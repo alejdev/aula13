@@ -15,6 +15,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -29,7 +31,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
