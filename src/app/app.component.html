@@ -1,5 +1,16 @@
-<mat-toolbar color="primary" role="heading" aria-label="heading">
-  <span>{{title}}</span>
-</mat-toolbar>
+<!-- <a13-header></a13-header> -->
+
+<mat-sidenav-container class="sidenav-container">
+	<mat-sidenav #leftSidenav mode="side" opened>
+		<a13-side-menu></a13-side-menu>
+	</mat-sidenav>
+	<mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
+		<div class="main_content">
+			<div style="padding: 20px">
+				Your content
+			</div>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>
 
 <router-outlet></router-outlet>
