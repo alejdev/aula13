@@ -28,8 +28,7 @@
               "src/manifest.json"
             ],
             "styles": [
-              "src/styles.sass",
-              "src/theme.sass"
+              "src/styles.sass"
             ],
             "scripts": [],
             "es5BrowserSupport": true
