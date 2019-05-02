@@ -1,3 +1,12 @@
+@mixin colorItem($color) {
+  border-left-color: $color;
+
+  span,
+  mat-icon {
+    color: $color;
+  }
+}
+
 .sidenav-container {
   min-width: 60px;
   height: calc(100vh - 200px);
@@ -24,3 +33,25 @@
   }
 }
 
+.nav-list-item {
+  box-sizing: border-box;
+
+  &.active {
+    background-color: #0000000a;
+    border-left-style: solid;
+    border-left-width: 4px;
+    transition: all .2s;
+
+    &.blue {
+      @include colorItem(#1976D2);
+    }
+
+    &.red {
+      @include colorItem(#D32F2F);
+    }
+
+    &.green {
+      @include colorItem(#388E3C);
+    }
+  }
+}

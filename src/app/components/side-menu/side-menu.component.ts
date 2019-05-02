@@ -10,6 +10,7 @@ interface MenuItem {
   name: string
   url: string
   icon: string
+  theme: string
 }
 
 @Component({
@@ -26,9 +27,9 @@ export class SideMenuComponent implements OnInit {
   public user: User = { name: 'Alejandro' }
 
   public menuItems: MenuItem[] = [
-    { name: 'Alumnos', url: 'some-link', icon: 'people' },
-    { name: 'Asignaturas', url: 'some-link', icon: 'import_contacts' },
-    { name: 'Configuración', url: 'some-link', icon: 'settings' },
+    { name: 'Alumnos', url: 'alumnos', icon: 'people', theme: 'blue' },
+    { name: 'Asignaturas', url: 'asignaturas', icon: 'import_contacts', theme: 'red' },
+    { name: 'Configuración', url: 'configuracion', icon: 'settings', theme: 'green' },
   ]
 
   constructor(private _sidenavService: SidenavService) { }
