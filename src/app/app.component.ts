@@ -1,24 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { SidenavService } from './services/sidenav.service';
-import { onMainContentChange } from './animations/animations';
 
 @Component({
   selector: 'a13-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [onMainContentChange]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
-  public onSideNavChange: boolean = true;
 
-  constructor(private swUpdate: SwUpdate, private sidenavService: SidenavService) {
-    this.sidenavService.sideNavState$.subscribe(res => {
-      this.onSideNavChange = res;
-      console.log('this.onSideNavChange', res)
-    });
-  }
+  constructor(private swUpdate: SwUpdate) { }
 
   ngOnInit(): void {
     // Service Worker
