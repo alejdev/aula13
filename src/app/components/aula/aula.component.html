@@ -1,0 +1,15 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <!-- Sidebar -->
+  <mat-sidenav class="sidenav border0" #leftSidenav mode="side" opened>
+    <a13-side-menu></a13-side-menu>
+  </mat-sidenav>
+
+  <!-- Content -->
+  <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
+    <div class="main-content">
+      <a13-header></a13-header>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
