@@ -1,28 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavService } from 'src/app/services/sidenav.service';
-import { onSideNavChange, animateText } from '../../animations/animations'
+import { onSideNavChange, animateText, animateAvatar } from '../../animations/animations'
 
-interface Page {
-  link: string;
-  name: string;
-  icon: string;
+interface User {
+  name: string
+}
+
+interface MenuItem {
+  name: string
+  url: string
+  icon: string
 }
 
 @Component({
   selector: 'a13-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
-  animations: [onSideNavChange, animateText]
+  animations: [onSideNavChange, animateText, animateAvatar]
 })
 export class SideMenuComponent implements OnInit {
 
-  public sideNavState: boolean = true;
-  public linkText: boolean = true;
+  public sideNavState: boolean = true
+  public linkText: boolean = true
 
-  public pages: Page[] = [
-    { name: 'Inbox', link: 'some-link', icon: 'inbox' },
-    { name: 'Starred', link: 'some-link', icon: 'star' },
-    { name: 'Send email', link: 'some-link', icon: 'send' },
+  public user: User = { name: 'Alejandro' }
+
+  public menuItems: MenuItem[] = [
+    { name: 'Alumnos', url: 'some-link', icon: 'people' },
+    { name: 'Asignaturas', url: 'some-link', icon: 'import_contacts' },
+    { name: 'Configuración', url: 'some-link', icon: 'settings' },
   ]
 
   constructor(private _sidenavService: SidenavService) { }

@@ -1,28 +1,27 @@
-<div class="sidenav_container" [@onSideNavChange]="sideNavState ? 'open' : 'close'">
-  <div fxLayout="column" fxLayoutGap="10px" style="height: 100%;">
-    
-    <div class="user_menu">
-      <mat-nav-list>
-        <a mat-list-item>
-          <img class="jim"
-            src="https://a57.foxnews.com/media2.foxnews.com/BrightCove/694940094001/2018/06/21/931/524/694940094001_5800293009001_5800284148001-vs.jpg?ve=1&tl=1"
-            alt="">
-          <span [@animateText]="linkText ? 'show' : 'hide'">{{ page?.name }} </span>
-        </a>
-      </mat-nav-list>
-      <mat-divider></mat-divider>
+<div class="sidenav-container" [@onSideNavChange]="sideNavState ? 'open' : 'close'">
+  <div class="side-menu-container" fxLayout="column" fxLayoutGap="10px">
+
+    <!-- User -->
+    <div class="user-menu" fxLayout="column" fxLayoutAlign="center center">
+      <a class="user-avatar" [@animateAvatar]="linkText ? 'huge' : 'small'">
+        <img class="user-avatar-image" src="assets/svgs/user-default.svg" alt="Avatar">
+      </a>
+      <span class="user-name mt1" [@animateText]="linkText ? 'show' : 'hide'">{{ user?.name }} </span>
     </div>
 
+    <!-- Menu -->
     <mat-nav-list>
-      <a mat-list-item *ngFor="let page of pages">
-        <mat-icon style="padding-right:5px;">{{page?.icon}}</mat-icon>
-        <span [@animateText]="linkText ? 'show' : 'hide'">{{ page?.name }} </span>
+      <a mat-list-item *ngFor="let item of menuItems">
+        <mat-icon [ngClass]="{'pH': linkText}">{{ item?.icon }}</mat-icon>
+        <span [@animateText]="linkText ? 'show' : 'hide'">{{ item?.name }} </span>
       </a>
     </mat-nav-list>
   </div>
 
   <span class="spacer"></span>
-  <div fxLayout="row" fxLayoutAlign="end center" style="padding: 0px 10px;">
+
+  <!-- Arrow -->
+  <div fxLayout="row" fxLayoutAlign="end center" class="pt0 pb0 prH plH">
     <button mat-icon-button (click)="onSinenavToggle()">
       <mat-icon *ngIf="sideNavState">arrow_left</mat-icon>
       <mat-icon *ngIf="!sideNavState">arrow_right</mat-icon>

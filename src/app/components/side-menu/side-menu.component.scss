@@ -1,11 +1,26 @@
-.sidenav_container {
+.sidenav-container {
   min-width: 60px;
   height: calc(100vh - 200px);
+
+  span,
+  mat-icon {
+    color: lighten(grey, 10%);
+  }
 }
 
-.jim {
-  width: 30px;
-  height: 30px;
-  object-fit: cover;
-  border-radius: 50%;
+.side-menu-container {
+  height: 100%;
 }
+
+.user-menu {
+  padding: 2em 0;
+
+  .user-avatar {
+    width: 64px;
+    height: 64px;
+    padding: .5em;
+    border: 1px solid lighten(grey, 40%);
+    border-radius: 50%;
+  }
+}
+

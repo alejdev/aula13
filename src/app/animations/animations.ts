@@ -18,7 +18,7 @@ export const onSideNavChange = trigger('onSideNavChange', [
 export const onMainContentChange = trigger('onMainContentChange', [
 	state('close',
 		style({
-			'margin-left': '62px'
+			'margin-left': '57px'
 		})
 	),
 	state('open',
@@ -41,6 +41,25 @@ export const animateText = trigger('animateText', [
 		style({
 			'display': 'block',
 			opacity: 1,
+		})
+	),
+	transition('close => open', animate('350ms ease-in')),
+	transition('open => close', animate('200ms ease-out')),
+]);
+
+export const animateAvatar = trigger('animateAvatar', [
+	state('small',
+		style({
+			'width': '32px',
+			'height': '32px',
+			'padding': '.2em'
+		})
+	),
+	state('huge',
+		style({
+			'width': '64px',
+			'height': '64px',
+			'padding': '.5em'
 		})
 	),
 	transition('close => open', animate('350ms ease-in')),
