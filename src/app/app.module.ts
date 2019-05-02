@@ -25,12 +25,14 @@ import {
   MatIconModule,
   MatListModule
 } from '@angular/material';
+import { PupilListComponent } from './components/pupil-list/pupil-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    PupilListComponent
   ],
   imports: [
     BrowserModule,
