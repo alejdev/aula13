@@ -1,0 +1,49 @@
+// Main
+html {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+  @include primary-font;
+}
+
+* {
+  -webkit-font-smoothing: antialased;
+  -moz-osx-font-smoothing: antialased;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.mat-display-4,
+.mat-display-3,
+.mat-display-2,
+.mat-display-1,
+.mat-h1,
+.mat-headline,
+.mat-h2,
+.mat-title,
+.mat-h3,
+.mat-subheading-2,
+.mat-h4,
+.mat-subheading-1,
+.mat-body,
+.mat-body-1,
+.mat-body-strong,
+.mat-body-2,
+.mat-small,
+.mat-caption {
+  @include secondary-font;
+  font-weight: bold !important;
+}

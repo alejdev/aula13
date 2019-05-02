@@ -1,0 +1,15 @@
+// Google fonts
+@import url("https://fonts.googleapis.com/css?family=Varela+Round|Montserrat|Material+Icons");
+
+// Typography
+$primary-typography: mat-typography-config($font-family: '"Varela Round", "Montserrat", "Helvetica Neue", sans-serif');
+
+@include angular-material-typography($primary-typography);
+
+@mixin primary-font {
+  font-family: "Varela Round" !important;
+}
+
+@mixin secondary-font {
+  font-family: "Montserrat" !important;
+}
