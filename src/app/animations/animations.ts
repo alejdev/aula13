@@ -18,7 +18,7 @@ export const onSideNavChange = trigger('onSideNavChange', [
 export const onMainContentChange = trigger('onMainContentChange', [
 	state('close',
 		style({
-			'margin-left': '57px'
+			'margin-left': '61px'
 		})
 	),
 	state('open',
