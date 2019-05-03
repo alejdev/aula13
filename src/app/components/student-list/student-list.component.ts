@@ -1,24 +1,24 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PupilService, Pupil } from 'src/app/services/pupil.service';
+import { StudentService, Student } from 'src/app/services/student.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
-  selector: 'a13-pupil-list',
-  templateUrl: './pupil-list.component.html',
-  styleUrls: ['./pupil-list.component.scss']
+  selector: 'a13-student-list',
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.scss']
 })
-export class PupilListComponent implements OnInit {
+export class StudentListComponent implements OnInit {
 
   title: string = 'Alumnos'
   displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol']
-  dataSource = new MatTableDataSource<Pupil>(this.pupilService.getPupilList())
-  selection = new SelectionModel<Pupil>(true, [])
+  dataSource = new MatTableDataSource<Student>(this.studentService.getStudentList())
+  selection = new SelectionModel<Student>(true, [])
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
 
-  constructor(private pupilService: PupilService) { }
+  constructor(private studentService: StudentService) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator
@@ -52,7 +52,7 @@ export class PupilListComponent implements OnInit {
   /** 
    * Label del checkbox
    */
-  checkboxLabel(row?: Pupil): string {
+  checkboxLabel(row?: Student): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }

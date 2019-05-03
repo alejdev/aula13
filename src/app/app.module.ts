@@ -33,7 +33,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { PupilListComponent } from './components/pupil-list/pupil-list.component';
+import { StudentListComponent } from './components/student-list/student-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { AulaComponent } from './components/aula/aula.component';
 import { SubjectListComponent } from './components/subject-list/subject-list.component';
@@ -46,7 +46,7 @@ import { MatPaginatorIntlEs } from './i18n/MatPaginatorIntlEs';
     AppComponent,
     HeaderComponent,
     SideMenuComponent,
-    PupilListComponent,
+    StudentListComponent,
     LoginComponent,
     AulaComponent,
     SubjectListComponent,

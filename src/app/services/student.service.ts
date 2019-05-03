@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export interface Pupil {
+export interface Student {
   name: string;
   position: number;
   weight: number;
@@ -10,9 +10,9 @@ export interface Pupil {
 @Injectable({
   providedIn: 'root'
 })
-export class PupilService {
+export class StudentService {
 
-  private pupilList: Pupil[] = [
+  private studentList: Student[] = [
     { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
     { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
     { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
@@ -28,7 +28,7 @@ export class PupilService {
   constructor() {
   }
 
-  getPupilList() {
-    return this.pupilList
+  getStudentList() {
+    return this.studentList
   }
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { PupilListComponent } from './components/pupil-list/pupil-list.component';
+import { StudentListComponent } from './components/student-list/student-list.component';
 import { AulaComponent } from './components/aula/aula.component';
 import { SubjectListComponent } from './components/subject-list/subject-list.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'aula', component: AulaComponent,
     children: [
       { path: '', redirectTo: 'alumnos', pathMatch: 'full' },
-      { path: 'alumnos', component: PupilListComponent },
+      { path: 'alumnos', component: StudentListComponent },
       { path: 'asignaturas', component: SubjectListComponent },
       { path: 'configuracion', component: ConfigurationComponent }
     ]
