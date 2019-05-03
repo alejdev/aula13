@@ -16,7 +16,15 @@ import {
   MatSidenavModule,
   MatButtonModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatPaginatorIntl,
+  MatSortModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatCheckboxModule,
+  MatCardModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +39,7 @@ import { AulaComponent } from './components/aula/aula.component';
 import { SubjectListComponent } from './components/subject-list/subject-list.component';
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MatPaginatorIntlEs } from './i18n/MatPaginatorIntlEs';
 
 @NgModule({
   declarations: [
@@ -60,9 +69,16 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlEs }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
