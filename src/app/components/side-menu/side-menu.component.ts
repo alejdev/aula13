@@ -6,13 +6,6 @@ interface User {
   name: string
 }
 
-interface MenuItem {
-  name: string
-  url: string
-  icon: string
-  theme: string
-}
-
 @Component({
   selector: 'a13-side-menu',
   templateUrl: './side-menu.component.html',
@@ -26,10 +19,13 @@ export class SideMenuComponent implements OnInit {
 
   public user: User = { name: 'Alejandro' }
 
-  public menuItems: MenuItem[] = [
-    { name: 'Alumnos', url: 'aula/alumnos', icon: 'people', theme: 'blue' },
-    { name: 'Asignaturas', url: 'aula/asignaturas', icon: 'import_contacts', theme: 'red' },
-    { name: 'Configuración', url: 'aula/configuracion', icon: 'settings', theme: 'green' },
+  public menuItems = [
+    [
+      { name: 'Alumnos', url: 'aula/alumnos', icon: 'people', theme: 'blue' },
+      { name: 'Asignaturas', url: 'aula/asignaturas', icon: 'import_contacts', theme: 'red' },
+      { name: 'Configuración', url: 'aula/configuracion', icon: 'settings', theme: 'green' }
+    ], [
+    ]
   ]
 
   constructor(private _sidenavService: SidenavService) { }

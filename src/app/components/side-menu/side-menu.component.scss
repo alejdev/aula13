@@ -1,19 +1,9 @@
-@mixin colorItem($color) {
-  border-left-color: $color;
-
-  span,
-  mat-icon {
-    color: $color;
-  }
-}
-
 .sidenav-container {
   min-width: 60px;
   height: calc(100vh - 200px);
 
-  span,
-  mat-icon {
-    color: lighten(grey, 10%);
+  span {
+    color: var(--font-light-color);
   }
 }
 
@@ -28,7 +18,7 @@
     width: 64px;
     height: 64px;
     padding: .5em;
-    border: 1px solid lighten(grey, 40%);
+    border: 1px solid var(--border-color);
     border-radius: 50%;
   }
 }
@@ -36,22 +26,19 @@
 .nav-list-item {
   box-sizing: border-box;
 
+  mat-icon.blue {
+    color: var(--primary-color);
+  }
+
   &.active {
-    background-color: #0000000a;
+    background-color: var(--bg-hover-color);
     border-left-style: solid;
     border-left-width: 4px;
+    border-left-color: var(--primary-color);
     transition: all .2s;
 
-    &.blue {
-      @include colorItem(#1976D2);
-    }
-
-    &.red {
-      @include colorItem(#D32F2F);
-    }
-
-    &.green {
-      @include colorItem(#388E3C);
+    span {
+      color: black;
     }
   }
 }
