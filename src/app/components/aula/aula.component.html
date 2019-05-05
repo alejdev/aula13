@@ -9,7 +9,9 @@
   <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
     <div class="main-content">
       <a13-header></a13-header>
-      <router-outlet></router-outlet>
+      <section class="aula-container">
+        <router-outlet></router-outlet>
+      </section>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -15,7 +15,6 @@ export class AulaComponent implements OnInit {
   constructor(private sidenavService: SidenavService) {
     this.sidenavService.sideNavState$.subscribe(res => {
       this.onSideNavChange = res;
-      console.log('this.onSideNavChange', res)
     });
   }
 
