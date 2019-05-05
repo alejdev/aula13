@@ -24,7 +24,9 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatCheckboxModule,
-  MatCardModule
+  MatCardModule,
+  MatChipsModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +42,8 @@ import { SubjectListComponent } from './components/subject-list/subject-list.com
 import { ConfigurationComponent } from './components/configuration/configuration.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { MatPaginatorIntlEs } from './i18n/MatPaginatorIntlEs';
+import { StudentComponent } from './components/student/student.component';
+import { StudentPipe } from './pipes/student.pipe';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,9 @@ import { MatPaginatorIntlEs } from './i18n/MatPaginatorIntlEs';
     AulaComponent,
     SubjectListComponent,
     ConfigurationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    StudentComponent,
+    StudentPipe,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +82,9 @@ import { MatPaginatorIntlEs } from './i18n/MatPaginatorIntlEs';
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatChipsModule,
+    MatTooltipModule
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlEs }],
   bootstrap: [AppComponent]
