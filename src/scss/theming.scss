@@ -3,8 +3,8 @@
 @include mat-core();
 
 // Palettes
-$my-app-primary: mat-palette($mat-gray, 900);
-$my-app-accent: mat-palette($mat-orange, 600, 900);
+$my-app-primary: mat-palette($mat-teal, 500);
+$my-app-accent: mat-palette($mat-brown, 500, 900);
 $my-app-warn: mat-palette($mat-red, 700, 900, A100);
 $my-theme-info: mat-palette($mat-blue);
 $my-theme-success: mat-palette($mat-green);
@@ -15,3 +15,27 @@ $my-theme-error: mat-palette($mat-red);
 $my-main-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 
 @include angular-material-theme($my-main-theme);
+
+.bg-primary {
+  @include bg-color(var(--primary-color));
+}
+
+.bg-accent {
+  @include bg-color(var(--accent-color));
+}
+
+.bg-warn {
+  @include bg-color(var(--warn-color));
+}
+
+.color-primary {
+  @include color(var(--primary-color));
+}
+
+.color-accent {
+  @include color(var(--accent-color));
+}
+
+.color-warn {
+  @include color(var(--warn-color));
+}
