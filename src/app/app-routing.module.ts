@@ -14,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'alumnos', pathMatch: 'full' },
       { path: 'alumnos', component: StudentListComponent },
+      { path: 'alumno/:id', component: StudentListComponent },
       { path: 'asignaturas', component: SubjectListComponent },
       { path: 'configuracion', component: ConfigurationComponent }
     ]
