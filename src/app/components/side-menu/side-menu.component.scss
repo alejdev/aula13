@@ -15,8 +15,8 @@
   padding: 2em 0;
 
   .user-avatar {
-    width: 64px;
-    height: 64px;
+    max-width: 64px;
+    width: 100%;
     padding: .5em;
     border: 1px solid var(--border-color);
     border-radius: 50%;

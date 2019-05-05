@@ -4,7 +4,7 @@
     <!-- User -->
     <div class="user-menu" fxLayout="column" fxLayoutAlign="center center">
       <a class="user-avatar" [@animateAvatar]="linkText ? 'huge' : 'small'">
-        <img class="user-avatar-image" src="assets/svgs/user-default.svg" alt="Avatar">
+        <img class="user-avatar-image" [src]="user?.avatar || 'assets/svgs/user-default.svg'" alt="Avatar">
       </a>
       <span class="user-name mt1" [@animateText]="linkText ? 'show' : 'hide'">{{ user?.name }} </span>
     </div>

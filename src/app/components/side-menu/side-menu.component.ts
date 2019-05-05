@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { onSideNavChange, animateText, animateAvatar } from '../../animations/animations'
-
-interface User {
-  name: string
-}
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'a13-side-menu',
@@ -17,7 +14,7 @@ export class SideMenuComponent implements OnInit {
   public sideNavState: boolean = true
   public linkText: boolean = true
 
-  public user: User = { name: 'Alejandro' }
+  public user: User = { name: 'Alejandro', avatar: '' }
 
   public menuItems = [
     [
