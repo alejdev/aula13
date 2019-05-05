@@ -6,13 +6,6 @@ $primary-typography: mat-typography-config($font-family: '"Varela Round", "Helve
 
 @include angular-material-typography($primary-typography);
 
-@mixin primary-font {
-  font-family: "Varela Round" !important;
-}
-
-@mixin secondary-font {
-  font-family: "Varela Round" !important;
-}
 
 h1,
 h2,
@@ -39,5 +32,35 @@ h6,
 .mat-small,
 .mat-caption {
   @include secondary-font;
+  color: var(--font-header-color);
   font-weight: bold !important;
+}
+
+.secondary-text {
+  color: var(--font-light-color);
+  font-size: .8rem;
+}
+
+.mat-icon-10 {
+  @include mat-icon-size(10px);
+}
+
+.mat-icon-14 {
+  @include mat-icon-size(14px);
+}
+
+.mat-icon-16 {
+  @include mat-icon-size(16px);
+}
+
+.mat-icon-18 {
+  @include mat-icon-size(18px);
+}
+
+.mat-icon-24 {
+  @include mat-icon-size(24px);
+}
+
+.mat-icon-32 {
+  @include mat-icon-size(32px);
 }
