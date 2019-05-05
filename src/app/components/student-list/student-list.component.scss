@@ -1,34 +1,7 @@
-mat-card {
-  margin: var(--margin-main-size);
-}
-
-.mat-h1 {
-  color: var(--font-header-color);
-  padding: var(--padding-main-size);
-  padding-bottom: 0;
-}
-
 .mat-form-field {
   width: 33%;
-  padding: var(--padding-main-size);
-  padding-top: 0;
-  padding-bottom: 1rem;
 
   mat-icon {
     color: var(--font-light-color);
-  }
-}
-table {
-  width: 100%;
-
-  tr.row,
-  tr.row-header {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  tr.row:hover {
-    background-color: var(--bg-hover-color);
   }
 }

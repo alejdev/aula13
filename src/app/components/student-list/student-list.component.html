@@ -1,55 +1,39 @@
-<mat-card class="p0 mat-elevation-z0">
+<!-- Title -->
+<h2 class="mat-h1">{{title}}</h2>
 
-  <h2 class="mat-h1">{{title}}</h2>
+<!-- Filter -->
+<mat-form-field>
+  <input matInput [(ngModel)]="search" placeholder="Buscar alumno">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
 
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar alumno">
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
+<!-- Columns -->
+<div class="mb1 mt2 p1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <!-- Name & Surname -->
+  <div class="row mrH mlH secondary-text" (click)="sort('name')">
+    <span class="mat-icon-16">Nombre</span>
+    <mat-icon class="mat-icon-18 mlH">arrow_downward</mat-icon>
+  </div>
 
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-      <th class="pl2" mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-        </mat-checkbox>
-      </th>
-      <td class="pl2" mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-        </mat-checkbox>
-      </td>
-    </ng-container>
+  <!-- Phone -->
+  <div class="row mrH mlH secondary-text" (click)="sort('phone')">
+    <span class="mat-icon-16">Teléfono</span>
+    <mat-icon class="mat-icon-18 mlH">arrow_downward</mat-icon>
+  </div>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-      <td mat-cell *matCellDef="let element"> #{{element.position}} </td>
-    </ng-container>
+  <!-- Spacer -->
+  <span class="spacer"></span>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
+  <!-- Type -->
+  <div class="row mrH mlH secondary-text" (click)="sort('type')">
+    <span class="mat-icon-16">Tipo</span>
+    <mat-icon class="mat-icon-18 mlH">arrow_downward</mat-icon>
+  </div>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-    </ng-container>
+</div>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th class="pr2" mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-      <td class="pr2" mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    </ng-container>
-
-    <tr class="row-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</mat-card>
+<!-- Students -->
+<ng-container *ngFor="let student of studentList | student: search">
+  <a13-student [(student)]="student"></a13-student>
+</ng-container>
