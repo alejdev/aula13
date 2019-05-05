@@ -24,7 +24,7 @@
 
   <!-- Arrow -->
   <div fxLayout="row" fxLayoutAlign="end center" class="pt0 pb0 prH plH">
-    <button mat-icon-button (click)="onSinenavToggle()">
+    <button mat-icon-button (click)="onSinenavToggle()" role="button" aria-label="Abrir/Cerrar menú">
       <mat-icon>{{'arrow_' + (sideNavState ? 'left' : 'right')}}</mat-icon>
     </button>
   </div>
