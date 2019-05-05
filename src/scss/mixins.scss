@@ -1,1 +1,28 @@
 // Mixins
+
+// Primary font
+@mixin primary-font {
+  font-family: "Varela Round" !important;
+}
+
+// Secondary font
+@mixin secondary-font {
+  font-family: "Varela Round" !important;
+}
+
+// Material icon size
+@mixin mat-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+}
+
+// Background-color
+@mixin bg-color($color) {
+	background-color: $color !important;
+}
+
+// Color
+@mixin color($color) {
+	color: $color !important;
+}
