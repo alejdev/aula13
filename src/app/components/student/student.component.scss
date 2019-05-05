@@ -1,0 +1,17 @@
+mat-card {
+	transition: all .2s;
+	cursor: pointer;
+
+  &:hover {
+		outline: -webkit-focus-ring-color auto 5px;
+  }
+}
+
+.row {
+  width: 25%;
+}
+
+.user-avatar-image {
+  max-width: 40px;
+  width: 100%;
+}
