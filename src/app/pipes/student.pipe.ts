@@ -10,8 +10,12 @@ export class StudentPipe implements PipeTransform {
       return array;
     }
     return array.filter(elem => {
-      let str = JSON.stringify(elem).toLowerCase()
-      return str.includes(args.toLowerCase())
+      let str = this.normalize(JSON.stringify(elem).toLowerCase())
+      return str.includes(this.normalize(args.toLowerCase()))
     });
+  }
+
+  normalize(str: string): string {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 }
