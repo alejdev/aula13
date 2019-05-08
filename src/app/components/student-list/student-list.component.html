@@ -8,32 +8,19 @@
 </mat-form-field>
 
 <!-- Columns -->
-<div class="mb1 mt2 p1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
-
-  <!-- Name & Surname -->
-  <div class="row mrH mlH secondary-text" (click)="sort('name')">
-    <span class="mat-icon-16">Nombre</span>
-    <mat-icon class="mat-icon-18 mlH">arrow_downward</mat-icon>
-  </div>
-
-  <!-- Phone -->
-  <div class="row mrH mlH secondary-text" (click)="sort('phone')">
-    <span class="mat-icon-16">Teléfono</span>
-    <mat-icon class="mat-icon-18 mlH">arrow_downward</mat-icon>
-  </div>
-
-  <!-- Spacer -->
-  <span class="spacer"></span>
-
-  <!-- Type -->
-  <div class="row mrH mlH secondary-text" (click)="sort('type')">
-    <span class="mat-icon-16">Tipo</span>
-    <mat-icon class="mat-icon-18 mlH">arrow_downward</mat-icon>
-  </div>
-
+<div class="mt2 p1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
+  <ng-container *ngFor="let col of columns">
+    <span *ngIf="col.spacer" [ngClass]="col.spacer"></span>
+    <div *ngIf="!col.spacer" (click)="sort(col.id)" class="row" [ngClass]="{'active': matchOrder(col.id)}">
+      <button mat-button aria-label="Ordenar columna">
+        <span>{{col.name}}</span>
+        <mat-icon class="mat-icon-18 mlH arrow-icon">{{getArrow(col.id)}}</mat-icon>
+      </button>
+    </div>
+  </ng-container>
 </div>
 
 <!-- Students -->
-<ng-container *ngFor="let student of studentList | student: search">
+<ng-container *ngFor="let student of studentList | student: search | orderBy : orderByProperty">
   <a13-student [(student)]="student"></a13-student>
 </ng-container>

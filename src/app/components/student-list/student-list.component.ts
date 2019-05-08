@@ -10,9 +10,20 @@ import { Student } from 'src/app/interfaces/student';
 export class StudentListComponent implements OnInit {
 
   title = 'Alumnos'
-  columns = ['nombre', 'telefono', 'spacer', 'tipo']
   studentList: Student[]
   search: string = ''
+  orderByProperty: string = 'name'
+  columns = [{
+    spacer: 'user-avatar-image mrH',
+  }, {
+    id: 'name',
+    name: 'Nombre'
+  }, {
+    spacer: 'spacer',
+  }, {
+    id: 'type',
+    name: 'Tipo'
+  }]
 
   constructor(private studentService: StudentService) {
     this.studentList = this.studentService.getStudentList()
@@ -20,7 +31,19 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit() { }
 
-  sort(value) {
-    console.log(value);
+  sort(value: string) {
+    this.orderByProperty = value === this.orderByProperty ? `-${value}` : value
+  }
+
+  matchOrder(value: string) {
+    let regex = `-?${value}`
+    return this.orderByProperty.match(new RegExp(regex, 'g'))
+  }
+
+  getArrow(value: string): string {
+    if (`-${value}` === this.orderByProperty) {
+      return 'arrow_upward'
+    }
+    return 'arrow_downward'
   }
 }
