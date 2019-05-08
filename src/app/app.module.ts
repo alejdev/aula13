@@ -44,6 +44,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MatPaginatorIntlEs } from './i18n/MatPaginatorIntlEs';
 import { StudentComponent } from './components/student/student.component';
 import { StudentPipe } from './pipes/student.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { StudentPipe } from './pipes/student.pipe';
     PageNotFoundComponent,
     StudentComponent,
     StudentPipe,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,
