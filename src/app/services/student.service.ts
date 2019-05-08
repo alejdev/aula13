@@ -10,6 +10,7 @@ export class StudentService {
     id: 1,
     name: 'Alejandro',
     surname: 'Martín Fernández',
+    fullName: 'Alejandro Martín Fernández',
     avatar: '',
     type: 'FEMAE',
     phones: [{
@@ -24,6 +25,7 @@ export class StudentService {
     id: 2,
     name: 'Carmen',
     surname: 'Valiente Blasco',
+    fullName: 'Carmen Valiente Blasco',
     avatar: '',
     type: 'Particular',
     phones: [{
@@ -35,12 +37,13 @@ export class StudentService {
     }],
     subjects: [{
       id: 1,
-      name: 'Chelo'
+      name: 'Lenguaje'
     }]
   }, {
     id: 3,
     name: 'María',
     surname: 'Abreu Márquez',
+    fullName: 'María Abreu Márquez',
     avatar: '',
     type: 'Particular',
     phones: [{
@@ -55,6 +58,7 @@ export class StudentService {
     id: 4,
     name: 'Enrique',
     surname: 'Romero Romero',
+    fullName: 'Enrique Romero Romero',
     avatar: '',
     type: 'FEMAE',
     phones: [{
@@ -69,6 +73,7 @@ export class StudentService {
     id: 5,
     name: 'Marco',
     surname: 'Hoya Cordobés',
+    fullName: 'Marco Hoya Cordobés',
     avatar: '',
     type: 'Particular',
     phones: [{
@@ -77,12 +82,13 @@ export class StudentService {
     }],
     subjects: [{
       id: 1,
-      name: 'Chelo'
+      name: 'Lenguaje'
     }]
   }, {
     id: 6,
     name: 'Raquel',
     surname: 'Hoyos',
+    fullName: 'Raquel Hoyos',
     avatar: '',
     type: 'FEMAE',
     phones: [{
@@ -97,6 +103,7 @@ export class StudentService {
     id: 7,
     name: 'Marta',
     surname: '',
+    fullName: 'Marta',
     avatar: '',
     type: 'Particular',
     phones: [{
@@ -105,12 +112,13 @@ export class StudentService {
     }],
     subjects: [{
       id: 1,
-      name: 'Chelo'
+      name: 'Lenguaje'
     }]
   }, {
     id: 8,
     name: 'Diego',
     surname: 'Bravo Rojo',
+    fullName: 'Diego Bravo Rojo',
     avatar: '',
     type: 'FEMAE',
     phones: [{
@@ -119,12 +127,13 @@ export class StudentService {
     }],
     subjects: [{
       id: 1,
-      name: 'Chelo'
+      name: 'Lenguaje'
     }]
   }, {
     id: 9,
     name: 'Daniel',
     surname: 'Rubio Rebollo',
+    fullName: 'Daniel Rubio Rebollo',
     avatar: '',
     type: 'FEMAE',
     phones: [{
@@ -139,7 +148,8 @@ export class StudentService {
     id: 10,
     name: 'Saray',
     surname: 'Brachiller',
-    avatar: '',
+    fullName: '',
+    avatar: 'Saray Bachiller',
     type: 'FEMAE',
     phones: [{
       name: 'Padre',
