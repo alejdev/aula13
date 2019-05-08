@@ -147,9 +147,9 @@ export class StudentService {
   }, {
     id: 10,
     name: 'Saray',
-    surname: 'Brachiller',
-    fullName: '',
-    avatar: 'Saray Bachiller',
+    surname: 'Bachiller',
+    fullName: 'Saray Bachiller',
+    avatar: '',
     type: 'FEMAE',
     phones: [{
       name: 'Padre',
