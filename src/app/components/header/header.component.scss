@@ -1,5 +1,10 @@
 .header {
-	background-color: var(--accent-color);
+  width: 100%;
+  height: var(--header-height);
+  position: relative;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--accent-color);
 
   h1 a {
     color: white;

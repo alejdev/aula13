@@ -1,14 +1,17 @@
+<!-- Header -->
+<a13-header></a13-header>
+
+<!-- Sidebar container -->
 <mat-sidenav-container class="sidenav-container">
 
-  <!-- Sidebar -->
-  <mat-sidenav class="sidenav border0" #leftSidenav mode="side" opened>
+  <!-- Side-menu -->
+  <mat-sidenav class="sidenav border0" #leftSidenav mode="side" opened [fixedInViewport]="true" [fixedTopGap]="64">
     <a13-side-menu></a13-side-menu>
   </mat-sidenav>
 
   <!-- Content -->
   <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
     <div class="main-content">
-      <a13-header></a13-header>
       <section class="aula-container">
         <router-outlet></router-outlet>
       </section>
