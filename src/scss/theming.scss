@@ -3,7 +3,7 @@
 @include mat-core();
 
 // Palettes
-$my-app-primary: mat-palette($mat-teal, 500);
+$my-app-primary: mat-palette($mat-light-blue, 700);
 $my-app-accent: mat-palette($mat-brown, 500, 900);
 $my-app-warn: mat-palette($mat-red, 700, 900, A100);
 $my-theme-info: mat-palette($mat-blue);

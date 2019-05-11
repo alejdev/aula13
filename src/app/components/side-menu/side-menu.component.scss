@@ -31,8 +31,8 @@
   }
 
   &.active {
-    background-color: var(--bg-hover-color);
-    border-left-color: var(--accent-color);
+    background-color: var(--bg-active-color);
+    border-left-color: var(--warn-color);
     transition: all .2s;
 
     span {
