@@ -72,7 +72,6 @@ h6,
 .mat-caption {
   @include secondary-font;
   color: var(--font-header-color);
-  font-weight: bold !important;
 }
 
 .secondary-text {
@@ -98,6 +97,10 @@ h6,
 
 .mat-icon-24 {
   @include mat-icon-size(24px);
+}
+
+.mat-icon-28 {
+  @include mat-icon-size(28px);
 }
 
 .mat-icon-32 {

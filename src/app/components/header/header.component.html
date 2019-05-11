@@ -1,4 +1,11 @@
 <mat-toolbar class="header">
+
+  <!-- Botón menu -->
+  <button class="menu-button mlQ mr1" mat-icon-button (click)="toggleSinenav()" aria-label="Abrir/Cerrar menú">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Title -->
   <h1 class="mat-h1">
     <a [routerLink]="[ '/aula' ]">{{title}}</a>
   </h1>

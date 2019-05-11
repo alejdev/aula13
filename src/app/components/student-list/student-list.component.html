@@ -1,5 +1,5 @@
 <!-- Title -->
-<h2 class="mat-h1">{{title}}</h2>
+<h2 class="mat-h1 pt1">{{title}}</h2>
 
 <!-- Filter -->
 <mat-form-field>
@@ -7,8 +7,8 @@
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
-<!-- Columns -->
-<div class="mt2 p1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
+<!-- List -->
+<div class="p1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
   <ng-container *ngFor="let col of columns">
     <span *ngIf="col.spacer" [ngClass]="col.spacer"></span>
     <div *ngIf="!col.spacer" (click)="sort(col.id)" class="row" [ngClass]="{'active': matchOrder(col.id)}">

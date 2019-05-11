@@ -1,7 +1,4 @@
 .sidenav-container {
-  min-width: 60px;
-  height: calc(100vh - 200px);
-
   span {
     color: var(--font-light-color);
   }
@@ -25,6 +22,9 @@
 
 .nav-list-item {
   box-sizing: border-box;
+  border-left-style: solid;
+  border-left-width: 4px;
+  border-left-color: transparent;
 
   mat-icon.blue {
     color: var(--primary-color);
@@ -32,8 +32,6 @@
 
   &.active {
     background-color: var(--bg-hover-color);
-    border-left-style: solid;
-    border-left-width: 4px;
     border-left-color: var(--primary-color);
     transition: all .2s;
 

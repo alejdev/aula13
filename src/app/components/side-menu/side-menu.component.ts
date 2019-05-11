@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavService } from 'src/app/services/sidenav.service';
-import { onSideNavChange, animateText, animateAvatar } from '../../animations/animations'
+import { animateText, animateAvatar } from '../../animations/animations'
 import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'a13-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
-  animations: [onSideNavChange, animateText, animateAvatar]
+  animations: [animateText, animateAvatar]
 })
 export class SideMenuComponent implements OnInit {
 
-  public sideNavState: boolean = true
-  public linkText: boolean = true
+  linkText: boolean = true
+  user: User = { name: 'Alejandro', avatar: '' }
 
-  public user: User = { name: 'Alejandro', avatar: '' }
-
-  public menuItems = [
+  menuItems = [
     [
       { name: 'Alumnos', url: 'aula/alumnos', icon: 'people', theme: 'blue' },
       { name: 'Asignaturas', url: 'aula/asignaturas', icon: 'import_contacts', theme: 'red' },
@@ -25,19 +23,14 @@ export class SideMenuComponent implements OnInit {
     ]
   ]
 
-  constructor(private _sidenavService: SidenavService) { }
-
-  ngOnInit() {
+  constructor(private sidenavService: SidenavService) {
+    this.sidenavService.sidenavState.subscribe(result => {
+      setTimeout(() => {
+        this.linkText = result;
+      }, 200)
+    });
   }
 
-  onSinenavToggle() {
-    this.sideNavState = !this.sideNavState
-
-    setTimeout(() => {
-      this.linkText = this.sideNavState;
-    }, 200)
-    this._sidenavService.sideNavState$.next(this.sideNavState)
-  }
+  ngOnInit() { }
 
 }
-

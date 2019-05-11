@@ -1,33 +1,38 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
+
 export const onSideNavChange = trigger('onSideNavChange', [
 	state('close',
 		style({
-			'min-width': '50px'
-		})
+			'min-width': '{{widthClose}}'
+		}),
+		{ params: { widthClose: '60px' } }
 	),
 	state('open',
 		style({
-			'min-width': '200px'
-		})
+			'min-width': '{{widthOpen}}'
+		}),
+		{ params: { widthOpen: '220px' } }
 	),
-	transition('close => open', animate('250ms ease-in')),
-	transition('open => close', animate('250ms ease-in')),
+	transition('close => open', animate('180ms ease-in')),
+	transition('open => close', animate('180ms ease-in')),
 ]);
 
 export const onMainContentChange = trigger('onMainContentChange', [
 	state('close',
 		style({
-			'margin-left': '61px'
-		})
+			'margin-left': '{{leftClose}}'
+		}),
+		{ params: { leftClose: '60px' } }
 	),
 	state('open',
 		style({
-			'margin-left': '200px'
-		})
+			'margin-left': '{{leftOpen}}'
+		}),
+		{ params: { leftOpen: '220px' } }
 	),
-	transition('close => open', animate('250ms ease-in')),
-	transition('open => close', animate('250ms ease-in')),
+	transition('close => open', animate('180ms ease-in')),
+	transition('open => close', animate('180ms ease-in')),
 ]);
 
 export const animateText = trigger('animateText', [
@@ -43,8 +48,8 @@ export const animateText = trigger('animateText', [
 			opacity: 1,
 		})
 	),
-	transition('close => open', animate('350ms ease-in')),
-	transition('open => close', animate('200ms ease-out')),
+	transition('close => open', animate('270ms ease-in')),
+	transition('open => close', animate('180ms ease-out')),
 ]);
 
 export const animateAvatar = trigger('animateAvatar', [
@@ -62,6 +67,6 @@ export const animateAvatar = trigger('animateAvatar', [
 			'padding': '.5em'
 		})
 	),
-	transition('close => open', animate('350ms ease-in')),
-	transition('open => close', animate('200ms ease-out')),
+	transition('close => open', animate('270ms ease-in')),
+	transition('open => close', animate('180ms ease-out')),
 ]);

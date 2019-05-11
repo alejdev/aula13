@@ -1,16 +1,19 @@
 <!-- Header -->
-<a13-header></a13-header>
+<a13-header [sidenav]="sideMenu"></a13-header>
 
 <!-- Sidebar container -->
 <mat-sidenav-container class="sidenav-container">
 
   <!-- Side-menu -->
-  <mat-sidenav class="sidenav border0" #leftSidenav mode="side" opened [fixedInViewport]="true" [fixedTopGap]="64">
+  <mat-sidenav #sideMenu class="sidenav border0" [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [opened]="!mobileQuery.matches" [fixedInViewport]="true" [fixedTopGap]="fixedTopGap"
+    [@onSideNavChange]="{value: onSideNavChange ? 'open' : 'close', params: {widthClose: animStyles.close.width, widthOpen: animStyles.open.width}}">
     <a13-side-menu></a13-side-menu>
   </mat-sidenav>
 
   <!-- Content -->
-  <mat-sidenav-content [@onMainContentChange]="onSideNavChange ? 'open': 'close'">
+  <mat-sidenav-content
+    [@onMainContentChange]="{value: onSideNavChange ? 'open' : 'close', params: {leftClose: animStyles.close.left, leftOpen: animStyles.open.left}}">
     <div class="main-content">
       <section class="aula-container">
         <router-outlet></router-outlet>

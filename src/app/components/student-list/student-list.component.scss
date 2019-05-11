@@ -1,5 +1,5 @@
 .mat-form-field {
-  width: 33%;
+  width: 100%;
 
   mat-icon {
     color: var(--font-light-color);
@@ -14,12 +14,12 @@
   color: var(--font-link-color);
 }
 
-.user-avatar-image {
-  max-width: 40px;
-  width: 100%;
-}
-
 .arrow-icon {
   position: relative;
   top: 2px;
+}
+
+.user-avatar-image {
+  max-width: 40px;
+  width: 100%;
 }

@@ -23,3 +23,16 @@
   --border-radius-main-size: .5rem;
   --header-height: 64px;
 }
+
+@media only screen and (max-width: 900px) {
+  :root {
+    --padding-main-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --padding-main-size: .75rem;
+    --header-height: 54px;
+  }
+}

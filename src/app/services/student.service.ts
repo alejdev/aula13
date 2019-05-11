@@ -6,7 +6,7 @@ import { Student } from '../interfaces/student';
 })
 export class StudentService {
 
-  private studentList: Student[] = [{
+  private _studentList: Student[] = [{
     id: 1,
     name: 'Alejandro',
     surname: 'Martín Fernández',
@@ -164,7 +164,7 @@ export class StudentService {
   constructor() {
   }
 
-  getStudentList() {
-    return this.studentList
+  get studentList() {
+    return this._studentList
   }
 }
