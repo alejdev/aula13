@@ -17,12 +17,10 @@
 
     <!-- Type -->
     <div class="mrH mlH" fxLayout="row" fxLayoutAlign="start center">
-      <mat-chip-list matTooltip="{{student?.type}}" [matTooltipPosition]="'above'">
-        <mat-chip selected
-          [ngClass]="{'bg-primary': student?.type === 'FEMAE', 'bg-accent': student?.type === 'Particular'}">
-          <mat-icon>{{student?.type === 'FEMAE' ? 'school' : 'home'}}</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
+      <div class="badge"
+        [ngClass]="{'bg-primary': student?.type === 'Femae', 'bg-accent': student?.type === 'Particular'}">
+        {{student?.type}}
+      </div>
     </div>
 
   </div>

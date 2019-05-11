@@ -25,8 +25,6 @@ import {
   MatInputModule,
   MatCheckboxModule,
   MatCardModule,
-  MatChipsModule,
-  MatTooltipModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -85,8 +83,6 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     MatFormFieldModule,
     MatCheckboxModule,
     MatCardModule,
-    MatChipsModule,
-    MatTooltipModule
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlEs }],
   bootstrap: [AppComponent]
