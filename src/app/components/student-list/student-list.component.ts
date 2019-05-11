@@ -1,41 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from 'src/app/interfaces/student';
+import { StudentPipe } from 'src/app/pipes/student.pipe';
 
 @Component({
   selector: 'a13-student-list',
   templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.scss']
+  styleUrls: ['./student-list.component.scss'],
+  providers: [StudentPipe]
 })
 export class StudentListComponent implements OnInit {
 
   title = 'Alumnos'
   studentList: Student[]
-  search: string = ''
+  studentListFiltered: Student[]
+  studentFilter: string = ''
   orderByProperty: string = 'fullName'
   columns = [{
-    spacer: 'user-avatar-image mrH',
-  }, {
     id: 'fullName',
-    name: 'Nombre'
-  }, {
-    spacer: 'spacer',
+    name: 'Nombre',
+    class: 'ml4',
   }, {
     id: 'type',
     name: 'Tipo'
   }]
 
-  constructor(private studentService: StudentService) {
+  constructor(private studentService: StudentService, private studentPipe: StudentPipe) {
     this.studentList = this.studentService.studentList
+    this.studentListFiltered = Object.assign(this.studentList)
   }
 
   ngOnInit() { }
 
-  sort(value: string) {
+  searchStudent(ev: string): void {
+    this.studentListFiltered = this.studentPipe.transform(this.studentList, ev)
+  }
+
+  sort(value: string): void {
     this.orderByProperty = value === this.orderByProperty ? `-${value}` : value
   }
 
-  matchOrder(value: string) {
+  matchOrder(value: string): RegExpMatchArray {
     let regex = `-?${value}`
     return this.orderByProperty.match(new RegExp(regex, 'g'))
   }

@@ -1,9 +1,14 @@
 mat-card {
-  transition: all .2s;
+  transition: all .1s ease-in-out;
   cursor: pointer;
 
   &:hover {
-    outline: -webkit-focus-ring-color auto 5px;
+    transform: scale(1.015);
+    box-shadow: 0 4px 4px #0002;
+  }
+
+  &:focus {
+    outline: -webkit-focus-ring-color auto 0;
   }
 }
 

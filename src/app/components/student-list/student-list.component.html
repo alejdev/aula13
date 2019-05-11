@@ -3,15 +3,14 @@
 
 <!-- Filter -->
 <mat-form-field>
-  <input matInput [(ngModel)]="search" placeholder="Buscar alumno" aria-label="Buscar alumno">
+  <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)" placeholder="Buscar alumno" aria-label="Buscar alumno" autocomplete="off">
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
 <!-- List -->
-<div class="p1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
+<div *ngIf="studentListFiltered.length" class="pt1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
   <ng-container *ngFor="let col of columns">
-    <span *ngIf="col.spacer" [ngClass]="col.spacer"></span>
-    <div *ngIf="!col.spacer" (click)="sort(col.id)" class="row" [ngClass]="{'active': matchOrder(col.id)}">
+    <div (click)="sort(col.id)" class="row {{col.class}}" [ngClass]="{'active': matchOrder(col.id)}">
       <button mat-button aria-label="Ordenar columna">
         <span>{{col.name}}</span>
         <mat-icon class="mat-icon-18 mlH arrow-icon">{{getArrow(col.id)}}</mat-icon>
@@ -21,6 +20,9 @@
 </div>
 
 <!-- Students -->
-<ng-container *ngFor="let student of studentList | student: search | orderBy : orderByProperty">
+<ng-container *ngFor="let student of studentListFiltered | orderBy : orderByProperty">
   <a13-student [(student)]="student"></a13-student>
 </ng-container>
+
+<!-- Empty list -->
+<h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt3 txt-center  light-text">¯\_(ツ)_/¯</h3>

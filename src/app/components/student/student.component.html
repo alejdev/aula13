@@ -8,16 +8,13 @@
       <!-- Name & Surname -->
       <div fxLayout="column" fxLayoutAlign="space-around start">
         <span>{{student?.name}}</span>
-        <span class="secondary-text">{{student?.surname}}</span>
+        <span class="mat-small light-text">{{student?.surname}}</span>
       </div>
     </div>
 
-    <!-- Spacer -->
-    <span class="spacer row"></span>
-
     <!-- Type -->
     <div class="mrH mlH" fxLayout="row" fxLayoutAlign="start center">
-      <div class="badge"
+      <div class="badge truncate"
         [ngClass]="{'bg-primary': student?.type === 'Femae', 'bg-accent': student?.type === 'Particular'}">
         {{student?.type}}
       </div>
