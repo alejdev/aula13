@@ -12,7 +12,7 @@ export class StudentService {
     surname: 'Martín Fernández',
     fullName: 'Alejandro Martín Fernández',
     avatar: '',
-    type: 'FEMAE',
+    type: 'Femae',
     phones: [{
       name: 'Padre',
       number: '654789321'
@@ -60,7 +60,7 @@ export class StudentService {
     surname: 'Romero Romero',
     fullName: 'Enrique Romero Romero',
     avatar: '',
-    type: 'FEMAE',
+    type: 'Femae',
     phones: [{
       name: 'Madre',
       number: '687532145'
@@ -90,7 +90,7 @@ export class StudentService {
     surname: 'Hoyos',
     fullName: 'Raquel Hoyos',
     avatar: '',
-    type: 'FEMAE',
+    type: 'Femae',
     phones: [{
       name: 'Madre',
       number: '654789321'
@@ -120,7 +120,7 @@ export class StudentService {
     surname: 'Bravo Rojo',
     fullName: 'Diego Bravo Rojo',
     avatar: '',
-    type: 'FEMAE',
+    type: 'Femae',
     phones: [{
       name: 'Padre',
       number: '654789321'
@@ -135,7 +135,7 @@ export class StudentService {
     surname: 'Rubio Rebollo',
     fullName: 'Daniel Rubio Rebollo',
     avatar: '',
-    type: 'FEMAE',
+    type: 'Femae',
     phones: [{
       name: 'Madre',
       number: '654789321'
@@ -150,7 +150,7 @@ export class StudentService {
     surname: 'Bachiller',
     fullName: 'Saray Bachiller',
     avatar: '',
-    type: 'FEMAE',
+    type: 'Femae',
     phones: [{
       name: 'Padre',
       number: '654789321'
