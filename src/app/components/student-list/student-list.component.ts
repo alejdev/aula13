@@ -12,11 +12,11 @@ export class StudentListComponent implements OnInit {
   title = 'Alumnos'
   studentList: Student[]
   search: string = ''
-  orderByProperty: string = 'name'
+  orderByProperty: string = 'fullName'
   columns = [{
     spacer: 'user-avatar-image mrH',
   }, {
-    id: 'name',
+    id: 'fullName',
     name: 'Nombre'
   }, {
     spacer: 'spacer',
