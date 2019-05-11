@@ -74,11 +74,9 @@ h6,
   color: var(--font-header-color);
 }
 
-.secondary-text {
+.light-text {
   color: var(--font-light-color);
-  font-size: .8rem;
 }
-
 .mat-icon-10 {
   @include mat-icon-size(10px);
 }
