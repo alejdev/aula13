@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { onMainContentChange, onSideNavChange } from 'src/app/animations/animations';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { MediaMatcher } from '@angular/cdk/layout';
+import * as Hammer from 'hammerjs';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'a13-aula',
@@ -11,16 +13,26 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class AulaComponent implements OnInit {
 
+  @ViewChild(MatSidenav)
+  public sideMenu: MatSidenav
+
   onSideNavChange: boolean
   fixedTopGap: number
   animStyles: any
   mobileQuery: MediaQueryList
   mobileQueryListener: () => void
 
-  constructor(private sidenavService: SidenavService, media: MediaMatcher) {
+  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher) {
+
+    // Event listender for toggle menu on mobile
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
     this.mobileQueryListener = () => this.setViewportSize()
     this.mobileQuery.addListener(this.mobileQueryListener)
+    
+    // Swipe sideMenu on mobile
+    const hammertime = new Hammer(elementRef.nativeElement, {});
+    hammertime.on('panright', (ev) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
+    hammertime.on('panleft', (ev) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
   }
 
   setViewportSize() {
