@@ -27,12 +27,12 @@
   border-left-color: transparent;
 
   mat-icon.blue {
-    color: var(--primary-color);
+    color: var(--accent-color);
   }
 
   &.active {
     background-color: var(--bg-hover-color);
-    border-left-color: var(--primary-color);
+    border-left-color: var(--accent-color);
     transition: all .2s;
 
     span {

@@ -1,17 +1,17 @@
 :root {
   // Colors
-  --primary-color: #05cfab;
-  --accent-color: #2c365b;
+  --primary-color: #2c365b;
+  --accent-color: #11a3da;
   --warn-color: #fc6044;
 
   // Fonts
   --font-main-color: #222;
   --font-light-color: #888;
   --font-header-color: #333;
-  --font-link-color: #2f63ee;
+  --font-link-color: var(--accent-color); // #2f63ee;
 
   // Backgrounds
-  --bg-main-color: #f0f6f5;
+  --bg-main-color: #f0f4f6;
   --bg-hover-color: #0000000a;
 
   // Borders
