@@ -1,90 +1,81 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { environment } from '../environments/environment';
+import { NgModule } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 
 import {
-  MatToolbarModule,
-  MatSidenavModule,
   MatButtonModule,
-  MatIconModule,
-  MatListModule,
-  MatTableModule,
-  MatPaginatorModule,
-  MatPaginatorIntl,
-  MatSortModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatCheckboxModule,
   MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule,
 } from '@angular/material';
 
-import { AppRoutingModule } from './app-routing.module';
-import { environment } from '../environments/environment';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { StudentListComponent } from './components/student-list/student-list.component';
-import { LoginComponent } from './components/login/login.component';
-import { AulaComponent } from './components/aula/aula.component';
-import { SubjectListComponent } from './components/subject-list/subject-list.component';
-import { ConfigurationComponent } from './components/configuration/configuration.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { MatPaginatorIntlEs } from './i18n/MatPaginatorIntlEs';
-import { StudentComponent } from './components/student/student.component';
 import { StudentPipe } from './pipes/student.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+
+import { AppComponent } from './app.component';
+import { AulaComponent } from './components/aula/aula.component';
+import { ConfigurationComponent } from './components/configuration/configuration.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { StudentComponent } from './components/student/student.component';
+import { StudentListComponent } from './components/student-list/student-list.component';
+import { SubjectListComponent } from './components/subject-list/subject-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    SideMenuComponent,
-    StudentListComponent,
-    LoginComponent,
     AulaComponent,
-    SubjectListComponent,
     ConfigurationComponent,
-    PageNotFoundComponent,
-    StudentComponent,
-    StudentPipe,
+    HeaderComponent,
+    LoginComponent,
     OrderByPipe,
+    PageNotFoundComponent,
+    SideMenuComponent,
+    StudentComponent,
+    StudentListComponent,
+    StudentPipe,
+    SubjectListComponent,
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule,
     AngularFireDatabaseModule,
-    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
     FlexLayoutModule,
-    MatToolbarModule,
-    MatSidenavModule,
+    FormsModule,
     MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlEs }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

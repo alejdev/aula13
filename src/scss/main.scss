@@ -16,8 +16,6 @@ body {
   -moz-osx-font-smoothing: antialased;
 }
 
-mat-card.mat-card,
-table.mat-table,
-mat-paginator.mat-paginator {
+mat-card.mat-card {
   border-radius: var(--border-radius-main-size);
 }
