@@ -3,24 +3,26 @@
 
 <!-- Filter -->
 <mat-form-field>
-  <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)" placeholder="Buscar alumno" aria-label="Buscar alumno" autocomplete="off">
+  <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)" placeholder="Buscar alumno"
+    aria-label="Buscar alumno" autocomplete="off">
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
 <!-- List -->
-<div *ngIf="studentListFiltered.length" class="pt1 pbQ" fxLayout="row" fxLayoutAlign="space-between center">
+<div *ngIf="studentListFiltered.length" class="pt1 pbQ" fxLayout="row" fxLayoutAlign="space-between center" matSort
+  matSortDisableClear (matSortChange)="sortData($event)" [matSortActive]="defaultSort"
+  [matSortDirection]="defaultSortDir" matSortStart="desc">
   <ng-container *ngFor="let col of columns">
-    <div (click)="sort(col.id)" class="row {{col.class}}" [ngClass]="{'active': matchOrder(col.id)}">
+    <div class="row {{col.class}}" [ngClass]="{'active': sortActive.active === col.id}" [mat-sort-header]="col.id">
       <button mat-button aria-label="Ordenar columna">
         <span>{{col.name}}</span>
-        <mat-icon class="mat-icon-18 mlH arrow-icon">{{getArrow(col.id)}}</mat-icon>
       </button>
     </div>
   </ng-container>
 </div>
 
 <!-- Students -->
-<ng-container *ngFor="let student of studentListFiltered | orderBy : orderByProperty">
+<ng-container *ngFor="let student of studentListFiltered">
   <a13-student [(student)]="student"></a13-student>
 </ng-container>
 

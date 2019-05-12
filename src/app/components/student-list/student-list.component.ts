@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from 'src/app/interfaces/student';
 import { StudentPipe } from 'src/app/pipes/student.pipe';
+import { Sort, SortDirection } from '@angular/material';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'a13-student-list',
@@ -15,7 +17,9 @@ export class StudentListComponent implements OnInit {
   studentList: Student[]
   studentListFiltered: Student[]
   studentFilter: string = ''
-  orderByProperty: string = 'fullName'
+  defaultSort: string = 'fullName'
+  defaultSortDir: SortDirection = 'desc'
+  sortActive: Sort
   columns = [{
     id: 'fullName',
     name: 'Nombre',
@@ -25,9 +29,10 @@ export class StudentListComponent implements OnInit {
     name: 'Tipo'
   }]
 
-  constructor(private studentService: StudentService, private studentPipe: StudentPipe) {
+  constructor(private studentService: StudentService, private studentPipe: StudentPipe, private utilService: UtilService) {
     this.studentList = this.studentService.studentList
     this.studentListFiltered = Object.assign(this.studentList)
+    this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
   }
 
   ngOnInit(): void { }
@@ -36,19 +41,8 @@ export class StudentListComponent implements OnInit {
     this.studentListFiltered = this.studentPipe.transform(this.studentList, ev)
   }
 
-  sort(value: string): void {
-    this.orderByProperty = value === this.orderByProperty ? `-${value}` : value
-  }
-
-  matchOrder(value: string): RegExpMatchArray {
-    let regex = `-?${value}`
-    return this.orderByProperty.match(new RegExp(regex, 'g'))
-  }
-
-  getArrow(value: string): string {
-    if (`-${value}` === this.orderByProperty) {
-      return 'arrow_upward'
-    }
-    return 'arrow_downward'
+  sortData(sort: Sort): void {
+    this.sortActive = sort
+    this.studentListFiltered = this.utilService.sortData(this.studentListFiltered, sort)
   }
 }

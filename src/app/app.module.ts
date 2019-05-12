@@ -21,7 +21,9 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatRippleModule,
   MatSidenavModule,
+  MatSortModule,
   MatToolbarModule,
 } from '@angular/material';
 
@@ -71,7 +73,9 @@ import { SubjectListComponent } from './components/subject-list/subject-list.com
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatRippleModule,
     MatSidenavModule,
+    MatSortModule,
     MatToolbarModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
