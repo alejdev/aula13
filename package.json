@@ -7,7 +7,8 @@
     "build": "ng build",
     "build:prod": "ng build --prod",
     "build:serve": "ng build --prod & http-server dist/aula13",
-    "deploy": "ng build --prod & firebase deploy",
+    "deploy:dev": "ng build & firebase use develop & firebase deploy",
+    "deploy": "ng build --prod & firebase use production & firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
