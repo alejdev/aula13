@@ -9,7 +9,6 @@ export class SubjectListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void { }
 
 }

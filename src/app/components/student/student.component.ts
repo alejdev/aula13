@@ -13,9 +13,9 @@ export class StudentComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit(): void { }
 
-  get studentData() {
+  get studentData(): Student {
     return this.student
   }
 

@@ -28,14 +28,14 @@ export class AulaComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
     this.mobileQueryListener = () => this.setViewportSize()
     this.mobileQuery.addListener(this.mobileQueryListener)
-    
+
     // Swipe sideMenu on mobile
     const hammertime = new Hammer(elementRef.nativeElement, {});
     hammertime.on('panright', (ev) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
     hammertime.on('panleft', (ev) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
   }
 
-  setViewportSize() {
+  setViewportSize(): void {
     if (this.mobileQuery.matches) {
       this.fixedTopGap = 54
       this.animStyles = {
@@ -65,7 +65,7 @@ export class AulaComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sidenavService.sidenavState.subscribe(res => {
       this.onSideNavChange = res;
     })

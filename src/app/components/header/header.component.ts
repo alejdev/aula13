@@ -17,9 +17,9 @@ export class HeaderComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
   }
 
-  ngOnInit() { }
+  ngOnInit(): void { }
 
-  toggleSinenav() {
+  toggleSinenav(): void {
     if (this.mobileQuery.matches) {
       this.sidenav.toggle()
     } else {

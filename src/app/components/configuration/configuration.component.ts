@@ -9,7 +9,6 @@ export class ConfigurationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void { }
 
 }

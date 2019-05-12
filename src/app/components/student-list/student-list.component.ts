@@ -30,7 +30,7 @@ export class StudentListComponent implements OnInit {
     this.studentListFiltered = Object.assign(this.studentList)
   }
 
-  ngOnInit() { }
+  ngOnInit(): void { }
 
   searchStudent(ev: string): void {
     this.studentListFiltered = this.studentPipe.transform(this.studentList, ev)
