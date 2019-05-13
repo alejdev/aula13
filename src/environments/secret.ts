@@ -1,7 +1,6 @@
 
 // Copy this file twice and rename: 'environment.ts' and 'environment.prod.ts'
-
-// Replace this by you firebase config
+// Replace this by you firebase configs
 export const environment = {
   production: false,
   firebase: {
@@ -11,5 +10,6 @@ export const environment = {
     projectId: "<PROJECT_ID>",
     storageBucket: "<BUCKET>.appspot.com",
     messagingSenderId: "<SENDER_ID>",
+    appId: "<APP_ID>"
   }
 };

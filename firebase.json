@@ -1,33 +1,48 @@
 {
-  "hosting": {
-    "public": "dist/aula13",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [{
-      "source": "**",
-      "destination": "/index.html"
-    }],
-    "headers": [{
-      "source": "*.@(*.css|js)",
-      "headers": [{
-        "key": "Cache-Control",
-        "value": "max-age=31536000"
+  "hosting": [{
+      "target": "dev",
+      "public": "dist/dev",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [{
+        "source": "**",
+        "destination": "/index.html"
       }]
-    }, {
-      "source": "**/*.@(*)",
+    },
+    {
+      "target": "prod",
+      "public": "dist/prod",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [{
+        "source": "**",
+        "destination": "/index.html"
+      }],
       "headers": [{
-        "key": "Cache-Control",
-        "value": "max-age=31536000"
+        "source": "*.@(*.css|js)",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }]
+      }, {
+        "source": "**/*.@(*)",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }]
+      }, {
+        "source": "404.html",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=31536000"
+        }]
       }]
-    }, {
-      "source": "404.html",
-      "headers": [{
-        "key": "Cache-Control",
-        "value": "max-age=31536000"
-      }]
-    }]
-  }
+    }
+  ]
 }
