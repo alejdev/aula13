@@ -1,6 +1,7 @@
 {
-  "name": "Aula 13 project",
+  "name": "Aula 13",
   "short_name": " Aula 13",
+  "description": "La app que te ayuda con la organización de tus alumnos y clases particulares.",
   "theme_color": "#2c365b",
   "background_color": "#ffffff",
   "display": "standalone",
@@ -9,7 +10,6 @@
   "start_url": "/",
   "dir": "ltr",
   "lang": "es",
-  "description": "La app que te ayuda con la organización de tus alumnos y clases particulares.",
   "related_applications": [],
   "prefer_related_applications": false,
   "gcm_sender_id": "103953800507",

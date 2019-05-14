@@ -25,7 +25,7 @@
   "dataGroups": [{
     "name": "FirebaseAPI",
     "urls": [
-      "https://aula13project.firebaseio.com/**"
+      "https://aula13-8a522.firebaseio.com/**"
     ],
     "cacheConfig": {
       "strategy": "freshness",
