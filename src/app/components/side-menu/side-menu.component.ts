@@ -16,10 +16,11 @@ export class SideMenuComponent implements OnInit {
 
   menuItems = [
     [
-      { name: 'Alumnos', url: 'aula/alumnos', icon: 'people', theme: 'blue' },
-      { name: 'Asignaturas', url: 'aula/asignaturas', icon: 'import_contacts', theme: 'red' },
-      { name: 'Configuración', url: 'aula/configuracion', icon: 'settings', theme: 'green' }
+      { name: 'Alumnos', url: 'aula/alumnos', icon: 'people' },
+      { name: 'Asignaturas', url: 'aula/asignaturas', icon: 'import_contacts' },
+      { name: 'Configuración', url: 'aula/configuracion', icon: 'settings' }
     ], [
+      { name: 'Login', url: 'login', icon: 'vpn_key' }
     ]
   ]
 
