@@ -23,4 +23,15 @@ export class StudentComponent implements OnInit {
     this.student = val
     this.student.emit(this.student)
   }
+
+  getPuntuation(list: any, index: number): string {
+    switch (true) {
+      case list.length === index+1:
+        return ``
+      case list.length === index+2:
+        return ` y`
+      default:
+        return `,`
+    }
+  }
 }

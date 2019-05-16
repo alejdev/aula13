@@ -20,6 +20,9 @@ export class StudentService {
     subjects: [{
       id: 1,
       name: 'Chelo'
+    }, {
+      id: 2,
+      name: 'Lenguaje'
     }]
   }, {
     id: 2,
@@ -38,6 +41,12 @@ export class StudentService {
     subjects: [{
       id: 1,
       name: 'Lenguaje'
+    }, {
+      id: 2,
+      name: 'Chelo'
+    }, {
+      id: 3,
+      name: 'Violín'
     }]
   }, {
     id: 3,

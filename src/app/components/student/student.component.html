@@ -8,14 +8,20 @@
       <!-- Name & Surname -->
       <div fxLayout="column" fxLayoutAlign="space-around start">
         <span>{{student?.name}}</span>
-        <span class="mat-small light-text">{{student?.surname}}</span>
+        <div fxLayout="row wrap">
+          <span class="mat-small light-text mrQ"
+            *ngFor="let subject of student?.subjects; let i=index; let first = first">
+            <span [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
+            <span>{{getPuntuation(student?.subjects, i)}}</span>
+          </span>
+        </div>
       </div>
     </div>
 
     <!-- Type -->
     <div class="mrH mlH" fxLayout="row" fxLayoutAlign="start center">
       <div class="badge truncate"
-        [ngClass]="{'bg-primary': student?.type === 'Femae', 'bg-accent': student?.type === 'Particular'}">
+        [ngClass]="{'primary-700': student?.type === 'Femae', 'accent-600': student?.type === 'Particular'}">
         {{student?.type}}
       </div>
     </div>
