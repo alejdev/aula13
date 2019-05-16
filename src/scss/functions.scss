@@ -1,0 +1,99 @@
+// Functions
+
+// Get color from a map
+@function get-color($scheme, $tone) {
+  @return map-get(map-get($colors, $scheme), $tone);
+}
+
+// Set Custom Palettes
+@function set-custom-palettes($theme-colors) {
+
+  $palettes-map: ();
+
+  @each $key,
+  $value in $theme-colors {
+    $map: ();
+    $map: map-merge($map, ($key: create_colour_map($value)));
+    $palettes-map: map-merge($palettes-map, $map);
+  }
+
+  @return $palettes-map;
+}
+
+// Generate a material palette 
+@function create_colour_map($color) {
+
+  $saturate: 25%;
+  $hue: 10%;
+
+  $map: (
+    50 : get-lightness-color($color, 10),
+    100 : get-lightness-color($color, 9),
+    200 : get-lightness-color($color, 8),
+    300 : get-lightness-color($color, 7),
+    400 : get-lightness-color($color, 6),
+    500 : get-lightness-color($color, 5),
+    600 : get-lightness-color($color, 4),
+    700 : get-lightness-color($color, 3),
+    800 : get-lightness-color($color, 2),
+    900 : get-lightness-color($color, 1),
+    A100 : adjust-hue(saturate(get-lightness-color($color, 9), $saturate), $hue),
+    A200 : adjust-hue(saturate(get-lightness-color($color, 8), $saturate), $hue),
+    A400 : adjust-hue(saturate(get-lightness-color($color, 6), $saturate), $hue),
+    A700 : adjust-hue(saturate(get-lightness-color($color, 3), $saturate), $hue),
+    contrast: (
+      50 : get-contrast-color(get-lightness-color($color, 10)),
+      100 : get-contrast-color(get-lightness-color($color, 9)),
+      200 : get-contrast-color(get-lightness-color($color, 8)),
+      300 : get-contrast-color(get-lightness-color($color, 7)),
+      400 : get-contrast-color(get-lightness-color($color, 6)),
+      500 : get-contrast-color(get-lightness-color($color, 5)),
+      600 : get-contrast-color(get-lightness-color($color, 4)),
+      700 : get-contrast-color(get-lightness-color($color, 3)),
+      800 : get-contrast-color(get-lightness-color($color, 2)),
+      900 : get-contrast-color(get-lightness-color($color, 1)),
+      A100 : get-contrast-color(adjust-hue(saturate(get-lightness-color($color, 9), $saturate), $hue)),
+      A200 : get-contrast-color(adjust-hue(saturate(get-lightness-color($color, 8), $saturate), $hue)),
+      A400 : get-contrast-color(adjust-hue(saturate(get-lightness-color($color, 6), $saturate), $hue)),
+      A700 : get-contrast-color(adjust-hue(saturate(get-lightness-color($color, 3), $saturate), $hue)))
+    );
+
+  @return $map;
+}
+
+@function get-lightness-color($color, $brightnessLevel) {
+  $colorLightness: floor(lightness($color) / 10);
+
+  @if $colorLightness < $brightnessLevel {
+    @return lighten($color, 8% * ($brightnessLevel - $colorLightness));
+  }
+
+  @if $colorLightness==$brightnessLevel {
+    // @debug $color + ' -> ' + (10 - $colorLightness);
+    @return $color;
+  }
+
+  @if $colorLightness>$brightnessLevel {
+    @return darken($color, 8% * ($colorLightness - $brightnessLevel));
+  }
+}
+
+// Contrast colors
+@function get-contrast-color($color) {
+  $lightness: lightness($color);
+  $contrast: $black-87-opacity;
+
+  @if ($lightness < 80) {
+    $contrast: black;
+  }
+
+  @if ($lightness < 60) {
+    $contrast: white;
+  }
+
+  @if ($lightness < 40) {
+    $contrast: $white-87-opacity;
+  }
+
+  @return $contrast;
+}

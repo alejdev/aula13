@@ -1,30 +1,46 @@
+// SCSS variables
+$colors: (
+  main: (
+    primary-color       : #2c365b,
+    accent-color        : #11a3da,
+    warn-color          : #ef6a39,
+  ),
+  font: (
+    main-color          : #222, 
+    light-color         : #666, 
+    header-color        : #333
+  ),
+  bg: (
+    main-color          : #f0f4f6,
+    hover-color         : #eee,
+    active-color        : #ededed
+  ),
+  other: (
+    border-color        : #d1ddf5
+  )
+);
+
+$sizes: (
+  main: (
+    margin-size         : 3rem,
+    padding-size        : 2rem,
+    radius-size         : .5rem,
+    header-size         : 64px
+  )
+);
+
+$fonts: (
+  primary: ("Varela Round", "Helvetica Neue", sans-serif),
+  secondary: ("Helvetica Neue", sans-serif)
+);
+
+// CSS variables
 :root {
-  // Colors
-  --primary-color: #2c365b;
-  --accent-color: #11a3da;
-  --warn-color: #ef6a39;
-
-  // Fonts
-  --font-main-color: #222;
-  --font-light-color: #666;
-  --font-header-color: #333;
-  --font-link-color: var(--accent-color); // #2f63ee;
-
-  // Backgrounds
-  --bg-main-color: #f0f4f6;
-  --bg-hover-color: #eee;
-  --bg-active-color: #ededed;
-
-  // Borders
-  --border-color: #d1ddf5;
-
-  // Sizes
-  --margin-main-size: 3rem;
-  --padding-main-size: 2rem;
-  --border-radius-main-size: .5rem;
-  --header-height: 64px;
+  @include set-map($colors);
+  @include set-map($sizes);
 }
 
+// Media queries
 @media only screen and (max-width: 900px) {
   :root {
     --padding-main-size: 1.2rem;
@@ -34,6 +50,6 @@
 @media only screen and (max-width: 600px) {
   :root {
     --padding-main-size: .75rem;
-    --header-height: 54px;
+    --header-height-size: 54px;
   }
 }

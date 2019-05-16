@@ -8,7 +8,7 @@ body {
   margin: 0;
   height: 100%;
   min-height: 100%;
-  @include primary-font;
+  font-family: map-get($fonts, primary);
 }
 
 * {
@@ -17,5 +17,5 @@ body {
 }
 
 mat-card.mat-card {
-  border-radius: var(--border-radius-main-size);
+  border-radius: var(--main-radius-size);
 }
