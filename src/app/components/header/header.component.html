@@ -1,4 +1,4 @@
-<mat-toolbar class="header">
+<mat-toolbar class="header" [color]="themeName">
 
   <!-- Botón menu -->
   <button class="menu-button mlQ mr1" mat-icon-button (click)="toggleSinenav()" aria-label="Abrir/Cerrar menú">
@@ -9,4 +9,13 @@
   <h1 class="mat-h1">
     <a [routerLink]="[ '/aula' ]">{{title}}</a>
   </h1>
+
+  <!-- Spacer -->
+  <div class="spacer"></div>
+
+  <!-- Toogle theme -->
+  <button class="menu-button mrQ" mat-icon-button (click)="toggleTheme()" aria-label="Cambiar tema"
+  matTooltip="Cambiar tema" matTooltipPosition="left">
+    <mat-icon>{{themeIcon}}</mat-icon>
+  </button>
 </mat-toolbar>

@@ -1,25 +1,14 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$theme-colors : (
-  primary         : get-color(main, primary-color),
-  accent          : get-color(main, accent-color),
-  warn            : get-color(main, warn-color)
-);
+@include set-custom-theme('light-theme', map-get($colors, light-theme), false);
+@include set-custom-theme('dark-theme', map-get($colors, dark-theme), true);
 
-$palettes-map: set-custom-palettes($theme-colors);
-
-// Set Theme
-$my-theme: mat-light-theme(
-  mat-palette(map-get($palettes-map, primary), 800, 500, 900),
-  mat-palette(map-get($palettes-map, accent), 600, 300, 800),
-  mat-palette(map-get($palettes-map, warn), 500, 200, 700)
-);
-
-// Set background
-$background: map-get($my-theme, background);
-$background: map_merge($background, (background: var(--bg-main-color)));
-$my-theme: map_merge($my-theme, (background: $background));
-
-@include angular-material-theme($my-theme);
-@include set-palette-classes($palettes-map);
+.light-theme .nav-list-item.active {
+	background-color: $black-6-opacity;
+	span { color: black; }
+}
+.dark-theme .nav-list-item.active {
+	background-color: $black-12-opacity;
+	span { color: white; }
+}

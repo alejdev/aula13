@@ -1,22 +1,26 @@
 // SCSS variables
+
+$main-color             : #3399f8;
+$second-color           : #da5111;
+$tertiary-color         : #e73636;
+
 $colors: (
-  main: (
-    primary-color       : #2c365b,
-    accent-color        : #11a3da,
-    warn-color          : #ef6a39,
+  light-theme: (
+    primary             : $main-color,
+    accent              : $second-color,
+    warn                : $tertiary-color,
+    background          : #f0f4f6,
+    foreground          : #222,
   ),
-  font: (
-    main-color          : #222, 
-    light-color         : #666, 
-    header-color        : #333
-  ),
-  bg: (
-    main-color          : #f0f4f6,
-    hover-color         : #eee,
-    active-color        : #ededed
+  dark-theme: (
+    primary             : $main-color,
+    accent              : $second-color,
+    warn                : $tertiary-color,
+    background          : #333,
+    foreground          : #bbbfc2,
   ),
   other: (
-    border-color        : #d1ddf5
+    border-color        : #8da3cf
   )
 );
 
@@ -41,15 +45,15 @@ $fonts: (
 }
 
 // Media queries
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 960px) {
   :root {
-    --padding-main-size: 1.2rem;
+    --main-padding-size: 1.2rem;
   }
 }
 
 @media only screen and (max-width: 600px) {
   :root {
-    --padding-main-size: .75rem;
-    --header-height-size: 54px;
+    --main-padding-size: .75rem;
+    // --main-header-size: 54px;
   }
 }

@@ -16,12 +16,9 @@
 // Set utility palette classes
 @mixin set-palette-classes($palettes-map) {
 
-  @each $namePalette,
-  $palette in $palettes-map {
-
-    @each $colorName,
-    $color in $palette {
-      @if $colorName !=contrast {
+  @each $namePalette, $palette in $palettes-map {
+    @each $colorName, $color in $palette {
+      @if $colorName != contrast {
         .#{$namePalette}-#{$colorName} {
           background-color: $color;
           color: mat-color(map-get($palette, contrast), $colorName);
@@ -44,7 +41,39 @@
 
 // Material icon size
 @mixin mat-icon-size($size: 24px) {
-  font-size: $size;
-  height: $size;
-  width: $size;
+  font-size: $size !important;
+  height: $size !important;
+  width: $size !important;
+}
+
+// Set custom theme
+@mixin set-custom-theme($name, $theme-colors, $isDark) {
+
+  $palettes-map: set-custom-palettes($theme-colors);
+
+  $my-theme: ();
+
+  @if $isDark {
+    $my-theme: mat-dark-theme(
+      mat-palette(map-get($palettes-map, primary), 400, 100, 500),
+      mat-palette(map-get($palettes-map, accent), 300),
+      mat-palette(map-get($palettes-map, warn))
+    );
+  } @else {
+    $my-theme: mat-light-theme(
+      mat-palette(map-get($palettes-map, primary), 600, 700, 900),
+      mat-palette(map-get($palettes-map, accent), 400),
+      mat-palette(map-get($palettes-map, warn))
+    );
+  }
+
+  $my-theme: set-background-theme($my-theme, map-get($theme-colors, background));
+  $my-theme: set-foreground-theme($my-theme, map-get($theme-colors, foreground));
+  
+  // Theme
+  .#{$name} {
+    background-color: map-get($theme-colors, background);
+    @include angular-material-theme($my-theme);
+    @include set-palette-classes($palettes-map);
+  }
 }

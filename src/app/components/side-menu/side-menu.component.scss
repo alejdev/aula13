@@ -1,9 +1,3 @@
-.sidenav-container {
-  span {
-    color: var(--font-light-color);
-  }
-}
-
 .side-menu-container {
   height: 100%;
 }
@@ -25,18 +19,9 @@
   border-left-style: solid;
   border-left-width: 4px;
   border-left-color: transparent;
-
-  mat-icon.blue {
-    color: var(--main-accent-color);
-  }
-
+  
   &.active {
-    background-color: var(--bg-active-color);
-    border-left-color: var(--main-warn-color);
+    border-left-color: var(--light-theme-accent);
     transition: all .2s;
-
-    span {
-      color: black;
-    }
   }
 }

@@ -21,10 +21,7 @@
 }
 
 // Generate a material palette 
-@function create_colour_map($color) {
-
-  $saturate: 25%;
-  $hue: 10%;
+@function create_colour_map($color, $saturate: 25%, $hue: 10%) {
 
   $map: (
     50 : get-lightness-color($color, 10),
@@ -68,12 +65,11 @@
     @return lighten($color, 8% * ($brightnessLevel - $colorLightness));
   }
 
-  @if $colorLightness==$brightnessLevel {
-    // @debug $color + ' -> ' + (10 - $colorLightness);
+  @if $colorLightness == $brightnessLevel {
     @return $color;
   }
 
-  @if $colorLightness>$brightnessLevel {
+  @if $colorLightness > $brightnessLevel {
     @return darken($color, 8% * ($colorLightness - $brightnessLevel));
   }
 }
@@ -91,9 +87,41 @@
     $contrast: white;
   }
 
-  @if ($lightness < 40) {
+  @if ($lightness < 20) {
     $contrast: $white-87-opacity;
   }
 
   @return $contrast;
+}
+
+// Set background theme
+@function set-background-theme($my-theme, $background-color) {
+  $my-background: map-get($my-theme, background);
+  $my-background: map_merge($my-background, (background: $background-color));
+  $my-theme: map_merge($my-theme, (background: $my-background));
+  @return $my-theme;
+}
+
+// Set foreground theme
+@function set-foreground-theme($my-theme, $foreground-color) {
+  $my-foreground: (
+    base                      : $foreground-color,
+    divider                   : rgba($foreground-color, 0.12),
+    dividers                  : rgba($foreground-color, 0.12),
+    disabled                  : rgba($foreground-color, 0.5),
+    disabled-button           : rgba($foreground-color, 0.3),
+    disabled-text             : rgba($foreground-color, 0.5),
+    elevation                 : $foreground-color,
+    hint-text                 : rgba($foreground-color, 0.3),
+    secondary-text            : rgba($foreground-color, 0.5),
+    icon                      : $foreground-color,
+    icons                     : $foreground-color,
+    text                      : $foreground-color,
+    slider-min                : $foreground-color,
+    slider-off                : rgba($foreground-color, 0.3),
+    slider-off-active         : rgba($foreground-color, 0.3)
+  );
+
+  $my-theme: map_merge($my-theme, (foreground: $my-foreground));
+  @return $my-theme;
 }
