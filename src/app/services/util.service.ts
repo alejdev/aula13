@@ -8,6 +8,11 @@ export class UtilService {
 
   constructor() { }
 
+  /** Regular expresions */
+  public regExp: any = {
+    email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  }
+
   /** Sort array */
   public sortData(data: any, sort: Sort = { active: 'name', direction: 'asc' }, defaultSortDir: SortDirection = 'desc'): any {
     const properties = data ? Object.keys(data[0]) : [];
