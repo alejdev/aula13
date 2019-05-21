@@ -12,7 +12,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   MatButtonModule,
@@ -25,6 +25,7 @@ import {
   MatSidenavModule,
   MatSortModule,
   MatToolbarModule,
+  MatTooltipModule,
 } from '@angular/material';
 
 import { StudentPipe } from './pipes/student.pipe';
@@ -77,6 +78,8 @@ import { SubjectListComponent } from './components/subject-list/subject-list.com
     MatSidenavModule,
     MatSortModule,
     MatToolbarModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

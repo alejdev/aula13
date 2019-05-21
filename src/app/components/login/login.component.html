@@ -1,19 +1,49 @@
-<section class="login" fxLayout="row">
+<section class="login" fxLayoutAlign="center center">
+  <div class="login-container">
 
-  <!-- Left -->
-  <aside class="left-login f4">
-    <h1 class="mat-display-1">{{title}}</h1>
-    <div class="bg-image-login"></div>
-  </aside>
+    <!-- Title -->
+    <h1 class="mb0">{{title}}</h1>
+    <span class="mat-caption mat-hint mb2 block">Organiza tus clases particulares</span>
 
-  <!-- Right -->
-  <div class="right-login f8">
+    <!-- Form -->
+    <form [formGroup]="formGroup" class="login-form">
 
-    <!-- Actions -->
-    <mat-toolbar class="header" fxLayout="row" fxLayoutAlign="end center">
-      <span class="mat-body light-text mr1">¿Aún no eres usuario?</span>
-      <button mat-stroked-button color="primary">Crear cuenta</button>
-    </mat-toolbar>
+      <!-- Email -->
+      <mat-form-field class="mb2">
+        <input matInput type="text" placeholder="Email de usuario" formControlName="email">
+        <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button aria-label="Clear"
+          (click)="formGroup.controls['email'].reset()">
+          <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
+        </button>
+        <mat-error *ngIf="!formGroup.controls['email'].valid">
+          {{getErrorEmail()}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Contraseña -->
+      <mat-form-field class="mb4">
+        <input matInput type="{{passwordType}}" placeholder="Contraseña" formControlName="password">
+        <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button aria-label="Clear"
+          (click)="togglePasswordVisibility()">
+          <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+        </button>
+        <mat-error *ngIf="!formGroup.controls['password'].valid">
+          {{getErrorPassword()}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Login button -->
+      <div class="button-controls" fxLayout="column">
+        <div class="mb1" fxLayout="row" fxLayoutAlign="end center">
+          <button fxFlex="200px" fxFlex.xs="100" mat-flat-button color="primary" (click)="loginWithEmail()">Iniciar
+            sesión</button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button fxFlex="200px" fxFlex.xs="100" mat-stroked-button color="accent" (click)="loginWithGoogle()">Login con
+            Google</button>
+        </div>
+      </div>
+    </form>
   </div>
-
 </section>
