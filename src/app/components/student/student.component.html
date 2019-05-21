@@ -9,7 +9,7 @@
       <div fxLayout="column" fxLayoutAlign="space-around start">
         <span>{{student?.name}}</span>
         <div fxLayout="row wrap">
-          <span class="mat-small light-text mrQ"
+          <span class="mat-small mat-hint mrQ"
             *ngFor="let subject of student?.subjects; let i=index; let first = first">
             <span [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
             <span>{{getPuntuation(student?.subjects, i)}}</span>
@@ -21,8 +21,8 @@
     <!-- Type -->
     <div class="mrH mlH" fxLayout="row" fxLayoutAlign="start center">
       <div class="badge truncate"
-        [ngClass]="{'primary-700': student?.type === 'Femae', 'accent-600': student?.type === 'Particular'}">
-        {{student?.type}}
+        [ngClass]="{'primary-800': student?.tag === 'Femae', 'accent-600': student?.tag === 'Particular'}">
+        {{student?.tag}}
       </div>
     </div>
 

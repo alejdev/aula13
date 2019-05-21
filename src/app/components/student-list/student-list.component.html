@@ -13,8 +13,8 @@
   matSortDisableClear (matSortChange)="sortData($event)" [matSortActive]="defaultSort"
   [matSortDirection]="defaultSortDir" matSortStart="desc">
   <ng-container *ngFor="let col of columns">
-    <div class="row {{col.class}}" [ngClass]="{'active': sortActive.active === col.id}" [mat-sort-header]="col.id">
-      <button mat-button aria-label="Ordenar columna">
+    <div class="row {{col.class}}" [mat-sort-header]="col.id">
+      <button mat-button aria-label="Ordenar columna" [color]="isActive(col.id)">
         <span>{{col.name}}</span>
       </button>
     </div>
@@ -27,4 +27,4 @@
 </ng-container>
 
 <!-- Empty list -->
-<h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt3 txt-center  light-text">¯\_(ツ)_/¯</h3>
+<h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt3 txt-center mat-hint">¯\_(ツ)_/¯</h3>

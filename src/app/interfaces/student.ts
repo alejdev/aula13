@@ -4,7 +4,7 @@ export interface Student {
 	surname?: string;
 	fullName: string;
 	avatar?: string;
-	type?: string;
+	tag?: string;
 	phones?: any[];
 	subjects?: any;
 	emit?: any; 

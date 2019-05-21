@@ -25,8 +25,8 @@ export class StudentListComponent implements OnInit {
     name: 'Nombre',
     class: 'ml4',
   }, {
-    id: 'type',
-    name: 'Tipo'
+    id: 'tag',
+    name: 'Etiqueta'
   }]
 
   constructor(private studentService: StudentService, private studentPipe: StudentPipe, private utilService: UtilService) {
@@ -44,5 +44,9 @@ export class StudentListComponent implements OnInit {
   sortData(sort: Sort): void {
     this.sortActive = sort
     this.studentListFiltered = this.utilService.sortData(this.studentListFiltered, sort)
+  }
+
+  isActive(id) {
+    return this.sortActive.active === id ? 'primary' : ''
   }
 }
