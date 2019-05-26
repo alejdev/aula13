@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostBinding } from '@angular/core';
 import { onMainContentChange, onSideNavChange } from 'src/app/animations/animations';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import * as Hammer from 'hammerjs';
 import { MatSidenav } from '@angular/material';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'a13-aula',
@@ -12,6 +14,8 @@ import { MatSidenav } from '@angular/material';
   animations: [onSideNavChange, onMainContentChange]
 })
 export class AulaComponent implements OnInit {
+
+  @HostBinding('class') componentCssClass: string
 
   @ViewChild(MatSidenav)
   public sideMenu: MatSidenav
@@ -22,7 +26,7 @@ export class AulaComponent implements OnInit {
   mobileQuery: MediaQueryList
   mobileQueryListener: () => void
 
-  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher) {
+  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer) {
 
     // Event listender for toggle menu on mobile
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
@@ -66,6 +70,13 @@ export class AulaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Theming service
+    this.themeService.theme.subscribe((result: any) => {
+      this.overlayContainer.getContainerElement().classList.add(result.id)
+      this.componentCssClass = result.id
+    });
+
+    // Sidenav service
     this.sidenavService.sidenavState.subscribe(res => {
       this.onSideNavChange = res;
     })

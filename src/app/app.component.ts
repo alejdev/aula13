@@ -1,7 +1,5 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { ThemeService } from './services/theme.service';
-import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'a13-root',
@@ -10,14 +8,8 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 })
 export class AppComponent implements OnInit {
 
-  @HostBinding('class') componentCssClass: string
 
-  constructor(private swUpdate: SwUpdate, private themeService: ThemeService, private overlayContainer: OverlayContainer) {
-    this.themeService.theme.subscribe((result: any) => {
-      this.overlayContainer.getContainerElement().classList.add(result.id)
-      this.componentCssClass = result.id
-    });
-  }
+  constructor(private swUpdate: SwUpdate) { }
 
   ngOnInit(): void {
     // Service Worker
