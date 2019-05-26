@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'a13-login',
+  host: {'class': 'light-theme'},
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -26,11 +27,13 @@ export class LoginComponent implements OnInit {
 
   loginWithEmail() {
     if (this.formGroup.valid) {
-      this.router.navigateByUrl('/aula')      
+      this.router.navigateByUrl('/aula')
     }
   }
 
   loginWithGoogle() { }
+  loginWithFacebook() { }
+  loginWithTwitter() { }
 
   togglePasswordVisibility() {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password'

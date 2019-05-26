@@ -1,17 +1,27 @@
-<section class="login" fxLayoutAlign="center center">
-  <div class="login-container">
+<section class="login" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+
+  <!-- Background -->
+  <div class="login-background"></div>
+
+  <!-- Form -->
+  <div class="login-container mat-elevation-z5" fxFlex.xs="100">
+
+    <!-- Logo -->
+    <div class="image-logo" fxLayout="row" fxLayoutAlign="center center">
+      <img class="image-logo-icon" src="/assets/images/cello.jpg" alt="Logo Aula 13">
+    </div>
 
     <!-- Title -->
-    <h1 class="mb0">{{title}}</h1>
-    <span class="mat-caption mat-hint mb2 block">Organiza tus clases particulares</span>
+    <h1 class="m0 mbH txt-thin">{{title}}</h1>
+    <span class="mat-body mat-hint mb1 block">Organiza tus clases particulares</span>
 
     <!-- Form -->
-    <form [formGroup]="formGroup" class="login-form">
+    <form [formGroup]="formGroup" class="login-form ptH">
 
       <!-- Email -->
-      <mat-form-field class="mb2">
-        <input matInput type="text" placeholder="Email de usuario" formControlName="email">
-        <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button aria-label="Clear"
+      <mat-form-field class="mb1">
+        <input matInput type="text" required placeholder="Email" formControlName="email">
+        <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button aria-label="Borrar correo"
           (click)="formGroup.controls['email'].reset()">
           <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
         </button>
@@ -21,9 +31,9 @@
       </mat-form-field>
 
       <!-- Contraseña -->
-      <mat-form-field class="mb4">
-        <input matInput type="{{passwordType}}" placeholder="Contraseña" formControlName="password">
-        <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button aria-label="Clear"
+      <mat-form-field class="mb3">
+        <input matInput type="{{passwordType}}" required placeholder="Contraseña" formControlName="password">
+        <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button aria-label="Mostrar/Ocultar contraseña"
           (click)="togglePasswordVisibility()">
           <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
           </mat-icon>
@@ -34,16 +44,26 @@
       </mat-form-field>
 
       <!-- Login button -->
-      <div class="button-controls" fxLayout="column">
-        <div class="mb1" fxLayout="row" fxLayoutAlign="end center">
-          <button fxFlex="200px" fxFlex.xs="100" mat-flat-button color="primary" (click)="loginWithEmail()">Iniciar
-            sesión</button>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="end center">
-          <button fxFlex="200px" fxFlex.xs="100" mat-stroked-button color="accent" (click)="loginWithGoogle()">Login con
-            Google</button>
-        </div>
+      <div class="mb1" fxLayout="row" fxLayoutAlign="end center">
+        <button fxFlex="100" mat-flat-button color="accent" (click)="loginWithEmail()" arial-label="Iniciar sesión con correo electrónico">Iniciar
+          sesión</button>
       </div>
     </form>
+
+    <!-- Login RS buttons -->
+    <div fxLayout="row" fxLayoutGap="1rem">
+      <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithGoogle()"
+        arial-label="Iniciar sesión con Google">
+        <img src="/assets/svgs/google-icon.svg" class="mat-icon-24" alt="Logo Google">
+      </button>
+      <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithFacebook()"
+        arial-label="Iniciar sesión con Facebook">
+        <img src="/assets/svgs/facebook-icon.svg" class="mat-icon-24" alt="Logo Facebook">
+      </button>
+      <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithTwitter()"
+        arial-label="Iniciar sesión con Twitter">
+        <img src="/assets/svgs/twitter-icon.svg" class="mat-icon-24" alt="Logo Twitter">
+      </button>
+    </div>
   </div>
 </section>
