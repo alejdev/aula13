@@ -3,11 +3,9 @@
 // Set map
 @mixin set-map($map) {
 
-  @each $nameSchema,
-  $schema in $map {
+  @each $nameSchema, $schema in $map {
 
-    @each $key,
-    $value in $schema {
+    @each $key, $value in $schema {
       --#{$nameSchema}-#{$key}: #{$value};
     }
   }
@@ -17,8 +15,9 @@
 @mixin set-palette-classes($palettes-map) {
 
   @each $namePalette, $palette in $palettes-map {
+
     @each $colorName, $color in $palette {
-      @if $colorName != contrast {
+      @if $colorName !=contrast {
         .#{$namePalette}-#{$colorName} {
           background-color: $color;
           color: mat-color(map-get($palette, contrast), $colorName);
@@ -31,8 +30,7 @@
 // Set utility icon classes
 @mixin set-icon-classes($iconSizes) {
 
-  @each $key,
-  $size in $iconSizes {
+  @each $key, $size in $iconSizes {
     .mat-icon-#{$key} {
       @include mat-icon-size($size);
     }
@@ -47,7 +45,7 @@
 }
 
 // Set custom theme
-@mixin set-custom-theme($name, $theme-colors, $isDark) {
+@mixin set-custom-theme($name, $theme-colors, $isDark, $primary-hue: 500, $accent-hue: 200, $warn-hue: 700, ) {
 
   $palettes-map: set-custom-palettes($theme-colors);
 
@@ -55,21 +53,23 @@
 
   @if $isDark {
     $my-theme: mat-dark-theme(
-      mat-palette(map-get($palettes-map, primary), 400, 100, 500),
-      mat-palette(map-get($palettes-map, accent), 300),
-      mat-palette(map-get($palettes-map, warn))
+      mat-palette(map-get($palettes-map, primary), $primary-hue, $primary-hue -200, $primary-hue +200),
+      mat-palette(map-get($palettes-map, accent), $accent-hue, $accent-hue -200, $accent-hue +200),
+      mat-palette(map-get($palettes-map, warn), $warn-hue, $warn-hue -200, $warn-hue +200)
     );
-  } @else {
+  }
+
+  @else {
     $my-theme: mat-light-theme(
-      mat-palette(map-get($palettes-map, primary), 600, 700, 900),
-      mat-palette(map-get($palettes-map, accent), 400),
-      mat-palette(map-get($palettes-map, warn))
+      mat-palette(map-get($palettes-map, primary), $primary-hue, $primary-hue -200, $primary-hue +200),
+      mat-palette(map-get($palettes-map, accent), $accent-hue, $accent-hue -200, $accent-hue +200),
+      mat-palette(map-get($palettes-map, warn), $warn-hue, $warn-hue -200, $warn-hue +200)
     );
   }
 
   $my-theme: set-background-theme($my-theme, map-get($theme-colors, background));
   $my-theme: set-foreground-theme($my-theme, map-get($theme-colors, foreground));
-  
+
   // Theme
   .#{$name} {
     background-color: map-get($theme-colors, background);

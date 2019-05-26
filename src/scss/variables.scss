@@ -1,16 +1,24 @@
-// SCSS variables
+// scss variables
 
-$main-color             : #3399f8;
-$second-color           : #da5111;
-$tertiary-color         : #e73636;
+$main-color             : #0259af;
+$main-light-hue         : 700;
+$main-dark-hue          : 400;
+
+$second-color           : #41a546;
+$second-light-hue       : 600;
+$second-dark-hue        : 300;
+
+$tertiary-color         : #df4846;
+$tertiary-light-hue     : 500;
+$tertiary-dark-hue      : 500;
 
 $colors: (
   light-theme: (
     primary             : $main-color,
     accent              : $second-color,
     warn                : $tertiary-color,
-    background          : #f0f4f6,
-    foreground          : #222,
+    background          : #ecf0f1,
+    foreground          : #222
   ),
   dark-theme: (
     primary             : $main-color,

@@ -1,8 +1,8 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-@include set-custom-theme('light-theme', map-get($colors, light-theme), false);
-@include set-custom-theme('dark-theme', map-get($colors, dark-theme), true);
+@include set-custom-theme('light-theme', map-get($colors, light-theme), false, $main-light-hue, $second-light-hue, $tertiary-light-hue);
+@include set-custom-theme('dark-theme', map-get($colors, dark-theme), true, $main-dark-hue, $second-dark-hue, $tertiary-dark-hue);
 
 .light-theme .nav-list-item.active {
 	background-color: $black-6-opacity;
