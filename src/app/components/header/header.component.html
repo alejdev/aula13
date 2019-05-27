@@ -1,6 +1,6 @@
 <mat-toolbar class="header" [color]="themeName">
 
-  <!-- Botón menu -->
+  <!-- Menu button -->
   <button class="menu-button mlQ mr1" mat-icon-button (click)="toggleSinenav()" aria-label="Abrir/Cerrar menú">
     <mat-icon>menu</mat-icon>
   </button>
@@ -13,8 +13,9 @@
   <!-- Spacer -->
   <div class="spacer"></div>
 
-  <!-- Toogle theme -->
-  <button class="menu-button mrQ" mat-icon-button (click)="toggleTheme()" aria-label="Cambiar tema">
-    <mat-icon>{{themeIcon}}</mat-icon>
+  <!-- Sign Out -->
+  <button class="menu-button mrQ" mat-button (click)="signOut()" aria-label="Cerrar sesión">
+    <span class="mat-body mrH">Cerrar sesión</span>
+    <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>

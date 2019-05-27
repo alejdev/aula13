@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ThemeService } from 'src/app/services/theme.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'a13-header',
@@ -13,19 +14,15 @@ export class HeaderComponent implements OnInit {
   title = 'Aula 13'
   @Input() sidenav: any
   mobileQuery: MediaQueryList
-  theme: any
   themeName: any
-  themeIcon: string
 
-  constructor(private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService) {
+  constructor(private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
   }
 
   ngOnInit(): void {
     this.themeService.theme.subscribe((result: any) => {
-      this.theme = result
-      this.themeIcon = this.themeService.getNextTheme(this.theme).icon;
-      this.themeIsDark()
+      this.themeName = result.isDark ? '' : 'primary'
     });
   }
 
@@ -37,13 +34,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  toggleTheme(): void {
-    let currentTheme = this.themeService.getNextTheme(this.theme);
-    this.themeService.theme.next(currentTheme)
-    this.themeIsDark()
-  }
-
-  themeIsDark() {
-    this.themeName = this.theme.isDark ? '' : 'primary'
+  signOut(): void {
+    this.router.navigateByUrl('/login')
   }
 }

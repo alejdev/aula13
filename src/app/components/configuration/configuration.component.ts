@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'a13-configuration',
@@ -7,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigurationComponent implements OnInit {
 
-  constructor() { }
+  title: string = 'Configuración'
+  theme: any
 
-  ngOnInit(): void { }
+  constructor(private themeService: ThemeService) { }
+
+  ngOnInit(): void {
+    this.themeService.theme.subscribe((result: any) => {
+      this.theme = result
+    });
+  }
+
+  toggleTheme(): void {
+    let currentTheme = this.themeService.getNextTheme(this.theme);
+    this.themeService.theme.next(currentTheme)
+  }
 
 }
