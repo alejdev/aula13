@@ -31,6 +31,8 @@
     "@angular/pwa": "^0.12.4",
     "@angular/router": "~7.2.0",
     "@angular/service-worker": "~7.2.0",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "^2.5.4",
     "css-utilities": "git+https://github.com/alejdev/css-utilities.git",
     "firebase": "^5.9.4",

@@ -1,6 +1,6 @@
-
 import { Component, OnInit, } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'a13-root',
@@ -9,8 +9,10 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent implements OnInit {
 
-
-  constructor(private swUpdate: SwUpdate) { }
+  constructor(private swUpdate: SwUpdate, translate: TranslateService) {
+    translate.setDefaultLang('es'); // fallback
+    translate.use('es');
+  }
 
   ngOnInit(): void {
     // Service Worker
