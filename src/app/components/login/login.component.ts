@@ -20,15 +20,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       email: [null, [Validators.required, Validators.pattern(this.utilService.regExp.email)]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
-      validate: ''
+      password: [null, [Validators.required, Validators.minLength(6)]]
     })
   }
 
   loginWithEmail() {
-    if (this.formGroup.valid) {
+    // if (this.formGroup.valid) {
       this.router.navigateByUrl('/aula')
-    }
+    // }
   }
 
   loginWithGoogle() { }
