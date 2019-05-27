@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubjectListComponent implements OnInit {
 
+  title: string = 'Asignaturas'
+
   constructor() { }
 
   ngOnInit(): void { }
