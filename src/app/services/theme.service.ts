@@ -9,12 +9,12 @@ export class ThemeService {
   private defaultThemeIndex: number = 0
   private themeList: any = [{
     id: 'light-theme',
-    name: 'modo luz',
+    name: 'THEMING.LIGHT_THEME',
     icon: 'brightness_5',
     isDark: false
   }, {
     id: 'dark-theme',
-    name: 'modo oscuro',
+    name: 'THEMING.DARK_THEME',
     icon: 'brightness_3',
     isDark: true
   }]

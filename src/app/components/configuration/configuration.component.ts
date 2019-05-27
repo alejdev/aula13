@@ -8,7 +8,7 @@ import { ThemeService } from 'src/app/services/theme.service';
 })
 export class ConfigurationComponent implements OnInit {
 
-  title: string = 'Configuración'
+  title: string = 'SETTINGS'
   theme: any
 
   constructor(private themeService: ThemeService) { }

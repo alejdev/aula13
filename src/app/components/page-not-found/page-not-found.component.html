@@ -1,6 +1,11 @@
-<p>
-  <b> 
-    Upps! Aquí no hay nada. <br>
-    <a [routerLink]="[ '/aula' ]">Volver</a>
-  </b>
-</p>
+<section fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+  <p class="txt-center mat-h1 mat-hint">
+    {{"MSG.NOTHING_MAN" | translate}}
+  </p>
+  <p class="txt-center txt-bold">
+    {{"MSG.NOTHING_HERE" | translate}}
+  </p>
+  <p class="txt-center txt-bold">
+    <a [routerLink]="[ '/aula' ]">{{'BACK' | translate}}</a>
+  </p>
+</section>

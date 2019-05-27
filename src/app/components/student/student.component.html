@@ -12,7 +12,7 @@
           <span class="mat-small mat-hint mrQ"
             *ngFor="let subject of student?.subjects; let i=index; let first = first">
             <span [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
-            <span>{{getPuntuation(student?.subjects, i)}}</span>
+            <span>{{getPuntuation(student?.subjects, i) | translate}}</span>
           </span>
         </div>
       </div>
@@ -20,7 +20,7 @@
 
     <!-- Type -->
     <div class="mrH mlH" fxLayout="row" fxLayoutAlign="start center">
-      <div class="badge truncate"
+      <div class="badge"
         [ngClass]="{'primary-500': student?.tag === 'Femae', 'accent-500': student?.tag === 'Particular'}">
         {{student?.tag}}
       </div>

@@ -13,7 +13,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class StudentListComponent implements OnInit {
 
-  title = 'Alumnos'
+  title = 'STUDENTS'
   studentList: Student[]
   studentListFiltered: Student[]
   studentFilter: string = ''
@@ -22,11 +22,11 @@ export class StudentListComponent implements OnInit {
   sortActive: Sort
   columns = [{
     id: 'fullName',
-    name: 'Nombre',
+    name: 'PROP.NAME',
     class: 'ml4',
   }, {
     id: 'tag',
-    name: 'Etiqueta'
+    name: 'PROP.TAG'
   }]
 
   constructor(private studentService: StudentService, private studentPipe: StudentPipe, private utilService: UtilService) {
@@ -46,7 +46,7 @@ export class StudentListComponent implements OnInit {
     this.studentListFiltered = this.utilService.sortData(this.studentListFiltered, sort)
   }
 
-  isActive(id) {
+  isActive(id: string) {
     return this.sortActive.active === id ? 'primary' : ''
   }
 }

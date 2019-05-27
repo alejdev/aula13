@@ -1,7 +1,7 @@
 <mat-toolbar class="header" [color]="themeName">
 
+  <button class="menu-button mlQ mr1" mat-icon-button (click)="toggleSinenav()" attr.aria-label="{{(sidenavState ? 'CLOSE_MENU' : 'OPEN_MENU') | translate}}">
   <!-- Menu button -->
-  <button class="menu-button mlQ mr1" mat-icon-button (click)="toggleSinenav()" aria-label="Abrir/Cerrar menú">
     <mat-icon>menu</mat-icon>
   </button>
 
@@ -14,8 +14,8 @@
   <div class="spacer"></div>
 
   <!-- Sign Out -->
-  <button class="menu-button mrQ" mat-button (click)="signOut()" aria-label="Cerrar sesión">
-    <span class="mat-body mrH">Cerrar sesión</span>
+  <button class="menu-button mrQ" mat-button (click)="signOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">
+    <span class="mat-body mrH">{{"SIGN.OUT" | translate}}</span>
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>

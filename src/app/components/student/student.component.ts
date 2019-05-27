@@ -29,7 +29,7 @@ export class StudentComponent implements OnInit {
       case list.length === index+1:
         return ``
       case list.length === index+2:
-        return ` y`
+        return `AND`
       default:
         return `,`
     }

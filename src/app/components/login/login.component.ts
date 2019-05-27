@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'a13-login',
-  host: {'class': 'light-theme'},
+  host: { 'class': 'light-theme' },
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -24,9 +25,9 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  loginWithEmail() {
+  loginWithEmail(): void {
     // if (this.formGroup.valid) {
-      this.router.navigateByUrl('/aula')
+    this.router.navigateByUrl('/aula')
     // }
   }
 
@@ -38,23 +39,17 @@ export class LoginComponent implements OnInit {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
   }
 
-  getErrorEmail() {
+  getError(type: string): string {
+    let form = this.formGroup.get(type)
     switch (true) {
-      case this.formGroup.get('email').hasError('required'):
-        return `El email es obligatorio`
-      case this.formGroup.get('email').hasError('pattern'):
-        return `Por favor, introduce un email válido`
-      default:
-        return ``
-    }
-  }
-
-  getErrorPassword() {
-    switch (true) {
-      case this.formGroup.get('password').hasError('required'):
-        return `La contraseña es obligatoria`
-      case this.formGroup.get('password').hasError('minlength'):
-        return `La contraseña debe tener al menos 6 caracteres`
+      case type === 'email' && form.hasError('required'):
+        return `ERR.EMAIL_REQUIRED`
+      case type === 'email' && form.hasError('pattern'):
+        return `ERR.EMAIL_INVALID`
+      case type === 'password' && form.hasError('required'):
+        return `ERR.PASSWORD_REQUIRED`
+      case type === 'password' && form.hasError('minlength'):
+        return `ERR.PASSWORD_INVALID`
       default:
         return ``
     }

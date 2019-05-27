@@ -15,9 +15,9 @@ export class SideMenuComponent implements OnInit {
   user: User = { name: 'Alejandro', avatar: '' }
 
   menuItems = [[
-    { name: 'Alumnos', url: 'aula/alumnos', icon: 'people' },
-    { name: 'Asignaturas', url: 'aula/asignaturas', icon: 'import_contacts' },
-    { name: 'Configuración', url: 'aula/configuracion', icon: 'settings' }
+    { name: 'STUDENTS', url: 'aula/alumnos', icon: 'people' },
+    { name: 'SUBJECTS', url: 'aula/asignaturas', icon: 'import_contacts' },
+    { name: 'SETTINGS', url: 'aula/configuracion', icon: 'settings' }
   ]]
 
   constructor(private sidenavService: SidenavService) {

@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   @Input() sidenav: any
   mobileQuery: MediaQueryList
   themeName: any
+  sidenavState: boolean
 
   constructor(private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
     this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'
     });
+    this.sidenavService.sidenavState.subscribe(result => this.sidenavState = result)
   }
 
   toggleSinenav(): void {

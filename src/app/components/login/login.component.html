@@ -21,47 +21,48 @@
       <!-- Email -->
       <mat-form-field class="mb1">
         <input matInput type="text" required placeholder="Email" formControlName="email">
-        <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button aria-label="Borrar correo"
-          (click)="formGroup.controls['email'].reset()">
+        <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button
+          attr.aria-label="{{'RESET_EMAIL' | translate}}" (click)="formGroup.controls['email'].reset()">
           <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
         </button>
         <mat-error *ngIf="!formGroup.controls['email'].valid">
-          {{getErrorEmail()}}
+          {{getError('email') | translate}}
         </mat-error>
       </mat-form-field>
 
       <!-- Contraseña -->
       <mat-form-field class="mb3">
         <input matInput type="{{passwordType}}" required placeholder="Contraseña" formControlName="password">
-        <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button aria-label="Mostrar/Ocultar contraseña"
+        <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button
+          attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}"
           (click)="togglePasswordVisibility()">
           <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
           </mat-icon>
         </button>
         <mat-error *ngIf="!formGroup.controls['password'].valid">
-          {{getErrorPassword()}}
+          {{getError('password') | translate}}
         </mat-error>
       </mat-form-field>
 
       <!-- Login button -->
       <div class="mb1" fxLayout="row" fxLayoutAlign="end center">
-        <button fxFlex="100" mat-flat-button color="accent" (click)="loginWithEmail()" arial-label="Iniciar sesión con correo electrónico">Iniciar
-          sesión</button>
+        <button fxFlex="100" mat-flat-button color="accent" (click)="loginWithEmail()"
+          attr.arial-label="{{'SIGN.IN_WITH_EMAIL' | translate}}">{{'SIGN.IN' | translate}}</button>
       </div>
     </form>
 
     <!-- Login RS buttons -->
     <div fxLayout="row" fxLayoutGap="1rem">
       <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithGoogle()"
-        arial-label="Iniciar sesión con Google">
+        attr.arial-label="{{'SIGN.IN_WITH_GOOGLE' | translate}}">
         <img src="/assets/svgs/google-icon.svg" class="mat-icon-24" alt="Logo Google">
       </button>
       <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithFacebook()"
-        arial-label="Iniciar sesión con Facebook">
+        attr.arial-label="{{'SIGN.IN_WITH_FACEBOOK' | translate}}">
         <img src="/assets/svgs/facebook-icon.svg" class="mat-icon-24" alt="Logo Facebook">
       </button>
       <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithTwitter()"
-        arial-label="Iniciar sesión con Twitter">
+        attr.arial-label="{{'SIGN.IN_WITH_TWITTER' | translate}}">
         <img src="/assets/svgs/twitter-icon.svg" class="mat-icon-24" alt="Logo Twitter">
       </button>
     </div>
