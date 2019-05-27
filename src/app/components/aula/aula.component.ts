@@ -6,6 +6,7 @@ import * as Hammer from 'hammerjs';
 import { MatSidenav } from '@angular/material';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ThemeService } from 'src/app/services/theme.service';
+import { Router, Event, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'a13-aula',
@@ -26,7 +27,7 @@ export class AulaComponent implements OnInit {
   mobileQuery: MediaQueryList
   mobileQueryListener: () => void
 
-  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer) {
+  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, router: Router) {
 
     // Event listender for toggle menu on mobile
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
@@ -37,6 +38,16 @@ export class AulaComponent implements OnInit {
     const hammertime = new Hammer(elementRef.nativeElement, {});
     hammertime.on('panright', (ev) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
     hammertime.on('panleft', (ev) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
+
+    // Detecting Router Changes
+    router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        // If mobile, side-menu will close when navigate
+        if (this.mobileQuery.matches) {
+          this.sideMenu.close()
+        }
+      }
+    });
   }
 
   setViewportSize(): void {
