@@ -20,18 +20,18 @@ export class LanguageService {
   }]
 
   constructor(private settingsService: SettingService, private translateService: TranslateService) {
-    let lang = this.languages.find(lang => lang.id === this.settingsService.value.lang)
+    let lang = this.languages.find((lang: any) => lang.id === this.settingsService.value.lang)
     this.lang = new BehaviorSubject(lang)
   }
 
   public setLang(value: any) {
     this.settingsService.value = { lang: value.id }
     this.lang.next(value)
-    this.translateService.use(value.id);
+    this.translateService.use(value.id)
   }
 
   public get languages(): any {
-    return this._languages;
+    return this._languages
   }
 
 }
