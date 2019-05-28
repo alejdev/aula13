@@ -11,7 +11,7 @@
     <mat-select [formControl]="langControl" (selectionChange)="setLang()">
       <mat-option *ngFor="let lang of languages" [value]="lang">
         <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <img [src]="'/assets/svgs/' + lang.id + '.svg'" width="20px" height="20px" alt="{{'FLAG_OF' | translate}} {{lang.name | translate}}">
+          <img [src]="'/assets/svgs/flags/' + lang.id + '.svg'" width="20px" height="20px" alt="{{'FLAG_OF' | translate}} {{lang.name | translate}}">
           <span>{{lang.name | translate}}</span>          
         </span>
       </mat-option>
