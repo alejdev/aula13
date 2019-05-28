@@ -17,22 +17,17 @@ import { Router, Event, NavigationStart } from '@angular/router';
 export class AulaComponent implements OnInit {
 
   @HostBinding('class') componentCssClass: string
-
-  @ViewChild(MatSidenav)
-  public sideMenu: MatSidenav
+  @ViewChild(MatSidenav) sideMenu: MatSidenav
 
   onSideNavChange: boolean
-  fixedTopGap: number
   animStyles: any
   mobileQuery: MediaQueryList
-  mobileQueryListener: () => void
 
   constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, router: Router) {
 
     // Event listender for toggle menu on mobile
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
-    this.mobileQueryListener = () => this.setViewportSize()
-    this.mobileQuery.addListener(this.mobileQueryListener)
+    this.mobileQuery.addListener(() => this.setViewportSize())
 
     // Swipe sideMenu on mobile
     const mc = new Hammer.Manager(elementRef.nativeElement, {})
@@ -48,7 +43,7 @@ export class AulaComponent implements OnInit {
           this.sideMenu.close()
         }
       }
-    });
+    })
   }
 
   ngOnInit(): void {
@@ -70,31 +65,17 @@ export class AulaComponent implements OnInit {
 
   setViewportSize(): void {
     if (this.mobileQuery.matches) {
-      this.fixedTopGap = 54
-      this.animStyles = {
-        open: {
-          width: '220px',
-          left: '0px'
-        },
-        close: {
-          width: '0px',
-          left: '0px'
-        }
-      }
       this.sidenavService.sidenavState.next(true)
+      this.animStyles = {
+        open: { width: '220px', left: '0px' },
+        close: { width: '0px', left: '0px' }
+      }
     } else {
-      this.fixedTopGap = 64
-      this.animStyles = {
-        open: {
-          width: '220px',
-          left: '220px'
-        },
-        close: {
-          width: '60px',
-          left: '60px'
-        }
-      }
       this.sidenavService.sidenavState.next(true)
+      this.animStyles = {
+        open: { width: '220px', left: '220px' },
+        close: { width: '60px', left: '60px' }
+      }
     }
   }
 }
