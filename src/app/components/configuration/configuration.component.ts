@@ -17,7 +17,7 @@ export class ConfigurationComponent implements OnInit {
   themeIsDark: boolean
 
   constructor(private languageService: LanguageService, private themeService: ThemeService) {
-    this.languages = languageService.languages
+    this.languages = languageService.languagesList
   }
 
   ngOnInit(): void {

@@ -9,7 +9,7 @@ import { SettingService } from './setting.service';
 export class LanguageService {
 
   public lang: BehaviorSubject<any>
-  private _languages: any = [{
+  private _languagesList: any = [{
     id: 'es',
     name: 'LANG.ES',
     tip: '“La razón de la sinrazón, que a mi razón se hace, de tal manera mi razón enflaquece, que con razón me quejo de la vuestra fermosura”.'
@@ -20,7 +20,7 @@ export class LanguageService {
   }]
 
   constructor(private settingsService: SettingService, private translateService: TranslateService) {
-    let lang = this.languages.find((lang: any) => lang.id === this.settingsService.value.lang)
+    let lang = this.languagesList.find((lang: any) => lang.id === this.settingsService.value.lang)
     this.lang = new BehaviorSubject(lang)
   }
 
@@ -30,7 +30,7 @@ export class LanguageService {
     this.translateService.use(value.id)
   }
 
-  public get languages(): any {
-    return this._languages
+  public get languagesList(): any {
+    return this._languagesList
   }
 }
