@@ -10,12 +10,13 @@
     "PASSWORD_INVALID": "La contraseña debe tener al menos 6 caracteres",
     "PASSWORD_REQUIRED": "La contraseña es obligatoria"
   },
+  "FLAG_OF": "Bandera de ",
   "HIDE_PASSWORD": "Ocultar contraseña",
   "GENERAL": "General",
   "LANGUAGE": "Idioma",
   "LANG": {
     "ES": "Español",
-    "EN": "English"
+    "EN": "Inglés"
   },
   "MSG": {
     "NOTHING_HERE": "Upps! Aquí no hay nada",

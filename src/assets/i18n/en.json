@@ -10,11 +10,12 @@
     "PASSWORD_INVALID": "Password needs to be at least six characters",
     "PASSWORD_REQUIRED": "Password is required"
   },
+  "FLAG_OF": "Flag of ",
   "HIDE_PASSWORD": "Hide password",
   "GENERAL": "General",
   "LANGUAGE": "Language",
   "LANG": {
-    "ES": "Español",
+    "ES": "Spanish",
     "EN": "English"
   },
   "MSG": {

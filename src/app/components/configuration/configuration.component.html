@@ -10,7 +10,10 @@
     <mat-label>{{"LANGUAGE" | translate}}</mat-label>
     <mat-select [formControl]="langControl" (selectionChange)="setLang()">
       <mat-option *ngFor="let lang of languages" [value]="lang">
-        {{lang.name | translate}}
+        <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <img [src]="'/assets/svgs/' + lang.id + '.svg'" width="20px" height="20px" alt="{{'FLAG_OF' | translate}} {{lang.name | translate}}">
+          <span>{{lang.name | translate}}</span>          
+        </span>
       </mat-option>
     </mat-select>
     <mat-hint>{{langControl.value?.tip}}</mat-hint>
