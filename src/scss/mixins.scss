@@ -72,7 +72,6 @@
 
   // Theme
   .#{$name} {
-    background-color: map-get($theme-colors, background);
     @include angular-material-theme($my-theme);
     @include set-palette-classes($palettes-map);
   }
