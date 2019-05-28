@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Student } from 'src/app/interfaces/student';
 
 @Component({
@@ -9,20 +9,10 @@ import { Student } from 'src/app/interfaces/student';
 export class StudentComponent implements OnInit {
 
   @Input() student: Student = null
-  @Output() studentChange = new EventEmitter()
 
   constructor() { }
 
   ngOnInit(): void { }
-
-  get studentData(): Student {
-    return this.student
-  }
-
-  set studentData(val) {
-    this.student = val
-    this.student.emit(this.student)
-  }
 
   getPuntuation(list: any, index: number): string {
     switch (true) {
