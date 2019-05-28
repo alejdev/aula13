@@ -1,0 +1,51 @@
+{
+  "AND": " and",
+  "APP_SUBTITLE": "Organize your private lessons",
+  "BACK": "Back",
+  "CLOSE_MENU": "Close menu",
+  "EMAIL": "Email",
+  "ERR": {
+    "EMAIL_INVALID": "Please, enter valid email address",
+    "EMAIL_REQUIRED": "Email is required",
+    "PASSWORD_INVALID": "Password needs to be at least six characters",
+    "PASSWORD_REQUIRED": "Password is required"
+  },
+  "HIDE_PASSWORD": "Hide password",
+  "GENERAL": "General",
+  "LANGUAGE": "Language",
+  "LANG": {
+    "ES": "Español",
+    "EN": "English"
+  },
+  "MSG": {
+    "NOTHING_HERE": "Upps! There is nothing here",
+    "NOTHING_MAN": "¯\\_(ツ)_/¯"
+  },
+  "OPEN_MENU": "Open menú",
+  "PASSWORD": "Password",
+  "PROP": {
+    "NAME": "Name",
+    "TAG": "Tag"
+  },
+  "RESET_EMAIL": "Reset email field",
+  "SHOW_PASSWORD": "Show password",
+  "SEARCH_STUDENT": "Search student",
+  "SETTINGS": "Settings",
+  "SIGN": {
+    "IN_WITH_EMAIL": "Sign in with mail",
+    "IN_WITH_FACEBOOK": "Sign in with Facebook",
+    "IN_WITH_GOOGLE": "Sign in with Google",
+    "IN_WITH_TWITTER": "Sign in with Twitter",
+    "IN": "Sign in",
+    "OUT": "Logout"
+  },
+  "SORT_COLUMN": "Sort column",
+  "STUDENTS": "Students",
+  "SUBJECTS": "Subjects",
+  "THEME": "Theme",
+  "THEMING": {
+    "DARK_MODE": "Dark mode",
+    "DARK_THEME": "Dark theme",
+    "LIGHT_THEME": "light theme"
+  }
+}

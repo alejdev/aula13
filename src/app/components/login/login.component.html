@@ -13,14 +13,14 @@
 
     <!-- Title -->
     <h1 class="m0 mbH txt-thin">{{title}}</h1>
-    <span class="mat-body mat-hint mb1 block">Organiza tus clases particulares</span>
+    <span class="mat-body mat-hint mb1 block">{{"APP_SUBTITLE" | translate}}</span>
 
     <!-- Form -->
     <form [formGroup]="formGroup" class="login-form ptH">
 
       <!-- Email -->
       <mat-form-field class="mb1">
-        <input matInput type="text" required placeholder="Email" formControlName="email">
+        <input matInput type="text" required placeholder="{{'EMAIL' | translate}}" formControlName="email">
         <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button
           attr.aria-label="{{'RESET_EMAIL' | translate}}" (click)="formGroup.controls['email'].reset()">
           <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
@@ -30,9 +30,9 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Contraseña -->
+      <!-- Password -->
       <mat-form-field class="mb3">
-        <input matInput type="{{passwordType}}" required placeholder="Contraseña" formControlName="password">
+        <input matInput type="{{passwordType}}" required placeholder="{{'PASSWORD' | translate}}" formControlName="password">
         <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button
           attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}"
           (click)="togglePasswordVisibility()">

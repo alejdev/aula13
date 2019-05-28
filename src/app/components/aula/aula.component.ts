@@ -27,7 +27,7 @@ export class AulaComponent implements OnInit {
   mobileQuery: MediaQueryList
   mobileQueryListener: () => void
 
-  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, router: Router) {
+  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, private router: Router) {
 
     // Event listender for toggle menu on mobile
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
@@ -35,12 +35,13 @@ export class AulaComponent implements OnInit {
     this.mobileQuery.addListener(this.mobileQueryListener)
 
     // Swipe sideMenu on mobile
-    const hammertime = new Hammer(elementRef.nativeElement, {});
-    hammertime.on('panright', (ev) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
-    hammertime.on('panleft', (ev) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
+    const mc = new Hammer.Manager(elementRef.nativeElement, {})
+    mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 100 }))
+    mc.on("panright", (ev: any) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
+    mc.on("panleft", (ev: any) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
 
     // Detecting Router Changes
-    router.events.subscribe((event: Event) => {
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // If mobile, side-menu will close when navigate
         if (this.mobileQuery.matches) {
@@ -48,6 +49,23 @@ export class AulaComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngOnInit(): void {
+    // Theming service
+    this.themeService.theme.subscribe((result: any) => {
+      let overlay = this.overlayContainer.getContainerElement().classList
+      let prevTheme = this.themeService.previousTheme
+      prevTheme ? overlay.remove(prevTheme.id) : 0
+      overlay.add(result.id)
+      this.componentCssClass = result.id
+    });
+
+    // Sidenav service
+    this.sidenavService.sidenavState.subscribe(res => {
+      this.onSideNavChange = res;
+    })
+    this.setViewportSize()
   }
 
   setViewportSize(): void {
@@ -78,19 +96,5 @@ export class AulaComponent implements OnInit {
       }
       this.sidenavService.sidenavState.next(true)
     }
-  }
-
-  ngOnInit(): void {
-    // Theming service
-    this.themeService.theme.subscribe((result: any) => {
-      this.overlayContainer.getContainerElement().classList.add(result.id)
-      this.componentCssClass = result.id
-    });
-
-    // Sidenav service
-    this.sidenavService.sidenavState.subscribe(res => {
-      this.onSideNavChange = res;
-    })
-    this.setViewportSize()
   }
 }

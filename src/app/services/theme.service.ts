@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { SettingService } from './setting.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
 
-  private defaultThemeIndex: number = 0
+  public theme: BehaviorSubject<any>
+  public previousTheme: any
   private themeList: any = [{
     id: 'light-theme',
     name: 'THEMING.LIGHT_THEME',
@@ -18,20 +20,20 @@ export class ThemeService {
     icon: 'brightness_3',
     isDark: true
   }]
-  public theme: BehaviorSubject<any> = new BehaviorSubject(this.themeList[this.defaultThemeIndex])
 
-  constructor() { }
-
-  getNextTheme(currentTheme: any): any {
-    let currentThemeIndex = this.themeList.indexOf(currentTheme);
-    switch (true) {
-      case currentThemeIndex === -1:
-        return this.themeList[this.defaultThemeIndex]
-      case currentThemeIndex === this.themeList.length - 1:
-        return this.themeList[0]
-      default:
-        return this.themeList[currentThemeIndex + 1]
-    }
+  constructor(private settings: SettingService) {
+    this.theme = new BehaviorSubject(this.themeList[this.settings.value.theme])
   }
 
+  toggleTheme(): void {
+    let currentThemeIndex = this.settings.value.theme
+    this.previousTheme = this.themeList[currentThemeIndex]
+    if (currentThemeIndex === this.themeList.length - 1) {
+      this.settings.value = { theme: 0 }
+      this.theme.next(this.themeList[this.settings.value.theme])
+    } else {
+      this.settings.value = { theme: currentThemeIndex + 1 }
+      this.theme.next(this.themeList[this.settings.value.theme])
+    }
+  }
 }

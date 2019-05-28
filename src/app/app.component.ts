@@ -1,6 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
+import { SettingService } from './services/setting.service';
 
 @Component({
   selector: 'a13-root',
@@ -9,9 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private swUpdate: SwUpdate, translate: TranslateService) {
-    translate.setDefaultLang('es'); // fallback
-    translate.use('es');
+  constructor(private swUpdate: SwUpdate, private settings: SettingService, private translate: TranslateService) {
+    this.translate.setDefaultLang('es'); // fallback
+    this.translate.use(this.settings.value.lang);
   }
 
   ngOnInit(): void {
