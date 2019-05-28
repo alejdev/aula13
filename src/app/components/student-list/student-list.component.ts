@@ -1,8 +1,8 @@
-import { Component, OnInit, } from '@angular/core';
-import { StudentService } from 'src/app/services/student.service';
+import { Component, OnInit } from '@angular/core';
+import { Sort, SortDirection } from '@angular/material';
 import { Student } from 'src/app/interfaces/student';
 import { StudentPipe } from 'src/app/pipes/student.pipe';
-import { Sort, SortDirection } from '@angular/material';
+import { StudentService } from 'src/app/services/student.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
