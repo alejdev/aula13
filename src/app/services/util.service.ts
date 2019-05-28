@@ -31,4 +31,9 @@ export class UtilService {
   public compare(a: number | string, b: number | string, isAsc: boolean): number {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
+
+  /** Random number */
+  public rand(max: number = 100, min: number = 0) {
+    return Math.floor(Math.random() * max) + min
+  }
 }
