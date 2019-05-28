@@ -11,6 +11,7 @@ export class StudentService {
     name: 'Alejandro',
     surname: 'Martín Fernández',
     fullName: 'Alejandro Martín Fernández',
+    gender: 'boy',
     avatar: '',
     tag: 'Femae',
     phones: [{
@@ -29,6 +30,7 @@ export class StudentService {
     name: 'Carmen',
     surname: 'Valiente Blasco',
     fullName: 'Carmen Valiente Blasco',
+    gender: 'girl',
     avatar: '',
     tag: 'Particular',
     phones: [{
@@ -53,6 +55,7 @@ export class StudentService {
     name: 'María',
     surname: 'Abreu Márquez',
     fullName: 'María Abreu Márquez',
+    gender: 'girl',
     avatar: '',
     tag: 'Particular',
     phones: [{
@@ -68,6 +71,7 @@ export class StudentService {
     name: 'Enrique',
     surname: 'Romero Romero',
     fullName: 'Enrique Romero Romero',
+    gender: 'boy',
     avatar: '',
     tag: 'Femae',
     phones: [{
@@ -83,6 +87,7 @@ export class StudentService {
     name: 'Marco',
     surname: 'Hoya Cordobés',
     fullName: 'Marco Hoya Cordobés',
+    gender: 'boy',
     avatar: '',
     tag: 'Particular',
     phones: [{
@@ -98,6 +103,7 @@ export class StudentService {
     name: 'Raquel',
     surname: 'Hoyos',
     fullName: 'Raquel Hoyos',
+    gender: 'girl',
     avatar: '',
     tag: 'Femae',
     phones: [{
@@ -113,6 +119,7 @@ export class StudentService {
     name: 'Marta',
     surname: '',
     fullName: 'Marta',
+    gender: 'girl',
     avatar: '',
     tag: 'Particular',
     phones: [{
@@ -128,6 +135,7 @@ export class StudentService {
     name: 'Diego',
     surname: 'Bravo Rojo',
     fullName: 'Diego Bravo Rojo',
+    gender: 'boy',
     avatar: '',
     tag: 'Femae',
     phones: [{
@@ -143,6 +151,7 @@ export class StudentService {
     name: 'Daniel',
     surname: 'Rubio Rebollo',
     fullName: 'Daniel Rubio Rebollo',
+    gender: 'boy',
     avatar: '',
     tag: 'Femae',
     phones: [{
@@ -158,6 +167,7 @@ export class StudentService {
     name: 'Saray',
     surname: 'Bachiller',
     fullName: 'Saray Bachiller',
+    gender: 'girl',
     avatar: '',
     tag: 'Femae',
     phones: [{

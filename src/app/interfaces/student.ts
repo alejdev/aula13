@@ -3,6 +3,7 @@ export interface Student {
 	name: string;
 	surname?: string;
 	fullName: string;
+	gender: string;
 	avatar?: string;
 	tag?: string;
 	phones?: any[];
