@@ -33,5 +33,4 @@ export class LanguageService {
   public get languages(): any {
     return this._languages
   }
-
 }

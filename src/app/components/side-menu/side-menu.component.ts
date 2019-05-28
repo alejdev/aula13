@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SidenavService } from 'src/app/services/sidenav.service';
-import { animateText, animateAvatar } from '../../animations/animations'
 import { User } from 'src/app/interfaces/user';
+import { SidenavService } from 'src/app/services/sidenav.service';
+import { animateAvatar, animateText } from '../../animations/animations';
 
 @Component({
   selector: 'a13-side-menu',

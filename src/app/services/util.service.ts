@@ -15,7 +15,7 @@ export class UtilService {
 
   /** Sort array */
   public sortData(data: any, sort: Sort = { active: 'name', direction: 'asc' }, defaultSortDir: SortDirection = 'desc'): any {
-    const properties = data ? Object.keys(data[0]) : [];
+    const properties = data ? Object.keys(data[0]) : []
     return data.sort((a: any, b: any) => {
       const isAsc = sort.direction === defaultSortDir
       for (const p of properties) {
@@ -29,11 +29,11 @@ export class UtilService {
 
   /** Compare datas */
   public compare(a: number | string, b: number | string, isAsc: boolean): number {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1)
   }
 
   /** Random number */
-  public rand(max: number = 100, min: number = 0) {
+  public rand(max: number = 100, min: number = 0): number {
     return Math.floor(Math.random() * max) + min
   }
 }

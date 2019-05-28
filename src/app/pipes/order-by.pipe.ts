@@ -23,7 +23,7 @@ export class OrderByPipe implements PipeTransform {
         return 1 * reverse
       }
       return 0
-    });
+    })
 
     return value;
   }

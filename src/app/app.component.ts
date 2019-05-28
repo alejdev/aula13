@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingService } from './services/setting.service';
@@ -11,8 +11,8 @@ import { SettingService } from './services/setting.service';
 export class AppComponent implements OnInit {
 
   constructor(private swUpdate: SwUpdate, settingsService: SettingService, translateService: TranslateService) {
-    translateService.setDefaultLang('es'); // fallback
-    translateService.use(settingsService.value.lang);
+    translateService.setDefaultLang('es')
+    translateService.use(settingsService.value.lang)
   }
 
   ngOnInit(): void {

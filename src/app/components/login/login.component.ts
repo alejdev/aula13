@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'a13-login',

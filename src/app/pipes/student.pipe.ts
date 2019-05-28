@@ -9,7 +9,7 @@ export class StudentPipe implements PipeTransform {
     if (!array || !args) {
       return array;
     }
-    return array.filter(elem => {
+    return array.filter((elem: any) => {
       let str = this.normalize(JSON.stringify(elem).toLowerCase())
       return str.includes(this.normalize(args.toLowerCase()))
     });

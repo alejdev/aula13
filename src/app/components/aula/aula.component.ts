@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef, HostBinding } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
+import { Event, NavigationStart, Router } from '@angular/router';
+import * as Hammer from 'hammerjs';
 import { onMainContentChange, onSideNavChange } from 'src/app/animations/animations';
 import { SidenavService } from 'src/app/services/sidenav.service';
-import { MediaMatcher } from '@angular/cdk/layout';
-import * as Hammer from 'hammerjs';
-import { MatSidenav } from '@angular/material';
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { ThemeService } from 'src/app/services/theme.service';
-import { Router, Event, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'a13-aula',
