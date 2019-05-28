@@ -21,19 +21,19 @@ export class ThemeService {
     isDark: true
   }]
 
-  constructor(private settings: SettingService) {
-    this.theme = new BehaviorSubject(this.themeList[this.settings.value.theme])
+  constructor(private settingsService: SettingService) {
+    this.theme = new BehaviorSubject(this.themeList[this.settingsService.value.theme])
   }
 
   toggleTheme(): void {
-    let currentThemeIndex = this.settings.value.theme
+    let currentThemeIndex = this.settingsService.value.theme
     this.previousTheme = this.themeList[currentThemeIndex]
     if (currentThemeIndex === this.themeList.length - 1) {
-      this.settings.value = { theme: 0 }
-      this.theme.next(this.themeList[this.settings.value.theme])
+      this.settingsService.value = { theme: 0 }
+      this.theme.next(this.themeList[this.settingsService.value.theme])
     } else {
-      this.settings.value = { theme: currentThemeIndex + 1 }
-      this.theme.next(this.themeList[this.settings.value.theme])
+      this.settingsService.value = { theme: currentThemeIndex + 1 }
+      this.theme.next(this.themeList[this.settingsService.value.theme])
     }
   }
 }

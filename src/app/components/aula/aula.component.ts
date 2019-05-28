@@ -27,7 +27,7 @@ export class AulaComponent implements OnInit {
   mobileQuery: MediaQueryList
   mobileQueryListener: () => void
 
-  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, private router: Router) {
+  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, router: Router) {
 
     // Event listender for toggle menu on mobile
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
@@ -41,7 +41,7 @@ export class AulaComponent implements OnInit {
     mc.on("panleft", (ev: any) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
 
     // Detecting Router Changes
-    this.router.events.subscribe((event: Event) => {
+    router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // If mobile, side-menu will close when navigate
         if (this.mobileQuery.matches) {

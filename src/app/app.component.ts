@@ -10,9 +10,9 @@ import { SettingService } from './services/setting.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private swUpdate: SwUpdate, private settings: SettingService, private translate: TranslateService) {
-    this.translate.setDefaultLang('es'); // fallback
-    this.translate.use(this.settings.value.lang);
+  constructor(private swUpdate: SwUpdate, settingsService: SettingService, translateService: TranslateService) {
+    translateService.setDefaultLang('es'); // fallback
+    translateService.use(settingsService.value.lang);
   }
 
   ngOnInit(): void {
