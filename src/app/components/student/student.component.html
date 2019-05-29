@@ -1,15 +1,15 @@
-<mat-card class="p1 mtH mbH mat-elevation-z0" matRipple [routerLink]="[ '/aula/alumno', student.id ]">
+<mat-card class="p-1 mt--h mb-h mat-elevation-z0" matRipple [routerLink]="[ '/aula/alumno', student.id ]">
   <div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <div class="row mrH mlH" fxLayout="row" fxLayoutAlign="start center">
+    <div class="row mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
       <!-- Avatar -->
-      <img class="user-avatar-image mr1" [src]="student.avatar || 'assets/svgs/avatars/' + student.gender + '-7.svg'" alt="Avatar">
+      <img class="user-avatar-image mr-1" [src]="student.avatar || 'assets/svgs/avatars/' + student.gender + '-7.svg'" alt="Avatar">
 
       <!-- Name & Surname -->
       <div fxLayout="column" fxLayoutAlign="space-around start">
         <span>{{student?.name}}</span>
         <div fxLayout="row wrap">
-          <span class="mat-small mat-hint mrQ"
+          <span class="mat-small mat-hint mr-q"
             *ngFor="let subject of student?.subjects; let i=index; let first = first">
             <span [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
             <span>{{getPuntuation(student?.subjects, i) | translate}}</span>
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Type -->
-    <div class="mrH mlH" fxLayout="row" fxLayoutAlign="start center">
+    <div class="mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
       <div class="badge"
         [ngClass]="{'primary-500': student?.tag === 'Femae', 'accent-500': student?.tag === 'Particular'}">
         {{student?.tag}}

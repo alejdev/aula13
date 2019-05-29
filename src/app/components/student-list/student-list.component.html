@@ -1,5 +1,5 @@
 <!-- Title -->
-<h2 class="mat-h1 pt1">{{title | translate}}</h2>
+<h2 class="mat-h1 pt-1">{{title | translate}}</h2>
 
 <!-- Filter -->
 <mat-form-field>
@@ -10,7 +10,7 @@
 </mat-form-field>
 
 <!-- List -->
-<div *ngIf="studentListFiltered.length" class="pt1 pbQ" fxLayout="row" fxLayoutAlign="space-between center" matSort
+<div *ngIf="studentListFiltered.length" class="pt-1 pb-q" fxLayout="row" fxLayoutAlign="space-between center" matSort
   matSortDisableClear (matSortChange)="sortData($event)" [matSortActive]="defaultSort"
   [matSortDirection]="defaultSortDir" matSortStart="desc">
   <ng-container *ngFor="let col of columns">
@@ -29,4 +29,4 @@
 </ng-container>
 
 <!-- Empty list -->
-<h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+<h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>

@@ -23,7 +23,7 @@ export class StudentListComponent implements OnInit {
   columns = [{
     id: 'fullName',
     name: 'PROP.NAME',
-    class: 'ml4',
+    class: 'ml-4',
   }, {
     id: 'tag',
     name: 'PROP.TAG'
