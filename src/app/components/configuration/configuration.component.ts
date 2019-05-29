@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { LanguageService } from 'src/app/services/language.service';
-import { ThemeService } from 'src/app/services/theme.service';
+import { Component, OnInit } from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { LanguageService } from 'src/app/services/language.service'
+import { ThemeService } from 'src/app/services/theme.service'
 
 @Component({
   selector: 'a13-configuration',
@@ -17,7 +17,7 @@ export class ConfigurationComponent implements OnInit {
   themeIsDark: boolean
 
   constructor(private languageService: LanguageService, private themeService: ThemeService) {
-    this.languages = languageService.languagesList
+    this.languages = languageService.languages
   }
 
   ngOnInit(): void {

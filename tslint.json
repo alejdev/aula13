@@ -73,6 +73,6 @@
     "directive-class-suffix": true,
     "indent": false,
 		"triple-equals": false,
-		"curly": false,
+    "curly": false
   }
 }

@@ -12,6 +12,12 @@
       "element",
       "a13",
       "kebab-case"
+    ],
+    // Mine
+    "semicolon": [true, "never"],
+    "eofline": true,
+    "max-line-length": [
+      false
     ]
   }
 }

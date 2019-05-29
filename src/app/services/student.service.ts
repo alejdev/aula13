@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Student } from '../interfaces/student';
+import { Injectable } from '@angular/core'
+import { Student } from '../interfaces/student'
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
 
-  private _studentList: Student[] = [{
+  private studentList: Student[] = [{
     id: 1,
     name: 'Alejandro',
     surname: 'Martín Fernández',
@@ -183,7 +183,7 @@ export class StudentService {
   constructor() {
   }
 
-  get studentList(): Student[] {
-    return this._studentList
+  get students(): Student[] {
+    return this.studentList
   }
 }

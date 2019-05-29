@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   name: 'orderBy'
@@ -10,7 +10,7 @@ export class OrderByPipe implements PipeTransform {
       return null
     }
 
-    var reverse = 1;
+    let reverse = 1
     if (config.startsWith('-')) {
       config = config.substring(1)
       reverse = -1
@@ -25,6 +25,6 @@ export class OrderByPipe implements PipeTransform {
       return 0
     })
 
-    return value;
+    return value
   }
 }

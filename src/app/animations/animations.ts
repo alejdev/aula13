@@ -1,15 +1,15 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations'
 
 export const onSideNavChange = trigger('onSideNavChange', [
 	state('close',
 		style({
-			'min-width': '{{widthClose}}'
+			minWidth: '{{widthClose}}'
 		}),
 		{ params: { widthClose: '60px' } }
 	),
 	state('open',
 		style({
-			'min-width': '{{widthOpen}}'
+			minWidth: '{{widthOpen}}'
 		}),
 		{ params: { widthOpen: '220px' } }
 	),
@@ -20,13 +20,13 @@ export const onSideNavChange = trigger('onSideNavChange', [
 export const onMainContentChange = trigger('onMainContentChange', [
 	state('close',
 		style({
-			'margin-left': '{{leftClose}}'
+			marginLeft: '{{leftClose}}'
 		}),
 		{ params: { leftClose: '60px' } }
 	),
 	state('open',
 		style({
-			'margin-left': '{{leftOpen}}'
+			marginLeft: '{{leftOpen}}'
 		}),
 		{ params: { leftOpen: '220px' } }
 	),
@@ -37,13 +37,13 @@ export const onMainContentChange = trigger('onMainContentChange', [
 export const animateText = trigger('animateText', [
 	state('hide',
 		style({
-			'display': 'none',
+			display: 'none',
 			opacity: 0,
 		})
 	),
 	state('show',
 		style({
-			'display': 'block',
+			display: 'block',
 			opacity: 1,
 		})
 	),
@@ -54,16 +54,16 @@ export const animateText = trigger('animateText', [
 export const animateAvatar = trigger('animateAvatar', [
 	state('small',
 		style({
-			'width': '32px',
-			'height': '32px',
-			'padding': '.2em'
+			width: '32px',
+			height: '32px',
+			padding: '.2em'
 		})
 	),
 	state('huge',
 		style({
-			'width': '64px',
-			'height': '64px',
-			'padding': '.5em'
+			width: '64px',
+			height: '64px',
+			padding: '.5em'
 		})
 	),
 	transition('close => open', animate('270ms ease-in')),

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Student } from 'src/app/interfaces/student';
+import { Component, Input, OnInit } from '@angular/core'
+import { Student } from 'src/app/interfaces/student'
 
 @Component({
   selector: 'a13-student',
@@ -16,9 +16,9 @@ export class StudentComponent implements OnInit {
 
   getPuntuation(list: any, index: number): string {
     switch (true) {
-      case list.length === index+1:
+      case list.length === index + 1:
         return ``
-      case list.length === index+2:
+      case list.length === index + 2:
         return `AND`
       default:
         return `,`

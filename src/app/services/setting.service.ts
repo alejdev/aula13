@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class SettingService {
 
   // Default settings
-  private _settings: any = {
+  private settings: any = {
     theme: 0,
     lang: 'es'
   }
@@ -14,11 +14,11 @@ export class SettingService {
   constructor() { }
 
   public get value(): any {
-    return JSON.parse(localStorage.getItem('a13_settings')) || this._settings
+    return JSON.parse(localStorage.getItem('a13_settings')) || this.settings
   }
 
   public set value(value: any) {
-    this._settings = { ...this._settings, ...value }
-    localStorage.setItem('a13_settings', JSON.stringify(this._settings))
+    this.settings = { ...this.settings, ...value }
+    localStorage.setItem('a13_settings', JSON.stringify(this.settings))
   }
 }

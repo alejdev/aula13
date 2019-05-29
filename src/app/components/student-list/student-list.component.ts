@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Sort, SortDirection } from '@angular/material';
-import { Student } from 'src/app/interfaces/student';
-import { StudentPipe } from 'src/app/pipes/student.pipe';
-import { StudentService } from 'src/app/services/student.service';
-import { UtilService } from 'src/app/services/util.service';
+import { Component, OnInit } from '@angular/core'
+import { Sort, SortDirection } from '@angular/material'
+import { Student } from 'src/app/interfaces/student'
+import { StudentPipe } from 'src/app/pipes/student.pipe'
+import { StudentService } from 'src/app/services/student.service'
+import { UtilService } from 'src/app/services/util.service'
 
 @Component({
   selector: 'a13-student-list',
@@ -30,7 +30,7 @@ export class StudentListComponent implements OnInit {
   }]
 
   constructor(studentService: StudentService, private studentPipe: StudentPipe, private utilService: UtilService) {
-    this.studentList = studentService.studentList
+    this.studentList = studentService.students
     this.studentListFiltered = Object.assign(this.studentList)
     this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
   }

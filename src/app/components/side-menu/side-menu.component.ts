@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/user';
-import { SidenavService } from 'src/app/services/sidenav.service';
-import { animateAvatar, animateText } from '../../animations/animations';
+import { Component, OnInit } from '@angular/core'
+import { User } from 'src/app/interfaces/user'
+import { SidenavService } from 'src/app/services/sidenav.service'
+import { animateAvatar, animateText } from '../../animations/animations'
 
 @Component({
   selector: 'a13-side-menu',
@@ -23,11 +23,10 @@ export class SideMenuComponent implements OnInit {
   constructor(sidenavService: SidenavService) {
     sidenavService.sidenavState.subscribe(result => {
       setTimeout(() => {
-        this.linkText = result;
+        this.linkText = result
       }, 200)
-    });
+    })
   }
 
   ngOnInit(): void { }
-
 }

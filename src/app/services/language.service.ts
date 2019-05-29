@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject } from 'rxjs';
-import { SettingService } from './setting.service';
+import { Injectable } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core'
+import { BehaviorSubject } from 'rxjs'
+import { SettingService } from './setting.service'
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { SettingService } from './setting.service';
 export class LanguageService {
 
   public lang: BehaviorSubject<any>
-  private _languagesList: any = [{
+  private languageList: any = [{
     id: 'es',
     name: 'LANG.ES',
     tip: '“La razón de la sinrazón, que a mi razón se hace, de tal manera mi razón enflaquece, que con razón me quejo de la vuestra fermosura”.'
@@ -20,8 +20,8 @@ export class LanguageService {
   }]
 
   constructor(private settingsService: SettingService, private translateService: TranslateService) {
-    let lang = this.languagesList.find((lang: any) => lang.id === this.settingsService.value.lang)
-    this.lang = new BehaviorSubject(lang)
+    const language = this.languages.find((lang: any) => lang.id === this.settingsService.value.lang)
+    this.lang = new BehaviorSubject(language)
   }
 
   public setLang(value: any) {
@@ -30,7 +30,7 @@ export class LanguageService {
     this.translateService.use(value.id)
   }
 
-  public get languagesList(): any {
-    return this._languagesList
+  public get languages(): any {
+    return this.languageList
   }
 }

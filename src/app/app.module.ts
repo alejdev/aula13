@@ -1,32 +1,32 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSortModule, MatToolbarModule } from '@angular/material';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { environment } from '../environments/dev';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AulaComponent } from './components/aula/aula.component';
-import { ConfigurationComponent } from './components/configuration/configuration.component';
-import { HeaderComponent } from './components/header/header.component';
-import { LoginComponent } from './components/login/login.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { StudentListComponent } from './components/student-list/student-list.component';
-import { StudentComponent } from './components/student/student.component';
-import { SubjectListComponent } from './components/subject-list/subject-list.component';
-import { OrderByPipe } from './pipes/order-by.pipe';
-import { StudentPipe } from './pipes/student.pipe';
+import { HttpClient, HttpClientModule } from '@angular/common/http'
+import { NgModule } from '@angular/core'
+import { AngularFireModule } from '@angular/fire'
+import { AngularFireAuthModule } from '@angular/fire/auth'
+import { AngularFireDatabaseModule } from '@angular/fire/database'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { AngularFireStorageModule } from '@angular/fire/storage'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSortModule, MatToolbarModule } from '@angular/material'
+import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ServiceWorkerModule } from '@angular/service-worker'
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { environment } from '../environments/dev'
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { AulaComponent } from './components/aula/aula.component'
+import { ConfigurationComponent } from './components/configuration/configuration.component'
+import { HeaderComponent } from './components/header/header.component'
+import { LoginComponent } from './components/login/login.component'
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
+import { SideMenuComponent } from './components/side-menu/side-menu.component'
+import { StudentListComponent } from './components/student-list/student-list.component'
+import { StudentComponent } from './components/student/student.component'
+import { SubjectListComponent } from './components/subject-list/subject-list.component'
+import { OrderByPipe } from './pipes/order-by.pipe'
+import { StudentPipe } from './pipes/student.pipe'
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

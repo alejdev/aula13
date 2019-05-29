@@ -1,8 +1,8 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { SidenavService } from 'src/app/services/sidenav.service';
-import { ThemeService } from 'src/app/services/theme.service';
+import { MediaMatcher } from '@angular/cdk/layout'
+import { Component, Input, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { SidenavService } from 'src/app/services/sidenav.service'
+import { ThemeService } from 'src/app/services/theme.service'
 
 @Component({
   selector: 'a13-header',
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'
-    });
+    })
     this.sidenavService.sidenavState.subscribe(result => this.sidenavState = result)
   }
 

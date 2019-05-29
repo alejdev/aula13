@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UtilService } from 'src/app/services/util.service';
+import { Component, OnInit, HostBinding } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
+import { UtilService } from 'src/app/services/util.service'
 
 @Component({
   selector: 'a13-login',
-  host: { 'class': 'light-theme' },
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   title: string = 'Aula 13'
-  formGroup: FormGroup;
+  formGroup: FormGroup
   passwordType = 'password'
+  @HostBinding('class') classes = 'light-theme'
 
   constructor(private formBuilder: FormBuilder, private utilService: UtilService, private router: Router) { }
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   getError(type: string): string {
-    let form = this.formGroup.get(type)
+    const form = this.formGroup.get(type)
     switch (true) {
       case type === 'email' && form.hasError('required'):
         return `ERR.EMAIL_REQUIRED`

@@ -1,12 +1,12 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material';
-import { Event, NavigationStart, Router } from '@angular/router';
-import * as Hammer from 'hammerjs';
-import { onMainContentChange, onSideNavChange } from 'src/app/animations/animations';
-import { SidenavService } from 'src/app/services/sidenav.service';
-import { ThemeService } from 'src/app/services/theme.service';
+import { MediaMatcher } from '@angular/cdk/layout'
+import { OverlayContainer } from '@angular/cdk/overlay'
+import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
+import { MatSidenav } from '@angular/material'
+import { Event, NavigationStart, Router } from '@angular/router'
+import * as Hammer from 'hammerjs'
+import { onMainContentChange, onSideNavChange } from 'src/app/animations/animations'
+import { SidenavService } from 'src/app/services/sidenav.service'
+import { ThemeService } from 'src/app/services/theme.service'
 
 @Component({
   selector: 'a13-aula',
@@ -26,14 +26,15 @@ export class AulaComponent implements OnInit {
   constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, router: Router) {
 
     // Event listender for toggle menu on mobile
-    this.mobileQuery = media.matchMedia('(max-width: 600px)')
-    this.mobileQuery.addListener(() => this.setViewportSize())
+    this.mobileQuery = window.matchMedia('(max-width: 600px)')
+    // tslint:disable-next-line:deprecation
+    this.mobileQuery.addListener((e) => this.setViewportSize())
 
     // Swipe sideMenu on mobile
     const mc = new Hammer.Manager(elementRef.nativeElement, {})
     mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 100 }))
-    mc.on("panright", (ev: any) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
-    mc.on("panleft", (ev: any) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
+    mc.on('panright', (ev: any) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
+    mc.on('panleft', (ev: any) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
 
     // Detecting Router Changes
     router.events.subscribe((event: Event) => {
@@ -49,17 +50,17 @@ export class AulaComponent implements OnInit {
   ngOnInit(): void {
     // Theming service
     this.themeService.theme.subscribe((result: any) => {
-      let overlay = this.overlayContainer.getContainerElement().classList
-      let prevTheme = this.themeService.previousTheme
-      prevTheme ? overlay.remove(prevTheme.id) : 0
+      const overlay = this.overlayContainer.getContainerElement().classList
+      const prevTheme = this.themeService.previousTheme
+      if (prevTheme) {
+        overlay.remove(prevTheme.id)
+      }
       overlay.add(result.id)
       this.componentCssClass = result.id
-    });
+    })
 
     // Sidenav service
-    this.sidenavService.sidenavState.subscribe(res => {
-      this.onSideNavChange = res;
-    })
+    this.sidenavService.sidenavState.subscribe(result => this.onSideNavChange = result)
     this.setViewportSize()
   }
 

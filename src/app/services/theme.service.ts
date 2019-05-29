@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { SettingService } from './setting.service';
+import { Injectable } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
+import { SettingService } from './setting.service'
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class ThemeService {
   }
 
   toggleTheme(): void {
-    let currentThemeIndex = this.settingsService.value.theme
+    const currentThemeIndex = this.settingsService.value.theme
     this.previousTheme = this.themeList[currentThemeIndex]
     if (currentThemeIndex === this.themeList.length - 1) {
       this.settingsService.value = { theme: 0 }

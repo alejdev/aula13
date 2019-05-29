@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
-import { TranslateService } from '@ngx-translate/core';
-import { SettingService } from './services/setting.service';
+import { Component, OnInit } from '@angular/core'
+import { SwUpdate } from '@angular/service-worker'
+import { TranslateService } from '@ngx-translate/core'
+import { SettingService } from './services/setting.service'
 
 @Component({
   selector: 'a13-root',
