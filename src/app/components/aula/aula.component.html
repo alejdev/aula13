@@ -5,7 +5,7 @@
 <mat-sidenav-container class="sidenav-container">
 
   <!-- Side-menu -->
-  <mat-sidenav #sideMenu class="sidenav border0" [mode]="mobileQuery.matches ? 'over' : 'side'"
+  <mat-sidenav #sideMenu class="sidenav border-0" [mode]="mobileQuery.matches ? 'over' : 'side'"
     [opened]="!mobileQuery.matches" [fixedInViewport]="true" fixedTopGap="64"
     [@onSideNavChange]="{value: onSideNavChange ? 'open' : 'close', params: {widthClose: animStyles.close.width, widthOpen: animStyles.open.width}}">
     <a13-side-menu></a13-side-menu>
