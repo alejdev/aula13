@@ -48,5 +48,3 @@ $primary-typography: mat-typography-config($font-family: map-get($fonts, primary
 // Icons sizes
 $iconSizes: (12 : 12px, 14 : 14px, 16 : 16px, 18 : 18px, 24 : 24px, 28 : 28px, 32 : 32px);
 @include set-icon-classes($iconSizes);
-
-.light-text { color: var(--font-light-color) }
