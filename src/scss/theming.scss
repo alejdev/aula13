@@ -6,9 +6,9 @@
 
 .light-theme .nav-list-item.active {
 	background-color: $black-6-opacity;
-	span { color: black; }
+	mat-icon, span { color: black; }
 }
 .dark-theme .nav-list-item.active {
 	background-color: $black-12-opacity;
-	span { color: white; }
+	mat-icon, span { color: white; }
 }

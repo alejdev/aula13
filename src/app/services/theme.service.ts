@@ -25,7 +25,7 @@ export class ThemeService {
     this.theme = new BehaviorSubject(this.themeList[this.settingsService.value.theme])
   }
 
-  toggleTheme(): void {
+  public toggleTheme(): void {
     const currentThemeIndex = this.settingsService.value.theme
     this.previousTheme = this.themeList[currentThemeIndex]
     if (currentThemeIndex === this.themeList.length - 1) {
