@@ -5,14 +5,15 @@
 <h3 class="mat-h2 mat-hint">{{"GENERAL" | translate}}</h3>
 
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
-  <mat-icon color="primary">language</mat-icon>
+  <img class="flag-selected" [src]="getFlag(langControl.value)"
+    alt="{{'FLAG_OF' | translate}} {{langControl.value.name | translate}}">
   <mat-form-field>
     <mat-label>{{"LANGUAGE" | translate}}</mat-label>
     <mat-select [formControl]="langControl" (selectionChange)="setLang()">
       <mat-option *ngFor="let lang of languages" [value]="lang">
         <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <img [src]="'/assets/svgs/flags/' + lang.id + '.svg'" width="20px" height="20px" alt="{{'FLAG_OF' | translate}} {{lang.name | translate}}">
-          <span>{{lang.name | translate}}</span>          
+          <img class="flag" [src]="getFlag(lang)" alt="{{'FLAG_OF' | translate}} {{lang.name | translate}}">
+          <span>{{lang.name | translate}}</span>
         </span>
       </mat-option>
     </mat-select>
