@@ -3,12 +3,14 @@
   "APP_SUBTITLE": "Organize your private lessons",
   "BACK": "Back",
   "CLOSE_MENU": "Close menu",
+  "CONFIRM_PASSWORD": "Confirm password",
   "EMAIL": "Email",
   "ERR": {
     "EMAIL_INVALID": "Please, enter valid email address",
     "EMAIL_REQUIRED": "Email is required",
     "PASSWORD_INVALID": "Password needs to be at least six characters",
-    "PASSWORD_REQUIRED": "Password is required"
+    "PASSWORD_REQUIRED": "Password is required",
+    "PASSWORD_NOT_MATCH": "Passwords do not match"
   },
   "FLAG_OF": "Flag of ",
   "HIDE_PASSWORD": "Hide password",
@@ -20,7 +22,9 @@
   },
   "MSG": {
     "NOTHING_HERE": "Upps! There is nothing here",
-    "NOTHING_MAN": "¯\\_(ツ)_/¯"
+    "NOTHING_MAN": "¯\\_(ツ)_/¯",
+    "NO_ACCOUNT": "Not a member yet?",
+    "YES_ACCOUNT": "Do you already have an account?"
   },
   "OPEN_MENU": "Open menú",
   "PASSWORD": "Password",
@@ -33,12 +37,12 @@
   "SEARCH_STUDENT": "Search student",
   "SETTINGS": "Settings",
   "SIGN": {
-    "IN_WITH_EMAIL": "Sign in with mail",
     "IN_WITH_FACEBOOK": "Sign in with Facebook",
     "IN_WITH_GOOGLE": "Sign in with Google",
     "IN_WITH_TWITTER": "Sign in with Twitter",
     "IN": "Sign in",
-    "OUT": "Logout"
+    "OUT": "Logout",
+    "UP": "Sign up"
   },
   "SORT_COLUMN": "Sort column",
   "STUDENTS": "Students",
