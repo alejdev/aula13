@@ -6,11 +6,12 @@
   "CONFIRM_PASSWORD": "Confirm password",
   "EMAIL": "Email",
   "ERR": {
+    "CONFIRM_PASSWORD_NOT_MATCH": "Passwords do not match",
+    "CONFIRM_PASSWORD_REQUIRED": "You must confirm the password",
     "EMAIL_INVALID": "Please, enter valid email address",
     "EMAIL_REQUIRED": "Email is required",
     "PASSWORD_INVALID": "Password needs to be at least six characters",
-    "PASSWORD_REQUIRED": "Password is required",
-    "PASSWORD_NOT_MATCH": "Passwords do not match"
+    "PASSWORD_REQUIRED": "Password is required"
   },
   "FLAG_OF": "Flag of ",
   "HIDE_PASSWORD": "Hide password",

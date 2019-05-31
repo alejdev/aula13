@@ -30,41 +30,67 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Password -->
-      <mat-form-field class="mb-3">
-        <input matInput type="{{passwordType}}" required placeholder="{{'PASSWORD' | translate}}" formControlName="password">
-        <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button
-          attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}"
-          (click)="togglePasswordVisibility()">
-          <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="!formGroup.controls['password'].valid">
-          {{getError('password') | translate}}
-        </mat-error>
-      </mat-form-field>
+      <div class="mb-3" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
+        <!-- Password -->
+        <mat-form-field>
+          <input matInput type="{{passwordType}}" required placeholder="{{'PASSWORD' | translate}}"
+            formControlName="password">
+          <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button
+            attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}"
+            (click)="togglePasswordVisibility()">
+            <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
+            </mat-icon>
+          </button>
+          <mat-error *ngIf="!formGroup.controls['password'].valid">
+            {{getError('password') | translate}}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Confirm password -->
+        <mat-form-field *ngIf="!login">
+          <input matInput type="{{passwordType}}" required placeholder="{{'CONFIRM_PASSWORD' | translate}}"
+            formControlName="confirmPassword">
+          <button mat-button *ngIf="formGroup.controls['confirmPassword'].value" matSuffix mat-icon-button
+            attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}"
+            (click)="togglePasswordVisibility()">
+            <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
+            </mat-icon>
+          </button>
+          <mat-error *ngIf="!formGroup.controls['confirmPassword'].valid">
+            {{getError('confirmPassword') | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
       <!-- Login button -->
-      <div class="mb-1" fxLayout="row" fxLayoutAlign="end center">
-        <button fxFlex="100" mat-flat-button color="accent" (click)="loginWithEmail()"
-          attr.arial-label="{{'SIGN.IN_WITH_EMAIL' | translate}}">{{'SIGN.IN' | translate}}</button>
+      <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
+        <button fxFlex="100" mat-flat-button [color]="getSignOptions().button.color"
+          (click)="login ? loginWithEmail(): registerWithEmail()"
+          attr.arial-label="{{getSignOptions().button.text | translate}}">{{getSignOptions().button.text | translate}}</button>
       </div>
     </form>
 
     <!-- Login RS buttons -->
     <div fxLayout="row" fxLayoutGap="1rem">
-      <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithGoogle()"
+      <button fxFlex="100" mat-stroked-button (click)="loginWithGoogle()"
         attr.arial-label="{{'SIGN.IN_WITH_GOOGLE' | translate}}">
         <img src="/assets/svgs/social/google-icon.svg" class="mat-icon-24" alt="Logo Google">
       </button>
-      <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithFacebook()"
+      <button fxFlex="100" mat-stroked-button (click)="loginWithFacebook()"
         attr.arial-label="{{'SIGN.IN_WITH_FACEBOOK' | translate}}">
         <img src="/assets/svgs/social/facebook-icon.svg" class="mat-icon-24" alt="Logo Facebook">
       </button>
-      <button fxFlex="100" mat-stroked-button color="primary" (click)="loginWithTwitter()"
+      <button fxFlex="100" mat-stroked-button (click)="loginWithTwitter()"
         attr.arial-label="{{'SIGN.IN_WITH_TWITTER' | translate}}">
         <img src="/assets/svgs/social/twitter-icon.svg" class="mat-icon-24" alt="Logo Twitter">
       </button>
+    </div>
+
+    <!-- Register button -->
+    <div class="mt-1" fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="mat-body mat-hint">{{getSignOptions().footer.hint | translate}}</span>
+      <button mat-button [color]="getSignOptions().footer.color" (click)="toggleSign()"
+        attr.arial-label="{{getSignOptions().footer.text | translate}}">{{getSignOptions().footer.text | translate}}</button>
     </div>
   </div>
 </section>

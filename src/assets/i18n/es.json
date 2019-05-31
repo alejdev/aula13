@@ -6,11 +6,12 @@
   "CONFIRM_PASSWORD": "Confirmar contraseña",
   "EMAIL": "Email",
   "ERR": {
+    "CONFIRM_PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
+    "CONFIRM_PASSWORD_REQUIRED": "Debes confirmar la contraseña",
     "EMAIL_INVALID": "Por favor, introduce un email válido",
     "EMAIL_REQUIRED": "El email es obligatorio",
     "PASSWORD_INVALID": "La contraseña debe tener al menos 6 caracteres",
-    "PASSWORD_REQUIRED": "La contraseña es obligatoria",
-    "PASSWORD_NOT_MATCH": "Las contraseñas no coinciden"
+    "PASSWORD_REQUIRED": "La contraseña es obligatoria"
   },
   "FLAG_OF": "Bandera de ",
   "HIDE_PASSWORD": "Ocultar contraseña",
