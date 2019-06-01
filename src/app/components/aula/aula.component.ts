@@ -17,7 +17,7 @@ import { ThemeService } from 'src/app/services/theme.service'
 export class AulaComponent implements OnInit {
 
   @HostBinding('class') componentCssClass: string
-  @ViewChild(MatSidenav) sideMenu: MatSidenav
+  @ViewChild(MatSidenav, { static: true }) sideMenu: MatSidenav
 
   onSideNavChange: boolean
   animStyles: any
