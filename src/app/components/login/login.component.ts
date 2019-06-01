@@ -19,11 +19,11 @@ export class LoginComponent implements OnInit {
   login: boolean = true
   @HostBinding('class') classes = 'light-theme'
 
-  constructor(private formBuilder: FormBuilder, private utilService: UtilService, private router: Router, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.formValidators = {
-      email: [null, Validators.compose([Validators.required, Validators.pattern(this.utilService.regExp.email)])],
+      email: [null, Validators.compose([Validators.required, Validators.pattern(UtilService.regExp.email)])],
       password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
     }
     this.formGroup = this.createSignInForm()
