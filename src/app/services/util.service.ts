@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Sort, SortDirection } from '@angular/material'
+import { Sort, SortDirection } from '@angular/material/sort'
 
 @Injectable({
   providedIn: 'root'

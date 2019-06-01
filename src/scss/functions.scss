@@ -65,13 +65,11 @@
     @return lighten($color, 8% * ($brightnessLevel - $colorLightness));
   }
 
-  @if $colorLightness == $brightnessLevel {
-    @return $color;
-  }
-
   @if $colorLightness > $brightnessLevel {
     @return darken($color, 8% * ($colorLightness - $brightnessLevel));
   }
+
+  @return $color;
 }
 
 // Contrast colors

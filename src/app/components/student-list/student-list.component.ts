@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Sort, SortDirection } from '@angular/material'
+import { Sort, SortDirection } from '@angular/material/sort'
 import { Student } from 'src/app/interfaces/student'
 import { StudentPipe } from 'src/app/pipes/student.pipe'
 import { StudentService } from 'src/app/services/student.service'

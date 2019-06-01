@@ -1,7 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout'
 import { OverlayContainer } from '@angular/cdk/overlay'
 import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
-import { MatSidenav } from '@angular/material'
+import { MatSidenav } from '@angular/material/sidenav'
 import { Event, NavigationStart, Router } from '@angular/router'
 import * as Hammer from 'hammerjs'
 import { onMainContentChange, onSideNavChange } from 'src/app/animations/animations'
