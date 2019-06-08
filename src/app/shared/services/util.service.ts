@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core'
+import { AbstractControl } from '@angular/forms'
+
 import { Sort, SortDirection } from '@angular/material/sort'
 
 @Injectable({
@@ -36,4 +38,13 @@ export class UtilService {
   public static rand(max: number = 100, min: number = 0): number {
     return Math.floor(Math.random() * max) + min
   }
+
+  /** Password match validator */
+	public static passwordMatchValidator(control: AbstractControl) {
+		const password: string = control.get('password').value
+		const confirmPassword: string = control.get('confirmPassword').value
+		if (password !== confirmPassword) {
+			control.get('confirmPassword').setErrors({ notSame: true })
+		}
+	}
 }

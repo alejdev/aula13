@@ -1,8 +1,9 @@
-import { MediaMatcher } from '@angular/cdk/layout'
 import { Component, Input, OnInit } from '@angular/core'
+import { MediaMatcher } from '@angular/cdk/layout'
 import { Router } from '@angular/router'
-import { SidenavService } from 'src/app/services/sidenav.service'
-import { ThemeService } from 'src/app/services/theme.service'
+
+import { SidenavService } from 'src/app/classroom/services/sidenav.service'
+import { ThemeService } from 'src/app/shared/services/theme.service'
 
 @Component({
   selector: 'a13-header',

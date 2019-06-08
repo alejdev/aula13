@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { LanguageService } from 'src/app/services/language.service'
-import { ThemeService } from 'src/app/services/theme.service'
+
+import { LanguageService } from 'src/app/classroom/services/language.service'
+import { ThemeService } from 'src/app/shared/services/theme.service'
 
 @Component({
   selector: 'a13-configuration',

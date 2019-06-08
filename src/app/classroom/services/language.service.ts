@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core'
+
 import { TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject } from 'rxjs'
-import { SettingService } from './setting.service'
+
+import { SettingService } from '../../shared/services/setting.service'
 
 @Injectable({
   providedIn: 'root'

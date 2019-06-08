@@ -1,9 +1,9 @@
 import { Component, HostBinding, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { AuthService } from 'src/app/services/auth.service'
-import { UtilService } from 'src/app/services/util.service'
-import { CustomValidator } from 'src/app/validators/custom-validator'
+
+import { AuthService } from 'src/app/shared/services/auth.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 @Component({
   selector: 'a13-login',
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   loginWithEmail(): void {
     if (this.formGroup.valid) {
-      this.router.navigate(['aula'])
+      this.router.navigate(['classroom'])
     }
   }
 
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   createSignUpForm(): FormGroup {
     return this.formBuilder.group(
       { ...this.formValidators, confirmPassword: [null, Validators.compose([Validators.required])] },
-      { validator: CustomValidator.passwordMatchValidator }
+      { validator: UtilService.passwordMatchValidator }
     )
   }
 

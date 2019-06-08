@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Student } from 'src/app/interfaces/student'
+
+import { Student } from 'src/app/classroom/models/student'
 
 @Component({
   selector: 'a13-student',

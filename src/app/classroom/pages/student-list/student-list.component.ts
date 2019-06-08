@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core'
+
 import { Sort, SortDirection } from '@angular/material/sort'
-import { Student } from 'src/app/interfaces/student'
-import { StudentPipe } from 'src/app/pipes/student.pipe'
-import { StudentService } from 'src/app/services/student.service'
-import { UtilService } from 'src/app/services/util.service'
+
+import { Student } from 'src/app/classroom/models/student'
+import { StudentPipe } from 'src/app/classroom/pipes/student.pipe'
+import { StudentService } from 'src/app/classroom/services/student.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 @Component({
   selector: 'a13-student-list',

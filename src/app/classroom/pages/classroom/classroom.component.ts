@@ -1,20 +1,23 @@
+import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
+import { Event, NavigationStart, Router } from '@angular/router'
 import { MediaMatcher } from '@angular/cdk/layout'
 import { OverlayContainer } from '@angular/cdk/overlay'
-import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
-import { MatSidenav } from '@angular/material/sidenav'
-import { Event, NavigationStart, Router } from '@angular/router'
+
 import * as Hammer from 'hammerjs'
-import { onMainContentChange, onSideNavChange } from 'src/app/animations/animations'
-import { SidenavService } from 'src/app/services/sidenav.service'
-import { ThemeService } from 'src/app/services/theme.service'
+
+import { MatSidenav } from '@angular/material/sidenav'
+
+import { SidenavService } from 'src/app/classroom/services/sidenav.service'
+import { ThemeService } from 'src/app/shared/services/theme.service'
+import { onMainContentChange, onSideNavChange } from 'src/app/classroom/animations/animations'
 
 @Component({
-  selector: 'a13-aula',
-  templateUrl: './aula.component.html',
-  styleUrls: ['./aula.component.scss'],
+  selector: 'a13-classroom',
+  templateUrl: './classroom.component.html',
+  styleUrls: ['./classroom.component.scss'],
   animations: [onSideNavChange, onMainContentChange]
 })
-export class AulaComponent implements OnInit {
+export class ClassroomComponent implements OnInit {
 
   @HostBinding('class') componentCssClass: string
   @ViewChild(MatSidenav, { static: true }) sideMenu: MatSidenav

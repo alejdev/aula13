@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { User } from 'src/app/interfaces/user'
-import { SidenavService } from 'src/app/services/sidenav.service'
+
+import { User } from 'src/app/classroom/models/user'
+
+import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { animateAvatar, animateText } from '../../animations/animations'
 
 @Component({
