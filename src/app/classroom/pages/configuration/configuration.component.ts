@@ -17,7 +17,10 @@ export class ConfigurationComponent implements OnInit {
   themeControl: any
   themeIsDark: boolean
 
-  constructor(private languageService: LanguageService, private themeService: ThemeService) {
+  constructor(
+    private languageService: LanguageService,
+    private themeService: ThemeService
+  ) {
     this.languages = languageService.languages
   }
 

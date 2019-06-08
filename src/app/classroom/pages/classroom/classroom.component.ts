@@ -26,7 +26,14 @@ export class ClassroomComponent implements OnInit {
   animStyles: any
   mobileQuery: MediaQueryList
 
-  constructor(elementRef: ElementRef, private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private overlayContainer: OverlayContainer, router: Router) {
+  constructor(
+    public elementRef: ElementRef,
+    public media: MediaMatcher,
+    public router: Router,
+    private sidenavService: SidenavService,
+    private overlayContainer: OverlayContainer,
+    private themeService: ThemeService
+  ) {
 
     // Event listender for toggle menu on mobile
     this.mobileQuery = window.matchMedia('(max-width: 600px)')

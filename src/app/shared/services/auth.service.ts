@@ -7,7 +7,10 @@ import { Router } from '@angular/router'
 })
 export class AuthService {
 
-  constructor(private authService: AngularFireAuth, private router: Router) { }
+  constructor(
+    private authService: AngularFireAuth,
+    private router: Router
+  ) { }
 
   public register(control: any) {
     this.authService.auth

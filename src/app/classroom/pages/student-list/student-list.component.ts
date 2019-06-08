@@ -31,7 +31,10 @@ export class StudentListComponent implements OnInit {
     name: 'PROP.TAG'
   }]
 
-  constructor(studentService: StudentService, private studentPipe: StudentPipe) {
+  constructor(
+    public studentService: StudentService,
+    private studentPipe: StudentPipe
+  ) {
     this.studentList = studentService.students
     this.studentListFiltered = Object.assign(this.studentList)
     this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })

@@ -18,7 +18,12 @@ export class HeaderComponent implements OnInit {
   themeName: any
   sidenavState: boolean
 
-  constructor(private sidenavService: SidenavService, media: MediaMatcher, private themeService: ThemeService, private router: Router) {
+  constructor(
+    public media: MediaMatcher,
+    private sidenavService: SidenavService,
+    private themeService: ThemeService,
+    private router: Router
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)')
   }
 

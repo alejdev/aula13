@@ -10,7 +10,11 @@ import { SettingService } from './shared/services/setting.service'
 })
 export class AppComponent implements OnInit {
 
-  constructor(private swUpdate: SwUpdate, settingsService: SettingService, translateService: TranslateService) {
+  constructor(
+    public settingsService: SettingService,
+    public translateService: TranslateService,
+    private swUpdate: SwUpdate
+  ) {
     translateService.setDefaultLang('es')
     translateService.use(settingsService.value.lang)
   }

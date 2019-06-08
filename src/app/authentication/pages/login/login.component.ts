@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit {
   login: boolean = true
   @HostBinding('class') classes = 'light-theme'
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.formValidators = {

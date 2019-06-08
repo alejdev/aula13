@@ -21,7 +21,10 @@ export class LanguageService {
     tip: '“A wizard is never late, nor is he early, he arrives precisely when he means to!”'
   }]
 
-  constructor(private settingsService: SettingService, private translateService: TranslateService) {
+  constructor(
+    private settingsService: SettingService,
+    private translateService: TranslateService
+  ) {
     const language = this.languages.find((lang: any) => lang.id === this.settingsService.value.lang)
     this.lang = new BehaviorSubject(language)
   }
