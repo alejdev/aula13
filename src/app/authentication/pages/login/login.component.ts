@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   title: string = 'Aula 13'
   formGroup: FormGroup
   formValidators: any
+  model: any
   passwordType = 'password'
   login: boolean = true
   @HostBinding('class') classes = 'light-theme'
@@ -49,7 +50,15 @@ export class LoginComponent implements OnInit {
 
   toggleSign() {
     this.login = !this.login
+    this.model = this.formGroup.controls
     this.formGroup = this.login ? this.createSignInForm() : this.createSignUpForm()
+
+    // Set old values to new formGroup
+    for (const key in this.model) {
+      if (this.formGroup.controls.hasOwnProperty(key)) {
+        this.formGroup.controls[key].setValue(this.model[key].value)
+      }
+    }
   }
 
   createSignInForm(): FormGroup {
