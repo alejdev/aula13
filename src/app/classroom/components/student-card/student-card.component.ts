@@ -3,9 +3,9 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Student } from 'src/app/classroom/models/student'
 
 @Component({
-  selector: 'a13-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+  selector: 'a13-student-card',
+  templateUrl: './student-card.component.html',
+  styleUrls: ['./student-card.component.scss']
 })
 export class StudentComponent implements OnInit {
 

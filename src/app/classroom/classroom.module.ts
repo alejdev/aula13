@@ -10,7 +10,7 @@ import { StudentListComponent } from 'src/app/classroom/pages/student-list/stude
 
 import { HeaderComponent } from 'src/app/classroom/components/header/header.component'
 import { SideMenuComponent } from 'src/app/classroom/components/side-menu/side-menu.component'
-import { StudentComponent } from 'src/app/classroom/components/student/student.component'
+import { StudentComponent } from 'src/app/classroom/components/student-card/student-card.component'
 
 import { OrderByPipe } from 'src/app/classroom/pipes/order-by.pipe'
 import { StudentPipe } from 'src/app/classroom/pipes/student.pipe'
