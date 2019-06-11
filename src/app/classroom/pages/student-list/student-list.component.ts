@@ -32,15 +32,15 @@ export class StudentListComponent implements OnInit {
   }]
 
   constructor(
-    public studentService: StudentService,
+    private studentService: StudentService,
     private studentPipe: StudentPipe
-  ) {
-    this.studentList = studentService.students
+  ) { }
+
+  ngOnInit(): void {
+    this.studentList = this.studentService.students
     this.studentListFiltered = Object.assign(this.studentList)
     this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
   }
-
-  ngOnInit(): void { }
 
   searchStudent(ev: string): void {
     this.studentListFiltered = this.studentPipe.transform(this.studentList, ev)

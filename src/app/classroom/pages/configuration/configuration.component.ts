@@ -20,14 +20,18 @@ export class ConfigurationComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private themeService: ThemeService
-  ) {
-    this.languages = languageService.languages
-  }
+  ) { }
 
   ngOnInit(): void {
+    // Language list
+    this.languages = this.languageService.languages
+
+    // Get language
     this.languageService.lang.subscribe((result: any) => {
       this.langControl.setValue(result)
     })
+
+    // Get theme
     this.themeService.theme.subscribe((result: any) => {
       this.themeControl = result
       this.themeIsDark = result.isDark

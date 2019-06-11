@@ -22,13 +22,14 @@ export class SideMenuComponent implements OnInit {
     { name: 'SETTINGS', url: 'aula/configuracion', icon: 'settings' }
   ]]
 
-  constructor(public sidenavService: SidenavService) {
-    sidenavService.sidenavState.subscribe(result => {
+  constructor(private sidenavService: SidenavService) { }
+
+  ngOnInit(): void {
+    // Get sidenav state
+    this.sidenavService.sidenavState.subscribe(result => {
       setTimeout(() => {
         this.linkText = result
       }, 200)
     })
   }
-
-  ngOnInit(): void { }
 }

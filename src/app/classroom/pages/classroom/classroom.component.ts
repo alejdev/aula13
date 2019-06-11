@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
 import { Event, NavigationStart, Router } from '@angular/router'
-import { MediaMatcher } from '@angular/cdk/layout'
 import { OverlayContainer } from '@angular/cdk/overlay'
 
 import * as Hammer from 'hammerjs'
@@ -27,27 +26,28 @@ export class ClassroomComponent implements OnInit {
   mobileQuery: MediaQueryList
 
   constructor(
-    public elementRef: ElementRef,
-    public media: MediaMatcher,
-    public router: Router,
+    private elementRef: ElementRef,
+    private router: Router,
     private sidenavService: SidenavService,
     private overlayContainer: OverlayContainer,
     private themeService: ThemeService
-  ) {
+  ) { }
 
+  ngOnInit(): void {
     // Event listender for toggle menu on mobile
     this.mobileQuery = window.matchMedia('(max-width: 600px)')
+
     // tslint:disable-next-line:deprecation
     this.mobileQuery.addListener((e) => this.setViewportSize())
 
     // Swipe sideMenu on mobile
-    const mc = new Hammer.Manager(elementRef.nativeElement, {})
+    const mc = new Hammer.Manager(this.elementRef.nativeElement, {})
     mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 100 }))
     mc.on('panright', (ev: any) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
     mc.on('panleft', (ev: any) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
 
     // Detecting Router Changes
-    router.events.subscribe((event: Event) => {
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // If mobile, side-menu will close when navigate
         if (this.mobileQuery.matches) {
@@ -55,9 +55,7 @@ export class ClassroomComponent implements OnInit {
         }
       }
     })
-  }
 
-  ngOnInit(): void {
     // Theming service
     this.themeService.theme.subscribe((result: any) => {
       const overlay = this.overlayContainer.getContainerElement().classList

@@ -11,13 +11,10 @@ import { SettingService } from './shared/services/setting.service'
 export class AppComponent implements OnInit {
 
   constructor(
-    public settingsService: SettingService,
-    public translateService: TranslateService,
+    private settingsService: SettingService,
+    private translateService: TranslateService,
     private swUpdate: SwUpdate
-  ) {
-    translateService.setDefaultLang('es')
-    translateService.use(settingsService.value.lang)
-  }
+  ) { }
 
   ngOnInit(): void {
     // Service Worker
@@ -26,5 +23,9 @@ export class AppComponent implements OnInit {
         window.location.reload()
       })
     }
+
+    // Set translations
+    this.translateService.setDefaultLang('es')
+    this.translateService.use(this.settingsService.value.lang)
   }
 }

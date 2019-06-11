@@ -19,18 +19,22 @@ export class HeaderComponent implements OnInit {
   sidenavState: boolean
 
   constructor(
-    public media: MediaMatcher,
+    private media: MediaMatcher,
     private sidenavService: SidenavService,
     private themeService: ThemeService,
     private router: Router
-  ) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)')
-  }
+  ) { }
 
   ngOnInit(): void {
+    // Set mediaQuery
+    this.mobileQuery = this.media.matchMedia('(max-width: 600px)')
+
+    // Get theme
     this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'
     })
+
+    // Get sidenav state
     this.sidenavService.sidenavState.subscribe(result => this.sidenavState = result)
   }
 

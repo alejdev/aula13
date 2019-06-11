@@ -181,8 +181,7 @@ export class StudentService {
     }]
   }]
 
-  constructor() {
-  }
+  constructor() { }
 
   public get students(): Student[] {
     return this.studentList
