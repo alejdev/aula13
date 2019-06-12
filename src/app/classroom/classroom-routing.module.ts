@@ -1,20 +1,16 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { ClassroomComponent } from 'src/app/classroom/pages/classroom/classroom.component'
-import { ConfigurationComponent } from 'src/app/classroom/pages/configuration/configuration.component'
-import { StudentListComponent } from 'src/app/classroom/pages/student-list/student-list.component'
-import { SubjectListComponent } from 'src/app/classroom/pages/subject-list/subject-list.component'
+import { ClassroomComponent } from 'src/app/classroom/components/classroom/classroom.component'
 
 const routes: Routes = [{
   path: '',
   component: ClassroomComponent,
   children: [
     { path: '', redirectTo: 'alumnos', pathMatch: 'full' },
-    { path: 'alumnos', component: StudentListComponent },
-    { path: 'alumno/:id', component: StudentListComponent },
-    { path: 'asignaturas', component: SubjectListComponent },
-    { path: 'configuracion', component: ConfigurationComponent }
+    { path: 'alumnos', loadChildren: () => import('./students/students.module').then(m => m.StudentsModule) },
+    { path: 'alumno/:id', loadChildren: () => import('./students/students.module').then(m => m.StudentsModule) },
+    { path: 'configuracion', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) }
   ]
 }]
 

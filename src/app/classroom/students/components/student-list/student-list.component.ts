@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core'
 
 import { Sort, SortDirection } from '@angular/material/sort'
 
-import { Student } from 'src/app/classroom/models/student'
-import { StudentPipe } from 'src/app/classroom/pipes/student.pipe'
+import { Student } from 'src/app/classroom/classroom.model'
+import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 

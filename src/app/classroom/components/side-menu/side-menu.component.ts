@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 
-import { User } from 'src/app/classroom/models/user'
+import { User } from 'src/app/classroom/classroom.model'
 
 import { SidenavService } from 'src/app/classroom/services/sidenav.service'
-import { animateAvatar, animateText } from '../../animations/animations'
+import { animateAvatar, animateText } from '../../classroom.animation'
 
 @Component({
   selector: 'a13-side-menu',
@@ -18,7 +18,6 @@ export class SideMenuComponent implements OnInit {
 
   menuItems = [[
     { name: 'STUDENTS', url: 'aula/alumnos', icon: 'people' },
-    { name: 'SUBJECTS', url: 'aula/asignaturas', icon: 'import_contacts' },
     { name: 'SETTINGS', url: 'aula/configuracion', icon: 'settings' }
   ]]
 

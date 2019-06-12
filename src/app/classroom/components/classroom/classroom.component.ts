@@ -8,7 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav'
 
 import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
-import { onMainContentChange, onSideNavChange } from 'src/app/classroom/animations/animations'
+import { onMainContentChange, onSideNavChange } from 'src/app/classroom/classroom.animation'
 
 @Component({
   selector: 'a13-classroom',

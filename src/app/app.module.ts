@@ -19,14 +19,16 @@ import { AppRoutingModule } from './app-routing.module'
     PageNotFoundComponent
   ],
   imports: [
+    // Angular
     BrowserAnimationsModule,
     BrowserModule,
 
+    // Routing
     AppRoutingModule,
 
+    // App modules
     CoreModule,
     SharedModule,
-
     ClassroomModule,
     AuthenticationModule
   ],
