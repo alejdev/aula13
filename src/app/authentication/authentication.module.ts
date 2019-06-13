@@ -15,10 +15,13 @@ import { LoginComponent } from 'src/app/authentication/components/login/login.co
     LoginComponent
   ],
   imports: [
-    SharedModule,
-
+    // Routing
     AuthenticationRoutingModule,
 
+    // App modules
+    SharedModule,
+
+    // Material
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,

@@ -16,10 +16,12 @@ import { TranslateModule } from '@ngx-translate/core'
     TranslateModule
   ],
   exports: [
+    // Angular
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
 
+    // Third parties
     FlexLayoutModule,
     TranslateModule
   ]

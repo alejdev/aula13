@@ -7,9 +7,8 @@ import { environment } from 'src/environments/dev'
 
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule } from '@angular/fire/auth'
-import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
-import { AngularFireStorageModule } from '@angular/fire/storage'
+// import { AngularFireStorageModule } from '@angular/fire/storage'
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
@@ -17,16 +16,18 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 @NgModule({
   declarations: [],
   imports: [
+    // Angular
     CommonModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
+    // Firebase
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule,
+    // AngularFireStorageModule,
     AngularFirestoreModule,
 
+    // Third parties
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
