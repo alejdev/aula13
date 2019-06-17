@@ -25,7 +25,8 @@
     "NOTHING_HERE": "Upps! Aquí no hay nada",
     "NOTHING_MAN": "¯\\_(ツ)_/¯",
     "NO_ACCOUNT": "¿Aún no eres usuario?",
-    "YES_ACCOUNT": "¿Ya tienes una cuenta?"
+    "YES_ACCOUNT": "¿Ya tienes una cuenta?",
+    "WELCOME": "¡Hola {{name}}!"
   },
   "OPEN_MENU": "Abrir menú",
   "PASSWORD": "Contraseña",

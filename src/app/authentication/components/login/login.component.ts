@@ -5,6 +5,8 @@ import { Router } from '@angular/router'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
+import { ToastService } from 'src/app/shared/services/toast.service'
+
 @Component({
   selector: 'a13-login',
   templateUrl: './login.component.html',
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -36,12 +39,20 @@ export class LoginComponent implements OnInit {
 
   loginWithEmail(): void {
     if (this.formGroup.valid) {
-      this.router.navigate(['classroom'])
+      this.router.navigate(['aula'])
     }
   }
 
   registerWithEmail(): void {
-    this.authService.register(this.formGroup.value)
+    if (this.formGroup.valid) {
+      this.authService.register(this.formGroup.value)
+        .then((auth: any) => {
+          console.log(auth)
+          this.router.navigate(['aula'])
+          this.toast.welcome(auth)
+        })
+        .catch((error: any) => console.log(error))
+    }
   }
 
   loginWithGoogle() { }

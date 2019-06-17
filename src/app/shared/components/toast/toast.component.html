@@ -1,0 +1,11 @@
+<div class="toast">
+  <ng-container [ngSwitch]="data.messageType">
+    <span *ngSwitchCase="'welcome'">
+      {{ data.message | translate:{'name': data.name} }}
+    </span>
+
+    <span *ngSwitchDefault>
+      {{ data.message | translate }}
+    </span>
+  </ng-container>
+</div>
