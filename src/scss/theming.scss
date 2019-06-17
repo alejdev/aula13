@@ -5,15 +5,19 @@
 @include set-custom-theme('dark-theme', map-get($colors, dark-theme), true, $main-dark-hue, $second-dark-hue, $tertiary-dark-hue);
 
 .light-theme .nav-list-item.active {
-	background-color: $black-6-opacity;
-	mat-icon, span { color: black; }
-}
-.dark-theme .nav-list-item.active {
-	background-color: $black-12-opacity;
-	mat-icon, span { color: white; }
+  background-color: $black-6-opacity;
+
+  mat-icon,
+  span {
+    color: black;
+  }
 }
 
-snack-bar-container {
-	color: white;
-	background-color: #323232;
+.dark-theme .nav-list-item.active {
+  background-color: $black-12-opacity;
+
+  mat-icon,
+  span {
+    color: white;
+  }
 }
