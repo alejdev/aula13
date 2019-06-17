@@ -28,14 +28,26 @@ export class ToastService extends MatSnackBar {
   say(text: string, config?: any): void {
     this.openFromComponent(
       ToastComponent,
-      { data: { message: text }, ...config }
+      {
+        data: {
+          message: text
+        },
+        ...config
+      }
     )
   }
 
   welcome(user: User, config?: any): void {
     this.openFromComponent(
       ToastComponent,
-      { data: { messageType: 'welcome', message: 'MSG.WELCOME', user: user.name }, ...config }
+      {
+        data: {
+          messageType: 'welcome',
+          message: 'MSG.WELCOME',
+          name: user && user.name ? user.name : '😊'
+        },
+        ...config
+      }
     )
   }
 
