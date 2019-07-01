@@ -21,7 +21,9 @@ export class ThemeService {
     isDark: true
   }]
 
-  constructor(private settingsService: SettingService) {
+  constructor(
+    private settingsService: SettingService
+  ) {
     this.theme = new BehaviorSubject(this.themeList[this.settingsService.value.theme])
   }
 

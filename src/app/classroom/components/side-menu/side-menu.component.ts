@@ -21,7 +21,9 @@ export class SideMenuComponent implements OnInit {
     { name: 'SETTINGS', url: 'aula/configuracion', icon: 'settings' }
   ]]
 
-  constructor(private sidenavService: SidenavService) { }
+  constructor(
+    private sidenavService: SidenavService
+  ) { }
 
   ngOnInit(): void {
     // Get sidenav state

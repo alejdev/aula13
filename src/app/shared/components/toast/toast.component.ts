@@ -8,7 +8,9 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material'
 })
 export class ToastComponent implements OnInit {
 
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
+  constructor(
+    @Inject(MAT_SNACK_BAR_DATA) public data: any
+  ) { }
 
   ngOnInit() { }
 
