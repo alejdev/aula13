@@ -39,13 +39,19 @@ export class LoginComponent implements OnInit {
 
   loginWithEmail(): void {
     if (this.formGroup.valid) {
-      this.router.navigate(['aula'])
+      this.authService.signIn(this.formGroup.value)
+        .then((auth: any) => {
+          console.log(auth)
+          this.router.navigate(['aula'])
+          this.toast.welcome(auth)
+        })
+        .catch((error: any) => console.log(error))
     }
   }
 
   registerWithEmail(): void {
     if (this.formGroup.valid) {
-      this.authService.register(this.formGroup.value)
+      this.authService.signUp(this.formGroup.value)
         .then((auth: any) => {
           console.log(auth)
           this.router.navigate(['aula'])

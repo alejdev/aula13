@@ -6,12 +6,20 @@ import { ClassroomComponent } from 'src/app/classroom/components/classroom/class
 const routes: Routes = [{
   path: '',
   component: ClassroomComponent,
-  children: [
-    { path: '', redirectTo: 'alumnos', pathMatch: 'full' },
-    { path: 'alumnos', loadChildren: () => import('./students/students.module').then(m => m.StudentsModule) },
-    { path: 'alumno/:id', loadChildren: () => import('./students/students.module').then(m => m.StudentsModule) },
-    { path: 'configuracion', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) }
-  ]
+  children: [{
+    path: '',
+    redirectTo: 'alumnos',
+    pathMatch: 'full'
+  }, {
+    path: 'alumnos',
+    loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
+  }, {
+    path: 'alumno/:id',
+    loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
+  }, {
+    path: 'configuracion',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
+  }]
 }]
 
 @NgModule({
@@ -19,6 +27,3 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class ClassroomRoutingModule { }
-
-
-

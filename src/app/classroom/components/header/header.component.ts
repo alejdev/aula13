@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 
 import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
+import { AuthService } from 'src/app/shared/services/auth.service'
 
 @Component({
   selector: 'a13-header',
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
     private media: MediaMatcher,
     private sidenavService: SidenavService,
     private themeService: ThemeService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +48,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  signOut(): void {
-    this.router.navigate(['login'])
+  logOut(): void {
+    this.authService.signOut()
+      .then(() => {
+        this.router.navigate(['login'])
+      })
+      .catch((error: any) => console.log(error))
   }
 }

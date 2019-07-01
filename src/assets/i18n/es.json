@@ -22,11 +22,12 @@
     "EN": "Inglés"
   },
   "MSG": {
+    "BYE": "¡Hasta pronto {{name}}!",
+    "NO_ACCOUNT": "¿Aún no eres usuario?",
     "NOTHING_HERE": "Upps! Aquí no hay nada",
     "NOTHING_MAN": "¯\\_(ツ)_/¯",
-    "NO_ACCOUNT": "¿Aún no eres usuario?",
-    "YES_ACCOUNT": "¿Ya tienes una cuenta?",
-    "WELCOME": "¡Hola {{name}}!"
+    "WELCOME": "¡Hola {{name}}!",
+    "YES_ACCOUNT": "¿Ya tienes una cuenta?"
   },
   "OPEN_MENU": "Abrir menú",
   "PASSWORD": "Contraseña",
