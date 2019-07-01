@@ -9,14 +9,12 @@ import { ClassroomModule } from './classroom/classroom.module'
 import { AuthenticationModule } from './authentication/authentication.module'
 
 import { AppComponent } from './app.component'
-import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component'
 
 import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PageNotFoundComponent
+    AppComponent
   ],
   imports: [
     // Angular
