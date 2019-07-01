@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core'
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router'
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanDeactivate } from '@angular/router'
 
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { AuthService } from './services/auth.service'
+import { AuthService } from '.././services/auth.service'
 
 @Injectable({
   providedIn: 'root'
 })
-export class NoAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
@@ -24,12 +24,13 @@ export class NoAuthGuard implements CanActivate {
       map(status => {
         console.log('TCL: AuthGuard -> status', status)
         if (status) {
-          this.router.navigate(['aula'])
-          return false
-        } else {
           return true
+        } else {
+          this.router.navigate(['login'])
+          return false
         }
       })
     )
   }
 }
+

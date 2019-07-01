@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router'
 
-import { AuthGuard } from './shared/auth.guard'
-import { NoAuthGuard } from './shared/no-auth.guard'
+import { AuthGuard } from './shared/guards/auth.guard'
+import { NoAuthGuard } from './shared/guards/no-auth.guard'
 
 const routes: Routes = [{
   path: 'login',
