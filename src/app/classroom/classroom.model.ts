@@ -1,11 +1,11 @@
 
-// User inrface
+// User interface
 export interface User {
 	name: string
 	avatar?: string
 }
 
-// Student inrface
+// Student interface
 export interface Student {
 	id: number
 	name: string

@@ -12,6 +12,17 @@ import { AppComponent } from './app.component'
 
 import { AppRoutingModule } from './app-routing.module'
 
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER } from 'ngx-ui-loader'
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: '#0259af',
+  fgsColor: '#0259af',
+  bgsType: SPINNER.ballScaleMultiple,
+  fgsType: SPINNER.circle,
+  hasProgressBar: false,
+  overlayColor: 'rgba(160, 160, 160, 0.3)',
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -28,7 +39,10 @@ import { AppRoutingModule } from './app-routing.module'
     CoreModule,
     SharedModule,
     ClassroomModule,
-    AuthenticationModule
+    AuthenticationModule,
+
+    // Third parties
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   exports: [],
   providers: [],

@@ -31,7 +31,7 @@
       </mat-form-field>
 
       <div class="mb-3" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
-        
+
         <!-- Password -->
         <mat-form-field>
           <input matInput type="{{passwordType}}" required placeholder="{{'PASSWORD' | translate}}"
@@ -65,8 +65,7 @@
 
       <!-- Login button -->
       <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
-        <button fxFlex="100" mat-flat-button [color]="getSignOptions().button.color"
-          (click)="login ? loginWithEmail(): registerWithEmail()"
+        <button fxFlex="100" mat-flat-button [color]="getSignOptions().button.color" (click)="loginWithEmail()"
           attr.arial-label="{{getSignOptions().button.text | translate}}">{{getSignOptions().button.text | translate}}</button>
       </div>
     </form>

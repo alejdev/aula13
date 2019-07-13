@@ -22,7 +22,6 @@ export class NoAuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.getStatus().pipe(
       map(status => {
-        console.log('TCL: AuthGuard -> status', status)
         if (status) {
           this.router.navigate(['aula'])
           return false

@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
     private media: MediaMatcher,
     private sidenavService: SidenavService,
     private themeService: ThemeService,
-    private router: Router,
     private authService: AuthService
   ) { }
 
@@ -50,9 +49,5 @@ export class HeaderComponent implements OnInit {
 
   logOut(): void {
     this.authService.signOut()
-      .then(() => {
-        this.router.navigate(['login'])
-      })
-      .catch((error: any) => console.log(error))
   }
 }

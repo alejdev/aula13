@@ -24,9 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
-    private toast: ToastService
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -39,25 +37,11 @@ export class LoginComponent implements OnInit {
 
   loginWithEmail(): void {
     if (this.formGroup.valid) {
-      this.authService.signIn(this.formGroup.value)
-        .then((auth: any) => {
-          console.log(auth)
-          this.router.navigate(['aula'])
-          this.toast.welcome(auth)
-        })
-        .catch((error: any) => console.log(error))
-    }
-  }
-
-  registerWithEmail(): void {
-    if (this.formGroup.valid) {
-      this.authService.signUp(this.formGroup.value)
-        .then((auth: any) => {
-          console.log(auth)
-          this.router.navigate(['aula'])
-          this.toast.welcome(auth)
-        })
-        .catch((error: any) => console.log(error))
+      if (this.login) {
+        this.authService.signIn(this.formGroup.value)
+      } else {
+        this.authService.signUp(this.formGroup.value)
+      }
     }
   }
 

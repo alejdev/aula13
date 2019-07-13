@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.getStatus().pipe(
       map(status => {
-        console.log('TCL: AuthGuard -> status', status)
         if (status) {
           return true
         } else {
