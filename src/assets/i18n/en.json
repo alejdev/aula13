@@ -2,16 +2,19 @@
   "AND": " and",
   "APP_SUBTITLE": "Organize your private lessons",
   "BACK": "Back",
+  "CANCEL": "Cancel",
   "CLOSE_MENU": "Close menu",
   "CONFIRM_PASSWORD": "Confirm password",
   "EMAIL": "Email",
   "ERR": {
+    "AUTH_INVALID": "The password or the email is invalid",
     "CONFIRM_PASSWORD_NOT_MATCH": "Passwords do not match",
     "CONFIRM_PASSWORD_REQUIRED": "You must confirm the password",
     "EMAIL_INVALID": "Please, enter valid email address",
     "EMAIL_REQUIRED": "Email is required",
     "PASSWORD_INVALID": "Password needs to be at least six characters",
-    "PASSWORD_REQUIRED": "Password is required"
+    "PASSWORD_REQUIRED": "Password is required",
+    "UNEXPECTED_ERROR": "An unexpected error occurred. Please try again later"
   },
   "FLAG_OF": "Flag of ",
   "HIDE_PASSWORD": "Hide password",
@@ -22,7 +25,9 @@
     "EN": "English"
   },
   "MSG": {
-    "BYE": "See you soon {{name}}!",
+    "BYE": "See you soon!",
+    "LOGOUT": "Do you want to log out?",
+    "LOGOUT.CONFIRM": "If you do we hope you come back soon :)",
     "NO_ACCOUNT": "Not a member yet?",
     "NOTHING_HERE": "Upps! There is nothing here",
     "NOTHING_MAN": "¯\\_(ツ)_/¯",

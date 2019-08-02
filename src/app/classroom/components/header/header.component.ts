@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { MediaMatcher } from '@angular/cdk/layout'
-import { Router } from '@angular/router'
+
+import { MatDialog } from '@angular/material'
 
 import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
-import { AuthService } from 'src/app/shared/services/auth.service'
+
+import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 
 @Component({
   selector: 'a13-header',
@@ -23,7 +25,7 @@ export class HeaderComponent implements OnInit {
     private media: MediaMatcher,
     private sidenavService: SidenavService,
     private themeService: ThemeService,
-    private authService: AuthService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(): void {
-    this.authService.signOut()
+    this.dialog.open(LogoutDialogComponent)
   }
 }

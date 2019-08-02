@@ -9,19 +9,22 @@ import { ClassroomRoutingModule } from './classroom-routing.module'
 
 import { HeaderComponent } from 'src/app/classroom/components/header/header.component'
 import { SideMenuComponent } from 'src/app/classroom/components/side-menu/side-menu.component'
+import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component'
 
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatDialogModule } from '@angular/material'
 
 @NgModule({
   declarations: [
     ClassroomComponent,
 
     HeaderComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    LogoutDialogComponent
   ],
   imports: [
     // Routing
@@ -37,7 +40,11 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    LogoutDialogComponent
   ]
 })
 export class ClassroomModule { }

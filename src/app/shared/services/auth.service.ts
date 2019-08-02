@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, HostBinding } from '@angular/core'
 import { Router } from '@angular/router'
 import { AngularFireAuth } from '@angular/fire/auth'
 
@@ -20,13 +20,21 @@ export class AuthService {
     private loaderService: LoaderService,
   ) {
     this.success = (auth: any) => {
-      this.toastService.welcome(auth)
       this.loaderService.stop()
+      this.toastService.welcome(auth)
       this.router.navigate(['aula'])
     }
     this.error = (error: any) => {
       console.log(error)
       this.loaderService.stop()
+      switch (error.code) {
+        case 'auth/wrong-password':
+          this.toastService.say('ERR.AUTH_INVALID')
+          break
+        default:
+          this.toastService.say('ERR.UNEXPECTED_ERROR')
+          break
+      }
     }
   }
 
@@ -54,6 +62,7 @@ export class AuthService {
       .then(() => {
         this.loaderService.stop()
         this.router.navigate(['login'])
+        this.toastService.say('MSG.BYE')
       })
       .catch(this.error)
   }

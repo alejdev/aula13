@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { SwUpdate } from '@angular/service-worker'
+import { OverlayContainer } from '@angular/cdk/overlay'
 
 import { TranslateService } from '@ngx-translate/core'
 
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit {
   constructor(
     private settingsService: SettingService,
     private translateService: TranslateService,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    private overlayContainer: OverlayContainer
   ) { }
 
   ngOnInit(): void {
@@ -29,5 +31,8 @@ export class AppComponent implements OnInit {
     // Set translations
     this.translateService.setDefaultLang('es')
     this.translateService.use(this.settingsService.value.lang)
+
+    // Set overlay
+    this.overlayContainer.getContainerElement().classList.add('light-theme')
   }
 }

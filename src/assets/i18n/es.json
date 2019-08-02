@@ -2,16 +2,19 @@
   "AND": " y",
   "APP_SUBTITLE": "Organiza tus clases particulares",
   "BACK": "Volver",
+  "CANCEL": "Cancelar",
   "CLOSE_MENU": "Cerrar menú",
   "CONFIRM_PASSWORD": "Confirmar contraseña",
   "EMAIL": "Email",
   "ERR": {
+    "AUTH_INVALID": "Email o contraseña incorrecta",
     "CONFIRM_PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
     "CONFIRM_PASSWORD_REQUIRED": "Debes confirmar la contraseña",
     "EMAIL_INVALID": "Por favor, introduce un email válido",
     "EMAIL_REQUIRED": "El email es obligatorio",
     "PASSWORD_INVALID": "La contraseña debe tener al menos 6 caracteres",
-    "PASSWORD_REQUIRED": "La contraseña es obligatoria"
+    "PASSWORD_REQUIRED": "La contraseña es obligatoria",
+    "UNEXPECTED_ERROR": "Ocurrió un error inexperado. Por favor, vuelva a intentarlo más tarde"
   },
   "FLAG_OF": "Bandera de ",
   "HIDE_PASSWORD": "Ocultar contraseña",
@@ -22,7 +25,9 @@
     "EN": "Inglés"
   },
   "MSG": {
-    "BYE": "¡Hasta pronto {{name}}!",
+    "BYE": "¡Hasta pronto!",
+    "LOGOUT": "¿Quieres cerrar la sesión?",
+    "LOGOUT.CONFIRM": "Si lo haces esperamos que vuelvas pronto :)",
     "NO_ACCOUNT": "¿Aún no eres usuario?",
     "NOTHING_HERE": "Upps! Aquí no hay nada",
     "NOTHING_MAN": "¯\\_(ツ)_/¯",

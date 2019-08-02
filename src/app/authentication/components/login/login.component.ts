@@ -1,11 +1,8 @@
 import { Component, HostBinding, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
 
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { UtilService } from 'src/app/shared/services/util.service'
-
-import { ToastService } from 'src/app/shared/services/toast.service'
 
 @Component({
   selector: 'a13-login',
@@ -30,7 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.formValidators = {
       email: [null, Validators.compose([Validators.required, Validators.pattern(UtilService.regExp.email)])],
-      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
+      password: [null, Validators.compose([Validators.required])],
     }
     this.formGroup = this.createSignInForm()
   }
@@ -68,7 +65,11 @@ export class LoginComponent implements OnInit {
 
   createSignUpForm(): FormGroup {
     return this.formBuilder.group(
-      { ...this.formValidators, confirmPassword: [null, Validators.compose([Validators.required])] },
+      {
+        ...this.formValidators,
+        password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
+        confirmPassword: [null, Validators.compose([Validators.required])]
+      },
       { validator: UtilService.passwordMatchValidator }
     )
   }
