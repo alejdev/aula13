@@ -29,10 +29,10 @@ export class AuthService {
       this.loaderService.stop()
       switch (error.code) {
         case 'auth/wrong-password':
-          this.toastService.say('ERR.AUTH_INVALID')
+          this.toastService.error('ERR.AUTH_INVALID')
           break
         default:
-          this.toastService.say('ERR.UNEXPECTED_ERROR')
+          this.toastService.error('ERR.UNEXPECTED_ERROR')
           break
       }
     }

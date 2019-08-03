@@ -14,4 +14,8 @@ export class ToastComponent implements OnInit {
 
   ngOnInit() { }
 
+  case(messageType: string): boolean {
+    return messageType === 'warning' || messageType === 'error'
+  }
+
 }

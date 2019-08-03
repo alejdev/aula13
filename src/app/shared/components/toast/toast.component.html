@@ -1,8 +1,14 @@
 <div class="toast">
-  <ng-container [ngSwitch]="data.messageType">
+  <ng-container [ngSwitch]="true">
 
-    <span *ngSwitchCase="'welcome'">
+    <span *ngSwitchCase="data.messageType === 'welcome'">
       {{ data.message | translate:{'name': data.name} }}
+    </span>
+
+    <span *ngSwitchCase="case(data.messageType)" [ngClass]="data.messageType" fxLayout="row"
+      fxLayoutAlign="start center">
+      <mat-icon class="mr-h">{{data.messageType}}</mat-icon>
+      {{ data.message | translate }}
     </span>
 
     <span *ngSwitchDefault>

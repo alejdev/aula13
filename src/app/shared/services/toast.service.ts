@@ -25,16 +25,25 @@ export class ToastService extends MatSnackBar {
     super(overlay, live, injector, breakpointObserver, parentSnackBar, defaultConfig)
   }
 
-  say(text: string, config?: any): void {
+  say(text: string, type?: string, config?: any): void {
     this.openFromComponent(
       ToastComponent,
       {
         data: {
-          message: text
+          message: text,
+          messageType: type,
         },
         ...config
       }
     )
+  }
+
+  warning(text: string): void {
+    this.say(text, 'warning')
+  }
+
+  error(text: string): void {
+    this.say(text, 'error')
   }
 
   welcome(user: User, config?: any): void {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { MatSnackBarConfig, MatSnackBarModule, MatProgressSpinnerModule } from '@angular/material'
+import { MatSnackBarConfig, MatSnackBarModule, MatProgressSpinnerModule, MatIconModule } from '@angular/material'
 
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { TranslateModule } from '@ngx-translate/core'
@@ -26,6 +26,7 @@ import { LoaderService } from './services/loader.service'
     ReactiveFormsModule,
 
     // Material
+    MatIconModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
 
