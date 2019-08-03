@@ -13,11 +13,18 @@
   }
 }
 
-.dark-theme .nav-list-item.active {
-  background-color: $black-12-opacity;
+.dark-theme {
+  .nav-list-item.active {
+    background-color: $black-12-opacity;
 
-  mat-icon,
-  span {
-    color: white;
+    mat-icon,
+    span {
+      color: white;
+    }
   }
+
+  .mat-dialog-container {
+    @include mat-elevation(5);
+  }
+
 }
