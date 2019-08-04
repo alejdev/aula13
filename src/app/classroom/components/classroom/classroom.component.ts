@@ -1,14 +1,14 @@
 import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
 import { Event, NavigationStart, Router } from '@angular/router'
-import { OverlayContainer } from '@angular/cdk/overlay'
 
 import * as Hammer from 'hammerjs'
 
 import { MatSidenav } from '@angular/material/sidenav'
 
 import { SidenavService } from 'src/app/classroom/services/sidenav.service'
-import { ThemeService } from 'src/app/shared/services/theme.service'
 import { onMainContentChange, onSideNavChange } from 'src/app/classroom/classroom.animation'
+import { ThemeService } from 'src/app/shared/services/theme.service'
+import { SettingService } from 'src/app/shared/services/setting.service'
 
 @Component({
   selector: 'a13-classroom',
@@ -29,8 +29,8 @@ export class ClassroomComponent implements OnInit {
     private elementRef: ElementRef,
     private router: Router,
     private sidenavService: SidenavService,
-    private overlayContainer: OverlayContainer,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private settingService: SettingService
   ) { }
 
   ngOnInit(): void {
@@ -57,15 +57,13 @@ export class ClassroomComponent implements OnInit {
     })
 
     // Theming service
-    this.themeService.theme.subscribe((result: any) => {
-      const overlay = this.overlayContainer.getContainerElement().classList
-      const prevTheme = this.themeService.previousTheme
-      if (prevTheme) {
-        overlay.remove(prevTheme.id)
-      }
-      overlay.add(result.id)
-      this.componentCssClass = result.id
+    this.themeService.theme.subscribe((theme: any) => {
+      console.log(theme)
+      this.componentCssClass = theme.id
     })
+
+    // Set setting theme on first time
+    this.themeService.setTheme(this.settingService.value.theme)
 
     // Sidenav service
     this.sidenavService.sidenavState.subscribe(result => this.onSideNavChange = result)

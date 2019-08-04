@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core'
+import { OverlayContainer } from '@angular/cdk/overlay'
+
 import { BehaviorSubject } from 'rxjs'
+
 import { SettingService } from './setting.service'
 
 @Injectable({
@@ -8,7 +11,6 @@ import { SettingService } from './setting.service'
 export class ThemeService {
 
   public theme: BehaviorSubject<any>
-  public previousTheme: any
   private themeList: any = [{
     id: 'light-theme',
     name: 'THEMING.LIGHT_THEME',
@@ -22,20 +24,46 @@ export class ThemeService {
   }]
 
   constructor(
-    private settingsService: SettingService
+    private settingsService: SettingService,
+    private overlayContainer: OverlayContainer
   ) {
-    this.theme = new BehaviorSubject(this.themeList[this.settingsService.value.theme])
+    this.setTheme(this.settingsService.value.theme)
+  }
+
+  public getThemeByIndex(index: number) {
+    return this.themeList[index]
+  }
+
+  public setTheme(themeIndex: number): void {
+    if (this.theme) {
+      this.theme.next(this.themeList[themeIndex])
+    } else {
+      this.theme = new BehaviorSubject(this.themeList[themeIndex])
+    }
+    this.setOverlay(this.themeList[themeIndex].id)
   }
 
   public toggleTheme(): void {
     const currentThemeIndex = this.settingsService.value.theme
-    this.previousTheme = this.themeList[currentThemeIndex]
+
     if (currentThemeIndex === this.themeList.length - 1) {
       this.settingsService.value = { theme: 0 }
-      this.theme.next(this.themeList[this.settingsService.value.theme])
     } else {
       this.settingsService.value = { theme: currentThemeIndex + 1 }
-      this.theme.next(this.themeList[this.settingsService.value.theme])
     }
+
+    this.theme.next(this.themeList[this.settingsService.value.theme])
+
+    // Set overlay
+    this.setOverlay(this.themeList[this.settingsService.value.theme].id)
+  }
+
+  private setOverlay(theme: string) {
+    const overlayClasses = this.overlayContainer.getContainerElement().classList
+    const themeClassesToRemove = Array.from(overlayClasses).filter((item: string) => item.includes('-theme'))
+    if (themeClassesToRemove.length) {
+      overlayClasses.remove(...themeClassesToRemove)
+    }
+    overlayClasses.add(theme)
   }
 }

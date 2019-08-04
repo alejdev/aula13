@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+import { ThemeService } from 'src/app/shared/services/theme.service'
 
 @Component({
   selector: 'a13-login',
@@ -17,19 +18,25 @@ export class LoginComponent implements OnInit {
   model: any
   passwordType = 'password'
   login: boolean = true
-  @HostBinding('class') classes = 'light-theme'
+  @HostBinding('class') componentCssClass: string
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService,
   ) { }
 
   ngOnInit(): void {
+    //  Config forms
     this.formValidators = {
       email: [null, Validators.compose([Validators.required, Validators.pattern(UtilService.regExp.email)])],
       password: [null, Validators.compose([Validators.required])],
     }
     this.formGroup = this.createSignInForm()
+
+    // Set theme
+    this.themeService.setTheme(0)
+    this.componentCssClass = this.themeService.getThemeByIndex(0).id
   }
 
   loginWithEmail(): void {

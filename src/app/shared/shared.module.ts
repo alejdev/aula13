@@ -49,7 +49,7 @@ import { LoaderService } from './services/loader.service'
     TranslateModule,
   ],
   providers: [
-    { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 4000 } },
+    { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 5000 } },
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
     LoaderService
   ]
