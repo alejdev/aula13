@@ -42,9 +42,17 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginWithGoogle() { }
-  loginWithFacebook() { }
-  loginWithTwitter() { }
+  loginWithGoogle() {
+    this.authService.loginWithGoogle()
+  }
+
+  loginWithFacebook() {
+    this.authService.loginWithFacebook()
+  }
+
+  loginWithTwitter() {
+    this.authService.loginWithTwitter()
+  }
 
   toggleSign() {
     this.login = !this.login

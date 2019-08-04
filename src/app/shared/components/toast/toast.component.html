@@ -6,9 +6,9 @@
     </span>
 
     <span *ngSwitchCase="case(data.messageType)" [ngClass]="data.messageType" fxLayout="row"
-      fxLayoutAlign="start center">
-      <mat-icon class="mr-h">{{data.messageType}}</mat-icon>
+      fxLayoutAlign="space-between center">
       {{ data.message | translate }}
+      <mat-icon class="ml-h">{{data.messageType}}</mat-icon>
     </span>
 
     <span *ngSwitchDefault>

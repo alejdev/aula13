@@ -38,6 +38,10 @@ export class ToastService extends MatSnackBar {
     )
   }
 
+  info(text: string): void {
+    this.say(text, 'info')
+  }
+
   warning(text: string): void {
     this.say(text, 'warning')
   }

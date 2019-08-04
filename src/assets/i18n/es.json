@@ -31,6 +31,7 @@
     "NO_ACCOUNT": "¿Aún no eres usuario?",
     "NOTHING_HERE": "Upps! Aquí no hay nada",
     "NOTHING_MAN": "¯\\_(ツ)_/¯",
+    "SERVICE_NOT_AVAILABLE": "Pronto estará disponible este servicio",
     "WELCOME": "¡Hola {{name}}!",
     "YES_ACCOUNT": "¿Ya tienes una cuenta?"
   },

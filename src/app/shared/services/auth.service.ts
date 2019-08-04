@@ -56,6 +56,16 @@ export class AuthService {
       .catch(this.error)
   }
 
+  public loginWithGoogle() {
+    this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
+  }
+  public loginWithFacebook() {
+    this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
+  }
+  public loginWithTwitter() {
+    this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
+  }
+
   public signOut() {
     this.loaderService.start()
     return this.angularFireAuth.auth.signOut()
