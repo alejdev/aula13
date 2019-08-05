@@ -54,4 +54,9 @@ export class StudentListComponent implements OnInit {
   isActive(id: string) {
     return this.sortActive.active === id ? 'primary' : ''
   }
+
+  resetFilter() {
+    this.studentFilter = ''
+    this.studentListFiltered = Object.assign(this.studentList)
+  }
 }

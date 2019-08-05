@@ -42,6 +42,7 @@
     "TAG": "Tag"
   },
   "RESET_EMAIL": "Reset email field",
+  "RESET_FILTER": "Reset filter",
   "SHOW_PASSWORD": "Show password",
   "SEARCH_STUDENT": "Search student",
   "SETTINGS": "Settings",

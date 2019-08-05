@@ -58,7 +58,6 @@ export class ClassroomComponent implements OnInit {
 
     // Theming service
     this.themeService.theme.subscribe((theme: any) => {
-      console.log(theme)
       this.componentCssClass = theme.id
     })
 

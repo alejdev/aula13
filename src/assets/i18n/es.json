@@ -42,6 +42,7 @@
     "TAG": "Etiqueta"
   },
   "RESET_EMAIL": "Reiniciar campo de correo electrónico",
+  "RESET_FILTER": "Reiniciar filtro",
   "SHOW_PASSWORD": "Mostrar contraseña",
   "SEARCH_STUDENT": "Buscar alumno",
   "SETTINGS": "Configuración",
