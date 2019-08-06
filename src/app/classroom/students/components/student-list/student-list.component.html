@@ -1,5 +1,9 @@
 <!-- Title -->
-<h2 class="mat-h1 pt-1">{{title | translate}}</h2>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <h2 class="mat-h1 pt-1">{{title | translate}}</h2>
+  <a13-floating-button text="ADD_STUDENT" icon="add" [route]="'/aula/alumno'"></a13-floating-button>
+</div>
+
 
 <!-- Filter -->
 <mat-form-field>

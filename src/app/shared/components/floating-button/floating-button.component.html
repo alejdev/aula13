@@ -1,0 +1,5 @@
+<button class="a13-floating-button" mat-flat-button color="primary" attr.arial-label="{{'ADD_STUDENT' | translate}}"
+	(click)="toAction()">
+	<mat-icon *ngIf="icon" [@animateFloatingButton]="buttonState">{{icon}}</mat-icon>
+	<span *ngIf="text" class="text-button">{{text | translate}}</span>
+</button>

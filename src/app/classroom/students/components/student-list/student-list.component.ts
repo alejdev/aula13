@@ -33,7 +33,7 @@ export class StudentListComponent implements OnInit {
 
   constructor(
     private studentService: StudentService,
-    private studentPipe: StudentPipe
+    private studentPipe: StudentPipe,
   ) { }
 
   ngOnInit(): void {
@@ -51,11 +51,11 @@ export class StudentListComponent implements OnInit {
     this.studentListFiltered = UtilService.sortData(this.studentListFiltered, sort)
   }
 
-  isActive(id: string) {
+  isActive(id: string): string {
     return this.sortActive.active === id ? 'primary' : ''
   }
 
-  resetFilter() {
+  resetFilter(): void {
     this.studentFilter = ''
     this.studentListFiltered = Object.assign(this.studentList)
   }

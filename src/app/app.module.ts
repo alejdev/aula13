@@ -1,5 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core'
 
 import { CoreModule } from './core/core.module'
@@ -28,10 +26,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AppComponent
   ],
   imports: [
-    // Angular
-    BrowserAnimationsModule,
-    BrowserModule,
-
     // Routing
     AppRoutingModule,
 
@@ -44,8 +38,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     // Third parties
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
-  exports: [],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

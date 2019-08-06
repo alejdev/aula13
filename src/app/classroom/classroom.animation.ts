@@ -69,3 +69,17 @@ export const animateAvatar = trigger('animateAvatar', [
 	transition('close => open', animate('270ms ease-in')),
 	transition('open => close', animate('180ms ease-out')),
 ])
+
+export const animateFloatingButton = trigger('animateFloatingButton', [
+  state('leave',
+    style({
+			transform: 'rotate(0deg)'
+    })
+  ),
+  state('enter',
+    style({
+			transform: 'rotate(180deg)',
+    })
+  ),
+  transition('* => *', animate('180ms ease-in'))
+])
