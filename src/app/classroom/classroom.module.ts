@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { SharedModule } from '../shared/shared.module'
 import { SettingsModule } from './settings/settings.module'
 import { StudentsModule } from './students/students.module'
+import { StudentProfileModule } from './student-profile/student-profile.module'
 
 import { ClassroomComponent } from 'src/app/classroom/components/classroom/classroom.component'
 import { ClassroomRoutingModule } from './classroom-routing.module'
@@ -33,6 +34,7 @@ import { MatDialogModule } from '@angular/material'
     // App modules
     SharedModule,
     StudentsModule,
+    StudentProfileModule,
     SettingsModule,
 
     // Material

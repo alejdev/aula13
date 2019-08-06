@@ -26,6 +26,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
     // Firebase
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
+
     // AngularFireStorageModule,
     AngularFirestoreModule,
 
