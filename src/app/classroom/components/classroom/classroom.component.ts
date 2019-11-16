@@ -27,7 +27,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
   @ViewChild(MatSidenav, { static: true }) sideMenu: MatSidenav
 
   private ngUnsubscribe = new Subject()
-  private refCollection: string = 'users'
+  private refName: string = 'users'
   public animStyles: any
   public onSideNavChange: boolean
   public mobileQuery: MediaQueryList
@@ -82,17 +82,10 @@ export class ClassroomComponent implements OnInit, OnDestroy {
   }
 
   setUserLogged() {
-    this.firestore.collection(
-      this.refCollection,
-      ref => ref.where('id', '==', this.authService.getUserUid()).limit(1)
-    )
-      .valueChanges()
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((users: any) => {
-        if (users[0]) {
-          this.authService.setUserLogged(users[0])
-        }
-      })
+    this.authService.readUser(this.authService.getUserUid())
+    .then((result) => {
+      this.authService.setUserLogged(result.data())
+    })
   }
 
   setViewportSize(): void {

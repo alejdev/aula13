@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth.service'
 export class StudentService {
 
   private ref: AngularFirestoreCollection = this.firestore.collection('users')
-  private subref: string = 'students'
+  private subRefName: string = 'students'
 
   constructor(
     private firestore: AngularFirestore,
@@ -23,15 +23,25 @@ export class StudentService {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
-      .collection(this.subref).snapshotChanges()
+      .collection(this.subRefName).snapshotChanges()
   }
 
   public createStudent(data: any) {
-    console.log(data)
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
-      .collection(this.subref).add(data)
+      .collection(this.subRefName)
+      .add(data)
+      .finally(() => this.loaderService.stop())
+  }
+
+  public readStudent(id: any) {
+    this.loaderService.start()
+    return this.ref
+      .doc(this.authService.getUserUid())
+      .collection(this.subRefName)
+      .doc(id).ref.get()
+      .finally(() => this.loaderService.stop())
   }
 
 }

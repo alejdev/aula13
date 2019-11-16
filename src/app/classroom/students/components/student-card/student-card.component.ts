@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 
+import { UtilService } from 'src/app/shared/services/util.service'
+
 @Component({
   selector: 'a13-student-card',
   templateUrl: './student-card.component.html',
@@ -9,19 +11,13 @@ export class StudentComponent implements OnInit {
 
   @Input() student: any = null
   resourceImagePath: string = 'assets/svgs/avatars/'
+  mark: any
 
-  constructor() { }
+  constructor(
+    private utilService: UtilService
+  ) { }
 
-  ngOnInit(): void { }
-
-  getPuntuation(list: any, index: number): string {
-    switch (true) {
-      case list.length === index + 1:
-        return ``
-      case list.length === index + 2:
-        return `AND`
-      default:
-        return `,`
-    }
+  ngOnInit(): void {
+    this.mark = this.utilService.mark
   }
 }

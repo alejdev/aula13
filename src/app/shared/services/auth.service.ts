@@ -106,6 +106,7 @@ export class AuthService {
   }
 
   private createUser(data: any) {
+    this.loaderService.start()
     return this.ref
       .doc(data.uid)
       .set({
@@ -121,4 +122,12 @@ export class AuthService {
       .catch(this.error)
       .finally(() => this.loaderService.stop())
   }
+
+  public readUser(id: any) {
+    this.loaderService.start()
+    return this.ref
+      .doc(id).ref.get()
+      .finally(() => this.loaderService.stop())
+  }
+
 }

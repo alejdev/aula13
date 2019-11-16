@@ -11,9 +11,9 @@
         <span>{{student?.name}}</span>
         <div fxLayout="row wrap">
           <span class="mat-small mat-hint mr-q"
-            *ngFor="let subject of student.musical.subjects; let i=index; let first = first">
+            *ngFor="let subject of student?.musical.subjects; let i=index; let first = first">
             <span [ngClass]="{'txt-lowercase': !first}">{{'SUBJECT.' + subject.viewValue | translate}}</span>
-            <span>{{getPuntuation(student?.musical.subjects, i) | translate}}</span>
+            <span>{{mark(student?.musical.subjects, i) | translate}}</span>
           </span>
         </div>
       </div>
