@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material'
 
+import { UtilService } from 'src/app/shared/services/util.service'
+
 @Component({
   selector: 'a13-pickup-image-dialog',
   templateUrl: './pickup-image-dialog.component.html',
@@ -8,10 +10,11 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material'
 })
 export class PickupImageDialogComponent implements OnInit {
 
-  resourceImagePath: string = 'assets/svgs/avatars/'
+  srcImage: any
 
   constructor(
     public dialogRef: MatDialogRef<PickupImageDialogComponent>,
+    private utilService: UtilService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -21,6 +24,7 @@ export class PickupImageDialogComponent implements OnInit {
         elem.selected = true
       }
     })
+    this.srcImage = this.utilService.srcImage
   }
 
   pickup(img: any) {
@@ -46,13 +50,16 @@ export class PickupImageComponent implements OnInit {
   @Input() image: any
   @Input() imageList: any
   @Output() imageChange: any = new EventEmitter<boolean>()
-  resourceImagePath: string = 'assets/svgs/avatars/'
+  srcImage: any
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utilService: UtilService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.srcImage = this.utilService.srcImage
+  }
 
   pickup() {
     const dialogRef = this.dialog.open(PickupImageDialogComponent, {

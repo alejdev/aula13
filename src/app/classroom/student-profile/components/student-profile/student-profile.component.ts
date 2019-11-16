@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 
-import { Subject } from 'rxjs'
-
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -13,12 +11,10 @@ import { UtilService } from 'src/app/shared/services/util.service'
 })
 export class StudentProfileComponent implements OnInit {
 
-  private ngUnsubscribe = new Subject()
   mark: any
-
   studentId: any
   student: any
-  resourceImagePath: string = 'assets/svgs/avatars/'
+  srcImage: any
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,6 +33,7 @@ export class StudentProfileComponent implements OnInit {
       })
 
     this.mark = this.utilService.mark
+    this.srcImage = this.utilService.srcImage
   }
 
 }

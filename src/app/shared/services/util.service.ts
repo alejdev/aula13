@@ -48,7 +48,7 @@ export class UtilService {
     }
   }
 
-  // split a list by commas
+  // Split a list by commas
   public mark(list: any, index: number): string {
     switch (true) {
       case list.length === index + 1:
@@ -58,5 +58,10 @@ export class UtilService {
       default:
         return `,`
     }
+  }
+
+  // Generate resource path
+  public srcImage({ path = 'assets/svgs/avatars/', img, ext = '.svg' }: any): string {
+    return `${path}${img ? img : 'user-default'}${ext}`
   }
 }

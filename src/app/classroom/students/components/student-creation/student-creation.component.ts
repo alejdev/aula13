@@ -14,7 +14,6 @@ export class StudentCreationComponent implements OnInit {
 
   ages: number[] = [] // = [...Array(100).keys()]
   avatarCtrl: any = { id: 'user-default' }
-  resourceImagePath: string = 'assets/svgs/avatars/'
 
   avatars: any = [
     { id: 'user-default' },

@@ -10,8 +10,8 @@ import { UtilService } from 'src/app/shared/services/util.service'
 export class StudentComponent implements OnInit {
 
   @Input() student: any = null
-  resourceImagePath: string = 'assets/svgs/avatars/'
   mark: any
+  srcImage: any
 
   constructor(
     private utilService: UtilService
@@ -19,5 +19,6 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.mark = this.utilService.mark
+    this.srcImage = this.utilService.srcImage
   }
 }

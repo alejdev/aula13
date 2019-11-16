@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{'PICKUP_IMAGE' | translate}}</h2>
 <div mat-dialog-content class="image-list-container" fxLayout="row wrap">
 	<div fxFlex="25" class="avatar-item-list" *ngFor="let img of data.imageList">
-		<img [ngClass]="{'selected': img.selected}" [src]="resourceImagePath + img.id + '.svg'" [alt]="img.id" (click)="pickup(img)">
+		<img [ngClass]="{'selected': img.selected}" [src]="srcImage({img: img.id})" [alt]="img.id" (click)="pickup(img)">
 	</div>
 </div>
 <mat-dialog-actions align="end">

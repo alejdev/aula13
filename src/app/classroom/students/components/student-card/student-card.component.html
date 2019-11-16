@@ -4,7 +4,7 @@
     <div class="row mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
 
       <!-- Avatar -->
-      <img class="user-avatar-image mr-1" [src]="resourceImagePath + student?.avatar + '.svg'" alt="Avatar">
+      <img class="user-avatar-image mr-1" [src]="srcImage({img: student?.avatar})" alt="Avatar">
 
       <!-- Name & Surname -->
       <div fxLayout="column" fxLayoutAlign="space-around start">

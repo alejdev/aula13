@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutGap="2rem">
   <div class="avatar">
-    <img [src]="resourceImagePath + (student?.avatar || 'user-default') + '.svg'" alt="{{student?.avatar}}">
+    <img [src]="srcImage({img: student?.avatar})" alt="{{student?.avatar}}">
   </div>
   <div class="info pt-1">
     <h3 class="mat-h2">{{student?.name}}</h3>

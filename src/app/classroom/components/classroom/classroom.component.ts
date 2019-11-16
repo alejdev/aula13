@@ -1,11 +1,7 @@
-import { Component, ElementRef, HostBinding, OnInit, ViewChild, OnDestroy } from '@angular/core'
+import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
 import { Event, NavigationStart, Router } from '@angular/router'
 
 import * as Hammer from 'hammerjs'
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-
-import { AngularFirestore } from '@angular/fire/firestore'
 
 import { MatSidenav } from '@angular/material/sidenav'
 
@@ -21,13 +17,11 @@ import { AuthService } from 'src/app/shared/services/auth.service'
   styleUrls: ['./classroom.component.scss'],
   animations: [onSideNavChange, onMainContentChange]
 })
-export class ClassroomComponent implements OnInit, OnDestroy {
+export class ClassroomComponent implements OnInit {
 
   @HostBinding('class') componentCssClass: string
   @ViewChild(MatSidenav, { static: true }) sideMenu: MatSidenav
 
-  private ngUnsubscribe = new Subject()
-  private refName: string = 'users'
   public animStyles: any
   public onSideNavChange: boolean
   public mobileQuery: MediaQueryList
@@ -38,8 +32,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     private sidenavService: SidenavService,
     private themeService: ThemeService,
     private settingService: SettingService,
-    private authService: AuthService,
-    private firestore: AngularFirestore
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -104,8 +97,4 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next()
-    this.ngUnsubscribe.complete()
-  }
 }
