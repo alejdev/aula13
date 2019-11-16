@@ -2,13 +2,13 @@
 <h2 class="mat-h1 pt-1 pb-1">{{title | translate}}</h2>
 
 <!-- Lenguaje -->
-<h3 class="mat-h2 mat-hint">{{"GENERAL" | translate}}</h3>
+<h3 class="mat-h2 mat-hint">{{'GENERAL' | translate}}</h3>
 
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
   <img class="flag-selected" [src]="getFlag(langControl.value)"
     alt="{{'FLAG_OF' | translate}} {{langControl.value.name | translate}}">
   <mat-form-field>
-    <mat-label>{{"LANGUAGE" | translate}}</mat-label>
+    <mat-label>{{'LANGUAGE' | translate}}</mat-label>
     <mat-select [formControl]="langControl" (selectionChange)="setLang()">
       <mat-option *ngFor="let lang of languages" [value]="lang">
         <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -24,11 +24,11 @@
 <mat-divider class="mt-2 mb-2"></mat-divider>
 
 <!-- Theme -->
-<h3 class="mat-h2 mat-hint">{{"THEME" | translate}}</h3>
+<h3 class="mat-h2 mat-hint">{{'THEME' | translate}}</h3>
 
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
   <mat-icon color="primary">{{themeControl.icon}}</mat-icon>
   <mat-slide-toggle labelPosition="before" (change)="toggleTheme()" [(ngModel)]="themeIsDark">
-    {{"THEMING.DARK_MODE" | translate}}
+    {{'THEMING.DARK_MODE' | translate}}
   </mat-slide-toggle>
 </div>
