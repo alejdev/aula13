@@ -109,13 +109,10 @@ export class AuthService {
     return this.ref
       .doc(data.uid)
       .set({
+        creationDate: data.metadata.a,
+        email: data.email,
         id: data.uid,
-        metadata: {
-          creationDate: data.metadata.a,
-          email: data.email,
-          name: data.displayName
-        },
-        data: {}
+        name: data.displayName
       })
       .then((auth: any) => {
         this.router.navigate(['aula'])

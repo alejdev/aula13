@@ -26,11 +26,11 @@ export class ClassroomComponent implements OnInit, OnDestroy {
   @HostBinding('class') componentCssClass: string
   @ViewChild(MatSidenav, { static: true }) sideMenu: MatSidenav
 
-  private mobileQuery: MediaQueryList
   private ngUnsubscribe = new Subject()
   private refCollection: string = 'users'
   public animStyles: any
   public onSideNavChange: boolean
+  public mobileQuery: MediaQueryList
 
   constructor(
     private elementRef: ElementRef,

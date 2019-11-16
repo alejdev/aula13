@@ -13,56 +13,57 @@ import { ToastService } from 'src/app/shared/services/toast.service'
 export class StudentCreationComponent implements OnInit {
 
   ages: number[] = [] // = [...Array(100).keys()]
-  avatarCtrl: any = { name: 'Avatar por defecto', src: 'assets/svgs/user-default.svg' }
+  avatarCtrl: any = { id: 'user-default' }
+  resourceImagePath: string = 'assets/svgs/avatars/'
 
   avatars: any = [
-    { id: 'default', src: 'assets/svgs/user-default.svg' },
-    { id: 'chico_0', src: 'assets/svgs/avatars/boy-0.svg' },
-    { id: 'chica_0', src: 'assets/svgs/avatars/girl-0.svg' },
-    { id: 'chico_1', src: 'assets/svgs/avatars/boy-1.svg' },
-    { id: 'chica_1', src: 'assets/svgs/avatars/girl-1.svg' },
-    { id: 'chico_2', src: 'assets/svgs/avatars/boy-2.svg' },
-    { id: 'chica_2', src: 'assets/svgs/avatars/girl-2.svg' },
-    { id: 'chico_3', src: 'assets/svgs/avatars/boy-3.svg' },
-    { id: 'chica_3', src: 'assets/svgs/avatars/girl-3.svg' },
-    { id: 'chico_4', src: 'assets/svgs/avatars/boy-4.svg' },
-    { id: 'chica_4', src: 'assets/svgs/avatars/girl-4.svg' },
-    { id: 'chico_5', src: 'assets/svgs/avatars/boy-5.svg' },
-    { id: 'chica_5', src: 'assets/svgs/avatars/girl-5.svg' },
-    { id: 'chico_6', src: 'assets/svgs/avatars/boy-6.svg' },
-    { id: 'chica_6', src: 'assets/svgs/avatars/girl-6.svg' },
-    { id: 'chico_7', src: 'assets/svgs/avatars/boy-7.svg' },
-    { id: 'chica_7', src: 'assets/svgs/avatars/girl-7.svg' },
-    { id: 'chico_8', src: 'assets/svgs/avatars/boy-8.svg' },
-    { id: 'chica_8', src: 'assets/svgs/avatars/girl-8.svg' },
-    { id: 'chico_9', src: 'assets/svgs/avatars/boy-9.svg' },
-    { id: 'chica_9', src: 'assets/svgs/avatars/girl-9.svg' },
-    { id: 'chico_10', src: 'assets/svgs/avatars/boy-10.svg' },
-    { id: 'chica_10', src: 'assets/svgs/avatars/girl-10.svg' },
-    { id: 'chico_11', src: 'assets/svgs/avatars/boy-11.svg' },
-    { id: 'chica_11', src: 'assets/svgs/avatars/girl-11.svg' },
-    { id: 'chico_12', src: 'assets/svgs/avatars/boy-12.svg' },
-    { id: 'chica_12', src: 'assets/svgs/avatars/girl-12.svg' },
-    { id: 'chico_13', src: 'assets/svgs/avatars/boy-13.svg' },
-    { id: 'chica_13', src: 'assets/svgs/avatars/girl-13.svg' },
-    { id: 'chico_14', src: 'assets/svgs/avatars/boy-14.svg' },
-    { id: 'chica_14', src: 'assets/svgs/avatars/girl-14.svg' },
-    { id: 'chico_15', src: 'assets/svgs/avatars/boy-15.svg' },
-    { id: 'chica_15', src: 'assets/svgs/avatars/girl-15.svg' },
-    { id: 'chico_16', src: 'assets/svgs/avatars/boy-16.svg' },
-    { id: 'chica_16', src: 'assets/svgs/avatars/girl-16.svg' },
-    { id: 'chico_17', src: 'assets/svgs/avatars/boy-17.svg' },
-    { id: 'chica_17', src: 'assets/svgs/avatars/girl-17.svg' },
-    { id: 'chico_18', src: 'assets/svgs/avatars/boy-18.svg' },
-    { id: 'chica_18', src: 'assets/svgs/avatars/girl-18.svg' },
-    { id: 'chico_19', src: 'assets/svgs/avatars/boy-19.svg' },
-    { id: 'chica_19', src: 'assets/svgs/avatars/girl-19.svg' },
-    { id: 'chico_20', src: 'assets/svgs/avatars/boy-20.svg' },
-    { id: 'chica_20', src: 'assets/svgs/avatars/girl-20.svg' },
-    { id: 'chico_21', src: 'assets/svgs/avatars/boy-21.svg' },
-    { id: 'chica_21', src: 'assets/svgs/avatars/girl-21.svg' },
-    { id: 'chico_22', src: 'assets/svgs/avatars/boy-22.svg' },
-    { id: 'chica_22', src: 'assets/svgs/avatars/girl-22.svg' }
+    { id: 'user-default' },
+    { id: 'boy-0' },
+    { id: 'girl-0' },
+    { id: 'boy-1' },
+    { id: 'girl-1' },
+    { id: 'boy-2' },
+    { id: 'girl-2' },
+    { id: 'boy-3' },
+    { id: 'girl-3' },
+    { id: 'boy-4' },
+    { id: 'girl-4' },
+    { id: 'boy-5' },
+    { id: 'girl-5' },
+    { id: 'boy-6' },
+    { id: 'girl-6' },
+    { id: 'boy-7' },
+    { id: 'girl-7' },
+    { id: 'boy-8' },
+    { id: 'girl-8' },
+    { id: 'boy-9' },
+    { id: 'girl-9' },
+    { id: 'boy-10' },
+    { id: 'girl-10' },
+    { id: 'boy-11' },
+    { id: 'girl-11' },
+    { id: 'boy-12' },
+    { id: 'girl-12' },
+    { id: 'boy-13' },
+    { id: 'girl-13' },
+    { id: 'boy-14' },
+    { id: 'girl-14' },
+    { id: 'boy-15' },
+    { id: 'girl-15' },
+    { id: 'boy-16' },
+    { id: 'girl-16' },
+    { id: 'boy-17' },
+    { id: 'girl-17' },
+    { id: 'boy-18' },
+    { id: 'girl-18' },
+    { id: 'boy-19' },
+    { id: 'girl-19' },
+    { id: 'boy-20' },
+    { id: 'girl-20' },
+    { id: 'boy-21' },
+    { id: 'girl-21' },
+    { id: 'boy-22' },
+    { id: 'girl-22' }
   ]
 
   academicCourses: any[] = [{
@@ -123,41 +124,41 @@ export class StudentCreationComponent implements OnInit {
   instruments: any[] = [{
     name: 'INSTRUMENTS.GROUP.STRING',
     group: [
-      { value: '0', viewValue: 'INSTRUMENT.VIOLIN' },
-      { value: '1', viewValue: 'INSTRUMENT.VIOLA' },
-      { value: '2', viewValue: 'INSTRUMENT.CELLO' },
-      { value: '3', viewValue: 'INSTRUMENT.DOUBLE_BASS' },
-      { value: '4', viewValue: 'INSTRUMENT.PIANO' },
-      { value: '5', viewValue: 'INSTRUMENT.GUITAR' },
-      { value: '6', viewValue: 'INSTRUMENT.HARP' }
+      { value: '0', viewValue: 'VIOLIN' },
+      { value: '1', viewValue: 'VIOLA' },
+      { value: '2', viewValue: 'CELLO' },
+      { value: '3', viewValue: 'DOUBLE_BASS' },
+      { value: '4', viewValue: 'PIANO' },
+      { value: '5', viewValue: 'GUITAR' },
+      { value: '6', viewValue: 'HARP' }
     ]
   }, {
     name: 'INSTRUMENTS.GROUP.WIND',
     group: [
-      { value: '7', viewValue: 'INSTRUMENT.ACCORDION' },
-      { value: '8', viewValue: 'INSTRUMENT.CLARINET' },
-      { value: '9', viewValue: 'INSTRUMENT.BASSOON' },
-      { value: '10', viewValue: 'INSTRUMENT.BAGPIPE' },
-      { value: '11', viewValue: 'INSTRUMENT.FLUTE' },
-      { value: '12', viewValue: 'INSTRUMENT.TRANSVERSE_FLUTE' },
-      { value: '13', viewValue: 'INSTRUMENT.OBOE' },
-      { value: '14', viewValue: 'INSTRUMENT.SAXOPHONE' },
-      { value: '15', viewValue: 'INSTRUMENT.TROMBONE' },
-      { value: '16', viewValue: 'INSTRUMENT.HORN' },
-      { value: '17', viewValue: 'INSTRUMENT.TRUMPET' },
-      { value: '18', viewValue: 'INSTRUMENT.TUBA' },
+      { value: '7', viewValue: 'ACCORDION' },
+      { value: '8', viewValue: 'CLARINET' },
+      { value: '9', viewValue: 'BASSOON' },
+      { value: '10', viewValue: 'BAGPIPE' },
+      { value: '11', viewValue: 'FLUTE' },
+      { value: '12', viewValue: 'TRANSVERSE_FLUTE' },
+      { value: '13', viewValue: 'OBOE' },
+      { value: '14', viewValue: 'SAXOPHONE' },
+      { value: '15', viewValue: 'TROMBONE' },
+      { value: '16', viewValue: 'HORN' },
+      { value: '17', viewValue: 'TRUMPET' },
+      { value: '18', viewValue: 'TUBA' },
     ]
   }, {
     name: 'INSTRUMENTS.GROUP.PERCUSSION',
     group: [
-      { value: '19', viewValue: 'INSTRUMENT.PERCUSSION' }
+      { value: '19', viewValue: 'PERCUSSION' }
     ]
   }]
 
   subjects: any[] = [
-    { value: '0', viewValue: 'SUBJECT.LANGUAGE' },
-    { value: '1', viewValue: 'SUBJECT.CELLO' },
-    { value: '2', viewValue: 'SUBJECT.VIOLIN' }
+    { value: '0', viewValue: 'LANGUAGE' },
+    { value: '1', viewValue: 'CELLO' },
+    { value: '2', viewValue: 'VIOLIN' }
   ]
 
   formGroup: FormGroup
@@ -193,12 +194,10 @@ export class StudentCreationComponent implements OnInit {
   save() {
     if (this.formGroup.valid) {
       this.studentService.createStudent({
-        personal: {
-          name: this.formGroup.value.studentNameCtrl,
-          avatar: this.avatarCtrl,
-          age: this.formGroup.value.studentAgeCtrl,
-          academicCourse: this.formGroup.value.studentAcademicCourseCtrl
-        },
+        name: this.formGroup.value.studentNameCtrl,
+        avatar: this.avatarCtrl.id,
+        age: this.formGroup.value.studentAgeCtrl,
+        academicCourse: this.formGroup.value.studentAcademicCourseCtrl,
         parents: {
           fatherName: this.formGroup.value.fatherNameCtrl,
           fatherPhone: this.formGroup.value.fatherPhoneCtrl,
@@ -209,7 +208,7 @@ export class StudentCreationComponent implements OnInit {
           musicalCourse: this.formGroup.value.musicalCourseCtrl,
           musicalTeacher: this.formGroup.value.musicalTeacherCtrl,
           instrument: this.formGroup.value.instrumentCtrl,
-          sujects: this.formGroup.value.subjectsCtrl
+          subjects: this.formGroup.value.subjectsCtrl || []
         }
       }).then((result) => {
         this.toastService.info('MSG.STUDENT_CREATE_OK')

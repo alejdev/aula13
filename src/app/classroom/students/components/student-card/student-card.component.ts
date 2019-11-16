@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core'
 export class StudentComponent implements OnInit {
 
   @Input() student: any = null
-  defaultAvatar: string = '/assets/svgs/user-default.svg'
+  resourceImagePath: string = 'assets/svgs/avatars/'
 
   constructor() { }
 

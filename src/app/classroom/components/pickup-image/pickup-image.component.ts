@@ -8,6 +8,8 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material'
 })
 export class PickupImageDialogComponent implements OnInit {
 
+  resourceImagePath: string = 'assets/svgs/avatars/'
+
   constructor(
     public dialogRef: MatDialogRef<PickupImageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -15,7 +17,7 @@ export class PickupImageDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.imageList.forEach((elem: any) => {
-      if (elem.src === this.data.image.src) {
+      if (elem.id === this.data.image.id) {
         elem.selected = true
       }
     })
@@ -24,17 +26,13 @@ export class PickupImageDialogComponent implements OnInit {
   pickup(img: any) {
     this.deselect()
     img.selected = true
-    this.data.image = img
+    this.dialogRef.close(img)
   }
 
   deselect() {
     this.data.imageList.forEach((elem: any) => {
       delete elem.selected
     })
-  }
-
-  save() {
-    this.dialogRef.close(this.data.image)
   }
 }
 
@@ -48,6 +46,7 @@ export class PickupImageComponent implements OnInit {
   @Input() image: any
   @Input() imageList: any
   @Output() imageChange: any = new EventEmitter<boolean>()
+  resourceImagePath: string = 'assets/svgs/avatars/'
 
   constructor(
     private dialog: MatDialog

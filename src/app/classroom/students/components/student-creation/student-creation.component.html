@@ -132,7 +132,7 @@
           <mat-option>-- {{'NONE' | translate}} --</mat-option>
           <mat-optgroup *ngFor="let group of instruments" [label]="group.name | translate">
             <mat-option *ngFor="let course of group.group" [value]="course.value">
-              {{course.viewValue | translate}}
+              {{'INSTRUMENT.' + course.viewValue | translate}}
             </mat-option>
           </mat-optgroup>
         </mat-select>
@@ -143,8 +143,8 @@
       <mat-form-field appearance="outline" fxFlex="50">
         <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
         <mat-select formControlName="subjectsCtrl" multiple attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
-          <mat-option *ngFor="let subject of subjects" [value]="subject.value">
-            {{subject.viewValue | translate}}
+          <mat-option *ngFor="let subject of subjects" [value]="subject">
+            {{'SUBJECT.' + subject.viewValue | translate}}
           </mat-option>
         </mat-select>
         <mat-icon class="mat-hint pr-1" matPrefix>library_books</mat-icon>
