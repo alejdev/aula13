@@ -2,15 +2,16 @@
   <div fxLayout="row" fxLayoutAlign="space-between center">
 
     <div class="row mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
+
       <!-- Avatar -->
-      <img class="user-avatar-image mr-1" [src]="student.avatar || 'assets/svgs/avatars/' + student.gender + '-7.svg'" alt="Avatar">
+      <img class="user-avatar-image mr-1" [src]="student?.personal?.avatar?.src || defaultAvatar" alt="Avatar">
 
       <!-- Name & Surname -->
       <div fxLayout="column" fxLayoutAlign="space-around start">
-        <span>{{student?.name}}</span>
+        <span>{{student?.personal?.name}}</span>
         <div fxLayout="row wrap">
           <span class="mat-small mat-hint mr-q"
-            *ngFor="let subject of student?.subjects; let i=index; let first = first">
+            *ngFor="let subject of student?.musical?.subjects; let i=index; let first = first">
             <span [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
             <span>{{getPuntuation(student?.subjects, i) | translate}}</span>
           </span>
@@ -21,8 +22,8 @@
     <!-- Type -->
     <div class="mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
       <div class="badge"
-        [ngClass]="{'primary-500': student?.tag === 'Femae', 'accent-500': student?.tag === 'Particular'}">
-        {{student?.tag}}
+        [ngClass]="{'primary-500': student?.label === 'Femae', 'accent-500': student?.label === 'Particular'}">
+        {{student?.label || 'LABEL_NO' | translate}}
       </div>
     </div>
 

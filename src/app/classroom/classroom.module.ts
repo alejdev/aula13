@@ -25,7 +25,7 @@ import { MatDialogModule } from '@angular/material'
 
     HeaderComponent,
     SideMenuComponent,
-    LogoutDialogComponent,
+    LogoutDialogComponent
   ],
   imports: [
     // Routing

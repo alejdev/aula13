@@ -6,7 +6,8 @@
       <a class="user-avatar" [@animateAvatar]="linkText ? 'huge' : 'small'">
         <img class="user-avatar-image" [src]="user?.avatar || 'assets/svgs/user-default.svg'" alt="Avatar">
       </a>
-      <span class="user-name mt-1" [@animateText]="linkText ? 'show' : 'hide'">{{ user?.name }} </span>
+      <span class="user-name mt-1"
+        [@animateText]="linkText ? 'show' : 'hide'">{{ getUser.getUserLogged()?.metadata?.name || getUser.getUserLogged()?.metadata?.email}} </span>
     </div>
 
     <!-- Menu -->

@@ -17,7 +17,7 @@ export class UtilService {
 
   /** Sort array */
   public static sortData(data: any, sort: Sort = { active: 'name', direction: 'asc' }, defaultSortDir: SortDirection = 'desc'): any {
-    const properties = data ? Object.keys(data[0]) : []
+    const properties = data && data[0] ? Object.keys(data[0]) : []
     return data.sort((a: any, b: any) => {
       const isAsc = sort.direction === defaultSortDir
       for (const p of properties) {

@@ -1,14 +1,19 @@
-import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, HostBinding, OnInit, ViewChild, OnDestroy } from '@angular/core'
 import { Event, NavigationStart, Router } from '@angular/router'
 
 import * as Hammer from 'hammerjs'
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
+
+import { AngularFirestore } from '@angular/fire/firestore'
 
 import { MatSidenav } from '@angular/material/sidenav'
 
-import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { onMainContentChange, onSideNavChange } from 'src/app/classroom/classroom.animation'
+import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { SettingService } from 'src/app/shared/services/setting.service'
+import { AuthService } from 'src/app/shared/services/auth.service'
 
 @Component({
   selector: 'a13-classroom',
@@ -16,24 +21,31 @@ import { SettingService } from 'src/app/shared/services/setting.service'
   styleUrls: ['./classroom.component.scss'],
   animations: [onSideNavChange, onMainContentChange]
 })
-export class ClassroomComponent implements OnInit {
+export class ClassroomComponent implements OnInit, OnDestroy {
 
   @HostBinding('class') componentCssClass: string
   @ViewChild(MatSidenav, { static: true }) sideMenu: MatSidenav
 
-  onSideNavChange: boolean
-  animStyles: any
-  mobileQuery: MediaQueryList
+  private mobileQuery: MediaQueryList
+  private ngUnsubscribe = new Subject()
+  private refCollection: string = 'users'
+  public animStyles: any
+  public onSideNavChange: boolean
 
   constructor(
     private elementRef: ElementRef,
     private router: Router,
     private sidenavService: SidenavService,
     private themeService: ThemeService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private authService: AuthService,
+    private firestore: AngularFirestore
   ) { }
 
   ngOnInit(): void {
+    // Set User Logged
+    this.setUserLogged()
+
     // Event listender for toggle menu on mobile
     this.mobileQuery = window.matchMedia('(max-width: 600px)')
 
@@ -69,6 +81,20 @@ export class ClassroomComponent implements OnInit {
     this.setViewportSize()
   }
 
+  setUserLogged() {
+    this.firestore.collection(
+      this.refCollection,
+      ref => ref.where('id', '==', this.authService.getUserUid()).limit(1)
+    )
+      .valueChanges()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((users: any) => {
+        if (users[0]) {
+          this.authService.setUserLogged(users[0])
+        }
+      })
+  }
+
   setViewportSize(): void {
     if (this.mobileQuery.matches) {
       this.sidenavService.sidenavState.next(true)
@@ -83,5 +109,10 @@ export class ClassroomComponent implements OnInit {
         close: { width: '60px', left: '60px' }
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next()
+    this.ngUnsubscribe.complete()
   }
 }

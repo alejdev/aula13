@@ -1,0 +1,47 @@
+.pickup-link {
+  display: block;
+  padding: 8px;
+  border: 1px solid #dfdfdf;
+  border-radius: 4px;
+  transition: all .2s;
+  cursor: pointer;
+
+  &:hover {
+    border-width: 2px;
+    border-color: #555;
+    padding: 7px !important;
+  }
+
+  .avatar {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+
+// Dialog
+.image-list-container {
+  text-align: center;
+  overflow-x: hidden;
+
+  .avatar-item-list {
+    background-color: white;
+    cursor: pointer;
+
+    img {
+      max-width: 110px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background-color: white;
+      transition: all .2s;
+
+      &:hover {
+        transform: scale(1.4);
+      }
+
+      &.selected {
+        border-color: #555;
+      }
+    }
+  }
+}

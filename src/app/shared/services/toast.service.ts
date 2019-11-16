@@ -6,8 +6,6 @@ import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { BreakpointObserver } from '@angular/cdk/layout'
 
 import { ToastComponent } from '../components/toast/toast.component'
-import { User } from 'src/app/classroom/classroom.model'
-
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +48,7 @@ export class ToastService extends MatSnackBar {
     this.say(text, 'error')
   }
 
-  welcome(user: User, config?: any): void {
+  welcome(user: any, config?: any): void {
     this.openFromComponent(
       ToastComponent,
       {

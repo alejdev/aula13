@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
 
-import { Student } from 'src/app/classroom/classroom.model'
-
 @Component({
   selector: 'a13-student-card',
   templateUrl: './student-card.component.html',
@@ -9,7 +7,8 @@ import { Student } from 'src/app/classroom/classroom.model'
 })
 export class StudentComponent implements OnInit {
 
-  @Input() student: Student = null
+  @Input() student: any = null
+  defaultAvatar: string = '/assets/svgs/user-default.svg'
 
   constructor() { }
 

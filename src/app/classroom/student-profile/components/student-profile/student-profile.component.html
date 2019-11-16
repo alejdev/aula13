@@ -1,3 +1,135 @@
-<p>
-  student-profile works!
-</p>
+<!-- Student section -->
+<h2 class="mat-h1 pt-1 pb-1">{{'ADD_STUDENT' | translate}}</h2>
+
+<!-- Student Data -->
+<h3 class="mat-h3 mat-hint">{{'STUDENT_PERSONAL_DATA' | translate}}</h3>
+
+<div class="mb-H f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+
+  <!-- Name -->
+  <mat-form-field  appearance="outline" fxFlex="100">
+    <mat-label>{{'FORM.NAME' | translate}}{{'AND' | translate}} {{'FORM.SURNAME' | translate | lowercase}}</mat-label>
+    <input matInput required [(ngModel)]="student.personal.name" attr.aria-label="{{'FORM.NAME' | translate}}"
+      autocomplete="off">
+    <mat-icon class="mat-hint pr-1" matPrefix>face</mat-icon>
+  </mat-form-field>
+
+  <!-- Age -->
+  <mat-form-field  appearance="outline" fxFlex="35">
+    <mat-label>{{'FORM.AGE' | translate}}</mat-label>
+    <mat-select [(ngModel)]="student.personal.age" attr.aria-label="{{'FORM.AGE' | translate}}">
+      <mat-option *ngFor="let age of ages" [value]="age">
+        {{age}} {{(age === 1 ? 'YEAR': 'YEARS') | translate}}
+      </mat-option>
+    </mat-select>
+    <mat-icon class="mat-hint pr-1" matPrefix>cake</mat-icon>
+  </mat-form-field>
+
+  <!-- Academic course -->
+  <mat-form-field  appearance="outline" fxFlex="65">
+    <mat-label>{{'FORM.ACADEMIC_COURSE' | translate}}</mat-label>
+    <mat-select [(ngModel)]="student.personal.course" attr.aria-label="{{'FORM.ACADEMIC_COURSE' | translate}}">
+      <mat-option>-- {{'NONE' | translate}} --</mat-option>
+      <mat-optgroup *ngFor="let group of academicCourses" [label]="group.name | translate">
+        <mat-option *ngFor="let course of group.group" [value]="course.value">
+          {{course.viewValue}} {{group.name | translate | lowercase}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-icon class="mat-hint pr-1" matPrefix>school</mat-icon>
+  </mat-form-field>
+
+  <!-- Father's name -->
+  <mat-form-field  appearance="outline" fxFlex="65">
+    <mat-label>{{'FORM.FATHERS_NAME' | translate}}</mat-label>
+    <input matInput [(ngModel)]="student.personal.father.name" attr.aria-label="{{'FORM.FATHERS_NAME' | translate}}"
+      autocomplete="off">
+    <mat-icon class="mat-hint pr-1" matPrefix>person</mat-icon>
+  </mat-form-field>
+
+  <!-- Father's phone -->
+  <mat-form-field  appearance="outline" fxFlex="35">
+    <mat-label>{{'FORM.PHONE' | translate}}</mat-label>
+    <input matInput type="number" [(ngModel)]="student.personal.father.phone"
+      attr.aria-label="{{'FORM.PHONE' | translate}}" autocomplete="off">
+    <mat-icon class="mat-hint pr-1" matPrefix>phone</mat-icon>
+  </mat-form-field>
+
+  <!-- Mother's name -->
+  <mat-form-field  appearance="outline" fxFlex="65">
+    <mat-label>{{'FORM.MOTHERS_NAME' | translate}}</mat-label>
+    <input matInput [(ngModel)]="student.personal.mother.name" attr.aria-label="{{'FORM.MOTHERS_NAME' | translate}}"
+      autocomplete="off">
+    <mat-icon class="mat-hint pr-1" matPrefix>person</mat-icon>
+  </mat-form-field>
+
+  <!-- Mother's phone -->
+  <mat-form-field  appearance="outline" fxFlex="35">
+    <mat-label>{{'FORM.PHONE' | translate}}</mat-label>
+    <input matInput type="number" [(ngModel)]="student.personal.mother.phone"
+      attr.aria-label="{{'FORM.PHONE' | translate}}" autocomplete="off">
+    <mat-icon class="mat-hint pr-1" matPrefix>phone</mat-icon>
+  </mat-form-field>
+</div>
+
+<mat-divider class="mt-2 mb-2"></mat-divider>
+
+<!-- Student Data -->
+<h3 class="mat-h3 mat-hint">{{'STUDENT_CONSERVATORY_DATA' | translate}}</h3>
+
+<div class="mb-H f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+
+  <!-- Conservatory course -->
+  <mat-form-field  appearance="outline" fxFlex="35">
+    <mat-label>{{'FORM.CONSERVATORY_COURSE' | translate}}</mat-label>
+    <mat-select [(ngModel)]="student.musical.course" attr.aria-label="{{'FORM.CONSERVATORY_COURSE' | translate}}">
+      <mat-option>-- {{'NONE' | translate}} --</mat-option>
+      <mat-optgroup *ngFor="let group of conservatoryCourses" [label]="group.name | translate">
+        <mat-option *ngFor="let course of group.group" [value]="course.value">
+          {{course.viewValue}} {{group.name | translate | lowercase}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-icon class="mat-hint pr-1" matPrefix>queue_music</mat-icon>
+  </mat-form-field>
+
+  <!-- Teacher's name -->
+  <mat-form-field  appearance="outline" fxFlex="65">
+    <mat-label>{{'FORM.CONSERVATORY_TEACHER' | translate}}</mat-label>
+    <input matInput [(ngModel)]="student.musical.teacher" attr.aria-label="{{'FORM.CONSERVATORY_TEACHER' | translate}}"
+      autocomplete="off">
+    <mat-icon class="mat-hint pr-1" matPrefix>record_voice_over</mat-icon>
+  </mat-form-field>
+
+  <!-- Instrument -->
+  <mat-form-field  appearance="outline" fxFlex="50">
+    <mat-label>{{'FORM.INSTRUMENT' | translate}}</mat-label>
+    <mat-select [(ngModel)]="student.musical.instrument" attr.aria-label="{{'FORM.INSTRUMENT' | translate}}">
+      <mat-option>-- {{'NONE' | translate}} --</mat-option>
+      <mat-optgroup *ngFor="let group of instruments" [label]="group.name | translate">
+        <mat-option *ngFor="let course of group.group" [value]="course.value">
+          {{course.viewValue | translate}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-icon class="mat-hint pr-1" matPrefix>music_note</mat-icon>
+  </mat-form-field>
+
+  <!-- Subjects -->
+  <mat-form-field  appearance="outline" fxFlex="80">
+    <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
+    <mat-select [(ngModel)]="student.musical.subjects" multiple attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
+      <mat-optgroup *ngFor="let group of subjects" [label]="group.name | translate">
+        <mat-option *ngFor="let course of group.group" [value]="course.value">
+          {{course.viewValue | translate}}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+    <mat-icon class="mat-hint pr-1" matPrefix>library_books</mat-icon>
+  </mat-form-field>
+  
+  <button class="add-button" mat-mini-fab color="primary" aria-label="Example icon-button with a heart icon">
+    <mat-icon>add</mat-icon>
+  </button>
+
+</div>

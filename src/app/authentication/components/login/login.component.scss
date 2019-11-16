@@ -30,7 +30,7 @@
 .login-container {
   width: 100%;
   z-index: 10;
-  max-width: 400px;
+  max-width: 500px;
   padding: var(--main-padding-size);
   padding-top: .5rem;
   background-color: white;
@@ -42,4 +42,8 @@
 mat-form-field {
   width: 100%;
   min-width: 100px
+}
+
+.login-button {
+  height: 48px;
 }

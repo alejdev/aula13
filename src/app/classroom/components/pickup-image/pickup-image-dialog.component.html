@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>{{'PICKUP_IMAGE' | translate}}</h2>
+<div mat-dialog-content class="image-list-container" fxLayout="row wrap">
+	<div fxFlex="25" class="avatar-item-list" *ngFor="let img of data.imageList">
+		<img [ngClass]="{'selected': img.selected}" [src]="img.src" [alt]="img.name" (click)="pickup(img)">
+	</div>
+</div>
+<mat-dialog-actions align="end">
+	<button mat-button color="warn" mat-dialog-close>{{'CANCEL' | translate}}</button>
+	<button class="ml-h" mat-flat-button color="primary" [mat-dialog-close]="true"
+		(click)="save()">{{'SELECT' | translate}}</button>
+</mat-dialog-actions>

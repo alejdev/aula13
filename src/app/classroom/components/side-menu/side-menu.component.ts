@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 
-import { User } from 'src/app/classroom/classroom.model'
-
-import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { animateAvatar, animateText } from '../../classroom.animation'
+import { SidenavService } from 'src/app/classroom/services/sidenav.service'
+import { AuthService } from 'src/app/shared/services/auth.service'
 
 @Component({
   selector: 'a13-side-menu',
@@ -14,7 +13,7 @@ import { animateAvatar, animateText } from '../../classroom.animation'
 export class SideMenuComponent implements OnInit {
 
   linkText: boolean = true
-  user: User = { name: 'Alejandro', avatar: '' }
+  getUser: any
 
   menuItems = [[
     { name: 'STUDENTS', url: 'aula/alumnos', icon: 'people' },
@@ -22,7 +21,8 @@ export class SideMenuComponent implements OnInit {
   ]]
 
   constructor(
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -32,5 +32,7 @@ export class SideMenuComponent implements OnInit {
         this.linkText = result
       }, 200)
     })
+
+    this.getUser = this.authService
   }
 }

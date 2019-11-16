@@ -1,11 +1,17 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
+
+import { Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 
 import { Sort, SortDirection } from '@angular/material/sort'
 
-import { Student } from 'src/app/classroom/classroom.model'
+import { StudentCreationComponent } from '../student-creation/student-creation.component'
 import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+import { LoaderService } from 'src/app/shared/services/loader.service'
+
+import { MatDialog } from '@angular/material'
 
 @Component({
   selector: 'a13-student-list',
@@ -13,33 +19,62 @@ import { UtilService } from 'src/app/shared/services/util.service'
   styleUrls: ['./student-list.component.scss'],
   providers: [StudentPipe]
 })
-export class StudentListComponent implements OnInit {
+export class StudentListComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject()
 
   title = 'STUDENTS'
-  studentList: Student[]
-  studentListFiltered: Student[]
+  studentList: any[]
+  studentListFiltered: any[]
   studentFilter: string = ''
-  defaultSort: string = 'fullName'
+  defaultSort: string = 'name'
   defaultSortDir: SortDirection = 'desc'
   sortActive: Sort
   columns = [{
-    id: 'fullName',
+    id: 'name',
     name: 'PROP.NAME',
     class: 'ml-4',
   }, {
-    id: 'tag',
-    name: 'PROP.TAG'
+    id: 'label',
+    name: 'PROP.LABEL'
   }]
 
   constructor(
     private studentService: StudentService,
     private studentPipe: StudentPipe,
+    private loaderService: LoaderService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.studentList = this.studentService.students
-    this.studentListFiltered = Object.assign(this.studentList)
-    this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
+    this.studentList = []
+    this.studentListFiltered = []
+    this.getStudentsList()
+  }
+
+  createStudent(): void {
+    const dialogRef = this.dialog.open(StudentCreationComponent, {
+      width: 'calc(100vw - 2rem)',
+      maxWidth: '800px'
+    })
+
+    dialogRef.afterClosed().subscribe(result => { })
+  }
+
+  getStudentsList(): void {
+    this.studentService.getStudentsList()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((result: any) => {
+        this.studentList = result.map((elem: any) => {
+          return {
+            id: elem.payload.doc.id,
+            ...elem.payload.doc.data()
+          }
+        })
+        this.studentListFiltered = Object.assign(this.studentList)
+        this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
+        this.loaderService.stop()
+      })
   }
 
   searchStudent(ev: string): void {
@@ -58,5 +93,10 @@ export class StudentListComponent implements OnInit {
   resetFilter(): void {
     this.studentFilter = ''
     this.studentListFiltered = Object.assign(this.studentList)
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next()
+    this.ngUnsubscribe.complete()
   }
 }

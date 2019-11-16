@@ -1,15 +1,14 @@
 <!-- Title -->
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
   <h2 class="mat-h1 pt-1">{{title | translate}}</h2>
-  <a13-floating-button text="ADD_STUDENT" icon="add" [route]="'/aula/alumno/crear'"></a13-floating-button>
+  <a13-floating-button text="ADD_STUDENT" icon="add" (click)="createStudent()"></a13-floating-button>
 </div>
 
-
 <!-- Filter -->
-<mat-form-field>
+<mat-form-field  appearance="outline">
+  <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
   <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)"
-    placeholder="{{'SEARCH_STUDENT' | translate}}" attr.aria-label="{{'SEARCH_STUDENT' | translate}}"
-    autocomplete="off">
+    attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
   <mat-icon class="mat-hint" matSuffix *ngIf="!studentFilter">search</mat-icon>
   <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button
     attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
@@ -18,7 +17,7 @@
 </mat-form-field>
 
 <!-- List -->
-<div *ngIf="studentListFiltered.length" class="pt-1 pb-q" fxLayout="row" fxLayoutAlign="space-between center" matSort
+<div *ngIf="studentListFiltered.length" class="pb-q" fxLayout="row" fxLayoutAlign="space-between center" matSort
   matSortDisableClear (matSortChange)="sortData($event)" [matSortActive]="defaultSort"
   [matSortDirection]="defaultSortDir" matSortStart="desc">
   <ng-container *ngFor="let col of columns">
