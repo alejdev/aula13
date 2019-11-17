@@ -7,14 +7,16 @@ mat-form-field {
   padding: 0 5px;
   max-width: 130px;
   margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.full-avatar {
+  width: 100%;
+  max-width: 230px;
+  max-height: 230px;
 }
 
 .full {
   width: 100%;
   max-width: 100%;
-}
-
-.full-avatar {
-  width: 100%;
-  max-width: 240px;
 }

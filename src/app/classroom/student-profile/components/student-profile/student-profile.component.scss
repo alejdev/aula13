@@ -7,7 +7,7 @@
   border-radius: none;
 }
 
-.avatar {  
+.avatar {
   max-width: 96px;
   max-height: 96px;
 }
@@ -16,10 +16,10 @@
 
   .profile-header {
     margin-left: 0;
-
-    .avatar .avatar-image {
-      max-width: 64px;
-    }
   }
 
+  .avatar {
+    max-width: 64px;
+    max-height: 64px;
+  }
 }
