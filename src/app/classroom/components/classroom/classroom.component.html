@@ -15,9 +15,7 @@
   <mat-sidenav-content
     [@onMainContentChange]="{value: onSideNavChange ? 'open' : 'close', params: {leftClose: animStyles.close.left, leftOpen: animStyles.open.left}}">
     <div class="main-content">
-      <section class="classroom-container">
-        <router-outlet></router-outlet>
-      </section>
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

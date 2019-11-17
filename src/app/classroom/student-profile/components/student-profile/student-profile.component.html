@@ -1,9 +1,10 @@
-<div fxLayout="row" fxLayoutGap="2rem">
-  <div class="avatar">
-    <img [src]="srcImage({img: student?.avatar})" alt="{{student?.avatar}}">
-  </div>
-  <div class="info pt-1">
-    <h3 class="mat-h2">{{student?.name}}</h3>
+<header class="container profile-header mat-card mat-elevation-z0" fxLayout="row" fxLayoutGap="2rem"
+  fxLayoutGap.xs="1rem">
+  <a matRipple class="avatar border-theme">
+    <img class="avatar-image" [src]="srcImage({img: student?.avatar})" alt="{{student?.avatar}}">
+  </a>
+  <div class="info pt-h">
+    <h3 class="mat-h2 mb-q">{{student?.name}}</h3>
     <div fxLayout="row wrap">
       <span class="mat-small mat-hint mr-q"
         *ngFor="let subject of student?.musical.subjects; let i=index; let first = first">
@@ -12,4 +13,8 @@
       </span>
     </div>
   </div>
+</header>
+
+<div class="container">
+
 </div>

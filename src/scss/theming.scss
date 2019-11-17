@@ -4,27 +4,67 @@
 @include set-custom-theme('light-theme', map-get($colors, light-theme), false, $main-light-hue, $second-light-hue, $tertiary-light-hue);
 @include set-custom-theme('dark-theme', map-get($colors, dark-theme), true, $main-dark-hue, $second-dark-hue, $tertiary-dark-hue);
 
-.light-theme .nav-list-item.active {
-  background-color: $black-6-opacity;
+// Light theme
+.light-theme {
+  .nav-list-item {
+    &.active {
+      background-color: rgba($main-color, 7%);
+      color: lighten($main-color, 10%);
 
-  mat-icon,
-  span {
-    color: black;
+      mat-icon,
+      span {
+        color: lighten($main-color, 10%);
+      }
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: rgba(saturate($main-color, 10%), 10%) !important;
+    }
+  }
+
+  .border-theme {
+    border-color: $black-12-opacity;
+
+    &-button:hover {
+      border-color: #555;
+      border-width: 2px;
+    }
   }
 }
 
+// Dark theme
 .dark-theme {
-  .nav-list-item.active {
-    background-color: $black-12-opacity;
-
-    mat-icon,
-    span {
+  .nav-list-item {
+    &.active {
+      background-color: lighten(map-get(map-get($colors, dark-theme), background), 3%);
       color: white;
+
+      mat-icon,
+      span {
+        color: white;
+      }
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: map-get(map-get($colors, dark-theme), background) !important;
     }
   }
 
   .mat-dialog-container {
     @include mat-elevation(5);
+  }
+
+  .border-theme {
+    border-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3);
+
+    &-button:hover {
+      border-color: map-get(map-get($colors, dark-theme), foreground);
+      border-width: 2px;
+    }
   }
 
 }

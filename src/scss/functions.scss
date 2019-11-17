@@ -94,9 +94,9 @@
 
 // Set background theme
 @function set-background-theme($my-theme, $background-color) {
-  $my-background: map-get($my-theme, background);
-  $my-background: map_merge($my-background, (background: $background-color));
-  $my-theme: map_merge($my-theme, (background: $my-background));
+  $my-background              : map-get($my-theme, background);
+  $my-background              : map_merge($my-background, (background: $background-color));
+  $my-theme                   : map_merge($my-theme, (background: $my-background));
   @return $my-theme;
 }
 

@@ -63,7 +63,7 @@ export const animateAvatar = trigger('animateAvatar', [
 		style({
 			width: '64px',
 			height: '64px',
-			padding: '.5em'
+			padding: '8px'
 		})
 	),
 	transition('close => open', animate('270ms ease-in')),

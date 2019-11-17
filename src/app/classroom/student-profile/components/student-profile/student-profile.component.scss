@@ -1,11 +1,25 @@
-.avatar {
+.container {
+  padding: var(--main-padding-size);
+}
 
-  img {
-    max-width: 110px;
-    width: 100%;
-    padding: 5px;
-    border-radius: 50%;
-    background-color: white;
-    border: 1px solid #ccc;
+.profile-header {
+  margin-left: 2px;
+  border-radius: none;
+}
+
+.avatar {  
+  max-width: 96px;
+  max-height: 96px;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .profile-header {
+    margin-left: 0;
+
+    .avatar .avatar-image {
+      max-width: 64px;
+    }
   }
+
 }

@@ -1,0 +1,31 @@
+// Avatar button image
+.avatar {
+  display: block;
+  max-width: 64px;
+  max-height: 64px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 8px;
+
+  &-button {
+    cursor: pointer;
+    transition: .2s;
+  }
+
+  &-button:hover {
+    padding: 7px !important;
+  }
+
+  .avatar-image {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+  }
+}
+
+// Border
+.border-theme {
+  border-width: map-get(map-get($sizes, main), border-size);
+  border-style: solid;
+}

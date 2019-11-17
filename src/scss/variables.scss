@@ -1,6 +1,6 @@
 // scss variables
 
-$main-color             : #0259af;
+$main-color             : #0084ff;
 $main-light-hue         : 700;
 $main-dark-hue          : 400;
 
@@ -17,7 +17,7 @@ $colors: (
     primary             : $main-color,
     accent              : $second-color,
     warn                : $tertiary-color,
-    background          : #ecf0f1,
+    background          : #f4f7fd,
     foreground          : #222
   ),
   dark-theme: (
@@ -37,7 +37,8 @@ $sizes: (
     margin-size         : 3rem,
     padding-size        : 2rem,
     radius-size         : .5rem,
-    header-size         : 64px
+    header-size         : 64px,
+    border-size         : 1px
   )
 );
 

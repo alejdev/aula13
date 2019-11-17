@@ -1,34 +1,37 @@
-<!-- Title -->
-<h2 class="mat-h1 pt-1 pb-1">{{title | translate}}</h2>
+<section class="container">
 
-<!-- Lenguaje -->
-<h3 class="mat-h2 mat-hint">{{'GENERAL' | translate}}</h3>
+  <!-- Title -->
+  <h2 class="mat-h1 pt-1 pb-1">{{title | translate}}</h2>
 
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
-  <img class="flag-selected" [src]="getFlag(langControl.value)"
-    alt="{{'FLAG_OF' | translate}} {{langControl.value.name | translate}}">
-  <mat-form-field>
-    <mat-label>{{'LANGUAGE' | translate}}</mat-label>
-    <mat-select [formControl]="langControl" (selectionChange)="setLang()">
-      <mat-option *ngFor="let lang of languages" [value]="lang">
-        <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <img class="flag" [src]="getFlag(lang)" alt="{{'FLAG_OF' | translate}} {{lang.name | translate}}">
-          <span>{{lang.name | translate}}</span>
-        </span>
-      </mat-option>
-    </mat-select>
-    <mat-hint>{{langControl.value?.tip}}</mat-hint>
-  </mat-form-field>
-</div>
+  <!-- Lenguaje -->
+  <h3 class="mat-h2 mat-hint">{{'GENERAL' | translate}}</h3>
 
-<mat-divider class="mt-2 mb-2"></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+    <img class="flag-selected" [src]="getFlag(langControl.value)"
+      alt="{{'FLAG_OF' | translate}} {{langControl.value.name | translate}}">
+    <mat-form-field>
+      <mat-label>{{'LANGUAGE' | translate}}</mat-label>
+      <mat-select [formControl]="langControl" (selectionChange)="setLang()">
+        <mat-option *ngFor="let lang of languages" [value]="lang">
+          <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <img class="flag" [src]="getFlag(lang)" alt="{{'FLAG_OF' | translate}} {{lang.name | translate}}">
+            <span>{{lang.name | translate}}</span>
+          </span>
+        </mat-option>
+      </mat-select>
+      <mat-hint>{{langControl.value?.tip}}</mat-hint>
+    </mat-form-field>
+  </div>
 
-<!-- Theme -->
-<h3 class="mat-h2 mat-hint">{{'THEME' | translate}}</h3>
+  <mat-divider class="mt-2 mb-2"></mat-divider>
 
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
-  <mat-icon color="primary">{{themeControl.icon}}</mat-icon>
-  <mat-slide-toggle labelPosition="before" (change)="toggleTheme()" [(ngModel)]="themeIsDark">
-    {{'THEMING.DARK_MODE' | translate}}
-  </mat-slide-toggle>
-</div>
+  <!-- Theme -->
+  <h3 class="mat-h2 mat-hint">{{'THEME' | translate}}</h3>
+
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+    <mat-icon color="primary">{{themeControl.icon}}</mat-icon>
+    <mat-slide-toggle labelPosition="before" (change)="toggleTheme()" [(ngModel)]="themeIsDark">
+      {{'THEMING.DARK_MODE' | translate}}
+    </mat-slide-toggle>
+  </div>
+</section>

@@ -1,7 +1,9 @@
 <h2 mat-dialog-title>{{'PICKUP_IMAGE' | translate}}</h2>
-<div mat-dialog-content class="image-list-container" fxLayout="row wrap">
+<div mat-dialog-content class="image-list-container mat-card mat-elevation-z0" fxLayout="row wrap">
 	<div fxFlex="25" class="avatar-item-list" *ngFor="let img of data.imageList">
-		<img [ngClass]="{'selected': img.selected}" [src]="srcImage({img: img.id})" [alt]="img.id" (click)="pickup(img)">
+		<a matRipple ngClass.xs="xs" class="avatar avatar-button" [ngClass]="{'selected': img.selected}" (click)="pickup(img)">
+			<img class="avatar-image" [src]="srcImage({img: img.id})" alt="img.id">
+		</a>
 	</div>
 </div>
 <mat-dialog-actions align="end">

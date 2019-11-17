@@ -61,7 +61,7 @@ export class UtilService {
   }
 
   // Generate resource path
-  public srcImage({ path = 'assets/svgs/avatars/', img, ext = '.svg' }: any): string {
-    return `${path}${img ? img : 'user-default'}${ext}`
+  public srcImage({ path, img, ext }: any = {}): string {
+    return `${path ? path : 'assets/svgs/avatars/'}${img ? img : 'user-default'}${ext ? ext : '.svg'}`
   }
 }

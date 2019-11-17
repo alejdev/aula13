@@ -1,39 +1,41 @@
-<!-- Title -->
-<div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
-  <h2 class="mat-h1 pt-1">{{title | translate}}</h2>
-  <a13-floating-button text="ADD_STUDENT" icon="add" (click)="createStudent()"></a13-floating-button>
-</div>
+<section class="container">
+  <!-- Title -->
+  <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
+    <h2 class="mat-h1 pt-1">{{title | translate}}</h2>
+    <a13-floating-button text="ADD_STUDENT" icon="add" (click)="createStudent()"></a13-floating-button>
+  </div>
 
-<!-- Filter -->
-<mat-form-field  appearance="outline">
-  <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
-  <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)"
-    attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
-  <mat-icon class="mat-hint" matSuffix *ngIf="!studentFilter">search</mat-icon>
-  <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button
-    attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
-    <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
-  </button>
-</mat-form-field>
+  <!-- Filter -->
+  <mat-form-field appearance="outline">
+    <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
+    <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)"
+      attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
+    <mat-icon class="mat-hint" matSuffix *ngIf="!studentFilter">search</mat-icon>
+    <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button
+      attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
+      <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
+    </button>
+  </mat-form-field>
 
-<!-- List -->
-<div *ngIf="studentListFiltered.length" class="pb-q" fxLayout="row" fxLayoutAlign="space-between center" matSort
-  matSortDisableClear (matSortChange)="sortData($event)" [matSortActive]="defaultSort"
-  [matSortDirection]="defaultSortDir" matSortStart="desc">
-  <ng-container *ngFor="let col of columns">
-    <div class="row {{col.class}}" [mat-sort-header]="col.id">
-      <button mat-button attr.aria-label="{{'SORT_COLUMN' | translate}} {{col.name | translate}}"
-        [color]="isActive(col.id)">
-        <span>{{col.name | translate}}</span>
-      </button>
-    </div>
+  <!-- List -->
+  <div *ngIf="studentListFiltered.length" class="pb-q" fxLayout="row" fxLayoutAlign="space-between center" matSort
+    matSortDisableClear (matSortChange)="sortData($event)" [matSortActive]="defaultSort"
+    [matSortDirection]="defaultSortDir" matSortStart="desc">
+    <ng-container *ngFor="let col of columns">
+      <div class="row {{col.class}}" [mat-sort-header]="col.id">
+        <button mat-button attr.aria-label="{{'SORT_COLUMN' | translate}} {{col.name | translate}}"
+          [color]="isActive(col.id)">
+          <span>{{col.name | translate}}</span>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Students -->
+  <ng-container *ngFor="let student of studentListFiltered">
+    <a13-student-card [(student)]="student"></a13-student-card>
   </ng-container>
-</div>
 
-<!-- Students -->
-<ng-container *ngFor="let student of studentListFiltered">
-  <a13-student-card [(student)]="student"></a13-student-card>
-</ng-container>
-
-<!-- Empty list -->
-<h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+  <!-- Empty list -->
+  <h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+</section>

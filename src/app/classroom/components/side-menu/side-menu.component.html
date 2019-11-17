@@ -3,8 +3,8 @@
 
     <!-- User -->
     <div class="user-menu" fxLayout="column" fxLayoutAlign="center center">
-      <a class="user-avatar" [@animateAvatar]="linkText ? 'huge' : 'small'">
-        <img class="user-avatar-image" [src]="srcImage({img: getUser.getUserLogged()?.avatar})" alt="Avatar">
+      <a matRipple class="avatar avatar-button border-theme border-theme-button" [@animateAvatar]="linkText ? 'huge' : 'small'">
+        <img class="avatar-image" [src]="srcImage({img: getUser.getUserLogged()?.avatar})" alt="Avatar">
       </a>
       <span class="user-name mt-1"
         [@animateText]="linkText ? 'show' : 'hide'">{{ getUser.getUserLogged()?.name || getUser.getUserLogged()?.email}}

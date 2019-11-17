@@ -1,5 +1,3 @@
-<div class="pickup-image-button">
-	<a matRipple ngClass.xs="xs" class="pickup-link" (click)="pickup()">
-		<img class="avatar" [src]="srcImage({img: image.id})" alt="{{'AVATAR' | translate}}">
-	</a>
-</div>
+<a matRipple ngClass.xs="xs" class="avatar avatar-button border-theme border-theme-button" (click)="pickup()">
+	<img class="avatar-image" [src]="srcImage({img: image.id})" alt="{{'AVATAR' | translate}}">
+</a>

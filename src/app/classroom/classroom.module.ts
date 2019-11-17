@@ -13,11 +13,12 @@ import { SideMenuComponent } from 'src/app/classroom/components/side-menu/side-m
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component'
 
 import { MatButtonModule } from '@angular/material/button'
+import { MatDialogModule } from '@angular/material/dialog'
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
+import { MatRippleModule } from '@angular/material/core'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatDialogModule } from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -39,11 +40,12 @@ import { MatDialogModule } from '@angular/material'
 
     // Material
     MatButtonModule,
+    MatDialogModule,
     MatIconModule,
     MatListModule,
+    MatRippleModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatDialogModule
   ],
   entryComponents: [
     LogoutDialogComponent
