@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { Validators, FormGroup, FormBuilder } from '@angular/forms'
+
+import { MAT_DIALOG_DATA } from '@angular/material'
 
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
@@ -12,58 +14,7 @@ import { ToastService } from 'src/app/shared/services/toast.service'
 })
 export class StudentCreationComponent implements OnInit {
 
-  ages: number[] = [] // = [...Array(100).keys()]
-  avatarCtrl: any = { id: 'user-default' }
-
-  avatars: any = [
-    { id: 'user-default' },
-    { id: 'boy-0' },
-    { id: 'girl-0' },
-    { id: 'boy-1' },
-    { id: 'girl-1' },
-    { id: 'boy-2' },
-    { id: 'girl-2' },
-    { id: 'boy-3' },
-    { id: 'girl-3' },
-    { id: 'boy-4' },
-    { id: 'girl-4' },
-    { id: 'boy-5' },
-    { id: 'girl-5' },
-    { id: 'boy-6' },
-    { id: 'girl-6' },
-    { id: 'boy-7' },
-    { id: 'girl-7' },
-    { id: 'boy-8' },
-    { id: 'girl-8' },
-    { id: 'boy-9' },
-    { id: 'girl-9' },
-    { id: 'boy-10' },
-    { id: 'girl-10' },
-    { id: 'boy-11' },
-    { id: 'girl-11' },
-    { id: 'boy-12' },
-    { id: 'girl-12' },
-    { id: 'boy-13' },
-    { id: 'girl-13' },
-    { id: 'boy-14' },
-    { id: 'girl-14' },
-    { id: 'boy-15' },
-    { id: 'girl-15' },
-    { id: 'boy-16' },
-    { id: 'girl-16' },
-    { id: 'boy-17' },
-    { id: 'girl-17' },
-    { id: 'boy-18' },
-    { id: 'girl-18' },
-    { id: 'boy-19' },
-    { id: 'girl-19' },
-    { id: 'boy-20' },
-    { id: 'girl-20' },
-    { id: 'boy-21' },
-    { id: 'girl-21' },
-    { id: 'boy-22' },
-    { id: 'girl-22' }
-  ]
+  avatars: any = ['user-default', 'boy-0', 'girl-0', 'boy-1', 'girl-1', 'boy-2', 'girl-2', 'boy-3', 'girl-3', 'boy-4', 'girl-4', 'boy-5', 'girl-5', 'boy-6', 'girl-6', 'boy-7', 'girl-7', 'boy-8', 'girl-8', 'boy-9', 'girl-9', 'boy-10', 'girl-10', 'boy-11', 'girl-11', 'boy-12', 'girl-12', 'boy-13', 'girl-13', 'boy-14', 'girl-14', 'boy-15', 'girl-15', 'boy-16', 'girl-16', 'boy-17', 'girl-17', 'boy-18', 'girl-18', 'boy-19', 'girl-19', 'boy-20', 'girl-20', 'boy-21', 'girl-21', 'boy-22', 'girl-22']
 
   academicCourses: any[] = [{
     name: 'FORM.COURSE.PRIMARY',
@@ -161,59 +112,77 @@ export class StudentCreationComponent implements OnInit {
   ]
 
   formGroup: FormGroup
+  ages: number[] = [] // = [...Array(100).keys()]
+  avatarCtrl: any = {}
+  student: any = this.data.student
 
   constructor(
     private formBuilder: FormBuilder,
     private studentService: StudentService,
     private loaderService: LoaderService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
+    // Generate ages
     for (let i = 0; i < 100; i++) {
       this.ages.push(i)
     }
 
+    // Init data
+    this.initForm()
+    console.log(this.data)
+  }
+
+  initForm() {
     this.formGroup = this.formBuilder.group({
-      studentNameCtrl: ['', Validators.required],
-      studentAvatarCtrl: [''],
-      studentAgeCtrl: [''],
-      studentAcademicCourseCtrl: [''],
-      fatherNameCtrl: [''],
-      fatherPhoneCtrl: [''],
-      motherNameCtrl: [''],
-      motherPhoneCtrl: [''],
-      musicalCourseCtrl: [''],
-      musicalTeacherCtrl: [''],
-      instrumentCtrl: [''],
-      subjectsCtrl: ['']
+      studentNameCtrl: [this.student.name, Validators.required],
+      studentAvatarCtrl: [this.student.avatar],
+      studentAgeCtrl: [this.student.age],
+      studentAcademicCourseCtrl: [this.student.academicCourse],
+      fatherNameCtrl: [this.student.parents.fatherName],
+      fatherPhoneCtrl: [this.student.parents.fatherPhone],
+      motherNameCtrl: [this.student.parents.motherName],
+      motherPhoneCtrl: [this.student.parents.motherPhone],
+      musicalCourseCtrl: [this.student.musical.musicalCourse],
+      musicalTeacherCtrl: [this.student.musical.musicalTeacher],
+      instrumentCtrl: [this.student.musical.instrument],
+      subjectsCtrl: [this.student.musical.subjects]
     })
   }
 
+  generateData() {
+    return {
+      name: this.formGroup.value.studentNameCtrl,
+      avatar: this.student.avatar,
+      age: this.formGroup.value.studentAgeCtrl,
+      academicCourse: this.formGroup.value.studentAcademicCourseCtrl,
+      parents: {
+        fatherName: this.formGroup.value.fatherNameCtrl,
+        fatherPhone: this.formGroup.value.fatherPhoneCtrl,
+        motherName: this.formGroup.value.motherNameCtrl,
+        motherPhone: this.formGroup.value.motherPhoneCtrl
+      },
+      musical: {
+        musicalCourse: this.formGroup.value.musicalCourseCtrl,
+        musicalTeacher: this.formGroup.value.musicalTeacherCtrl,
+        instrument: this.formGroup.value.instrumentCtrl,
+        subjects: this.formGroup.value.subjectsCtrl || []
+      }
+    }
+  }
+
+  // TODO: crear funcion modificar
+  // TODO: subjects no seleccionadas al modificar
   save() {
     if (this.formGroup.valid) {
-      this.studentService.createStudent({
-        name: this.formGroup.value.studentNameCtrl,
-        avatar: this.avatarCtrl.id,
-        age: this.formGroup.value.studentAgeCtrl,
-        academicCourse: this.formGroup.value.studentAcademicCourseCtrl,
-        parents: {
-          fatherName: this.formGroup.value.fatherNameCtrl,
-          fatherPhone: this.formGroup.value.fatherPhoneCtrl,
-          motherName: this.formGroup.value.motherNameCtrl,
-          motherPhone: this.formGroup.value.motherPhoneCtrl
-        },
-        musical: {
-          musicalCourse: this.formGroup.value.musicalCourseCtrl,
-          musicalTeacher: this.formGroup.value.musicalTeacherCtrl,
-          instrument: this.formGroup.value.instrumentCtrl,
-          subjects: this.formGroup.value.subjectsCtrl || []
-        }
-      }).then((result) => {
-        this.toastService.info('MSG.STUDENT_CREATE_OK')
-      }).catch((err) => {
-        this.toastService.error('ERR.UNEXPECTED_ERROR')
-      }).finally(() => this.loaderService.stop())
+      this.studentService.createStudent(this.generateData())
+        .then((result) => {
+          this.toastService.info('MSG.STUDENT_CREATE_OK')
+        }).catch((err) => {
+          this.toastService.error('ERR.UNEXPECTED_ERROR')
+        }).finally(() => this.loaderService.stop())
     }
   }
 }

@@ -1,8 +1,12 @@
 <header class="container profile-header mat-card mat-elevation-z0" fxLayout="row" fxLayoutGap="2rem"
   fxLayoutGap.xs="1rem">
+
+  <!-- Avatar -->
   <a matRipple class="avatar border-theme">
     <img class="avatar-image" [src]="srcImage({img: student?.avatar})" alt="{{student?.avatar}}">
   </a>
+
+  <!-- Student information -->
   <div class="info pt-h">
     <h3 class="mat-h2 mb-q">{{student?.name}}</h3>
     <div fxLayout="row wrap">
@@ -13,6 +17,29 @@
       </span>
     </div>
   </div>
+
+  <div class="spacer"></div>
+
+  <!-- Menu options -->
+  <button class="icon-button mr-0" mat-icon-button [matMenuTriggerFor]="menu"
+    attr.aria-label="{{'OPTION_MENU' | translate}}">
+    <mat-icon class="mat-hint">more_horiz</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="edit()">
+      <mat-icon>edit</mat-icon>
+      <span>{{'EDIT_STUDENT' | translate}}</span>
+    </button>
+    <button mat-menu-item (click)="archive()" disabled>
+      <mat-icon>archive</mat-icon>
+      <span>{{'ARCHIVE_STUDENT' | translate}}</span>
+    </button>
+    <button mat-menu-item (click)="delete()" disabled>
+      <mat-icon>delete</mat-icon>
+      <span>{{'DELETE_STUDENT' | translate}}</span>
+    </button>
+  </mat-menu>
+
 </header>
 
 <div class="container">

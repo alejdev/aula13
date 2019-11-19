@@ -11,9 +11,9 @@ import { MatInputModule } from '@angular/material/input'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatSelectModule } from '@angular/material/select'
 import { MatGridListModule } from '@angular/material'
+import { MatMenuModule } from '@angular/material/menu'
 
 import { StudentProfileComponent } from './components/student-profile/student-profile.component'
-
 @NgModule({
   declarations: [
     StudentProfileComponent
@@ -32,7 +32,8 @@ import { StudentProfileComponent } from './components/student-profile/student-pr
     MatInputModule,
     MatDividerModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule
   ]
 })
 export class StudentProfileModule { }

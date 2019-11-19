@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core'
+
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material'
 
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -19,10 +20,8 @@ export class PickupImageDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.data.imageList.forEach((elem: any) => {
-      if (elem.id === this.data.image.id) {
-        elem.selected = true
-      }
+    this.data.imageList = this.data.imageList.map((elem: any) => {
+      return { id: elem, selected: elem === this.data.image }
     })
     this.srcImage = this.utilService.srcImage
   }
@@ -30,12 +29,12 @@ export class PickupImageDialogComponent implements OnInit {
   pickup(img: any) {
     this.deselect()
     img.selected = true
-    this.dialogRef.close(img)
+    this.dialogRef.close(img.id)
   }
 
   deselect() {
     this.data.imageList.forEach((elem: any) => {
-      delete elem.selected
+      elem.selected = false
     })
   }
 }

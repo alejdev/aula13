@@ -55,7 +55,28 @@ export class StudentListComponent implements OnInit, OnDestroy {
   createStudent(): void {
     const dialogRef = this.dialog.open(StudentCreationComponent, {
       width: 'calc(100vw - 2rem)',
-      maxWidth: '800px'
+      maxWidth: '800px',
+      data: {
+        isNewStudent: true,
+        student: {
+          name: '',
+          avatar: 'user-default',
+          age: '',
+          academicCourse: '',
+          parents: {
+            fatherName: '',
+            fatherPhone: '',
+            motherName: '',
+            motherPhone: ''
+          },
+          musical: {
+            musicalCourse: '',
+            musicalTeacher: '',
+            instrument: '',
+            subjects: []
+          }
+        }
+      }
     })
 
     dialogRef.afterClosed().subscribe(result => { })

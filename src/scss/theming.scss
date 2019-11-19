@@ -32,6 +32,11 @@
       border-width: 2px;
     }
   }
+
+  .icon-button {
+    background-color: darken(map-get(map-get($colors, light-theme), background), 2%);
+  }
+  
 }
 
 // Dark theme
@@ -66,5 +71,10 @@
       border-width: 2px;
     }
   }
+
+  .icon-button {
+    background-color: map-get(map-get($colors, dark-theme), background);
+  }
+  
 
 }
