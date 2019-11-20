@@ -35,12 +35,29 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public readStudent(id: any) {
+  public readStudent(id: string) {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName)
-      .doc(id).ref.get()
+      .doc(id).valueChanges()
+  }
+
+  public updateStudent(id: string, student: any) {
+    this.loaderService.start()
+    return this.ref
+      .doc(this.authService.getUserUid())
+      .collection(this.subRefName)
+      .doc(id).ref.set(student)
+      .finally(() => this.loaderService.stop())
+  }
+
+  public deleteStudent(id: string) {
+    this.loaderService.start()
+    return this.ref
+      .doc(this.authService.getUserUid())
+      .collection(this.subRefName)
+      .doc(id).ref.delete()
       .finally(() => this.loaderService.stop())
   }
 

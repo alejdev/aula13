@@ -11,11 +11,10 @@ import { UtilService } from 'src/app/shared/services/util.service'
 })
 export class PickupImageDialogComponent implements OnInit {
 
-  srcImage: any
+  srcImage: any = UtilService.srcImage
 
   constructor(
     public dialogRef: MatDialogRef<PickupImageDialogComponent>,
-    private utilService: UtilService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -23,7 +22,6 @@ export class PickupImageDialogComponent implements OnInit {
     this.data.imageList = this.data.imageList.map((elem: any) => {
       return { id: elem, selected: elem === this.data.image }
     })
-    this.srcImage = this.utilService.srcImage
   }
 
   pickup(img: any) {
@@ -49,16 +47,14 @@ export class PickupImageComponent implements OnInit {
   @Input() image: any
   @Input() imageList: any
   @Output() imageChange: any = new EventEmitter<boolean>()
-  srcImage: any
+  srcImage: any = UtilService.srcImage
 
   constructor(
     private dialog: MatDialog,
     private utilService: UtilService
   ) { }
 
-  ngOnInit() {
-    this.srcImage = this.utilService.srcImage
-  }
+  ngOnInit() {}
 
   pickup() {
     const dialogRef = this.dialog.open(PickupImageDialogComponent, {

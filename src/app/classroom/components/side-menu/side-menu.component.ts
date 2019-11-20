@@ -15,7 +15,7 @@ export class SideMenuComponent implements OnInit {
 
   linkText: boolean = true
   getUser: any
-  srcImage: any
+  srcImage: any = UtilService.srcImage
 
   menuItems = [[
     { name: 'STUDENTS', url: 'aula/alumnos', icon: 'people' },
@@ -24,8 +24,7 @@ export class SideMenuComponent implements OnInit {
 
   constructor(
     private sidenavService: SidenavService,
-    private authService: AuthService,
-    private utilService: UtilService
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +36,5 @@ export class SideMenuComponent implements OnInit {
     })
 
     this.getUser = this.authService
-    this.srcImage = this.utilService.srcImage
   }
 }

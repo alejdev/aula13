@@ -1,28 +1,37 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material'
 
+import { takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs'
+
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
+import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
+
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 
 @Component({
   selector: 'a13-student-profile',
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss']
 })
-export class StudentProfileComponent implements OnInit {
+export class StudentProfileComponent implements OnInit, OnDestroy {
 
-  mark: any
+  private ngUnsubscribe = new Subject()
+
   studentId: any
   student: any
-  srcImage: any
+  mark: any = UtilService.mark
+  srcImage: any = UtilService.srcImage
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
     private utilService: UtilService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -31,22 +40,23 @@ export class StudentProfileComponent implements OnInit {
 
     // Get student
     this.studentService.readStudent(this.studentId)
-      .then((result) => {
-        this.student = result.data()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((result: any) => {
+        console.log(result)
+        this.student = result
+        this.loaderService.stop()
       })
-
-    this.mark = this.utilService.mark
-    this.srcImage = this.utilService.srcImage
   }
 
   edit() {
-    const dialogRef = this.dialog.open(StudentCreationComponent, {
+    this.dialog.open(StudentCreationComponent, {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
-      data: { student: this.student }
+      data: {
+        idStudent: this.studentId,
+        student: this.student
+      }
     })
-
-    dialogRef.afterClosed().subscribe(result => { })
   }
 
   archive() {
@@ -54,7 +64,17 @@ export class StudentProfileComponent implements OnInit {
   }
 
   delete() {
+    this.dialog.open(StudentDeleteDialogComponent, {
+      data: {
+        idStudent: this.studentId,
+        student: this.student
+      }
+    })
+  }
 
+  ngOnDestroy() {
+    this.ngUnsubscribe.next()
+    this.ngUnsubscribe.complete()
   }
 
 }

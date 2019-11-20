@@ -13,7 +13,7 @@ export class LogoutDialogComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    public dialogRef: MatDialogRef<LogoutDialogComponent>
+    private dialogRef: MatDialogRef<LogoutDialogComponent>
   ) { }
 
   ngOnInit() { }

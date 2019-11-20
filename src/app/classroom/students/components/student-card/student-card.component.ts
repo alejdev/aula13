@@ -10,15 +10,10 @@ import { UtilService } from 'src/app/shared/services/util.service'
 export class StudentComponent implements OnInit {
 
   @Input() student: any = null
-  mark: any
-  srcImage: any
+  mark: any = UtilService.mark
+  srcImage: any = UtilService.srcImage
 
-  constructor(
-    private utilService: UtilService
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.mark = this.utilService.mark
-    this.srcImage = this.utilService.srcImage
-  }
+  ngOnInit(): void {}
 }

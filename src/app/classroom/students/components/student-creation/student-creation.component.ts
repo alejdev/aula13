@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 
-import { MAT_DIALOG_DATA } from '@angular/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 @Component({
   selector: 'a13-student-creation',
@@ -19,123 +20,114 @@ export class StudentCreationComponent implements OnInit {
   academicCourses: any[] = [{
     name: 'FORM.COURSE.PRIMARY',
     group: [
-      { value: '0', viewValue: '1º' },
-      { value: '1', viewValue: '2º' },
-      { value: '2', viewValue: '3º' },
-      { value: '3', viewValue: '4º' },
-      { value: '4', viewValue: '5º' },
-      { value: '5', viewValue: '6º' }
+      { id: '0', viewValue: '1º' },
+      { id: '1', viewValue: '2º' },
+      { id: '2', viewValue: '3º' },
+      { id: '3', viewValue: '4º' },
+      { id: '4', viewValue: '5º' },
+      { id: '5', viewValue: '6º' }
     ]
   }, {
     name: 'FORM.COURSE.SECONDARY',
     group: [
-      { value: '6', viewValue: '1º' },
-      { value: '7', viewValue: '2º' },
-      { value: '8', viewValue: '3º' },
-      { value: '9', viewValue: '4º' }
+      { id: '6', viewValue: '1º' },
+      { id: '7', viewValue: '2º' },
+      { id: '8', viewValue: '3º' },
+      { id: '9', viewValue: '4º' }
     ]
   }, {
     name: 'FORM.COURSE.HIGH_SCHOOL',
     group: [
-      { value: '10', viewValue: '1º' },
-      { value: '11', viewValue: '2º' }
+      { id: '10', viewValue: '1º' },
+      { id: '11', viewValue: '2º' }
     ]
   }]
 
   conservatoryCourses: any[] = [{
     name: 'FORM.COURSE.ELEMENTARY',
     group: [
-      { value: '0', viewValue: '1º' },
-      { value: '1', viewValue: '2º' },
-      { value: '2', viewValue: '3º' },
-      { value: '3', viewValue: '4º' }
+      { id: '0', viewValue: '1º' },
+      { id: '1', viewValue: '2º' },
+      { id: '2', viewValue: '3º' },
+      { id: '3', viewValue: '4º' }
     ]
   }, {
     name: 'FORM.COURSE.PROFESSIONAL',
     group: [
-      { value: '4', viewValue: '1º' },
-      { value: '5', viewValue: '2º' },
-      { value: '6', viewValue: '3º' },
-      { value: '7', viewValue: '4º' },
-      { value: '8', viewValue: '5º' },
-      { value: '9', viewValue: '6º' }
+      { id: '4', viewValue: '1º' },
+      { id: '5', viewValue: '2º' },
+      { id: '6', viewValue: '3º' },
+      { id: '7', viewValue: '4º' },
+      { id: '8', viewValue: '5º' },
+      { id: '9', viewValue: '6º' }
     ]
   }, {
     name: 'FORM.COURSE.SUPERIOR',
     group: [
-      { value: '10', viewValue: '1º' },
-      { value: '11', viewValue: '2º' },
-      { value: '12', viewValue: '3º' },
-      { value: '13', viewValue: '4º' },
-      { value: '14', viewValue: '5º' }
+      { id: '10', viewValue: '1º' },
+      { id: '11', viewValue: '2º' },
+      { id: '12', viewValue: '3º' },
+      { id: '13', viewValue: '4º' },
+      { id: '14', viewValue: '5º' }
     ]
   }]
 
   instruments: any[] = [{
     name: 'INSTRUMENTS.GROUP.STRING',
     group: [
-      { value: '0', viewValue: 'VIOLIN' },
-      { value: '1', viewValue: 'VIOLA' },
-      { value: '2', viewValue: 'CELLO' },
-      { value: '3', viewValue: 'DOUBLE_BASS' },
-      { value: '4', viewValue: 'PIANO' },
-      { value: '5', viewValue: 'GUITAR' },
-      { value: '6', viewValue: 'HARP' }
+      { id: '0', viewValue: 'VIOLIN' },
+      { id: '1', viewValue: 'VIOLA' },
+      { id: '2', viewValue: 'CELLO' },
+      { id: '3', viewValue: 'DOUBLE_BASS' },
+      { id: '4', viewValue: 'PIANO' },
+      { id: '5', viewValue: 'GUITAR' },
+      { id: '6', viewValue: 'HARP' }
     ]
   }, {
     name: 'INSTRUMENTS.GROUP.WIND',
     group: [
-      { value: '7', viewValue: 'ACCORDION' },
-      { value: '8', viewValue: 'CLARINET' },
-      { value: '9', viewValue: 'BASSOON' },
-      { value: '10', viewValue: 'BAGPIPE' },
-      { value: '11', viewValue: 'FLUTE' },
-      { value: '12', viewValue: 'TRANSVERSE_FLUTE' },
-      { value: '13', viewValue: 'OBOE' },
-      { value: '14', viewValue: 'SAXOPHONE' },
-      { value: '15', viewValue: 'TROMBONE' },
-      { value: '16', viewValue: 'HORN' },
-      { value: '17', viewValue: 'TRUMPET' },
-      { value: '18', viewValue: 'TUBA' },
+      { id: '7', viewValue: 'ACCORDION' },
+      { id: '8', viewValue: 'CLARINET' },
+      { id: '9', viewValue: 'BASSOON' },
+      { id: '10', viewValue: 'BAGPIPE' },
+      { id: '11', viewValue: 'FLUTE' },
+      { id: '12', viewValue: 'TRANSVERSE_FLUTE' },
+      { id: '13', viewValue: 'OBOE' },
+      { id: '14', viewValue: 'SAXOPHONE' },
+      { id: '15', viewValue: 'TROMBONE' },
+      { id: '16', viewValue: 'HORN' },
+      { id: '17', viewValue: 'TRUMPET' },
+      { id: '18', viewValue: 'TUBA' },
     ]
   }, {
     name: 'INSTRUMENTS.GROUP.PERCUSSION',
     group: [
-      { value: '19', viewValue: 'PERCUSSION' }
+      { id: '19', viewValue: 'PERCUSSION' }
     ]
   }]
 
   subjects: any[] = [
-    { value: '0', viewValue: 'LANGUAGE' },
-    { value: '1', viewValue: 'CELLO' },
-    { value: '2', viewValue: 'VIOLIN' }
+    { id: '0', viewValue: 'LANGUAGE' },
+    { id: '1', viewValue: 'CELLO' },
+    { id: '2', viewValue: 'VIOLIN' }
   ]
 
   formGroup: FormGroup
-  ages: number[] = [] // = [...Array(100).keys()]
-  avatarCtrl: any = {}
+  ages: any[] = Array(100).fill(0).map((e, i) => i + 1)
   student: any = this.data.student
+  equals: any = UtilService.equals
 
   constructor(
     private formBuilder: FormBuilder,
     private studentService: StudentService,
     private loaderService: LoaderService,
     private toastService: ToastService,
+    private dialogRef: MatDialogRef<StudentCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
-    // Generate ages
-    for (let i = 0; i < 100; i++) {
-      this.ages.push(i)
-    }
-
-    // Init data
-    this.initForm()
-    console.log(this.data)
-  }
-
-  initForm() {
+    // Init form controls
     this.formGroup = this.formBuilder.group({
       studentNameCtrl: [this.student.name, Validators.required],
       studentAvatarCtrl: [this.student.avatar],
@@ -152,35 +144,37 @@ export class StudentCreationComponent implements OnInit {
     })
   }
 
-  generateData() {
-    return {
-      name: this.formGroup.value.studentNameCtrl,
-      avatar: this.student.avatar,
-      age: this.formGroup.value.studentAgeCtrl,
-      academicCourse: this.formGroup.value.studentAcademicCourseCtrl,
-      parents: {
-        fatherName: this.formGroup.value.fatherNameCtrl,
-        fatherPhone: this.formGroup.value.fatherPhoneCtrl,
-        motherName: this.formGroup.value.motherNameCtrl,
-        motherPhone: this.formGroup.value.motherPhoneCtrl
-      },
-      musical: {
-        musicalCourse: this.formGroup.value.musicalCourseCtrl,
-        musicalTeacher: this.formGroup.value.musicalTeacherCtrl,
-        instrument: this.formGroup.value.instrumentCtrl,
-        subjects: this.formGroup.value.subjectsCtrl || []
-      }
-    }
-  }
-
-  // TODO: crear funcion modificar
-  // TODO: subjects no seleccionadas al modificar
   save() {
     if (this.formGroup.valid) {
-      this.studentService.createStudent(this.generateData())
-        .then((result) => {
-          this.toastService.info('MSG.STUDENT_CREATE_OK')
-        }).catch((err) => {
+      const student = {
+        name: this.formGroup.value.studentNameCtrl,
+        avatar: this.student.avatar,
+        age: this.formGroup.value.studentAgeCtrl,
+        academicCourse: this.formGroup.value.studentAcademicCourseCtrl,
+        parents: {
+          fatherName: this.formGroup.value.fatherNameCtrl,
+          fatherPhone: this.formGroup.value.fatherPhoneCtrl,
+          motherName: this.formGroup.value.motherNameCtrl,
+          motherPhone: this.formGroup.value.motherPhoneCtrl
+        },
+        musical: {
+          musicalCourse: this.formGroup.value.musicalCourseCtrl,
+          musicalTeacher: this.formGroup.value.musicalTeacherCtrl,
+          instrument: this.formGroup.value.instrumentCtrl,
+          subjects: this.formGroup.value.subjectsCtrl || []
+        }
+      }
+      let createStudent: any
+      if (this.data.idStudent) {
+        createStudent = this.studentService.updateStudent(this.data.idStudent, student)
+      } else {
+        createStudent = this.studentService.createStudent(student)
+      }
+      createStudent
+        .then((result: any) => {
+          this.toastService.info(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)
+          this.dialogRef.close(this.data.student)
+        }).catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         }).finally(() => this.loaderService.stop())
     }

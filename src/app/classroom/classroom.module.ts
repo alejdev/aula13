@@ -11,6 +11,7 @@ import { ClassroomRoutingModule } from './classroom-routing.module'
 import { HeaderComponent } from 'src/app/classroom/components/header/header.component'
 import { SideMenuComponent } from 'src/app/classroom/components/side-menu/side-menu.component'
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component'
+import { StudentDeleteDialogComponent } from './components/student-delete-dialog/student-delete-dialog.component'
 
 import { MatButtonModule } from '@angular/material/button'
 import { MatDialogModule } from '@angular/material/dialog'
@@ -26,7 +27,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 
     HeaderComponent,
     SideMenuComponent,
-    LogoutDialogComponent
+    LogoutDialogComponent,
+    StudentDeleteDialogComponent
   ],
   imports: [
     // Routing
@@ -48,7 +50,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatToolbarModule,
   ],
   entryComponents: [
-    LogoutDialogComponent
+    LogoutDialogComponent,
+    StudentDeleteDialogComponent
   ]
 })
 export class ClassroomModule { }

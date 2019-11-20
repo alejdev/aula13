@@ -49,7 +49,7 @@ export class UtilService {
   }
 
   // Split a list by commas
-  public mark(list: any, index: number): string {
+  public static mark(list: any, index: number): string {
     switch (true) {
       case list.length === index + 1:
         return ``
@@ -61,7 +61,12 @@ export class UtilService {
   }
 
   // Generate resource path
-  public srcImage({ path, img, ext }: any = {}): string {
+  public static srcImage({ path, img, ext }: any = {}): string {
     return `${path ? path : 'assets/svgs/avatars/'}${img ? img : 'user-default'}${ext ? ext : '.svg'}`
+  }
+
+  // Compare if two object are equal by property
+  public static equals(o1: any, o2: any): boolean {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2
   }
 }

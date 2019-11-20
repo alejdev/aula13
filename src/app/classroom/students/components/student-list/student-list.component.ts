@@ -53,11 +53,10 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   createStudent(): void {
-    const dialogRef = this.dialog.open(StudentCreationComponent, {
+    this.dialog.open(StudentCreationComponent, {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
       data: {
-        isNewStudent: true,
         student: {
           name: '',
           avatar: 'user-default',
@@ -78,8 +77,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
         }
       }
     })
-
-    dialogRef.afterClosed().subscribe(result => { })
   }
 
   getStudentsList(): void {
