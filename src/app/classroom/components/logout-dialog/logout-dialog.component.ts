@@ -16,7 +16,7 @@ export class LogoutDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<LogoutDialogComponent>
   ) { }
 
-  ngOnInit() { }
+  ngOnInit(): void { }
 
   onNoClick(): void {
     this.dialogRef.close()

@@ -8,8 +8,11 @@ const routes: Routes = [{
   component: ClassroomComponent,
   children: [{
     path: '',
-    redirectTo: 'alumnos',
+    redirectTo: 'diario',
     pathMatch: 'full'
+  }, {
+    path: 'diario',
+    loadChildren: () => import('./daily/daily.module').then(m => m.DailyModule)
   }, {
     path: 'alumnos',
     loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)

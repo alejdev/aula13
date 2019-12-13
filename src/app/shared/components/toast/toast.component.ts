@@ -12,7 +12,7 @@ export class ToastComponent implements OnInit {
     @Inject(MAT_SNACK_BAR_DATA) public data: any
   ) { }
 
-  ngOnInit() { }
+  ngOnInit(): void { }
 
   case(messageType: string): boolean {
     const reg = RegExp('info|warning|error', 'g')

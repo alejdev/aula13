@@ -1,3 +1,33 @@
+// General
+.container {
+  padding: var(--main-padding-size);
+}
+
+.mat-dialog-content {
+  overflow-x: hidden !important;
+}
+
+.ck-editor__editable_inline {
+  word-break: break-all;
+  min-height: 200px;
+  max-height: 300px;
+  max-width: 100%;
+}
+
+.aumente {
+  transition: all .1s ease-in-out !important;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.015);
+    box-shadow: 0 4px 4px #0002;
+  }
+
+  &:focus {
+    outline: -webkit-focus-ring-color auto 0;
+  }
+}
+
 // Avatar button image
 .avatar {
   display: block;
@@ -17,6 +47,10 @@
     padding: 7px !important;
   }
 
+  &-xs {
+    max-width: 32px;
+  }
+
   .avatar-image {
     width: 100%;
     max-width: 100%;
@@ -28,4 +62,51 @@
 .border-theme {
   border-width: map-get(map-get($sizes, main), border-size);
   border-style: solid;
+}
+
+// Badge
+.badge {
+  padding: 3px 5px;
+  margin: 2px;
+  font-size: 12px;
+  border-radius: 3px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+// Link
+.link {
+  color: map-get(map-get($colors, other), link-color);
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: map-get(map-get($sizes, main), scroll-size);
+}
+
+::-webkit-scrollbar-button:increment,
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: map-get(map-get($sizes, main), scroll-size);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: map-get(map-get($sizes, main), scroll-size)*2;
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 50%;
 }

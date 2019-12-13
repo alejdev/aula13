@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 
+import { DailyModule } from './daily/daily.module'
 import { SharedModule } from '../shared/shared.module'
 import { SettingsModule } from './settings/settings.module'
 import { StudentsModule } from './students/students.module'
@@ -13,11 +14,7 @@ import { SideMenuComponent } from 'src/app/classroom/components/side-menu/side-m
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component'
 import { StudentDeleteDialogComponent } from './components/student-delete-dialog/student-delete-dialog.component'
 
-import { MatButtonModule } from '@angular/material/button'
-import { MatDialogModule } from '@angular/material/dialog'
-import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
-import { MatRippleModule } from '@angular/material/core'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
 
@@ -39,15 +36,12 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     StudentsModule,
     StudentProfileModule,
     SettingsModule,
+    DailyModule,
 
     // Material
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
     MatListModule,
-    MatRippleModule,
     MatSidenavModule,
-    MatToolbarModule,
+    MatToolbarModule
   ],
   entryComponents: [
     LogoutDialogComponent,

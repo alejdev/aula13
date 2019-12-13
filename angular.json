@@ -52,7 +52,13 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/@ckeditor/ckeditor5-build-classic/build/translations/es.js",
+              "./node_modules/@ckeditor/ckeditor5-build-classic/build/translations/en-gb.js",
+              "./node_modules/@ckeditor/ckeditor5-build-classic/build/translations/de.js",
+              "./node_modules/@ckeditor/ckeditor5-build-classic/build/translations/fr.js",
+              "./node_modules/@ckeditor/ckeditor5-build-classic/build/translations/it.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -72,7 +78,7 @@
               "buildOptimizer": true,
               "budgets": [{
                 "type": "initial",
-                "maximumWarning": "2mb",
+                "maximumWarning": "4mb",
                 "maximumError": "5mb"
               }],
               "serviceWorker": true,

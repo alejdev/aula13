@@ -11,6 +11,7 @@ import { StudentDeleteDialogComponent } from 'src/app/classroom/components/stude
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
+import { ModelService } from 'src/app/shared/services/model.service'
 
 @Component({
   selector: 'a13-student-profile',
@@ -25,16 +26,18 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   student: any
   mark: any = UtilService.mark
   srcImage: any = UtilService.srcImage
+  academicCourseList: any = ModelService.academicCourseList
+  conservatoryCourseList: any = ModelService.conservatoryCourseList
+  truncate: boolean = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
-    private utilService: UtilService,
     private dialog: MatDialog,
     private loaderService: LoaderService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Get param id
     this.activatedRoute.params.subscribe(params => this.studentId = params.id)
 

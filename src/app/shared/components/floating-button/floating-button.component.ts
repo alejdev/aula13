@@ -24,7 +24,7 @@ export class FloatingButtonComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.buttonState = 'leave'
   }
 

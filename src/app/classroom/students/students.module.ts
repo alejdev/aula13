@@ -6,11 +6,10 @@ import { SharedModule } from 'src/app/shared/shared.module'
 import { StudentListComponent } from './components/student-list/student-list.component'
 import { StudentCreationComponent } from './components/student-creation/student-creation.component'
 import { StudentComponent } from 'src/app/classroom/students/components/student-card/student-card.component'
-import { FloatingButtonComponent } from 'src/app/shared/components/floating-button/floating-button.component'
 import { PickupImageComponent, PickupImageDialogComponent } from '../components/pickup-image/pickup-image.component'
 
-import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
-import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
+import { OrderByPipe } from './pipes/order-by.pipe'
+import { StudentPipe } from './pipes/student.pipe'
 
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
@@ -28,7 +27,6 @@ import { MatSelectModule } from '@angular/material/select'
     StudentListComponent,
     StudentComponent,
     StudentCreationComponent,
-    FloatingButtonComponent,
     PickupImageComponent,
     PickupImageDialogComponent,
 
@@ -40,20 +38,7 @@ import { MatSelectModule } from '@angular/material/select'
     StudentsRoutingModule,
 
     // App modules
-    SharedModule,
-
-    // Material
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatRippleModule,
-    MatSortModule,
-    MatStepperModule,
-    MatSelectModule
-
+    SharedModule
   ],
   entryComponents: [
     StudentCreationComponent,

@@ -18,6 +18,7 @@ export class SideMenuComponent implements OnInit {
   srcImage: any = UtilService.srcImage
 
   menuItems = [[
+    { name: 'DAILY', url: 'aula/diario', icon: 'date_range' },
     { name: 'STUDENTS', url: 'aula/alumnos', icon: 'people' },
     { name: 'SETTINGS', url: 'aula/configuracion', icon: 'settings' }
   ]]

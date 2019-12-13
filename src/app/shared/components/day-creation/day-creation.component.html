@@ -1,0 +1,73 @@
+<div class="mb-2" fxLayout="row" fxLayoutAlign="space-between center">
+  <!-- Title -->
+  <h2 class="m-0" mat-dialog-title>{{(data.idDay ? 'EDIT_DAY' : 'ADD_DAY') | translate}}</h2>
+
+  <!-- Sign Out -->
+  <button mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/decoupled-document/ckeditor.js"></script>
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="formGroup" autocomplete="off">
+
+    <div class="mb-2 mt-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
+
+      <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxFlex
+        ngClass.xs="full">
+
+        <!-- Student -->
+        <mat-form-field appearance="outline" fxFlex="65">
+          <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
+          <mat-select required formControlName="dayStudentCtrl" [compareWith]="equals"
+            attr.aria-label="{{'FORM.STUDENT' | translate}}">
+            <mat-option>-- {{'NONE' | translate}} --</mat-option>
+            <mat-option *ngFor="let student of studentList" [value]="student">
+              <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: student.avatar})" alt="Avatar">
+                <span>{{student.name}}</span>
+              </span>
+            </mat-option>
+          </mat-select>
+          <mat-icon class="mat-hint pr-1" matPrefix>
+            <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: formGroup?.value?.dayStudentCtrl?.avatar})"
+              alt="Avatar">
+          </mat-icon>
+        </mat-form-field>
+
+        <!-- Date -->
+        <mat-form-field appearance="outline" fxFlex="35">
+          <mat-label>{{'FORM.DATE' | translate}}</mat-label>
+          <input class="pl-h" matInput required formControlName="dayDateCtrl" [matDatepicker]="dp">
+          <mat-datepicker #dp></mat-datepicker>
+          <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dp">
+          </mat-datepicker-toggle>
+        </mat-form-field>
+
+        <!-- Title -->
+        <mat-form-field appearance="outline" fxFlex="100">
+          <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
+          <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}"
+            maxlength="{{maxlengthTitle}}" autocomplete="off">
+          <mat-icon class="mat-hint pr-1" matPrefix>title</mat-icon>
+          <mat-hint align="start">{{'HINT.TITLE' | translate}}</mat-hint>
+          <mat-hint align="end">{{title.value.length}} / {{maxlengthTitle}}</mat-hint>
+        </mat-form-field>
+
+        <!-- Content -->
+        <div class="angular-editor mt-1 pt-h pb-h">
+          <ckeditor id="ckeditor" [editor]="ckeditor" [config]="editorConfig"></ckeditor>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" mat-dialog-close
+    attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
+  <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="formGroup.invalid" (click)="save()"
+    attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+</mat-dialog-actions>

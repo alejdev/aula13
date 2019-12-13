@@ -6,8 +6,6 @@ import { SharedModule } from 'src/app/shared/shared.module'
 import { ConfigurationComponent } from './components/configuration/configuration.component'
 
 import { MatDividerModule } from '@angular/material/divider'
-import { MatIconModule } from '@angular/material/icon'
-import { MatSelectModule } from '@angular/material/select'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 @NgModule({
@@ -23,8 +21,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
     // Material
     MatDividerModule,
-    MatIconModule,
-    MatSelectModule,
     MatSlideToggleModule,
   ]
 })

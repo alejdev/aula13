@@ -1,11 +1,4 @@
 mat-card {
-  transition: all .1s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.015);
-    box-shadow: 0 4px 4px #0002;
-  }
 
   &:focus {
     outline: -webkit-focus-ring-color auto 0;
@@ -16,12 +9,4 @@ mat-card {
   max-width: 40px;
   width: 100%;
   border-radius: 50%;
-}
-
-.badge {
-  color: white;
-  padding: 3px 5px;
-  font-size: 12px;
-  border-radius: 3px;
-  background-color: #888;
 }

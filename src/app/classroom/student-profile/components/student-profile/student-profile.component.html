@@ -1,47 +1,138 @@
-<header class="container profile-header mat-card mat-elevation-z0" fxLayout="row" fxLayoutGap="2rem"
-  fxLayoutGap.xs="1rem">
+<!-- Toolbar -->
+<div class="profile-toolbar mat-card mat-elevation-z0 p-0 mb-0">
 
-  <!-- Avatar -->
-  <a matRipple class="avatar border-theme">
-    <img class="avatar-image" [src]="srcImage({img: student?.avatar})" alt="{{student?.avatar}}">
-  </a>
+  <div class="p-h" fxLayout="row" fxLayoutAlign="space-between center">
 
-  <!-- Student information -->
-  <div class="info pt-h">
-    <h3 class="mat-h2 mb-q">{{student?.name}}</h3>
-    <div fxLayout="row wrap">
-      <span class="mat-small mat-hint mr-q"
-        *ngFor="let subject of student?.musical.subjects; let i=index; let first = first">
-        <span [ngClass]="{'txt-lowercase': !first}">{{'SUBJECT.' + subject.viewValue | translate}}</span>
-        <span>{{mark(student?.musical.subjects, i) | translate}}</span>
-      </span>
-    </div>
+    <!-- Back button  -->
+    <button class="mr-h" [routerLink]="[ '/aula/alumnos' ]" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <!-- Name -->
+    <h2 class="title-name mat-h3 mb-0 mr-q" (click)="truncate=!truncate" [ngClass]="{'truncate': !truncate}">{{student?.name}}</h2>
+
+    <!-- Spacer -->
+    <div class="spacer"></div>
+
+    <!-- Menu phone -->
+    <button *ngIf="student?.parents?.father?.phone || student?.parents?.mother?.phone" mat-icon-button
+      [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
+      <mat-icon class="mat-hint">phone</mat-icon>
+    </button>
+    <mat-menu #menuPhones="matMenu">
+      <button *ngIf="student?.parents?.father?.phone" mat-menu-item>
+        <a class="clickable-phone-number" href="{{'tel:' + student?.parents?.father?.phone}}">
+          <span *ngIf="student?.parents?.father?.name" class="mat-hint">{{student?.parents?.father?.name}}:</span>
+          <span class="phone">{{student?.parents?.father?.phone}}</span>
+        </a>
+      </button>
+      <button *ngIf="student?.parents?.mother?.phone" mat-menu-item>
+        <a class="clickable-phone-number" href="{{'tel:' + student?.parents?.mother?.phone}}">
+          <span *ngIf="student?.parents?.mother?.name" class="mat-hint">{{student?.parents?.mother?.name}}:</span>
+          <span class="phone">{{student?.parents?.mother?.phone}}</span>
+        </a>
+      </button>
+    </mat-menu>
+
+    <!-- Menu options -->
+    <button class="mr-0" mat-icon-button [matMenuTriggerFor]="menuOptions"
+      attr.aria-label="{{'OPTION_MENU' | translate}}">
+      <mat-icon class="mat-hint">more_vert</mat-icon>
+    </button>
+    <mat-menu #menuOptions="matMenu">
+      <button mat-menu-item (click)="edit()">
+        <mat-icon class="mat-hint">edit</mat-icon>
+        <span>{{'EDIT_STUDENT' | translate}}</span>
+      </button>
+      <button mat-menu-item (click)="archive()" disabled>
+        <mat-icon class="mat-hint">archive</mat-icon>
+        <span>{{'ARCHIVE_STUDENT' | translate}}</span>
+      </button>
+      <button mat-menu-item (click)="delete()">
+        <mat-icon class="mat-hint">delete</mat-icon>
+        <span>{{'STUDENT_DELETE' | translate}}</span>
+      </button>
+    </mat-menu>
   </div>
+</div>
 
-  <div class="spacer"></div>
+<!-- Profile container -->
+<div class="profile-container">
 
-  <!-- Menu options -->
-  <button class="icon-button mr-0" mat-icon-button [matMenuTriggerFor]="menu"
-    attr.aria-label="{{'OPTION_MENU' | translate}}">
-    <mat-icon class="mat-hint">more_horiz</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="edit()">
-      <mat-icon>edit</mat-icon>
-      <span>{{'EDIT_STUDENT' | translate}}</span>
-    </button>
-    <button mat-menu-item (click)="archive()" disabled>
-      <mat-icon>archive</mat-icon>
-      <span>{{'ARCHIVE_STUDENT' | translate}}</span>
-    </button>
-    <button mat-menu-item (click)="delete()">
-      <mat-icon>delete</mat-icon>
-      <span>{{'STUDENT_DELETE' | translate}}</span>
-    </button>
-  </mat-menu>
+  <header class="container profile-header mat-card mat-elevation-z0">
 
-</header>
+    <div class="" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
 
-<div class="container">
+      <!-- Avatar -->
+      <a flex="grow" matRipple class="avatar border-theme">
+        <img class="avatar-image" [src]="srcImage({img: student?.avatar})" alt="{{student?.avatar}}">
+      </a>
 
+      <!-- Student information -->
+      <div fxFlex class="info">
+
+        <!-- Subjects -->
+        <div class="mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+          <div class="badge mat-hint" *ngFor="let subject of student?.musical.subjects; let i=index; let first = first">
+            <span>{{'SUBJECT.' + subject.viewValue | translate}}</span>
+          </div>
+        </div>
+
+        <!-- More Info -->
+        <!-- <a class="link mat-small pointer" (click)="isInfoOpened=!isInfoOpened">
+          {{isInfoOpened | stringBy:'SHOW_LESS':'SHOW_MORE' | translate}}
+        </a> -->
+
+        <!-- Number info -->
+        <div fxLayout="row" fxLayoutGap="1rem">
+          <div *ngIf="student?.age" class="mat-small">
+            <span class="mb-0">{{student?.age}}</span>
+            <span class="mat-hint"> {{'YEARS' | translate}}</span>
+          </div>
+          <div *ngIf="student?.academicCourse" class="mat-small">
+            <span class="mb-0">{{student?.academicCourse?.viewValue}}</span>
+            <span class="mat-hint">
+              {{student?.academicCourse?.id | group: academicCourseList | translate | lowercase}}</span>
+          </div>
+          <div *ngIf="student?.musical?.course" class="mat-small">
+            <span class="mb-0">{{student?.musical?.course.viewValue}}</span>
+            <span class="mat-hint">
+              {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}</span>
+          </div>
+        </div>
+
+        <!-- Teacher -->
+        <div *ngIf="student?.musical?.teacher" class="mat-small">
+          <span class="mat-hint">
+            {{'TEACHER' | translate}}: </span>
+          <span class="mb-0">{{student?.musical?.teacher}}</span>
+        </div>
+
+        <!-- Instrument -->
+        <div *ngIf="student?.musical?.teacher" class="mat-small">
+          <span class="mat-hint">
+            {{'FORM.INSTRUMENT' | translate}}: </span>
+          <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <mat-tab-group mat-stretch-tabs color="primary">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">today</mat-icon>
+      </ng-template>
+      <div class="container">
+        <a13-day-card></a13-day-card>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">assessment</mat-icon>
+      </ng-template>
+      {{'MARKS' | translate}}
+    </mat-tab>
+  </mat-tab-group>
 </div>

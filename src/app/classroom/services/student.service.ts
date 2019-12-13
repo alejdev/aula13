@@ -12,6 +12,7 @@ export class StudentService {
 
   private ref: AngularFirestoreCollection = this.firestore.collection('users')
   private subRefName: string = 'students'
+  private cachedStudentList: any[] = []
 
   constructor(
     private firestore: AngularFirestore,
@@ -19,11 +20,19 @@ export class StudentService {
     private authService: AuthService
   ) { }
 
-  public getStudentsList() {
+  public getStudentList() {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName).snapshotChanges()
+  }
+
+  public getCachedStudentList() {
+    return this.cachedStudentList
+  }
+
+  public setCachedStudentList(cachedStudentList: any[]) {
+    this.cachedStudentList = cachedStudentList
   }
 
   public createStudent(data: any) {

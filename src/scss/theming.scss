@@ -18,7 +18,6 @@
     }
 
     &:hover,
-    &:active,
     &:focus {
       background-color: rgba(saturate($main-color, 10%), 10%) !important;
     }
@@ -33,10 +32,22 @@
     }
   }
 
-  .icon-button {
+  .icon-button,
+  .badge {
     background-color: darken(map-get(map-get($colors, light-theme), background), 2%);
   }
-  
+
+  .badge {
+    color: #888;
+  }
+
+  .mat-tab-group .mat-tab-header {
+    background-color: white;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-color: darken(map-get(map-get($colors, light-theme), background), 2%);
+  }
 }
 
 // Dark theme
@@ -72,9 +83,21 @@
     }
   }
 
-  .icon-button {
-    background-color: map-get(map-get($colors, dark-theme), background);
+  .icon-button,
+  .badge {
+    background-color: #666;
   }
-  
 
+  .badge {
+    color: #ccc;
+  }
+
+  // 424242
+  .mat-tab-group .mat-tab-header {
+    background-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
+  }
 }

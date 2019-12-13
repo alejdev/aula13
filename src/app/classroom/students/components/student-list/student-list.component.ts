@@ -9,6 +9,7 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
 import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+import { ModelService } from 'src/app/shared/services/model.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 
 import { MatDialog } from '@angular/material'
@@ -49,7 +50,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.studentList = []
     this.studentListFiltered = []
-    this.getStudentsList()
+    this.getStudentList()
   }
 
   createStudent(): void {
@@ -57,30 +58,13 @@ export class StudentListComponent implements OnInit, OnDestroy {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
       data: {
-        student: {
-          name: '',
-          avatar: 'user-default',
-          age: '',
-          academicCourse: '',
-          parents: {
-            fatherName: '',
-            fatherPhone: '',
-            motherName: '',
-            motherPhone: ''
-          },
-          musical: {
-            musicalCourse: '',
-            musicalTeacher: '',
-            instrument: '',
-            subjects: []
-          }
-        }
+        student: ModelService.studenModel
       }
     })
   }
 
-  getStudentsList(): void {
-    this.studentService.getStudentsList()
+  getStudentList(): void {
+    this.studentService.getStudentList()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((result: any) => {
         this.studentList = result.map((elem: any) => {
@@ -89,6 +73,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
             ...elem.payload.doc.data()
           }
         })
+        this.studentService.setCachedStudentList(this.studentList)
         this.studentListFiltered = Object.assign(this.studentList)
         this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
         this.loaderService.stop()

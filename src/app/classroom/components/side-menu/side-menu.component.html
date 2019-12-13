@@ -3,7 +3,8 @@
 
     <!-- User -->
     <div class="user-menu" fxLayout="column" fxLayoutAlign="center center">
-      <a matRipple class="avatar avatar-button border-theme border-theme-button" [@animateAvatar]="linkText ? 'huge' : 'small'">
+      <a matRipple class="avatar avatar-button border-theme border-theme-button"
+        [@animateAvatar]="linkText ? 'huge' : 'small'">
         <img class="avatar-image" [src]="srcImage({img: getUser.getUserLogged()?.avatar})" alt="Avatar">
       </a>
       <span class="user-name mt-1"
@@ -15,7 +16,8 @@
     <mat-nav-list class="m-0 p-0" *ngFor="let menu of menuItems; index as i">
       <mat-divider *ngIf="i !== 0 && menu.length !== 0"></mat-divider>
       <a class="nav-list-item" mat-list-item *ngFor="let item of menu" [routerLink]="[ '/' + item?.url ]"
-        routerLinkActive="active {{item?.theme}}">
+        routerLinkActive="active {{item?.theme}}" #routerLinkActiveInstance="routerLinkActive"
+        [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1">
         <mat-icon class="mat-hint">{{ item?.icon }}</mat-icon>
         <span class="mat-hint pl-h ml-q" [@animateText]="linkText ? 'show' : 'hide'">{{ item?.name | translate}}</span>
       </a>

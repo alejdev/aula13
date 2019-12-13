@@ -28,7 +28,8 @@ $colors: (
     foreground          : #bbbfc2,
   ),
   other: (
-    border-color        : #8da3cf
+    border-color        : #8da3cf,
+    link-color          : darken($main-color, 10%)
   )
 );
 
@@ -38,7 +39,8 @@ $sizes: (
     padding-size        : 2rem,
     radius-size         : .5rem,
     header-size         : 64px,
-    border-size         : 1px
+    border-size         : 1px,
+    scroll-size         : 10px
   )
 );
 

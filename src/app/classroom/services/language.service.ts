@@ -14,11 +14,22 @@ export class LanguageService {
   private languageList: any = [{
     id: 'es',
     name: 'LANG.ES',
-    tip: '“La razón de la sinrazón, que a mi razón se hace, de tal manera mi razón enflaquece, que con razón me quejo de la vuestra fermosura”.'
+    tip: '“El lago parece mar, el viento sirve de abrigo: todo se vuelve a inventar si lo comparto contigo.” —Silvio Rodriguez'
   }, {
     id: 'en',
     name: 'LANG.EN',
-    tip: '“A wizard is never late, nor is he early, he arrives precisely when he means to!”'
+    tip: '“Work is life, you know, and without it, there’s nothing but fear and insecurity.” —John Lennon'
+  }, {
+    id: 'de',
+    name: 'LANG.DE',
+    tip: '“Alles, was man tun muss, ist, die richtige Taste zum richtigen Zeitpunkt zu treffen und das Instrument spielt von ganz allein.” —Johann Sebastian Bach'}, {
+    id: 'it',
+    name: 'LANG.IT',
+    tip: '“Non ci si improvvisa. Per diventare grandi serve molta esperienza alle spalle, dalla serata allo spettacolo, dalla piccola televisione alla radio.” —Raffaella Carrà'
+  }, {
+    id: 'fr',
+    name: 'LANG.FR',
+    tip: '“J\'aime la vie profondément, j\'aime l\'humain. Je sais qu\'il est capable des pires choses comme des plus belles choses. J\'ai envie de valoriser les belles choses.” —Isabelle Geffroy (Zaz)'
   }]
 
   constructor(

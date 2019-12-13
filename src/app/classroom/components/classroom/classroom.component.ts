@@ -24,7 +24,8 @@ export class ClassroomComponent implements OnInit {
 
   public animStyles: any
   public onSideNavChange: boolean
-  public mobileQuery: MediaQueryList
+  public mobileQueryS: MediaQueryList
+  public mobileQueryM: MediaQueryList
 
   constructor(
     private elementRef: ElementRef,
@@ -40,22 +41,25 @@ export class ClassroomComponent implements OnInit {
     this.setUserLogged()
 
     // Event listender for toggle menu on mobile
-    this.mobileQuery = window.matchMedia('(max-width: 600px)')
+    this.mobileQueryS = window.matchMedia('(max-width: 600px)')
+    this.mobileQueryM = window.matchMedia('(min-width: 601px) and (max-width: 900px)')
 
-    // tslint:disable-next-line:deprecation
-    this.mobileQuery.addListener((e) => this.setViewportSize())
+    /* tslint:disable */
+    this.mobileQueryS.addListener((e) => this.setViewportSize())
+    this.mobileQueryM.addListener((e) => this.setViewportSize())
+    /* tslint:enable */
 
     // Swipe sideMenu on mobile
     const mc = new Hammer.Manager(this.elementRef.nativeElement, {})
     mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 100 }))
-    mc.on('panright', (ev: any) => this.mobileQuery.matches ? this.sideMenu.open() : 0)
-    mc.on('panleft', (ev: any) => this.mobileQuery.matches ? this.sideMenu.close() : 0)
+    mc.on('panright', (ev: any) => this.mobileQueryS.matches ? this.sideMenu.open() : 0)
+    mc.on('panleft', (ev: any) => this.mobileQueryS.matches ? this.sideMenu.close() : 0)
 
     // Detecting Router Changes
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // If mobile, side-menu will close when navigate
-        if (this.mobileQuery.matches) {
+        if (this.mobileQueryS.matches) {
           this.sideMenu.close()
         }
       }
@@ -76,24 +80,41 @@ export class ClassroomComponent implements OnInit {
 
   setUserLogged() {
     this.authService.readUser(this.authService.getUserUid())
-    .then((result) => {
-      this.authService.setUserLogged(result.data())
-    })
+      .then((result) => {
+        this.authService.setUserLogged(result.data())
+      })
   }
 
   setViewportSize(): void {
-    if (this.mobileQuery.matches) {
+    if (this.mobileQueryS.matches) {
       this.sidenavService.sidenavState.next(true)
-      this.animStyles = {
+      this.animStyles = this.setAnimStyle('S')
+    } else if (this.mobileQueryM.matches) {
+      this.sidenavService.sidenavState.next(false)
+      setTimeout(() => {
+        const mainContent = document.querySelector('#main-content-container')
+        const style = mainContent.getAttribute('style')
+        if (style.indexOf('60px') == -1) {
+          mainContent.setAttribute('style', 'margin-left: 60px')
+        }
+      }, 100)
+      this.animStyles = this.setAnimStyle('M')
+    } else {
+      this.sidenavService.sidenavState.next(true)
+      this.animStyles = this.setAnimStyle('M')
+    }
+  }
+
+  setAnimStyle(media: string) {
+    if (media === 'S') {
+      return {
         open: { width: '220px', left: '0px' },
         close: { width: '0px', left: '0px' }
       }
-    } else {
-      this.sidenavService.sidenavState.next(true)
-      this.animStyles = {
-        open: { width: '220px', left: '220px' },
-        close: { width: '60px', left: '60px' }
-      }
+    }
+    return {
+      open: { width: '220px', left: '220px' },
+      close: { width: '60px', left: '60px' }
     }
   }
 

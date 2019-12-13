@@ -54,7 +54,7 @@ export class PickupImageComponent implements OnInit {
     private utilService: UtilService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   pickup() {
     const dialogRef = this.dialog.open(PickupImageDialogComponent, {

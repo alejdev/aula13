@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   title = 'Aula 13'
   @Input() sidenav: any
-  mobileQuery: MediaQueryList
+  mobileQueryS: MediaQueryList
   themeName: any
   sidenavState: boolean
 
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     // Set mediaQuery
-    this.mobileQuery = this.media.matchMedia('(max-width: 600px)')
+    this.mobileQueryS = this.media.matchMedia('(max-width: 600px)')
 
     // Get theme
     this.themeService.theme.subscribe((result: any) => {
@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSinenav(): void {
-    if (this.mobileQuery.matches) {
+    if (this.mobileQueryS.matches) {
       this.sidenav.toggle()
     } else {
       this.sidenavService.sidenavState.next(!this.sidenavService.sidenavState.value)
