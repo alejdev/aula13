@@ -55,7 +55,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
       maxWidth: '800px',
       data: {
         idStudent: this.studentId,
-        student: this.student
+        student: { ...this.student }
       }
     })
   }
