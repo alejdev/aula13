@@ -18,7 +18,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
 import { DayService } from 'src/app/classroom/services/day.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
-import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { SettingService } from '../../services/setting.service'
@@ -60,7 +59,6 @@ export class DayCreationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dayService: DayService,
     private studentService: StudentService,
-    private loaderService: LoaderService,
     private toastService: ToastService,
     private settingService: SettingService,
     private dialogRef: MatDialogRef<DayCreationComponent>,
@@ -125,7 +123,6 @@ export class DayCreationComponent implements OnInit {
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
-        // .finally(() => this.loaderService.stop())
     }
   }
 }

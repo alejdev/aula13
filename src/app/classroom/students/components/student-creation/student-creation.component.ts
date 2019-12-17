@@ -4,7 +4,6 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
 import { StudentService } from 'src/app/classroom/services/student.service'
-import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
@@ -30,7 +29,6 @@ export class StudentCreationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private studentService: StudentService,
-    private loaderService: LoaderService,
     private toastService: ToastService,
     private dialogRef: MatDialogRef<StudentCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -107,7 +105,6 @@ export class StudentCreationComponent implements OnInit {
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
-        // .finally(() => this.loaderService.stop())
     }
   }
 }
