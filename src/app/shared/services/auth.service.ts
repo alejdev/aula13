@@ -26,7 +26,6 @@ export class AuthService {
   ) {
     this.error = (error: any) => {
       console.log(error)
-      this.loaderService.stop()
       switch (error.code) {
         case 'auth/wrong-password':
           this.toastService.error('ERR.AUTH_INVALID')
@@ -70,6 +69,7 @@ export class AuthService {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => this.createUser(auth.user))
       .catch(this.error)
+      .finally(() => this.loaderService.stop())
   }
 
   public signIn(control: any) {
@@ -97,7 +97,6 @@ export class AuthService {
     this.loaderService.start()
     return this.angularFireAuth.auth.signOut()
       .then(() => {
-        this.loaderService.stop()
         this.router.navigate(['login'])
         this.toastService.say('MSG.BYE')
       })

@@ -121,9 +121,11 @@ export class DayCreationComponent implements OnInit {
         .then((result: any) => {
           this.toastService.info(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.day)
-        }).catch((err: any) => {
+        })
+        .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
-        }).finally(() => this.loaderService.stop())
+        })
+        // .finally(() => this.loaderService.stop())
     }
   }
 }

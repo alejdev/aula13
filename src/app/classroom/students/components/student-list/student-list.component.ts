@@ -1,8 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
-
 import { Sort, SortDirection } from '@angular/material/sort'
 
 import { StudentCreationComponent } from '../student-creation/student-creation.component'
@@ -10,7 +7,6 @@ import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
-import { LoaderService } from 'src/app/shared/services/loader.service'
 
 import { MatDialog } from '@angular/material'
 
@@ -22,10 +18,9 @@ import { MatDialog } from '@angular/material'
 })
 export class StudentListComponent implements OnInit, OnDestroy {
 
-  private ngUnsubscribe = new Subject()
-
   title = 'STUDENTS'
   studentList: any[]
+  studentListObservable: any
   studentListFiltered: any[]
   studentFilter: string = ''
   defaultSort: string = 'name'
@@ -43,7 +38,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
   constructor(
     private studentService: StudentService,
     private studentPipe: StudentPipe,
-    private loaderService: LoaderService,
     private dialog: MatDialog
   ) { }
 
@@ -51,6 +45,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.studentList = []
     this.studentListFiltered = []
     this.getStudentList()
+    this.observeStudentList()
   }
 
   createStudent(): void {
@@ -65,18 +60,18 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   getStudentList(): void {
     this.studentService.getStudentList()
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .then((result: any) => {
+        this.studentList = this.studentService.mapStudentList(result)
+      })
+  }
+
+  observeStudentList(): void {
+    this.studentListObservable = this.studentService.observeStudentList()
       .subscribe((result: any) => {
-        this.studentList = result.map((elem: any) => {
-          return {
-            id: elem.payload.doc.id,
-            ...elem.payload.doc.data()
-          }
-        })
+        this.studentList = this.studentService.mapStudentList(result)
         this.studentService.setCachedStudentList(this.studentList)
         this.studentListFiltered = Object.assign(this.studentList)
         this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
-        this.loaderService.stop()
       })
   }
 
@@ -99,7 +94,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next()
-    this.ngUnsubscribe.complete()
+    this.studentListObservable.complete()
   }
 }

@@ -103,9 +103,11 @@ export class StudentCreationComponent implements OnInit {
         .then((result: any) => {
           this.toastService.info(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.student)
-        }).catch((err: any) => {
+        })
+        .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
-        }).finally(() => this.loaderService.stop())
+        })
+        // .finally(() => this.loaderService.stop())
     }
   }
 }

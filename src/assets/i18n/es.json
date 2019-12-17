@@ -35,7 +35,7 @@
 		"CONSERVATORY_TEACHER": "Profesor del conservatorio",
 		"CONTENT": "Registro del día",
 		"COURSE": {
-			"COURSE.ELEMENTARY": "Elemental",
+			"ELEMENTARY": "Elemental",
 			"HIGH_SCHOOL": "Bachillerato",
 			"PRIMARY": "Primaria",
 			"PROFESSIONAL": "Profesional",

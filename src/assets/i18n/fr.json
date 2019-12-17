@@ -35,7 +35,7 @@
 		"CONSERVATORY_TEACHER": "Professeur de Conservatoire",
 		"CONTENT": "Record du jour",
 		"COURSE": {
-			"COURSE.ELEMENTARY": "Élémentaire",
+			"ELEMENTARY": "Élémentaire",
 			"HIGH_SCHOOL": "Baccalauréat",
 			"PRIMARY": "Primaire",
 			"PROFESSIONAL": "Professionnel",

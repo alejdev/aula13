@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { take } from 'rxjs/operators'
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
 
@@ -20,11 +21,34 @@ export class StudentService {
     private authService: AuthService
   ) { }
 
-  public getStudentList() {
-    this.loaderService.start()
+  public mapStudent(data: any) {
+    return {
+      id: data.payload.id,
+      ...data.payload.data()
+    }
+  }
+
+  public mapStudentList(data: any) {
+    return data.map((elem: any) => {
+      return {
+        id: elem.payload.doc.id,
+        ...elem.payload.doc.data()
+      }
+    })
+  }
+
+  public observeStudentList() {
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName).snapshotChanges()
+  }
+
+  public getStudentList() {
+    this.loaderService.start()
+    return this.observeStudentList()
+      .pipe(take(1))
+      .toPromise()
+      .finally(() => this.loaderService.stop())
   }
 
   public getCachedStudentList() {
@@ -44,12 +68,19 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public readStudent(id: string) {
-    this.loaderService.start()
+  public observeStudent(id: string) {
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName)
-      .doc(id).valueChanges()
+      .doc(id).snapshotChanges()
+  }
+
+  public readStudent(id: string) {
+    this.loaderService.start()
+    return this.observeStudent(id)
+      .pipe(take(1))
+      .toPromise()
+      .finally(() => this.loaderService.stop())
   }
 
   public updateStudent(id: string, student: any) {

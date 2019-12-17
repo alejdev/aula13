@@ -2,15 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material'
 
-import { takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs'
-
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
-import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 
 @Component({
@@ -20,10 +16,9 @@ import { ModelService } from 'src/app/shared/services/model.service'
 })
 export class StudentProfileComponent implements OnInit, OnDestroy {
 
-  private ngUnsubscribe = new Subject()
-
   studentId: any
   student: any
+  studentObservable: any
   mark: any = UtilService.mark
   srcImage: any = UtilService.srcImage
   academicCourseList: any = ModelService.academicCourseList
@@ -33,8 +28,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
-    private dialog: MatDialog,
-    private loaderService: LoaderService
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -43,11 +37,15 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
 
     // Get student
     this.studentService.readStudent(this.studentId)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .then((result: any) => {
+        this.student = this.studentService.mapStudent(result)
+      })
+
+    // Observe student
+    this.studentObservable = this.studentService.observeStudent(this.studentId)
       .subscribe((result: any) => {
-        console.log(result)
-        this.student = result
-        this.loaderService.stop()
+        this.student = this.studentService.mapStudent(result)
+        console.log(this.student)
       })
   }
 
@@ -76,8 +74,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next()
-    this.ngUnsubscribe.complete()
+    this.studentObservable.complete()
   }
 
 }

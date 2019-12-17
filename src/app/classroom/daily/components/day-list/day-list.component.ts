@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-
-import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
-import { LoaderService } from 'src/app/shared/services/loader.service'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { ModelService } from 'src/app/shared/services/model.service'
@@ -16,16 +12,14 @@ import { MatDialog } from '@angular/material'
   templateUrl: './day-list.component.html',
   styleUrls: ['./day-list.component.scss']
 })
-export class DayListComponent implements OnInit {
-
-  private ngUnsubscribe = new Subject()
+export class DayListComponent implements OnInit, OnDestroy {
 
   title = 'DAILY'
   dayList: any[]
+  dayListSObservable: any
   studentList: any[]
 
   constructor(
-    private loaderService: LoaderService,
     private dialog: MatDialog,
     private studentService: StudentService,
     private dayService: DayService
@@ -36,41 +30,10 @@ export class DayListComponent implements OnInit {
     this.studentList = this.studentService.getCachedStudentList()
     if (this.studentList.length) {
       this.getDayList()
+      this.observeDayList()
     } else {
       this.getStudentList()
     }
-  }
-
-  getDayList(): void {
-    this.dayService.getDayList()
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((result: any) => {
-        this.dayList = result.map((elem: any) => {
-          const data = elem.payload.doc.data()
-          return {
-            id: elem.payload.doc.id,
-            student: this.studentList.find((student) => student.id === data.studentId),
-            ...data,
-          }
-        })
-        this.loaderService.stop()
-      })
-  }
-
-  getStudentList(): void {
-    this.studentService.getStudentList()
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((result: any) => {
-        this.studentList = result.map((elem: any) => {
-          return {
-            id: elem.payload.doc.id,
-            ...elem.payload.doc.data()
-          }
-        })
-        this.studentService.setCachedStudentList(this.studentList)
-        this.getDayList()
-        this.loaderService.stop()
-      })
   }
 
   createDay() {
@@ -81,6 +44,34 @@ export class DayListComponent implements OnInit {
         day: ModelService.dayModel
       }
     })
+  }
+
+  getDayList(): void {
+    this.dayService.getDayList()
+      .then((result: any) => {
+        this.dayList = this.dayService.mapDayList(result, this.studentList)
+      })
+  }
+
+  observeDayList(): void {
+    this.dayListSObservable = this.dayService.observeDayList()
+      .subscribe((result: any) => {
+        this.dayList = this.dayService.mapDayList(result, this.studentList)
+      })
+  }
+
+  getStudentList(): void {
+    this.studentService.observeStudentList()
+      .subscribe((result: any) => {
+        this.studentList = this.studentService.mapStudentList(result)
+        this.studentService.setCachedStudentList(this.studentList)
+        this.getDayList()
+        this.observeDayList()
+      })
+  }
+
+  ngOnDestroy() {
+    this.dayListSObservable.complete()
   }
 
 }

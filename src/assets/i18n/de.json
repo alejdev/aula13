@@ -35,7 +35,7 @@
 		"CONSERVATORY_TEACHER": "Konservatorium Professor",
 		"CONTENT": "Tagesrekord",
 		"COURSE": {
-			"COURSE.ELEMENTARY": "Grundstufe",
+			"ELEMENTARY": "Grundstufe",
 			"HIGH_SCHOOL": "Abitur",
 			"PRIMARY": "Primär",
 			"PROFESSIONAL": "Professionell",

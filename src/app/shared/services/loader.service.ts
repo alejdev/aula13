@@ -1,23 +1,33 @@
 import { Injectable } from '@angular/core'
-import { Subject } from 'rxjs'
-import { NgxUiLoaderService } from 'ngx-ui-loader'
+import { BehaviorSubject } from 'rxjs'
 
 @Injectable()
 export class LoaderService {
 
-  isLoading: Subject<boolean> = new Subject<boolean>()
+  private activeRequests: number = 0
+  private loadingValue: boolean = false
+  public loadingStatus: BehaviorSubject<boolean> = new BehaviorSubject(false)
 
-  constructor(
-    private loader: NgxUiLoaderService
-  ) { }
+  get loading(): boolean {
+    return this.loadingValue
+  }
+
+  set loading(value) {
+    this.loadingValue = value
+    this.loadingStatus.next(value)
+  }
 
   public start() {
-    this.isLoading.next(true)
-    this.loader.start()
+    if (this.activeRequests === 0) {
+      this.loading = true
+    }
+    this.activeRequests++
   }
 
   public stop() {
-    this.isLoading.next(false)
-    this.loader.stop()
+    this.activeRequests--
+    if (this.activeRequests === 0) {
+      this.loading = false
+    }
   }
 }

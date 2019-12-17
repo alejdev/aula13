@@ -10,6 +10,8 @@ import { LoaderService } from './services/loader.service'
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 
+  activeRequests: number = 0
+
   constructor(
     public loaderService: LoaderService
   ) { }
@@ -18,9 +20,20 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.loaderService.start()
+
+    if (this.activeRequests === 0) {
+      this.loaderService.start()
+    }
+
+    this.activeRequests++
+
     return next.handle(req).pipe(
-      finalize(() => this.loaderService.stop())
+      finalize(() => {
+        this.activeRequests--
+        if (this.activeRequests === 0) {
+          this.loaderService.stop()
+        }
+      })
     )
   }
 }

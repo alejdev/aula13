@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(
     private settingsService: SettingService,
     private translateService: TranslateService,
-    private swUpdate: SwUpdate,
+    private swUpdate: SwUpdate
   ) { }
 
   ngOnInit(): void {

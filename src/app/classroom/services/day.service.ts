@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { take } from 'rxjs/operators'
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
 
@@ -19,12 +20,36 @@ export class DayService {
     private authService: AuthService
   ) { }
 
-  public getDayList() {
-    this.loaderService.start()
+  public mapDay(data: any) {
+    return {
+      id: data.payload.id,
+      ...data.payload.data()
+    }
+  }
+
+  public mapDayList(data: any, studentList: any) {
+    return data.map((elem: any) => {
+      const docData = elem.payload.doc.data()
+      return {
+        id: elem.payload.doc.id,
+        student: studentList.find((student: any) => student.id === docData.studentId),
+        ...docData
+      }
+    })
+  }
+
+  public observeDayList() {
     return this.ref
       .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .snapshotChanges()
+      .collection(this.subRefName).snapshotChanges()
+  }
+
+  public getDayList() {
+    this.loaderService.start()
+    return this.observeDayList()
+      .pipe(take(1))
+      .toPromise()
+      .finally(() => this.loaderService.stop())
   }
 
   public createDay(data: any) {
@@ -36,12 +61,19 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public readDay(id: string) {
-    this.loaderService.start()
+  public observeDay(id: string) {
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName)
-      .doc(id).valueChanges()
+      .doc(id).snapshotChanges()
+  }
+
+  public readDay(id: string) {
+    this.loaderService.start()
+    return this.observeDay(id)
+      .pipe(take(1))
+      .toPromise()
+      .finally(() => this.loaderService.stop())
   }
 
   public updateDay(id: string, day: any) {

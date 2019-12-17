@@ -35,7 +35,7 @@
 		"CONSERVATORY_TEACHER": "Conservatory professor",
 		"CONTENT": "Day record",
 		"COURSE": {
-			"COURSE.ELEMENTARY": "Elementary",
+			"ELEMENTARY": "Elementary",
 			"HIGH_SCHOOL": "Baccalaureate",
 			"PRIMARY": "Primary",
 			"PROFESSIONAL": "Professional",

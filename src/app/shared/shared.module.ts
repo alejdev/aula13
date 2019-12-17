@@ -13,8 +13,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatRippleModule } from '@angular/material/core'
 import { MatSelectModule } from '@angular/material/select'
-import { MatSnackBarConfig } from '@angular/material/snack-bar'
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarConfig, MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSortModule } from '@angular/material/sort'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 
@@ -26,18 +25,18 @@ import { ToastComponent } from './components/toast/toast.component'
 import { DayCardComponent } from './components/day-card/day-card.component'
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component'
 import { DayCreationComponent } from './components/day-creation/day-creation.component'
+import { LoaderComponent } from './components/loader/loader.component'
 
 import { StringByPipe } from './pipes/string-by.pipe'
 
-import { HttpConfigInterceptor } from './http-config.interceptor'
 import { LoaderService } from './services/loader.service'
+import { SettingService } from './services/setting.service'
 
 import localeEs from '@angular/common/locales/es'
 import localeEn from '@angular/common/locales/en'
 import localeDe from '@angular/common/locales/de'
 import localeIt from '@angular/common/locales/it'
 import localeFr from '@angular/common/locales/fr'
-import { SettingService } from './services/setting.service'
 
 registerLocaleData(localeEs, 'es')
 registerLocaleData(localeEn, 'en')
@@ -52,7 +51,9 @@ registerLocaleData(localeFr, 'fr')
     DayCardComponent,
     DayCreationComponent,
 
-    StringByPipe
+    StringByPipe,
+
+    LoaderComponent
   ],
   imports: [
     // Angular
@@ -109,14 +110,16 @@ registerLocaleData(localeFr, 'fr')
     StringByPipe,
     FloatingButtonComponent,
     DayCardComponent,
-    DayCreationComponent
+    DayCreationComponent,
+    LoaderComponent
+
   ],
   entryComponents: [
     ToastComponent
   ],
   providers: [
     { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 5000 } },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
     { provide: LOCALE_ID, deps: [SettingService], useFactory: (settingService: any) => settingService.value.lang },
     LoaderService
   ]
