@@ -63,10 +63,6 @@ export class StudentCreationComponent implements OnInit {
     })
   }
 
-  setGroup(control: string, group: any): void {
-    this.formGroup.value[control] = group.groupId
-  }
-
   save() {
     if (this.formGroup.valid) {
       const student = {
