@@ -34,4 +34,19 @@
       {{'THEMING.DARK_MODE' | translate}}
     </mat-slide-toggle>
   </div>
+
+  <mat-divider class="mt-2 mb-2"></mat-divider>
+
+  <!-- Behavior -->
+  <h3 class="mat-h2 mat-hint">{{'BEHAVIOR.TITLE' | translate}}</h3>
+
+  <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
+    <mat-icon color="primary">swap_horiz</mat-icon>
+    <div fxLayout="column">
+      <mat-slide-toggle labelPosition="before" (change)="togglePanSideMenu()" [(ngModel)]="canPanSideMenu">
+        {{'BEHAVIOR.PAN_SIDEMENU' | translate}}
+      </mat-slide-toggle>
+      <mat-hint class="mat-hint txt-0 mt-h">{{'BEHAVIOR.PAN_SIDEMENU_HINT' | translate}}</mat-hint>
+    </div>
+  </div>
 </section>

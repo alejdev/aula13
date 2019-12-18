@@ -8,7 +8,8 @@ export class SettingService {
   // Default settings
   private settings: any = {
     theme: 0,
-    lang: 'es'
+    lang: 'es',
+    canPanSideMenu: true
   }
 
   constructor() { }

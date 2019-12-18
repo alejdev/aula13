@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms'
 
 import { LanguageService } from 'src/app/classroom/services/language.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
+import { SettingService } from 'src/app/shared/services/setting.service'
 
 @Component({
   selector: 'a13-configuration',
@@ -16,10 +17,12 @@ export class ConfigurationComponent implements OnInit {
   languages: any
   themeControl: any
   themeIsDark: boolean
+  canPanSideMenu: boolean = this.settingService.value.canPanSideMenu
 
   constructor(
     private languageService: LanguageService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private settingService: SettingService
   ) { }
 
   ngOnInit(): void {
@@ -49,4 +52,10 @@ export class ConfigurationComponent implements OnInit {
   toggleTheme(): void {
     this.themeService.toggleTheme()
   }
+
+  togglePanSideMenu(): void {
+    this.settingService.value = { canPanSideMenu: !this.settingService.value.canPanSideMenu }
+    location.reload()
+  }
+
 }

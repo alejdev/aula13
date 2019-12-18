@@ -50,10 +50,12 @@ export class ClassroomComponent implements OnInit {
     /* tslint:enable */
 
     // Swipe sideMenu on mobile
-    const mc = new Hammer.Manager(this.elementRef.nativeElement, {})
-    mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 100 }))
-    mc.on('panright', (ev: any) => this.mobileQueryS.matches ? this.sideMenu.open() : 0)
-    mc.on('panleft', (ev: any) => this.mobileQueryS.matches ? this.sideMenu.close() : 0)
+    if (this.settingService.value.canPanSideMenu) {
+      const mc = new Hammer.Manager(this.elementRef.nativeElement, {})
+      mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL, threshold: 100 }))
+      mc.on('panright', (ev: any) => this.mobileQueryS.matches ? this.sideMenu.open() : 0)
+      mc.on('panleft', (ev: any) => this.mobileQueryS.matches ? this.sideMenu.close() : 0)
+    }
 
     // Detecting Router Changes
     this.router.events.subscribe((event: Event) => {

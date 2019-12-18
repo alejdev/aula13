@@ -7,6 +7,11 @@
 	"ARCHIVE_STUDENT": "Archivar alumno",
 	"AVATAR": "Imagen de perfil",
 	"BACK": "Volver",
+	"BEHAVIOR": {
+		"PAN_SIDEMENU": "Deslizar menú",
+		"PAN_SIDEMENU_HINT": "Arrastra el dedo horizontalmente por la pantalla para abrir el menú lateral. (Sólo en móvil)",
+		"TITLE": "Comportamiento"
+	},
 	"CANCEL": "Cancelar",
 	"CLOSE_MENU": "Cerrar menú",
 	"CONFIRM_PASSWORD": "Confirmar contraseña",

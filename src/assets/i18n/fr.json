@@ -7,6 +7,11 @@
 	"ARCHIVE_STUDENT": "Étudiant aux archives",
 	"AVATAR": "Image de profil",
 	"BACK": "Revenir",
+	"BEHAVIOR": {
+		"PAN_SIDEMENU": "Menu des diapositives",
+		"PAN_SIDEMENU_HINT": "Faites glisser votre doigt horizontalement sur l'écran pour ouvrir le menu latéral. (Mobile uniquement)",
+		"TITLE": "Comportement"
+	},
 	"CANCEL": "Annuler",
 	"CLOSE_MENU": "Fermer le menu",
 	"CONFIRM_PASSWORD": "Confirmer mot de passe",
