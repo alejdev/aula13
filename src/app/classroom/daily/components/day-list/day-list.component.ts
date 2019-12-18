@@ -36,7 +36,7 @@ export class DayListComponent implements OnInit, OnDestroy {
     }
   }
 
-  createDay() {
+  createDay(): void {
     this.dialog.open(DayCreationComponent, {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
@@ -70,7 +70,7 @@ export class DayListComponent implements OnInit, OnDestroy {
       })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.dayListSObservable.complete()
   }
 

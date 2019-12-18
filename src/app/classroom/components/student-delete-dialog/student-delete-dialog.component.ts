@@ -25,7 +25,7 @@ export class StudentDeleteDialogComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  ok() {
+  ok(): void {
     this.studentService.deleteStudent(this.data.idStudent)
       .then((result) => {
         this.dialogRef.close(this.data.student)

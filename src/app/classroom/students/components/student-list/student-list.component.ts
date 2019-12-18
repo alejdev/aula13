@@ -93,7 +93,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.studentListFiltered = Object.assign(this.studentList)
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.studentListObservable.complete()
   }
 }

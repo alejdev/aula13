@@ -49,19 +49,19 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): void {
     this.authService.loginWithGoogle()
   }
 
-  loginWithFacebook() {
+  loginWithFacebook(): void {
     this.authService.loginWithFacebook()
   }
 
-  loginWithTwitter() {
+  loginWithTwitter(): void {
     this.authService.loginWithTwitter()
   }
 
-  toggleSign() {
+  toggleSign(): void {
     this.login = !this.login
     this.model = this.formGroup.controls
     this.formGroup = this.login ? this.createSignInForm() : this.createSignUpForm()
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  togglePasswordVisibility() {
+  togglePasswordVisibility(): void {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
   }
 
@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  getSignOptions() {
+  getSignOptions(): any {
     return {
       button: {
         color: this.login ? 'accent' : 'primary',

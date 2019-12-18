@@ -24,13 +24,13 @@ export class PickupImageDialogComponent implements OnInit {
     })
   }
 
-  pickup(img: any) {
+  pickup(img: any): void {
     this.deselect()
     img.selected = true
     this.dialogRef.close(img.id)
   }
 
-  deselect() {
+  deselect(): void {
     this.data.imageList.forEach((elem: any) => {
       elem.selected = false
     })
@@ -56,7 +56,7 @@ export class PickupImageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  pickup() {
+  pickup(): void {
     const dialogRef = this.dialog.open(PickupImageDialogComponent, {
       maxWidth: '585px',
       data: {

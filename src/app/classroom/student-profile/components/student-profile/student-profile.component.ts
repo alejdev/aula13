@@ -49,7 +49,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
       })
   }
 
-  edit() {
+  edit(): void {
     this.dialog.open(StudentCreationComponent, {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
@@ -60,11 +60,11 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     })
   }
 
-  archive() {
+  archive(): void {
 
   }
 
-  delete() {
+  delete(): void {
     this.dialog.open(StudentDeleteDialogComponent, {
       data: {
         idStudent: this.studentId,
@@ -73,7 +73,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.studentObservable.complete()
   }
 

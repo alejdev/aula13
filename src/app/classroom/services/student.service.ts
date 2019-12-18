@@ -21,14 +21,14 @@ export class StudentService {
     private authService: AuthService
   ) { }
 
-  public mapStudent(data: any) {
+  public mapStudent(data: any): any {
     return {
       id: data.payload.id,
       ...data.payload.data()
     }
   }
 
-  public mapStudentList(data: any) {
+  public mapStudentList(data: any): any {
     return data.map((elem: any) => {
       return {
         id: elem.payload.doc.id,
@@ -37,13 +37,13 @@ export class StudentService {
     })
   }
 
-  public observeStudentList() {
+  public observeStudentList(): any {
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName).snapshotChanges()
   }
 
-  public getStudentList() {
+  public getStudentList(): any {
     this.loaderService.start()
     return this.observeStudentList()
       .pipe(take(1))
@@ -51,15 +51,15 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public getCachedStudentList() {
+  public getCachedStudentList(): any {
     return this.cachedStudentList
   }
 
-  public setCachedStudentList(cachedStudentList: any[]) {
+  public setCachedStudentList(cachedStudentList: any[]): void {
     this.cachedStudentList = cachedStudentList
   }
 
-  public createStudent(data: any) {
+  public createStudent(data: any): any {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -68,14 +68,14 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public observeStudent(id: string) {
+  public observeStudent(id: string): any {
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName)
       .doc(id).snapshotChanges()
   }
 
-  public readStudent(id: string) {
+  public readStudent(id: string): any {
     this.loaderService.start()
     return this.observeStudent(id)
       .pipe(take(1))
@@ -83,7 +83,7 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public updateStudent(id: string, student: any) {
+  public updateStudent(id: string, student: any): any {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -92,7 +92,7 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public deleteStudent(id: string) {
+  public deleteStudent(id: string): any {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())

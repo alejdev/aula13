@@ -17,14 +17,14 @@ export class LoaderService {
     this.loadingStatus.next(value)
   }
 
-  public start() {
+  public start(): void {
     if (this.activeRequests === 0) {
       this.loading = true
     }
     this.activeRequests++
   }
 
-  public stop() {
+  public stop(): void {
     this.activeRequests--
     if (this.activeRequests === 0) {
       this.loading = false

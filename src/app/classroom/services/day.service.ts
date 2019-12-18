@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { take } from 'rxjs/operators'
 
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/firestore'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
@@ -20,14 +20,14 @@ export class DayService {
     private authService: AuthService
   ) { }
 
-  public mapDay(data: any) {
+  public mapDay(data: any): any {
     return {
       id: data.payload.id,
       ...data.payload.data()
     }
   }
 
-  public mapDayList(data: any, studentList: any) {
+  public mapDayList(data: any, studentList: any): any {
     return data.map((elem: any) => {
       const docData = elem.payload.doc.data()
       return {
@@ -38,13 +38,13 @@ export class DayService {
     })
   }
 
-  public observeDayList() {
+  public observeDayList(): any {
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName).snapshotChanges()
   }
 
-  public getDayList() {
+  public getDayList(): any {
     this.loaderService.start()
     return this.observeDayList()
       .pipe(take(1))
@@ -52,7 +52,7 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public createDay(data: any) {
+  public createDay(data: any): any {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -61,14 +61,14 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public observeDay(id: string) {
+  public observeDay(id: string): any {
     return this.ref
       .doc(this.authService.getUserUid())
       .collection(this.subRefName)
       .doc(id).snapshotChanges()
   }
 
-  public readDay(id: string) {
+  public readDay(id: string): any {
     this.loaderService.start()
     return this.observeDay(id)
       .pipe(take(1))
@@ -76,7 +76,7 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public updateDay(id: string, day: any) {
+  public updateDay(id: string, day: any): any {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -85,7 +85,7 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public deleteDay(id: string) {
+  public deleteDay(id: string): any {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())

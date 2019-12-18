@@ -17,7 +17,7 @@ export class LoaderComponent implements OnInit, OnDestroy {
     private loaderService: LoaderService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // Loading status
     this.loadingSubscription = this.loaderService.loadingStatus.subscribe((result) => {
@@ -25,7 +25,7 @@ export class LoaderComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.loadingSubscription.unsubscribe()
   }
 

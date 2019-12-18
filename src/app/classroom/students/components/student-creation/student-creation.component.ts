@@ -63,7 +63,7 @@ export class StudentCreationComponent implements OnInit {
     })
   }
 
-  save() {
+  save(): void {
     if (this.formGroup.valid) {
       const student = {
         name: this.formGroup.value.studentNameCtrl,

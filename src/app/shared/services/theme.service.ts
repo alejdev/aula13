@@ -30,7 +30,7 @@ export class ThemeService {
     this.setTheme(this.settingsService.value.theme)
   }
 
-  public getThemeByIndex(index: number) {
+  public getThemeByIndex(index: number): any {
     return this.themeList[index]
   }
 
@@ -58,7 +58,7 @@ export class ThemeService {
     this.setOverlay(this.themeList[this.settingsService.value.theme].id)
   }
 
-  private setOverlay(theme: string) {
+  private setOverlay(theme: string): void {
     const overlayClasses = this.overlayContainer.getContainerElement().classList
     const themeClassesToRemove = Array.from(overlayClasses).filter((item: string) => item.includes('-theme'))
     if (themeClassesToRemove.length) {

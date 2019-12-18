@@ -43,28 +43,28 @@ export class AuthService {
     }
   }
 
-  public getStatus() {
+  public getStatus(): any {
     return this.angularFireAuth.authState
   }
 
-  public getUserUid() {
+  public getUserUid(): any {
     return this.userUid
   }
 
-  public setUserUid(uid: string) {
+  public setUserUid(uid: string): void {
     this.userUid = uid
   }
 
-  public getUserLogged() {
+  public getUserLogged(): any {
     return this.userLogged
   }
 
-  public setUserLogged(user: any) {
+  public setUserLogged(user: any): void {
     this.userLogged = user
     console.log(this.userLogged)
   }
 
-  public signUp(control: any) {
+  public signUp(control: any): any {
     this.loaderService.start()
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => this.createUser(auth.user))
@@ -72,7 +72,7 @@ export class AuthService {
       .finally(() => this.loaderService.stop())
   }
 
-  public signIn(control: any) {
+  public signIn(control: any): any {
     this.loaderService.start()
     return this.angularFireAuth.auth.signInWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => {
@@ -83,17 +83,17 @@ export class AuthService {
       .finally(() => this.loaderService.stop())
   }
 
-  public loginWithGoogle() {
+  public loginWithGoogle(): void {
     this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
   }
-  public loginWithFacebook() {
+  public loginWithFacebook(): void {
     this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
   }
-  public loginWithTwitter() {
+  public loginWithTwitter(): void {
     this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
   }
 
-  public signOut() {
+  public signOut(): any {
     this.loaderService.start()
     return this.angularFireAuth.auth.signOut()
       .then(() => {
@@ -104,7 +104,7 @@ export class AuthService {
       .finally(() => this.loaderService.stop())
   }
 
-  private createUser(data: any) {
+  private createUser(data: any): any {
     this.loaderService.start()
     return this.ref
       .doc(data.uid)
@@ -122,7 +122,7 @@ export class AuthService {
       .finally(() => this.loaderService.stop())
   }
 
-  public readUser(id: any) {
+  public readUser(id: any): any {
     this.loaderService.start()
     return this.ref
       .doc(id).ref.get()

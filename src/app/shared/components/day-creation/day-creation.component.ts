@@ -91,7 +91,7 @@ export class DayCreationComponent implements OnInit {
     }
   }
 
-  onReady(editor: any) {
+  onReady(editor: any): void {
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
@@ -102,7 +102,7 @@ export class DayCreationComponent implements OnInit {
     this.formGroup.value[control] = group.groupId
   }
 
-  save() {
+  save(): void {
     if (this.formGroup.valid) {
       const day = {
         name: this.formGroup.value.dayTitleCtrl,

@@ -80,7 +80,7 @@ export class ClassroomComponent implements OnInit {
     this.setViewportSize()
   }
 
-  setUserLogged() {
+  setUserLogged(): void {
     this.authService.readUser(this.authService.getUserUid())
       .then((result) => {
         this.authService.setUserLogged(result.data())
@@ -107,7 +107,7 @@ export class ClassroomComponent implements OnInit {
     }
   }
 
-  setAnimStyle(media: string) {
+  setAnimStyle(media: string): any {
     if (media === 'S') {
       return {
         open: { width: '220px', left: '0px' },
