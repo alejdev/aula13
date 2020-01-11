@@ -1,3 +1,10 @@
+.floating-button {
+  fa-icon {
+    position: relative;
+    top: 1px;
+  }
+}
+
 .text-button {
   position: relative;
   top: 1px;
@@ -13,12 +20,6 @@
     z-index: 1;
     height: 4rem;
     border-radius: 50%;
-
-    .mat-icon {
-      font-size: 1.9rem;
-      width: 32px;
-      height: 30px;
-    }
 
     .text-button {
       display: none;

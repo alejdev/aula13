@@ -4,7 +4,7 @@
 
   <!-- Sign Out -->
   <button mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
-    <mat-icon>clear</mat-icon>
+    <fa-icon class="mat-icon-24 mat-hint" icon="times"></fa-icon>
   </button>
 </div>
 
@@ -30,7 +30,7 @@
           </mat-label>
           <input matInput required formControlName="studentNameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}"
             autocomplete="off">
-          <mat-icon class="mat-hint pr-1" matPrefix>face</mat-icon>
+          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="signature"></fa-icon>
         </mat-form-field>
 
         <!-- Age -->
@@ -41,7 +41,7 @@
               {{age}} {{(age === 1 ? 'YEAR': 'YEARS') | translate}}
             </mat-option>
           </mat-select>
-          <mat-icon class="mat-hint pr-1" matPrefix>cake</mat-icon>
+          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="birthday-cake"></fa-icon>
         </mat-form-field>
 
         <!-- Academic course -->
@@ -56,7 +56,7 @@
               </mat-option>
             </mat-optgroup>
           </mat-select>
-          <mat-icon class="mat-hint pr-1" matPrefix>school</mat-icon>
+          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="school"></fa-icon>
         </mat-form-field>
       </div>
     </div>
@@ -70,7 +70,7 @@
         <mat-label>{{'FORM.FATHERS_NAME' | translate}}</mat-label>
         <input matInput formControlName="fatherNameCtrl" attr.aria-label="{{'FORM.FATHERS_NAME' | translate}}"
           autocomplete="off">
-        <mat-icon class="mat-hint pr-1" matPrefix>person</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="user"></fa-icon>
       </mat-form-field>
 
       <!-- Father's phone -->
@@ -78,7 +78,7 @@
         <mat-label>{{'FORM.PHONE' | translate}}</mat-label>
         <input matInput formControlName="fatherPhoneCtrl" attr.aria-label="{{'FORM.PHONE' | translate}}"
           autocomplete="off">
-        <mat-icon class="mat-hint pr-1" matPrefix>phone</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="phone-alt"></fa-icon>
       </mat-form-field>
 
       <!-- Mother's name -->
@@ -86,7 +86,7 @@
         <mat-label>{{'FORM.MOTHERS_NAME' | translate}}</mat-label>
         <input matInput formControlName="motherNameCtrl" attr.aria-label="{{'FORM.MOTHERS_NAME' | translate}}"
           autocomplete="off">
-        <mat-icon class="mat-hint pr-1" matPrefix>person</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="user"></fa-icon>
       </mat-form-field>
 
       <!-- Mother's phone -->
@@ -94,7 +94,7 @@
         <mat-label>{{'FORM.PHONE' | translate}}</mat-label>
         <input matInput formControlName="motherPhoneCtrl" attr.aria-label="{{'FORM.PHONE' | translate}}"
           autocomplete="off">
-        <mat-icon class="mat-hint pr-1" matPrefix>phone</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="phone-alt"></fa-icon>
       </mat-form-field>
 
     </div>
@@ -115,7 +115,7 @@
             </mat-option>
           </mat-optgroup>
         </mat-select>
-        <mat-icon class="mat-hint pr-1" matPrefix>queue_music</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="graduation-cap"></fa-icon>
       </mat-form-field>
 
       <!-- Teacher's name -->
@@ -123,7 +123,7 @@
         <mat-label>{{'FORM.CONSERVATORY_TEACHER' | translate}}</mat-label>
         <input matInput formControlName="musicalTeacherCtrl"
           attr.aria-label="{{'FORM.CONSERVATORY_TEACHER' | translate}}" autocomplete="off">
-        <mat-icon class="mat-hint pr-1" matPrefix>record_voice_over</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="chalkboard-teacher"></fa-icon>
       </mat-form-field>
 
       <!-- Instrument -->
@@ -138,7 +138,7 @@
             </mat-option>
           </mat-optgroup>
         </mat-select>
-        <mat-icon class="mat-hint pr-1" matPrefix>music_note</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="guitar"></fa-icon>
       </mat-form-field>
 
       <!-- Subjects -->
@@ -150,7 +150,7 @@
             {{'SUBJECT.' + subject.viewValue | translate}}
           </mat-option>
         </mat-select>
-        <mat-icon class="mat-hint pr-1" matPrefix>library_books</mat-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="book"></fa-icon>
       </mat-form-field>
 
     </div>

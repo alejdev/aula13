@@ -32,8 +32,10 @@ a.clickable-phone-number {
 }
 
 // General
-.mat-menu-item mat-icon {
-  color: grey;
+.mat-menu-item fa-icon {
+  position: relative;
+  top: 1px;
+  margin-right: 10px;
 }
 
 @media only screen and (max-width: 600px) {

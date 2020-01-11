@@ -26,8 +26,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
     // Firebase
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-
-    // AngularFireStorageModule,
     AngularFirestoreModule,
 
     // Third parties
@@ -37,7 +35,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
   ]
 })
 export class CoreModule { }

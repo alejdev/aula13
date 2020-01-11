@@ -14,13 +14,31 @@
 
     <!-- Menu -->
     <mat-nav-list class="m-0 p-0" *ngFor="let menu of menuItems; index as i">
-      <mat-divider *ngIf="i !== 0 && menu.length !== 0"></mat-divider>
-      <a class="nav-list-item" mat-list-item *ngFor="let item of menu" [routerLink]="[ '/' + item?.url ]"
-        routerLinkActive="active {{item?.theme}}" #routerLinkActiveInstance="routerLinkActive"
-        [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1">
-        <mat-icon class="mat-hint">{{ item?.icon }}</mat-icon>
-        <span class="mat-hint pl-h ml-q" [@animateText]="linkText ? 'show' : 'hide'">{{ item?.name | translate}}</span>
-      </a>
+      <ng-container *ngFor="let item of menu">
+        <a mat-list-item (click)="onItemSelected(item)">
+          <fa-icon class="mat-hint" [icon]="item.icon"></fa-icon>
+          <span class="mat-hint pl-h ml-q"
+            [@animateText]="linkText ? 'show' : 'hide'">{{ item?.name | translate}}</span>
+          <span fxFlex></span>
+          <button mat-icon-button (click)="openMenu($event)">
+            <fa-icon class="mat-hint" icon="ellipsis-v"></fa-icon>
+          </button>
+          <fa-icon *ngIf="item.children && item.children.length"
+            [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" class="mat-hint" icon="chevron-right">
+          </fa-icon>
+        </a>
+        <div *ngIf="item.expanded">
+          <ng-container *ngFor="let child of item.children">
+            <a mat-list-item (click)="onItemSelected(child)" [routerLink]="[ '/' + item?.url ]"
+              routerLinkActive="active {{item?.theme}}" #routerLinkActiveInstance="routerLinkActive"
+              [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+              [ngClass]="{'active': child.route ? router.isActive(child.route, true): false, 'expanded': child.expanded}">
+              <span class="mat-hint pl-h ml-q"
+                [@animateText]="linkText ? 'show' : 'hide'">{{child?.name | translate}}</span>
+            </a>
+          </ng-container>
+        </div>
+      </ng-container>
     </mat-nav-list>
   </div>
 </div>

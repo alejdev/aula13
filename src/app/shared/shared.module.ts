@@ -1,6 +1,5 @@
 import { NgModule, LOCALE_ID } from '@angular/core'
 import { CommonModule, registerLocaleData } from '@angular/common'
-import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 
@@ -44,6 +43,9 @@ registerLocaleData(localeDe, 'de')
 registerLocaleData(localeIt, 'it')
 registerLocaleData(localeFr, 'fr')
 
+import { FontAwesomeModule, FaIconLibrary, FaConfig } from '@fortawesome/angular-fontawesome'
+import { faChevronRight, faCalendarAlt, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPencilAlt, faTrashAlt, faArchive, faCalendar, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones } from '@fortawesome/free-solid-svg-icons'
+
 @NgModule({
   declarations: [
     ToastComponent,
@@ -79,7 +81,8 @@ registerLocaleData(localeFr, 'fr')
     // Third parties
     FlexLayoutModule,
     TranslateModule,
-    CKEditorModule
+    CKEditorModule,
+    FontAwesomeModule
   ],
   exports: [
     // Angular
@@ -105,6 +108,7 @@ registerLocaleData(localeFr, 'fr')
     FlexLayoutModule,
     TranslateModule,
     CKEditorModule,
+    FontAwesomeModule,
 
     // Mine
     StringByPipe,
@@ -119,9 +123,51 @@ registerLocaleData(localeFr, 'fr')
   ],
   providers: [
     { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 5000 } },
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
     { provide: LOCALE_ID, deps: [SettingService], useFactory: (settingService: any) => settingService.value.lang },
     LoaderService
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  constructor(
+    faConfig: FaConfig,
+    library: FaIconLibrary
+  ) {
+    faConfig.defaultPrefix = 'fas'
+    library.addIcons(
+      faArchive,
+      faArrowLeft,
+      faBars,
+      faBirthdayCake,
+      faBook,
+      faCalendarAlt,
+      faChalkboardTeacher,
+      faChevronRight,
+      faCog,
+      faEllipsisV,
+      faExclamation,
+      faEye,
+      faEyeSlash,
+      faFont,
+      faGraduationCap,
+      faGuitar,
+      faInfo,
+      faMoon,
+      faPencilAlt,
+      faPhoneAlt,
+      faPlus,
+      faPoll,
+      faSchool,
+      faSearch,
+      faSignature,
+      faSignOutAlt,
+      faSkullCrossbones,
+      faStream,
+      faSun,
+      faTimes,
+      faTrashAlt,
+      faUniversity,
+      faUser,
+      faUserGraduate,
+    )
+  }
+}

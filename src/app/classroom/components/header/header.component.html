@@ -1,8 +1,9 @@
 <mat-toolbar class="header" [color]="themeName">
 
-  <button class="menu-button ml-q mr-1" mat-icon-button (click)="toggleSinenav()" attr.aria-label="{{(sidenavState ? 'CLOSE_MENU' : 'OPEN_MENU') | translate}}">
-  <!-- Menu button -->
-    <mat-icon>menu</mat-icon>
+  <button class="menu-button ml-q mr-1" mat-icon-button (click)="toggleSinenav()"
+    attr.aria-label="{{(sidenavState ? 'CLOSE_MENU' : 'OPEN_MENU') | translate}}">
+    <!-- Menu button -->
+    <fa-icon class="mat-icon-18" icon="bars"></fa-icon>
   </button>
 
   <!-- Title -->
@@ -15,6 +16,6 @@
 
   <!-- Sign Out -->
   <button class="menu-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">
-    <mat-icon>exit_to_app</mat-icon>
+    <fa-icon class="mat-icon-18" icon="sign-out-alt"></fa-icon>
   </button>
 </mat-toolbar>

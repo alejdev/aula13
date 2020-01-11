@@ -5,11 +5,12 @@
 
     <!-- Back button  -->
     <button class="mr-h" [routerLink]="[ '/aula/alumnos' ]" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
-      <mat-icon>arrow_back</mat-icon>
+      <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
     </button>
 
     <!-- Name -->
-    <h2 class="title-name mat-h3 mb-0 mr-q" (click)="truncate=!truncate" [ngClass]="{'truncate': !truncate}">{{student?.name}}</h2>
+    <h2 class="title-name mat-h3 mb-0 mr-q" (click)="truncate=!truncate" [ngClass]="{'truncate': !truncate}">
+      {{student?.name}}</h2>
 
     <!-- Spacer -->
     <div class="spacer"></div>
@@ -17,7 +18,7 @@
     <!-- Menu phone -->
     <button *ngIf="student?.parents?.father?.phone || student?.parents?.mother?.phone" mat-icon-button
       [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
-      <mat-icon class="mat-hint">phone</mat-icon>
+      <fa-icon class="mat-icon-18 mat-hint" icon="phone-alt"></fa-icon>
     </button>
     <mat-menu #menuPhones="matMenu">
       <button *ngIf="student?.parents?.father?.phone" mat-menu-item>
@@ -37,19 +38,19 @@
     <!-- Menu options -->
     <button class="mr-0" mat-icon-button [matMenuTriggerFor]="menuOptions"
       attr.aria-label="{{'OPTION_MENU' | translate}}">
-      <mat-icon class="mat-hint">more_vert</mat-icon>
+      <fa-icon class="mat-icon-18 mat-hint" icon="ellipsis-v"></fa-icon>
     </button>
     <mat-menu #menuOptions="matMenu">
       <button mat-menu-item (click)="edit()">
-        <mat-icon class="mat-hint">edit</mat-icon>
+        <fa-icon class="mat-icon-16 mat-hint" icon="pencil-alt"></fa-icon>
         <span>{{'EDIT_STUDENT' | translate}}</span>
       </button>
       <button mat-menu-item (click)="archive()" disabled>
-        <mat-icon class="mat-hint">archive</mat-icon>
+        <fa-icon class="mat-icon-16 mat-hint" icon="trash-alt"></fa-icon>
         <span>{{'ARCHIVE_STUDENT' | translate}}</span>
       </button>
       <button mat-menu-item (click)="delete()">
-        <mat-icon class="mat-hint">delete</mat-icon>
+        <fa-icon class="mat-icon-16 mat-hint" icon="archive"></fa-icon>
         <span>{{'STUDENT_DELETE' | translate}}</span>
       </button>
     </mat-menu>
@@ -122,7 +123,7 @@
   <mat-tab-group mat-stretch-tabs color="primary">
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">today</mat-icon>
+        <fa-icon class="mat-icon-20" icon="calendar-alt"></fa-icon>
       </ng-template>
       <div class="container">
         <a13-day-card></a13-day-card>
@@ -130,7 +131,7 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">assessment</mat-icon>
+        <fa-icon class="mat-icon-20" icon="poll"></fa-icon>
       </ng-template>
       {{'MARKS' | translate}}
     </mat-tab>

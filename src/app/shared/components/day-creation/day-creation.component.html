@@ -4,7 +4,7 @@
 
   <!-- Sign Out -->
   <button mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
-    <mat-icon>clear</mat-icon>
+    <fa-icon class="mat-icon-24 mat-hint" icon="times"></fa-icon>
   </button>
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/decoupled-document/ckeditor.js"></script>
@@ -19,7 +19,11 @@
 
         <!-- Student -->
         <mat-form-field appearance="outline" fxFlex="65">
-          <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
+          <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>          
+          <div class="avatar-container mt-h" matPrefix>
+            <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: formGroup?.value?.dayStudentCtrl?.avatar})"
+              alt="Avatar">
+          </div>
           <mat-select required formControlName="dayStudentCtrl" [compareWith]="equals"
             attr.aria-label="{{'FORM.STUDENT' | translate}}">
             <mat-option>-- {{'NONE' | translate}} --</mat-option>
@@ -30,10 +34,6 @@
               </span>
             </mat-option>
           </mat-select>
-          <mat-icon class="mat-hint pr-1" matPrefix>
-            <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: formGroup?.value?.dayStudentCtrl?.avatar})"
-              alt="Avatar">
-          </mat-icon>
         </mat-form-field>
 
         <!-- Date -->
@@ -50,7 +50,7 @@
           <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
           <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}"
             maxlength="{{maxlengthTitle}}" autocomplete="off">
-          <mat-icon class="mat-hint pr-1" matPrefix>title</mat-icon>
+          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
           <mat-hint align="start">{{'HINT.TITLE' | translate}}</mat-hint>
           <mat-hint align="end">{{title.value.length}} / {{maxlengthTitle}}</mat-hint>
         </mat-form-field>

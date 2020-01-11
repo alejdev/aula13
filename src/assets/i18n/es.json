@@ -13,6 +13,8 @@
 		"TITLE": "Comportamiento"
 	},
 	"CANCEL": "Cancelar",
+	"CLASSROOM": "Aula",
+	"CLASSROOMS": "Aulas",
 	"CLOSE_MENU": "Cerrar menú",
 	"CONFIRM_PASSWORD": "Confirmar contraseña",
 	"DAILY": "Diario",
@@ -119,6 +121,7 @@
 		"NOTHING_HERE": "Upps! Aquí no hay nada",
 		"NOTHING_MAN": "¯\\_(ツ)_/¯",
 		"NO_ACCOUNT": "¿Aún no eres usuario?",
+		"RELOAD_PAGE_FOR_CHANGES": "Recarga la página para que los cambios surtan efecto",
 		"SERVICE_NOT_AVAILABLE": "Pronto estará disponible este servicio",
 		"STUDENT_CREATE_OK": "Un nuevo alumno se ha apuntado a clase",
 		"STUDENT_DELETE": "¿Estás seguro que quieres borrar este alumno?",

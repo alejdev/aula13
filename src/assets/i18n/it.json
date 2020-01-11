@@ -13,6 +13,8 @@
 		"TITLE": "Comportamento"
 	},
 	"CANCEL": "Annullare",
+	"CLASSROOM": "Classe",
+	"CLASSROOMS": "Classi",
 	"CLOSE_MENU": "Chiudi menu",
 	"CONFIRM_PASSWORD": "Conferma password",
 	"DAILY": "Quotidiano",
@@ -119,6 +121,7 @@
 		"NOTHING_HERE": "Upps! Niente qui",
 		"NOTHING_MAN": "¯\\_(ツ)_/¯",
 		"NO_ACCOUNT": "Non sei ancora un utente?",
+		"RELOAD_PAGE_FOR_CHANGES": "Ricarica la pagina per rendere effettive le modifiche",
 		"SERVICE_NOT_AVAILABLE": "Questo servizio sarà presto disponibile",
 		"STUDENT_CREATE_OK": "Un nuovo studente si è iscritto per la lezione",
 		"STUDENT_DELETE": "Sei sicuro di voler eliminare questo studente?",

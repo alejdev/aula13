@@ -13,6 +13,8 @@
 		"TITLE": "Verhalten"
 	},
 	"CANCEL": "Abbrechen",
+	"CLASSROOM": "Klasse",
+	"CLASSROOMS": "Klassen",
 	"CLOSE_MENU": "Menü schließen",
 	"CONFIRM_PASSWORD": "Passwort bestätigen",
 	"DAILY": "Täglich",
@@ -119,6 +121,7 @@
 		"NOTHING_HERE": "Upps! Hier nichts",
 		"NOTHING_MAN": "¯\\_(ツ)_/¯",
 		"NO_ACCOUNT": "Noch kein Benutzer?",
+		"RELOAD_PAGE_FOR_CHANGES": "Laden Sie die Seite neu, damit die Änderungen wirksam werden",
 		"SERVICE_NOT_AVAILABLE": "Dieser Service wird in Kürze verfügbar sein",
 		"STUDENT_CREATE_OK": "Ein neuer Schüler hat sich für den Unterricht angemeldet",
 		"STUDENT_DELETE": "Möchten Sie diesen Schüler wirklich löschen?",

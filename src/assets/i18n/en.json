@@ -13,6 +13,8 @@
 		"TITLE": "Behavior"
 	},
 	"CANCEL": "Cancel",
+	"CLASSROOM": "Classroom",
+	"CLASSROOMS": "Classrooms",
 	"CLOSE_MENU": "Close menu",
 	"CONFIRM_PASSWORD": "Confirm password",
 	"DAILY": "Daily",
@@ -119,6 +121,7 @@
 		"NOTHING_HERE": "Upps! There is nothing here",
 		"NOTHING_MAN": "¯\\_(ツ)_/¯",
 		"NO_ACCOUNT": "Not a user yet?",
+		"RELOAD_PAGE_FOR_CHANGES": "Reload the page for changes to take effect",
 		"SERVICE_NOT_AVAILABLE": "This service will be available soon",
 		"STUDENT_CREATE_OK": "A new student has signed up for class",
 		"STUDENT_DELETE": "Are you sure you want to delete this student?",

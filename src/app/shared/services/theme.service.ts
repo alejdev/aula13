@@ -14,12 +14,12 @@ export class ThemeService {
   private themeList: any = [{
     id: 'light-theme',
     name: 'THEMING.LIGHT_THEME',
-    icon: 'brightness_5',
+    icon: 'sun',
     isDark: false
   }, {
     id: 'dark-theme',
     name: 'THEMING.DARK_THEME',
-    icon: 'brightness_3',
+    icon: 'moon',
     isDark: true
   }]
 

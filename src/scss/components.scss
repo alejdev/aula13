@@ -28,6 +28,18 @@
   }
 }
 
+.color-primary {
+  color: $main-color;
+}
+
+mat-form-field {
+  fa-icon {
+    position: relative;
+    top: -4px;
+    margin-left: 0.5rem;
+  }
+}
+
 // Avatar button image
 .avatar {
   display: block;
