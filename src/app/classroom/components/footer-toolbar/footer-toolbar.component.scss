@@ -1,0 +1,9 @@
+.footer-toolbar {
+  width: 100%;
+  height: var(--main-header-size);
+	z-index: 1000;
+	
+	.active fa-icon {
+		color: var(--light-theme-primary)
+	}
+}

@@ -1,11 +1,5 @@
 <mat-toolbar class="header" [color]="themeName">
 
-  <button class="menu-button ml-q mr-1" mat-icon-button (click)="toggleSinenav()"
-    attr.aria-label="{{(sidenavState ? 'CLOSE_MENU' : 'OPEN_MENU') | translate}}">
-    <!-- Menu button -->
-    <fa-icon class="mat-icon-18" icon="bars"></fa-icon>
-  </button>
-
   <!-- Title -->
   <h1 class="mat-h1">
     <a [routerLink]="[ '/aula' ]">{{title}}</a>

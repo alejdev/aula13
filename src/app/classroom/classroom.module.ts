@@ -13,6 +13,7 @@ import { HeaderComponent } from 'src/app/classroom/components/header/header.comp
 import { SideMenuComponent } from 'src/app/classroom/components/side-menu/side-menu.component'
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component'
 import { StudentDeleteDialogComponent } from './components/student-delete-dialog/student-delete-dialog.component'
+import { FooterToolbarComponent } from './components/footer-toolbar/footer-toolbar.component'
 
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
@@ -25,7 +26,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     HeaderComponent,
     SideMenuComponent,
     LogoutDialogComponent,
-    StudentDeleteDialogComponent
+    StudentDeleteDialogComponent,
+    FooterToolbarComponent
   ],
   imports: [
     // Routing

@@ -1,4 +1,13 @@
+#main-content-container {
+  height: 100vh;
+}
+
 .main-content {
   width: 100%;
-  height: calc(100vh - var(--main-header-size)) !important;
+  height: 100%;
+
+  .router-container {
+    flex: 1 0 auto;
+    min-height: auto;
+  }
 }
