@@ -15,11 +15,8 @@ import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 })
 export class HeaderComponent implements OnInit {
 
-  title = 'Aula 13'
-  @Input() sidenav: any
   mobileQueryS: MediaQueryList
   themeName: any
-  sidenavState: boolean
 
   constructor(
     private media: MediaMatcher,
@@ -36,17 +33,6 @@ export class HeaderComponent implements OnInit {
     this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'
     })
-
-    // Get sidenav state
-    this.sidenavService.sidenavState.subscribe(result => this.sidenavState = result)
-  }
-
-  toggleSinenav(): void {
-    if (this.mobileQueryS.matches) {
-      this.sidenav.toggle()
-    } else {
-      this.sidenavService.sidenavState.next(!this.sidenavService.sidenavState.value)
-    }
   }
 
   logOut(): void {

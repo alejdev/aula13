@@ -1,12 +1,7 @@
 <mat-toolbar class="header" [color]="themeName">
 
-  <!-- Title -->
-  <h1 class="mat-h1">
-    <a [routerLink]="[ '/aula' ]">{{title}}</a>
-  </h1>
-
   <!-- Spacer -->
-  <div class="spacer"></div>
+  <span fxFlex></span>
 
   <!-- Sign Out -->
   <button class="menu-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">

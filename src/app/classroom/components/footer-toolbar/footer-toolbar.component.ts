@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
 
-import { SidenavService } from 'src/app/classroom/services/sidenav.service'
-import { MediaMatcher } from '@angular/cdk/layout'
-
 @Component({
   selector: 'a13-footer-toolbar',
   templateUrl: './footer-toolbar.component.html',
@@ -10,11 +7,7 @@ import { MediaMatcher } from '@angular/cdk/layout'
 })
 export class FooterToolbarComponent implements OnInit {
 
-  title = 'Aula 13'
   @Input() sidenav: any
-  mobileQueryS: MediaQueryList
-  themeName: any
-  sidenavState: boolean
 
   toolbarItems: any = [{
     name: 'STUDENTS',
@@ -26,21 +19,11 @@ export class FooterToolbarComponent implements OnInit {
     icon: 'calendar-day'
   }]
 
-  constructor(
-    private media: MediaMatcher,
-    private sidenavService: SidenavService,
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    // Set mediaQuery
-    this.mobileQueryS = this.media.matchMedia('(max-width: 600px)')
-  }
+  ngOnInit(): void { }
 
   toggleSinenav(): void {
-    if (this.mobileQueryS.matches) {
-      this.sidenav.toggle()
-    } else {
-      this.sidenavService.sidenavState.next(!this.sidenavService.sidenavState.value)
-    }
+    this.sidenav.toggle()
   }
 }

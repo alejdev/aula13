@@ -167,7 +167,7 @@ export class SharedModule {
       faTrashAlt,
       faUniversity,
       faUser,
-      faUserGraduate
+      faUserGraduate,
     )
   }
 }

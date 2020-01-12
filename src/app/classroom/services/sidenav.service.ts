@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Event, NavigationEnd, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 
@@ -7,9 +7,8 @@ import { BehaviorSubject } from 'rxjs'
 })
 export class SidenavService {
 
-  public sidenavState: BehaviorSubject<boolean> = new BehaviorSubject(true)
-  public appDrawer: any
   public currentUrl = new BehaviorSubject<string>(undefined)
+  public appDrawer: any
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: Event) => {
