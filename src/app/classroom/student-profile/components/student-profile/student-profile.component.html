@@ -1,68 +1,9 @@
-<!-- Toolbar -->
-<div class="profile-toolbar mat-card mat-elevation-z0 p-0 mb-0">
-
-  <div class="p-h" fxLayout="row" fxLayoutAlign="space-between center">
-
-    <!-- Back button  -->
-    <button class="mr-h" [routerLink]="[ '/aula/alumnos' ]" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
-      <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
-    </button>
-
-    <!-- Name -->
-    <h2 class="title-name mat-h3 mb-0 mr-q" (click)="truncate=!truncate" [ngClass]="{'truncate': !truncate}">
-      {{student?.name}}</h2>
-
-    <!-- Spacer -->
-    <span fxFlex></span>
-
-    <!-- Menu phone -->
-    <button *ngIf="student?.parents?.father?.phone || student?.parents?.mother?.phone" mat-icon-button
-      [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
-      <fa-icon class="mat-icon-18 mat-hint" icon="phone-alt"></fa-icon>
-    </button>
-    <mat-menu #menuPhones="matMenu">
-      <button *ngIf="student?.parents?.father?.phone" mat-menu-item>
-        <a class="clickable-phone-number" href="{{'tel:' + student?.parents?.father?.phone}}">
-          <span *ngIf="student?.parents?.father?.name" class="mat-hint">{{student?.parents?.father?.name}}:</span>
-          <span class="phone">{{student?.parents?.father?.phone}}</span>
-        </a>
-      </button>
-      <button *ngIf="student?.parents?.mother?.phone" mat-menu-item>
-        <a class="clickable-phone-number" href="{{'tel:' + student?.parents?.mother?.phone}}">
-          <span *ngIf="student?.parents?.mother?.name" class="mat-hint">{{student?.parents?.mother?.name}}:</span>
-          <span class="phone">{{student?.parents?.mother?.phone}}</span>
-        </a>
-      </button>
-    </mat-menu>
-
-    <!-- Menu options -->
-    <button class="mr-0" mat-icon-button [matMenuTriggerFor]="menuOptions"
-      attr.aria-label="{{'OPTION_MENU' | translate}}">
-      <fa-icon class="mat-icon-18 mat-hint" icon="ellipsis-v"></fa-icon>
-    </button>
-    <mat-menu #menuOptions="matMenu">
-      <button mat-menu-item (click)="edit()">
-        <fa-icon class="mat-icon-16 mat-hint" icon="pencil-alt"></fa-icon>
-        <span>{{'EDIT_STUDENT' | translate}}</span>
-      </button>
-      <button mat-menu-item (click)="archive()" disabled>
-        <fa-icon class="mat-icon-16 mat-hint" icon="trash-alt"></fa-icon>
-        <span>{{'ARCHIVE_STUDENT' | translate}}</span>
-      </button>
-      <button mat-menu-item (click)="delete()">
-        <fa-icon class="mat-icon-16 mat-hint" icon="archive"></fa-icon>
-        <span>{{'STUDENT_DELETE' | translate}}</span>
-      </button>
-    </mat-menu>
-  </div>
-</div>
-
 <!-- Profile container -->
 <div class="profile-container">
 
   <header class="container profile-header mat-card mat-elevation-z0">
 
-    <div class="" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
+    <div class="mt-h" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
 
       <!-- Avatar -->
       <a flex="grow" matRipple class="avatar border-theme">

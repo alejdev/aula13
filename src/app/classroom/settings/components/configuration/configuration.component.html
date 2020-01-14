@@ -1,10 +1,7 @@
 <section class="container">
 
-  <!-- Title -->
-  <h2 class="mat-h1 pt-1 pb-1">{{title | translate}}</h2>
-
   <!-- Lenguaje -->
-  <h3 class="mat-h2 mat-hint">{{'GENERAL' | translate}}</h3>
+  <h3 class="mat-h2 mt-h mat-hint">{{'GENERAL' | translate}}</h3>
 
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
     <img class="flag-selected" [src]="getFlag(langControl.value)"

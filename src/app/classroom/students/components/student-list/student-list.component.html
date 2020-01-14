@@ -1,9 +1,4 @@
 <section class="container">
-  <!-- Title -->
-  <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
-    <h2 class="mat-h1 pt-1">{{title | translate}}</h2>
-    <a13-floating-button text="ADD_STUDENT" icon="add" (click)="createStudent()"></a13-floating-button>
-  </div>
 
   <!-- Filter -->
   <mat-form-field appearance="outline">
@@ -38,4 +33,7 @@
 
   <!-- Empty list -->
   <h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+
+  <!-- Floating button -->
+  <a13-floating-button text="ADD_STUDENT" icon="add" (click)="createStudent()"></a13-floating-button>
 </section>

@@ -9,6 +9,8 @@ mat-sidenav.sidenav {
 .main-content {
   width: 100%;
   height: 100%;
+  padding-top: var(--main-header-size);
+  overflow: hidden;
 
   .router-container {
     flex: 1 0 auto;

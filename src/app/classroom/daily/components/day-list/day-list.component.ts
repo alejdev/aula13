@@ -4,6 +4,7 @@ import { DayCreationComponent } from 'src/app/shared/components/day-creation/day
 import { DayService } from 'src/app/classroom/services/day.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { ModelService } from 'src/app/shared/services/model.service'
+import { HeaderService } from 'src/app/classroom/services/header.service'
 
 import { MatDialog } from '@angular/material'
 
@@ -14,7 +15,6 @@ import { MatDialog } from '@angular/material'
 })
 export class DayListComponent implements OnInit, OnDestroy {
 
-  title = 'DAILY'
   dayList: any[]
   dayListSObservable: any
   studentList: any[]
@@ -22,10 +22,16 @@ export class DayListComponent implements OnInit, OnDestroy {
   constructor(
     private dialog: MatDialog,
     private studentService: StudentService,
-    private dayService: DayService
+    private dayService: DayService,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
+    // Config header
+    this.headerService.configHeader({
+      title: 'DAILY'
+    })
+
     this.dayList = []
     this.studentList = this.studentService.getCachedStudentList()
     if (this.studentList.length) {

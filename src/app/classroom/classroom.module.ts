@@ -18,6 +18,7 @@ import { FooterToolbarComponent } from './components/footer-toolbar/footer-toolb
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatMenuModule } from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     // Material
     MatListModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule
   ],
   entryComponents: [
     LogoutDialogComponent,

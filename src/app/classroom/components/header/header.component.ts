@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { MediaMatcher } from '@angular/cdk/layout'
+import { Component, OnInit } from '@angular/core'
 
 import { MatDialog } from '@angular/material'
 
-import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
+import { HeaderService } from '../../services/header.service'
 
 import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 
@@ -15,25 +14,33 @@ import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 })
 export class HeaderComponent implements OnInit {
 
-  mobileQueryS: MediaQueryList
   themeName: any
+  headerConfig: any
+  truncate: boolean = false
 
   constructor(
-    private media: MediaMatcher,
-    private sidenavService: SidenavService,
     private themeService: ThemeService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
-    // Set mediaQuery
-    this.mobileQueryS = this.media.matchMedia('(max-width: 600px)')
-
     // Get theme
     this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'
     })
+
+    // Theming service
+    this.headerService.config.subscribe((config: any) => {
+      this.headerConfig = config
+    })
   }
+
+  edit(): void { }
+
+  archive(): void {  }
+
+  delete(): void { }
 
   logOut(): void {
     this.dialog.open(LogoutDialogComponent)

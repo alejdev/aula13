@@ -8,6 +8,7 @@ import { StudentDeleteDialogComponent } from 'src/app/classroom/components/stude
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
+import { HeaderService } from 'src/app/classroom/services/header.service'
 
 @Component({
   selector: 'a13-student-profile',
@@ -28,10 +29,12 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
+
     // Get param id
     this.activatedRoute.params.subscribe(params => this.studentId = params.id)
 
@@ -46,6 +49,13 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
       .subscribe((result: any) => {
         this.student = this.studentService.mapStudent(result)
         console.log(this.student)
+
+        // Config header
+        this.headerService.configHeader({
+          title: this.student.name,
+          back: '/aula/alumnos',
+          student: this.student
+        })
       })
   }
 

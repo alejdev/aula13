@@ -44,7 +44,7 @@ registerLocaleData(localeIt, 'it')
 registerLocaleData(localeFr, 'fr')
 
 import { FontAwesomeModule, FaIconLibrary, FaConfig } from '@fortawesome/angular-fontawesome'
-import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPencilAlt, faTrashAlt, faArchive, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones, faCalendarDay } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPen, faTrash, faArchive, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones, faCalendarDay } from '@fortawesome/free-solid-svg-icons'
 
 @NgModule({
   declarations: [
@@ -152,7 +152,7 @@ export class SharedModule {
       faGuitar,
       faInfo,
       faMoon,
-      faPencilAlt,
+      faPen,
       faPhoneAlt,
       faPlus,
       faPoll,
@@ -164,7 +164,7 @@ export class SharedModule {
       faStream,
       faSun,
       faTimes,
-      faTrashAlt,
+      faTrash,
       faUniversity,
       faUser,
       faUserGraduate,

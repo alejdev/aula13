@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
 
   <!-- Side-menu -->
-  <mat-sidenav #sideMenu class="sidenav border-0" [mode]="over" [fixedInViewport]="true">
+  <mat-sidenav #sideMenu class="sidenav border-0" mode="over" [fixedInViewport]="true">
     <a13-side-menu></a13-side-menu>
   </mat-sidenav>
 
@@ -9,7 +9,7 @@
   <mat-sidenav-content id="main-content-container">
     <div class="main-content" fxLayout="column">
       <!-- Header -->
-      <a13-header class="mat-elevation-z4"></a13-header>
+      <a13-header></a13-header>
 
       <!-- Router -->
       <main class="router-container">
@@ -17,7 +17,7 @@
       </main>
 
       <!-- Footer toolbar -->
-      <a13-footer-toolbar class="mat-elevation-z4" [sidenav]="sideMenu"></a13-footer-toolbar>
+      <a13-footer-toolbar [sidenav]="sideMenu"></a13-footer-toolbar>
     </div>
   </mat-sidenav-content>
 

@@ -1,9 +1,4 @@
 <section class="container">
-  <!-- Title -->
-  <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
-    <h2 class="mat-h1 pt-1">{{title | translate}}</h2>
-    <a13-floating-button text="ADD_DAY" icon="add" (click)="createDay()"></a13-floating-button>
-  </div>
 
   <!-- Days -->
   <ng-container *ngFor="let day of dayList">
@@ -12,4 +7,7 @@
 
   <!-- Empty list -->
   <h3 *ngIf="!dayList.length" class="mat-h1 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+
+  <!-- Floating button -->
+  <a13-floating-button text="ADD_DAY" icon="add" (click)="createDay()"></a13-floating-button>
 </section>
