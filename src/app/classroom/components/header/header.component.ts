@@ -36,11 +36,11 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  edit(): void { }
-
-  archive(): void {  }
-
-  delete(): void { }
+  openDialog(component: any, config: any) {
+    if (component && config) {
+      this.dialog.open(component, config)
+    }
+  }
 
   logOut(): void {
     this.dialog.open(LogoutDialogComponent)

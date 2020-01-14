@@ -54,33 +54,40 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
         this.headerService.configHeader({
           title: this.student.name,
           back: '/aula/alumnos',
-          student: this.student
+          student: this.student,
+          menuOptions: [{
+            name: 'EDIT_STUDENT',
+            icon: 'pen',
+            dialog: {
+              component: StudentCreationComponent,
+              config: {
+                width: 'calc(100vw - 2rem)',
+                maxWidth: '800px',
+                data: {
+                  idStudent: this.studentId,
+                  student: { ...this.student }
+                }
+              }
+            }
+          }, {
+            name: 'ARCHIVE_STUDENT',
+            icon: 'archive',
+            dialog: {}
+          }, {
+            name: 'STUDENT_DELETE',
+            icon: 'trash',
+            dialog: {
+              component: StudentDeleteDialogComponent,
+              config: {
+                data: {
+                  idStudent: this.studentId,
+                  student: { ...this.student }
+                }
+              }
+            }
+          }]
         })
       })
-  }
-
-  edit(): void {
-    this.dialog.open(StudentCreationComponent, {
-      width: 'calc(100vw - 2rem)',
-      maxWidth: '800px',
-      data: {
-        idStudent: this.studentId,
-        student: { ...this.student }
-      }
-    })
-  }
-
-  archive(): void {
-
-  }
-
-  delete(): void {
-    this.dialog.open(StudentDeleteDialogComponent, {
-      data: {
-        idStudent: this.studentId,
-        student: this.student
-      }
-    })
   }
 
   ngOnDestroy(): void {

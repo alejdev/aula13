@@ -7,7 +7,7 @@
     <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
   </button>
 
-  
+
   <!-- Title -->
   <h2 *ngIf="headerConfig.title" class="title" (click)="truncate=!truncate" [ngClass]="{'truncate': !truncate}">
     {{headerConfig.title | translate}}
@@ -39,29 +39,22 @@
   </mat-menu>
 
   <!-- Menu options-->
-  <button *ngIf="headerConfig.student" class="mr-0 menu-button" mat-icon-button [matMenuTriggerFor]="menuOptions"
-    attr.aria-label="{{'OPTION_MENU' | translate}}">
+  <button *ngIf="headerConfig.menuOptions?.length" class=" mr-0 menu-button" mat-icon-button
+    [matMenuTriggerFor]="menuOptions" attr.aria-label="{{'OPTION_MENU' | translate}}">
     <fa-icon class="mat-icon-18" icon="ellipsis-v"></fa-icon>
   </button>
   <mat-menu #menuOptions="matMenu">
-    <button mat-menu-item (click)="edit()">
-      <fa-icon class="mat-icon-16 mat-hint" icon="pen"></fa-icon>
-      <span>{{'EDIT_STUDENT' | translate}}</span>
-    </button>
-    <button mat-menu-item (click)="archive()" disabled>
-      <fa-icon class="mat-icon-16 mat-hint" icon="archive"></fa-icon>
-      <span>{{'ARCHIVE_STUDENT' | translate}}</span>
-    </button>
-    <button mat-menu-item (click)="delete()">
-      <fa-icon class="mat-icon-16 mat-hint" icon="trash"></fa-icon>
-      <span>{{'STUDENT_DELETE' | translate}}</span>
+    <button *ngFor="let item of headerConfig.menuOptions" mat-menu-item
+      (click)="openDialog(item.dialog?.component, item.dialog?.config)">
+      <fa-icon class="mat-icon-16 mat-hint" [icon]="item.icon"></fa-icon>
+      <span>{{item.name | translate}}</span>
     </button>
   </mat-menu>
 
-
   <!-- Sign Out -->
-  <!-- <button class="menu-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">
+  <button *ngIf="headerConfig.signOut" class="menu-button mr-q" mat-icon-button (click)="logOut()"
+    attr.aria-label="{{'SIGN.OUT' | translate}}">
     <fa-icon class="mat-icon-18" icon="sign-out-alt"></fa-icon>
-  </button> -->
+  </button>
 
 </mat-toolbar>
