@@ -27,9 +27,9 @@ export class StudentDeleteDialogComponent implements OnInit {
 
   ok(): void {
     this.studentService.deleteStudent(this.data.idStudent)
-      .then((result) => {
+      .then((result: any) => {
         this.dialogRef.close(this.data.student)
-        this.router.navigate(['classroom'])
+        this.router.navigate(['aula/alumnos'])
       })
   }
 
