@@ -76,7 +76,7 @@
 	"HIDE_PASSWORD": "Hide password",
 	"HINT": {
 		"ADD_NEW_PHONE": "Add a new phone",
-		"OBSERVATIONS": "",
+		"OBSERVATIONS": "Add a brief description of the student",
 		"TITLE": "Add a small descriptive title."
 	},
 	"INSTRUMENT": {
