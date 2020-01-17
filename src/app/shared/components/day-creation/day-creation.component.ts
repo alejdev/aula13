@@ -66,7 +66,6 @@ export class DayCreationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.day = this.data.day
     this.studentList = this.studentService.getCachedStudentList()
     this.equals = UtilService.equals

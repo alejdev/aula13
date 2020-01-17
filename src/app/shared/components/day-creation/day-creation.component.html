@@ -3,8 +3,8 @@
   <h2 class="m-0" mat-dialog-title>{{(data.idDay ? 'EDIT_DAY' : 'ADD_DAY') | translate}}</h2>
 
   <!-- Sign Out -->
-  <button mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
-    <fa-icon class="mat-icon-24 mat-hint" icon="times"></fa-icon>
+  <button class="button-close" mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
+    <fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
   </button>
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/decoupled-document/ckeditor.js"></script>
@@ -19,7 +19,7 @@
 
         <!-- Student -->
         <mat-form-field appearance="outline" fxFlex="65">
-          <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>          
+          <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
           <div class="avatar-container mt-h" matPrefix>
             <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: formGroup?.value?.dayStudentCtrl?.avatar})"
               alt="Avatar">
