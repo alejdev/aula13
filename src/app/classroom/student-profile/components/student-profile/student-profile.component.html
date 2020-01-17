@@ -15,15 +15,11 @@
 
         <!-- Subjects -->
         <div class="mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
-          <div class="badge mat-hint" *ngFor="let subject of student?.musical?.subjects; let i=index; let first = first">
+          <div class="badge mat-hint"
+            *ngFor="let subject of student?.musical?.subjects; let i=index; let first = first">
             <span>{{'SUBJECT.' + subject.viewValue | translate}}</span>
           </div>
         </div>
-
-        <!-- More Info -->
-        <!-- <a class="link mat-small pointer" (click)="isInfoOpened=!isInfoOpened">
-          {{isInfoOpened | stringBy:'SHOW_LESS':'SHOW_MORE' | translate}}
-        </a> -->
 
         <!-- Number info -->
         <div fxLayout="row" fxLayoutGap="1rem">
@@ -56,6 +52,24 @@
             {{'FORM.INSTRUMENT' | translate}}: </span>
           <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
         </div>
+
+        <!-- More Info -->
+        <div *ngIf="student?.observations">
+
+          <!-- Observations -->
+          <div *ngIf="moreInfoConfig.show" class="mat-small">
+            <span class="mat-hint">
+              {{'FORM.OBSERVATIONS' | translate}}: </span>
+            <span class="mb-0">{{student.observations}}</span>
+          </div>
+
+          <!-- More Info button-->
+          <a class="link mat-small pointer" (click)="showMore()">
+            {{moreInfoConfig.text | translate}}
+            <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
+          </a>
+        </div>
+
       </div>
     </div>
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { MatDialog } from '@angular/material'
 
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
@@ -24,12 +23,15 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   srcImage: any = UtilService.srcImage
   academicCourseList: any = ModelService.academicCourseList
   conservatoryCourseList: any = ModelService.conservatoryCourseList
-  truncate: boolean = false
+  moreInfoConfig: any = {
+    show: false,
+    text: 'SHOW_MORE',
+    icon: 'caret-down'
+  }
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
-    private dialog: MatDialog,
     private headerService: HeaderService
   ) { }
 
@@ -88,6 +90,22 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           }]
         })
       })
+  }
+
+  showMore() {
+    if (this.moreInfoConfig.show) {
+      this.moreInfoConfig = {
+        show: false,
+        text: 'SHOW_MORE',
+        icon: 'caret-down'
+      }
+    } else {
+      this.moreInfoConfig = {
+        show: true,
+        text: 'SHOW_LESS',
+        icon: 'caret-up'
+      }
+    }
   }
 
   ngOnDestroy(): void {

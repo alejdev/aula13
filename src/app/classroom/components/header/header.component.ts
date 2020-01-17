@@ -16,12 +16,12 @@ export class HeaderComponent implements OnInit {
 
   themeName: any
   headerConfig: any
-  truncate: boolean = false
+  isTruncated: boolean = false
 
   constructor(
     private themeService: ThemeService,
-    private dialog: MatDialog,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {

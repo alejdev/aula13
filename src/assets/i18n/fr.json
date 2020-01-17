@@ -17,6 +17,11 @@
 	"CLASSROOMS": "Classes",
 	"CLOSE_MENU": "Fermer le menu",
 	"CONFIRM_PASSWORD": "Confirmer mot de passe",
+	"CONTACT": {
+		"PERSON": "Personne de contact",
+		"PHONE": "Téléphone de contact",
+		"TITLE": "Contact"
+	},
 	"DAILY": "Tous les jours",
 	"DELETE": "Supprimer",
 	"EDIT_STUDENT": "Modifier l'élève",
@@ -70,6 +75,8 @@
 	"GENERAL": "Général",
 	"HIDE_PASSWORD": "Masquer le mot de passe",
 	"HINT": {
+		"ADD_NEW_PHONE": "Ajouter un nouveau téléphone",
+		"OBSERVATIONS": "",
 		"TITLE": "Ajoutez un petit titre descriptif."
 	},
 	"INSTRUMENT": {
@@ -175,7 +182,7 @@
 	},
 	"SUBJECTS": "Sujets",
 	"TEACHER": "Enseignant",
-	"THEME": "Objet",
+	"THEME": "Thème",
 	"THEMING": {
 		"DARK_MODE": "Mode sombre",
 		"DARK_THEME": "Thème sombre",

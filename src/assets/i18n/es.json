@@ -17,6 +17,11 @@
 	"CLASSROOMS": "Aulas",
 	"CLOSE_MENU": "Cerrar menú",
 	"CONFIRM_PASSWORD": "Confirmar contraseña",
+	"CONTACT": {
+		"PERSON": "Persona de contacto",
+		"PHONE": "Teléfono de contacto",
+		"TITLE": "Contacto"
+	},
 	"DAILY": "Diario",
 	"DELETE": "Borrar",
 	"EDIT_STUDENT": "Editar alumno",
@@ -70,6 +75,8 @@
 	"GENERAL": "General",
 	"HIDE_PASSWORD": "Ocultar contraseña",
 	"HINT": {
+		"ADD_NEW_PHONE": "Añade un nuevo teléfono",
+		"OBSERVATIONS": "Añade una breve descripción del alumno",
 		"TITLE": "Añade un pequeño título descriptivo."
 	},
 	"INSTRUMENT": {

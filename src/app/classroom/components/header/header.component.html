@@ -9,7 +9,8 @@
 
 
   <!-- Title -->
-  <h2 *ngIf="headerConfig.title" class="title" (click)="truncate=!truncate" [ngClass]="{'truncate': !truncate}">
+  <h2 *ngIf="headerConfig.title" class="title" (click)="isTruncated=!isTruncated"
+    [ngClass]="{'truncate': !isTruncated}">
     {{headerConfig.title | translate}}
   </h2>
 
@@ -17,23 +18,15 @@
   <span fxFlex></span>
 
   <!-- Menu phone -->
-  <button *ngIf="headerConfig.student?.parents?.father?.phone || headerConfig.student?.parents?.mother?.phone"
-    class="menu-button" mat-icon-button [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
+  <button *ngIf="headerConfig.student?.contactInformation?.phones?.length" class="menu-button" mat-icon-button
+    [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
     <fa-icon class="mat-icon-18" icon="phone-alt"></fa-icon>
   </button>
   <mat-menu #menuPhones="matMenu">
-    <button *ngIf="headerConfig.student?.parents?.father?.phone" mat-menu-item>
-      <a class="clickable-phone-number" href="{{'tel:' + headerConfig.student?.parents?.father?.phone}}">
-        <span *ngIf="headerConfig.student?.parents?.father?.name"
-          class="mat-hint">{{headerConfig.student?.parents?.father?.name}}:</span>
-        <span class="phone">{{headerConfig.student?.parents?.father?.phone}}</span>
-      </a>
-    </button>
-    <button *ngIf="headerConfig.student?.parents?.mother?.phone" mat-menu-item>
-      <a class="clickable-phone-number" href="{{'tel:' + headerConfig.student?.parents?.mother?.phone}}">
-        <span *ngIf="headerConfig.student?.parents?.mother?.name"
-          class="mat-hint">{{headerConfig.student?.parents?.mother?.name}}:</span>
-        <span class="phone">{{headerConfig.student?.parents?.mother?.phone}}</span>
+    <button *ngFor="let phone of headerConfig.student?.contactInformation?.phones" mat-menu-item>
+      <a class="clickable-phone-number" href="{{'tel:' + phone.number}}">
+        <span *ngIf="phone.name" class="mat-hint">{{phone.name}}:</span>
+        <span class="phone">{{phone.number}}</span>
       </a>
     </button>
   </mat-menu>

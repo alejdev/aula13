@@ -20,3 +20,22 @@ mat-form-field {
   width: 100%;
   max-width: 100%;
 }
+
+.button-text-icon {
+
+  fa-icon {
+    position: relative;
+    top: 1px;
+    color: var(--light-theme-accent);
+  }
+
+  &[disabled="true"] fa-icon {
+    filter: grayscale(100%);
+  }
+
+  .text-button {
+    position: relative;
+    top: 1px;
+    margin-left: 5px;
+  }
+}

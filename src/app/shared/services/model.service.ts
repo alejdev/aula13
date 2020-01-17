@@ -143,15 +143,9 @@ export class ModelService {
     avatar: 'user-default',
     age: '',
     academicCourse: '',
-    parents: {
-      father: {
-        name: '',
-        phone: ''
-      },
-      mother: {
-        name: '',
-        phone: ''
-      }
+    observations: '',
+    contactInformation: {
+      phones: []
     },
     musical: {
       group: '',

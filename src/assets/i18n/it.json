@@ -17,6 +17,11 @@
 	"CLASSROOMS": "Classi",
 	"CLOSE_MENU": "Chiudi menu",
 	"CONFIRM_PASSWORD": "Conferma password",
+	"CONTACT": {
+		"PERSON": "Persona di contatto",
+		"PHONE": "Telefono di contatto",
+		"TITLE": "Contatto"
+	},
 	"DAILY": "Quotidiano",
 	"DELETE": "Cancellare",
 	"EDIT_STUDENT": "Modifica studente",
@@ -70,6 +75,8 @@
 	"GENERAL": "Generali",
 	"HIDE_PASSWORD": "Nascondi la password",
 	"HINT": {
+		"ADD_NEW_PHONE": "Aggiungi un nuovo telefono",
+		"OBSERVATIONS": "",
 		"TITLE": "Aggiungi un piccolo titolo descrittivo."
 	},
 	"INSTRUMENT": {
