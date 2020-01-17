@@ -58,8 +58,9 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.dialog.open(StudentCreationComponent, {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
+      autoFocus: false,
       data: {
-        student: ModelService.studenModel
+        student: UtilService.clone(ModelService.studenModel)
       }
     })
   }

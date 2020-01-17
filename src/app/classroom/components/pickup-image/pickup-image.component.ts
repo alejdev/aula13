@@ -50,11 +50,10 @@ export class PickupImageComponent implements OnInit {
   srcImage: any = UtilService.srcImage
 
   constructor(
-    private dialog: MatDialog,
-    private utilService: UtilService
+    private dialog: MatDialog
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   pickup(): void {
     const dialogRef = this.dialog.open(PickupImageDialogComponent, {
