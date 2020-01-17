@@ -46,6 +46,7 @@ export class DayListComponent implements OnInit, OnDestroy {
     this.dialog.open(DayCreationComponent, {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
+      autoFocus: false,
       data: {
         day: ModelService.dayModel
       }
