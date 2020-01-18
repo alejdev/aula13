@@ -32,7 +32,7 @@ export class DayCreationComponent implements OnInit {
 
   equals: any
   srcImage: any
-  formGroup: FormGroup
+  dayFormGroup: FormGroup
   maxlengthTitle: number = 50
   ckeditor: any = DecoupledEditor
   editorConfig: any
@@ -54,9 +54,9 @@ export class DayCreationComponent implements OnInit {
     this.srcImage = UtilService.srcImage
 
     // Init form controls
-    this.formGroup = this.formBuilder.group({
+    this.dayFormGroup = this.formBuilder.group({
       dayStudentCtrl: [this.day.student, Validators.required],
-      dayDateCtrl: [moment().toISOString(), Validators.required],
+      dayDateCtrl: [moment(UtilService.today(), 'DD/MM/YYYY'), Validators.required],
       dayTitleCtrl: [this.day.title, Validators.required],
       dayContentCtrl: [this.day.content, Validators.required],
     })
@@ -80,23 +80,23 @@ export class DayCreationComponent implements OnInit {
   }
 
   setGroup(control: string, group: any): void {
-    this.formGroup.value[control] = group.groupId
+    this.dayFormGroup.value[control] = group.groupId
   }
 
-  formatDate(date: any) {
-    if (date) {
-      return `${date._i.year}-${date._i.month + 1}-${date._i.date}`
+  formatOutputDate(date: any) {
+    if (date && date._isAMomentObject && date._isValid) {
+      return moment(date, 'DD/MM/YYYY').unix()
     }
     return ''
   }
 
   save(): void {
-    if (this.formGroup.valid) {
+    if (this.dayFormGroup.valid) {
       const day = {
-        student: this.formGroup.value.dayStudentCtrl,
-        date: this.formatDate(this.formGroup.value.dayDateCtrl),
-        title: this.formGroup.value.dayTitleCtrl,
-        content: this.formGroup.value.dayTitleCtrl
+        studentId: this.dayFormGroup.value.dayStudentCtrl.id,
+        date: this.formatOutputDate(this.dayFormGroup.value.dayDateCtrl),
+        title: this.dayFormGroup.value.dayTitleCtrl,
+        content: this.dayFormGroup.value.dayContentCtrl
       }
       let createDay: any
       if (this.data.idDay) {

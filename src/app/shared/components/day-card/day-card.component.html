@@ -4,13 +4,13 @@
 
       <!-- Avatar -->
       <a *ngIf="day" [routerLink]="[ '/aula/alumno', day?.student?.id ]">
-        <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: day?.student?.avatar})" alt="Avatar">
+        <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: day?.student?.personal?.avatar})" alt="Avatar">
       </a>
 
       <!-- Header info -->
       <div class="header-info" fxLayout="column" fxLayoutAlign="center">
         <span class="mat-h3 mb-q header-info-title">{{day?.title}}</span>
-        <span class="mat-small mat-hint header-info-name">{{day?.student?.name}}</span>
+        <span class="mat-small mat-hint header-info-name">{{day?.student?.personal?.name}}</span>
       </div>
     </div>
 
@@ -21,6 +21,6 @@
     <span class="mat-small mat-hint">{{day?.date | date: 'd MMM'}}</span>
   </div>
   <mat-card-content class="day-container truncate-2">
-    {{day?.content}}
+    {{day?.content | stripHTML}}
   </mat-card-content>
 </mat-card>
