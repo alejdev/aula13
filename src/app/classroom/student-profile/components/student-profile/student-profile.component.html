@@ -13,14 +13,6 @@
       <!-- Student information -->
       <div fxFlex class="info">
 
-        <!-- Subjects -->
-        <div class="mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
-          <div class="badge mat-hint"
-            *ngFor="let subject of student?.musical?.subjects; let i=index; let first = first">
-            <span>{{'SUBJECT.' + subject.viewValue | translate}}</span>
-          </div>
-        </div>
-
         <!-- Number info -->
         <div fxLayout="row" fxLayoutGap="1rem">
           <div *ngIf="student?.age" class="mat-small">
@@ -39,6 +31,13 @@
           </div>
         </div>
 
+        <!-- Instrument -->
+        <div *ngIf="student?.musical?.teacher" class="mat-small">
+          <span class="mat-hint">
+            {{'FORM.INSTRUMENT' | translate}}: </span>
+          <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
+        </div>
+
         <!-- Teacher -->
         <div *ngIf="student?.musical?.teacher" class="mat-small">
           <span class="mat-hint">
@@ -46,11 +45,12 @@
           <span class="mb-0">{{student?.musical?.teacher}}</span>
         </div>
 
-        <!-- Instrument -->
-        <div *ngIf="student?.musical?.teacher" class="mat-small">
-          <span class="mat-hint">
-            {{'FORM.INSTRUMENT' | translate}}: </span>
-          <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
+        <!-- Subjects -->
+        <div class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+          <div class="badge mat-hint"
+            *ngFor="let subject of student?.musical?.subjects; let i=index; let first = first">
+            <span>{{'SUBJECT.' + subject.viewValue | translate}}</span>
+          </div>
         </div>
 
         <!-- More Info -->
@@ -75,6 +75,7 @@
 
   </header>
 
+  <!-- Tabs -->
   <mat-tab-group mat-stretch-tabs color="primary">
     <mat-tab>
       <ng-template mat-tab-label>
