@@ -1,5 +1,4 @@
-<mat-toolbar class="header" [color]="themeName">
-
+<mat-toolbar class="header" [ngClass]="{'height-auto': !isTruncated}" [color]="themeName">
 
   <!-- Back button  -->
   <button *ngIf="headerConfig.back" class="mr-h menu-button" [routerLink]="[ headerConfig.back ]" mat-icon-button
@@ -7,10 +6,9 @@
     <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
   </button>
 
-
   <!-- Title -->
-  <h2 *ngIf="headerConfig.title" class="title" (click)="isTruncated=!isTruncated"
-    [ngClass]="{'truncate': !isTruncated}">
+  <h2 *ngIf="headerConfig.title" class="title pt-h pb-h" (click)="truncate()"
+    [ngClass]="{'truncate': isTruncated}">
     {{headerConfig.title | translate}}
   </h2>
 

@@ -57,6 +57,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           title: this.student.name,
           back: '/aula/alumnos',
           student: this.student,
+          truncable: true,
           menuOptions: [{
             name: 'EDIT_STUDENT',
             icon: 'pen',
@@ -65,6 +66,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
               config: {
                 width: 'calc(100vw - 2rem)',
                 maxWidth: '800px',
+                autoFocus: false,
                 data: {
                   idStudent: this.studentId,
                   student: { ...this.student }
@@ -81,6 +83,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             dialog: {
               component: StudentDeleteDialogComponent,
               config: {
+                autoFocus: false,
                 data: {
                   idStudent: this.studentId,
                   student: { ...this.student }

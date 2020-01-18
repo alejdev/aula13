@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   themeName: any
   headerConfig: any
-  isTruncated: boolean = false
+  isTruncated: boolean
 
   constructor(
     private themeService: ThemeService,
@@ -33,12 +33,19 @@ export class HeaderComponent implements OnInit {
     // Theming service
     this.headerService.config.subscribe((config: any) => {
       this.headerConfig = config
+      this.isTruncated = true
     })
   }
 
   openDialog(component: any, config: any) {
     if (component && config) {
       this.dialog.open(component, config)
+    }
+  }
+
+  truncate() {
+    if (this.headerConfig.truncable) {
+      this.isTruncated = !this.isTruncated
     }
   }
 

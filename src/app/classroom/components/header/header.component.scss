@@ -3,16 +3,23 @@
   top: 0;
   width: 100%;
   height: var(--main-header-size);
+  min-height: var(--main-header-size);
   z-index: 20;
+  white-space: normal;
 
   .title {
     line-height: 1.25;
     font-size: 17px;
+    cursor: pointer;
   }
 
   .title,
   .menu-button {
     color: var(--light-theme-background);
+  }
+
+  &.height-auto {
+    height: auto;
   }
 }
 
