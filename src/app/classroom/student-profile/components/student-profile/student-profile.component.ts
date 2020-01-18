@@ -54,7 +54,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
 
         // Config header
         this.headerService.configHeader({
-          title: this.student.name,
+          title: this.student.personal.name,
           back: '/aula/alumnos',
           student: this.student,
           truncable: true,

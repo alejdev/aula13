@@ -77,7 +77,10 @@
 	"HIDE_PASSWORD": "Nascondi la password",
 	"HINT": {
 		"ADD_NEW_PHONE": "Aggiungi un nuovo telefono",
+		"BIRTHDATE": "Premere il calendario o inserire la data (GG/MM/AAAA)",
+		"CLASSROOM": "Puoi raggruppare gli studenti in diverse classi",
 		"OBSERVATIONS": "Aggiungi una breve descrizione dello studente",
+		"SUBJECTS": "Segna le materie che verranno insegnate allo studente",
 		"TITLE": "Aggiungi un piccolo titolo descrittivo."
 	},
 	"INSTRUMENT": {

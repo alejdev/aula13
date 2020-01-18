@@ -4,16 +4,16 @@
     <div class="row mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
 
       <!-- Avatar -->
-      <img class="user-avatar-image mr-1" [src]="srcImage({img: student?.avatar})" alt="Avatar">
+      <img class="user-avatar-image mr-1" [src]="srcImage({img: student?.personal?.avatar})" alt="Avatar">
 
       <!-- Name & Surname -->
       <div fxLayout="column" fxLayoutAlign="space-around start">
-        <span>{{student?.name}}</span>
+        <span>{{student?.personal?.name}}</span>
         <div fxLayout="row wrap">
           <span class="mat-small mat-hint mr-q"
-            *ngFor="let subject of student?.musical.subjects; let i=index; let first = first">
+            *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
             <span [ngClass]="{'txt-lowercase': !first}">{{'SUBJECT.' + subject.viewValue | translate}}</span>
-            <span>{{mark(student?.musical.subjects, i) | translate}}</span>
+            <span>{{mark(student?.classroom?.subjects, i) | translate}}</span>
           </span>
         </div>
       </div>

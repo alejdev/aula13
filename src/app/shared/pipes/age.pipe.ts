@@ -6,9 +6,9 @@ import moment from 'moment'
 })
 export class AgePipe implements PipeTransform {
 
-  transform(value: any, ...args: any[]): any {
+  transform(value: any, ...args: any[]): number {
     const today = moment()
-    const birthdate = moment(value, 'YYYY-MM-DD')
+    const birthdate = moment(value, 'DD/MM/YYYY')
     return today.diff(birthdate, 'year')
   }
 

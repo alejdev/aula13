@@ -10,14 +10,15 @@
 
 <mat-dialog-content class="mat-typography">
 
-  <form [formGroup]="formGroup" autocomplete="off">
+  <form [formGroup]="studentFormGroup" autocomplete="off">
 
+    <!-- STUDENT -->
     <h3 class="mat-h2 mat-hint">{{'STUDENT_PERSONAL_DATA' | translate}}</h3>
-
-    <div class="mb-2 mt-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
+    <div formGroupName="personalFormGroup" class="mb-2 mt-1 f-wrap" fxLayout="row" fxLayout.xs="column"
+      fxLayoutAlign="start center">
 
       <!-- Avatar -->
-      <a13-pickup-image ngClass.xs="full-avatar mb-1 pb-h" class="avatar-selected" [(image)]="student.avatar"
+      <a13-pickup-image ngClass.xs="full-avatar mb-1 pb-h" class="avatar-selected" [(image)]="student.personal.avatar"
         [imageList]="avatars" fxFlex="nogrow">
       </a13-pickup-image>
 
@@ -28,36 +29,25 @@
         <mat-form-field appearance="outline" fxFlex="100">
           <mat-label>{{'FORM.NAME' | translate}}{{'AND' | translate}} {{'FORM.SURNAME' | translate | lowercase}}
           </mat-label>
-          <input matInput required formControlName="studentNameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}"
+          <input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}"
             autocomplete="off">
           <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="signature"></fa-icon>
         </mat-form-field>
 
         <!-- Birthdate -->
-        <mat-form-field appearance="outline" fxFlex="35">
+        <mat-form-field class="mb-1" appearance="outline" fxFlex="35">
           <mat-label>{{'FORM.BIRTHDATE' | translate}}</mat-label>
-          <input class="pl-h" matInput required formControlName="studentBirthdateCtrl"
-            [matDatepicker]="birthdatePicker">
+          <input class="pl-h" matInput formControlName="birthdateCtrl" [matDatepicker]="birthdatePicker" [max]="maxDate">
           <mat-datepicker #birthdatePicker></mat-datepicker>
           <mat-datepicker-toggle class="mat-hint" matPrefix [for]="birthdatePicker">
           </mat-datepicker-toggle>
+          <mat-hint align="start">{{'HINT.BIRTHDATE' | translate}}</mat-hint>
         </mat-form-field>
-
-        <!-- Age -->
-        <!-- <mat-form-field appearance="outline" fxFlex="35">
-          <mat-label>{{'FORM.AGE' | translate}}</mat-label>
-          <mat-select formControlName="studentAgeCtrl" attr.aria-label="{{'FORM.AGE' | translate}}">
-            <mat-option *ngFor="let age of ages" [value]="age">
-              {{age}} {{(age === 1 ? 'YEAR': 'YEARS') | translate}}
-            </mat-option>
-          </mat-select>
-          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="birthday-cake"></fa-icon>
-        </mat-form-field> -->
 
         <!-- Academic course -->
         <mat-form-field appearance="outline" fxFlex="65">
           <mat-label>{{'FORM.ACADEMIC_COURSE' | translate}}</mat-label>
-          <mat-select formControlName="studentAcademicCourseCtrl" [compareWith]="equals"
+          <mat-select formControlName="academicCourseCtrl" [compareWith]="equals"
             attr.aria-label="{{'FORM.ACADEMIC_COURSE' | translate}}">
             <mat-option>-- {{'NONE' | translate}} --</mat-option>
             <mat-optgroup *ngFor="let group of academicCourses" [label]="group.name | translate">
@@ -72,19 +62,19 @@
         <!-- Details -->
         <mat-form-field appearance="outline" fxFlex="65">
           <mat-label>{{'FORM.OBSERVATIONS' | translate}}</mat-label>
-          <textarea matInput formControlName="studentObservationsCtrl" rows="4"></textarea>
+          <textarea matInput formControlName="observationsCtrl" rows="4"></textarea>
           <!-- <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="file-alt"></fa-icon> -->
           <mat-hint align="start">{{'HINT.OBSERVATIONS' | translate}}</mat-hint>
         </mat-form-field>
       </div>
     </div>
 
+    <!-- CONTACT INFORMATION -->
     <h3 class="mat-h2 mat-hint">{{'CONTACT.TITLE' | translate}}</h3>
-
-    <div class="mb-2 mt-1" formGroupName="contactInformation">
+    <div formGroupName="contactInformationFormGroup" class="mb-2 mt-1">
 
       <!-- Phones -->
-      <div class="phone-list" *ngIf="arrayPhones.controls" formArrayName="phones">
+      <div class="phone-list" *ngIf="arrayPhones.controls" formArrayName="phonesFormArray">
         <div *ngFor="let phone of arrayPhones.controls; let i = index" fxLayout="row"
           fxLayoutAlign="space-between center">
 
@@ -125,14 +115,15 @@
       </div>
     </div>
 
+    <!-- MUSICAL -->
     <h3 class="mat-h2 mat-hint">{{'STUDENT_CONSERVATORY_DATA' | translate}}</h3>
-
-    <div class="mb-H mt-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <div formGroupName="musicalFormGroup" class="mb-H mt-1 f-wrap" fxLayout="row" fxLayout.xs="column"
+      fxLayoutAlign="space-between center">
 
       <!-- Conservatory course -->
       <mat-form-field appearance="outline" fxFlex="35">
         <mat-label>{{'FORM.CONSERVATORY_COURSE' | translate}}</mat-label>
-        <mat-select formControlName="musicalCourseCtrl" [compareWith]="equals"
+        <mat-select formControlName="courseCtrl" [compareWith]="equals"
           attr.aria-label="{{'FORM.CONSERVATORY_COURSE' | translate}}">
           <mat-option>-- {{'NONE' | translate}} --</mat-option>
           <mat-optgroup *ngFor="let group of conservatoryCourses" [label]="group.name | translate">
@@ -144,11 +135,11 @@
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="graduation-cap"></fa-icon>
       </mat-form-field>
 
-      <!-- Teacher's name -->
+      <!-- Teacher-->
       <mat-form-field appearance="outline" fxFlex="65">
         <mat-label>{{'FORM.CONSERVATORY_TEACHER' | translate}}</mat-label>
-        <input matInput formControlName="musicalTeacherCtrl"
-          attr.aria-label="{{'FORM.CONSERVATORY_TEACHER' | translate}}" autocomplete="off">
+        <input matInput formControlName="teacherCtrl" attr.aria-label="{{'FORM.CONSERVATORY_TEACHER' | translate}}"
+          autocomplete="off">
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="chalkboard-teacher"></fa-icon>
       </mat-form-field>
 
@@ -167,18 +158,38 @@
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="guitar"></fa-icon>
       </mat-form-field>
 
+    </div>
+
+    <!-- CLASSROOM -->
+    <h3 class="mat-h2 mat-hint">{{'CLASSROOM' | translate}}</h3>
+    <div formGroupName="classroomFormGroup" class="mb-H mt-1 f-wrap" fxLayout="row" fxLayout.xs="column"
+      fxLayoutAlign="space-between center">
+
+      <!-- Classroom -->
+      <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
+        <mat-label>{{'CLASSROOM' | translate}}</mat-label>
+        <mat-select formControlName="classroomIdCtrl" [compareWith]="equals" multiple
+          attr.aria-label="{{'CLASSROOM' | translate}}">
+          <mat-option *ngFor="let classroom of subjects" [value]="classroom">
+            {{classroom.viewValue}}
+          </mat-option>
+        </mat-select>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="chalkboard"></fa-icon>
+        <mat-hint align="start">{{'HINT.CLASSROOM' | translate}}</mat-hint>
+      </mat-form-field>
+
       <!-- Subjects -->
       <mat-form-field appearance="outline" fxFlex="50">
         <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
         <mat-select formControlName="subjectsCtrl" [compareWith]="equals" multiple
           attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
           <mat-option *ngFor="let subject of subjects" [value]="subject">
-            {{'SUBJECT.' + subject.viewValue | translate}}
+            {{subject.viewValue}}
           </mat-option>
         </mat-select>
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="book"></fa-icon>
+        <mat-hint align="start">{{'HINT.SUBJECTS' | translate}}</mat-hint>
       </mat-form-field>
-
     </div>
   </form>
 
@@ -187,6 +198,6 @@
 <mat-dialog-actions align="end">
   <button mat-button color="warn" mat-dialog-close
     attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
-  <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="formGroup.invalid" (click)="save()"
-    attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+  <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="studentFormGroup.invalid"
+    (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
 </mat-dialog-actions>

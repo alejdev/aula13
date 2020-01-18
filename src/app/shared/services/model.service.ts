@@ -139,28 +139,33 @@ export class ModelService {
   ]
 
   public static studenModel: any = {
-    name: '',
-    avatar: 'user-default',
-    birthdate: '',
-    academicCourse: '',
-    observations: '',
+    classroom: {
+      classroomId: '',
+      subjects: []
+    },
     contactInformation: {
       phones: []
     },
     musical: {
       group: '',
-      teacher: '',
       instrument: '',
-      subjects: []
+      teacher: ''
+    },
+    personal: {
+      academicCourse: '',
+      avatar: 'user-default',
+      birthdate: '',
+      name: '',
+      observations: ''
     }
   }
 
   public static dayModel: any = {
-    title: '',
     content: '',
-    studentId: '',
-    student: null,
     date: null,
+    student: null,
+    studentId: '',
+    title: ''
   }
 
   constructor() { }

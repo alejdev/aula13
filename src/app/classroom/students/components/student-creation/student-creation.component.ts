@@ -27,9 +27,10 @@ export class StudentCreationComponent implements OnInit {
   subjects: any[]
   arrayPhones: any = {}
 
-  formGroup: FormGroup
+  studentFormGroup: FormGroup
   student: any
   equals: any
+  maxDate: Date
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,20 +52,28 @@ export class StudentCreationComponent implements OnInit {
 
     this.student = this.data.student
     this.equals = UtilService.equals
+    this.maxDate = UtilService.today()
 
     // Init form controls
-    this.formGroup = this.formBuilder.group({
-      studentNameCtrl: [this.student.name, Validators.required],
-      studentAvatarCtrl: [this.student.avatar],
-      studentBirthdateCtrl: [moment(this.student.birthdate, 'YYYY-MM-DD')],
-      studentAcademicCourseCtrl: [this.student.academicCourse],
-      studentObservationsCtrl: [this.student.observations],
-      musicalCourseCtrl: [this.student.musical.course],
-      musicalTeacherCtrl: [this.student.musical.teacher],
-      instrumentCtrl: [this.student.musical.instrument],
-      subjectsCtrl: [this.student.musical.subjects],
-      contactInformation: this.formBuilder.group({
-        phones: this.formBuilder.array([])
+    this.studentFormGroup = this.formBuilder.group({
+      personalFormGroup: this.formBuilder.group({
+        nameCtrl: [this.student.personal.name, Validators.required],
+        avatarCtrl: [this.student.personal.avatar],
+        birthdateCtrl: [this.formatInputDate(this.student.personal.birthdate)],
+        academicCourseCtrl: [this.student.personal.academicCourse],
+        observationsCtrl: [this.student.personal.observations]
+      }),
+      contactInformationFormGroup: this.formBuilder.group({
+        phonesFormArray: this.formBuilder.array([])
+      }),
+      musicalFormGroup: this.formBuilder.group({
+        courseCtrl: [this.student.musical.course],
+        teacherCtrl: [this.student.musical.teacher],
+        instrumentCtrl: [this.student.musical.instrument]
+      }),
+      classroomFormGroup: this.formBuilder.group({
+        classroomIdCtrl: [this.student.classroom.classroomId],
+        subjectsCtrl: [this.student.classroom.subjects]
       })
     })
 
@@ -76,6 +85,20 @@ export class StudentCreationComponent implements OnInit {
     }
   }
 
+  formatInputDate(date: any) {
+    if (date) {
+      return moment(date, 'DD-MM-YYYY')
+    }
+    return ''
+  }
+
+  formatOutputDate(date: any) {
+    if (date && date._isAMomentObject && date._isValid) {
+      return moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY')
+    }
+    return ''
+  }
+
   initPhoneControls(phone: any): FormGroup {
     return this.formBuilder.group({
       contactPhoneNameCtrl: [phone ? phone.name : '', [Validators.required]],
@@ -84,7 +107,7 @@ export class StudentCreationComponent implements OnInit {
   }
 
   addPhone(phone?: any, focus?: boolean): void {
-    this.arrayPhones = this.formGroup.get('contactInformation').get('phones') as FormArray
+    this.arrayPhones = this.studentFormGroup.get('contactInformationFormGroup').get('phonesFormArray') as FormArray
     this.arrayPhones.push(this.initPhoneControls(phone))
     if (focus) {
       setTimeout(() => this.focusNewPhone(), 200)
@@ -113,31 +136,30 @@ export class StudentCreationComponent implements OnInit {
     return []
   }
 
-  formatDate(date: any) {
-    if (date) {
-      return `${date._i.year}-${date._i.month + 1}-${date._i.date}`
-    }
-    return ''
-  }
-
   save(): void {
-    if (this.formGroup.valid) {
+    if (this.studentFormGroup.valid) {
       const student = {
-        name: this.formGroup.value.studentNameCtrl,
-        avatar: this.student.avatar,
-        birthdate: this.formatDate(this.formGroup.value.studentBirthdateCtrl),
-        academicCourse: this.formGroup.value.studentAcademicCourseCtrl || '',
-        observations: this.formGroup.value.studentObservationsCtrl,
+        classroom: {
+          classroomId: this.studentFormGroup.value.classroomFormGroup.classroomIdCtrl || '',
+          subjects: this.studentFormGroup.value.classroomFormGroup.subjectsCtrl || []
+        },
         contactInformation: {
           phones: this.getPhoneListValues()
         },
         musical: {
-          course: this.formGroup.value.musicalCourseCtrl || '',
-          teacher: this.formGroup.value.musicalTeacherCtrl,
-          instrument: this.formGroup.value.instrumentCtrl || '',
-          subjects: this.formGroup.value.subjectsCtrl || []
+          course: this.studentFormGroup.value.musicalFormGroup.courseCtrl || '',
+          instrument: this.studentFormGroup.value.musicalFormGroup.instrumentCtrl || '',
+          teacher: this.studentFormGroup.value.musicalFormGroup.teacherCtrl
+        },
+        personal: {
+          academicCourse: this.studentFormGroup.value.personalFormGroup.academicCourseCtrl || '',
+          avatar: this.student.personal.avatar,
+          birthdate: this.formatOutputDate(this.studentFormGroup.value.personalFormGroup.birthdateCtrl),
+          name: this.studentFormGroup.value.personalFormGroup.nameCtrl,
+          observations: this.studentFormGroup.value.personalFormGroup.observationsCtrl
         }
       }
+
       let createStudent: any
       if (this.data.idStudent) {
         createStudent = this.studentService.updateStudent(this.data.idStudent, student)

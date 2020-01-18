@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class StringByPipe implements PipeTransform {
 
-  transform(value: any, trueString: string, falseString: string): any {
+  transform(value: any, trueString: string, falseString: string): string {
     return value ? trueString : falseString
   }
 

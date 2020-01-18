@@ -77,7 +77,10 @@
 	"HIDE_PASSWORD": "Passwort verstecken",
 	"HINT": {
 		"ADD_NEW_PHONE": "Fügen Sie ein neues Telefon hinzu",
+		"BIRTHDATE": "Drücken Sie auf den Kalender oder geben Sie das Datum ein (TT/MM/JJJJ)",
+		"CLASSROOM": "Sie können Schüler in verschiedenen Klassenräumen gruppieren",
 		"OBSERVATIONS": "Fügen Sie eine kurze Beschreibung des Schülers hinzu",
+		"SUBJECTS": "Markieren Sie die Fächer, die dem Schüler beigebracht werden",
 		"TITLE": "Fügen Sie einen kleinen beschreibenden Titel hinzu."
 	},
 	"INSTRUMENT": {

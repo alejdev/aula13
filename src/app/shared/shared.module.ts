@@ -20,11 +20,10 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 
 export const MY_DATE_FORMATS = {
   parse: {
-    dateInput: 'DD MMM, YYYY',
-    firebase: 'YYYY-MM-DD'
+    dateInput: 'DD/MM/YYYY'
   },
   display: {
-    dateInput: 'DD MMM, YYYY',
+    dateInput: 'DD/MM/YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY'
@@ -42,6 +41,8 @@ import { DayCreationComponent } from './components/day-creation/day-creation.com
 import { LoaderComponent } from './components/loader/loader.component'
 
 import { StringByPipe } from './pipes/string-by.pipe'
+import { AgePipe } from './pipes/age.pipe'
+import { StripHTMLPipe } from './pipes/strip-html.pipe'
 
 import { LoaderService } from './services/loader.service'
 import { SettingService } from './services/setting.service'
@@ -59,8 +60,7 @@ registerLocaleData(localeIt, 'it')
 registerLocaleData(localeFr, 'fr')
 
 import { FontAwesomeModule, FaIconLibrary, FaConfig } from '@fortawesome/angular-fontawesome'
-import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPen, faTrash, faArchive, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones, faCalendarDay, faFileAlt, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { AgePipe } from './pipes/age.pipe'
+import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPen, faTrash, faArchive, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones, faCalendarDay, faFileAlt, faCaretUp, faCaretDown, faChalkboard } from '@fortawesome/free-solid-svg-icons'
 
 @NgModule({
   declarations: [
@@ -72,7 +72,9 @@ import { AgePipe } from './pipes/age.pipe'
     StringByPipe,
     AgePipe,
 
-    LoaderComponent
+    LoaderComponent,
+
+    StripHTMLPipe
   ],
   imports: [
     // Angular
@@ -159,6 +161,9 @@ export class SharedModule {
       faBirthdayCake,
       faBook,
       faCalendarDay,
+      faCaretDown,
+      faCaretUp,
+      faChalkboard,
       faChalkboardTeacher,
       faChevronRight,
       faCog,
@@ -166,6 +171,7 @@ export class SharedModule {
       faExclamation,
       faEye,
       faEyeSlash,
+      faFileAlt,
       faFont,
       faGraduationCap,
       faGuitar,
@@ -187,9 +193,6 @@ export class SharedModule {
       faUniversity,
       faUser,
       faUserGraduate,
-      faFileAlt,
-      faCaretDown,
-      faCaretUp
     )
   }
 }
