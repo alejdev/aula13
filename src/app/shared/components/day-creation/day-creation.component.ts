@@ -8,8 +8,6 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/de'
 import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
-import { MomentDateAdapter } from '@angular/material-moment-adapter'
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material'
 import _moment from 'moment'
 import { default as _rollupMoment } from 'moment'
 const moment = _rollupMoment || _moment
@@ -22,26 +20,10 @@ import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { SettingService } from '../../services/setting.service'
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'DD MMM, YYYY',
-  },
-  display: {
-    dateInput: 'DD MMM, YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  }
-}
-
 @Component({
   selector: 'a13-day-creation',
   templateUrl: './day-creation.component.html',
-  styleUrls: ['./day-creation.component.scss'],
-  providers: [
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-  ],
+  styleUrls: ['./day-creation.component.scss']
 })
 export class DayCreationComponent implements OnInit {
 
@@ -101,12 +83,20 @@ export class DayCreationComponent implements OnInit {
     this.formGroup.value[control] = group.groupId
   }
 
+  formatDate(date: any) {
+    if (date) {
+      return `${date._i.year}-${date._i.month + 1}-${date._i.date}`
+    }
+    return ''
+  }
+
   save(): void {
     if (this.formGroup.valid) {
       const day = {
-        name: this.formGroup.value.dayTitleCtrl,
-        age: this.formGroup.value.dayContentCtrl,
-        academicCourse: this.formGroup.value.dayStudentCourseCtrl,
+        student: this.formGroup.value.dayStudentCtrl,
+        date: this.formatDate(this.formGroup.value.dayDateCtrl),
+        title: this.formGroup.value.dayTitleCtrl,
+        content: this.formGroup.value.dayTitleCtrl
       }
       let createDay: any
       if (this.data.idDay) {

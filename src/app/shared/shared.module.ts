@@ -15,6 +15,21 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatSnackBarConfig, MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSortModule } from '@angular/material/sort'
 import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MomentDateAdapter } from '@angular/material-moment-adapter'
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material'
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD MMM, YYYY',
+    firebase: 'YYYY-MM-DD'
+  },
+  display: {
+    dateInput: 'DD MMM, YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  }
+}
 
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { TranslateModule } from '@ngx-translate/core'
@@ -45,6 +60,7 @@ registerLocaleData(localeFr, 'fr')
 
 import { FontAwesomeModule, FaIconLibrary, FaConfig } from '@fortawesome/angular-fontawesome'
 import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPen, faTrash, faArchive, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones, faCalendarDay, faFileAlt, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { AgePipe } from './pipes/age.pipe'
 
 @NgModule({
   declarations: [
@@ -54,6 +70,7 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     DayCreationComponent,
 
     StringByPipe,
+    AgePipe,
 
     LoaderComponent
   ],
@@ -112,11 +129,11 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
 
     // Mine
     StringByPipe,
+    AgePipe,
     FloatingButtonComponent,
     DayCardComponent,
     DayCreationComponent,
     LoaderComponent
-
   ],
   entryComponents: [
     ToastComponent
@@ -124,7 +141,9 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
   providers: [
     { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 5000 } },
     { provide: LOCALE_ID, deps: [SettingService], useFactory: (settingService: any) => settingService.value.lang },
-    LoaderService
+    LoaderService,
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ]
 })
 export class SharedModule {

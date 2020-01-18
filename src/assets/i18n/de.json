@@ -43,6 +43,7 @@
 	"FORM": {
 		"ACADEMIC_COURSE": "Akademisches Jahr",
 		"AGE": "Alter",
+		"BIRTHDATE": "Geburtsdatum",
 		"CONSERVATORY_COURSE": "Wintergarten-Kurs",
 		"CONSERVATORY_TEACHER": "Konservatorium Professor",
 		"CONTENT": "Tagesrekord",

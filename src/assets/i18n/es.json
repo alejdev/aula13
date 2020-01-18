@@ -43,6 +43,7 @@
 	"FORM": {
 		"ACADEMIC_COURSE": "Curso académico",
 		"AGE": "Edad",
+		"BIRTHDATE": "Fecha de nacimiento",
 		"CONSERVATORY_COURSE": "Curso del conservatorio",
 		"CONSERVATORY_TEACHER": "Profesor del conservatorio",
 		"CONTENT": "Registro del día",

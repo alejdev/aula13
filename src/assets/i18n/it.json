@@ -43,6 +43,7 @@
 	"FORM": {
 		"ACADEMIC_COURSE": "Anno accademico",
 		"AGE": "Età",
+		"BIRTHDATE": "Data di nascita",
 		"CONSERVATORY_COURSE": "Corso di Conservatorio",
 		"CONSERVATORY_TEACHER": "Professore di Conservatorio",
 		"CONTENT": "Record del giorno",

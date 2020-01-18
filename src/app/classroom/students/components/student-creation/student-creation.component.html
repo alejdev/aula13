@@ -33,8 +33,18 @@
           <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="signature"></fa-icon>
         </mat-form-field>
 
-        <!-- Age -->
+        <!-- Birthdate -->
         <mat-form-field appearance="outline" fxFlex="35">
+          <mat-label>{{'FORM.BIRTHDATE' | translate}}</mat-label>
+          <input class="pl-h" matInput required formControlName="studentBirthdateCtrl"
+            [matDatepicker]="birthdatePicker">
+          <mat-datepicker #birthdatePicker></mat-datepicker>
+          <mat-datepicker-toggle class="mat-hint" matPrefix [for]="birthdatePicker">
+          </mat-datepicker-toggle>
+        </mat-form-field>
+
+        <!-- Age -->
+        <!-- <mat-form-field appearance="outline" fxFlex="35">
           <mat-label>{{'FORM.AGE' | translate}}</mat-label>
           <mat-select formControlName="studentAgeCtrl" attr.aria-label="{{'FORM.AGE' | translate}}">
             <mat-option *ngFor="let age of ages" [value]="age">
@@ -42,7 +52,7 @@
             </mat-option>
           </mat-select>
           <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="birthday-cake"></fa-icon>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <!-- Academic course -->
         <mat-form-field appearance="outline" fxFlex="65">

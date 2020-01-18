@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ElementRef } from '@angular/core'
-import { Validators, FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms'
+import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms'
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
@@ -7,6 +7,10 @@ import { StudentService } from 'src/app/classroom/services/student.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
+
+import _moment from 'moment'
+import { default as _rollupMoment } from 'moment'
+const moment = _rollupMoment || _moment
 
 @Component({
   selector: 'a13-student-creation',
@@ -52,7 +56,7 @@ export class StudentCreationComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       studentNameCtrl: [this.student.name, Validators.required],
       studentAvatarCtrl: [this.student.avatar],
-      studentAgeCtrl: [this.student.age],
+      studentBirthdateCtrl: [moment(this.student.birthdate, 'YYYY-MM-DD')],
       studentAcademicCourseCtrl: [this.student.academicCourse],
       studentObservationsCtrl: [this.student.observations],
       musicalCourseCtrl: [this.student.musical.course],
@@ -109,12 +113,19 @@ export class StudentCreationComponent implements OnInit {
     return []
   }
 
+  formatDate(date: any) {
+    if (date) {
+      return `${date._i.year}-${date._i.month + 1}-${date._i.date}`
+    }
+    return ''
+  }
+
   save(): void {
     if (this.formGroup.valid) {
       const student = {
         name: this.formGroup.value.studentNameCtrl,
         avatar: this.student.avatar,
-        age: this.formGroup.value.studentAgeCtrl || '',
+        birthdate: this.formatDate(this.formGroup.value.studentBirthdateCtrl),
         academicCourse: this.formGroup.value.studentAcademicCourseCtrl || '',
         observations: this.formGroup.value.studentObservationsCtrl,
         contactInformation: {

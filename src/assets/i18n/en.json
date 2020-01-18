@@ -43,6 +43,7 @@
 	"FORM": {
 		"ACADEMIC_COURSE": "Academic course",
 		"AGE": "Age",
+		"BIRTHDATE": "Birthdate",
 		"CONSERVATORY_COURSE": "Conservatory Course",
 		"CONSERVATORY_TEACHER": "Conservatory professor",
 		"CONTENT": "Day record",

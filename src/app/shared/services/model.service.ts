@@ -141,7 +141,7 @@ export class ModelService {
   public static studenModel: any = {
     name: '',
     avatar: 'user-default',
-    age: '',
+    birthdate: '',
     academicCourse: '',
     observations: '',
     contactInformation: {

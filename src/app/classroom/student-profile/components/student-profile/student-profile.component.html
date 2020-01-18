@@ -15,8 +15,8 @@
 
         <!-- Number info -->
         <div fxLayout="row" fxLayoutGap="1rem">
-          <div *ngIf="student?.age" class="mat-small">
-            <span class="mb-0">{{student?.age}}</span>
+          <div *ngIf="student?.birthdate" class="mat-small">
+            <span class="mb-0">{{student?.birthdate | age}}</span>
             <span class="mat-hint"> {{'YEARS' | translate}}</span>
           </div>
           <div *ngIf="student?.academicCourse" class="mat-small">
