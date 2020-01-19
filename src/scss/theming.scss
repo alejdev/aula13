@@ -48,6 +48,23 @@
   ::-webkit-scrollbar-thumb {
     border-color: darken(map-get(map-get($colors, light-theme), background), 2%);
   }
+
+  .angular-editor .ck {
+
+    .ck-toolbar {
+      background: map-get(map-get($colors, light-theme), background);
+      border-color: $black-12-opacity;
+    }
+
+    .ck-editor__main {
+      &>.ck-editor__editable {
+        &:not(.ck-focused) {
+          border-color: $black-12-opacity;
+        }
+      }
+    }
+  }
+
 }
 
 // Dark theme
@@ -99,5 +116,43 @@
 
   ::-webkit-scrollbar-thumb {
     border-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
+  }
+
+  .angular-editor .ck {
+
+    .ck-reset_all,
+    .ck-reset_all * {
+      color: #ccc;
+    }
+
+    &.ck-toolbar__separator {
+      background-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3) !important;
+    }
+
+    .ck-button:not(.ck-disabled):hover,
+    a.ck.ck-button:not(.ck-disabled):hover,
+    .ck-button:not(.ck-disabled):active,
+    a.ck.ck-button:not(.ck-disabled):active,
+    .ck-button.ck-on,
+    a.ck.ck-button.ck-on {
+      background-color: map-get(map-get($colors, dark-theme), background);
+    }
+
+    .ck-toolbar,
+    .ck-dropdown__panel,
+    .ck-list {
+      background-color: lighten(map-get(map-get($colors, dark-theme), background), 3%);
+      border-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3);
+      color: #ccc;
+      border-radius: 5px;
+    }
+
+    .ck-editor__main {
+      &>.ck-editor__editable {
+        &:not(.ck-focused) {
+          border-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3);
+        }
+      }
+    }
   }
 }

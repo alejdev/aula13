@@ -95,6 +95,31 @@ mat-form-field {
   }
 }
 
+// Editor
+.angular-editor {
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
+
+  .ck {
+    .ck-editor__top .ck-sticky-panel .ck-toolbar,
+    .ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
+      border-radius: 5px 5px 0 0 !important;
+    }
+
+    .ck-editor__main {
+      &>.ck-editor__editable {
+        background: transparent;
+        border-radius: 0 0 5px 5px !important;
+
+        &.ck-focused {
+          border-width: 0 2px 2px 2px;
+        }
+      }
+    }
+  }
+}
+
 // Link
 .link {
   color: map-get(map-get($colors, other), link-color);
