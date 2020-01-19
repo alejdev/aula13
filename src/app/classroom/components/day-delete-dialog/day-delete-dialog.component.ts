@@ -32,7 +32,7 @@ export class DayDeleteDialogComponent implements OnInit {
       .then((result: any) => {
         this.dialogRef.close(this.data.day)
         this.router.navigate(['aula/diario'])
-        this.toastService.success(`MSG.DAY_DELETE_OK`)
+        this.toastService.success('MSG.DAY_DELETE_OK')
       })
       .catch((err: any) => {
         this.toastService.error('ERR.UNEXPECTED_ERROR')

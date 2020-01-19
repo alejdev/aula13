@@ -29,7 +29,7 @@ export class ClassroomDeleteDialogComponent implements OnInit {
     this.classroomService.deleteClassroom(this.data.idEntity)
       .then((result: any) => {
         this.dialogRef.close(this.data.entity)
-        this.toastService.success(`MSG.CLASSROOM_DELETE_OK`)
+        this.toastService.success('MSG.CLASSROOM_DELETE_OK')
       })
       .catch((err: any) => {
         this.toastService.error('ERR.UNEXPECTED_ERROR')

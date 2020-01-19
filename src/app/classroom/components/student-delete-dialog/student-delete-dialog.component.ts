@@ -32,7 +32,7 @@ export class StudentDeleteDialogComponent implements OnInit {
       .then((result: any) => {
         this.dialogRef.close(this.data.student)
         this.router.navigate(['aula/alumnos'])
-        this.toastService.success(`MSG.STUDENT_DELETE_OK`)
+        this.toastService.success('MSG.STUDENT_DELETE_OK')
       })
       .catch((err: any) => {
         this.toastService.error('ERR.UNEXPECTED_ERROR')
