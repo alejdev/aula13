@@ -1,4 +1,4 @@
-<div class="mb-2" fxLayout="row" fxLayoutAlign="space-between center">
+<div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
   <!-- Title -->
   <h2 class="m-0" mat-dialog-title>{{(data.idDay ? 'EDIT_DAY' : 'ADD_DAY') | translate}}</h2>
 
@@ -12,7 +12,7 @@
 
   <form [formGroup]="dayFormGroup" autocomplete="off">
 
-    <div class="mb-2 mt-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
+    <div class="mb-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
 
       <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxFlex
         ngClass.xs="full">
@@ -37,7 +37,7 @@
         </mat-form-field>
 
         <!-- Date -->
-        <mat-form-field appearance="outline" fxFlex="35">
+        <mat-form-field class="mb-1" appearance="outline" fxFlex="35">
           <mat-label>{{'FORM.DATE' | translate}}</mat-label>
           <input class="pl-h" matInput required formControlName="dayDateCtrl" [matDatepicker]="dp">
           <mat-datepicker #dp></mat-datepicker>

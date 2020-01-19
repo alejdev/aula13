@@ -10,6 +10,8 @@ import { ModelService } from 'src/app/shared/services/model.service'
 
 import _moment from 'moment'
 import { default as _rollupMoment } from 'moment'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 const moment = _rollupMoment || _moment
 
 @Component({
@@ -24,7 +26,8 @@ export class StudentCreationComponent implements OnInit {
   academicCourses: any[]
   conservatoryCourses: any[]
   instruments: any[]
-  subjects: any[]
+  classroomList: any[]
+  subjectList: any[]
   arrayPhones: any = {}
 
   studentFormGroup: FormGroup
@@ -36,6 +39,8 @@ export class StudentCreationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private elementRef: ElementRef,
     private studentService: StudentService,
+    private subjectService: SubjectService,
+    private classroomService: ClassroomService,
     private toastService: ToastService,
     private dialogRef: MatDialogRef<StudentCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -48,7 +53,10 @@ export class StudentCreationComponent implements OnInit {
     this.academicCourses = ModelService.academicCourseList
     this.conservatoryCourses = ModelService.conservatoryCourseList
     this.instruments = ModelService.instrumentList
-    this.subjects = ModelService.subjectList
+    this.classroomList = this.classroomService.getCachedClassroomList()
+    this.subjectList = this.subjectService.getCachedSubjectList()
+    console.log(this.classroomList)
+    console.log(this.subjectList)
 
     this.student = this.data.student
     this.equals = UtilService.equals
@@ -168,7 +176,7 @@ export class StudentCreationComponent implements OnInit {
       }
       createStudent
         .then((result: any) => {
-          this.toastService.info(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)
+          this.toastService.success(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.student)
         })
         .catch((err: any) => {

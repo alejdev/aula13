@@ -106,7 +106,7 @@ export class DayCreationComponent implements OnInit {
       }
       createDay
         .then((result: any) => {
-          this.toastService.info(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
+          this.toastService.success(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.day)
         })
         .catch((err: any) => {

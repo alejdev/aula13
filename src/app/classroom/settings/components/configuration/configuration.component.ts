@@ -65,7 +65,7 @@ export class ConfigurationComponent implements OnInit {
 
   togglePanSideMenu(): void {
     this.settingService.value = { canPanSideMenu: !this.settingService.value.canPanSideMenu }
-    this.toastService.info(`MSG.RELOAD_PAGE_FOR_CHANGES`)
+    this.toastService.success(`MSG.RELOAD_PAGE_FOR_CHANGES`)
   }
 
 }

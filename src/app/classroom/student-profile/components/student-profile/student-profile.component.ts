@@ -52,46 +52,48 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
         this.student = this.studentService.mapStudent(result)
         console.log(this.student)
 
-        // Config header
-        this.headerService.configHeader({
-          title: this.student.personal.name,
-          back: '/aula/alumnos',
-          student: this.student,
-          truncable: true,
-          menuOptions: [{
-            name: 'EDIT_STUDENT',
-            icon: 'pen',
-            dialog: {
-              component: StudentCreationComponent,
-              config: {
-                width: 'calc(100vw - 2rem)',
-                maxWidth: '800px',
-                autoFocus: false,
-                data: {
-                  idStudent: this.studentId,
-                  student: { ...this.student }
+        if (this.student && this.student.personal) {
+          // Config header
+          this.headerService.configHeader({
+            title: this.student.personal.name,
+            back: '/aula/alumnos',
+            student: this.student,
+            truncable: true,
+            menuOptions: [{
+              name: 'EDIT_STUDENT',
+              icon: 'pen',
+              dialog: {
+                component: StudentCreationComponent,
+                config: {
+                  width: 'calc(100vw - 2rem)',
+                  maxWidth: '800px',
+                  autoFocus: false,
+                  data: {
+                    idStudent: this.studentId,
+                    student: { ...this.student }
+                  }
                 }
               }
-            }
-          }, {
-            name: 'ARCHIVE_STUDENT',
-            icon: 'archive',
-            dialog: {}
-          }, {
-            name: 'STUDENT_DELETE',
-            icon: 'trash',
-            dialog: {
-              component: StudentDeleteDialogComponent,
-              config: {
-                autoFocus: false,
-                data: {
-                  idStudent: this.studentId,
-                  student: { ...this.student }
+            }, {
+              name: 'ARCHIVE_STUDENT',
+              icon: 'archive',
+              dialog: {}
+            }, {
+              name: 'STUDENT_DELETE',
+              icon: 'trash',
+              dialog: {
+                component: StudentDeleteDialogComponent,
+                config: {
+                  autoFocus: false,
+                  data: {
+                    idStudent: this.studentId,
+                    student: { ...this.student }
+                  }
                 }
               }
-            }
-          }]
-        })
+            }]
+          })
+        }
       })
   }
 

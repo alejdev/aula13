@@ -132,12 +132,6 @@ export class ModelService {
     ]
   }]
 
-  public static subjectList: any[] = [
-    { id: '0', viewValue: 'LANGUAGE' },
-    { id: '1', viewValue: 'CELLO' },
-    { id: '2', viewValue: 'VIOLIN' }
-  ]
-
   public static studenModel: any = {
     classroom: {
       classroomId: '',
@@ -168,8 +162,14 @@ export class ModelService {
     title: ''
   }
 
+  public static classroomModel: any = {
+    name: '',
+    students: []
+  }
+
+  public static subjectModel: any = {
+    name: ''
+  }
+
   constructor() { }
-
-
-
 }
