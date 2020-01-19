@@ -30,11 +30,15 @@ export class ToastService extends MatSnackBar {
         data: {
           message: text,
           messageType: type,
-          icon: type === 'info' ? 'info' : type === 'warning' ? 'exclamation' : 'skull-crossbones'
+          icon: type === 'success' ? 'check' : type === 'info' ? 'info' : type === 'warning' ? 'exclamation' : 'skull-crossbones'
         },
         ...config
       }
     )
+  }
+
+  success(text: string): void {
+    this.say(text, 'success')
   }
 
   info(text: string): void {
