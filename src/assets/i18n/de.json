@@ -137,6 +137,7 @@
 	"LANGUAGE": "Sprache",
 	"MARKS": "Hinweise",
 	"MSG": {
+		"APP_UPDATED": "Die Anwendung wurde mit neuen Funktionen aktualisiert",
 		"BYE": "Bis bald",
 		"CLASSROOM_CREATE_OK": "Klassenzimmer erfolgreich erstellt",
 		"CLASSROOM_DELETE": "Möchten Sie diesen Klassenraum wirklich löschen?",

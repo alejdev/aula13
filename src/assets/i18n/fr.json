@@ -137,6 +137,7 @@
 	"LANGUAGE": "Langage",
 	"MARKS": "Remarques",
 	"MSG": {
+		"APP_UPDATED": "L'application a été mise à jour avec de nouvelles fonctionnalités",
 		"BYE": "À bientôt!",
 		"CLASSROOM_CREATE_OK": "Salle de classe créée avec succès",
 		"CLASSROOM_DELETE": "Voulez-vous vraiment supprimer cette classe?",
