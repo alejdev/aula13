@@ -1,0 +1,51 @@
+<div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
+
+	<!-- Title -->
+	<h2 class="m-0" mat-dialog-title>{{(data.idEntity ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}</h2>
+
+	<!-- Close dialog button -->
+	<button class="button-close" mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
+		<fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
+	</button>
+</div>
+
+<mat-dialog-content class="mat-typography">
+
+	<form [formGroup]="classroomFormGroup" autocomplete="off">
+
+		<div class="f-wrap mb-1" fxLayout="column">
+
+			<!-- Name -->
+			<mat-form-field appearance="outline" fxFlex="100">
+				<mat-label>{{'FORM.CLASSROOMS_NAME' | translate}}
+				</mat-label>
+				<input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.CLASSROOMS_NAME' | translate}}"
+					autocomplete="off">
+				<fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+			</mat-form-field>
+
+			<!-- Student list -->
+			<mat-form-field appearance="outline" fxFlex="100">
+				<mat-label>{{'FORM.STUDENT_LIST' | translate}}</mat-label>
+				<mat-select formControlName="studentListCtrl" multiple attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}">
+					<mat-option *ngFor="let student of studentList" [value]="student.id">
+						<span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+							<img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: student.personal?.avatar})" alt="Avatar">
+							<span>{{student.personal?.name}}</span>
+						</span>
+					</mat-option>
+				</mat-select>
+				<fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="user-graduate"></fa-icon>
+				<mat-hint align="start">{{'HINT.CLASSROOM_STUDENT_LIST' | translate}}</mat-hint>
+			</mat-form-field>
+		</div>
+	</form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button color="warn" mat-dialog-close
+		attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
+	<button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="classroomFormGroup.invalid"
+		(click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+</mat-dialog-actions>

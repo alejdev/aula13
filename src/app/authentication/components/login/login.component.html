@@ -19,12 +19,12 @@
     <form [formGroup]="formGroup" class="login-form pt-h">
 
       <!-- Email -->
-      <mat-form-field class="mb-1"  appearance="outline">
+      <mat-form-field class="mb-1" appearance="outline">
         <mat-label>{{'EMAIL' | translate}}</mat-label>
         <input matInput type="text" required formControlName="email">
         <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button
           attr.aria-label="{{'RESET_EMAIL' | translate}}" (click)="formGroup.controls['email'].reset()">
-          <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
+          <fa-icon class="mat-icon-24 mat-hint" icon="times"></fa-icon>
         </button>
         <mat-error *ngIf="!formGroup.controls['email'].valid">
           {{getError('email') | translate}}
@@ -34,14 +34,14 @@
       <div class="mb-1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
 
         <!-- Password -->
-        <mat-form-field  appearance="outline">
+        <mat-form-field appearance="outline">
           <mat-label>{{'PASSWORD' | translate}}</mat-label>
           <input matInput type="{{passwordType}}" required formControlName="password">
           <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button
             attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}"
             (click)="togglePasswordVisibility()">
-            <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
-            </mat-icon>
+            <fa-icon class="mat-icon-24 mat-hint" icon="{{passwordType === 'password' ? 'eye' : 'eye-slash'}}">
+            </fa-icon>
           </button>
           <mat-error *ngIf="!formGroup.controls['password'].valid">
             {{getError('password') | translate}}
@@ -49,14 +49,14 @@
         </mat-form-field>
 
         <!-- Confirm password -->
-        <mat-form-field *ngIf="!login"  appearance="outline">
+        <mat-form-field *ngIf="!login" appearance="outline">
           <mat-label>{{'CONFIRM_PASSWORD' | translate}}</mat-label>
           <input matInput type="{{passwordType}}" required formControlName="confirmPassword">
           <button mat-button *ngIf="formGroup.controls['confirmPassword'].value" matSuffix mat-icon-button
             attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}"
             (click)="togglePasswordVisibility()">
-            <mat-icon class="mat-icon-24 mat-hint">{{passwordType === 'password' ? 'visibility' : 'visibility_off'}}
-            </mat-icon>
+            <fa-icon class="mat-icon-24 mat-hint" icon="{{passwordType === 'password' ? 'eye' : 'eye-slash'}}">
+            </fa-icon>
           </button>
           <mat-error *ngIf="!formGroup.controls['confirmPassword'].valid">
             {{getError('confirmPassword') | translate}}

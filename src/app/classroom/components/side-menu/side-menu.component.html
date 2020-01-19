@@ -1,25 +1,61 @@
 <div class="sidenav-container">
   <div class="side-menu-container" fxLayout="column" fxLayoutGap="10px">
 
+    <!-- Title -->
+    <h1 class="pl-1 pt-h mat-body mat-hint">{{title}}</h1>
+
     <!-- User -->
-    <div class="user-menu" fxLayout="column" fxLayoutAlign="center center">
-      <a matRipple class="avatar avatar-button border-theme border-theme-button"
-        [@animateAvatar]="linkText ? 'huge' : 'small'">
+    <div class="mt-1 mb-2" fxLayout="column" fxLayoutAlign="center center">
+      <a matRipple class="avatar avatar-button border-theme border-theme-button">
         <img class="avatar-image" [src]="srcImage({img: getUser.getUserLogged()?.avatar})" alt="Avatar">
       </a>
-      <span class="user-name mt-1"
-        [@animateText]="linkText ? 'show' : 'hide'">{{ getUser.getUserLogged()?.name || getUser.getUserLogged()?.email}}
+      <span class="user-name mt-1">{{ getUser.getUserLogged()?.name || getUser.getUserLogged()?.email}}
       </span>
     </div>
 
     <!-- Menu -->
-    <mat-nav-list class="m-0 p-0" *ngFor="let menu of menuItems; index as i">
-      <mat-divider *ngIf="i !== 0 && menu.length !== 0"></mat-divider>
-      <a class="nav-list-item" mat-list-item *ngFor="let item of menu" [routerLink]="[ '/' + item?.url ]"
-        routerLinkActive="active {{item?.theme}}" #routerLinkActiveInstance="routerLinkActive"
-        [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1">
-        <mat-icon class="mat-hint">{{ item?.icon }}</mat-icon>
-        <span class="mat-hint pl-h ml-q" [@animateText]="linkText ? 'show' : 'hide'">{{ item?.name | translate}}</span>
+    <div class="nav-list-container">
+      <mat-nav-list class="m-0 p-0 mb-1" *ngFor="let menu of menuItems; index as i">
+        <div class="lola">
+          <ng-container *ngFor="let item of menu">
+            <a mat-list-item (click)="onItemSelected(item)" [ngClass]="{'active': item.expanded}">
+              <fa-icon class="mat-hint" [icon]="item.icon"></fa-icon>
+              <span class="mat-hint pl-h ml-q">{{ item?.name | translate}}</span>
+              <span fxFlex></span>
+              <button mat-icon-button *ngIf="item.children && item.children.length"
+                [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" (click)="createElement($event, item)">
+                <fa-icon class="mat-hint" icon="plus"></fa-icon>
+              </button>
+            </a>
+            <div *ngIf="item.expanded">
+              <ng-container *ngFor="let child of item.children">
+                <a mat-list-item (click)="onItemSelected(child)" [ngClass]="{'expanded': child.expanded}">
+                  <span class="mat-hint pl-1 ml-1">{{child?.name}}</span>
+                  <span fxFlex></span>
+                  <button mat-icon-button [matMenuTriggerFor]="menuOptionsId"
+                    attr.aria-label="{{'OPTION_MENU' | translate}}">
+                    <fa-icon class="mat-hint" icon="ellipsis-v"></fa-icon>
+                  </button>
+                </a>
+                <mat-menu #menuOptionsId="matMenu">
+                  <button *ngFor="let option of menuOptions" mat-menu-item
+                    (click)="openMenuOption($event, item, child, option)">
+                    <fa-icon class="mat-icon-16 mat-hint" [icon]="option.icon"></fa-icon>
+                    <span>{{option.name | translate}}</span>
+                  </button>
+                </mat-menu>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </mat-nav-list>
+    </div>
+
+    <!-- Configuration -->
+    <mat-nav-list class="m-0 p-0">
+      <a mat-list-item [routerLink]="[ '/aula/configuracion' ]" routerLinkActive="active">
+        <fa-icon class="mat-hint" icon="cog"></fa-icon>
+        <span class="mat-hint pl-h ml-q">{{ 'SETTINGS' | translate}}</span>
       </a>
     </mat-nav-list>
   </div>

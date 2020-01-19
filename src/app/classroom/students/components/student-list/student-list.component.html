@@ -1,19 +1,14 @@
 <section class="container">
-  <!-- Title -->
-  <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
-    <h2 class="mat-h1 pt-1">{{title | translate}}</h2>
-    <a13-floating-button text="ADD_STUDENT" icon="add" (click)="createStudent()"></a13-floating-button>
-  </div>
 
   <!-- Filter -->
   <mat-form-field appearance="outline">
     <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
     <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)"
       attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
-    <mat-icon class="mat-hint" matSuffix *ngIf="!studentFilter">search</mat-icon>
+    <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
     <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button
       attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
-      <mat-icon class="mat-icon-24 mat-hint">close</mat-icon>
+      <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
     </button>
   </mat-form-field>
 
@@ -38,4 +33,7 @@
 
   <!-- Empty list -->
   <h3 *ngIf="!studentListFiltered.length" class="mat-h1 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+
+  <!-- Floating button -->
+  <a13-floating-button text="ADD_STUDENT" icon="add" (click)="createStudent()"></a13-floating-button>
 </section>

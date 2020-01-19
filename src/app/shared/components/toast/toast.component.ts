@@ -15,7 +15,7 @@ export class ToastComponent implements OnInit {
   ngOnInit(): void { }
 
   case(messageType: string): boolean {
-    const reg = RegExp('info|warning|error', 'g')
+    const reg = RegExp('success|info|warning|error', 'g')
     return reg.test(messageType)
   }
 

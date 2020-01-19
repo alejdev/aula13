@@ -8,8 +8,6 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/de'
 import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
-import { MomentDateAdapter } from '@angular/material-moment-adapter'
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material'
 import _moment from 'moment'
 import { default as _rollupMoment } from 'moment'
 const moment = _rollupMoment || _moment
@@ -22,26 +20,10 @@ import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { SettingService } from '../../services/setting.service'
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'DD MMM, YYYY',
-  },
-  display: {
-    dateInput: 'DD MMM, YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  }
-}
-
 @Component({
   selector: 'a13-day-creation',
   templateUrl: './day-creation.component.html',
-  styleUrls: ['./day-creation.component.scss'],
-  providers: [
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-  ],
+  styleUrls: ['./day-creation.component.scss']
 })
 export class DayCreationComponent implements OnInit {
 
@@ -50,7 +32,7 @@ export class DayCreationComponent implements OnInit {
 
   equals: any
   srcImage: any
-  formGroup: FormGroup
+  dayFormGroup: FormGroup
   maxlengthTitle: number = 50
   ckeditor: any = DecoupledEditor
   editorConfig: any
@@ -66,16 +48,15 @@ export class DayCreationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.day = this.data.day
     this.studentList = this.studentService.getCachedStudentList()
     this.equals = UtilService.equals
     this.srcImage = UtilService.srcImage
 
     // Init form controls
-    this.formGroup = this.formBuilder.group({
+    this.dayFormGroup = this.formBuilder.group({
       dayStudentCtrl: [this.day.student, Validators.required],
-      dayDateCtrl: [moment().toISOString(), Validators.required],
+      dayDateCtrl: [moment(UtilService.today(), 'DD/MM/YYYY'), Validators.required],
       dayTitleCtrl: [this.day.title, Validators.required],
       dayContentCtrl: [this.day.content, Validators.required],
     })
@@ -99,15 +80,23 @@ export class DayCreationComponent implements OnInit {
   }
 
   setGroup(control: string, group: any): void {
-    this.formGroup.value[control] = group.groupId
+    this.dayFormGroup.value[control] = group.groupId
+  }
+
+  formatOutputDate(date: any) {
+    if (date && date._isAMomentObject && date._isValid) {
+      return moment(date, 'DD/MM/YYYY').unix()
+    }
+    return ''
   }
 
   save(): void {
-    if (this.formGroup.valid) {
+    if (this.dayFormGroup.valid) {
       const day = {
-        name: this.formGroup.value.dayTitleCtrl,
-        age: this.formGroup.value.dayContentCtrl,
-        academicCourse: this.formGroup.value.dayStudentCourseCtrl,
+        studentId: this.dayFormGroup.value.dayStudentCtrl.id,
+        date: this.formatOutputDate(this.dayFormGroup.value.dayDateCtrl),
+        title: this.dayFormGroup.value.dayTitleCtrl,
+        content: this.dayFormGroup.value.dayContentCtrl
       }
       let createDay: any
       if (this.data.idDay) {
@@ -117,7 +106,7 @@ export class DayCreationComponent implements OnInit {
       }
       createDay
         .then((result: any) => {
-          this.toastService.info(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
+          this.toastService.success(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.day)
         })
         .catch((err: any) => {

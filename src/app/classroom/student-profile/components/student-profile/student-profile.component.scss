@@ -4,36 +4,16 @@
   border-radius: 0;
   height: 56px;
 
-  .title-name {
-    line-height: 1.25;
-  }
-
   .avatar {
     max-width: 96px;
     max-height: 96px;
   }
 }
 
-a.clickable-phone-number {
-  display: block;
-  text-decoration: none !important;
-
-  .phone {
-    color: var(--light-theme-primary);
-    margin-left: .5rem;
-  }
-}
-
 // Profile container
 .profile-container {
-  height: calc(100vh - var(--main-header-size) - 56px);
   margin-left: 2px;
   overflow: overlay;  
-}
-
-// General
-.mat-menu-item mat-icon {
-  color: grey;
 }
 
 @media only screen and (max-width: 600px) {

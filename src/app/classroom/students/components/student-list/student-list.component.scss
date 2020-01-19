@@ -9,5 +9,11 @@ mat-form-field {
 
 .reset-button {
   position: relative;
-  top: -2px
+  top: -8px;
+
+  fa-icon {
+    position: relative;
+    top: 1px;
+    right: 4px;
+  }
 }

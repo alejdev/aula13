@@ -1,16 +1,40 @@
 .header {
+  position: fixed;
+  top: 0;
   width: 100%;
   height: var(--main-header-size);
-  position: relative;
-  top: 0;
-  z-index: 1000;
+  min-height: var(--main-header-size);
+  z-index: 20;
+  white-space: normal;
 
+  .title {
+    line-height: 1.25;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .title,
   .menu-button {
-    color: white;
+    color: var(--light-theme-background);
   }
 
-  h1 a {
-    color: white;
-    text-decoration: none;
+  &.height-auto {
+    height: auto;
   }
+}
+
+a.clickable-phone-number {
+  display: block;
+  text-decoration: none !important;
+
+  .phone {
+    color: var(--light-theme-primary);
+    margin-left: .5rem;
+  }
+}
+
+.mat-menu-item fa-icon {
+  position: relative;
+  top: 1px;
+  margin-right: 10px;
 }

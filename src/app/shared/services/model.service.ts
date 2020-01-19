@@ -132,45 +132,44 @@ export class ModelService {
     ]
   }]
 
-  public static subjectList: any[] = [
-    { id: '0', viewValue: 'LANGUAGE' },
-    { id: '1', viewValue: 'CELLO' },
-    { id: '2', viewValue: 'VIOLIN' }
-  ]
-
   public static studenModel: any = {
-    name: '',
-    avatar: 'user-default',
-    age: '',
-    academicCourse: '',
-    parents: {
-      father: {
-        name: '',
-        phone: ''
-      },
-      mother: {
-        name: '',
-        phone: ''
-      }
+    classroom: {
+      classroomId: '',
+      subjects: []
+    },
+    contactInformation: {
+      phones: []
     },
     musical: {
       group: '',
-      teacher: '',
       instrument: '',
-      subjects: []
+      teacher: ''
+    },
+    personal: {
+      academicCourse: '',
+      avatar: 'user-default',
+      birthdate: '',
+      name: '',
+      observations: ''
     }
   }
 
   public static dayModel: any = {
-    title: '',
     content: '',
-    studentId: '',
-    student: null,
     date: null,
+    student: null,
+    studentId: '',
+    title: ''
+  }
+
+  public static classroomModel: any = {
+    name: '',
+    students: []
+  }
+
+  public static subjectModel: any = {
+    name: ''
   }
 
   constructor() { }
-
-
-
 }

@@ -9,6 +9,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 
 import { MatDialog } from '@angular/material'
+import { HeaderService } from 'src/app/classroom/services/header.service'
 
 @Component({
   selector: 'a13-student-list',
@@ -18,7 +19,6 @@ import { MatDialog } from '@angular/material'
 })
 export class StudentListComponent implements OnInit, OnDestroy {
 
-  title = 'STUDENTS'
   studentList: any[]
   studentListObservable: any
   studentListFiltered: any[]
@@ -38,10 +38,16 @@ export class StudentListComponent implements OnInit, OnDestroy {
   constructor(
     private studentService: StudentService,
     private studentPipe: StudentPipe,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
+    // Config header
+    this.headerService.configHeader({
+      title: 'STUDENTS'
+    })
+
     this.studentList = []
     this.studentListFiltered = []
     this.getStudentList()
@@ -52,8 +58,9 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.dialog.open(StudentCreationComponent, {
       width: 'calc(100vw - 2rem)',
       maxWidth: '800px',
+      autoFocus: false,
       data: {
-        student: ModelService.studenModel
+        student: UtilService.clone(ModelService.studenModel)
       }
     })
   }

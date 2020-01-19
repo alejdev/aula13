@@ -11,17 +11,6 @@ import { PickupImageComponent, PickupImageDialogComponent } from '../components/
 import { OrderByPipe } from './pipes/order-by.pipe'
 import { StudentPipe } from './pipes/student.pipe'
 
-import { MatButtonModule } from '@angular/material/button'
-import { MatCardModule } from '@angular/material/card'
-import { MatDialogModule } from '@angular/material/dialog'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatIconModule } from '@angular/material/icon'
-import { MatInputModule } from '@angular/material/input'
-import { MatRippleModule } from '@angular/material/core'
-import { MatSortModule } from '@angular/material/sort'
-import { MatStepperModule } from '@angular/material/stepper'
-import { MatSelectModule } from '@angular/material/select'
-
 @NgModule({
   declarations: [
     StudentListComponent,

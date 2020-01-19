@@ -4,7 +4,6 @@ import { SharedModule } from 'src/app/shared/shared.module'
 
 import { StudentProfileRoutingModule } from './student-profile-routing.module'
 
-import { MatMenuModule } from '@angular/material/menu'
 import { MatTabsModule } from '@angular/material/tabs'
 
 import { StudentProfileComponent } from './components/student-profile/student-profile.component'
@@ -24,7 +23,6 @@ import { GroupPipe } from './pipes/group.pipe'
     SharedModule,
 
     // Material
-    MatMenuModule,
     MatTabsModule
   ],
   exports: [

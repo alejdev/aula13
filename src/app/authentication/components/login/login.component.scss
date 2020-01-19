@@ -41,7 +41,17 @@
 
 mat-form-field {
   width: 100%;
-  min-width: 100px
+  min-width: 100px;
+
+  button[mat-icon-button] {
+    position: relative;
+    top: -8px;
+
+    fa-icon {
+      top: 0;
+      margin-left: 0
+    }
+  }
 }
 
 .login-button {

@@ -1,0 +1,36 @@
+<div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
+
+	<!-- Title -->
+	<h2 class="m-0" mat-dialog-title>{{(data.idEntity ? 'EDIT_SUBJECT' : 'CREATE_SUBJECT') | translate}}</h2>
+
+	<!-- Close dialog button -->
+	<button class="button-close" mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
+		<fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
+	</button>
+</div>
+
+<mat-dialog-content class="mat-typography">
+
+	<form [formGroup]="subjectFormGroup" autocomplete="off">
+
+		<div class="f-wrap" fxLayout="column">
+
+			<!-- Name -->
+			<mat-form-field appearance="outline" fxFlex="100">
+				<mat-label>{{'FORM.SUBJECTS_NAME' | translate}}
+				</mat-label>
+				<input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.SUBJECTS_NAME' | translate}}"
+					autocomplete="off">
+				<fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+			</mat-form-field>
+		</div>
+	</form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button color="warn" mat-dialog-close
+		attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
+	<button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="subjectFormGroup.invalid"
+		(click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+</mat-dialog-actions>

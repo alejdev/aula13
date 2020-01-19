@@ -1,0 +1,15 @@
+<mat-toolbar class="footer-toolbar" fxLayout="row" fxLayoutAlign="space-around center">
+
+	<!-- Items -->
+	<ng-container *ngFor="let item of toolbarItems">
+		<button class="menu-button" mat-icon-button [routerLink]="[ '/aula/' + item?.url ]" attr.aria-label="{{item.name | translate}}" routerLinkActive="active">
+			<fa-icon class="mat-hint mat-icon-22" [icon]="item.icon"></fa-icon>
+		</button>
+	</ng-container>
+
+	<!-- Side menu -->
+	<button class="menu-button" mat-icon-button (click)="toggleSinenav()"
+		attr.aria-label="{{'OPEN_CLOSE_MENU' | translate}}">
+		<fa-icon class="mat-hint mat-icon-22" icon="bars"></fa-icon>
+	</button>
+</mat-toolbar>

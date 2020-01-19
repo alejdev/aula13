@@ -1,21 +1,24 @@
-<!-- Header -->
-<a13-header [sidenav]="sideMenu"></a13-header>
-
-<!-- Sidebar container -->
 <mat-sidenav-container class="sidenav-container">
 
   <!-- Side-menu -->
-  <mat-sidenav #sideMenu class="sidenav border-0" [mode]="mobileQueryS.matches ? 'over' : 'side'"
-    [opened]="!mobileQueryS.matches" [fixedInViewport]="true" fixedTopGap="64"
-    [@onSideNavChange]="{value: onSideNavChange ? 'open' : 'close', params: {widthClose: animStyles.close.width, widthOpen: animStyles.open.width}}">
+  <mat-sidenav #sideMenu class="sidenav border-0" mode="over" [fixedInViewport]="true" [autoFocus]="false">
     <a13-side-menu></a13-side-menu>
   </mat-sidenav>
 
   <!-- Content -->
-  <mat-sidenav-content id="main-content-container"
-    [@onMainContentChange]="{value: onSideNavChange ? 'open' : 'close', params: {leftClose: animStyles.close.left, leftOpen: animStyles.open.left}}">
-    <div class="main-content">
-      <router-outlet></router-outlet>
+  <mat-sidenav-content id="main-content-container">
+    <div class="main-content" fxLayout="column">
+      <!-- Header -->
+      <a13-header></a13-header>
+
+      <!-- Router -->
+      <main class="router-container">
+        <router-outlet></router-outlet>
+      </main>
+
+      <!-- Footer toolbar -->
+      <a13-footer-toolbar [sidenav]="sideMenu"></a13-footer-toolbar>
     </div>
   </mat-sidenav-content>
+
 </mat-sidenav-container>

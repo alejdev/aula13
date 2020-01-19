@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { MediaMatcher } from '@angular/cdk/layout'
+import { Component, OnInit } from '@angular/core'
 
 import { MatDialog } from '@angular/material'
 
-import { SidenavService } from 'src/app/classroom/services/sidenav.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
+import { HeaderService } from '../../services/header.service'
 
 import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 
@@ -15,37 +14,38 @@ import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 })
 export class HeaderComponent implements OnInit {
 
-  title = 'Aula 13'
-  @Input() sidenav: any
-  mobileQueryS: MediaQueryList
   themeName: any
-  sidenavState: boolean
+  headerConfig: any
+  isTruncated: boolean
 
   constructor(
-    private media: MediaMatcher,
-    private sidenavService: SidenavService,
     private themeService: ThemeService,
+    private headerService: HeaderService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    // Set mediaQuery
-    this.mobileQueryS = this.media.matchMedia('(max-width: 600px)')
-
     // Get theme
     this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'
     })
 
-    // Get sidenav state
-    this.sidenavService.sidenavState.subscribe(result => this.sidenavState = result)
+    // Theming service
+    this.headerService.config.subscribe((config: any) => {
+      this.headerConfig = config
+      this.isTruncated = true
+    })
   }
 
-  toggleSinenav(): void {
-    if (this.mobileQueryS.matches) {
-      this.sidenav.toggle()
-    } else {
-      this.sidenavService.sidenavState.next(!this.sidenavService.sidenavState.value)
+  openDialog(component: any, config: any) {
+    if (component && config) {
+      this.dialog.open(component, config)
+    }
+  }
+
+  truncate() {
+    if (this.headerConfig.truncable) {
+      this.isTruncated = !this.isTruncated
     }
   }
 

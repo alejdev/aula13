@@ -1,6 +1,11 @@
 mat-form-field {
   width: 100%;
   padding: 0 5px;
+
+  .avatar-container {
+    position: relative;
+    top:  3px;
+  }
 }
 
 .full {

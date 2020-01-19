@@ -70,4 +70,13 @@ export class UtilService {
   public static equals(o1: any, o2: any): boolean {
     return o1 && o2 ? o1.id === o2.id : o1 === o2
   }
+
+  // Clone a object
+  public static clone(object: any): any {
+    return JSON.parse(JSON.stringify(object))
+  }
+
+  public static today() {
+    return new Date()
+  }
 }

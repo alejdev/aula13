@@ -1,10 +1,7 @@
 <section class="container">
 
-  <!-- Title -->
-  <h2 class="mat-h1 pt-1 pb-1">{{title | translate}}</h2>
-
   <!-- Lenguaje -->
-  <h3 class="mat-h2 mat-hint">{{'GENERAL' | translate}}</h3>
+  <h3 class="mat-h2 mt-h mat-hint">{{'GENERAL' | translate}}</h3>
 
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
     <img class="flag-selected" [src]="getFlag(langControl.value)"
@@ -29,7 +26,7 @@
   <h3 class="mat-h2 mat-hint">{{'THEME' | translate}}</h3>
 
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
-    <mat-icon color="primary">{{themeControl.icon}}</mat-icon>
+    <fa-icon class="mat-icon-22 color-primary" [icon]="themeControl.icon"></fa-icon>
     <mat-slide-toggle labelPosition="before" (change)="toggleTheme()" [(ngModel)]="themeIsDark">
       {{'THEMING.DARK_MODE' | translate}}
     </mat-slide-toggle>
@@ -41,7 +38,7 @@
   <h3 class="mat-h2 mat-hint">{{'BEHAVIOR.TITLE' | translate}}</h3>
 
   <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
-    <mat-icon color="primary">swap_horiz</mat-icon>
+    <fa-icon class="mat-icon-20 color-primary color-primary" icon="stream"></fa-icon>
     <div fxLayout="column">
       <mat-slide-toggle labelPosition="before" (change)="togglePanSideMenu()" [(ngModel)]="canPanSideMenu">
         {{'BEHAVIOR.PAN_SIDEMENU' | translate}}

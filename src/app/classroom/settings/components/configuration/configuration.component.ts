@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms'
 import { LanguageService } from 'src/app/classroom/services/language.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { SettingService } from 'src/app/shared/services/setting.service'
+import { ToastService } from 'src/app/shared/services/toast.service'
+import { HeaderService } from 'src/app/classroom/services/header.service'
 
 @Component({
   selector: 'a13-configuration',
@@ -22,10 +24,18 @@ export class ConfigurationComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private themeService: ThemeService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private toastService: ToastService,
+    private headerService: HeaderService
   ) { }
 
   ngOnInit(): void {
+
+    // Config header
+    this.headerService.configHeader({
+      title: 'SETTINGS'
+    })
+
     // Language list
     this.languages = this.languageService.languages
 
@@ -55,7 +65,7 @@ export class ConfigurationComponent implements OnInit {
 
   togglePanSideMenu(): void {
     this.settingService.value = { canPanSideMenu: !this.settingService.value.canPanSideMenu }
-    location.reload()
+    this.toastService.success(`MSG.RELOAD_PAGE_FOR_CHANGES`)
   }
 
 }

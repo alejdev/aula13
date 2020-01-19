@@ -1,4 +1,20 @@
+mat-sidenav.sidenav {
+  min-width: 280px;
+  max-width: 280px;
+}
+
+#main-content-container {
+  height: 100vh;
+}
+
 .main-content {
   width: 100%;
-  height: calc(100vh - var(--main-header-size)) !important;
+  height: 100%;
+  padding-top: var(--main-header-size);
+  overflow: hidden;
+
+  .router-container {
+    flex: 1 0 auto;
+    min-height: auto;
+  }
 }
