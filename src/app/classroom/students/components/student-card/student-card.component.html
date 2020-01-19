@@ -12,7 +12,7 @@
         <div fxLayout="row wrap">
           <span class="mat-small mat-hint mr-q"
             *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
-            <span [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
+            <span [ngClass]="{'txt-lowercase': !first}">{{subject | subjectName}}</span>
             <span>{{mark(student?.classroom?.subjects, i) | translate}}</span>
           </span>
         </div>

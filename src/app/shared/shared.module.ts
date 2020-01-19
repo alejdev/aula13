@@ -43,6 +43,7 @@ import { LoaderComponent } from './components/loader/loader.component'
 import { StringByPipe } from './pipes/string-by.pipe'
 import { AgePipe } from './pipes/age.pipe'
 import { StripHTMLPipe } from './pipes/strip-html.pipe'
+import { SubjectNamePipe } from './pipes/subject-name.pipe'
 
 import { LoaderService } from './services/loader.service'
 import { SettingService } from './services/setting.service'
@@ -71,10 +72,10 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
 
     StringByPipe,
     AgePipe,
+    StripHTMLPipe,
+    SubjectNamePipe,
 
-    LoaderComponent,
-
-    StripHTMLPipe
+    LoaderComponent
   ],
   imports: [
     // Angular
@@ -132,6 +133,8 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     // Mine
     StringByPipe,
     AgePipe,
+    StripHTMLPipe,
+    SubjectNamePipe,
     FloatingButtonComponent,
     DayCardComponent,
     DayCreationComponent,

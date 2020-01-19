@@ -7,7 +7,8 @@
 
       <!-- Avatar -->
       <a flex="grow" matRipple class="avatar border-theme">
-        <img class="avatar-image" [src]="srcImage({img: student?.personal?.avatar})" alt="{{student?.personal?.avatar}}">
+        <img class="avatar-image" [src]="srcImage({img: student?.personal?.avatar})"
+          alt="{{student?.personal?.avatar}}">
       </a>
 
       <!-- Student information -->
@@ -49,7 +50,7 @@
         <div class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
           <div class="badge mat-hint"
             *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
-            <span>{{subject.name}}</span>
+            <span>{{subject | subjectName}}</span>
           </div>
         </div>
 

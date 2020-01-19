@@ -181,9 +181,9 @@
       <!-- Subjects -->
       <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
         <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
-        <mat-select formControlName="subjectsCtrl" [compareWith]="equals" multiple
+        <mat-select formControlName="subjectsCtrl" multiple
           attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
-          <mat-option *ngFor="let subject of subjectList" [value]="subject">
+          <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
             {{subject.name}}
           </mat-option>
         </mat-select>
