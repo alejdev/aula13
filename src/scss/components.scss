@@ -85,13 +85,18 @@ mat-form-field {
 
 // Badge
 .badge {
-  padding: 3px 5px;
+  padding: 2px 4px;
   margin: 2px;
   font-size: 12px;
   border-radius: 3px;
+  border: 1px solid transparent;
 
   &:first-child {
     margin-left: 0;
+  }
+
+  &.badge-stroked {
+    background-color: transparent;
   }
 }
 

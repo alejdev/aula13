@@ -80,7 +80,7 @@ export class StudentCreationComponent implements OnInit {
         instrumentCtrl: [this.student.musical.instrument]
       }),
       classroomFormGroup: this.formBuilder.group({
-        classroomIdCtrl: [this.student.classroom.classroomId],
+        classroomsCtrl: [this.student.classroom.classrooms],
         subjectsCtrl: [this.student.classroom.subjects]
       })
     })
@@ -148,7 +148,7 @@ export class StudentCreationComponent implements OnInit {
     if (this.studentFormGroup.valid) {
       const student = {
         classroom: {
-          classroomId: this.studentFormGroup.value.classroomFormGroup.classroomIdCtrl || '',
+          classrooms: this.studentFormGroup.value.classroomFormGroup.classroomsCtrl || [],
           subjects: this.studentFormGroup.value.classroomFormGroup.subjectsCtrl || []
         },
         contactInformation: {

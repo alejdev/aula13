@@ -134,7 +134,7 @@ export class ModelService {
 
   public static studenModel: any = {
     classroom: {
-      classroomId: '',
+      classrooms: [],
       subjects: []
     },
     contactInformation: {

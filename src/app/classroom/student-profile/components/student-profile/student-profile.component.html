@@ -15,20 +15,22 @@
       <div fxFlex class="info">
 
         <!-- Number info -->
-        <div fxLayout="row" fxLayoutGap="1rem">
-          <div *ngIf="student?.personal?.birthdate" class="mat-small">
+        <div class="mb-q" fxLayout="row" fxLayoutGap="1rem">
+          <div *ngIf="student?.personal?.birthdate" class="">
             <span class="mb-0">{{student?.personal?.birthdate | age}}</span>
-            <span class="mat-hint"> {{'YEARS' | translate}}</span>
+            <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
           </div>
-          <div *ngIf="student?.personal?.academicCourse" class="mat-small">
+          <div *ngIf="student?.personal?.academicCourse" class="">
             <span class="mb-0">{{student?.personal?.academicCourse?.viewValue}}</span>
-            <span class="mat-hint">
-              {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}</span>
+            <span class="mat-hint mat-small">
+              {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
+            </span>
           </div>
-          <div *ngIf="student?.musical?.course" class="mat-small">
+          <div *ngIf="student?.musical?.course" class="">
             <span class="mb-0">{{student?.musical?.course.viewValue}}</span>
-            <span class="mat-hint">
-              {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}</span>
+            <span class="mat-hint mat-small">
+              {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
+            </span>
           </div>
         </div>
 
@@ -46,9 +48,14 @@
           <span class="mb-0">{{student?.musical?.teacher}}</span>
         </div>
 
-        <!-- Subjects -->
-        <div class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+        <div *ngIf="student?.classroom?.classrooms" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+          <!-- Classrooms -->
           <div class="badge mat-hint"
+            *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">
+            <span>{{classroom | classroomName}}</span>
+          </div>
+          <!-- Subjects -->
+          <div class="badge badge-stroked mat-hint"
             *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
             <span>{{subject | subjectName}}</span>
           </div>

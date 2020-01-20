@@ -168,8 +168,8 @@
 
       <!-- Classroom -->
       <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
-        <mat-label>{{'CLASSROOM' | translate}}</mat-label>
-        <mat-select formControlName="classroomIdCtrl" multiple attr.aria-label="{{'CLASSROOM' | translate}}">
+        <mat-label>{{'CLASSROOMS' | translate}}</mat-label>
+        <mat-select formControlName="classroomsCtrl" multiple attr.aria-label="{{'CLASSROOMS' | translate}}">
           <mat-option *ngFor="let classroom of classroomList" [value]="classroom.id">
             {{classroom.name}}
           </mat-option>
