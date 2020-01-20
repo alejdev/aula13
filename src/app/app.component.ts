@@ -24,8 +24,10 @@ export class AppComponent implements OnInit {
     // Service Worker
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
-        window.location.reload()
-        this.toastService.info('APP_UPDATED')
+        this.toastService.info('MSG.APP_UPDATED')
+        setTimeout(() => {
+          window.location.reload()
+        }, 5000)
       })
     }
 
