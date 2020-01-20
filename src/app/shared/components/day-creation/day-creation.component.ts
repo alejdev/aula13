@@ -85,7 +85,7 @@ export class DayCreationComponent implements OnInit {
 
   formatOutputDate(date: any) {
     if (date && date._isAMomentObject && date._isValid) {
-      return moment(date, 'DD/MM/YYYY').unix()
+      return moment(date, 'DD/MM/YYYY').unix() * 1000
     }
     return ''
   }

@@ -18,7 +18,7 @@
     <span fxFlex></span>
 
     <!-- Date -->
-    <span class="mat-small mat-hint">{{day?.date | date: 'd MMM'}}</span>
+    <span class="mat-small mat-hint text-date">{{day?.date | date: 'd MMM, yy'}}</span>
   </div>
   <mat-card-content class="day-container truncate-2">
     {{day?.content | stripHTML}}
