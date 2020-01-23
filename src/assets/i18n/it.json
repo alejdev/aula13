@@ -1,6 +1,5 @@
 {
 	"ACTION_NOT_REVERSED": "Questa azione non può essere annullata.",
-	"ADD_DAY": "Aggiungi record",
 	"ADD_STUDENT": "Aggiungi studente",
 	"AND": " e",
 	"APP_SUBTITLE": "Organizza le tue lezioni private",
@@ -26,6 +25,11 @@
 	"CREATE_CLASSROOM": "Crea un'aula",
 	"CREATE_SUBJECT": "Crea soggetto",
 	"DAILY": "Quotidiano",
+	"DAY": {
+		"ADD": "Aggiungi record",
+		"DELETE": "Elimina record",
+		"EDIT": "Modifica record"
+	},
 	"DELETE": "Cancellare",
 	"DELETE_CLASSROOM": "Elimina classe",
 	"DELETE_ELEMENT": "Elimina elemento",
@@ -146,6 +150,7 @@
 		"DAY_CREATE_OK": "È stato creato un nuovo record",
 		"DAY_DELETE": "Sei sicuro di voler eliminare questo record?",
 		"DAY_DELETE_OK": "Il registro è stato cancellato con successo",
+		"DAY_NOT_EXIST": "Questo record non esiste",
 		"DAY_UPDATE_OK": "Record modificato",
 		"LOGOUT": "Vuoi uscire?",
 		"LOGOUT_CONFIRM": "Se lo fai, speriamo che torni presto :)",

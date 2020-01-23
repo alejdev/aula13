@@ -1,6 +1,5 @@
 {
 	"ACTION_NOT_REVERSED": "Diese Aktion kann nicht rückgängig gemacht werden.",
-	"ADD_DAY": "Datensatz hinzufügen",
 	"ADD_STUDENT": "Schüler hinzufügen",
 	"AND": " und ",
 	"APP_SUBTITLE": "Organisieren Sie Ihren Privatunterricht",
@@ -26,6 +25,11 @@
 	"CREATE_CLASSROOM": "Erstellen Sie ein Klassenzimmer",
 	"CREATE_SUBJECT": "Betreff erstellen",
 	"DAILY": "Täglich",
+	"DAY": {
+		"ADD": "Datensatz hinzufügen",
+		"DELETE": "Registrierung löschen",
+		"EDIT": "Datensatz bearbeiten"
+	},
 	"DELETE": "Löschen",
 	"DELETE_CLASSROOM": "Klassenzimmer löschen",
 	"DELETE_ELEMENT": "Element löschen",
@@ -146,6 +150,7 @@
 		"DAY_CREATE_OK": "Ein neuer Datensatz wurde erstellt",
 		"DAY_DELETE": "Möchten Sie diesen Datensatz wirklich löschen?",
 		"DAY_DELETE_OK": "Die Registrierung wurde erfolgreich gelöscht",
+		"DAY_NOT_EXIST": "Dieser Datensatz existiert nicht",
 		"DAY_UPDATE_OK": "Geänderter Datensatz",
 		"LOGOUT": "Möchten Sie sich abmelden?",
 		"LOGOUT_CONFIRM": "Dann hoffen wir, dass Sie bald wiederkommen :)",

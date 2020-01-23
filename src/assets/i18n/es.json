@@ -1,6 +1,5 @@
 {
 	"ACTION_NOT_REVERSED": "Esta acción no podrá ser revertida",
-	"ADD_DAY": "Añadir registro",
 	"ADD_STUDENT": "Añadir alumno",
 	"AND": " y",
 	"APP_SUBTITLE": "Organiza tus clases particulares",
@@ -26,6 +25,11 @@
 	"CREATE_CLASSROOM": "Crear aula",
 	"CREATE_SUBJECT": "Crear asignatura",
 	"DAILY": "Diario",
+	"DAY": {
+		"ADD": "Añadir registro",
+		"DELETE": "Borrar registro",
+		"EDIT": "Editar registro"
+	},
 	"DELETE": "Borrar",
 	"DELETE_CLASSROOM": "Borrar aula",
 	"DELETE_ELEMENT": "Borrar elemento",
@@ -146,6 +150,7 @@
 		"DAY_CREATE_OK": "Se ha creado un nuevo registro",
 		"DAY_DELETE": "¿Estás seguro que quieres borrar este registro?",
 		"DAY_DELETE_OK": "Se ha borrado correctamente el registro",
+		"DAY_NOT_EXIST": "Este registro no existe",
 		"DAY_UPDATE_OK": "Registro modificado",
 		"LOGOUT": "¿Quieres cerrar la sesión?",
 		"LOGOUT_CONFIRM": "Si lo haces esperamos que vuelvas pronto :)",

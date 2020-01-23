@@ -1,6 +1,5 @@
 {
 	"ACTION_NOT_REVERSED": "Cette action ne peut pas être annulée.",
-	"ADD_DAY": "Ajouter un enregistrement",
 	"ADD_STUDENT": "Ajouter un étudiant",
 	"AND": " et",
 	"APP_SUBTITLE": "Organisez vos cours particuliers",
@@ -26,6 +25,11 @@
 	"CREATE_CLASSROOM": "Créer une salle de classe",
 	"CREATE_SUBJECT": "Créer un sujet",
 	"DAILY": "Tous les jours",
+	"DAY": {
+		"ADD": "Ajouter un enregistrement",
+		"DELETE": "Supprimer l'inscription",
+		"EDIT": "Modifier l'enregistrement"
+	},
 	"DELETE": "Supprimer",
 	"DELETE_CLASSROOM": "Supprimer la classe",
 	"DELETE_ELEMENT": "Supprimer l'élément",
@@ -146,6 +150,7 @@
 		"DAY_CREATE_OK": "Un nouveau record a été créé",
 		"DAY_DELETE": "Voulez-vous vraiment supprimer cet enregistrement?",
 		"DAY_DELETE_OK": "Le registre a été supprimé avec succès",
+		"DAY_NOT_EXIST": "Cet enregistrement n'existe pas",
 		"DAY_UPDATE_OK": "Enregistrement modifié",
 		"LOGOUT": "Voulez-vous vous déconnecter?",
 		"LOGOUT_CONFIRM": "Si vous le faites, nous espérons que vous reviendrez bientôt :)",

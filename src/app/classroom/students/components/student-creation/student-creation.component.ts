@@ -95,7 +95,7 @@ export class StudentCreationComponent implements OnInit {
 
   formatInputDate(date: any) {
     if (date) {
-      return moment(date, 'DD-MM-YYYY')
+      return moment(date, 'DD/MM/YYYY')
     }
     return ''
   }

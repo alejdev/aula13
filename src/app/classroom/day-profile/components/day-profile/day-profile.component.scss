@@ -1,0 +1,52 @@
+// Toolbar
+.profile-toolbar {
+  margin-left: 2px;
+  border-radius: 0;
+  height: 56px;
+}
+
+// Profile container
+.profile-container {
+  margin-left: 2px;
+  overflow: overlay;
+
+  .avatar {
+    max-width: 48px;
+    max-height: 48px;
+  }
+
+  .student-name {
+    outline: 0;
+  }
+}
+
+.day-container {
+  max-height: calc(100vh - 130px - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
+}
+
+@media only screen and (max-width: 960px) {
+  .day-container {
+    max-height: calc(100vh - 105px - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .profile-header,
+  .profile-container {
+    margin-left: 0;
+  }
+
+  .profile-header {
+    margin-left: 0;
+
+    .avatar {
+      max-width: 36px;
+      max-height: 36px;
+    }
+  }
+
+  .day-container {
+    max-height: calc(100vh - 78px - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
+  }
+}

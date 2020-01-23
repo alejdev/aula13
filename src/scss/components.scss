@@ -161,3 +161,18 @@ mat-form-field {
   border-radius: map-get(map-get($sizes, main), scroll-size) * 2;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .3);
 }
+
+// Overflow scroll
+.overflow-scroll-container {
+  height: 100%;
+  overflow: hidden;
+
+  .overflow-scroll {
+    flex: 1 0 auto;
+    min-height: auto;
+
+    .overflow-scroll-content {
+      overflow-y: auto;
+    }
+  }
+}

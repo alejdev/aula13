@@ -157,7 +157,6 @@ export class ModelService {
   public static dayModel: any = {
     content: '',
     date: null,
-    student: null,
     studentId: '',
     title: ''
   }

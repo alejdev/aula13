@@ -30,8 +30,8 @@ export class DayCreationComponent implements OnInit {
   day: any
   studentList: any[]
 
-  equals: any
   srcImage: any
+  equals: any
   dayFormGroup: FormGroup
   maxlengthTitle: number = 50
   ckeditor: any = DecoupledEditor
@@ -49,18 +49,8 @@ export class DayCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.day = this.data.day
-    this.studentList = this.studentService.getCachedStudentList()
-    this.equals = UtilService.equals
     this.srcImage = UtilService.srcImage
-
-    // Init form controls
-    this.dayFormGroup = this.formBuilder.group({
-      dayStudentCtrl: [this.day.student, Validators.required],
-      dayDateCtrl: [moment(UtilService.today(), 'DD/MM/YYYY'), Validators.required],
-      dayTitleCtrl: [this.day.title, Validators.required],
-      dayContentCtrl: [this.day.content, Validators.required],
-    })
-
+    this.equals = UtilService.equals
     this.editorConfig = {
       toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', '|', 'heading'],
       language: this.settingService.value.lang,
@@ -69,6 +59,28 @@ export class DayCreationComponent implements OnInit {
         { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
         { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
       ]
+    }
+
+    // Init form controls
+    this.dayFormGroup = this.formBuilder.group({
+      dayStudentCtrl: [this.day.student, Validators.required],
+      dayDateCtrl: [this.formatInputDate(this.day.date), Validators.required],
+      dayTitleCtrl: [this.day.title, Validators.required],
+      dayContentCtrl: [this.day.content, Validators.required],
+    })
+
+    this.getStudentList()
+  }
+
+  getStudentList(): void {
+    const studentList = this.studentService.getCachedStudentList()
+    if (studentList.length) {
+      this.studentList = studentList
+    } else {
+      this.studentService.getStudentList()
+        .then((result: any) => {
+          this.studentList = this.studentService.mapStudentList(result)
+        })
     }
   }
 
@@ -79,8 +91,11 @@ export class DayCreationComponent implements OnInit {
     )
   }
 
-  setGroup(control: string, group: any): void {
-    this.dayFormGroup.value[control] = group.groupId
+  formatInputDate(date: any): any {
+    if (date) {
+      return moment(new Date(date), 'DD/MM/YYYY')
+    }
+    return moment(UtilService.today(), 'DD/MM/YYYY')
   }
 
   formatOutputDate(date: any) {

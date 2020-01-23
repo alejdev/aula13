@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core'
 
-import { DailyModule } from './daily/daily.module'
 import { SharedModule } from '../shared/shared.module'
 import { SettingsModule } from './settings/settings.module'
 import { StudentsModule } from './students/students.module'
 import { StudentProfileModule } from './student-profile/student-profile.module'
+import { DailyModule } from './daily/daily.module'
+import { DayProfileModule } from './day-profile/day-profile.module'
 
 import { ClassroomComponent } from 'src/app/classroom/components/classroom/classroom.component'
 import { ClassroomRoutingModule } from './classroom-routing.module'
@@ -50,6 +51,7 @@ import { MatMenuModule } from '@angular/material'
     StudentProfileModule,
     SettingsModule,
     DailyModule,
+    DayProfileModule,
 
     // Material
     MatListModule,

@@ -14,6 +14,9 @@ const routes: Routes = [{
     path: 'diario',
     loadChildren: () => import('./daily/daily.module').then(m => m.DailyModule)
   }, {
+    path: 'dia/:id',
+    loadChildren: () => import('./day-profile/day-profile.module').then(m => m.DayProfileModule)
+  }, {
     path: 'alumnos',
     loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
   }, {

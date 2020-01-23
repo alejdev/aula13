@@ -1,6 +1,5 @@
 {
 	"ACTION_NOT_REVERSED": "This action cannot be reversed.",
-	"ADD_DAY": "Add record",
 	"ADD_STUDENT": "Add student",
 	"AND": " and",
 	"APP_SUBTITLE": "Organize your private lessons",
@@ -26,6 +25,11 @@
 	"CREATE_CLASSROOM": "Create classroom",
 	"CREATE_SUBJECT": "Create subject",
 	"DAILY": "Daily",
+	"DAY": {
+		"ADD": "Add record",
+		"DELETE": "Clear log",
+		"EDIT": "Edit record"
+	},
 	"DELETE": "Delete",
 	"DELETE_CLASSROOM": "Delete classroom",
 	"DELETE_ELEMENT": "Delete Item",
@@ -146,6 +150,7 @@
 		"DAY_CREATE_OK": "A new record has been created",
 		"DAY_DELETE": "Are you sure you want to delete this record?",
 		"DAY_DELETE_OK": "Registry has been deleted successfully",
+		"DAY_NOT_EXIST": "This record does not exist",
 		"DAY_UPDATE_OK": "Modified Record",
 		"LOGOUT": "Do you want to log out?",
 		"LOGOUT_CONFIRM": "If you do we hope you come back soon :)",

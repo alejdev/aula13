@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
@@ -30,6 +30,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
     private headerService: HeaderService
@@ -93,6 +94,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
               }
             }]
           })
+        } else {
+          this.router.navigate(['aula/alumnos'])
         }
       })
   }

@@ -14,9 +14,9 @@
     </div>
 
     <!-- Menu -->
-    <div class="nav-list-container">
-      <mat-nav-list class="m-0 p-0 mb-1" *ngFor="let menu of menuItems; index as i">
-        <div class="lola">
+    <div class="overflow-scroll-container">
+      <mat-nav-list class="m-0 p-0 mb-1 overflow-scroll" *ngFor="let menu of menuItems; index as i">
+        <div class="overflow-scroll-content nav-list">
           <ng-container *ngFor="let item of menu">
             <a mat-list-item (click)="onItemSelected(item)" [ngClass]="{'active': item.expanded}">
               <fa-icon class="mat-hint" [icon]="item.icon"></fa-icon>

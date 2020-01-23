@@ -1,0 +1,26 @@
+<!-- Profile container -->
+<div class="profile-container">
+	<header class="container profile-header mat-card mat-elevation-z0">
+		<div fxLayout="row" fxLayoutAlign="start center" *ngIf="day?.student">
+
+			<!-- Avatar -->
+			<a class="avatar border-theme mr-h" [routerLink]="[ '/aula/alumno', day?.studentId ]">
+				<img class="avatar-image p-0 mr-1" [src]="srcImage({img: day?.student?.personal?.avatar})" alt="Avatar">
+			</a>
+
+			<!-- Header info -->
+			<div class="header-info" fxLayout="column" fxLayoutAlign="center">
+				<span class="mat-h3 mb-0 pointer student-name"
+					[routerLink]="[ '/aula/alumno', day?.studentId ]">{{day?.student?.personal?.name}}</span>
+				<span class="mat-small mat-hint">{{day?.date | date: 'fullDate'}}</span>
+			</div>
+		</div>
+	</header>
+</div>
+
+<!-- Content -->
+<section class="overflow-scroll-container">
+	<div class="overflow-scroll">
+		<div class="day-container container overflow-scroll-content" [innerHTML]="day?.content"></div>
+	</div>
+</section>
