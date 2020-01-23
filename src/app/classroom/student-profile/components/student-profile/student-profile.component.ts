@@ -66,7 +66,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
               dialog: {
                 component: StudentCreationComponent,
                 config: {
-                  width: 'calc(100vw - 2rem)',
+                  width: 'calc(100vw)',
                   maxWidth: '800px',
                   autoFocus: false,
                   data: {

@@ -35,7 +35,7 @@
         </mat-form-field>
 
         <!-- Birthdate -->
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="35">
+        <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
           <mat-label>{{'FORM.BIRTHDATE' | translate}}</mat-label>
           <input class="pl-h" matInput formControlName="birthdateCtrl" [matDatepicker]="birthdatePicker"
             [max]="maxDate">
@@ -46,7 +46,7 @@
         </mat-form-field>
 
         <!-- Academic course -->
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="65">
+        <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
           <mat-label>{{'FORM.ACADEMIC_COURSE' | translate}}</mat-label>
           <mat-select formControlName="academicCourseCtrl" [compareWith]="equals"
             attr.aria-label="{{'FORM.ACADEMIC_COURSE' | translate}}">
@@ -59,15 +59,15 @@
           </mat-select>
           <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="school"></fa-icon>
         </mat-form-field>
-
-        <!-- Details -->
-        <mat-form-field appearance="outline" fxFlex="100">
-          <mat-label>{{'FORM.OBSERVATIONS' | translate}}</mat-label>
-          <textarea matInput formControlName="observationsCtrl" rows="4"></textarea>
-          <!-- <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="file-alt"></fa-icon> -->
-          <mat-hint align="start">{{'HINT.OBSERVATIONS' | translate}}</mat-hint>
-        </mat-form-field>
       </div>
+
+      <!-- Details -->
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>{{'FORM.OBSERVATIONS' | translate}}</mat-label>
+        <textarea matInput formControlName="observationsCtrl" rows="4"></textarea>
+        <!-- <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="file-alt"></fa-icon> -->
+        <mat-hint align="start">{{'HINT.OBSERVATIONS' | translate}}</mat-hint>
+      </mat-form-field>
     </div>
 
     <!-- CONTACT INFORMATION -->
@@ -122,7 +122,7 @@
       fxLayoutAlign="space-between center">
 
       <!-- Conservatory course -->
-      <mat-form-field appearance="outline" fxFlex="35">
+      <mat-form-field appearance="outline" fxFlex="50">
         <mat-label>{{'FORM.CONSERVATORY_COURSE' | translate}}</mat-label>
         <mat-select formControlName="courseCtrl" [compareWith]="equals"
           attr.aria-label="{{'FORM.CONSERVATORY_COURSE' | translate}}">
@@ -137,7 +137,7 @@
       </mat-form-field>
 
       <!-- Teacher-->
-      <mat-form-field appearance="outline" fxFlex="65">
+      <mat-form-field appearance="outline" fxFlex="50">
         <mat-label>{{'FORM.CONSERVATORY_TEACHER' | translate}}</mat-label>
         <input matInput formControlName="teacherCtrl" attr.aria-label="{{'FORM.CONSERVATORY_TEACHER' | translate}}"
           autocomplete="off">

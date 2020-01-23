@@ -18,7 +18,7 @@
         ngClass.xs="full">
 
         <!-- Student -->
-        <mat-form-field appearance="outline" fxFlex="65">
+        <mat-form-field appearance="outline" fxFlex="50">
           <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
           <div class="avatar-container mt-h" matPrefix>
             <img class="avatar avatar-xs p-0 mr-1"
@@ -37,7 +37,7 @@
         </mat-form-field>
 
         <!-- Date -->
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="35">
+        <mat-form-field ngClass.xs="mb-1" appearance="outline" fxFlex="50">
           <mat-label>{{'FORM.DATE' | translate}}</mat-label>
           <input class="pl-h" matInput required formControlName="dayDateCtrl" [matDatepicker]="dp">
           <mat-datepicker #dp></mat-datepicker>

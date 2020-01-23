@@ -56,7 +56,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   createStudent(): void {
     this.dialog.open(StudentCreationComponent, {
-      width: 'calc(100vw - 2rem)',
+      width: 'calc(100vw)',
       maxWidth: '800px',
       autoFocus: false,
       data: {

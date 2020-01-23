@@ -96,7 +96,7 @@ export class SideMenuComponent implements OnInit {
   createElement(ev: Event, item: any): void {
     ev.stopImmediatePropagation()
     this.dialog.open(item.create, {
-      width: 'calc(100vw - 2rem)',
+      width: 'calc(100vw)',
       maxWidth: '800px',
       autoFocus: false,
       data: {
@@ -109,7 +109,7 @@ export class SideMenuComponent implements OnInit {
     ev.stopImmediatePropagation()
     if (option.id === 'edit') {
       this.dialog.open(item.create, {
-        width: 'calc(100vw - 2rem)',
+        width: 'calc(100vw)',
         maxWidth: '800px',
         autoFocus: false,
         data: {
