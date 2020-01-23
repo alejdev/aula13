@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, ElementRef } from '@angular/core'
 import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms'
+import { Router } from '@angular/router'
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
@@ -7,11 +8,11 @@ import { StudentService } from 'src/app/classroom/services/student.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 
 import _moment from 'moment'
 import { default as _rollupMoment } from 'moment'
-import { SubjectService } from 'src/app/classroom/services/subject.service'
-import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 const moment = _rollupMoment || _moment
 
 @Component({
@@ -36,6 +37,7 @@ export class StudentCreationComponent implements OnInit {
   maxDate: Date
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private elementRef: ElementRef,
     private studentService: StudentService,
@@ -55,8 +57,6 @@ export class StudentCreationComponent implements OnInit {
     this.instruments = ModelService.instrumentList
     this.classroomList = this.classroomService.getCachedClassroomList()
     this.subjectList = this.subjectService.getCachedSubjectList()
-    console.log(this.classroomList)
-    console.log(this.subjectList)
 
     this.student = this.data.student
     this.equals = UtilService.equals
@@ -178,6 +178,10 @@ export class StudentCreationComponent implements OnInit {
         .then((result: any) => {
           this.toastService.success(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.student)
+          // Go to profile when create
+          if (result && result.id) {
+            this.router.navigate(['aula/alumno', result.id])
+          }
         })
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')

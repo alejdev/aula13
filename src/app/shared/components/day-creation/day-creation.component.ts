@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { Validators, FormGroup, FormBuilder } from '@angular/forms'
+import { Router } from '@angular/router'
 
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-classic'
 import '@ckeditor/ckeditor5-build-classic/build/translations/es'
@@ -38,6 +39,7 @@ export class DayCreationComponent implements OnInit {
   editorConfig: any
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private dayService: DayService,
     private studentService: StudentService,
@@ -123,6 +125,10 @@ export class DayCreationComponent implements OnInit {
         .then((result: any) => {
           this.toastService.success(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.day)
+          // Go to profile when create
+          if (result && result.id) {
+            this.router.navigate(['aula/dia', result.id])
+          }
         })
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
