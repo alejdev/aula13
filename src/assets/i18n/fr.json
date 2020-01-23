@@ -8,7 +8,7 @@
 	"BACK": "Revenir",
 	"BEHAVIOR": {
 		"PAN_SIDEMENU": "Menu des diapositives",
-		"PAN_SIDEMENU_HINT": "Faites glisser votre doigt horizontalement sur l'écran pour ouvrir le menu latéral. (Mobile uniquement)",
+		"PAN_SIDEMENU_HINT": "Faites glisser votre doigt horizontalement sur l'écran pour ouvrir le menu latéral",
 		"TITLE": "Comportement"
 	},
 	"CANCEL": "Annuler",

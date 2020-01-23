@@ -8,7 +8,7 @@
 	"BACK": "Volver",
 	"BEHAVIOR": {
 		"PAN_SIDEMENU": "Deslizar menú",
-		"PAN_SIDEMENU_HINT": "Arrastra el dedo horizontalmente por la pantalla para abrir el menú lateral. (Sólo en móvil)",
+		"PAN_SIDEMENU_HINT": "Arrastra el dedo horizontalmente por la pantalla para abrir el menú lateral",
 		"TITLE": "Comportamiento"
 	},
 	"CANCEL": "Cancelar",

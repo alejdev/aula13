@@ -8,7 +8,7 @@
 	"BACK": "Zurück",
 	"BEHAVIOR": {
 		"PAN_SIDEMENU": "Menü schieben",
-		"PAN_SIDEMENU_HINT": "Ziehen Sie Ihren Finger horizontal über den Bildschirm, um das Seitenmenü zu öffnen. (Nur für Handys)",
+		"PAN_SIDEMENU_HINT": "Ziehen Sie Ihren Finger horizontal über den Bildschirm, um das Seitenmenü zu öffnen",
 		"TITLE": "Verhalten"
 	},
 	"CANCEL": "Abbrechen",

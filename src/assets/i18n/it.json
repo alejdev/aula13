@@ -8,7 +8,7 @@
 	"BACK": "Ritorno",
 	"BEHAVIOR": {
 		"PAN_SIDEMENU": "Menu scorrevole",
-		"PAN_SIDEMENU_HINT": "Trascina il dito in orizzontale sullo schermo per aprire il menu laterale. (Solo cellulare)",
+		"PAN_SIDEMENU_HINT": "Trascina il dito in orizzontale sullo schermo per aprire il menu laterale",
 		"TITLE": "Comportamento"
 	},
 	"CANCEL": "Annullare",

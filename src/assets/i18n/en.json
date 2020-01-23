@@ -8,7 +8,7 @@
 	"BACK": "Return",
 	"BEHAVIOR": {
 		"PAN_SIDEMENU": "Slide menu",
-		"PAN_SIDEMENU_HINT": "Drag your finger horizontally across the screen to open the side menu. (Mobile only)",
+		"PAN_SIDEMENU_HINT": "Drag your finger horizontally across the screen to open the side menu",
 		"TITLE": "Behavior"
 	},
 	"CANCEL": "Cancel",
