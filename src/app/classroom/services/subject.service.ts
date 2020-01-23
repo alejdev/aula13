@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +35,14 @@ export class SubjectService {
         id: elem.payload.doc.id,
         ...elem.payload.doc.data()
       }
-    })
+    }).sort(UtilService.compare)
   }
 
   public observeSubjectList(): any {
     return this.ref
       .doc(this.authService.getUserUid())
-      .collection(this.subRefName).snapshotChanges()
+      .collection(this.subRefName, ref => ref.orderBy('name', 'desc'))
+      .snapshotChanges()
   }
 
   public getSubjectList(): any {
