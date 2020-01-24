@@ -90,7 +90,6 @@ export class SideMenuComponent implements OnInit {
 
   openMenu(ev: Event): void {
     ev.stopImmediatePropagation()
-    console.log(ev)
   }
 
   createElement(ev: Event, item: any): void {

@@ -1,15 +1,15 @@
 .success fa-icon {
-  color: #74da8a
+  color: var(--other-succes-color)
 }
 
 .info fa-icon {
-  color: #5faef7
+  color: var(--other-info-color)
 }
 
 .warning fa-icon {
-  color: #f7ba5f
+  color: var(--other-warning-color)
 }
 
 .error fa-icon {
-  color: #f75f5f
+  color: var(--other-error-color)
 }

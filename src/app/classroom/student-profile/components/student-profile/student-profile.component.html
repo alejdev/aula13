@@ -48,7 +48,8 @@
           <span class="mb-0">{{student?.musical?.teacher}}</span>
         </div>
 
-        <div *ngIf="student?.classroom?.classrooms" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+        <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length" class="mt-q mb-q"
+          fxLayout="row wrap" fxLayoutAlign="start center">
           <!-- Classrooms -->
           <div class="badge mat-hint"
             *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">

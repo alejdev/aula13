@@ -8,7 +8,7 @@ $second-color           : #41a546;
 $second-light-hue       : 600;
 $second-dark-hue        : 300;
 
-$tertiary-color         : #df4846;
+$tertiary-color         : #f75f5f;
 $tertiary-light-hue     : 500;
 $tertiary-dark-hue      : 500;
 
@@ -29,7 +29,10 @@ $colors: (
   ),
   other: (
     border-color        : #8da3cf,
-    link-color          : $main-color
+    success-color       : #74da8a,
+    info-color          : #5faef7,
+    warning-color       : #f7ba5f,
+    error-color         : #f75f5f,
   )
 );
 

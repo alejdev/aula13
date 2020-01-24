@@ -19,12 +19,11 @@
       </div>
     </div>
 
-    <!-- Type -->
-    <div class="mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
-      <div class="badge"
-        [ngClass]="{'primary-500': student?.label === 'Femae', 'accent-500': student?.label === 'Particular'}">
-        {{student?.label || 'LABEL_NO' | translate}}
-      </div>
+
+    <div class="mr-h ml-h">
+      <button mat-icon-button (click)="fav($event)">
+        <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star"></fa-icon>
+      </button>
     </div>
 
   </div>

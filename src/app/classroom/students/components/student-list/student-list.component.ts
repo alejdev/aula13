@@ -63,7 +63,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.studentListObservable = this.studentService.observeStudentList()
       .subscribe((result: any) => {
         this.studentList = this.studentService.mapStudentList(result)
-        console.log(this.studentList)
         this.studentService.setCachedStudentList(this.studentList)
         this.studentListFiltered = Object.assign(this.studentList)
       })
