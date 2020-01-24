@@ -112,7 +112,7 @@ export class DayCreationComponent implements OnInit {
       const day = {
         studentId: this.dayFormGroup.value.dayStudentCtrl.id,
         date: this.formatOutputDate(this.dayFormGroup.value.dayDateCtrl),
-        title: this.dayFormGroup.value.dayTitleCtrl,
+        title: UtilService.capitalize(this.dayFormGroup.value.dayTitleCtrl),
         content: this.dayFormGroup.value.dayContentCtrl
       }
       let createDay: any

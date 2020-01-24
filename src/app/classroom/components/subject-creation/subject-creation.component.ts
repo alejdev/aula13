@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { SubjectService } from '../../services/subject.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 @Component({
   selector: 'a13-subject-creation',
@@ -38,7 +39,7 @@ export class SubjectCreationComponent implements OnInit {
   save(): void {
     if (this.subjectFormGroup.valid) {
       const subject = {
-        name: this.subjectFormGroup.value.nameCtrl || ''
+        name: UtilService.capitalize(this.subjectFormGroup.value.nameCtrl || '')
       }
       let createSubject: any
       if (this.data.idEntity) {

@@ -46,7 +46,7 @@ export class ClassroomCreationComponent implements OnInit {
   save(): void {
     if (this.classroomFormGroup.valid) {
       const classroom = {
-        name: this.classroomFormGroup.value.nameCtrl || '',
+        name: UtilService.capitalize(this.classroomFormGroup.value.nameCtrl || ''),
         students: this.classroomFormGroup.value.studentListCtrl || []
       }
       let createClassroom: any

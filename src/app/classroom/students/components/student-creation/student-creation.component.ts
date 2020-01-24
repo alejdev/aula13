@@ -163,7 +163,7 @@ export class StudentCreationComponent implements OnInit {
           academicCourse: this.studentFormGroup.value.personalFormGroup.academicCourseCtrl || '',
           avatar: this.student.personal.avatar,
           birthdate: this.formatOutputDate(this.studentFormGroup.value.personalFormGroup.birthdateCtrl),
-          name: this.studentFormGroup.value.personalFormGroup.nameCtrl,
+          name: UtilService.capitalize(this.studentFormGroup.value.personalFormGroup.nameCtrl),
           observations: this.studentFormGroup.value.personalFormGroup.observationsCtrl
         }
       }

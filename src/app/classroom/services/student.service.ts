@@ -40,7 +40,7 @@ export class StudentService {
   public observeStudentList(): any {
     return this.ref
       .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => ref.orderBy('personal.name', 'desc'))
+      .collection(this.subRefName, ref => ref.orderBy('personal.name'))
       .snapshotChanges()
   }
 

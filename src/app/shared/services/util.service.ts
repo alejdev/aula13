@@ -76,7 +76,13 @@ export class UtilService {
     return JSON.parse(JSON.stringify(object))
   }
 
-  public static today() {
+  // Get today date
+  public static today(): Date {
     return new Date()
+  }
+
+  // Transform first character to uppercase
+  public static capitalize(text: string): string {
+    return text.charAt(0).toUpperCase() + text.slice(1)
   }
 }

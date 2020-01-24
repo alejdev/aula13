@@ -41,7 +41,7 @@ export class DayService {
   public observeDayList(): any {
     return this.ref
       .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => ref.orderBy('date', 'desc'))
+      .collection(this.subRefName, ref => ref.orderBy('date'))
       .snapshotChanges()
   }
 

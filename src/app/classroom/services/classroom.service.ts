@@ -35,13 +35,13 @@ export class ClassroomService {
         id: elem.payload.doc.id,
         ...elem.payload.doc.data()
       }
-    }).sort(UtilService.compare)
+    })
   }
 
   public observeClassroomList(): any {
     return this.ref
       .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => ref.orderBy('name', 'desc'))
+      .collection(this.subRefName, ref => ref.orderBy('name'))
       .snapshotChanges()
   }
 

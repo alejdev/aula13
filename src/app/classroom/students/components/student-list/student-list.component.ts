@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 
-import { Sort, SortDirection } from '@angular/material/sort'
-
 import { StudentCreationComponent } from '../student-creation/student-creation.component'
 import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
 import { StudentService } from 'src/app/classroom/services/student.service'
@@ -23,17 +21,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
   studentListObservable: any
   studentListFiltered: any[]
   studentFilter: string = ''
-  defaultSort: string = 'name'
-  defaultSortDir: SortDirection = 'desc'
-  sortActive: Sort
-  columns = [{
-    id: 'name',
-    name: 'PROP.NAME',
-    class: 'ml-4',
-  }, {
-    id: 'label',
-    name: 'PROP.LABEL'
-  }]
 
   constructor(
     private studentService: StudentService,
@@ -76,23 +63,14 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.studentListObservable = this.studentService.observeStudentList()
       .subscribe((result: any) => {
         this.studentList = this.studentService.mapStudentList(result)
+        console.log(this.studentList)
         this.studentService.setCachedStudentList(this.studentList)
         this.studentListFiltered = Object.assign(this.studentList)
-        this.sortData({ active: this.defaultSort, direction: this.defaultSortDir })
       })
   }
 
   searchStudent(ev: string): void {
     this.studentListFiltered = this.studentPipe.transform(this.studentList, ev)
-  }
-
-  sortData(sort: Sort): void {
-    this.sortActive = sort
-    this.studentListFiltered = UtilService.sortData(this.studentListFiltered, sort)
-  }
-
-  isActive(id: string): string {
-    return this.sortActive.active === id ? 'primary' : ''
   }
 
   resetFilter(): void {
