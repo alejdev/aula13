@@ -140,6 +140,7 @@ export class ModelService {
     contactInformation: {
       phones: []
     },
+    favorite: false,
     musical: {
       group: '',
       instrument: '',

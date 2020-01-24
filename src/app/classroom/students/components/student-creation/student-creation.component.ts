@@ -154,6 +154,7 @@ export class StudentCreationComponent implements OnInit {
         contactInformation: {
           phones: this.getPhoneListValues()
         },
+        favorite: false,
         musical: {
           course: this.studentFormGroup.value.musicalFormGroup.courseCtrl || '',
           instrument: this.studentFormGroup.value.musicalFormGroup.instrumentCtrl || '',

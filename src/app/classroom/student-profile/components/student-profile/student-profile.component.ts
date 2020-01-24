@@ -116,8 +116,12 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  fav(): void {
+    this.student.favorite = !this.student.favorite
+    this.studentService.updateStudent(this.student.id, this.student)
+  }
+
   ngOnDestroy(): void {
     this.studentObservable.complete()
   }
-
 }

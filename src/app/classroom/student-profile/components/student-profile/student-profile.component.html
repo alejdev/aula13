@@ -5,12 +5,20 @@
 
     <div class="mt-h" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
 
-      <!-- Avatar -->
-      <a flex="grow" matRipple class="avatar border-theme">
-        <img class="avatar-image" [src]="srcImage({img: student?.personal?.avatar})"
-          alt="{{student?.personal?.avatar}}">
-      </a>
+      <div fxLayout="column" fxLayoutAlign="center center">
 
+        <!-- Avatar -->
+        <a flex="grow" matRipple class="avatar border-theme">
+          <img class="avatar-image" [src]="srcImage({img: student?.personal?.avatar})"
+            alt="{{student?.personal?.avatar}}">
+        </a>
+
+        <!-- Fav button -->
+        <button class="mr-h ml-h" mat-icon-button (click)="fav()">
+          <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star"></fa-icon>
+        </button>
+      </div>
+      
       <!-- Student information -->
       <div fxFlex class="info">
 

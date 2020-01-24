@@ -19,12 +19,10 @@
       </div>
     </div>
 
-
-    <div class="mr-h ml-h">
-      <button mat-icon-button (click)="fav($event)">
-        <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star"></fa-icon>
-      </button>
-    </div>
+    <!-- Fav button -->
+    <button class="mr-h ml-h" mat-icon-button (click)="fav($event)">
+      <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star"></fa-icon>
+    </button>
 
   </div>
 </mat-card>

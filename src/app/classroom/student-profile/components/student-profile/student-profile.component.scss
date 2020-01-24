@@ -11,9 +11,13 @@
   overflow: overlay;  
 
   .avatar {
-    max-width: 96px;
-    max-height: 96px;
+    max-width: 64px;
+    max-height: 64px;
   }
+}
+
+.star-active {
+  color: var(--other-warning-color)
 }
 
 @media only screen and (max-width: 600px) {
@@ -25,10 +29,5 @@
 
   .profile-header {
     margin-left: 0;
-
-    .avatar {
-      max-width: 64px;
-      max-height: 64px;
-    }
   }
 }
