@@ -52,11 +52,13 @@
           <!-- Classrooms -->
           <div class="badge mat-hint"
             *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">
+            <fa-icon class="mat-icon-12 mr-q" icon="chalkboard"></fa-icon>
             <span>{{classroom | classroomName}}</span>
           </div>
           <!-- Subjects -->
           <div class="badge badge-stroked mat-hint"
             *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
+            <fa-icon class="mat-icon-12 mr-q" icon="book"></fa-icon>
             <span>{{subject | subjectName}}</span>
           </div>
         </div>
