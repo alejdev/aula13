@@ -104,10 +104,25 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.favoriteListFiltered = this.studentListFiltered.filter(student => student.favorite && !student.archived)
     this.restListFiltered = this.studentListFiltered.filter(student => !student.favorite && !student.archived)
     this.archivedListFiltered = this.studentListFiltered.filter(student => student.archived)
+
+    // Show group list if search inside
+    if (this.studentFilter) {
+      switch (true) {
+        case this.favoriteListFiltered.length > 0:
+          this.showMore('favorite', true)
+          break
+        case this.restListFiltered.length > 0:
+          this.showMore('rest', true)
+          break
+        case this.archivedListFiltered.length > 0:
+          this.showMore('archived', true)
+          break
+      }
+    }
   }
 
-  showMore(list: string): void {
-    const state = this.toggleConfig[list].show
+  showMore(list: string, show?: boolean): void {
+    const state = show ? !show : this.toggleConfig[list].show
     this.toggleConfig[list].show = state ? false : true
     this.toggleConfig[list].icon = `caret-${state ? 'down' : 'up'}`
   }
