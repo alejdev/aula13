@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Add student",
 	"AND": " and",
 	"APP_SUBTITLE": "Organize your private lessons",
+	"ARCHIVE": "Archive",
 	"ARCHIVED_STUDENTS": "Archived Students",
 	"ARCHIVE_STUDENT": "Archive student",
 	"AVATAR": "Profile image",
@@ -161,9 +162,13 @@
 		"NO_ACCOUNT": "Not a user yet?",
 		"RELOAD_PAGE_FOR_CHANGES": "Reload the page for changes to take effect",
 		"SERVICE_NOT_AVAILABLE": "This service will be available soon",
+		"STUDENT_ARCHIVE": "Are you sure you want to archive this student?",
+		"STUDENT_ARCHIVED_OK": "Student archived correctly",
 		"STUDENT_CREATE_OK": "A new student has signed up for class",
 		"STUDENT_DELETE": "Are you sure you want to delete this student?",
 		"STUDENT_DELETE_OK": "The student has been successfully deleted",
+		"STUDENT_UNARCHIVE": "Are you sure you want to unarchive this student?",
+		"STUDENT_UNARCHIVED_OK": "Student unarchived correctly",
 		"STUDENT_UPDATE_OK": "The student has been modified",
 		"SUBJECT_CREATE_OK": "The subject has been created correctly",
 		"SUBJECT_DELETE": "Are you sure you want to delete this subject?",
@@ -208,6 +213,7 @@
 	"SORT_COLUMN": "Sort column",
 	"STUDENT": "Student",
 	"STUDENTS": "Students",
+	"STUDENT_ARCHIVED": "Filed student",
 	"STUDENT_CONSERVATORY_DATA": "Conservatory",
 	"STUDENT_DELETE": "Delete student",
 	"STUDENT_PARENTS_DATA": "Parents",
@@ -221,6 +227,8 @@
 		"DARK_THEME": "Dark Theme",
 		"LIGHT_THEME": "Clear topic"
 	},
+	"UNARCHIVE": "Unarchive",
+	"UNARCHIVE_STUDENT": "Unarchive student",
 	"YEAR": "year",
 	"YEARS": "years"
 }

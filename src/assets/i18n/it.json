@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Aggiungi studente",
 	"AND": " e",
 	"APP_SUBTITLE": "Organizza le tue lezioni private",
+	"ARCHIVE": "File",
 	"ARCHIVED_STUDENTS": "Studenti archiviati",
 	"ARCHIVE_STUDENT": "Studente d'archivio",
 	"AVATAR": "Immagine del profilo",
@@ -161,9 +162,13 @@
 		"NO_ACCOUNT": "Non sei ancora un utente?",
 		"RELOAD_PAGE_FOR_CHANGES": "Ricarica la pagina per rendere effettive le modifiche",
 		"SERVICE_NOT_AVAILABLE": "Questo servizio sarà presto disponibile",
+		"STUDENT_ARCHIVE": "Sei sicuro di voler archiviare questo studente?",
+		"STUDENT_ARCHIVED_OK": "Studente archiviato correttamente",
 		"STUDENT_CREATE_OK": "Un nuovo studente si è iscritto per la lezione",
 		"STUDENT_DELETE": "Sei sicuro di voler eliminare questo studente?",
 		"STUDENT_DELETE_OK": "Lo studente è stato cancellato con successo",
+		"STUDENT_UNARCHIVE": "Sei sicuro di voler annullare l'archiviazione di questo studente?",
+		"STUDENT_UNARCHIVED_OK": "Studente non archiviato correttamente",
 		"STUDENT_UPDATE_OK": "Lo studente è stato modificato",
 		"SUBJECT_CREATE_OK": "L'argomento è stato creato correttamente",
 		"SUBJECT_DELETE": "Sei sicuro di voler eliminare questo argomento?",
@@ -208,6 +213,7 @@
 	"SORT_COLUMN": "Ordina colonna",
 	"STUDENT": "Studente",
 	"STUDENTS": "Scuola",
+	"STUDENT_ARCHIVED": "Studente archiviato",
 	"STUDENT_CONSERVATORY_DATA": "Conservatorio",
 	"STUDENT_DELETE": "Elimina studente",
 	"STUDENT_PARENTS_DATA": "Genitori",
@@ -221,6 +227,8 @@
 		"DARK_THEME": "Tema scuro",
 		"LIGHT_THEME": "Cancella argomento"
 	},
+	"UNARCHIVE": "Unarchiving",
+	"UNARCHIVE_STUDENT": "Studente non archiviato",
 	"YEAR": "anno",
 	"YEARS": "anni"
 }

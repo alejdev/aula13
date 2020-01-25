@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Ajouter un étudiant",
 	"AND": " et",
 	"APP_SUBTITLE": "Organisez vos cours particuliers",
+	"ARCHIVE": "Archive",
 	"ARCHIVED_STUDENTS": "Étudiants archivés",
 	"ARCHIVE_STUDENT": "Étudiant aux archives",
 	"AVATAR": "Image de profil",
@@ -161,9 +162,13 @@
 		"NO_ACCOUNT": "Pas encore utilisateur?",
 		"RELOAD_PAGE_FOR_CHANGES": "Recharger la page pour que les modifications prennent effet",
 		"SERVICE_NOT_AVAILABLE": "Ce service sera bientôt disponible",
+		"STUDENT_ARCHIVE": "Voulez-vous vraiment archiver cet étudiant?",
+		"STUDENT_ARCHIVED_OK": "Élève déposé avec succès",
 		"STUDENT_CREATE_OK": "Un nouvel étudiant s'est inscrit en classe",
 		"STUDENT_DELETE": "Voulez-vous vraiment supprimer cet étudiant?",
 		"STUDENT_DELETE_OK": "L'élève a été supprimé avec succès",
+		"STUDENT_UNARCHIVE": "Voulez-vous vraiment désarchiver cet élève?",
+		"STUDENT_UNARCHIVED_OK": "L'élève s'est désarchivé correctement",
 		"STUDENT_UPDATE_OK": "L'élève a été modifié",
 		"SUBJECT_CREATE_OK": "Le sujet a été créé correctement",
 		"SUBJECT_DELETE": "Voulez-vous vraiment supprimer ce sujet?",
@@ -208,6 +213,7 @@
 	"SORT_COLUMN": "Colonne de tri",
 	"STUDENT": "Étudiant",
 	"STUDENTS": "Élèves",
+	"STUDENT_ARCHIVED": "Étudiant classé",
 	"STUDENT_CONSERVATORY_DATA": "Conservatoire",
 	"STUDENT_DELETE": "Supprimer l'élève",
 	"STUDENT_PARENTS_DATA": "Les pères",
@@ -221,6 +227,8 @@
 		"DARK_THEME": "Thème sombre",
 		"LIGHT_THEME": "Sujet clair"
 	},
+	"UNARCHIVE": "Désarchiver",
+	"UNARCHIVE_STUDENT": "Étudiant désarchivé",
 	"YEAR": "année",
 	"YEARS": "ans"
 }

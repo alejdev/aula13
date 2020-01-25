@@ -31,7 +31,7 @@
 
     <!-- Rest students -->
     <div *ngIf="restListFiltered.length>0" [ngClass]="{'mt-1': favoriteListFiltered.length>0}">
-      <button mat-button class="mat-hint" (click)="showMore('rest')">
+      <button mat-button (click)="showMore('rest')">
         {{toggleConfig.rest.text | translate}}
         ({{restListFiltered.length}})
         <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.rest.icon"></fa-icon>
@@ -46,7 +46,7 @@
     <!-- Archived students -->
     <div *ngIf="archivedListFiltered.length>0"
       [ngClass]="{'mt-1': favoriteListFiltered.length>0 || restListFiltered.length>0}">
-      <button mat-button color="warn" (click)="showMore('archived')">
+      <button mat-button class="mat-hint" (click)="showMore('archived')">
         {{toggleConfig.archived.text | translate}}
         ({{archivedListFiltered.length}})
         <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.archived.icon"></fa-icon>

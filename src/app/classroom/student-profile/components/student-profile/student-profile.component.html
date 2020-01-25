@@ -22,6 +22,14 @@
       <!-- Student information -->
       <div fxFlex class="info">
 
+        <!-- Archived -->
+        <div *ngIf="student?.archived" class="mat-small error mb-q">
+          <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+          <span class="error-color">
+            {{'STUDENT_ARCHIVED' | translate}}
+          </span>
+        </div>
+
         <!-- Number info -->
         <div class="mb-q" fxLayout="row" fxLayoutGap="1rem">
           <div *ngIf="student?.personal?.birthdate" class="">
@@ -56,19 +64,21 @@
           <span class="mb-0">{{student?.musical?.teacher}}</span>
         </div>
 
+        <!-- Badges -->
         <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length" class="mt-q mb-q"
           fxLayout="row wrap" fxLayoutAlign="start center">
+
           <!-- Classrooms -->
-          <div class="badge mat-hint"
-            *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">
-            <fa-icon class="mat-icon-12 mr-q" icon="chalkboard"></fa-icon>
-            <span>{{classroom | classroomName}}</span>
+          <div class="badge" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">
+            <fa-icon class="mat-icon-12 mr-q mat-hint" icon="chalkboard"></fa-icon>
+            <span class="mat-hint">{{classroom | classroomName}}</span>
           </div>
+
           <!-- Subjects -->
-          <div class="badge badge-stroked mat-hint"
+          <div class="badge badge-stroked"
             *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
-            <fa-icon class="mat-icon-12 mr-q" icon="book"></fa-icon>
-            <span>{{subject | subjectName}}</span>
+            <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
+            <span class="mat-hint">{{subject | subjectName}}</span>
           </div>
         </div>
 
@@ -101,9 +111,9 @@
         <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
       </ng-template>
       <div class="container">
-        <ng-container *ngFor="let day of dayList">
+        <!-- <ng-container *ngFor="let day of dayList">
           <a13-day-card [(day)]="day"></a13-day-card>
-        </ng-container>
+        </ng-container> -->
       </div>
     </mat-tab>
     <mat-tab>

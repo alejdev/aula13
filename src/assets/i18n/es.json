@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Añadir alumno",
 	"AND": " y",
 	"APP_SUBTITLE": "Organiza tus clases particulares",
+	"ARCHIVE": "Archivar",
 	"ARCHIVED_STUDENTS": "Alumnos archivados",
 	"ARCHIVE_STUDENT": "Archivar alumno",
 	"AVATAR": "Imagen de perfil",
@@ -161,9 +162,13 @@
 		"NO_ACCOUNT": "¿Aún no eres usuario?",
 		"RELOAD_PAGE_FOR_CHANGES": "Recarga la página para que los cambios surtan efecto",
 		"SERVICE_NOT_AVAILABLE": "Pronto estará disponible este servicio",
+		"STUDENT_ARCHIVE": "¿Estás seguro que quieres archivar este alumno?",
+		"STUDENT_ARCHIVED_OK": "Estudiante archivado correctamente",
 		"STUDENT_CREATE_OK": "Un nuevo alumno se ha apuntado a clase",
 		"STUDENT_DELETE": "¿Estás seguro que quieres borrar este alumno?",
 		"STUDENT_DELETE_OK": "Se ha borrado correctamente el alumno",
+		"STUDENT_UNARCHIVE": "¿Estás seguro que quieres desarchivar este alumno?",
+		"STUDENT_UNARCHIVED_OK": "Estudiante desarchivado correctamente",
 		"STUDENT_UPDATE_OK": "Se ha modificado el alumno",
 		"SUBJECT_CREATE_OK": "Se ha creado la asignatura correctamente",
 		"SUBJECT_DELETE": "¿Estás seguro que quieres borrar esta asignatura?",
@@ -208,6 +213,7 @@
 	"SORT_COLUMN": "Ordenar columna",
 	"STUDENT": "Alumno",
 	"STUDENTS": "Alumnos",
+	"STUDENT_ARCHIVED": "Alumno archivado",
 	"STUDENT_CONSERVATORY_DATA": "Conservatorio",
 	"STUDENT_DELETE": "Borrar alumno",
 	"STUDENT_PARENTS_DATA": "Padres",
@@ -221,6 +227,8 @@
 		"DARK_THEME": "Tema oscuro",
 		"LIGHT_THEME": "Tema claro"
 	},
+	"UNARCHIVE": "Desarchivar",
+	"UNARCHIVE_STUDENT": "Desarchivar alumno",
 	"YEAR": "año",
 	"YEARS": "años"
 }

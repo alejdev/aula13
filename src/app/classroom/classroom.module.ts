@@ -14,6 +14,7 @@ import { HeaderComponent } from 'src/app/classroom/components/header/header.comp
 import { SideMenuComponent } from 'src/app/classroom/components/side-menu/side-menu.component'
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component'
 import { StudentDeleteDialogComponent } from './components/student-delete-dialog/student-delete-dialog.component'
+import { StudentArchiveDialogComponent } from './components/student-archive-dialog/student-archive-dialog.component'
 import { ClassroomDeleteDialogComponent } from './components/classroom-delete-dialog/classroom-delete-dialog.component'
 import { SubjectDeleteDialogComponent } from './components/subject-delete-dialog/subject-delete-dialog.component'
 import { DayDeleteDialogComponent } from './components/day-delete-dialog/day-delete-dialog.component'
@@ -24,7 +25,7 @@ import { SubjectCreationComponent } from './components/subject-creation/subject-
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatMenuModule } from '@angular/material'
+import { MatMenuModule } from '@angular/material/menu'
 
 @NgModule({
   declarations: [
@@ -34,12 +35,13 @@ import { MatMenuModule } from '@angular/material'
     SideMenuComponent,
     LogoutDialogComponent,
     StudentDeleteDialogComponent,
+    StudentArchiveDialogComponent,
     FooterToolbarComponent,
     ClassroomCreationComponent,
     SubjectCreationComponent,
     ClassroomDeleteDialogComponent,
     SubjectDeleteDialogComponent,
-    DayDeleteDialogComponent
+    DayDeleteDialogComponent,
   ],
   imports: [
     // Routing
@@ -62,6 +64,7 @@ import { MatMenuModule } from '@angular/material'
   entryComponents: [
     LogoutDialogComponent,
     StudentDeleteDialogComponent,
+    StudentArchiveDialogComponent,
     ClassroomCreationComponent,
     SubjectCreationComponent,
     ClassroomDeleteDialogComponent,

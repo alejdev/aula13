@@ -9,6 +9,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { DayService } from 'src/app/classroom/services/day.service'
+import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 
 @Component({
   selector: 'a13-student-profile',
@@ -83,9 +84,18 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
                 }
               }
             }, {
-              name: 'ARCHIVE_STUDENT',
-              icon: 'archive',
-              dialog: {}
+              name: `${!this.student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
+              icon: `box${!this.student.archived ? '' : '-open'}`,
+              dialog: {
+                component: StudentArchiveDialogComponent,
+                config: {
+                  autoFocus: false,
+                  data: {
+                    idStudent: this.studentId,
+                    student: { ...this.student }
+                  }
+                }
+              }
             }, {
               name: 'STUDENT_DELETE',
               icon: 'trash',

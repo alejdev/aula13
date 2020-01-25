@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Schüler hinzufügen",
 	"AND": " und ",
 	"APP_SUBTITLE": "Organisieren Sie Ihren Privatunterricht",
+	"ARCHIVE": "Archiv",
 	"ARCHIVED_STUDENTS": "Archivierte Schüler",
 	"ARCHIVE_STUDENT": "Student archivieren",
 	"AVATAR": "Profilbild",
@@ -161,9 +162,13 @@
 		"NO_ACCOUNT": "Noch kein Benutzer?",
 		"RELOAD_PAGE_FOR_CHANGES": "Laden Sie die Seite neu, damit die Änderungen wirksam werden",
 		"SERVICE_NOT_AVAILABLE": "Dieser Service wird in Kürze verfügbar sein",
+		"STUDENT_ARCHIVE": "Möchten Sie diesen Studenten wirklich archivieren?",
+		"STUDENT_ARCHIVED_OK": "Student erfolgreich abgelegt",
 		"STUDENT_CREATE_OK": "Ein neuer Schüler hat sich für den Unterricht angemeldet",
 		"STUDENT_DELETE": "Möchten Sie diesen Schüler wirklich löschen?",
 		"STUDENT_DELETE_OK": "Der Student wurde erfolgreich gelöscht",
+		"STUDENT_UNARCHIVE": "Möchten Sie diesen Studenten wirklich aus dem Archiv entfernen?",
+		"STUDENT_UNARCHIVED_OK": "Der Student wurde korrekt aus dem Archiv entfernt",
 		"STUDENT_UPDATE_OK": "Der Student wurde geändert",
 		"SUBJECT_CREATE_OK": "Der Betreff wurde korrekt erstellt",
 		"SUBJECT_DELETE": "Möchten Sie diesen Betreff wirklich löschen?",
@@ -208,6 +213,7 @@
 	"SORT_COLUMN": "Spalte sortieren",
 	"STUDENT": "Student",
 	"STUDENTS": "Studenten",
+	"STUDENT_ARCHIVED": "Abgelegter Student",
 	"STUDENT_CONSERVATORY_DATA": "Wintergarten",
 	"STUDENT_DELETE": "Schüler löschen",
 	"STUDENT_PARENTS_DATA": "Vater",
@@ -221,6 +227,8 @@
 		"DARK_THEME": "Dunkles Thema",
 		"LIGHT_THEME": "Klares Thema"
 	},
+	"UNARCHIVE": "Archiv aufheben",
+	"UNARCHIVE_STUDENT": "Student aus dem Archiv entfernen",
 	"YEAR": "Jahr",
 	"YEARS": "Jahre alt"
 }

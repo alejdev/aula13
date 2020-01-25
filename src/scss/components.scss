@@ -23,9 +23,31 @@
   }
 }
 
+// Colors
 .color-primary {
   color: $main-color;
 }
+
+.success fa-icon,
+.success-color {
+  color: var(--other-success-color)
+}
+
+.info fa-icon,
+.info-color {
+  color: var(--other-info-color)
+}
+
+.warning fa-icon,
+.warning-color {
+  color: var(--other-warning-color)
+}
+
+.error fa-icon,
+.error-color {
+  color: var(--other-error-color)
+}
+
 
 mat-form-field {
   fa-icon {
