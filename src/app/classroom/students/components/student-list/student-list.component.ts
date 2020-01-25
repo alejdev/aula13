@@ -33,7 +33,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
     },
     rest: {
       show: true,
-      text: 'REST_STUDENTS',
+      text: 'STUDENTS',
       icon: 'caret-up'
     },
     archived: {
@@ -98,6 +98,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   resetFilter(): void {
     this.studentFilter = ''
     this.studentListFiltered = Object.assign(this.studentList)
+    this.filterStudents()
   }
 
   filterStudents(): void {

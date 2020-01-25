@@ -147,6 +147,7 @@ export class StudentCreationComponent implements OnInit {
   save(): void {
     if (this.studentFormGroup.valid) {
       const student = {
+        archived: this.student.archived,
         classroom: {
           classrooms: this.studentFormGroup.value.classroomFormGroup.classroomsCtrl || [],
           subjects: this.studentFormGroup.value.classroomFormGroup.subjectsCtrl || []

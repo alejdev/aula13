@@ -133,6 +133,7 @@ export class ModelService {
   }]
 
   public static studenModel: any = {
+    archived: false,
     classroom: {
       classrooms: [],
       subjects: []
