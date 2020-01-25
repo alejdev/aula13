@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Add student",
 	"AND": " and",
 	"APP_SUBTITLE": "Organize your private lessons",
+	"ARCHIVED_STUDENTS": "Archived Students",
 	"ARCHIVE_STUDENT": "Archive student",
 	"AVATAR": "Profile image",
 	"BACK": "Return",
@@ -52,6 +53,7 @@
 		"UNEXPECTED_ERROR": "An unexpected error occurred. Please try again later.",
 		"USER_NOT_FOUND": "User not found"
 	},
+	"FAVORITES": "Favorites",
 	"FINALIZE": "Finalize",
 	"FLAG_OF": "Flag of",
 	"FORM": {
@@ -187,6 +189,7 @@
 	"RESET": "Restart",
 	"RESET_EMAIL": "Reset email field",
 	"RESET_FILTER": "Reset filter",
+	"REST_STUDENTS": "Other students",
 	"SAVE": "Save",
 	"SEARCH_STUDENT": "Search student",
 	"SELECT": "Select",

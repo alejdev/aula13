@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Aggiungi studente",
 	"AND": " e",
 	"APP_SUBTITLE": "Organizza le tue lezioni private",
+	"ARCHIVED_STUDENTS": "Studenti archiviati",
 	"ARCHIVE_STUDENT": "Studente d'archivio",
 	"AVATAR": "Immagine del profilo",
 	"BACK": "Ritorno",
@@ -52,6 +53,7 @@
 		"UNEXPECTED_ERROR": "Si è verificato un errore imprevisto. Ti preghiamo di riprovare più tardi.",
 		"USER_NOT_FOUND": "Utente non trovato"
 	},
+	"FAVORITES": "Favorito",
 	"FINALIZE": "Ultimare",
 	"FLAG_OF": "Bandiera di",
 	"FORM": {
@@ -187,6 +189,7 @@
 	"RESET": "Riavvio",
 	"RESET_EMAIL": "Reimposta campo email",
 	"RESET_FILTER": "Reimposta filtro",
+	"REST_STUDENTS": "Altri studenti",
 	"SAVE": "Salvare",
 	"SEARCH_STUDENT": "Cerca studente",
 	"SELECT": "Selezionare",

@@ -14,3 +14,11 @@ mat-card {
 .star-active {
   color: var(--other-warning-color)
 }
+
+.archived-student {
+  opacity: .4;
+
+  &:hover {
+    opacity: 1;
+  }
+}

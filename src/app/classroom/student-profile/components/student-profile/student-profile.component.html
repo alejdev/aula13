@@ -1,11 +1,11 @@
 <!-- Profile container -->
 <div class="profile-container">
 
-  <header class="container profile-header mat-card mat-elevation-z0">
+  <header class="container pb-h profile-header mat-card mat-elevation-z0">
 
     <div class="mt-h" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
 
-      <div fxLayout="column" fxLayoutAlign="center center">
+      <div fxLayout="column" fxLayoutAlign="start center">
 
         <!-- Avatar -->
         <a flex="grow" matRipple class="avatar border-theme">
@@ -18,7 +18,7 @@
           <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star"></fa-icon>
         </button>
       </div>
-      
+
       <!-- Student information -->
       <div fxFlex class="info">
 
@@ -101,7 +101,9 @@
         <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
       </ng-template>
       <div class="container">
-        <a13-day-card></a13-day-card>
+        <ng-container *ngFor="let day of dayList">
+          <a13-day-card [(day)]="day"></a13-day-card>
+        </ng-container>
       </div>
     </mat-tab>
     <mat-tab>

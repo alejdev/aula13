@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Ajouter un étudiant",
 	"AND": " et",
 	"APP_SUBTITLE": "Organisez vos cours particuliers",
+	"ARCHIVED_STUDENTS": "Étudiants archivés",
 	"ARCHIVE_STUDENT": "Étudiant aux archives",
 	"AVATAR": "Image de profil",
 	"BACK": "Revenir",
@@ -52,6 +53,7 @@
 		"UNEXPECTED_ERROR": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard.",
 		"USER_NOT_FOUND": "Utilisateur non trouvé"
 	},
+	"FAVORITES": "Favoris",
 	"FINALIZE": "Terminer",
 	"FLAG_OF": "Drapeau de",
 	"FORM": {
@@ -187,6 +189,7 @@
 	"RESET": "Redémarrer",
 	"RESET_EMAIL": "Réinitialiser le champ e-mail",
 	"RESET_FILTER": "Réinitialiser le filtre",
+	"REST_STUDENTS": "Autres étudiants",
 	"SAVE": "Sauvegarder",
 	"SEARCH_STUDENT": "Recherche étudiant",
 	"SELECT": "sélectionner",

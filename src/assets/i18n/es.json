@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Añadir alumno",
 	"AND": " y",
 	"APP_SUBTITLE": "Organiza tus clases particulares",
+	"ARCHIVED_STUDENTS": "Alumnos archivados",
 	"ARCHIVE_STUDENT": "Archivar alumno",
 	"AVATAR": "Imagen de perfil",
 	"BACK": "Volver",
@@ -52,6 +53,7 @@
 		"UNEXPECTED_ERROR": "Ocurrió un error inesperado. Por favor, vuelva a intentarlo más tarde",
 		"USER_NOT_FOUND": "Usuario no encontrado"
 	},
+	"FAVORITES": "Favoritos",
 	"FINALIZE": "Finalizar",
 	"FLAG_OF": "Bandera de ",
 	"FORM": {
@@ -187,6 +189,7 @@
 	"RESET": "Reiniciar",
 	"RESET_EMAIL": "Reiniciar campo de correo electrónico",
 	"RESET_FILTER": "Reiniciar filtro",
+	"REST_STUDENTS": "Demás estudiantes",
 	"SAVE": "Guardar",
 	"SEARCH_STUDENT": "Buscar alumno",
 	"SELECT": "Seleccionar",

@@ -21,6 +21,27 @@ export class StudentListComponent implements OnInit, OnDestroy {
   studentListObservable: any
   studentListFiltered: any[]
   studentFilter: string = ''
+  favoriteListFiltered: any[]
+  restListFiltered: any[]
+  archivedListFiltered: any[]
+
+  toggleConfig: any = {
+    favorite: {
+      show: true,
+      text: 'FAVORITES',
+      icon: 'caret-up'
+    },
+    rest: {
+      show: true,
+      text: 'REST_STUDENTS',
+      icon: 'caret-up'
+    },
+    archived: {
+      show: false,
+      text: 'ARCHIVED_STUDENTS',
+      icon: 'caret-down'
+    }
+  }
 
   constructor(
     private studentService: StudentService,
@@ -65,16 +86,30 @@ export class StudentListComponent implements OnInit, OnDestroy {
         this.studentList = this.studentService.mapStudentList(result)
         this.studentService.setCachedStudentList(this.studentList)
         this.studentListFiltered = Object.assign(this.studentList)
+        this.filterStudents()
       })
   }
 
   searchStudent(ev: string): void {
     this.studentListFiltered = this.studentPipe.transform(this.studentList, ev)
+    this.filterStudents()
   }
 
   resetFilter(): void {
     this.studentFilter = ''
     this.studentListFiltered = Object.assign(this.studentList)
+  }
+
+  filterStudents(): void {
+    this.favoriteListFiltered = this.studentListFiltered.filter(student => student.favorite && !student.archived)
+    this.restListFiltered = this.studentListFiltered.filter(student => !student.favorite && !student.archived)
+    this.archivedListFiltered = this.studentListFiltered.filter(student => student.archived)
+  }
+
+  showMore(list: string): void {
+    const state = this.toggleConfig[list].show
+    this.toggleConfig[list].show = state ? false : true
+    this.toggleConfig[list].icon = `caret-${state ? 'down' : 'up'}`
   }
 
   ngOnDestroy(): void {

@@ -3,6 +3,7 @@
 	"ADD_STUDENT": "Schüler hinzufügen",
 	"AND": " und ",
 	"APP_SUBTITLE": "Organisieren Sie Ihren Privatunterricht",
+	"ARCHIVED_STUDENTS": "Archivierte Schüler",
 	"ARCHIVE_STUDENT": "Student archivieren",
 	"AVATAR": "Profilbild",
 	"BACK": "Zurück",
@@ -52,6 +53,7 @@
 		"UNEXPECTED_ERROR": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später noch einmal.",
 		"USER_NOT_FOUND": "Benutzer nicht gefunden"
 	},
+	"FAVORITES": "Favoriten",
 	"FINALIZE": "Fertig stellen",
 	"FLAG_OF": "Flagge von",
 	"FORM": {
@@ -187,6 +189,7 @@
 	"RESET": "Starten Sie neu",
 	"RESET_EMAIL": "E-Mail-Feld zurücksetzen",
 	"RESET_FILTER": "Filter zurücksetzen",
+	"REST_STUDENTS": "Andere Schüler",
 	"SAVE": "Speichern",
 	"SEARCH_STUDENT": "Student suchen",
 	"SELECT": "Auswählen",

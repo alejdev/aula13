@@ -8,6 +8,7 @@ import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
+import { DayService } from 'src/app/classroom/services/day.service'
 
 @Component({
   selector: 'a13-student-profile',
@@ -19,6 +20,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   studentId: any
   student: any
   studentObservable: any
+  dayList: any[]
+  dayListSObservable: any
   mark: any = UtilService.mark
   srcImage: any = UtilService.srcImage
   academicCourseList: any = ModelService.academicCourseList
@@ -33,6 +36,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
+    private dayService: DayService,
     private headerService: HeaderService
   ) { }
 
@@ -52,6 +56,9 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
       .subscribe((result: any) => {
         this.student = this.studentService.mapStudent(result)
         console.log(this.student)
+
+        this.getDayList()
+        this.observeDayList()
 
         if (this.student && this.student.personal) {
           // Config header
@@ -101,24 +108,31 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   }
 
   showMore() {
-    if (this.moreInfoConfig.show) {
-      this.moreInfoConfig = {
-        show: false,
-        text: 'SHOW_MORE',
-        icon: 'caret-down'
-      }
-    } else {
-      this.moreInfoConfig = {
-        show: true,
-        text: 'SHOW_LESS',
-        icon: 'caret-up'
-      }
+    const state = this.moreInfoConfig.show
+    this.moreInfoConfig = {
+      show: state ? false : true,
+      text: `SHOW_${state ? 'MORE' : 'LESS'}`,
+      icon: `caret-${state ? 'down' : 'up'}`
     }
   }
 
   fav(): void {
     this.student.favorite = !this.student.favorite
     this.studentService.updateStudent(this.student.id, this.student)
+  }
+
+  getDayList(): void {
+    this.dayService.getDayList()
+      .then((result: any) => {
+        this.dayList = this.dayService.mapDayList(result, [])
+      })
+  }
+
+  observeDayList(): void {
+    this.dayListSObservable = this.dayService.observeDayList()
+      .subscribe((result: any) => {
+        this.dayList = this.dayService.mapDayList(result, [])
+      })
   }
 
   ngOnDestroy(): void {
