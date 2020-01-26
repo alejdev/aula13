@@ -15,6 +15,8 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatSnackBarConfig, MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSortModule } from '@angular/material/sort'
 import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatMenuModule } from '@angular/material/menu'
+
 import { MomentDateAdapter } from '@angular/material-moment-adapter'
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material'
 
@@ -39,6 +41,7 @@ import { DayCardComponent } from './components/day-card/day-card.component'
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component'
 import { DayCreationComponent } from './components/day-creation/day-creation.component'
 import { LoaderComponent } from './components/loader/loader.component'
+import { SelectStudentComponent } from './components/select-student/select-student.component'
 
 import { StringByPipe } from './pipes/string-by.pipe'
 import { AgePipe } from './pipes/age.pipe'
@@ -62,7 +65,7 @@ registerLocaleData(localeIt, 'it')
 registerLocaleData(localeFr, 'fr')
 
 import { FontAwesomeModule, FaIconLibrary, FaConfig } from '@fortawesome/angular-fontawesome'
-import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPen, faTrash, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones, faCalendarDay, faFileAlt, faCaretUp, faCaretDown, faChalkboard, faCheck, faStar, faBox, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsisV, faTimes, faEye, faEyeSlash, faBars, faSignOutAlt, faMoon, faSun, faStream, faArrowLeft, faPhoneAlt, faPen, faTrash, faPoll, faSignature, faBirthdayCake, faSchool, faUser, faGraduationCap, faChalkboardTeacher, faGuitar, faSearch, faFont, faPlus, faInfo, faExclamation, faSkullCrossbones, faCalendarDay, faFileAlt, faCaretUp, faCaretDown, faChalkboard, faCheck, faStar, faBox, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -70,14 +73,14 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     FloatingButtonComponent,
     DayCardComponent,
     DayCreationComponent,
+    LoaderComponent,
+    SelectStudentComponent,
 
     StringByPipe,
     AgePipe,
     StripHTMLPipe,
     SubjectNamePipe,
-    ClassroomNamePipe,
-
-    LoaderComponent,
+    ClassroomNamePipe
   ],
   imports: [
     // Angular
@@ -125,6 +128,7 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     MatSnackBarModule,
     MatSortModule,
     MatDatepickerModule,
+    MatMenuModule,
 
     // Third parties
     FlexLayoutModule,
@@ -141,7 +145,8 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     FloatingButtonComponent,
     DayCardComponent,
     DayCreationComponent,
-    LoaderComponent
+    LoaderComponent,
+    SelectStudentComponent
   ],
   entryComponents: [
     ToastComponent
@@ -165,6 +170,8 @@ export class SharedModule {
       faBars,
       faBirthdayCake,
       faBook,
+      faBox,
+      faBoxOpen,
       faCalendarDay,
       faCaretDown,
       faCaretUp,
@@ -200,8 +207,6 @@ export class SharedModule {
       faUniversity,
       faUser,
       faUserGraduate,
-      faBox,
-      faBoxOpen
     )
   }
 }

@@ -25,7 +25,6 @@ import { SubjectCreationComponent } from './components/subject-creation/subject-
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatMenuModule } from '@angular/material/menu'
 
 @NgModule({
   declarations: [
@@ -58,8 +57,7 @@ import { MatMenuModule } from '@angular/material/menu'
     // Material
     MatListModule,
     MatSidenavModule,
-    MatToolbarModule,
-    MatMenuModule
+    MatToolbarModule
   ],
   entryComponents: [
     LogoutDialogComponent,

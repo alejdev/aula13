@@ -33,6 +33,7 @@ export class SideMenuComponent implements OnInit {
   menuItems = [[{
     name: 'CLASSROOMS',
     icon: 'chalkboard',
+    expanded: true,
     create: ClassroomCreationComponent,
     delete: ClassroomDeleteDialogComponent,
     model: ModelService.classroomModel,
@@ -40,6 +41,7 @@ export class SideMenuComponent implements OnInit {
   }, {
     name: 'SUBJECTS',
     icon: 'book',
+    expanded: true,
     create: SubjectCreationComponent,
     delete: SubjectDeleteDialogComponent,
     model: ModelService.subjectModel,
@@ -86,10 +88,6 @@ export class SideMenuComponent implements OnInit {
     if (item.children && item.children.length) {
       item.expanded = !item.expanded
     }
-  }
-
-  openMenu(ev: Event): void {
-    ev.stopImmediatePropagation()
   }
 
   createElement(ev: Event, item: any): void {

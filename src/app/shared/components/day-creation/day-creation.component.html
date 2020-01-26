@@ -18,26 +18,11 @@
         ngClass.xs="full">
 
         <!-- Student -->
-        <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
-          <div class="avatar-container mt-h" matPrefix>
-            <img class="avatar avatar-xs p-0 mr-1"
-              [src]="srcImage({img: dayFormGroup?.controls?.dayStudentCtrl?.value?.personal?.avatar})" alt="Avatar">
-          </div>
-          <mat-select required formControlName="dayStudentCtrl" [compareWith]="equals"
-            attr.aria-label="{{'FORM.STUDENT' | translate}}">
-            <mat-option>-- {{'NONE' | translate}} --</mat-option>
-            <mat-option *ngFor="let student of studentList" [value]="student">
-              <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                <img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: student?.personal?.avatar})" alt="Avatar">
-                <span>{{student?.personal?.name}}</span>
-              </span>
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <a13-select-student class="mb-h" fxFlex="50" formControlName="dayStudentCtrl">
+        </a13-select-student>
 
         <!-- Date -->
-        <mat-form-field ngClass.xs="mb-1" appearance="outline" fxFlex="50">
+        <mat-form-field class="mb-h" ngClass.xs="mb-1" appearance="outline" fxFlex="50">
           <mat-label>{{'FORM.DATE' | translate}}</mat-label>
           <input class="pl-h" matInput required formControlName="dayDateCtrl" [matDatepicker]="dp">
           <mat-datepicker #dp></mat-datepicker>

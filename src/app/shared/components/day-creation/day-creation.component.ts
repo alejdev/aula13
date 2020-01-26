@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
 import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router'
 
@@ -26,10 +26,11 @@ import { SettingService } from '../../services/setting.service'
   templateUrl: './day-creation.component.html',
   styleUrls: ['./day-creation.component.scss']
 })
-export class DayCreationComponent implements OnInit {
+export class DayCreationComponent implements OnInit, OnDestroy {
 
   day: any
   studentList: any[]
+  studentListObservable: any
 
   srcImage: any
   equals: any
@@ -75,15 +76,10 @@ export class DayCreationComponent implements OnInit {
   }
 
   getStudentList(): void {
-    const studentList = this.studentService.getCachedStudentList()
-    if (studentList.length) {
-      this.studentList = studentList
-    } else {
-      this.studentService.getStudentList()
-        .then((result: any) => {
-          this.studentList = this.studentService.mapStudentList(result)
-        })
-    }
+    this.studentListObservable = this.studentService.observeStudentList()
+      .subscribe((result: any) => {
+        this.studentList = this.studentService.mapStudentList(result).filter((student: any) => !student.archived)
+      })
   }
 
   onReady(editor: any): void {
@@ -100,21 +96,32 @@ export class DayCreationComponent implements OnInit {
     return moment(UtilService.today(), 'DD/MM/YYYY')
   }
 
-  formatOutputDate(date: any) {
+  formatOutputDate(date: any): any {
     if (date && date._isAMomentObject && date._isValid) {
       return moment(date, 'DD/MM/YYYY').unix() * 1000
     }
     return ''
   }
 
+  getStudentId(): any {
+    const dayStudentCtrl = this.dayFormGroup.value.dayStudentCtrl
+    if (dayStudentCtrl.hasOwnProperty('studentCtrl')) {
+      return dayStudentCtrl.studentCtrl.id
+    }
+    return dayStudentCtrl.id
+  }
+
   save(): void {
     if (this.dayFormGroup.valid) {
+      console.log(this.dayFormGroup.value)
+
       const day = {
-        studentId: this.dayFormGroup.value.dayStudentCtrl.id,
+        studentId: this.getStudentId(),
         date: this.formatOutputDate(this.dayFormGroup.value.dayDateCtrl),
         title: UtilService.capitalize(this.dayFormGroup.value.dayTitleCtrl),
         content: this.dayFormGroup.value.dayContentCtrl
       }
+
       let createDay: any
       if (this.data.idDay) {
         createDay = this.dayService.updateDay(this.data.idDay, day)
@@ -134,5 +141,9 @@ export class DayCreationComponent implements OnInit {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
     }
+  }
+
+  ngOnDestroy(): void {
+    this.studentListObservable.complete()
   }
 }

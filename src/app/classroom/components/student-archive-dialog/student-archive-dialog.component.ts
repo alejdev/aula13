@@ -43,7 +43,6 @@ export class StudentArchiveDialogComponent implements OnInit {
     this.studentService.updateStudent(this.data.idStudent, this.student)
       .then((result: any) => {
         this.dialogRef.close(this.data.student)
-        this.router.navigate(['aula/alumnos'])
         this.toastService.success(this.textConfig.msgOk)
       })
       .catch((err: any) => {

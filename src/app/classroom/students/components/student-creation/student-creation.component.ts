@@ -147,7 +147,7 @@ export class StudentCreationComponent implements OnInit {
   save(): void {
     if (this.studentFormGroup.valid) {
       const student = {
-        archived: this.student.archived,
+        archived: !!this.student.archived,
         classroom: {
           classrooms: this.studentFormGroup.value.classroomFormGroup.classroomsCtrl || [],
           subjects: this.studentFormGroup.value.classroomFormGroup.subjectsCtrl || []
@@ -155,7 +155,7 @@ export class StudentCreationComponent implements OnInit {
         contactInformation: {
           phones: this.getPhoneListValues()
         },
-        favorite: false,
+        favorite: !!this.student.favorite,
         musical: {
           course: this.studentFormGroup.value.musicalFormGroup.courseCtrl || '',
           instrument: this.studentFormGroup.value.musicalFormGroup.instrumentCtrl || '',

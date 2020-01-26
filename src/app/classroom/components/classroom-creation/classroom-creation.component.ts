@@ -17,7 +17,6 @@ export class ClassroomCreationComponent implements OnInit {
 
   classroomFormGroup: FormGroup
   studentList: any[]
-  equals: any
   srcImage: any
   classroom: any
 
@@ -31,10 +30,8 @@ export class ClassroomCreationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.equals = UtilService.equals
     this.srcImage = UtilService.srcImage
     this.classroom = this.data.entity
-    this.studentList = this.studentService.getCachedStudentList()
 
     // Init form controls
     this.classroomFormGroup = this.formBuilder.group({
@@ -43,11 +40,19 @@ export class ClassroomCreationComponent implements OnInit {
     })
   }
 
+  getStudentIdList(): any {
+    const studentListCtrl = this.classroomFormGroup.value.studentListCtrl
+    if (studentListCtrl.hasOwnProperty('studentCtrl')) {
+      return studentListCtrl.studentCtrl
+    }
+    return studentListCtrl
+  }
+
   save(): void {
     if (this.classroomFormGroup.valid) {
       const classroom = {
         name: UtilService.capitalize(this.classroomFormGroup.value.nameCtrl || ''),
-        students: this.classroomFormGroup.value.studentListCtrl || []
+        students: this.getStudentIdList()
       }
       let createClassroom: any
       if (this.data.idEntity) {

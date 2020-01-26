@@ -10,6 +10,9 @@ import { ModelService } from 'src/app/shared/services/model.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
+import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+
+import { MatDialog } from '@angular/material'
 
 @Component({
   selector: 'a13-student-profile',
@@ -22,7 +25,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   student: any
   studentObservable: any
   dayList: any[]
-  dayListSObservable: any
+  dayListObservable: any
   mark: any = UtilService.mark
   srcImage: any = UtilService.srcImage
   academicCourseList: any = ModelService.academicCourseList
@@ -35,6 +38,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
     private dayService: DayService,
@@ -56,10 +60,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     this.studentObservable = this.studentService.observeStudent(this.studentId)
       .subscribe((result: any) => {
         this.student = this.studentService.mapStudent(result)
-        console.log(this.student)
-
-        this.getDayList()
-        this.observeDayList()
+        this.queryDayList()
 
         if (this.student && this.student.personal) {
           // Config header
@@ -131,21 +132,28 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     this.studentService.updateStudent(this.student.id, this.student)
   }
 
-  getDayList(): void {
-    this.dayService.getDayList()
-      .then((result: any) => {
-        this.dayList = this.dayService.mapDayList(result, [])
-      })
-  }
-
-  observeDayList(): void {
-    this.dayListSObservable = this.dayService.observeDayList()
+  queryDayList(): void {
+    this.dayListObservable = this.dayService.queryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
         this.dayList = this.dayService.mapDayList(result, [])
       })
   }
 
+  createDay(): void {
+    const newDay = ModelService.dayModel
+    newDay.student = this.student
+    this.dialog.open(DayCreationComponent, {
+      width: 'calc(100vw)',
+      maxWidth: '800px',
+      autoFocus: false,
+      data: {
+        day: newDay,
+      }
+    })
+  }
+
   ngOnDestroy(): void {
     this.studentObservable.complete()
+    this.dayListObservable.complete()
   }
 }

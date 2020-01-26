@@ -1,0 +1,16 @@
+mat-form-field {
+  width: 100%;
+
+  .avatar-container {
+    position: relative;
+    padding-right: 2rem;
+
+    .avatar {
+      position: absolute;
+			top: -15px;
+			left: 3px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

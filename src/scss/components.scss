@@ -30,24 +30,24 @@
 
 .success fa-icon,
 .success-color {
-  color: var(--other-success-color)
+  color: var(--other-success-color) !important;
 }
 
 .info fa-icon,
 .info-color {
-  color: var(--other-info-color)
+  color: var(--other-info-color) !important;
 }
 
 .warning fa-icon,
-.warning-color {
-  color: var(--other-warning-color)
+.warning-color,
+.star-active {
+  color: var(--other-warning-color) !important;
 }
 
 .error fa-icon,
 .error-color {
-  color: var(--other-error-color)
+  color: var(--other-error-color) !important;
 }
-
 
 mat-form-field {
   fa-icon {
@@ -82,7 +82,7 @@ mat-form-field {
   }
 
   &-xs {
-    max-width: 32px;
+    max-width: 28px;
   }
 
   .avatar-image {

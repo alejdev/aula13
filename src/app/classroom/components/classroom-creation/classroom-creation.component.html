@@ -25,19 +25,8 @@
 			</mat-form-field>
 
 			<!-- Student list -->
-			<mat-form-field appearance="outline" fxFlex="100">
-				<mat-label>{{'FORM.STUDENT_LIST' | translate}}</mat-label>
-				<mat-select formControlName="studentListCtrl" multiple attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}">
-					<mat-option *ngFor="let student of studentList" [value]="student.id">
-						<span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-							<img class="avatar avatar-xs p-0 mr-1" [src]="srcImage({img: student.personal?.avatar})" alt="Avatar">
-							<span>{{student.personal?.name}}</span>
-						</span>
-					</mat-option>
-				</mat-select>
-				<fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="user-graduate"></fa-icon>
-				<mat-hint align="start">{{'HINT.CLASSROOM_STUDENT_LIST' | translate}}</mat-hint>
-			</mat-form-field>
+			<a13-select-student [multiple]="true" formControlName="studentListCtrl" hint="HINT.CLASSROOM_STUDENT_LIST">
+			</a13-select-student>
 		</div>
 	</form>
 
