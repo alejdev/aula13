@@ -44,13 +44,16 @@
 	"EMAIL": "Email",
 	"ERR": {
 		"AUTH_INVALID": "E-mail ou mot de passe incorrect",
+		"CLASSROOM_EXISTS": "Il y a déjà une salle de classe du même nom",
 		"CONFIRM_PASSWORD_NOT_MATCH": "Les mots de passe ne correspondent pas",
 		"CONFIRM_PASSWORD_REQUIRED": "Vous devez confirmer le mot de passe",
 		"EMAIL_ALREADY_IN_USE": "Cet e-mail est déjà utilisé",
 		"EMAIL_INVALID": "Veuillez saisir un e-mail valide",
 		"EMAIL_REQUIRED": "L'email est requis",
+		"FIELD_REQUIRED": "Ce champ est obligatoire",
 		"PASSWORD_INVALID": "Le mot de passe doit contenir au moins 6 caractères",
 		"PASSWORD_REQUIRED": "Le mot de passe est obligatoire",
+		"SUBJECT_EXISTS": "Il existe déjà un sujet du même nom",
 		"UNEXPECTED_ERROR": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard.",
 		"USER_NOT_FOUND": "Utilisateur non trouvé"
 	},

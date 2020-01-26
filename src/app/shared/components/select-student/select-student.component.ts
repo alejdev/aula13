@@ -46,7 +46,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
       })
 
     this.studentFormGroup = this.formBuilder.group({
-      studentCtrl: [null, Validators.required]
+      studentCtrl: [null]
     })
   }
 

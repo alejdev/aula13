@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
@@ -6,25 +6,29 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { ClassroomService } from '../../services/classroom.service'
-import { StudentService } from '../../services/student.service'
+import { debounceTime, switchMap } from 'rxjs/operators'
+
 
 @Component({
   selector: 'a13-classroom-creation',
   templateUrl: './classroom-creation.component.html',
   styleUrls: ['./classroom-creation.component.scss']
 })
-export class ClassroomCreationComponent implements OnInit {
+export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
   classroomFormGroup: FormGroup
   studentList: any[]
   srcImage: any
   classroom: any
 
+  queryClassroomName: any
+  observableClassroomName: any
+  validatingName: boolean
+
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,
     private classroomService: ClassroomService,
-    private studentService: StudentService,
     private dialogRef: MatDialogRef<ClassroomCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -38,6 +42,25 @@ export class ClassroomCreationComponent implements OnInit {
       nameCtrl: [this.classroom.name || '', Validators.required],
       studentListCtrl: [this.classroom.students || []]
     })
+
+    this.onStudentsChange()
+  }
+
+  onStudentsChange() {
+    const nameCtrl = this.classroomFormGroup.controls.nameCtrl
+
+    this.queryClassroomName = nameCtrl.valueChanges
+      .subscribe(() => this.validatingName = true)
+
+    this.observableClassroomName = nameCtrl.valueChanges
+      .pipe(
+        debounceTime(500),
+        switchMap(() => this.classroomService.queryClassroom(UtilService.capitalize(nameCtrl.value)))
+      ).subscribe((result: any) => {
+        nameCtrl.markAsTouched()
+        nameCtrl.setErrors(result.length ? { nameTaken: true } : nameCtrl.errors)
+        this.validatingName = false
+      })
   }
 
   getStudentIdList(): any {
@@ -69,5 +92,10 @@ export class ClassroomCreationComponent implements OnInit {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
     }
+  }
+
+  ngOnDestroy(): void {
+    this.queryClassroomName.complete()
+    this.observableClassroomName.complete()
   }
 }

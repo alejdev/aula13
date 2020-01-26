@@ -85,6 +85,15 @@ export class ClassroomService {
       .finally(() => this.loaderService.stop())
   }
 
+  public queryClassroom(name: string): any {
+    return this.ref
+      .doc(this.authService.getUserUid())
+      .collection(this.subRefName, ref => {
+        return ref.where('name', '==', name)
+      })
+      .snapshotChanges()
+  }
+
   public updateClassroom(id: string, classroom: any): any {
     this.loaderService.start()
     return this.ref

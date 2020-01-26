@@ -44,13 +44,16 @@
 	"EMAIL": "E-mail",
 	"ERR": {
 		"AUTH_INVALID": "Email o password errate",
+		"CLASSROOM_EXISTS": "Esiste già un'aula con lo stesso nome",
 		"CONFIRM_PASSWORD_NOT_MATCH": "Le password non corrispondono",
 		"CONFIRM_PASSWORD_REQUIRED": "Devi confermare la password",
 		"EMAIL_ALREADY_IN_USE": "Questa email è già in uso",
 		"EMAIL_INVALID": "Inserisci un indirizzo email valido",
 		"EMAIL_REQUIRED": "Email obbligatoria",
+		"FIELD_REQUIRED": "Questo campo è obbligatorio",
 		"PASSWORD_INVALID": "La password deve contenere almeno 6 caratteri",
 		"PASSWORD_REQUIRED": "La password è obbligatoria",
+		"SUBJECT_EXISTS": "C'è già un soggetto con lo stesso nome",
 		"UNEXPECTED_ERROR": "Si è verificato un errore imprevisto. Ti preghiamo di riprovare più tardi.",
 		"USER_NOT_FOUND": "Utente non trovato"
 	},

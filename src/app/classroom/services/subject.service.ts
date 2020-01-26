@@ -85,6 +85,15 @@ export class SubjectService {
       .finally(() => this.loaderService.stop())
   }
 
+  public querySubject(name: string): any {
+    return this.ref
+      .doc(this.authService.getUserUid())
+      .collection(this.subRefName, ref => {
+        return ref.where('name', '==', name)
+      })
+      .snapshotChanges()
+  }
+
   public updateSubject(id: string, subject: any): any {
     this.loaderService.start()
     return this.ref

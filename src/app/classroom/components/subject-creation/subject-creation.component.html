@@ -22,6 +22,12 @@
 				<input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.SUBJECTS_NAME' | translate}}"
 					autocomplete="off">
 				<fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+				<mat-error *ngIf="subjectFormGroup.controls.nameCtrl.hasError('nameTaken')">
+					{{'ERR.SUBJECT_EXISTS' | translate}}
+				</mat-error>
+				<mat-error *ngIf="subjectFormGroup.controls.nameCtrl.hasError('required')">
+					{{'ERR.FIELD_REQUIRED' | translate}}
+				</mat-error>
 			</mat-form-field>
 		</div>
 	</form>
@@ -31,6 +37,7 @@
 <mat-dialog-actions align="end">
 	<button mat-button color="warn" mat-dialog-close
 		attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
-	<button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="subjectFormGroup.invalid"
-		(click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+	<button class="ml-h" mat-flat-button color="primary" mat-dialog-close
+		[disabled]="subjectFormGroup.invalid || validatingName" (click)="save()"
+		attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
 </mat-dialog-actions>

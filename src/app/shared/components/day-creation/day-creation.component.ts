@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router'
 
@@ -16,7 +16,6 @@ const moment = _rollupMoment || _moment
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
 import { DayService } from 'src/app/classroom/services/day.service'
-import { StudentService } from 'src/app/classroom/services/student.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { SettingService } from '../../services/setting.service'
@@ -26,11 +25,10 @@ import { SettingService } from '../../services/setting.service'
   templateUrl: './day-creation.component.html',
   styleUrls: ['./day-creation.component.scss']
 })
-export class DayCreationComponent implements OnInit, OnDestroy {
+export class DayCreationComponent implements OnInit {
 
   day: any
   studentList: any[]
-  studentListObservable: any
 
   srcImage: any
   equals: any
@@ -43,7 +41,6 @@ export class DayCreationComponent implements OnInit, OnDestroy {
     private router: Router,
     private formBuilder: FormBuilder,
     private dayService: DayService,
-    private studentService: StudentService,
     private toastService: ToastService,
     private settingService: SettingService,
     private dialogRef: MatDialogRef<DayCreationComponent>,
@@ -71,15 +68,6 @@ export class DayCreationComponent implements OnInit, OnDestroy {
       dayTitleCtrl: [this.day.title, Validators.required],
       dayContentCtrl: [this.day.content, Validators.required],
     })
-
-    this.getStudentList()
-  }
-
-  getStudentList(): void {
-    this.studentListObservable = this.studentService.observeStudentList()
-      .subscribe((result: any) => {
-        this.studentList = this.studentService.mapStudentList(result).filter((student: any) => !student.archived)
-      })
   }
 
   onReady(editor: any): void {
@@ -141,9 +129,5 @@ export class DayCreationComponent implements OnInit, OnDestroy {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
     }
-  }
-
-  ngOnDestroy(): void {
-    this.studentListObservable.complete()
   }
 }

@@ -6,6 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { SubjectService } from '../../services/subject.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+import { debounceTime, switchMap } from 'rxjs/operators'
 
 @Component({
   selector: 'a13-subject-creation',
@@ -18,6 +19,10 @@ export class SubjectCreationComponent implements OnInit {
   equals: any
   srcImage: any
   subject: any
+
+  querySubjectName: any
+  observableSubjectName: any
+  validatingName: boolean
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,6 +39,25 @@ export class SubjectCreationComponent implements OnInit {
     this.subjectFormGroup = this.formBuilder.group({
       nameCtrl: [this.subject.name || '', Validators.required]
     })
+
+    this.onSubjectChange()
+  }
+
+  onSubjectChange() {
+    const nameCtrl = this.subjectFormGroup.controls.nameCtrl
+
+    this.querySubjectName = nameCtrl.valueChanges
+      .subscribe(() => this.validatingName = true)
+
+    this.observableSubjectName = nameCtrl.valueChanges
+      .pipe(
+        debounceTime(500),
+        switchMap(() => this.subjectService.querySubject(UtilService.capitalize(nameCtrl.value)))
+      ).subscribe((result: any) => {
+        nameCtrl.markAsTouched()
+        nameCtrl.setErrors(result.length ? { nameTaken: true } : nameCtrl.errors)
+        this.validatingName = false
+      })
   }
 
   save(): void {

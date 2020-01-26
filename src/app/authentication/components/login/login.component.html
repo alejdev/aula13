@@ -43,7 +43,7 @@
             <fa-icon class="mat-icon-24 mat-hint" icon="{{passwordType === 'password' ? 'eye' : 'eye-slash'}}">
             </fa-icon>
           </button>
-          <mat-error *ngIf="!formGroup.controls['password'].valid">
+          <mat-error *ngIf="!formGroup.controls.password.valid">
             {{getError('password') | translate}}
           </mat-error>
         </mat-form-field>
@@ -58,7 +58,7 @@
             <fa-icon class="mat-icon-24 mat-hint" icon="{{passwordType === 'password' ? 'eye' : 'eye-slash'}}">
             </fa-icon>
           </button>
-          <mat-error *ngIf="!formGroup.controls['confirmPassword'].valid">
+          <mat-error *ngIf="!formGroup.controls.confirmPassword.valid">
             {{getError('confirmPassword') | translate}}
           </mat-error>
         </mat-form-field>
