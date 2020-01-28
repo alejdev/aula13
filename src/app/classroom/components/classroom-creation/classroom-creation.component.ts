@@ -57,8 +57,11 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
         debounceTime(500),
         switchMap(() => this.classroomService.queryClassroom(UtilService.capitalize(nameCtrl.value)))
       ).subscribe((result: any) => {
+        if (result.length && this.data.entity.name !== result[0].payload.doc.data().name) {
+          nameCtrl.setErrors({ nameTaken: true })
+        }
+        nameCtrl.setErrors(nameCtrl.errors)
         nameCtrl.markAsTouched()
-        nameCtrl.setErrors(result.length ? { nameTaken: true } : nameCtrl.errors)
         this.validatingName = false
       })
   }
