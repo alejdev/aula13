@@ -1,13 +1,7 @@
-// Profile container
-.profile-container {
-  max-height: calc(100vh - var(--main-header-size) * 2);
+.profile-header {
 
   .avatar {
     max-width: 64px;
     max-height: 64px;
-  }
-
-  .mat-tab-container {
-    padding: var(--main-padding-size);
   }
 }

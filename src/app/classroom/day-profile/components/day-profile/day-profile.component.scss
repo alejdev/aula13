@@ -1,6 +1,4 @@
-// Profile container
 .profile-container {
-  max-height: calc(100vh - var(--main-header-size) * 2);
 
   .avatar {
     max-width: 36px;
@@ -9,9 +7,5 @@
 
   .student-name {
     outline: 0;
-  }
-
-  .day-container {
-    padding: var(--main-padding-size);
   }
 }

@@ -33,7 +33,7 @@ export class SideMenuComponent implements OnInit {
   menuItems = [[{
     name: 'CLASSROOMS',
     icon: 'chalkboard',
-    expanded: true,
+    expanded: false,
     create: ClassroomCreationComponent,
     delete: ClassroomDeleteDialogComponent,
     model: ModelService.classroomModel,
@@ -41,7 +41,7 @@ export class SideMenuComponent implements OnInit {
   }, {
     name: 'SUBJECTS',
     icon: 'book',
-    expanded: true,
+    expanded: false,
     create: SubjectCreationComponent,
     delete: SubjectDeleteDialogComponent,
     model: ModelService.subjectModel,

@@ -1,8 +1,19 @@
 // General
 .container {
-  padding: var(--main-padding-size);
-  max-height: calc(100vh - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
   overflow-y: auto;
+  
+  &-padd {
+    padding: var(--main-padding-size);
+    max-height: calc(100vh - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
+  }
+
+  &-nopadd {
+    max-height: calc(100vh - var(--main-header-size) * 2);
+  }
+}
+
+.padding-content {
+  padding: var(--main-padding-size);
 }
 
 .mat-dialog-content {

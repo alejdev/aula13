@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container container-padd">
 
   <!-- Lenguaje -->
   <h3 class="mat-h2 mt-h mat-hint">{{'GENERAL' | translate}}</h3>
@@ -6,7 +6,7 @@
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
     <img class="flag-selected" [src]="getFlag(langControl.value)"
       alt="{{'FLAG_OF' | translate}} {{langControl.value.name | translate}}">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>{{'LANGUAGE' | translate}}</mat-label>
       <mat-select [formControl]="langControl" (selectionChange)="setLang()">
         <mat-option *ngFor="let lang of languages" [value]="lang">
@@ -20,7 +20,7 @@
     </mat-form-field>
   </div>
 
-  <mat-divider class="mt-2 mb-2"></mat-divider>
+  <mat-divider class="mt-3 mb-1"></mat-divider>
 
   <!-- Theme -->
   <h3 class="mat-h2 mat-hint">{{'THEME' | translate}}</h3>
@@ -32,7 +32,7 @@
     </mat-slide-toggle>
   </div>
 
-  <mat-divider class="mt-2 mb-2"></mat-divider>
+  <mat-divider class="mt-2 mb-1"></mat-divider>
 
   <!-- Behavior -->
   <h3 class="mat-h2 mat-hint">{{'BEHAVIOR.TITLE' | translate}}</h3>

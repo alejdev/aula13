@@ -8,6 +8,8 @@ mat-form-field {
 }
 
 .flag-selected {
+  position: relative;
+  top: -5px;
   width: 24px;
   height: 24px;
 }

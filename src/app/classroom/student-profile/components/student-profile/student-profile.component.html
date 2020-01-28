@@ -1,138 +1,131 @@
-<!-- Profile container -->
-<section class="overflow-scroll-container">
-  <div class="overflow-scroll">
+<section class="container container-nopadd">
+  <header class="profile-header padding-content pb-h mat-card mat-elevation-z0">
 
-    <div class="profile-container overflow-scroll-content">
-      <header class="container pb-h profile-header mat-card mat-elevation-z0">
+    <div class="mt-h" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
+      <div fxLayout="column" fxLayoutAlign="start center">
 
-        <div class="mt-h" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
-          <div fxLayout="column" fxLayoutAlign="start center">
+        <!-- Avatar -->
+        <a flex="grow" matRipple class="avatar border-theme">
+          <img class="avatar-image" [src]="srcImage({img: student?.personal?.avatar})"
+            alt="{{student?.personal?.avatar}}">
+        </a>
 
-            <!-- Avatar -->
-            <a flex="grow" matRipple class="avatar border-theme">
-              <img class="avatar-image" [src]="srcImage({img: student?.personal?.avatar})"
-                alt="{{student?.personal?.avatar}}">
-            </a>
+        <!-- Fav button -->
+        <button class="mr-h ml-h" mat-icon-button (click)="fav()">
+          <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star">
+          </fa-icon>
+        </button>
+      </div>
 
-            <!-- Fav button -->
-            <button class="mr-h ml-h" mat-icon-button (click)="fav()">
-              <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star">
-              </fa-icon>
-            </button>
+      <!-- Student information -->
+      <div fxFlex>
+
+        <!-- Archived -->
+        <div *ngIf="student?.archived" class="mat-small error mb-q">
+          <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+          <span class="error-color">
+            {{'STUDENT_ARCHIVED' | translate}}
+          </span>
+        </div>
+
+        <!-- Number info -->
+        <div class="mb-q" fxLayout="row" fxLayoutGap="1rem">
+          <div *ngIf="student?.personal?.birthdate" class="">
+            <span class="mb-0">{{student?.personal?.birthdate | age}}</span>
+            <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
           </div>
-
-          <!-- Student information -->
-          <div fxFlex>
-
-            <!-- Archived -->
-            <div *ngIf="student?.archived" class="mat-small error mb-q">
-              <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
-              <span class="error-color">
-                {{'STUDENT_ARCHIVED' | translate}}
-              </span>
-            </div>
-
-            <!-- Number info -->
-            <div class="mb-q" fxLayout="row" fxLayoutGap="1rem">
-              <div *ngIf="student?.personal?.birthdate" class="">
-                <span class="mb-0">{{student?.personal?.birthdate | age}}</span>
-                <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
-              </div>
-              <div *ngIf="student?.personal?.academicCourse" class="">
-                <span class="mb-0">{{student?.personal?.academicCourse?.viewValue}}</span>
-                <span class="mat-hint mat-small">
-                  {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
-                </span>
-              </div>
-              <div *ngIf="student?.musical?.course" class="">
-                <span class="mb-0">{{student?.musical?.course.viewValue}}</span>
-                <span class="mat-hint mat-small">
-                  {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
-                </span>
-              </div>
-            </div>
-
-            <!-- Instrument -->
-            <div *ngIf="student?.musical?.instrument" class="mat-small">
-              <span class="mat-hint">
-                {{'FORM.INSTRUMENT' | translate}}: </span>
-              <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
-            </div>
-
-            <!-- Teacher -->
-            <div *ngIf="student?.musical?.teacher" class="mat-small">
-              <span class="mat-hint">
-                {{'TEACHER' | translate}}: </span>
-              <span class="mb-0">{{student?.musical?.teacher}}</span>
-            </div>
-
-            <!-- Badges -->
-            <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length"
-              class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
-
-              <!-- Classrooms -->
-              <div class="badge"
-                *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">
-                <fa-icon class="mat-icon-12 mr-q mat-hint" icon="chalkboard"></fa-icon>
-                <span class="mat-hint">{{classroom | classroomName}}</span>
-              </div>
-
-              <!-- Subjects -->
-              <div class="badge badge-stroked"
-                *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
-                <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
-                <span class="mat-hint">{{subject | subjectName}}</span>
-              </div>
-            </div>
-
-            <!-- More Info -->
-            <div *ngIf="student?.personal?.observations">
-
-              <!-- Observations -->
-              <div *ngIf="moreInfoConfig.show" class="mat-small">
-                <span class="mat-hint">
-                  {{'FORM.OBSERVATIONS' | translate}}: </span>
-                <span class="mb-0">{{student?.personal?.observations}}</span>
-              </div>
-
-              <!-- More Info button-->
-              <a class="link mat-small pointer" (click)="showMore()">
-                {{moreInfoConfig.text | translate}}
-                <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
-              </a>
-            </div>
-
+          <div *ngIf="student?.personal?.academicCourse" class="">
+            <span class="mb-0">{{student?.personal?.academicCourse?.viewValue}}</span>
+            <span class="mat-hint mat-small">
+              {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
+            </span>
+          </div>
+          <div *ngIf="student?.musical?.course" class="">
+            <span class="mb-0">{{student?.musical?.course.viewValue}}</span>
+            <span class="mat-hint mat-small">
+              {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
+            </span>
           </div>
         </div>
 
-      </header>
+        <!-- Instrument -->
+        <div *ngIf="student?.musical?.instrument" class="mat-small">
+          <span class="mat-hint">
+            {{'FORM.INSTRUMENT' | translate}}: </span>
+          <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
+        </div>
 
-      <!-- Tabs -->
-      <mat-tab-group mat-stretch-tabs color="primary">
+        <!-- Teacher -->
+        <div *ngIf="student?.musical?.teacher" class="mat-small">
+          <span class="mat-hint">
+            {{'TEACHER' | translate}}: </span>
+          <span class="mb-0">{{student?.musical?.teacher}}</span>
+        </div>
 
-        <!-- Days -->
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
-          </ng-template>
-          <div class="mat-tab-container">
-            <ng-container *ngFor="let day of dayList">
-              <a13-day-card [(day)]="day"></a13-day-card>
-            </ng-container>
-            <a13-floating-button text="DAY.ADD" icon="add" (click)="createDay()"></a13-floating-button>
+        <!-- Badges -->
+        <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length" class="mt-q mb-q"
+          fxLayout="row wrap" fxLayoutAlign="start center">
+
+          <!-- Classrooms -->
+          <div class="badge" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">
+            <fa-icon class="mat-icon-12 mr-q mat-hint" icon="chalkboard"></fa-icon>
+            <span class="mat-hint">{{classroom | classroomName}}</span>
           </div>
-        </mat-tab>
 
-        <!-- Marks -->
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <fa-icon class="mat-icon-20" icon="poll"></fa-icon>
-          </ng-template>
-          <div class="mat-tab-container">
-            <p>{{'MARKS' | translate}}</p>
+          <!-- Subjects -->
+          <div class="badge badge-stroked"
+            *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
+            <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
+            <span class="mat-hint">{{subject | subjectName}}</span>
           </div>
-        </mat-tab>
-      </mat-tab-group>
+        </div>
+
+        <!-- More Info -->
+        <div *ngIf="student?.personal?.observations">
+
+          <!-- Observations -->
+          <div *ngIf="moreInfoConfig.show" class="mat-small">
+            <span class="mat-hint">
+              {{'FORM.OBSERVATIONS' | translate}}: </span>
+            <span class="mb-0">{{student?.personal?.observations}}</span>
+          </div>
+
+          <!-- More Info button-->
+          <a class="link mat-small pointer" (click)="showMore()">
+            {{moreInfoConfig.text | translate}}
+            <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
+          </a>
+        </div>
+
+      </div>
     </div>
-  </div>
+
+  </header>
+
+  <!-- Tabs -->
+  <mat-tab-group mat-stretch-tabs color="primary">
+
+    <!-- Days -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
+      </ng-template>
+      <div class="padding-content">
+        <ng-container *ngFor="let day of dayList">
+          <a13-day-card [(day)]="day"></a13-day-card>
+        </ng-container>
+        <a13-floating-button text="DAY.ADD" icon="add" (click)="createDay()"></a13-floating-button>
+      </div>
+    </mat-tab>
+
+    <!-- Marks -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <fa-icon class="mat-icon-20" icon="poll"></fa-icon>
+      </ng-template>
+      <div class="padding-content">
+        <p>{{'MARKS' | translate}}</p>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </section>
