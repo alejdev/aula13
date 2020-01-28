@@ -73,7 +73,7 @@ export class UtilService {
 
   // Clone a object
   public static clone(object: any): any {
-    return JSON.parse(JSON.stringify(object))
+    return object ? JSON.parse(JSON.stringify(object)) : object
   }
 
   // Get today date
