@@ -1,6 +1,5 @@
 // Profile container
 .profile-container {
-  margin-left: 2px;
   max-height: calc(100vh - var(--main-header-size) * 2);
 
   .avatar {
@@ -10,17 +9,5 @@
 
   .mat-tab-container {
     padding: var(--main-padding-size);
-  }
-}
-
-@media only screen and (max-width: 600px) {
-
-  .profile-header,
-  .profile-container {
-    margin-left: 0;
-  }
-
-  .profile-header {
-    margin-left: 0;
   }
 }
