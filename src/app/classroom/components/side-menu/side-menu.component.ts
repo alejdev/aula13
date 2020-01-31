@@ -110,7 +110,6 @@ export class SideMenuComponent implements OnInit {
         maxWidth: '800px',
         autoFocus: false,
         data: {
-          idEntity: child.id,
           entity: child
         }
       })
@@ -118,7 +117,7 @@ export class SideMenuComponent implements OnInit {
       this.dialog.open(item.delete, {
         autoFocus: false,
         data: {
-          idEntity: child.id
+          entity: child
         }
       })
     }

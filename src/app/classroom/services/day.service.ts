@@ -56,7 +56,7 @@ export class DayService {
       .snapshotChanges()
   }
 
-  public getDayList(): any {
+  public getDayList(): Promise<any> {
     this.loaderService.start()
     return this.observeDayList()
       .pipe(take(1))
@@ -64,7 +64,7 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public createDay(data: any): any {
+  public createDay(data: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -80,7 +80,7 @@ export class DayService {
       .doc(id).snapshotChanges()
   }
 
-  public readDay(id: string): any {
+  public readDay(id: string): Promise<any> {
     this.loaderService.start()
     return this.observeDay(id)
       .pipe(take(1))
@@ -88,7 +88,7 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public updateDay(id: string, day: any): any {
+  public updateDay(id: string, day: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -97,7 +97,7 @@ export class DayService {
       .finally(() => this.loaderService.stop())
   }
 
-  public deleteDay(id: string): any {
+  public deleteDay(id: string): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())

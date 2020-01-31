@@ -69,14 +69,14 @@ export class SubjectCreationComponent implements OnInit {
         name: UtilService.capitalize(this.subjectFormGroup.value.nameCtrl || '')
       }
       let createSubject: any
-      if (this.data.idEntity) {
-        createSubject = this.subjectService.updateSubject(this.data.idEntity, subject)
+      if (this.data.entity.id) {
+        createSubject = this.subjectService.updateSubject(this.data.entity.id, subject)
       } else {
         createSubject = this.subjectService.createSubject(subject)
       }
       createSubject
         .then((result: any) => {
-          this.toastService.success(`MSG.SUBJECT_${this.data.idEntity ? 'UPDATE' : 'CREATE'}_OK`)
+          this.toastService.success(`MSG.SUBJECT_${this.data.entity.id ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.entity)
         })
         .catch((err: any) => {

@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material'
 export class DayListComponent implements OnInit, OnDestroy {
 
   dayList: any[]
-  dayListSObservable: any
+  dayListObservable: any
   studentList: any[]
 
   constructor(
@@ -61,7 +61,7 @@ export class DayListComponent implements OnInit, OnDestroy {
   }
 
   observeDayList(): void {
-    this.dayListSObservable = this.dayService.observeDayList()
+    this.dayListObservable = this.dayService.observeDayList()
       .subscribe((result: any) => {
         this.dayList = this.dayService.mapDayList(result, this.studentList)
       })
@@ -78,7 +78,7 @@ export class DayListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dayListSObservable.complete()
+    this.dayListObservable.complete()
   }
 
 }

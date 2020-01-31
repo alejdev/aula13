@@ -5,7 +5,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
-import { UtilService } from 'src/app/shared/services/util.service'
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +44,7 @@ export class ClassroomService {
       .snapshotChanges()
   }
 
-  public getClassroomList(): any {
+  public getClassroomList(): Promise<any> {
     this.loaderService.start()
     return this.observeClassroomList()
       .pipe(take(1))
@@ -61,7 +60,7 @@ export class ClassroomService {
     this.cachedClassroomList = cachedClassroomList
   }
 
-  public createClassroom(data: any): any {
+  public createClassroom(data: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -77,7 +76,7 @@ export class ClassroomService {
       .doc(id).snapshotChanges()
   }
 
-  public readClassroom(id: string): any {
+  public readClassroom(id: string): Promise<any> {
     this.loaderService.start()
     return this.observeClassroom(id)
       .pipe(take(1))
@@ -94,7 +93,7 @@ export class ClassroomService {
       .snapshotChanges()
   }
 
-  public updateClassroom(id: string, classroom: any): any {
+  public updateClassroom(id: string, classroom: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())

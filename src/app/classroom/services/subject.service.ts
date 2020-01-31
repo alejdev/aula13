@@ -45,7 +45,7 @@ export class SubjectService {
       .snapshotChanges()
   }
 
-  public getSubjectList(): any {
+  public getSubjectList(): Promise<any> {
     this.loaderService.start()
     return this.observeSubjectList()
       .pipe(take(1))
@@ -61,7 +61,7 @@ export class SubjectService {
     this.cachedSubjectList = cachedSubjectList
   }
 
-  public createSubject(data: any): any {
+  public createSubject(data: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -77,7 +77,7 @@ export class SubjectService {
       .doc(id).snapshotChanges()
   }
 
-  public readSubject(id: string): any {
+  public readSubject(id: string): Promise<any> {
     this.loaderService.start()
     return this.observeSubject(id)
       .pipe(take(1))
@@ -94,7 +94,7 @@ export class SubjectService {
       .snapshotChanges()
   }
 
-  public updateSubject(id: string, subject: any): any {
+  public updateSubject(id: string, subject: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -103,7 +103,7 @@ export class SubjectService {
       .finally(() => this.loaderService.stop())
   }
 
-  public deleteSubject(id: string): any {
+  public deleteSubject(id: string): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())

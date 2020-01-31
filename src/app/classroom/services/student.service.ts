@@ -6,6 +6,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
 
+import firebase from 'firebase/app'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,7 +50,14 @@ export class StudentService {
       .snapshotChanges()
   }
 
-  public getStudentList(): any {
+  public queryStudentsByClassroom(classroom: string): any {
+    return this.ref
+      .doc(this.authService.getUserUid())
+      .collection(this.subRefName, ref => ref.where('classroom.classrooms', 'array-contains', classroom))
+      .snapshotChanges()
+  }
+
+  public getStudentList(): Promise<any> {
     this.loaderService.start()
     return this.observeStudentList()
       .pipe(take(1))
@@ -64,7 +73,7 @@ export class StudentService {
     this.cachedStudentList = cachedStudentList
   }
 
-  public createStudent(data: any): any {
+  public createStudent(data: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -80,7 +89,7 @@ export class StudentService {
       .doc(id).snapshotChanges()
   }
 
-  public readStudent(id: string): any {
+  public readStudent(id: string): Promise<any> {
     this.loaderService.start()
     return this.observeStudent(id)
       .pipe(take(1))
@@ -88,7 +97,7 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public updateStudent(id: string, student: any): any {
+  public updateStudent(id: string, student: any): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())
@@ -97,7 +106,20 @@ export class StudentService {
       .finally(() => this.loaderService.stop())
   }
 
-  public deleteStudent(id: string): any {
+  public updateStudents(students: any[]): Promise<any> {
+    this.loaderService.start()
+    const batch = firebase.firestore().batch()
+    const collection = this.ref.doc(this.authService.getUserUid()).collection(this.subRefName)
+    students.forEach((doc: any) => {
+      const ref = collection.doc(doc.id).ref
+      batch.update(ref, { classroom: { classrooms: doc.classroom.classrooms } })
+    })
+    return batch
+      .commit()
+      .finally(() => this.loaderService.stop())
+  }
+
+  public deleteStudent(id: string): Promise<any> {
     this.loaderService.start()
     return this.ref
       .doc(this.authService.getUserUid())

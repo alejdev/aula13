@@ -1,7 +1,7 @@
 <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
 
 	<!-- Title -->
-	<h2 class="m-0" mat-dialog-title>{{(data.idEntity ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}</h2>
+	<h2 class="m-0" mat-dialog-title>{{(data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}</h2>
 
 	<!-- Close dialog button -->
 	<button class="button-close" mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">

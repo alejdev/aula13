@@ -26,7 +26,7 @@ export class SubjectDeleteDialogComponent implements OnInit {
   }
 
   ok(): void {
-    this.subjectService.deleteSubject(this.data.idEntity)
+    this.subjectService.deleteSubject(this.data.entity.id)
       .then((result: any) => {
         this.dialogRef.close(this.data.entity)
         this.toastService.success('MSG.SUBJECT_DELETE_OK')
