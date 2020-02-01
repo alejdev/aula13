@@ -5,8 +5,6 @@ import { MatDialog } from '@angular/material'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { HeaderService } from '../../services/header.service'
 
-import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
-
 @Component({
   selector: 'a13-header',
   templateUrl: './header.component.html',
@@ -47,9 +45,5 @@ export class HeaderComponent implements OnInit {
     if (this.headerConfig.truncable) {
       this.isTruncated = !this.isTruncated
     }
-  }
-
-  logOut(): void {
-    this.dialog.open(LogoutDialogComponent)
   }
 }

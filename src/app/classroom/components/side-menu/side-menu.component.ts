@@ -10,6 +10,7 @@ import { ClassroomCreationComponent } from '../classroom-creation/classroom-crea
 import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
 import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
 import { SubjectDeleteDialogComponent } from '../subject-delete-dialog/subject-delete-dialog.component'
+import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 
 import { indicatorRotate } from '../../classroom.animation'
 
@@ -29,6 +30,17 @@ export class SideMenuComponent implements OnInit {
   srcImage: any = UtilService.srcImage
   classroomList: any[]
   subjectList: any[]
+
+  menuProfile = [{
+    name: 'PROFILE',
+    icon: 'user',
+    disabled: true,
+    action: () => { }
+  }, {
+    name: 'SIGN.OUT',
+    icon: 'sign-out-alt',
+    action: () => { this.dialog.open(LogoutDialogComponent) }
+  }]
 
   menuItems = [[{
     name: 'CLASSROOMS',

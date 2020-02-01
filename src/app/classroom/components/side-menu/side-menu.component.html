@@ -9,8 +9,20 @@
       <a matRipple class="avatar avatar-button border-theme border-theme-button">
         <img class="avatar-image" [src]="srcImage({img: getUser.getUserLogged()?.avatar})" alt="Avatar">
       </a>
-      <span class="user-name mt-1">{{ getUser.getUserLogged()?.name || getUser.getUserLogged()?.email}}
-      </span>
+      <div class="mt-1" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <span class="user-name">{{ getUser.getUserLogged()?.name || getUser.getUserLogged()?.email }}
+        </span>
+        <button mat-icon-button [matMenuTriggerFor]="menuProfileId" attr.aria-label="{{'OPTION_MENU' | translate}}">
+          <fa-icon class="mat-hint relative" style="top:-3px" icon="sort-down"></fa-icon>
+        </button>
+        <mat-menu #menuProfileId="matMenu">
+          <button *ngFor="let option of menuProfile" mat-menu-item (click)="option.action()"
+            [disabled]="option.disabled">
+            <fa-icon class="mat-icon-20 mat-hint" [icon]="option.icon"></fa-icon>
+            <span>{{option.name | translate}}</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
 
     <!-- Menu -->
