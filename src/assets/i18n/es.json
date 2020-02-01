@@ -105,6 +105,7 @@
 		"CLASSROOM_STUDENT_LIST": "Seleccione los alumnos matriculados en este aula",
 		"OBSERVATIONS": "Añade una breve descripción del alumno",
 		"SUBJECTS": "Marque las asignaturas que le impartirá al alumno",
+		"SUBJECT_STUDENT_LIST": "Seleccione los alumnos matriculados a esta asignatura",
 		"TITLE": "Añade un pequeño título descriptivo."
 	},
 	"INSTRUMENT": {

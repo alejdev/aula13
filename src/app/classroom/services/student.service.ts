@@ -30,22 +30,6 @@ export class StudentService {
     return this.userData.collection(this.subCollectionName)
   }
 
-  public addStudentClassroom(student: any, classroomId: any): any {
-    const classrooms = student.classroom.classrooms
-    return !classrooms.includes(classroomId) ? {
-      id: student.id,
-      classroom: { classrooms: [...classrooms, classroomId] }
-    } : undefined
-  }
-
-  public removeStudentClassroom(student: any, classroomId: any): any {
-    const classrooms = student.classroom.classrooms
-    return classrooms.includes(classroomId) ? {
-      id: student.id,
-      classroom: { classrooms: classrooms.filter((elem: any) => elem !== classroomId) }
-    } : undefined
-  }
-
   // Observables
   public observeStudentList(): any {
     return this.userData
@@ -62,10 +46,10 @@ export class StudentService {
   }
 
   // Promises
-  public async queryStudentsByClassroom(classroom: string): Promise<any> {
+  public async queryEnrrolledStudents(property: string, classroom: string): Promise<any> {
     const students = await this.userData
       .collection(this.subCollectionName,
-        ref => ref.where('classroom.classrooms', 'array-contains', classroom)
+        ref => ref.where(property, 'array-contains', classroom)
       )
       .get().toPromise()
     return UtilService.mapColl(students)

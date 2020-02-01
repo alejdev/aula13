@@ -105,6 +105,7 @@
 		"CLASSROOM_STUDENT_LIST": "Select the students enrolled in this classroom",
 		"OBSERVATIONS": "Add a brief description of the student",
 		"SUBJECTS": "Mark the subjects that will be taught to the student",
+		"SUBJECT_STUDENT_LIST": "Select the students enrolled in this subject",
 		"TITLE": "Add a small descriptive title."
 	},
 	"INSTRUMENT": {

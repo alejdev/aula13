@@ -30,8 +30,17 @@ export class ClassroomDeleteDialogComponent implements OnInit {
   }
 
   async removeClassroomsToStudents() {
-    const students = await this.studentService.queryStudentsByClassroom(this.data.entity.id)
-    const studentList = students.map((student: any) => this.studentService.removeStudentClassroom(student, this.data.entity.id))
+    const students = await this.studentService.queryEnrrolledStudents('classroom.classrooms', this.data.entity.id)
+    const studentList = students.map((student: any) => {
+      const classrooms = student.classroom.classrooms
+      return classrooms.includes(this.data.entity.id) ? {
+        id: student.id,
+        classroom: {
+          classrooms: classrooms.filter((elem: any) => elem !== this.data.entity.id),
+          subjects: student.classroom.subjects
+        }
+      } : undefined
+    })
     this.studentService.updateStudentBatch(studentList)
   }
 

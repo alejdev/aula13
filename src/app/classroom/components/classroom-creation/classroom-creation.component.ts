@@ -50,7 +50,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
     // If edit
     if (this.classroom.id) {
-      this.queryStudentsByClassroom()
+      this.queryEnrrolledStudents()
     }
   }
 
@@ -74,8 +74,8 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
       })
   }
 
-  async queryStudentsByClassroom(): Promise<any> {
-    const students = await this.studentService.queryStudentsByClassroom(this.classroom.id)
+  async queryEnrrolledStudents(): Promise<any> {
+    const students = await this.studentService.queryEnrrolledStudents('classroom.classrooms', this.classroom.id)
     this.studentIdList = students.map((student: any) => student.id)
     this.classroomFormGroup.controls.studentListCtrl.setValue(this.studentIdList)
   }
@@ -89,10 +89,23 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
     const enrrolledStudents = this.formatStudentIdList()
     const students = await this.studentService.getStudentList()
     const studentsMap = students.map((student: any) => {
+      const classrooms = student.classroom.classrooms
       if (enrrolledStudents.includes(student.id)) {
-        return this.studentService.addStudentClassroom(student, this.data.entity.id)
+        return !classrooms.includes(this.data.entity.id) ? {
+          id: student.id,
+          classroom: {
+            classrooms: [...classrooms, this.data.entity.id],
+            subjects: student.classroom.subjects
+          }
+        } : undefined
       }
-      return this.studentService.removeStudentClassroom(student, this.data.entity.id)
+      return classrooms.includes(this.data.entity.id) ? {
+        id: student.id,
+        classroom: {
+          classrooms: classrooms.filter((elem: any) => elem !== this.data.entity.id),
+          subjects: student.classroom.subjects
+        }
+      } : undefined
     })
     return this.studentService.updateStudentBatch(studentsMap)
   }
