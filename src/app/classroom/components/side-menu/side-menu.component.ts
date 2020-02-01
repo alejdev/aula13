@@ -70,14 +70,14 @@ export class SideMenuComponent implements OnInit {
 
     this.classroomService.observeClassroomList()
       .subscribe((result: any) => {
-        this.menuItems[0][0].children = this.classroomService.mapClassroomList(result)
-        this.classroomService.setCachedClassroomList(this.menuItems[0][0].children)
+        this.menuItems[0][0].children = UtilService.mapColl(result)
+        this.classroomService.cachedClassrooms = this.menuItems[0][0].children
       })
 
     this.subjectService.observeSubjectList()
       .subscribe((result: any) => {
-        this.menuItems[0][1].children = this.subjectService.mapSubjectList(result)
-        this.subjectService.setCachedSubjectList(this.menuItems[0][1].children)
+        this.menuItems[0][1].children = UtilService.mapColl(result)
+        this.subjectService.cachedSubjects = this.menuItems[0][1].children
       })
   }
 

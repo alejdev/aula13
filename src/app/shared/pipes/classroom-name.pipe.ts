@@ -11,9 +11,10 @@ export class ClassroomNamePipe implements PipeTransform {
   ) { }
 
   transform(value: any, ...args: any[]): any {
-    const classroomList = this.classroomService.getCachedClassroomList()
-    const classroom = classroomList.find((elem: any) => elem.id === value)
-    return classroom.name
+    return this.classroomService
+      .cachedClassrooms
+      .find((elem: any) => elem.id === value)
+      .name
   }
 
 }

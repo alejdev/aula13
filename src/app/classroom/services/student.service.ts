@@ -80,8 +80,7 @@ export class StudentService {
 
   public updateStudent(id: string, student: any): Promise<any> {
     this.loaderService.start()
-    return this.subCollection
-      .doc(id).ref.set(student)
+    return this.subCollection.doc(id).ref.set(student)
       .finally(() => this.loaderService.stop())
   }
 

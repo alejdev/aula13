@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
-import { take } from 'rxjs/operators'
 
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
+import { Observable } from 'rxjs'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 @Injectable({
@@ -12,8 +12,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 })
 export class SubjectService {
 
-  private ref: AngularFirestoreCollection = this.firestore.collection('users')
-  private subRefName: string = 'subjects'
+  private subCollectionName: string = 'subjects'
   private cachedSubjectList: any[] = []
 
   constructor(
@@ -22,93 +21,70 @@ export class SubjectService {
     private authService: AuthService
   ) { }
 
-  public mapSubject(data: any): any {
-    return {
-      id: data.payload.id,
-      ...data.payload.data()
-    }
+  // Collections
+  private get userData(): AngularFirestoreDocument {
+    return this.firestore.collection('users').doc(this.authService.getUserUid())
   }
 
-  public mapSubjectList(data: any): any {
-    return data.map((elem: any) => {
-      return {
-        id: elem.payload.doc.id,
-        ...elem.payload.doc.data()
-      }
-    })
+  private get subCollection(): AngularFirestoreCollection {
+    return this.userData.collection(this.subCollectionName)
   }
 
-  public observeSubjectList(): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => ref.orderBy('name'))
-      .snapshotChanges()
-  }
-
-  public getSubjectList(): Promise<any> {
-    this.loaderService.start()
-    return this.observeSubjectList()
-      .pipe(take(1))
-      .toPromise()
-      .finally(() => this.loaderService.stop())
-  }
-
-  public getCachedSubjectList(): any {
+  public get cachedSubjects(): any[] {
     return this.cachedSubjectList
   }
 
-  public setCachedSubjectList(cachedSubjectList: any[]): void {
+  public set cachedSubjects(cachedSubjectList: any[]) {
     this.cachedSubjectList = cachedSubjectList
+  }
+
+  // Observables
+  public observeSubjectList(): Observable<any> {
+    return this.userData
+      .collection(this.subCollectionName, ref => ref.orderBy('name'))
+      .snapshotChanges()
+  }
+
+  public observeSubject(id: string): Observable<any> {
+    return this.subCollection.doc(id).snapshotChanges()
+  }
+
+  public querySubject(name: string): Observable<any> {
+    return this.userData
+      .collection(this.subCollectionName, ref => ref.where('name', '==', name))
+      .snapshotChanges()
+  }
+
+  // Promises
+  public async getSubjectList(): Promise<any> {
+    this.loaderService.start()
+    const subjects = await this.subCollection.get().toPromise()
+    this.loaderService.stop()
+    return UtilService.mapColl(subjects)
   }
 
   public createSubject(data: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .add(data)
+    return this.subCollection.add(data)
       .finally(() => this.loaderService.stop())
   }
 
-  public observeSubject(id: string): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .doc(id).snapshotChanges()
-  }
-
-  public readSubject(id: string): Promise<any> {
+  public async readSubject(id: string): Promise<any> {
     this.loaderService.start()
-    return this.observeSubject(id)
-      .pipe(take(1))
-      .toPromise()
-      .finally(() => this.loaderService.stop())
-  }
-
-  public querySubject(name: string): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => {
-        return ref.where('name', '==', name)
-      })
-      .snapshotChanges()
+    const student = await this.subCollection.doc(id).get().toPromise()
+    this.loaderService.stop()
+    return UtilService.mapDoc(student)
   }
 
   public updateSubject(id: string, subject: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .doc(id).ref.set(subject)
+    return this.subCollection.doc(id).ref.set(subject)
       .finally(() => this.loaderService.stop())
   }
 
   public deleteSubject(id: string): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .doc(id).ref.delete()
+    return this.subCollection.doc(id).ref.delete()
       .finally(() => this.loaderService.stop())
   }
 

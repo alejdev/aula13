@@ -11,9 +11,10 @@ export class SubjectNamePipe implements PipeTransform {
   ) { }
 
   transform(value: any, ...args: any[]): any {
-    const subjectList = this.subjectService.getCachedSubjectList()
-    const subject = subjectList.find((elem: any) => elem.id === value)
-    return subject.name
+    return this.subjectService
+      .cachedSubjects
+      .find((elem: any) => elem.id === value)
+      .name
   }
 
 }

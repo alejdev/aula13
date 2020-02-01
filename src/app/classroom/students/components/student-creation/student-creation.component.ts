@@ -55,8 +55,8 @@ export class StudentCreationComponent implements OnInit {
     this.academicCourses = ModelService.academicCourseList
     this.conservatoryCourses = ModelService.conservatoryCourseList
     this.instruments = ModelService.instrumentList
-    this.classroomList = this.classroomService.getCachedClassroomList()
-    this.subjectList = this.subjectService.getCachedSubjectList()
+    this.classroomList = this.classroomService.cachedClassrooms
+    this.subjectList = this.subjectService.cachedSubjects
 
     this.student = this.data.student
     this.equals = UtilService.equals
@@ -146,6 +146,7 @@ export class StudentCreationComponent implements OnInit {
 
   save(): void {
     if (this.studentFormGroup.valid) {
+
       const student = {
         archived: !!this.student.archived,
         classroom: {
@@ -176,6 +177,7 @@ export class StudentCreationComponent implements OnInit {
       } else {
         createStudent = this.studentService.createStudent(student)
       }
+
       createStudent
         .then((result: any) => {
           this.toastService.success(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)

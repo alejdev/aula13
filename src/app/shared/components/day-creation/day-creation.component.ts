@@ -101,7 +101,6 @@ export class DayCreationComponent implements OnInit {
 
   save(): void {
     if (this.dayFormGroup.valid) {
-      console.log(this.dayFormGroup.value)
 
       const day = {
         studentId: this.getStudentId(),
@@ -116,6 +115,7 @@ export class DayCreationComponent implements OnInit {
       } else {
         createDay = this.dayService.createDay(day)
       }
+
       createDay
         .then((result: any) => {
           this.toastService.success(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)

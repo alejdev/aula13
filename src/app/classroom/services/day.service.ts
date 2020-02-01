@@ -73,8 +73,7 @@ export class DayService {
 
   public updateDay(id: string, day: any): Promise<any> {
     this.loaderService.start()
-    return this.subCollection
-      .doc(id).ref.set(day)
+    return this.subCollection.doc(id).ref.set(day)
       .finally(() => this.loaderService.stop())
   }
 
