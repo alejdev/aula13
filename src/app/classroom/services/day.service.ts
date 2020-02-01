@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+
+import firebase from 'firebase/app'
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { UtilService } from 'src/app/shared/services/util.service'
-import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +31,15 @@ export class DayService {
     return this.userData.collection(this.subCollectionName)
   }
 
+  private dayList(key: string, operator: any, value: any): AngularFirestoreCollection<any> {
+    return this.userData
+      .collection(this.subCollectionName, ref => {
+        return ref
+          .where(key, operator, value)
+          .orderBy('date', 'desc')
+      })
+  }
+
   // Observables
   public observeDayList(): Observable<any> {
     return this.userData
@@ -36,14 +47,8 @@ export class DayService {
       .snapshotChanges()
   }
 
-  public queryDayList(key: string, operator: any, value: any): Observable<any> {
-    return this.userData
-      .collection(this.subCollectionName, ref => {
-        return ref
-          .where(key, operator, value)
-          .orderBy('date', 'desc')
-      })
-      .snapshotChanges()
+  public observeQueryDayList(key: string, operator: any, value: any): Observable<any> {
+    return this.dayList(key, operator, value).snapshotChanges()
   }
 
   public observeDay(id: string): Observable<any> {
@@ -54,6 +59,13 @@ export class DayService {
   public async getDayList(): Promise<any> {
     this.loaderService.start()
     const days = await this.subCollection.get().toPromise()
+    this.loaderService.stop()
+    return UtilService.mapColl(days)
+  }
+
+  public async getQueryDayList(key: string, operator: any, value: any): Promise<any> {
+    this.loaderService.start()
+    const days = await this.dayList(key, operator, value).get().toPromise()
     this.loaderService.stop()
     return UtilService.mapColl(days)
   }
@@ -80,6 +92,17 @@ export class DayService {
   public deleteDay(id: string): Promise<any> {
     this.loaderService.start()
     return this.subCollection.doc(id).ref.delete()
+      .finally(() => this.loaderService.stop())
+  }
+
+  public deleteDayBatch(days: any[]): Promise<any> {
+    this.loaderService.start()
+    const batch = firebase.firestore().batch()
+    days.forEach((day: any) => {
+      const ref = this.subCollection.doc(day.id).ref
+      batch.delete(ref)
+    })
+    return batch.commit()
       .finally(() => this.loaderService.stop())
   }
 }

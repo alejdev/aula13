@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+
+import firebase from 'firebase/app'
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
@@ -6,8 +9,6 @@ import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import firebase from 'firebase/app'
-import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'

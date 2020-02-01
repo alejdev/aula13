@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
-import { Observable } from 'rxjs'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 @Injectable({
