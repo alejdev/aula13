@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core'
+import { Injectable } from '@angular/core'
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import firebase from 'firebase/app'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class StudentService {
   }
 
   // Observables
-  public observeStudentList(): any {
+  public observeStudentList(): Observable<any> {
     return this.userData
       .collection(this.subCollectionName, ref => {
         return ref
@@ -41,22 +42,26 @@ export class StudentService {
       .snapshotChanges()
   }
 
-  public observeStudent(id: string): any {
+  public observeStudent(id: string): Observable<any> {
     return this.subCollection.doc(id).snapshotChanges()
   }
 
   // Promises
   public async queryEnrrolledStudents(property: string, classroom: string): Promise<any> {
+    this.loaderService.start()
     const students = await this.userData
       .collection(this.subCollectionName,
         ref => ref.where(property, 'array-contains', classroom)
       )
       .get().toPromise()
+    this.loaderService.stop()
     return UtilService.mapColl(students)
   }
 
   public async getStudentList(): Promise<any> {
+    this.loaderService.start()
     const students = await this.subCollection.get().toPromise()
+    this.loaderService.stop()
     return UtilService.mapColl(students)
   }
 
@@ -67,7 +72,9 @@ export class StudentService {
   }
 
   public async readStudent(id: string): Promise<any> {
+    this.loaderService.start()
     const student = await this.subCollection.doc(id).get().toPromise()
+    this.loaderService.stop()
     return UtilService.mapDoc(student)
   }
 

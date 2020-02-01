@@ -5,6 +5,7 @@ import { DayService } from 'src/app/classroom/services/day.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 import { MatDialog } from '@angular/material'
 
@@ -40,6 +41,25 @@ export class DayListComponent implements OnInit, OnDestroy {
     this.observeDayList()
   }
 
+  async getDayList(): Promise<any> {
+    const dayList = await this.dayService.getDayList()
+    this.dayList = dayList.map((day: any) => this.mapDayList(day))
+  }
+
+  observeDayList(): void {
+    this.dayListObservable = this.dayService.observeDayList()
+      .subscribe((result: any) => {
+        this.dayList = UtilService.mapColl(result).map((day) => this.mapDayList(day))
+      })
+  }
+
+  mapDayList(day: any): any {
+    return {
+      student: this.studentList.find((student: any) => student.id === day.studentId),
+      ...day
+    }
+  }
+
   createDay(): void {
     this.dialog.open(DayCreationComponent, {
       width: 'calc(100vw)',
@@ -49,23 +69,6 @@ export class DayListComponent implements OnInit, OnDestroy {
         day: ModelService.dayModel
       }
     })
-  }
-
-  getDayList(): void {
-    this.dayService.getDayList()
-      .then((result: any) => {
-        this.dayList = this.dayService.mapDayList(result, this.studentList)
-      })
-  }
-
-  observeDayList(): void {
-    this.dayListObservable = this.dayService.observeDayList()
-      .subscribe((result: any) => {
-        this.dayList = this.dayService.mapDayList(result, this.studentList)
-      })
-  }
-
-  async getStudentList(): Promise<any> {
   }
 
   ngOnDestroy(): void {

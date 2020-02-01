@@ -21,9 +21,7 @@ export class ClassroomDeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.data)
-  }
+  ngOnInit(): void { }
 
   onNoClick(): void {
     this.dialogRef.close()

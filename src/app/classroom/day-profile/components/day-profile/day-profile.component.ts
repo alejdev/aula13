@@ -34,24 +34,26 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     this.getDay()
   }
 
-  getDay() {
+  async getDay(): Promise<any> {
 
     // Get day
-    this.dayService.readDay(this.dayId)
-      .then((result: any) => {
-        this.day = this.dayService.mapDay(result)
-      })
+    this.day = await this.dayService.readDay(this.dayId)
 
     // Observe day
     this.dayObservable = this.dayService.observeDay(this.dayId)
       .subscribe((result: any) => {
-        this.day = this.dayService.mapDay(result)
+        this.day = UtilService.mapDoc(result)
         if (this.day.studentId) {
           this.getStudent(this.day.studentId)
         } else {
           this.router.navigate(['aula/diario'])
         }
       })
+  }
+
+  async getStudent(id: string): Promise<any> {
+    this.day.student = await this.studentService.readStudent(id)
+    this.configHeader()
   }
 
   configHeader() {
@@ -93,11 +95,6 @@ export class DayProfileComponent implements OnInit, OnDestroy {
         }]
       })
     }
-  }
-
-  async getStudent(id: string): Promise<any> {
-    this.day.student = await this.studentService.readStudent(id)
-    this.configHeader()
   }
 
   ngOnDestroy(): void {

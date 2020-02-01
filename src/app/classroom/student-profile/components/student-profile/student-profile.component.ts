@@ -136,7 +136,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   queryDayList(): void {
     this.dayListObservable = this.dayService.queryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
-        this.dayList = this.dayService.mapDayList(result, [])
+        this.dayList = UtilService.mapColl(result)
       })
   }
 

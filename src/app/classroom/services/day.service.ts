@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core'
-import { take } from 'rxjs/operators'
 
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
+import { UtilService } from 'src/app/shared/services/util.service'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DayService {
 
-  private ref: AngularFirestoreCollection = this.firestore.collection('users')
-  private subRefName: string = 'days'
+  private subCollectionName: string = 'days'
 
   constructor(
     private firestore: AngularFirestore,
@@ -20,35 +20,25 @@ export class DayService {
     private authService: AuthService
   ) { }
 
-  public mapDay(data: any): any {
-    return {
-      id: data.payload.id,
-      ...data.payload.data()
-    }
+  // Collections
+  private get userData(): AngularFirestoreDocument {
+    return this.firestore.collection('users').doc(this.authService.getUserUid())
   }
 
-  public mapDayList(data: any, studentList: any): any {
-    return data.map((elem: any) => {
-      const docData = elem.payload.doc.data()
-      return {
-        id: elem.payload.doc.id,
-        student: studentList.find((student: any) => student.id === docData.studentId),
-        ...docData
-      }
-    })
+  private get subCollection(): AngularFirestoreCollection {
+    return this.userData.collection(this.subCollectionName)
   }
 
-  public observeDayList(): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => ref.orderBy('date', 'desc'))
+  // Observables
+  public observeDayList(): Observable<any> {
+    return this.userData
+      .collection(this.subCollectionName, ref => ref.orderBy('date', 'desc'))
       .snapshotChanges()
   }
 
-  public queryDayList(key: string, operator: any, value: any): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => {
+  public queryDayList(key: string, operator: any, value: any): Observable<any> {
+    return this.userData
+      .collection(this.subCollectionName, ref => {
         return ref
           .where(key, operator, value)
           .orderBy('date', 'desc')
@@ -56,53 +46,41 @@ export class DayService {
       .snapshotChanges()
   }
 
-  public getDayList(): Promise<any> {
+  public observeDay(id: string): Observable<any> {
+    return this.subCollection.doc(id).snapshotChanges()
+  }
+
+  // Promises
+  public async getDayList(): Promise<any> {
     this.loaderService.start()
-    return this.observeDayList()
-      .pipe(take(1))
-      .toPromise()
-      .finally(() => this.loaderService.stop())
+    const days = await this.subCollection.get().toPromise()
+    this.loaderService.stop()
+    return UtilService.mapColl(days)
   }
 
   public createDay(data: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .add(data)
+    return this.subCollection.add(data)
       .finally(() => this.loaderService.stop())
   }
 
-  public observeDay(id: string): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .doc(id).snapshotChanges()
-  }
-
-  public readDay(id: string): Promise<any> {
-    // this.loaderService.start()
-    return this.observeDay(id)
-      .pipe(take(1))
-      .toPromise()
-      // .finally(() => this.loaderService.stop())
+  public async readDay(id: string): Promise<any> {
+    this.loaderService.start()
+    const day = await this.subCollection.doc(id).get().toPromise()
+    this.loaderService.stop()
+    return UtilService.mapDoc(day)
   }
 
   public updateDay(id: string, day: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
+    return this.subCollection
       .doc(id).ref.set(day)
       .finally(() => this.loaderService.stop())
   }
 
   public deleteDay(id: string): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .doc(id).ref.delete()
+    return this.subCollection.doc(id).ref.delete()
       .finally(() => this.loaderService.stop())
   }
 }

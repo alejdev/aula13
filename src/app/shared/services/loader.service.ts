@@ -27,7 +27,10 @@ export class LoaderService {
   public stop(): void {
     this.activeRequests--
     if (this.activeRequests === 0) {
-      this.loading = false
+      // Request overlap
+      setTimeout(() => {
+        this.loading = false
+      }, 250)
     }
   }
 }
