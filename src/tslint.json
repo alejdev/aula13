@@ -18,6 +18,7 @@
     "eofline": true,
     "max-line-length": [
       false
-    ]
+    ],
+    "no-switch-case-fall-through": false
   }
 }
