@@ -17,12 +17,4 @@ export class SidenavService {
       }
     })
   }
-
-  public closeNav() {
-    this.appDrawer.close()
-  }
-
-  public openNav() {
-    this.appDrawer.open()
-  }
 }
