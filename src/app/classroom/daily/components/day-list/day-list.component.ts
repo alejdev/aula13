@@ -28,18 +28,16 @@ export class DayListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Config header
-    this.headerService.configHeader({
-      title: 'DAILY'
-    })
+    this.headerService.configHeader({ title: 'DAILY' })
 
+    this.getData()
+  }
+
+  async getData(): Promise<any> {
     this.dayList = []
-    this.studentList = this.studentService.getCachedStudentList()
-    if (this.studentList.length) {
-      this.getDayList()
-      this.observeDayList()
-    } else {
-      this.getStudentList()
-    }
+    this.studentList = await this.studentService.getStudentList()
+    this.getDayList()
+    this.observeDayList()
   }
 
   createDay(): void {
@@ -67,14 +65,7 @@ export class DayListComponent implements OnInit, OnDestroy {
       })
   }
 
-  getStudentList(): void {
-    this.studentService.observeStudentList()
-      .subscribe((result: any) => {
-        this.studentList = this.studentService.mapStudentList(result)
-        this.studentService.setCachedStudentList(this.studentList)
-        this.getDayList()
-        this.observeDayList()
-      })
+  async getStudentList(): Promise<any> {
   }
 
   ngOnDestroy(): void {

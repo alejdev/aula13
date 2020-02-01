@@ -34,6 +34,11 @@
   }
 }
 
+// Toast
+snack-bar-container {
+  margin-bottom: calc(var(--main-header-size) + var(--main-padding-size)) !important;
+}
+
 // Colors
 .color-primary {
   color: $main-color;

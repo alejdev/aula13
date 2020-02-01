@@ -95,12 +95,9 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  getStudent(id: string): any {
-    this.studentService.readStudent(id)
-      .then((result: any) => {
-        this.day.student = this.studentService.mapStudent(result)
-        this.configHeader()
-      })
+  async getStudent(id: string): Promise<any> {
+    this.day.student = await this.studentService.readStudent(id)
+    this.configHeader()
   }
 
   ngOnDestroy(): void {

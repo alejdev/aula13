@@ -85,4 +85,31 @@ export class UtilService {
   public static capitalize(text: string): string {
     return text.charAt(0).toUpperCase() + text.slice(1)
   }
+
+  // Map firestore document
+  public static mapDoc(doc: any): any {
+    return doc.payload ?
+      {
+        id: doc.payload.id,
+        ...doc.payload.data()
+      } : {
+        id: doc.id,
+        ...doc.data()
+      }
+  }
+
+  // Map firestore collecction
+  public static mapColl(collection: any): any[] {
+    if (collection.docs) {
+      const list = []
+      collection.forEach((doc: any) => list.push(this.mapDoc(doc)))
+      return list
+    }
+    return collection.map((elem: any) => {
+      return {
+        id: elem.payload.doc.id,
+        ...elem.payload.doc.data()
+      }
+    })
+  }
 }

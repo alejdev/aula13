@@ -164,8 +164,7 @@ export class ModelService {
   }
 
   public static classroomModel: any = {
-    name: '',
-    students: []
+    name: ''
   }
 
   public static subjectModel: any = {

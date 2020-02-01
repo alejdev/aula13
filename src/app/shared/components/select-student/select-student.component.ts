@@ -42,7 +42,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
 
     this.studentListObservable = this.studentService.observeStudentList()
       .subscribe((result: any) => {
-        this.studentList = this.studentService.mapStudentList(result).filter((student: any) => !student.archived)
+        this.studentList = UtilService.mapColl(result).filter((student: any) => !student.archived)
       })
 
     this.studentFormGroup = this.formBuilder.group({

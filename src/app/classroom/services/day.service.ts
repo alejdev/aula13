@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { take } from 'rxjs/operators'
 
-import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/firestore'
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
@@ -81,11 +81,11 @@ export class DayService {
   }
 
   public readDay(id: string): Promise<any> {
-    this.loaderService.start()
+    // this.loaderService.start()
     return this.observeDay(id)
       .pipe(take(1))
       .toPromise()
-      .finally(() => this.loaderService.stop())
+      // .finally(() => this.loaderService.stop())
   }
 
   public updateDay(id: string, day: any): Promise<any> {

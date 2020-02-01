@@ -29,17 +29,10 @@ export class ClassroomDeleteDialogComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  // TODO: batch
-  removeClassroomsToStudents(): void {
-    const classroomId = this.data.entity.id
-    this.studentService.queryStudentsByClassroom(classroomId)
-      .subscribe((result: any) => {
-        const studentList = this.studentService.mapStudentList(result)
-        studentList.forEach((student: any) => {
-          student.classroom.classrooms = student.classroom.classrooms.filter((elem: any) => elem !== classroomId)
-          this.studentService.updateStudent(student.id, student)
-        })
-      })
+  async removeClassroomsToStudents() {
+    const students = await this.studentService.queryStudentsByClassroom(this.data.entity.id)
+    const studentList = students.map((student: any) => this.studentService.removeStudentClassroom(student, this.data.entity.id))
+    this.studentService.updateStudentBatch(studentList)
   }
 
   ok(): void {

@@ -73,18 +73,14 @@ export class StudentListComponent implements OnInit, OnDestroy {
     })
   }
 
-  getStudentList(): void {
-    this.studentService.getStudentList()
-      .then((result: any) => {
-        this.studentList = this.studentService.mapStudentList(result)
-      })
+  async getStudentList(): Promise<any> {
+    this.studentList = await this.studentService.getStudentList()
   }
 
   observeStudentList(): void {
     this.studentListObservable = this.studentService.observeStudentList()
       .subscribe((result: any) => {
-        this.studentList = this.studentService.mapStudentList(result)
-        this.studentService.setCachedStudentList(this.studentList)
+        this.studentList = UtilService.mapColl(result)
         this.studentListFiltered = Object.assign(this.studentList)
         this.filterStudents()
       })

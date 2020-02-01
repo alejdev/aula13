@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core'
-import { take } from 'rxjs/operators'
+import { Injectable, OnInit } from '@angular/core'
 
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { AuthService } from 'src/app/shared/services/auth.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 import firebase from 'firebase/app'
 
@@ -13,9 +13,7 @@ import firebase from 'firebase/app'
 })
 export class StudentService {
 
-  private ref: AngularFirestoreCollection = this.firestore.collection('users')
-  private subRefName: string = 'students'
-  private cachedStudentList: any[] = []
+  private subCollectionName: string = 'students'
 
   constructor(
     private firestore: AngularFirestore,
@@ -23,26 +21,35 @@ export class StudentService {
     private authService: AuthService
   ) { }
 
-  public mapStudent(data: any): any {
-    return {
-      id: data.payload.id,
-      ...data.payload.data()
-    }
+  // Collections
+  private get userData(): AngularFirestoreDocument {
+    return this.firestore.collection('users').doc(this.authService.getUserUid())
   }
 
-  public mapStudentList(data: any): any {
-    return data.map((elem: any) => {
-      return {
-        id: elem.payload.doc.id,
-        ...elem.payload.doc.data()
-      }
-    })
+  private get subCollection(): AngularFirestoreCollection {
+    return this.userData.collection(this.subCollectionName)
   }
 
+  public addStudentClassroom(student: any, classroomId: any): any {
+    const classrooms = student.classroom.classrooms
+    return !classrooms.includes(classroomId) ? {
+      id: student.id,
+      classroom: { classrooms: [...classrooms, classroomId] }
+    } : undefined
+  }
+
+  public removeStudentClassroom(student: any, classroomId: any): any {
+    const classrooms = student.classroom.classrooms
+    return classrooms.includes(classroomId) ? {
+      id: student.id,
+      classroom: { classrooms: classrooms.filter((elem: any) => elem !== classroomId) }
+    } : undefined
+  }
+
+  // Observables
   public observeStudentList(): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => {
+    return this.userData
+      .collection(this.subCollectionName, ref => {
         return ref
           .orderBy('favorite', 'desc')
           .orderBy('personal.name')
@@ -50,81 +57,60 @@ export class StudentService {
       .snapshotChanges()
   }
 
-  public queryStudentsByClassroom(classroom: string): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName, ref => ref.where('classroom.classrooms', 'array-contains', classroom))
-      .snapshotChanges()
+  public observeStudent(id: string): any {
+    return this.subCollection.doc(id).snapshotChanges()
   }
 
-  public getStudentList(): Promise<any> {
-    this.loaderService.start()
-    return this.observeStudentList()
-      .pipe(take(1))
-      .toPromise()
-      .finally(() => this.loaderService.stop())
+  // Promises
+  public async queryStudentsByClassroom(classroom: string): Promise<any> {
+    const students = await this.userData
+      .collection(this.subCollectionName,
+        ref => ref.where('classroom.classrooms', 'array-contains', classroom)
+      )
+      .get().toPromise()
+    return UtilService.mapColl(students)
   }
 
-  public getCachedStudentList(): any {
-    return this.cachedStudentList
-  }
-
-  public setCachedStudentList(cachedStudentList: any[]): void {
-    this.cachedStudentList = cachedStudentList
+  public async getStudentList(): Promise<any> {
+    const students = await this.subCollection.get().toPromise()
+    return UtilService.mapColl(students)
   }
 
   public createStudent(data: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .add(data)
+    return this.subCollection.add(data)
       .finally(() => this.loaderService.stop())
   }
 
-  public observeStudent(id: string): any {
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .doc(id).snapshotChanges()
-  }
-
-  public readStudent(id: string): Promise<any> {
-    this.loaderService.start()
-    return this.observeStudent(id)
-      .pipe(take(1))
-      .toPromise()
-      .finally(() => this.loaderService.stop())
+  public async readStudent(id: string): Promise<any> {
+    const student = await this.subCollection.doc(id).get().toPromise()
+    return UtilService.mapDoc(student)
   }
 
   public updateStudent(id: string, student: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
+    return this.subCollection
       .doc(id).ref.set(student)
       .finally(() => this.loaderService.stop())
   }
 
-  public updateStudents(students: any[]): Promise<any> {
+  public updateStudentBatch(students: any[]): Promise<any> {
     this.loaderService.start()
     const batch = firebase.firestore().batch()
-    const collection = this.ref.doc(this.authService.getUserUid()).collection(this.subRefName)
-    students.forEach((doc: any) => {
-      const ref = collection.doc(doc.id).ref
-      batch.update(ref, { classroom: { classrooms: doc.classroom.classrooms } })
-    })
-    return batch
-      .commit()
+    students
+      .filter(student => student)
+      .forEach((student: any) => {
+        const ref = this.subCollection.doc(student.id).ref
+        delete student.id
+        batch.update(ref, student)
+      })
+    return batch.commit()
       .finally(() => this.loaderService.stop())
   }
 
   public deleteStudent(id: string): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(this.authService.getUserUid())
-      .collection(this.subRefName)
-      .doc(id).ref.delete()
+    return this.subCollection.doc(id).ref.delete()
       .finally(() => this.loaderService.stop())
   }
 

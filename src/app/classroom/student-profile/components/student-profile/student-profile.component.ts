@@ -51,15 +51,12 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => this.studentId = params.id)
 
     // Get student
-    this.studentService.readStudent(this.studentId)
-      .then((result: any) => {
-        this.student = this.studentService.mapStudent(result)
-      })
+    this.getStudent(this.studentId)
 
     // Observe student
     this.studentObservable = this.studentService.observeStudent(this.studentId)
       .subscribe((result: any) => {
-        this.student = this.studentService.mapStudent(result)
+        this.student = UtilService.mapDoc(result)
         this.queryDayList()
 
         if (this.student && this.student.personal) {
@@ -116,6 +113,10 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           this.router.navigate(['aula/alumnos'])
         }
       })
+  }
+
+  async getStudent(id: string): Promise<any> {
+    this.student = await this.studentService.readStudent(id)
   }
 
   showMore() {

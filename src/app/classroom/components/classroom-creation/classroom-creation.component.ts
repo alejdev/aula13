@@ -45,11 +45,13 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
       studentListCtrl: [this.studentIdList || []]
     })
 
+    // Listen name changes
+    this.onClassroomChange()
+
     // If edit
     if (this.classroom.id) {
       this.queryStudentsByClassroom()
     }
-    this.onClassroomChange()
   }
 
   onClassroomChange() {
@@ -72,70 +74,50 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
       })
   }
 
-  queryStudentsByClassroom() {
-    this.studentService.queryStudentsByClassroom(this.classroom.id)
-      .subscribe((result: any) => {
-        this.studentIdList = this.studentService.mapStudentList(result).map((student: any) => student.id)
-        this.classroomFormGroup.controls.studentListCtrl.setValue(this.studentIdList)
-      })
+  async queryStudentsByClassroom(): Promise<any> {
+    const students = await this.studentService.queryStudentsByClassroom(this.classroom.id)
+    this.studentIdList = students.map((student: any) => student.id)
+    this.classroomFormGroup.controls.studentListCtrl.setValue(this.studentIdList)
   }
 
-  getStudentIdList(): any {
+  formatStudentIdList(): any[] {
     const studentListCtrl = this.classroomFormGroup.value.studentListCtrl
-    if (studentListCtrl.hasOwnProperty('studentCtrl')) {
-      this.studentIdList = studentListCtrl.studentCtrl
-    } else {
-      this.studentIdList = studentListCtrl
-    }
+    return studentListCtrl.studentCtrl || studentListCtrl
   }
 
-  mapStudent(student: any): any {
-    const classrooms = student.classroom.classrooms
-    // Add classroom
-    if (this.studentIdList.includes(student.id) && !classrooms.includes(this.classroom.id)) {
-      return {
-        id: student.id,
-        classroom: { classrooms: [...classrooms, this.classroom.id] }
-      }
-    }
-    // Remove classroom
-    if (!this.studentIdList.includes(student.id) && classrooms.includes(this.classroom.id)) {
-      return {
-        id: student.id,
-        classroom: { classrooms: classrooms.filter((elem: any) => elem !== this.classroom.id) }
-      }
-    }
-    return
-  }
-
-  async saveStudents(): Promise<any> {
-    this.getStudentIdList()
+  async updateStudentClassrooms(): Promise<any> {
+    const enrrolledStudents = this.formatStudentIdList()
     const students = await this.studentService.getStudentList()
-    const studentsMap = this.studentService
-      .mapStudentList(students)
-      .map((student: any) => this.mapStudent(student))
-      .filter((student: any) => student)
-    return this.studentService.updateStudents(studentsMap)
+    const studentsMap = students.map((student: any) => {
+      if (enrrolledStudents.includes(student.id)) {
+        return this.studentService.addStudentClassroom(student, this.data.entity.id)
+      }
+      return this.studentService.removeStudentClassroom(student, this.data.entity.id)
+    })
+    return this.studentService.updateStudentBatch(studentsMap)
   }
 
-  save(): void {
+  save(): any {
     if (this.classroomFormGroup.valid) {
+
       const classroom = {
         name: UtilService.capitalize(this.classroomFormGroup.value.nameCtrl || '')
       }
-      let createClassroom: any
+
+      let setClassroom: any
       if (this.data.entity.id) {
-        createClassroom = this.classroomService.updateClassroom(this.data.entity.id, classroom)
+        setClassroom = this.classroomService.updateClassroom(this.data.entity.id, classroom)
       } else {
-        createClassroom = this.classroomService.createClassroom(classroom)
+        setClassroom = this.classroomService.createClassroom(classroom)
       }
-      createClassroom
+
+      setClassroom
         .then((result: any) => {
           // If edit
           this.classroom.id = result ? result.id : this.classroom.id
-          this.saveStudents()
-          this.toastService.success(`MSG.CLASSROOM_${this.data.entity.id ? 'UPDATE' : 'CREATE'}_OK`)
+          this.updateStudentClassrooms()
           this.dialogRef.close(this.data.entity)
+          this.toastService.success(`MSG.CLASSROOM_${result ? 'CREATE' : 'UPDATE'}_OK`)
         })
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
