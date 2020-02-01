@@ -1,4 +1,4 @@
-<section class="login" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
+<section class="login mat-typography" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2rem">
 
   <!-- Background -->
   <div class="login-background"></div>
@@ -19,7 +19,7 @@
     <form [formGroup]="formGroup" class="login-form pt-h">
 
       <!-- Email -->
-      <mat-form-field class="mb-1" appearance="outline">
+      <mat-form-field class="mb-q" appearance="outline">
         <mat-label>{{'EMAIL' | translate}}</mat-label>
         <input matInput type="text" required formControlName="email">
         <button mat-button *ngIf="formGroup.controls['email'].value" matSuffix mat-icon-button
@@ -31,10 +31,10 @@
         </mat-error>
       </mat-form-field>
 
-      <div class="mb-1" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="1rem">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="10px">
 
         <!-- Password -->
-        <mat-form-field appearance="outline">
+        <mat-form-field class="mb-h" appearance="outline">
           <mat-label>{{'PASSWORD' | translate}}</mat-label>
           <input matInput type="{{passwordType}}" required formControlName="password">
           <button mat-button *ngIf="formGroup.controls['password'].value" matSuffix mat-icon-button
@@ -49,7 +49,7 @@
         </mat-form-field>
 
         <!-- Confirm password -->
-        <mat-form-field *ngIf="!login" appearance="outline">
+        <mat-form-field class="mb-h" *ngIf="!login" appearance="outline">
           <mat-label>{{'CONFIRM_PASSWORD' | translate}}</mat-label>
           <input matInput type="{{passwordType}}" required formControlName="confirmPassword">
           <button mat-button *ngIf="formGroup.controls['confirmPassword'].value" matSuffix mat-icon-button
