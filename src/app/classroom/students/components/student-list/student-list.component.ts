@@ -52,9 +52,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Config header
-    this.headerService.configHeader({
-      title: 'STUDENTS'
-    })
+    this.headerService.configHeader({ title: 'STUDENTS' })
 
     this.studentList = []
     this.studentListFiltered = []
@@ -103,24 +101,23 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.archivedListFiltered = this.studentListFiltered.filter(student => student.archived)
 
     // Show group list if search inside
-    if (this.studentFilter) {
+    if (this.studentFilter.length > 2) {
       switch (true) {
         case this.favoriteListFiltered.length > 0:
           this.showMore('favorite', true)
-          break
         case this.restListFiltered.length > 0:
           this.showMore('rest', true)
-          break
         case this.archivedListFiltered.length > 0:
           this.showMore('archived', true)
-          break
       }
+    } else if (this.studentFilter.length === 0) {
+      this.showMore('archived', false)
     }
   }
 
   showMore(list: string, show?: boolean): void {
-    const state = show ? !show : this.toggleConfig[list].show
-    this.toggleConfig[list].show = state ? false : true
+    const state = this.toggleConfig[list].show
+    this.toggleConfig[list].show = typeof show === 'undefined' ? !state : show
     this.toggleConfig[list].icon = `caret-${state ? 'down' : 'up'}`
   }
 
