@@ -28,8 +28,6 @@ export class ClassroomComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Set User Logged
-    this.setUserLogged()
 
     // Swipe sideMenu on mobile
     if (this.settingService.value.canPanSideMenu) {
@@ -53,12 +51,5 @@ export class ClassroomComponent implements OnInit {
 
     // Set setting theme on first time
     this.themeService.setTheme(this.settingService.value.theme)
-  }
-
-  setUserLogged(): void {
-    this.authService.readUser(this.authService.getUserUid())
-      .then((result: any) => {
-        this.authService.setUserLogged(result.data())
-      })
   }
 }

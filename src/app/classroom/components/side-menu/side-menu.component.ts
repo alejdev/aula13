@@ -26,7 +26,7 @@ import { MatDialog } from '@angular/material'
 export class SideMenuComponent implements OnInit {
 
   title = 'Aula 13'
-  getUser: any
+  user: any
   srcImage: any = UtilService.srcImage
   classroomList: any[]
   subjectList: any[]
@@ -78,7 +78,9 @@ export class SideMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUser = this.authService
+
+    // Set user
+    this.setUserLogged()
 
     this.classroomService.observeClassroomList()
       .subscribe((result: any) => {
@@ -91,6 +93,11 @@ export class SideMenuComponent implements OnInit {
         this.menuItems[0][1].children = UtilService.mapColl(result)
         this.subjectService.cachedSubjects = this.menuItems[0][1].children
       })
+  }
+
+  async setUserLogged(): Promise<any> {
+    const auth = await this.authService.readUser(this.authService.userUid)
+    this.user = auth.data()
   }
 
   onItemSelected(item: any): void {

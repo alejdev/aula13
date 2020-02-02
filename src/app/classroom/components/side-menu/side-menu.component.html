@@ -7,11 +7,10 @@
     <!-- User -->
     <div class="mt-1 mb-2" fxLayout="column" fxLayoutAlign="center center">
       <a matRipple class="avatar avatar-button border-theme border-theme-button">
-        <img class="avatar-image" [src]="srcImage({img: getUser.getUserLogged()?.avatar})" alt="Avatar">
+        <img class="avatar-image" [src]="srcImage({img: user?.avatar })" alt="Avatar">
       </a>
       <div class="mt-1" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-        <span class="user-name">{{ getUser.getUserLogged()?.name || getUser.getUserLogged()?.email }}
-        </span>
+        <span class="user-name">{{ user?.name || user?.email }}</span>
         <button mat-icon-button [matMenuTriggerFor]="menuProfileId" attr.aria-label="{{'OPTION_MENU' | translate}}">
           <fa-icon class="mat-hint relative" style="top:-3px" icon="sort-down"></fa-icon>
         </button>

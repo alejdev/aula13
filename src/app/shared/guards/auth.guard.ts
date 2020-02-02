@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     return this.authService.getStatus().pipe(
       map((status: any) => {
         if (status) {
-          this.authService.setUserUid(status.uid)
+          this.authService.userUid = status.uid
           return true
         } else {
           this.router.navigate(['login'])

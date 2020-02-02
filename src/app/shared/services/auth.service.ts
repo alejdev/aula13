@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { AngularFireAuth } from '@angular/fire/auth'
@@ -6,6 +6,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 
 import { ToastService } from './toast.service'
 import { LoaderService } from './loader.service'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,7 @@ import { LoaderService } from './loader.service'
 export class AuthService {
 
   private error: any
-  private userUid: string = null
-  private userLogged: any = null
-  private ref: AngularFirestoreCollection = this.firestore.collection('users')
+  private userUidValue: string
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -43,28 +42,26 @@ export class AuthService {
     }
   }
 
-  public getStatus(): any {
+  // Collections
+  private get userData(): AngularFirestoreCollection {
+    return this.firestore.collection('users')
+  }
+
+  public get userUid(): string {
+    return this.userUidValue
+  }
+
+  public set userUid(uid: string) {
+    this.userUidValue = uid
+  }
+
+  // Observables
+  public getStatus(): Observable<any> {
     return this.angularFireAuth.authState
   }
 
-  public getUserUid(): any {
-    return this.userUid
-  }
-
-  public setUserUid(uid: string): void {
-    this.userUid = uid
-  }
-
-  public getUserLogged(): any {
-    return this.userLogged
-  }
-
-  public setUserLogged(user: any): void {
-    this.userLogged = user
-    console.log(this.userLogged)
-  }
-
-  public signUp(control: any): any {
+  // Promises
+  public signUp(control: any): Promise<any> {
     this.loaderService.start()
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => this.createUser(auth.user))
@@ -72,7 +69,7 @@ export class AuthService {
       .finally(() => this.loaderService.stop())
   }
 
-  public signIn(control: any): any {
+  public signIn(control: any): Promise<any> {
     this.loaderService.start()
     return this.angularFireAuth.auth.signInWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => {
@@ -93,7 +90,7 @@ export class AuthService {
     this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
   }
 
-  public signOut(): any {
+  public signOut(): Promise<any> {
     this.loaderService.start()
     return this.angularFireAuth.auth.signOut()
       .then(() => {
@@ -104,9 +101,9 @@ export class AuthService {
       .finally(() => this.loaderService.stop())
   }
 
-  private createUser(data: any): any {
+  private createUser(data: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
+    return this.userData
       .doc(data.uid)
       .set({
         creationDate: data.metadata.a,
@@ -122,10 +119,9 @@ export class AuthService {
       .finally(() => this.loaderService.stop())
   }
 
-  public readUser(id: any): any {
+  public readUser(id: any): Promise<any> {
     this.loaderService.start()
-    return this.ref
-      .doc(id).ref.get()
+    return this.userData.doc(id).ref.get()
       .finally(() => this.loaderService.stop())
   }
 

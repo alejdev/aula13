@@ -23,7 +23,7 @@ export class SubjectService {
 
   // Collections
   private get userData(): AngularFirestoreDocument {
-    return this.firestore.collection('users').doc(this.authService.getUserUid())
+    return this.firestore.collection('users').doc(this.authService.userUid)
   }
 
   private get subCollection(): AngularFirestoreCollection {
