@@ -232,7 +232,7 @@
 	"STUDENT_PARENTS_DATA": "Parents",
 	"STUDENT_PERSONAL_DATA": "Student",
 	"SUBJECT": {
-		"CREATION_SUBTITLE": "You can add or modify subjects to teach your students and enroll as many as you need in it"
+		"CREATION_SUBTITLE": "You can add or modify subjects to teach your students and enroll as many as you need in them"
 	},
 	"SUBJECTS": "Subjects",
 	"SUBJECT_DELETE": "Delete subject",

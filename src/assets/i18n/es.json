@@ -232,7 +232,7 @@
 	"STUDENT_PARENTS_DATA": "Padres",
 	"STUDENT_PERSONAL_DATA": "Alumno",
 	"SUBJECT": {
-		"CREATION_SUBTITLE": "Puedes añadir o modificar asignaturas para impartir a tus alumnos y matricular a tantos como necesites en ella"
+		"CREATION_SUBTITLE": "Puedes añadir o modificar asignaturas para impartir a tus alumnos y matricular a tantos como necesites en ellas"
 	},
 	"SUBJECTS": "Asignaturas",
 	"SUBJECT_DELETE": "Borrar asignatura",
