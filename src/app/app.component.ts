@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.toastService.info('MSG.APP_UPDATED')
         setTimeout(() => {
           window.location.reload()
-        }, 5000)
+        }, 3000)
       })
     }
 
