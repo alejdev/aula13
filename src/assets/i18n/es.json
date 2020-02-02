@@ -14,7 +14,10 @@
 		"TITLE": "Comportamiento"
 	},
 	"CANCEL": "Cancelar",
-	"CLASSROOM": "Aula",
+	"CLASSROOM": {
+		"CREATION_SUBTITLE": "Puedes añadir o modificar aulas para organizar a tus alumnos en diferentes grupos",
+		"NAME": "Aula"
+	},
 	"CLASSROOMS": "Aulas",
 	"CLASSROOM_DELETE": "Borrar aula",
 	"CLOSE_MENU": "Cerrar menú",
@@ -105,7 +108,7 @@
 		"CLASSROOM_STUDENT_LIST": "Seleccione los alumnos matriculados en este aula",
 		"OBSERVATIONS": "Añade una breve descripción del alumno",
 		"SUBJECTS": "Marque las asignaturas que le impartirá al alumno",
-		"SUBJECT_STUDENT_LIST": "Seleccione los alumnos matriculados a esta asignatura",
+		"SUBJECT_STUDENT_LIST": "Seleccione los alumnos matriculados en esta asignatura",
 		"TITLE": "Añade un pequeño título descriptivo."
 	},
 	"INSTRUMENT": {
@@ -225,6 +228,9 @@
 	"STUDENT_DELETE": "Borrar alumno",
 	"STUDENT_PARENTS_DATA": "Padres",
 	"STUDENT_PERSONAL_DATA": "Alumno",
+	"SUBJECT": {
+		"CREATION_SUBTITLE": "Puedes añadir o modificar asignaturas para impartir a tus alumnos y matricular a tantos como necesites en ella"
+	},
 	"SUBJECTS": "Asignaturas",
 	"SUBJECT_DELETE": "Borrar asignatura",
 	"TEACHER": "Profesor",

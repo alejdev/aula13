@@ -14,7 +14,10 @@
 		"TITLE": "Verhalten"
 	},
 	"CANCEL": "Abbrechen",
-	"CLASSROOM": "Klasse",
+	"CLASSROOM": {
+		"CREATION_SUBTITLE": "Sie können Klassenräume hinzufügen oder ändern, um Ihre Schüler in verschiedenen Gruppen zu organisieren",
+		"NAME": "Klasse"
+	},
 	"CLASSROOMS": "Klassen",
 	"CLASSROOM_DELETE": "Klassenzimmer löschen",
 	"CLOSE_MENU": "Menü schließen",
@@ -225,6 +228,9 @@
 	"STUDENT_DELETE": "Schüler löschen",
 	"STUDENT_PARENTS_DATA": "Vater",
 	"STUDENT_PERSONAL_DATA": "Student",
+	"SUBJECT": {
+		"CREATION_SUBTITLE": "Sie können Fächer hinzufügen oder ändern, um Ihren Schülern beizubringen und so viele Fächer einzuschreiben, wie Sie benötigen"
+	},
 	"SUBJECTS": "Themen",
 	"SUBJECT_DELETE": "Betreff löschen",
 	"TEACHER": "Lehrer",

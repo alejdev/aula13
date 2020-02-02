@@ -14,7 +14,10 @@
 		"TITLE": "Comportamento"
 	},
 	"CANCEL": "Annullare",
-	"CLASSROOM": "Classe",
+	"CLASSROOM": {
+		"CREATION_SUBTITLE": "Puoi aggiungere o modificare le aule per organizzare i tuoi studenti in diversi gruppi",
+		"NAME": "Classe"
+	},
 	"CLASSROOMS": "Classi",
 	"CLASSROOM_DELETE": "Elimina classe",
 	"CLOSE_MENU": "Chiudi menu",
@@ -225,6 +228,9 @@
 	"STUDENT_DELETE": "Elimina studente",
 	"STUDENT_PARENTS_DATA": "Genitori",
 	"STUDENT_PERSONAL_DATA": "Studente",
+	"SUBJECT": {
+		"CREATION_SUBTITLE": "Puoi aggiungere o modificare argomenti per insegnare ai tuoi studenti e iscriverne quanti ne hai bisogno"
+	},
 	"SUBJECTS": "Soggetti",
 	"SUBJECT_DELETE": "Elimina soggetto",
 	"TEACHER": "Professore",

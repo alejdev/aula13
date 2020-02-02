@@ -14,7 +14,10 @@
 		"TITLE": "Behavior"
 	},
 	"CANCEL": "Cancel",
-	"CLASSROOM": "Classroom",
+	"CLASSROOM": {
+		"CREATION_SUBTITLE": "You can add or modify classrooms to organize your students in different groups",
+		"NAME": "Classroom"
+	},
 	"CLASSROOMS": "Classrooms",
 	"CLASSROOM_DELETE": "Delete classroom",
 	"CLOSE_MENU": "Close menu",
@@ -225,6 +228,9 @@
 	"STUDENT_DELETE": "Delete student",
 	"STUDENT_PARENTS_DATA": "Parents",
 	"STUDENT_PERSONAL_DATA": "Student",
+	"SUBJECT": {
+		"CREATION_SUBTITLE": "You can add or modify subjects to teach your students and enroll as many as you need in it"
+	},
 	"SUBJECTS": "Subjects",
 	"SUBJECT_DELETE": "Delete subject",
 	"TEACHER": "Teacher",
