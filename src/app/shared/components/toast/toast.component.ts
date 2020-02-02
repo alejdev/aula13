@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { MAT_SNACK_BAR_DATA } from '@angular/material'
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material'
 
 @Component({
   selector: 'a13-toast',
@@ -9,6 +9,7 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material'
 export class ToastComponent implements OnInit {
 
   constructor(
+    private snackRef: MatSnackBarRef<ToastComponent>,
     @Inject(MAT_SNACK_BAR_DATA) public data: any
   ) { }
 
@@ -17,6 +18,10 @@ export class ToastComponent implements OnInit {
   case(messageType: string): boolean {
     const reg = RegExp('success|info|warning|error', 'g')
     return reg.test(messageType)
+  }
+
+  close() {
+    this.snackRef.dismiss()
   }
 
 }

@@ -6,13 +6,17 @@
     </span>
 
     <span *ngSwitchCase="case(data.messageType)" [ngClass]="data.messageType" fxLayout="row"
-      fxLayoutAlign="space-between center">
+      fxLayoutAlign="start center">
+      <fa-icon class="mat-icon-18 mr-1" [icon]="data.icon"></fa-icon>
       {{ data.message | translate }}
-      <fa-icon class="mat-icon-18 ml-h" [icon]="data.icon"></fa-icon>
     </span>
 
     <span *ngSwitchDefault>
       {{ data.message | translate }}
     </span>
+
+    <span fxFlex></span>
+
+    <button mat-button (click)="close()">{{'OK' | translate}}</button>
   </ng-container>
 </div>

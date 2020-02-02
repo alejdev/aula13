@@ -152,7 +152,7 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     ToastComponent
   ],
   providers: [
-    { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 5000 } },
+    { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 6000 } },
     { provide: LOCALE_ID, deps: [SettingService], useFactory: (settingService: any) => settingService.value.lang },
     LoaderService,
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
