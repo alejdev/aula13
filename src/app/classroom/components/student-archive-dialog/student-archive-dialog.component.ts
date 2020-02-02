@@ -29,6 +29,7 @@ export class StudentArchiveDialogComponent implements OnInit {
     this.textConfig = {
       title: `${!this.student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
       msg: `MSG.STUDENT_${!this.student.archived ? '' : 'UN'}ARCHIVE`,
+      msg2: `MSG.STUDENT_${!this.student.archived ? '' : 'UN'}ARCHIVE_2`,
       okButton: `${!this.student.archived ? '' : 'UN'}ARCHIVE`,
       msgOk: `MSG.STUDENT_${!this.student.archived ? '' : 'UN'}ARCHIVED_OK`
     }

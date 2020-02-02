@@ -2,7 +2,12 @@
 <h2 mat-dialog-title>{{textConfig.title | translate}}</h2>
 
 <!-- Content -->
-<p class="mat-hint" mat-dialog-content>{{textConfig.msg | translate}}</p>
+<p class="mat-hint mb-h" mat-dialog-content>
+	<b>{{textConfig.msg | translate}}</b>
+</p>
+<p *ngIf="textConfig.msg2" class="mat-hint txt-justify" mat-dialog-content>
+	{{textConfig.msg2 | translate}}
+</p>
 
 <!-- Action -->
 <div class="mt-2" mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
