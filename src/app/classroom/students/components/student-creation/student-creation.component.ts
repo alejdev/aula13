@@ -171,14 +171,14 @@ export class StudentCreationComponent implements OnInit {
         }
       }
 
-      let createStudent: any
+      let setStudent: any
       if (this.data.idStudent) {
-        createStudent = this.studentService.updateStudent(this.data.idStudent, student)
+        setStudent = this.studentService.updateStudent(this.data.idStudent, student)
       } else {
-        createStudent = this.studentService.createStudent(student)
+        setStudent = this.studentService.createStudent(student)
       }
 
-      createStudent
+      setStudent
         .then((result: any) => {
           this.toastService.success(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.student)

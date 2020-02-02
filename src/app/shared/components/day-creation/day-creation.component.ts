@@ -107,14 +107,14 @@ export class DayCreationComponent implements OnInit {
         content: this.dayFormGroup.value.dayContentCtrl
       }
 
-      let createDay: any
+      let setDay: any
       if (this.data.idDay) {
-        createDay = this.dayService.updateDay(this.data.idDay, day)
+        setDay = this.dayService.updateDay(this.data.idDay, day)
       } else {
-        createDay = this.dayService.createDay(day)
+        setDay = this.dayService.createDay(day)
       }
 
-      createDay
+      setDay
         .then((result: any) => {
           this.toastService.success(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.day)
