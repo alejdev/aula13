@@ -32,6 +32,7 @@
 	"DAILY": "Daily",
 	"DAY": {
 		"ADD": "Add record",
+		"CREATION_SUBTITLE": "With these records you can track each student daily",
 		"DELETE": "Clear log",
 		"EDIT": "Edit record"
 	},

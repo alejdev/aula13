@@ -32,6 +32,7 @@
 	"DAILY": "Täglich",
 	"DAY": {
 		"ADD": "Datensatz hinzufügen",
+		"CREATION_SUBTITLE": "Mit diesen Aufzeichnungen können Sie jeden Schüler täglich verfolgen",
 		"DELETE": "Registrierung löschen",
 		"EDIT": "Datensatz bearbeiten"
 	},

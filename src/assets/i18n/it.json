@@ -32,6 +32,7 @@
 	"DAILY": "Quotidiano",
 	"DAY": {
 		"ADD": "Aggiungi record",
+		"CREATION_SUBTITLE": "Con questi record puoi monitorare ogni studente ogni giorno",
 		"DELETE": "Elimina record",
 		"EDIT": "Modifica record"
 	},

@@ -32,6 +32,7 @@
 	"DAILY": "Tous les jours",
 	"DAY": {
 		"ADD": "Ajouter un enregistrement",
+		"CREATION_SUBTITLE": "Avec ces enregistrements, vous pouvez suivre chaque élève quotidiennement",
 		"DELETE": "Supprimer l'inscription",
 		"EDIT": "Modifier l'enregistrement"
 	},

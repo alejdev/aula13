@@ -32,6 +32,7 @@
 	"DAILY": "Diario",
 	"DAY": {
 		"ADD": "Añadir registro",
+		"CREATION_SUBTITLE": "Con estos registros podrás hacer un seguimiento diario de cada alumno",
 		"DELETE": "Borrar registro",
 		"EDIT": "Editar registro"
 	},
