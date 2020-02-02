@@ -158,6 +158,7 @@
 		"DAY_DELETE": "Voulez-vous vraiment supprimer cet enregistrement?",
 		"DAY_DELETE_OK": "Le registre a été supprimé avec succès",
 		"DAY_NOT_EXIST": "Cet enregistrement n'existe pas",
+		"DAY_STUDENT_ARCHIVED": "Vous ne pouvez pas créer d'enregistrements d'un étudiant archivé. Déchargez-le d'abord",
 		"DAY_UPDATE_OK": "Enregistrement modifié",
 		"LOGOUT": "Voulez-vous vous déconnecter?",
 		"LOGOUT_CONFIRM": "Si vous le faites, nous espérons que vous reviendrez bientôt :)",

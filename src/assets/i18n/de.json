@@ -158,6 +158,7 @@
 		"DAY_DELETE": "Möchten Sie diesen Datensatz wirklich löschen?",
 		"DAY_DELETE_OK": "Die Registrierung wurde erfolgreich gelöscht",
 		"DAY_NOT_EXIST": "Dieser Datensatz existiert nicht",
+		"DAY_STUDENT_ARCHIVED": "Sie können keine Aufzeichnungen eines archivierten Schülers erstellen. Zuerst entladen",
 		"DAY_UPDATE_OK": "Geänderter Datensatz",
 		"LOGOUT": "Möchten Sie sich abmelden?",
 		"LOGOUT_CONFIRM": "Dann hoffen wir, dass Sie bald wiederkommen :)",

@@ -15,6 +15,7 @@ export class FloatingButtonComponent implements OnInit {
   @Input() icon: string
   @Input() action: any
   @Input() route: any
+  @Input() disabled: boolean
 
   buttonState: string
   @HostListener('mouseenter') onMouseEnter(): void { this.buttonState = 'enter' }
@@ -29,11 +30,13 @@ export class FloatingButtonComponent implements OnInit {
   }
 
   toAction(): void {
-    if (this.action) {
-      this.action()
-    }
-    if (this.route) {
-      this.router.navigate([this.route])
+    if (!this.disabled) {
+      if (this.action) {
+        this.action()
+      }
+      if (this.route) {
+        this.router.navigate([this.route])
+      }
     }
   }
 }

@@ -3,14 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
+import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
+import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
+import { ToastService } from 'src/app/shared/services/toast.service'
 import { DayService } from 'src/app/classroom/services/day.service'
-import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
-import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 
 import { MatDialog } from '@angular/material'
 
@@ -42,7 +43,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
     private dayService: DayService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -141,16 +143,20 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   }
 
   createDay(): void {
-    const newDay = ModelService.dayModel
-    newDay.student = this.student
-    this.dialog.open(DayCreationComponent, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      data: {
-        day: newDay,
-      }
-    })
+    if (this.student.archived) {
+      this.toastService.warning('MSG.DAY_STUDENT_ARCHIVED')
+    } else {
+      const newDay = ModelService.dayModel
+      newDay.student = this.student
+      this.dialog.open(DayCreationComponent, {
+        width: 'calc(100vw)',
+        maxWidth: '800px',
+        autoFocus: false,
+        data: {
+          day: newDay,
+        }
+      })
+    }
   }
 
   ngOnDestroy(): void {
