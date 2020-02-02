@@ -29,13 +29,13 @@ export class DayCreationComponent implements OnInit {
 
   day: any
   studentList: any[]
-
-  srcImage: any
-  equals: any
   dayFormGroup: FormGroup
   maxlengthTitle: number = 50
   ckeditor: any = DecoupledEditor
   editorConfig: any
+
+  srcImage: any = UtilService.srcImage
+  equals: any = UtilService.srcImage
 
   constructor(
     private router: Router,
@@ -49,8 +49,6 @@ export class DayCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.day = this.data.day
-    this.srcImage = UtilService.srcImage
-    this.equals = UtilService.equals
     this.editorConfig = {
       toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', '|', 'heading'],
       language: this.settingService.value.lang,

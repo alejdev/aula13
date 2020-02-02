@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
+import { Subscription } from 'rxjs'
 
 import { UtilService } from 'src/app/shared/services/util.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
@@ -18,8 +19,10 @@ export class DayProfileComponent implements OnInit, OnDestroy {
 
   dayId: any
   day: any
-  dayObservable: any
   srcImage: any = UtilService.srcImage
+
+  routerSubscription: Subscription
+  daySubscription: Subscription
 
   constructor(
     private router: Router,
@@ -30,7 +33,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => this.dayId = params.id)
+    this.routerSubscription = this.activatedRoute.params.subscribe(params => this.dayId = params.id)
     this.getDay()
   }
 
@@ -40,7 +43,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     this.day = await this.dayService.readDay(this.dayId)
 
     // Observe day
-    this.dayObservable = this.dayService.observeDay(this.dayId)
+    this.daySubscription = this.dayService.observeDay(this.dayId)
       .subscribe((result: any) => {
         this.day = UtilService.mapDoc(result)
         if (this.day.studentId) {
@@ -98,6 +101,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dayObservable.complete()
+    this.routerSubscription.unsubscribe()
+    this.daySubscription.unsubscribe()
   }
 }

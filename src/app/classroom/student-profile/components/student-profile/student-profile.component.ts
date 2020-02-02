@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
+import { Subscription } from 'rxjs'
 
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
@@ -24,9 +25,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
 
   studentId: any
   student: any
-  studentObservable: any
   dayList: any[]
-  dayListObservable: any
+
   mark: any = UtilService.mark
   srcImage: any = UtilService.srcImage
   academicCourseList: any = ModelService.academicCourseList
@@ -36,6 +36,10 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     text: 'SHOW_MORE',
     icon: 'caret-down'
   }
+
+  routerSubscription: Subscription
+  dayListSubscription: Subscription
+  dayListQuerySubscription: Subscription
 
   constructor(
     private router: Router,
@@ -50,13 +54,13 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     // Get param id
-    this.activatedRoute.params.subscribe(params => this.studentId = params.id)
+    this.routerSubscription = this.activatedRoute.params.subscribe(params => this.studentId = params.id)
 
     // Get student
     this.getStudent(this.studentId)
 
     // Observe student
-    this.studentObservable = this.studentService.observeStudent(this.studentId)
+    this.dayListSubscription = this.studentService.observeStudent(this.studentId)
       .subscribe((result: any) => {
         this.student = UtilService.mapDoc(result)
         this.queryDayList()
@@ -136,7 +140,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   }
 
   queryDayList(): void {
-    this.dayListObservable = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
+    this.dayListQuerySubscription = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
         this.dayList = UtilService.mapColl(result)
       })
@@ -160,7 +164,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.studentObservable.complete()
-    this.dayListObservable.complete()
+    this.routerSubscription.unsubscribe()
+    this.dayListSubscription.unsubscribe()
+    this.dayListQuerySubscription.unsubscribe()
   }
 }

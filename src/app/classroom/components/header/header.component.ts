@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Subscription } from 'rxjs'
 
 import { MatDialog } from '@angular/material'
 
@@ -10,11 +11,14 @@ import { HeaderService } from '../../services/header.service'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   themeName: any
   headerConfig: any
   isTruncated: boolean
+
+  themeConfigSubscription: Subscription
+  headerConfigSubscription: Subscription
 
   constructor(
     private themeService: ThemeService,
@@ -24,12 +28,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     // Get theme
-    this.themeService.theme.subscribe((result: any) => {
+    this.themeConfigSubscription = this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'
     })
 
-    // Theming service
-    this.headerService.config.subscribe((config: any) => {
+    // Header config
+    this.headerConfigSubscription = this.headerService.config.subscribe((config: any) => {
       this.headerConfig = config
       this.isTruncated = true
     })
@@ -45,5 +49,10 @@ export class HeaderComponent implements OnInit {
     if (this.headerConfig.truncable) {
       this.isTruncated = !this.isTruncated
     }
+  }
+
+  ngOnDestroy(): void {
+    this.themeConfigSubscription.unsubscribe()
+    this.headerConfigSubscription.unsubscribe()
   }
 }

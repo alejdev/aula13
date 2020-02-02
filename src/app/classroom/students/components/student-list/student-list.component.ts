@@ -5,6 +5,7 @@ import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 import { ModelService } from 'src/app/shared/services/model.service'
+import { Subscription } from 'rxjs'
 
 import { MatDialog } from '@angular/material'
 import { HeaderService } from 'src/app/classroom/services/header.service'
@@ -18,7 +19,8 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 export class StudentListComponent implements OnInit, OnDestroy {
 
   studentList: any[]
-  studentListObservable: any
+  studentListSubscription: Subscription
+
   studentListFiltered: any[]
   studentFilter: string = ''
   favoriteListFiltered: any[]
@@ -76,7 +78,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   observeStudentList(): void {
-    this.studentListObservable = this.studentService.observeStudentList()
+    this.studentListSubscription = this.studentService.observeStudentList()
       .subscribe((result: any) => {
         this.studentList = UtilService.mapColl(result)
         this.studentListFiltered = Object.assign(this.studentList)
@@ -122,6 +124,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.studentListObservable.complete()
+    this.studentListSubscription.unsubscribe()
   }
 }

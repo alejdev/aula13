@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
+
+import { Subscription } from 'rxjs'
 
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -23,13 +25,16 @@ import { MatDialog } from '@angular/material'
   styleUrls: ['./side-menu.component.scss'],
   animations: [indicatorRotate]
 })
-export class SideMenuComponent implements OnInit {
+export class SideMenuComponent implements OnInit, OnDestroy {
 
   title = 'Aula 13'
   user: any
   srcImage: any = UtilService.srcImage
+
   classroomList: any[]
+  classroomSubscription: Subscription
   subjectList: any[]
+  subjectSubscription: Subscription
 
   menuProfile = [{
     name: 'PROFILE',
@@ -82,13 +87,13 @@ export class SideMenuComponent implements OnInit {
     // Set user
     this.setUserLogged()
 
-    this.classroomService.observeClassroomList()
+    this.classroomSubscription = this.classroomService.observeClassroomList()
       .subscribe((result: any) => {
         this.menuItems[0][0].children = UtilService.mapColl(result)
         this.classroomService.cachedClassrooms = this.menuItems[0][0].children
       })
 
-    this.subjectService.observeSubjectList()
+    this.subjectSubscription = this.subjectService.observeSubjectList()
       .subscribe((result: any) => {
         this.menuItems[0][1].children = UtilService.mapColl(result)
         this.subjectService.cachedSubjects = this.menuItems[0][1].children
@@ -140,5 +145,10 @@ export class SideMenuComponent implements OnInit {
         }
       })
     }
+  }
+
+  ngOnDestroy(): void {
+    this.classroomSubscription.unsubscribe()
+    this.subjectSubscription.unsubscribe()
   }
 }

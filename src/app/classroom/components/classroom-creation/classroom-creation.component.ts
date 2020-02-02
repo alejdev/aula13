@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { debounceTime, switchMap } from 'rxjs/operators'
+import { Subscription } from 'rxjs'
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 
@@ -19,11 +20,11 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   classroomFormGroup: FormGroup
   studentList: any[]
   studentIdList: any[]
-  srcImage: any
   classroom: any
+  srcImage: any = UtilService.srcImage
 
-  queryClassroomName: any
-  observableClassroomName: any
+  classroomNameSubscription: Subscription
+  queryClassroomNameSubscription: Subscription
   validatingName: boolean
 
   constructor(
@@ -36,7 +37,6 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.srcImage = UtilService.srcImage
     this.classroom = this.data.entity
 
     // Init form controls
@@ -57,10 +57,10 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   onClassroomChange() {
     const nameCtrl = this.classroomFormGroup.controls.nameCtrl
 
-    this.queryClassroomName = nameCtrl.valueChanges
+    this.classroomNameSubscription = nameCtrl.valueChanges
       .subscribe(() => this.validatingName = true)
 
-    this.observableClassroomName = nameCtrl.valueChanges
+    this.queryClassroomNameSubscription = nameCtrl.valueChanges
       .pipe(
         debounceTime(500),
         switchMap(() => this.classroomService.queryClassroom(UtilService.capitalize(nameCtrl.value)))
@@ -139,7 +139,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.queryClassroomName.complete()
-    this.observableClassroomName.complete()
+    this.classroomNameSubscription.unsubscribe()
+    this.queryClassroomNameSubscription.unsubscribe()
   }
 }

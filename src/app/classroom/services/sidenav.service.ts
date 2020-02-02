@@ -1,20 +1,26 @@
-import { Injectable } from '@angular/core'
+import { Injectable, OnDestroy } from '@angular/core'
 import { Event, NavigationEnd, Router } from '@angular/router'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Subscription } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
-export class SidenavService {
+export class SidenavService implements OnDestroy {
 
   public currentUrl = new BehaviorSubject<string>(undefined)
   public appDrawer: any
 
+  routerSubscribe: Subscription
+
   constructor(private router: Router) {
-    this.router.events.subscribe((event: Event) => {
+    this.routerSubscribe = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl.next(event.urlAfterRedirects)
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscribe.unsubscribe()
   }
 }

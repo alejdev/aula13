@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormControl } from '@angular/forms'
+import { Subscription } from 'rxjs'
 
 import { LanguageService } from 'src/app/classroom/services/language.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
@@ -12,7 +13,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
   templateUrl: './configuration.component.html',
   styleUrls: ['./configuration.component.scss']
 })
-export class ConfigurationComponent implements OnInit {
+export class ConfigurationComponent implements OnInit, OnDestroy {
 
   title: string = 'SETTINGS'
   langControl = new FormControl('', [])
@@ -20,6 +21,9 @@ export class ConfigurationComponent implements OnInit {
   themeControl: any
   themeIsDark: boolean
   canPanSideMenu: boolean = this.settingService.value.canPanSideMenu
+
+  langSubscription: Subscription
+  themeSubscription: Subscription
 
   constructor(
     private languageService: LanguageService,
@@ -40,12 +44,12 @@ export class ConfigurationComponent implements OnInit {
     this.languages = this.languageService.languages
 
     // Get language
-    this.languageService.lang.subscribe((result: any) => {
+    this.langSubscription = this.languageService.lang.subscribe((result: any) => {
       this.langControl.setValue(result)
     })
 
     // Get theme
-    this.themeService.theme.subscribe((result: any) => {
+    this.themeSubscription = this.themeService.theme.subscribe((result: any) => {
       this.themeControl = result
       this.themeIsDark = result.isDark
     })
@@ -66,5 +70,10 @@ export class ConfigurationComponent implements OnInit {
   togglePanSideMenu(): void {
     this.settingService.value = { canPanSideMenu: !this.settingService.value.canPanSideMenu }
     this.toastService.info('MSG.RELOAD_PAGE_FOR_CHANGES')
+  }
+
+  ngOnDestroy(): void {
+    this.langSubscription.unsubscribe()
+    this.themeSubscription.unsubscribe()
   }
 }

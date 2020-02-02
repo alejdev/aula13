@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core'
+import { Component, OnInit, Input, Inject, Output, EventEmitter, OnDestroy } from '@angular/core'
+import { Subscription } from 'rxjs'
 
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material'
 
@@ -42,12 +43,14 @@ export class PickupImageDialogComponent implements OnInit {
   templateUrl: './pickup-image.component.html',
   styleUrls: ['./pickup-image.component.scss']
 })
-export class PickupImageComponent implements OnInit {
+export class PickupImageComponent implements OnInit, OnDestroy {
 
   @Input() image: any
   @Input() imageList: any
   @Output() imageChange: any = new EventEmitter<boolean>()
   srcImage: any = UtilService.srcImage
+
+  dialogSubscription: Subscription
 
   constructor(
     private dialog: MatDialog
@@ -64,10 +67,14 @@ export class PickupImageComponent implements OnInit {
       }
     })
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogSubscription = dialogRef.afterClosed().subscribe(result => {
       this.image = result ? result : this.image
       this.imageChange.emit(this.image)
     })
+  }
+
+  ngOnDestroy(): void {
+    this.dialogSubscription.unsubscribe()
   }
 
 }

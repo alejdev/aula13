@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { debounceTime, switchMap } from 'rxjs/operators'
+import { Subscription } from 'rxjs'
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 
@@ -19,11 +20,11 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   subjectFormGroup: FormGroup
   studentList: any[]
   studentIdList: any[]
-  srcImage: any
+  srcImage: any = UtilService.srcImage
   subject: any
 
-  querySubjectName: any
-  observableSubjectName: any
+  subjectNameSubscription: Subscription
+  querySubjectNameSubscription: Subscription
   validatingName: boolean
 
   constructor(
@@ -36,7 +37,6 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.srcImage = UtilService.srcImage
     this.subject = this.data.entity
 
     // Init form controls
@@ -57,10 +57,10 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   onSubjectChange() {
     const nameCtrl = this.subjectFormGroup.controls.nameCtrl
 
-    this.querySubjectName = nameCtrl.valueChanges
+    this.subjectNameSubscription = nameCtrl.valueChanges
       .subscribe(() => this.validatingName = true)
 
-    this.observableSubjectName = nameCtrl.valueChanges
+    this.querySubjectNameSubscription = nameCtrl.valueChanges
       .pipe(
         debounceTime(500),
         switchMap(() => this.subjectService.querySubject(UtilService.capitalize(nameCtrl.value)))
@@ -139,7 +139,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.querySubjectName.complete()
-    this.observableSubjectName.complete()
+    this.subjectNameSubscription.unsubscribe()
+    this.querySubjectNameSubscription.unsubscribe()
   }
 }

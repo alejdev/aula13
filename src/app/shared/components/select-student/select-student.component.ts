@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, forwardRef } from '@angular/core'
 import { FormGroup, FormBuilder, Validators, NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, Validator, AbstractControl, ValidationErrors } from '@angular/forms'
+import { Subscription } from 'rxjs'
 
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { UtilService } from '../../services/util.service'
@@ -25,11 +26,13 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
 
   studentFormGroup: FormGroup
   studentList: any[]
-  studentListObservable: any
   ready: boolean
 
-  srcImage: any
-  equals: any
+  studentListSubscription: Subscription
+  studentFormGroupSubscription: Subscription
+
+  srcImage: any = UtilService.srcImage
+  equals: any = UtilService.equals
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,10 +40,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   ) { }
 
   ngOnInit() {
-    this.srcImage = UtilService.srcImage
-    this.equals = UtilService.equals
-
-    this.studentListObservable = this.studentService.observeStudentList()
+    this.studentListSubscription = this.studentService.observeStudentList()
       .subscribe((result: any) => {
         this.studentList = UtilService.mapColl(result).filter((student: any) => !student.archived)
       })
@@ -57,7 +57,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   }
 
   registerOnChange(fn: any): void {
-    this.studentFormGroup.valueChanges.subscribe(fn)
+    this.studentFormGroupSubscription = this.studentFormGroup.valueChanges.subscribe(fn)
   }
 
   registerOnTouched(fn: any): void {
@@ -80,6 +80,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   }
 
   ngOnDestroy(): void {
-    this.studentListObservable.complete()
+    this.studentListSubscription.unsubscribe()
+    this.studentFormGroupSubscription.unsubscribe()
   }
 }

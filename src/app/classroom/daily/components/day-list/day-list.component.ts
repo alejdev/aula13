@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Subscription } from 'rxjs'
 
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayService } from 'src/app/classroom/services/day.service'
@@ -17,8 +18,9 @@ import { MatDialog } from '@angular/material'
 export class DayListComponent implements OnInit, OnDestroy {
 
   dayList: any[]
-  dayListObservable: any
   studentList: any[]
+
+  dayListSubscription: Subscription
 
   constructor(
     private dialog: MatDialog,
@@ -47,7 +49,7 @@ export class DayListComponent implements OnInit, OnDestroy {
   }
 
   observeDayList(): void {
-    this.dayListObservable = this.dayService.observeDayList()
+    this.dayListSubscription = this.dayService.observeDayList()
       .subscribe((result: any) => {
         this.dayList = UtilService.mapColl(result).map((day) => this.mapDayList(day))
       })
@@ -72,7 +74,7 @@ export class DayListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dayListObservable.complete()
+    this.dayListSubscription.unsubscribe()
   }
 
 }
