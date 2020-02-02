@@ -74,7 +74,9 @@ export class PickupImageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dialogSubscription.unsubscribe()
+    if (this.dialogSubscription) {
+      this.dialogSubscription.unsubscribe()
+    }
   }
 
 }
