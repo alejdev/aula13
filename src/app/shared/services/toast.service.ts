@@ -30,7 +30,7 @@ export class ToastService extends MatSnackBar {
         data: {
           message: text,
           messageType: type,
-          icon: type === 'success' ? 'check' : type === 'info' ? 'info' : type === 'warning' ? 'exclamation' : 'skull-crossbones'
+          icon: type === 'success' ? 'check' : type === 'warning' ? 'exclamation' : type === 'error' ? 'skull-crossbones' : 'info'
         },
         ...config
       }
@@ -60,7 +60,8 @@ export class ToastService extends MatSnackBar {
         data: {
           messageType: 'welcome',
           message: 'MSG.WELCOME',
-          name: user && user.name ? user.name : '😊'
+          name: user && user.name ? user.name : '😊',
+          icon: 'info'
         },
         ...config
       }

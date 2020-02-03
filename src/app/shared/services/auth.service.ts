@@ -95,7 +95,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signOut()
       .then(() => {
         this.router.navigate(['login'])
-        this.toastService.say('MSG.BYE')
+        this.toastService.info('MSG.BYE')
       })
       .catch(this.error)
       .finally(() => this.loaderService.stop())

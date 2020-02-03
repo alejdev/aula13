@@ -1,22 +1,29 @@
 <div class="toast">
-  <ng-container [ngSwitch]="true">
 
-    <span *ngSwitchCase="data.messageType === 'welcome'">
-      {{ data.message | translate:{'name': data.name} }}
+  <div [ngSwitch]="true" [ngClass]="data?.messageType" fxLayout="row" fxLayoutAlign="start center">
+
+    <!-- Icon -->
+    <fa-icon class="mat-icon-18 mr-1" [icon]="data?.icon || 'info'"></fa-icon>
+
+    <!-- Welcome -->
+    <span *ngSwitchCase="data?.messageType === 'welcome'" class="info">
+      {{ data?.message | translate:{'name': data?.name} }}
     </span>
 
-    <span *ngSwitchCase="case(data.messageType)" [ngClass]="data.messageType" fxLayout="row"
-      fxLayoutAlign="start center">
-      <fa-icon class="mat-icon-18 mr-1" [icon]="data.icon"></fa-icon>
-      {{ data.message | translate }}
+    <!-- Types -->
+    <span *ngSwitchCase="case(data?.messageType)">
+      {{ data?.message | translate }}
     </span>
 
-    <span *ngSwitchDefault>
-      {{ data.message | translate }}
+    <!-- Default -->
+    <span *ngSwitchDefault fxLayout="row">
+      {{ data?.message | translate }}
     </span>
 
+    <!-- Spacer -->
     <span fxFlex></span>
 
+    <!-- OK button -->
     <button mat-button (click)="close()">{{'OK' | translate}}</button>
-  </ng-container>
+  </div>
 </div>
