@@ -1,5 +1,5 @@
 <mat-toolbar class="header" [ngClass]="{'height-auto': !isTruncated}" [color]="themeName">
-  <div class="container-max sm">
+  <div class="container-max sm" fxLayout="row" fxLayoutAlign="start center">
 
     <!-- Back button  -->
     <button *ngIf="headerConfig.back" class="mr-h menu-button" [routerLink]="[ headerConfig.back ]" mat-icon-button
