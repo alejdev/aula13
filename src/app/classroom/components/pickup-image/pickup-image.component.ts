@@ -3,16 +3,12 @@ import { Subscription } from 'rxjs'
 
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material'
 
-import { UtilService } from 'src/app/shared/services/util.service'
-
 @Component({
   selector: 'a13-pickup-image-dialog',
   templateUrl: './pickup-image-dialog.component.html',
   styleUrls: ['./pickup-image.component.scss']
 })
 export class PickupImageDialogComponent implements OnInit {
-
-  srcImage: any = UtilService.srcImage
 
   constructor(
     public dialogRef: MatDialogRef<PickupImageDialogComponent>,
@@ -48,7 +44,6 @@ export class PickupImageComponent implements OnInit, OnDestroy {
   @Input() image: any
   @Input() imageList: any
   @Output() imageChange: any = new EventEmitter<boolean>()
-  srcImage: any = UtilService.srcImage
 
   dialogSubscription: Subscription
 

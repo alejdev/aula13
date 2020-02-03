@@ -28,7 +28,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   dayList: any[]
 
   mark: any = UtilService.mark
-  srcImage: any = UtilService.srcImage
   academicCourseList: any = ModelService.academicCourseList
   conservatoryCourseList: any = ModelService.conservatoryCourseList
   moreInfoConfig: any = {
@@ -62,7 +61,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     // Observe student
     this.dayListSubscription = this.studentService.observeStudent(this.studentId)
       .subscribe((result: any) => {
-        this.student = UtilService.mapDoc(result)
+        this.student = UtilService.mapDocument(result)
         this.queryDayList()
 
         if (this.student && this.student.personal) {
@@ -142,7 +141,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   queryDayList(): void {
     this.dayListQuerySubscription = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
-        this.dayList = UtilService.mapColl(result)
+        this.dayList = UtilService.mapCollection(result)
       })
   }
 

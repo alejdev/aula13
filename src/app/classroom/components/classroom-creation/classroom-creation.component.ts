@@ -21,7 +21,6 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   studentList: any[]
   studentIdList: any[]
   classroom: any
-  srcImage: any = UtilService.srcImage
 
   classroomNameSubscription: Subscription
   queryClassroomNameSubscription: Subscription

@@ -51,7 +51,7 @@ export class DayListComponent implements OnInit, OnDestroy {
   observeDayList(): void {
     this.dayListSubscription = this.dayService.observeDayList()
       .subscribe((result: any) => {
-        this.dayList = UtilService.mapColl(result).map((day) => this.mapDayList(day))
+        this.dayList = UtilService.mapCollection(result).map((day) => this.mapDayList(day))
       })
   }
 

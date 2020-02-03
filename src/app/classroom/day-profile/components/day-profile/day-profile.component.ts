@@ -19,7 +19,6 @@ export class DayProfileComponent implements OnInit, OnDestroy {
 
   dayId: any
   day: any
-  srcImage: any = UtilService.srcImage
 
   routerSubscription: Subscription
   daySubscription: Subscription
@@ -45,7 +44,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     // Observe day
     this.daySubscription = this.dayService.observeDay(this.dayId)
       .subscribe((result: any) => {
-        this.day = UtilService.mapDoc(result)
+        this.day = UtilService.mapDocument(result)
         if (this.day.studentId) {
           this.getStudent(this.day.studentId)
         } else {

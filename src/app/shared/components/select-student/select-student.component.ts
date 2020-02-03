@@ -31,7 +31,6 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   studentListSubscription: Subscription
   studentFormGroupSubscription: Subscription
 
-  srcImage: any = UtilService.srcImage
   equals: any = UtilService.equals
 
   constructor(
@@ -42,7 +41,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   ngOnInit() {
     this.studentListSubscription = this.studentService.observeStudentList()
       .subscribe((result: any) => {
-        this.studentList = UtilService.mapColl(result).filter((student: any) => !student.archived)
+        this.studentList = UtilService.mapCollection(result).filter((student: any) => !student.archived)
       })
 
     this.studentFormGroup = this.formBuilder.group({

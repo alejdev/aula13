@@ -60,7 +60,7 @@ export class SubjectService {
     this.loaderService.start()
     const subjects = await this.subCollection.get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapColl(subjects)
+    return UtilService.mapCollection(subjects)
   }
 
   public createSubject(data: any): Promise<any> {
@@ -73,7 +73,7 @@ export class SubjectService {
     this.loaderService.start()
     const student = await this.subCollection.doc(id).get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapDoc(student)
+    return UtilService.mapDocument(student)
   }
 
   public updateSubject(id: string, subject: any): Promise<any> {

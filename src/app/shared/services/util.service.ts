@@ -61,11 +61,6 @@ export class UtilService {
     }
   }
 
-  // Generate resource path
-  public static srcImage({ path, img, ext }: any = {}): string {
-    return `${path ? path : 'assets/svgs/avatars/'}${img ? img : 'user-default'}${ext ? ext : '.svg'}`
-  }
-
   // Compare if two object are equal by property
   public static equals(o1: any, o2: any): boolean {
     return o1 && o2 ? o1.id === o2.id : o1 === o2
@@ -87,7 +82,7 @@ export class UtilService {
   }
 
   // Map firestore document
-  public static mapDoc(doc: any): any {
+  public static mapDocument(doc: any): any {
     return doc.payload ?
       {
         id: doc.payload.id,
@@ -99,10 +94,10 @@ export class UtilService {
   }
 
   // Map firestore collecction
-  public static mapColl(collection: any): any[] {
+  public static mapCollection(collection: any): any[] {
     if (collection.docs) {
       const list = []
-      collection.forEach((doc: any) => list.push(this.mapDoc(doc)))
+      collection.forEach((doc: any) => list.push(this.mapDocument(doc)))
       return list
     }
     return collection.map((elem: any) => {

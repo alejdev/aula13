@@ -56,14 +56,14 @@ export class StudentService {
       )
       .get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapColl(students)
+    return UtilService.mapCollection(students)
   }
 
   public async getStudentList(): Promise<any> {
     this.loaderService.start()
     const students = await this.subCollection.get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapColl(students)
+    return UtilService.mapCollection(students)
   }
 
   public createStudent(data: any): Promise<any> {
@@ -76,7 +76,7 @@ export class StudentService {
     this.loaderService.start()
     const student = await this.subCollection.doc(id).get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapDoc(student)
+    return UtilService.mapDocument(student)
   }
 
   public updateStudent(id: string, student: any): Promise<any> {

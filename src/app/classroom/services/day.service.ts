@@ -60,14 +60,14 @@ export class DayService {
     this.loaderService.start()
     const days = await this.subCollection.get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapColl(days)
+    return UtilService.mapCollection(days)
   }
 
   public async getQueryDayList(key: string, operator: any, value: any): Promise<any> {
     this.loaderService.start()
     const days = await this.dayList(key, operator, value).get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapColl(days)
+    return UtilService.mapCollection(days)
   }
 
   public createDay(data: any): Promise<any> {
@@ -80,7 +80,7 @@ export class DayService {
     this.loaderService.start()
     const day = await this.subCollection.doc(id).get().toPromise()
     this.loaderService.stop()
-    return UtilService.mapDoc(day)
+    return UtilService.mapDocument(day)
   }
 
   public updateDay(id: string, day: any): Promise<any> {

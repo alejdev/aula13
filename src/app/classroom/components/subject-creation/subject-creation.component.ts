@@ -20,7 +20,6 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   subjectFormGroup: FormGroup
   studentList: any[]
   studentIdList: any[]
-  srcImage: any = UtilService.srcImage
   subject: any
 
   subjectNameSubscription: Subscription

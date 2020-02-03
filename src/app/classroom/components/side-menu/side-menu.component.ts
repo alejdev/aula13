@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-
 import { Subscription } from 'rxjs'
 
 import { AuthService } from 'src/app/shared/services/auth.service'
@@ -29,7 +28,6 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   title = 'Aula 13'
   user: any
-  srcImage: any = UtilService.srcImage
 
   classroomList: any[]
   subjectList: any[]
@@ -89,13 +87,13 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
     this.classroomSubscription = this.classroomService.observeClassroomList()
       .subscribe((result: any) => {
-        this.menuItems[0][0].children = UtilService.mapColl(result)
+        this.menuItems[0][0].children = UtilService.mapCollection(result)
         this.classroomService.cachedClassrooms = this.menuItems[0][0].children
       })
 
     this.subjectSubscription = this.subjectService.observeSubjectList()
       .subscribe((result: any) => {
-        this.menuItems[0][1].children = UtilService.mapColl(result)
+        this.menuItems[0][1].children = UtilService.mapCollection(result)
         this.subjectService.cachedSubjects = this.menuItems[0][1].children
       })
   }

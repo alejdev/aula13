@@ -82,7 +82,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   observeStudentList(): void {
     this.studentListSubscription = this.studentService.observeStudentList()
       .subscribe((result: any) => {
-        this.studentList = UtilService.mapColl(result)
+        this.studentList = UtilService.mapCollection(result)
         this.studentListFiltered = Object.assign(this.studentList)
         this.filterStudents()
       })

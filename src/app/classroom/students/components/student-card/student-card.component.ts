@@ -12,7 +12,6 @@ export class StudentComponent implements OnInit {
 
   @Input() student: any = null
   mark: any = UtilService.mark
-  srcImage: any = UtilService.srcImage
 
   constructor(
     private studentService: StudentService
