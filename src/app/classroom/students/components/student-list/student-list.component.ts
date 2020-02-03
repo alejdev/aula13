@@ -21,8 +21,9 @@ export class StudentListComponent implements OnInit, OnDestroy {
   studentList: any[]
   studentListSubscription: Subscription
 
-  studentListFiltered: any[]
   studentFilter: string = ''
+  studentListFiltered: any[]
+
   favoriteListFiltered: any[]
   restListFiltered: any[]
   archivedListFiltered: any[]
@@ -58,6 +59,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
     this.studentList = []
     this.studentListFiltered = []
+
     this.getStudentList()
     this.observeStudentList()
   }
@@ -103,7 +105,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.archivedListFiltered = this.studentListFiltered.filter(student => student.archived)
 
     // Show group list if search inside
-    if (this.studentFilter.length > 2) {
+    if (this.studentFilter.length > 1) {
       switch (true) {
         case this.favoriteListFiltered.length > 0:
           this.showMore('favorite', true)
@@ -118,9 +120,9 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   showMore(list: string, show?: boolean): void {
-    const state = this.toggleConfig[list].show
-    this.toggleConfig[list].show = typeof show === 'undefined' ? !state : show
-    this.toggleConfig[list].icon = `caret-${state ? 'down' : 'up'}`
+    const state = typeof show === 'undefined' ? !this.toggleConfig[list].show : show
+    this.toggleConfig[list].show = state
+    this.toggleConfig[list].icon = `caret-${!state ? 'down' : 'up'}`
   }
 
   ngOnDestroy(): void {
