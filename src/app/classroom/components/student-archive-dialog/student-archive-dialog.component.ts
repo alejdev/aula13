@@ -17,7 +17,6 @@ export class StudentArchiveDialogComponent implements OnInit {
   textConfig: any
 
   constructor(
-    private router: Router,
     private studentService: StudentService,
     private toastService: ToastService,
     private dialogRef: MatDialogRef<StudentArchiveDialogComponent>,
