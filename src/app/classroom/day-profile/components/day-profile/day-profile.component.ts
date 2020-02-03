@@ -82,6 +82,20 @@ export class DayProfileComponent implements OnInit, OnDestroy {
             }
           }
         }, {
+          name: 'DAY.DUPLICATE',
+          icon: 'copy',
+          dialog: {
+            component: DayCreationComponent,
+            config: {
+              width: 'calc(100vw)',
+              maxWidth: '800px',
+              autoFocus: false,
+              data: {
+                day: { ...this.day }
+              }
+            }
+          }
+        }, {
           name: 'DAY.DELETE',
           icon: 'trash',
           dialog: {

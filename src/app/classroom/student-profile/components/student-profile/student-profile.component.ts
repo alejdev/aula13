@@ -87,6 +87,20 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
                 }
               }
             }, {
+              name: 'DUPLICATE_STUDENT',
+              icon: 'copy',
+              dialog: {
+                component: StudentCreationComponent,
+                config: {
+                  width: 'calc(100vw)',
+                  maxWidth: '800px',
+                  autoFocus: false,
+                  data: {
+                    student: { ...this.student }
+                  }
+                }
+              }
+            }, {
               name: `${!this.student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
               icon: `box${!this.student.archived ? '' : '-open'}`,
               dialog: {
