@@ -16,10 +16,11 @@ export class FloatingButtonComponent implements OnInit {
   @Input() action: any
   @Input() route: any
   @Input() disabled: boolean
+  @Input() animate: boolean
 
-  buttonState: string
-  @HostListener('mouseenter') onMouseEnter(): void { this.buttonState = 'enter' }
-  @HostListener('mouseleave') onMouseLeave(): void { this.buttonState = 'leave' }
+  buttonState: any
+  @HostListener('mouseenter') onMouseEnter(): void { this.buttonState = this.animate ? 'enter' : false }
+  @HostListener('mouseleave') onMouseLeave(): void { this.buttonState = this.animate ? 'leave' : false }
 
   constructor(
     private router: Router

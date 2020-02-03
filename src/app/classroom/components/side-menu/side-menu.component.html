@@ -11,8 +11,9 @@
       </a>
       <div class="mt-1" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
         <span class="user-name">{{ user?.name || user?.email }}</span>
-        <button mat-icon-button [matMenuTriggerFor]="menuProfileId" attr.aria-label="{{'OPTION_MENU' | translate}}">
-          <fa-icon class="mat-hint relative" style="top:-3px" icon="sort-down"></fa-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger"
+          attr.aria-label="{{'OPTION_MENU' | translate}}">
+          <fa-icon class="mat-hint" icon="{{'caret-' + (openStatus.menuOpen ? 'up': 'down')}}"></fa-icon>
         </button>
         <mat-menu #menuProfileId="matMenu">
           <button *ngFor="let option of menuProfile" mat-menu-item (click)="option.action()"

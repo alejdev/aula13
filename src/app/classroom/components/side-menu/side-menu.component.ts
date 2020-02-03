@@ -32,8 +32,8 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   srcImage: any = UtilService.srcImage
 
   classroomList: any[]
-  classroomSubscription: Subscription
   subjectList: any[]
+  classroomSubscription: Subscription
   subjectSubscription: Subscription
 
   menuProfile = [{

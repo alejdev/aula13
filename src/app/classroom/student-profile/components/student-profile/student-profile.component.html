@@ -114,7 +114,7 @@
         <ng-container *ngFor="let day of dayList">
           <a13-day-card [(day)]="day"></a13-day-card>
         </ng-container>
-        <a13-floating-button text="DAY.ADD" icon="add" [disabled]="student?.archived" (click)="createDay()"></a13-floating-button>
+        <a13-floating-button text="DAY.ADD" icon="edit" [disabled]="student?.archived" (click)="createDay()"></a13-floating-button>
       </div>
     </mat-tab>
 
