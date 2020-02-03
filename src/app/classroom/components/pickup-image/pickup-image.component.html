@@ -1,3 +1,3 @@
 <a matRipple ngClass.xs="xs" class="avatar avatar-button border-theme border-theme-button" (click)="pickup()">
-	<img class="avatar-image" [src]="srcImage({img: image})" alt="{{'AVATAR' | translate}}">
+	<img class="avatar-image" [src]="image | srcImage" alt="{{'AVATAR' | translate}}">
 </a>

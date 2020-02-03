@@ -5,7 +5,7 @@
 
 				<!-- Avatar -->
 				<a class="avatar border-theme mr-h" [routerLink]="[ '/aula/alumno', day?.studentId ]">
-					<img class="avatar-image p-0 mr-1" [src]="srcImage({img: day?.student?.personal?.avatar})" alt="Avatar">
+					<img class="avatar-image p-0 mr-1" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
 				</a>
 
 				<!-- Header info -->

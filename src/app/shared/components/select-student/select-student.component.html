@@ -5,13 +5,13 @@
 		<mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
 		<div matPrefix class="avatar-container">
 			<img class="avatar avatar-xs p-0"
-				[src]="srcImage({img: studentFormGroup?.controls?.studentCtrl?.value?.personal?.avatar})" alt="Avatar">
+				[src]="studentFormGroup?.controls?.studentCtrl?.value?.personal?.avatar | srcImage" alt="Avatar">
 		</div>
 		<mat-select formControlName="studentCtrl" attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}"
 			[compareWith]="equals">
 			<mat-option *ngFor="let student of studentList" [value]="student">
 				<span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-					<img class="avatar avatar-xs p-0 mr-h" [src]="srcImage({img: student.personal?.avatar})" alt="Avatar">
+					<img class="avatar avatar-xs p-0 mr-h" [src]="student.personal?.avatar | srcImage" alt="Avatar">
 					<span>
 						<fa-icon *ngIf="student?.favorite" class="mat-icon-14 star-active mr-q" icon="star"></fa-icon>
 						{{student?.personal?.name}}
@@ -28,7 +28,7 @@
 		<mat-select formControlName="studentCtrl" multiple attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}">
 			<mat-option *ngFor="let student of studentList" [value]="student.id">
 				<span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-					<img class="avatar avatar-xs p-0 mr-h" [src]="srcImage({img: student.personal?.avatar})" alt="Avatar">
+					<img class="avatar avatar-xs p-0 mr-h" [src]="student.personal?.avatar | srcImage" alt="Avatar">
 					<span>
 						<fa-icon *ngIf="student?.favorite" class="mat-icon-14 star-active mr-q" icon="star"></fa-icon>
 						{{student?.personal?.name}}

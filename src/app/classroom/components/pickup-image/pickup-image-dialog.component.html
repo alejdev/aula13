@@ -2,7 +2,7 @@
 <div mat-dialog-content class="grid-image-list mat-card mat-elevation-z0">
 	<div class="avatar-item" fxFlexAlign="center center" *ngFor="let img of data.imageList">
 		<img matRipple class="avatar-image" [ngClass]="{'selected': img.selected}"
-			[ngClass.xs]="{'selected': img.selected, 'xs': true}" (click)="pickup(img)" [src]="srcImage({img: img.id})"
+			[ngClass.xs]="{'selected': img.selected, 'xs': true}" (click)="pickup(img)" [src]="img.id | srcImage"
 			alt="img.id">
 	</div>
 </div>
