@@ -244,3 +244,12 @@ mat-form-field {
     0px 4px 2px 0px rgba(34, 34, 34, 0.01),
     0px 1px 2px 0px rgba(34, 34, 34, 0.01) !important;
 }
+
+// Arhived student
+.archived-student {
+  opacity: .4;
+
+  &:hover {
+    opacity: 1;
+  }
+}

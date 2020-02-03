@@ -36,9 +36,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     // Config header
-    this.headerService.configHeader({
-      title: 'SETTINGS'
-    })
+    this.headerService.configHeader({ title: 'SETTINGS' })
 
     // Language list
     this.languages = this.languageService.languages

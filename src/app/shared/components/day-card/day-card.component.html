@@ -1,4 +1,5 @@
-<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente" matRipple [routerLink]="[ '/aula/dia', day?.id ]">
+<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente"
+  [ngClass]="{'archived-student': day?.student?.archived}" matRipple [routerLink]=" [ '/aula/dia' , day?.id ]">
   <div fxLayout="row" fxLayoutAlign="space-between start">
     <div class="mb-1" fxLayout="row" fxLayoutAlign="start center">
 

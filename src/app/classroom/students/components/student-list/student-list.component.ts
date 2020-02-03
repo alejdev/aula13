@@ -76,7 +76,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   async getStudentList(): Promise<any> {
-    this.studentList = await this.studentService.getStudentList()
+    await this.studentService.getStudentList()
   }
 
   observeStudentList(): void {

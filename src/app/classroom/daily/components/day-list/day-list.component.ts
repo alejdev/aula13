@@ -44,14 +44,15 @@ export class DayListComponent implements OnInit, OnDestroy {
   }
 
   async getDayList(): Promise<any> {
-    const dayList = await this.dayService.getDayList()
-    this.dayList = dayList.map((day: any) => this.mapDayList(day))
+    await this.dayService.getDayList()
   }
 
   observeDayList(): void {
     this.dayListSubscription = this.dayService.observeDayList()
       .subscribe((result: any) => {
-        this.dayList = UtilService.mapCollection(result).map((day) => this.mapDayList(day))
+        this.dayList = UtilService.mapCollection(result)
+          .map((day) => this.mapDayList(day))
+          .filter((day) => !day.student.archived)
       })
   }
 
