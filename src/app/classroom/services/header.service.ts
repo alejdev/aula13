@@ -13,4 +13,9 @@ export class HeaderService {
   public configHeader(data: any) {
     this.config.next(data)
   }
+
+  public mergeHeader(data: any) {
+    const config = { ...this.config.getValue(), ...data }
+    this.config.next(config)
+  }
 }

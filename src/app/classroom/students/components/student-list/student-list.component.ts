@@ -117,6 +117,14 @@ export class StudentListComponent implements OnInit, OnDestroy {
     } else if (this.studentFilter.length === 0) {
       this.showMore('archived', false)
     }
+
+    // Total listFiltered length
+    this.headerService.mergeHeader({
+      length:
+        this.favoriteListFiltered.length +
+        this.restListFiltered.length +
+        this.archivedListFiltered.length
+    })
   }
 
   showMore(list: string, show?: boolean): void {

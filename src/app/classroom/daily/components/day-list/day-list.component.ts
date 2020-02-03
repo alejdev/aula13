@@ -53,6 +53,9 @@ export class DayListComponent implements OnInit, OnDestroy {
         this.dayList = UtilService.mapCollection(result)
           .map((day) => this.mapDayList(day))
           .filter((day) => !day.student.archived)
+
+        // Total dayList length
+        this.headerService.mergeHeader({ length: this.dayList.length })
       })
   }
 

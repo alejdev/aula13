@@ -142,6 +142,9 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     this.dayListQuerySubscription = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
         this.dayList = UtilService.mapCollection(result)
+
+        // Total dayList length
+        this.headerService.mergeHeader({ length: this.dayList.length })
       })
   }
 
