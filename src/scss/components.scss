@@ -1,7 +1,7 @@
 // General
 .container {
   overflow-y: auto;
-  
+
   &-padd {
     padding: var(--main-padding-size);
     max-height: calc(100vh - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
@@ -14,6 +14,24 @@
 
 .padding-content {
   padding: var(--main-padding-size);
+}
+
+.container-max {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  &.lg {
+    max-width: var(--main-lg-size);
+  }
+
+  &.sm {
+    max-width: var(--main-sm-size);
+  }
+
+  &.xs {
+    max-width: var(--main-xs-size);
+  }
 }
 
 .mat-dialog-content {
@@ -210,4 +228,19 @@ mat-form-field {
       overflow-y: auto;
     }
   }
+}
+
+// Shadows
+.shadow-top {
+  box-shadow:
+    0px -2px 2px 0px rgba(34, 34, 34, 0.04),
+    0px -4px 3px 0px rgba(34, 34, 34, 0.02),
+    0px -1px 4px 0px rgba(34, 34, 34, 0.01) !important;
+}
+
+.shadow-bottom {
+  box-shadow:
+    0px 2px 1px 0px rgba(34, 34, 34, 0.01),
+    0px 4px 2px 0px rgba(34, 34, 34, 0.01),
+    0px 1px 2px 0px rgba(34, 34, 34, 0.01) !important;
 }

@@ -1,7 +1,12 @@
 .profile-header {
+  padding-bottom: 48px !important;
 
   .avatar {
     max-width: 64px;
     max-height: 64px;
   }
+}
+
+.profile-tabs {
+  margin-top: -48px;
 }

@@ -1,68 +1,71 @@
 <section class="container container-padd">
+  <div class="container-max sm">
 
-  <!-- Filter -->
-  <mat-form-field appearance="outline">
-    <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
-    <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)"
-      attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
-    <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
-    <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button
-      attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
-      <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
-    </button>
-  </mat-form-field>
-
-  <!-- Students list-->
-  <div class="pb-5" *ngIf="studentListFiltered.length">
-
-    <!-- Favorites -->
-    <div *ngIf="favoriteListFiltered.length>0">
-      <button mat-button color="primary" (click)="showMore('favorite')">
-        {{toggleConfig.favorite.text | translate}}
-        ({{favoriteListFiltered.length}})
-        <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.favorite.icon"></fa-icon>
+    <!-- Filter -->
+    <mat-form-field appearance="outline">
+      <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
+      <input matInput [(ngModel)]="studentFilter" (ngModelChange)="searchStudent($event)"
+        attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
+      <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
+      <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button
+        attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
+        <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
       </button>
-    </div>
-    <ng-container *ngIf="toggleConfig.favorite.show">
-      <ng-container *ngFor="let student of favoriteListFiltered; let i = index">
-        <a13-student-card [(student)]="student"></a13-student-card>
-      </ng-container>
-    </ng-container>
+    </mat-form-field>
 
-    <!-- Rest students -->
-    <div *ngIf="restListFiltered.length>0" [ngClass]="{'mt-1': favoriteListFiltered.length>0}">
-      <button mat-button class="mat-hint" (click)="showMore('rest')">
-        {{toggleConfig.rest.text | translate}}
-        ({{restListFiltered.length}})
-        <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.rest.icon"></fa-icon>
-      </button>
-    </div>
-    <ng-container *ngIf="toggleConfig.rest.show">
-      <ng-container *ngFor="let student of restListFiltered; let i = index">
-        <a13-student-card [(student)]="student"></a13-student-card>
-      </ng-container>
-    </ng-container>
+    <!-- Students list-->
+    <div class="pb-5" *ngIf="studentListFiltered.length">
 
-    <!-- Archived students -->
-    <div *ngIf="archivedListFiltered.length>0"
-      [ngClass]="{'mt-1': favoriteListFiltered.length>0 || restListFiltered.length>0}">
-      <button mat-button color="warn" (click)="showMore('archived')">
-        {{toggleConfig.archived.text | translate}}
-        ({{archivedListFiltered.length}})
-        <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.archived.icon"></fa-icon>
-      </button>
-    </div>
-    <ng-container *ngIf="toggleConfig.archived.show">
-      <ng-container *ngFor="let student of archivedListFiltered; let i = index">
-        <a13-student-card [(student)]="student"></a13-student-card>
+      <!-- Favorites -->
+      <div *ngIf="favoriteListFiltered.length>0">
+        <button mat-button color="primary" (click)="showMore('favorite')">
+          {{toggleConfig.favorite.text | translate}}
+          ({{favoriteListFiltered.length}})
+          <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.favorite.icon"></fa-icon>
+        </button>
+      </div>
+      <ng-container *ngIf="toggleConfig.favorite.show">
+        <ng-container *ngFor="let student of favoriteListFiltered; let i = index">
+          <a13-student-card [(student)]="student"></a13-student-card>
+        </ng-container>
       </ng-container>
-    </ng-container>
 
+      <!-- Rest students -->
+      <div *ngIf="restListFiltered.length>0" [ngClass]="{'mt-1': favoriteListFiltered.length>0}">
+        <button mat-button class="mat-hint" (click)="showMore('rest')">
+          {{toggleConfig.rest.text | translate}}
+          ({{restListFiltered.length}})
+          <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.rest.icon"></fa-icon>
+        </button>
+      </div>
+      <ng-container *ngIf="toggleConfig.rest.show">
+        <ng-container *ngFor="let student of restListFiltered; let i = index">
+          <a13-student-card [(student)]="student"></a13-student-card>
+        </ng-container>
+      </ng-container>
+
+      <!-- Archived students -->
+      <div *ngIf="archivedListFiltered.length>0"
+        [ngClass]="{'mt-1': favoriteListFiltered.length>0 || restListFiltered.length>0}">
+        <button mat-button color="warn" (click)="showMore('archived')">
+          {{toggleConfig.archived.text | translate}}
+          ({{archivedListFiltered.length}})
+          <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.archived.icon"></fa-icon>
+        </button>
+      </div>
+      <ng-container *ngIf="toggleConfig.archived.show">
+        <ng-container *ngFor="let student of archivedListFiltered; let i = index">
+          <a13-student-card [(student)]="student"></a13-student-card>
+        </ng-container>
+      </ng-container>
+
+    </div>
+
+    <!-- Empty list -->
+    <h3 *ngIf="!studentListFiltered.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}
+    </h3>
+
+    <!-- Floating button -->
+    <a13-floating-button text="ADD_STUDENT" icon="user-plus" (click)="createStudent()"></a13-floating-button>
   </div>
-
-  <!-- Empty list -->
-  <h3 *ngIf="!studentListFiltered.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
-
-  <!-- Floating button -->
-  <a13-floating-button text="ADD_STUDENT" icon="user-plus" (click)="createStudent()"></a13-floating-button>
 </section>

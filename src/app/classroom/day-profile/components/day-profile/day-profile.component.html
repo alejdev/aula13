@@ -1,7 +1,7 @@
 <section class="container container-nopadd">
 	<div class="profile-container overflow-scroll-content">
-		<header class="profile-header p-1 mat-card mat-elevation-z0">
-			<div fxLayout="row" fxLayoutAlign="start center" *ngIf="day?.student">
+		<header class="profile-header shadow-bottom p-1 mat-card mat-elevation-z0">
+			<div class="container-max sm" fxLayout="row" fxLayoutAlign="start center" *ngIf="day?.student">
 
 				<!-- Avatar -->
 				<a class="avatar border-theme mr-h" [routerLink]="[ '/aula/alumno', day?.studentId ]">
@@ -18,6 +18,8 @@
 		</header>
 
 		<!-- Content -->
-		<div class="padding-content" [innerHTML]="day?.content"></div>
+		<div class="container-padd">
+			<div class="container-max sm p-h" [innerHTML]="day?.content"></div>
+		</div>
 	</div>
 </section>

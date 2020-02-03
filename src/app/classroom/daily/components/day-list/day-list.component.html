@@ -1,13 +1,15 @@
 <section class="container container-padd">
+  <div class="container-max sm">
 
-  <!-- Days -->
-  <ng-container *ngFor="let day of dayList">
-    <a13-day-card [(day)]="day"></a13-day-card>
-  </ng-container>
+    <!-- Days -->
+    <ng-container *ngFor="let day of dayList">
+      <a13-day-card [(day)]="day"></a13-day-card>
+    </ng-container>
 
-  <!-- Empty list -->
-  <h3 *ngIf="!dayList.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+    <!-- Empty list -->
+    <h3 *ngIf="!dayList.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
 
-  <!-- Floating button -->
-  <a13-floating-button text="DAY.ADD" icon="edit" (click)="createDay()"></a13-floating-button>
+    <!-- Floating button -->
+    <a13-floating-button text="DAY.ADD" icon="edit" (click)="createDay()"></a13-floating-button>
+  </div>
 </section>
