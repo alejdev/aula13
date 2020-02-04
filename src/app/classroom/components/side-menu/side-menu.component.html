@@ -32,7 +32,8 @@
           <ng-container *ngFor="let item of menu">
             <a mat-list-item (click)="onItemSelected(item)" [ngClass]="{'active': item.expanded}">
               <fa-icon class="mat-hint" [icon]="item.icon"></fa-icon>
-              <span class="mat-hint pl-h ml-q">{{ item?.name | translate}}</span>
+              <span class="mat-hint pl-h ml-q mr-q">{{ item?.name | translate}}</span>
+              <span class="translucide mat-hint"> | {{item?.children?.length}}</span>
               <span fxFlex></span>
               <button mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'"
                 (click)="createElement($event, item)">
