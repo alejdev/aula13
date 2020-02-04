@@ -20,7 +20,7 @@
       <div *ngIf="favoriteListFiltered.length>0">
         <button mat-button color="primary" (click)="showMore('favorite')">
           {{toggleConfig.favorite.text | translate}}
-          ({{favoriteListFiltered.length}})
+          <span class="translucide"> | {{favoriteListFiltered.length}}</span>
           <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.favorite.icon"></fa-icon>
         </button>
       </div>
@@ -34,7 +34,7 @@
       <div *ngIf="restListFiltered.length>0" [ngClass]="{'mt-1': favoriteListFiltered.length>0}">
         <button mat-button class="mat-hint" (click)="showMore('rest')">
           {{toggleConfig.rest.text | translate}}
-          ({{restListFiltered.length}})
+          <span class="translucide"> | {{restListFiltered.length}}</span>
           <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.rest.icon"></fa-icon>
         </button>
       </div>
@@ -49,7 +49,7 @@
         [ngClass]="{'mt-1': favoriteListFiltered.length>0 || restListFiltered.length>0}">
         <button mat-button color="warn" (click)="showMore('archived')">
           {{toggleConfig.archived.text | translate}}
-          ({{archivedListFiltered.length}})
+          <span class="translucide"> | {{archivedListFiltered.length}}</span>
           <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.archived.icon"></fa-icon>
         </button>
       </div>
