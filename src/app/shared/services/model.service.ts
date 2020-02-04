@@ -8,30 +8,18 @@ export class ModelService {
   public static ageList: number[] = Array(100).fill(0).map((e, i) => i + 1)
 
   public static avatarList: string[] = [
-    'user-default',
-    'boy-0', 'girl-0',
-    'boy-1', 'girl-1',
-    'boy-2', 'girl-2',
-    'boy-3', 'girl-3',
-    'boy-4', 'girl-4',
-    'boy-5', 'girl-5',
-    'boy-6', 'girl-6',
-    'boy-7', 'girl-7',
-    'boy-8', 'girl-8',
-    'boy-9', 'girl-9',
-    'boy-10', 'girl-10',
-    'boy-11', 'girl-11',
-    'boy-12', 'girl-12',
-    'boy-13', 'girl-13',
-    'boy-14', 'girl-14',
-    'boy-15', 'girl-15',
-    'boy-16', 'girl-16',
-    'boy-17', 'girl-17',
-    'boy-18', 'girl-18',
-    'boy-19', 'girl-19',
-    'boy-20', 'girl-20',
-    'boy-21', 'girl-21',
-    'boy-22', 'girl-22'
+    'user-default', 'boy-20', 'girl-9', 'girl-14',
+    'boy-15', 'boy-10', 'girl-22', 'girl-1',
+    'boy-3', 'boy-6', 'girl-15', 'girl-20',
+    'boy-17', 'boy-12', 'girl-17', 'girl-10',
+    'boy-8', 'boy-22', 'girl-11', 'girl-2',
+    'boy-0', 'boy-7', 'girl-13', 'girl-7',
+    'boy-1', 'boy-14', 'girl-5', 'girl-21',
+    'boy-19', 'boy-21', 'girl-6', 'girl-18',
+    'boy-9', 'boy-4', 'girl-3', 'girl-16',
+    'boy-13', 'boy-18', 'girl-19', 'girl-12',
+    'boy-16', 'boy-2', 'girl-0', 'girl-4',
+    'boy-11', 'boy-5', 'girl-8'
   ]
 
   public static academicCourseList: any[] = [{

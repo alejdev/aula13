@@ -33,6 +33,7 @@ export class StudentCreationComponent implements OnInit {
 
   studentFormGroup: FormGroup
   student: any
+  studentAvatar: string
   equals: any
   maxDate: Date
 
@@ -59,6 +60,7 @@ export class StudentCreationComponent implements OnInit {
     this.subjectList = this.subjectService.cachedSubjects
 
     this.student = this.data.student
+    this.studentAvatar = this.student.personal.avatar
     this.equals = UtilService.equals
     this.maxDate = UtilService.today()
 
@@ -146,7 +148,7 @@ export class StudentCreationComponent implements OnInit {
 
   save(): void {
     if (this.studentFormGroup.valid) {
-
+      this.data.student.personal.avatar = this.studentAvatar
       const student = {
         archived: !!this.student.archived,
         classroom: {
@@ -164,7 +166,7 @@ export class StudentCreationComponent implements OnInit {
         },
         personal: {
           academicCourse: this.studentFormGroup.value.personalFormGroup.academicCourseCtrl || '',
-          avatar: this.student.personal.avatar,
+          avatar: this.data.student.personal.avatar,
           birthdate: this.formatOutputDate(this.studentFormGroup.value.personalFormGroup.birthdateCtrl),
           name: UtilService.capitalize(this.studentFormGroup.value.personalFormGroup.nameCtrl),
           observations: this.studentFormGroup.value.personalFormGroup.observationsCtrl
