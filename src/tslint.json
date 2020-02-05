@@ -19,6 +19,7 @@
     "max-line-length": [
       false
     ],
-    "no-switch-case-fall-through": false
+    "no-switch-case-fall-through": false,
+    "variable-name": false
   }
 }
