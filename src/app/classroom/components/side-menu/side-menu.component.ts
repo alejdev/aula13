@@ -6,6 +6,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { ClassroomCreationComponent } from '../classroom-creation/classroom-creation.component'
 import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
@@ -16,7 +17,6 @@ import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 import { indicatorRotate } from '../../classroom.animation'
 
 import { MatDialog } from '@angular/material'
-
 
 @Component({
   selector: 'a13-side-menu',
@@ -37,8 +37,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   menuProfile = [{
     name: 'PROFILE',
     icon: 'user',
-    disabled: true,
-    action: () => { }
+    action: () => { this.toastService.info('MSG.SERVICE_NOT_AVAILABLE') }
   }, {
     name: 'SIGN.OUT',
     icon: 'sign-out-alt',
@@ -77,7 +76,8 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private classroomService: ClassroomService,
     private subjectService: SubjectService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {

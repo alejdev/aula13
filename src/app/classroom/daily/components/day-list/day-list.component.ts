@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Subscription } from 'rxjs'
-
-import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { BehaviorSubject, Observable, Subscription } from 'rxjs'
+import { map, scan, take, tap } from 'rxjs/operators'
 import { DayService } from 'src/app/classroom/services/day.service'
-import { StudentService } from 'src/app/classroom/services/student.service'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
-import { UtilService } from 'src/app/shared/services/util.service'
+import { StudentService } from 'src/app/classroom/services/student.service'
+import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { ModelService } from 'src/app/shared/services/model.service'
 
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { AngularFirestoreCollection } from '@angular/fire/firestore'
 import { MatDialog } from '@angular/material'
 
 @Component({
@@ -22,48 +22,98 @@ export class DayListComponent implements OnInit, OnDestroy {
 
   dayListSubscription: Subscription
 
+  private _done = new BehaviorSubject(false)
+  private _loading = new BehaviorSubject(false)
+  private _newData = new BehaviorSubject([])
+
+  // Observable data
+  data: Observable<any>
+  done: Observable<boolean> = this._done.asObservable()
+  loading: Observable<boolean> = this._loading.asObservable()
+
   constructor(
-    private dialog: MatDialog,
     private studentService: StudentService,
     private dayService: DayService,
-    private headerService: HeaderService
+    private dialog: MatDialog,
+    private headerService: HeaderService,
   ) { }
 
-  ngOnInit(): void {
-    // Config header
+  async ngOnInit(): Promise<any> {
     this.headerService.configHeader({ title: 'DAILY' })
-
-    this.getData()
+    this.studentService.savedStudentList = await this.studentService.getStudentList()
+    this.loadData()
   }
 
-  async getData(): Promise<any> {
+  private loadData(): void {
     this.dayList = []
-    this.studentList = await this.studentService.getStudentList()
-    this.getDayList()
-    this.observeDayList()
-  }
-
-  async getDayList(): Promise<any> {
-    await this.dayService.getDayList()
-  }
-
-  observeDayList(): void {
-    this.dayListSubscription = this.dayService.observeDayList()
+    this.dayListSubscription = this.initPagination()
       .subscribe((result: any) => {
-        this.dayList = UtilService.mapCollection(result)
-          .map((day) => this.mapDayList(day))
-          .filter((day) => !day.student.archived)
-
-        // Total dayList length
+        this.dayList = result
+        this.dayService.savedDayList = this.dayList
         this.headerService.mergeHeader({ length: this.dayList.length })
       })
   }
 
-  mapDayList(day: any): any {
-    return {
-      student: this.studentList.find((student: any) => student.id === day.studentId),
-      ...day
-    }
+  // Pagination
+  private initPagination() {
+    this.mapAndUpdate(this.dayService.getCollection())
+
+    // Create the observable array for consumption in components
+    return this.data = this._newData.asObservable()
+      .pipe(
+        map((days: any) => {
+          return days.map(day => {
+            return {
+              student: this.studentService.savedStudentList.find((student: any) => student.id === day.studentId),
+              ...day
+            }
+          })
+        }),
+        // filter((day) => !day.student.archive),
+        scan((acc, val) => this.dayService.query.prepend ? val.concat(acc) : acc.concat(val))
+      )
+  }
+
+  // Retrieves new data
+  private more() {
+    this.mapAndUpdate(this.dayService.getCollection(this._newData.value))
+  }
+
+  // Maps the snapshot to usable format the updates source
+  private mapAndUpdate(col: AngularFirestoreCollection<any>) {
+
+    // Stop scroll retrieving when done
+    if (this._done.value || this._loading.value) { return }
+
+    // Loading
+    this._loading.next(true)
+
+    // Map snapshot with doc ref (needed for cursor)
+    return col.snapshotChanges()
+      .pipe(
+        tap(arr => {
+          let values = arr.map(snap => {
+            const data = snap.payload.doc.data()
+            const doc = snap.payload.doc
+            const id = doc.id
+            return { ...data, doc, id }
+          })
+
+          // If prepending, reverse the batch order
+          values = this.dayService.query.prepend ? values.reverse() : values
+
+          // update source with new values, done loading
+          this._newData.next(values)
+          this._loading.next(false)
+
+          // no more values, mark done
+          if (!values.length) {
+            this._done.next(true)
+          }
+        }),
+        take(1)
+      )
+      .subscribe()
   }
 
   createDay(): void {
@@ -75,6 +125,12 @@ export class DayListComponent implements OnInit, OnDestroy {
         day: ModelService.dayModel
       }
     })
+  }
+
+  scrollHandler(e: any): void {
+    if (e === 'bottom') {
+      this.more()
+    }
   }
 
   ngOnDestroy(): void {

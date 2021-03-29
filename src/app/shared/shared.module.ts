@@ -50,6 +50,8 @@ import { SubjectNamePipe } from './pipes/subject-name.pipe'
 import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { SrcImagePipe } from './pipes/src-image.pipe'
 
+import { ScrollableDirective } from './directives/scrollable.directive'
+
 import { LoaderService } from './services/loader.service'
 import { SettingService } from './services/setting.service'
 
@@ -82,7 +84,8 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     StripHTMLPipe,
     SubjectNamePipe,
     ClassroomNamePipe,
-    SrcImagePipe
+    SrcImagePipe,
+    ScrollableDirective
   ],
   imports: [
     // Angular
@@ -145,6 +148,9 @@ import { faChevronRight, faUserGraduate, faCog, faBook, faUniversity, faEllipsis
     SubjectNamePipe,
     ClassroomNamePipe,
     SrcImagePipe,
+
+    ScrollableDirective,
+
     FloatingButtonComponent,
     DayCardComponent,
     DayCreationComponent,

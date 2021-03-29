@@ -1,14 +1,11 @@
-import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-
 import firebase from 'firebase/app'
-
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
-
-import { LoaderService } from 'src/app/shared/services/loader.service'
+import { Observable } from 'rxjs'
 import { AuthService } from 'src/app/shared/services/auth.service'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
+import { Injectable } from '@angular/core'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +13,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 export class StudentService {
 
   private subCollectionName: string = 'students'
+  private _savedStudentList: any[] = []
 
   constructor(
     private firestore: AngularFirestore,
@@ -30,6 +28,14 @@ export class StudentService {
 
   private get subCollection(): AngularFirestoreCollection {
     return this.userData.collection(this.subCollectionName)
+  }
+
+  public get savedStudentList(): any[] {
+    return this._savedStudentList
+  }
+
+  public set savedStudentList(list) {
+    this._savedStudentList = list
   }
 
   // Observables
