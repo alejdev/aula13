@@ -1,9 +1,13 @@
 <mat-toolbar class="header" [ngClass]="{'height-auto': !isTruncated}" [color]="themeName">
+
+  <div class="fixed">
+    <a13-title-logo fxHide.md fxHide.sm fxHide.xs></a13-title-logo>
+  </div>
+
   <div class="container-max sm" fxLayout="row" fxLayoutAlign="start center">
 
     <!-- Back button  -->
-    <button *ngIf="headerConfig.back" class="mr-h menu-button" [routerLink]="[ headerConfig.back ]" mat-icon-button
-      attr.aria-label="{{'BACK' | translate}}">
+    <button *ngIf="headerConfig.back" class="mr-h menu-button" [routerLink]="[ headerConfig.back ]" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
       <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
     </button>
 
@@ -17,8 +21,7 @@
     <span fxFlex></span>
 
     <!-- Menu phone -->
-    <button *ngIf="headerConfig.student?.contactInformation?.phones?.length" class="menu-button" mat-icon-button
-      [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
+    <button *ngIf="headerConfig.student?.contactInformation?.phones?.length" class="menu-button" mat-icon-button [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
       <fa-icon class="mat-icon-18" icon="phone-alt"></fa-icon>
     </button>
     <mat-menu #menuPhones="matMenu">
@@ -31,21 +34,18 @@
     </mat-menu>
 
     <!-- Menu options-->
-    <button *ngIf="headerConfig.menuOptions?.length" class=" mr-0 menu-button" mat-icon-button
-      [matMenuTriggerFor]="menuOptions" attr.aria-label="{{'OPTION_MENU' | translate}}">
+    <button *ngIf="headerConfig.menuOptions?.length" class=" mr-0 menu-button" mat-icon-button [matMenuTriggerFor]="menuOptions" attr.aria-label="{{'OPTION_MENU' | translate}}">
       <fa-icon class="mat-icon-18" icon="ellipsis-v"></fa-icon>
     </button>
     <mat-menu #menuOptions="matMenu">
-      <button *ngFor="let item of headerConfig.menuOptions" mat-menu-item
-        (click)="openDialog(item.dialog?.component, item.dialog?.config)">
+      <button *ngFor="let item of headerConfig.menuOptions" mat-menu-item (click)="openDialog(item.dialog?.component, item.dialog?.config)">
         <fa-icon class="mat-icon-16 mat-hint" [icon]="item.icon"></fa-icon>
         <span>{{item.name | translate}}</span>
       </button>
     </mat-menu>
 
     <!-- Sign Out -->
-    <button *ngIf="headerConfig.signOut" class="menu-button mr-q" mat-icon-button (click)="logOut()"
-      attr.aria-label="{{'SIGN.OUT' | translate}}">
+    <button *ngIf="headerConfig.signOut" class="menu-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">
       <fa-icon class="mat-icon-18" icon="sign-out-alt"></fa-icon>
     </button>
 

@@ -2,7 +2,11 @@
   <div class="side-menu-container" fxLayout="column" fxLayoutGap="10px">
 
     <!-- Title -->
-    <h1 class="pl-1 pt-h mat-body mat-hint">{{title}}</h1>
+    <!-- <h1 class="pl-1 pt-h mat-body mat-hint">{{title}}</h1> -->
+
+    <div class="title-logo pl-1 pt-h mat-body">
+      <a13-title-logo></a13-title-logo>
+    </div>
 
     <!-- User -->
     <div class="mt-1 mb-2" fxLayout="column" fxLayoutAlign="center center">
@@ -11,13 +15,11 @@
       </a>
       <div class="mt-1" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
         <span class="user-name">{{ user?.name || user?.email }}</span>
-        <button mat-icon-button [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger"
-          attr.aria-label="{{'OPTION_MENU' | translate}}">
+        <button mat-icon-button [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger" attr.aria-label="{{'OPTION_MENU' | translate}}">
           <fa-icon class="mat-hint" icon="{{'caret-' + (openStatus.menuOpen ? 'up': 'down')}}"></fa-icon>
         </button>
         <mat-menu #menuProfileId="matMenu">
-          <button *ngFor="let option of menuProfile" mat-menu-item (click)="option.action()"
-            [disabled]="option.disabled">
+          <button *ngFor="let option of menuProfile" mat-menu-item (click)="option.action()" [disabled]="option.disabled">
             <fa-icon class="mat-icon-20 mat-hint" [icon]="option.icon"></fa-icon>
             <span>{{option.name | translate}}</span>
           </button>
@@ -35,8 +37,7 @@
               <span class="mat-hint pl-h ml-q mr-q">{{ item?.name | translate}}</span>
               <span class="translucide mat-hint"> | {{item?.children?.length}}</span>
               <span fxFlex></span>
-              <button mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'"
-                (click)="createElement($event, item)">
+              <button mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" (click)="createElement($event, item)">
                 <fa-icon class="mat-hint" icon="plus"></fa-icon>
               </button>
             </a>
@@ -45,14 +46,12 @@
                 <a mat-list-item (click)="onItemSelected(child)" [ngClass]="{'expanded': child.expanded}">
                   <span class="mat-hint pl-1 ml-1">{{child?.name}}</span>
                   <span fxFlex></span>
-                  <button mat-icon-button [matMenuTriggerFor]="menuOptionsId"
-                    attr.aria-label="{{'OPTION_MENU' | translate}}">
+                  <button mat-icon-button [matMenuTriggerFor]="menuOptionsId" attr.aria-label="{{'OPTION_MENU' | translate}}">
                     <fa-icon class="mat-hint" icon="ellipsis-v"></fa-icon>
                   </button>
                 </a>
                 <mat-menu #menuOptionsId="matMenu">
-                  <button *ngFor="let option of menuOptions" mat-menu-item
-                    (click)="openMenuOption($event, item, child, option)">
+                  <button *ngFor="let option of menuOptions" mat-menu-item (click)="openMenuOption($event, item, child, option)">
                     <fa-icon class="mat-icon-16 mat-hint" [icon]="option.icon"></fa-icon>
                     <span>{{option.name | translate}}</span>
                   </button>

@@ -2,6 +2,10 @@
   width: 100%;
   height: 100vh;
 
+  .title-logo {
+    height: 80px;
+  }
+
   .nav-list {
     max-height: calc(100vh - 118px - var(--main-header-size) * 3);
   }

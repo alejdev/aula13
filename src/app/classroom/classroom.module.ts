@@ -24,7 +24,8 @@ import { SubjectCreationComponent } from './components/subject-creation/subject-
 
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
-import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TitleLogoComponent } from './components/title-logo/title-logo.component'
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     ClassroomDeleteDialogComponent,
     SubjectDeleteDialogComponent,
     DayDeleteDialogComponent,
+    TitleLogoComponent,
   ],
   imports: [
     // Routing
