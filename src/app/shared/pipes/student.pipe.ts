@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 @Pipe({
   name: 'student'
 })
-export class StudentPipe implements PipeTransform {
+export class FilterPipe implements PipeTransform {
 
   transform(array: any, args?: any): any {
     if (!array || !args) {

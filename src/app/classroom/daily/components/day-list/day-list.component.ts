@@ -3,7 +3,7 @@ import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
-import { StudentPipe } from 'src/app/shared/pipes/student.pipe'
+import { FilterPipe } from 'src/app/shared/pipes/student.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material'
   selector: 'a13-day-list',
   templateUrl: './day-list.component.html',
   styleUrls: ['./day-list.component.scss'],
-  providers: [StudentPipe]
+  providers: [FilterPipe]
 })
 export class DayListComponent implements OnInit, OnDestroy {
 
@@ -29,7 +29,7 @@ export class DayListComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentService: StudentService,
-    private studentPipe: StudentPipe,
+    private FilterPipe: FilterPipe,
     private dayService: DayService,
     private dialog: MatDialog,
     private headerService: HeaderService,
@@ -50,12 +50,22 @@ export class DayListComponent implements OnInit, OnDestroy {
           ...day
         }
       })
-      this.dayListFiltered = Object.assign(this.dayList)
+      this.assignList();
     })
   }
 
   searchDay(query: string): void {
-    this.dayListFiltered = this.studentPipe.transform(this.dayList, query)
+    this.dayListFiltered = this.FilterPipe.transform(this.dayList, query)
+    this.headerService.mergeHeader({ length: this.dayListFiltered.length })
+  }
+
+  resetFilter(): void {
+    this.dayFilter = ''
+    this.assignList()
+  }
+
+  assignList() {
+    this.dayListFiltered = Object.assign(this.dayList)
     this.headerService.mergeHeader({ length: this.dayListFiltered.length })
   }
 

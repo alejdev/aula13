@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
-import { StudentPipe } from 'src/app/shared/pipes/student.pipe'
+import { FilterPipe } from 'src/app/shared/pipes/student.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -14,7 +14,7 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
   selector: 'a13-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.scss'],
-  providers: [StudentPipe]
+  providers: [FilterPipe]
 })
 export class StudentListComponent implements OnInit, OnDestroy {
 
@@ -48,7 +48,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentService: StudentService,
-    private studentPipe: StudentPipe,
+    private FilterPipe: FilterPipe,
     private dialog: MatDialog,
     private headerService: HeaderService
   ) { }
@@ -89,7 +89,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   searchStudent(ev: string): void {
-    this.studentListFiltered = this.studentPipe.transform(this.studentList, ev)
+    this.studentListFiltered = this.FilterPipe.transform(this.studentList, ev)
     this.filterStudents()
   }
 

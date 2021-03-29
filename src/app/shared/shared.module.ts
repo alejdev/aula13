@@ -40,7 +40,7 @@ import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { SrcImagePipe } from './pipes/src-image.pipe'
 import { StringByPipe } from './pipes/string-by.pipe'
 import { StripHTMLPipe } from './pipes/strip-html.pipe'
-import { StudentPipe } from './pipes/student.pipe'
+import { FilterPipe } from './pipes/student.pipe'
 import { SubjectNamePipe } from './pipes/subject-name.pipe'
 import { LoaderService } from './services/loader.service'
 import { SettingService } from './services/setting.service'
@@ -78,7 +78,7 @@ registerLocaleData(localeFr, 'fr')
     SubjectNamePipe,
     ClassroomNamePipe,
     SrcImagePipe,
-    StudentPipe,
+    FilterPipe,
     ScrollableDirective,
   ],
   imports: [
@@ -142,7 +142,7 @@ registerLocaleData(localeFr, 'fr')
     SubjectNamePipe,
     ClassroomNamePipe,
     SrcImagePipe,
-    StudentPipe,
+    FilterPipe,
 
     ScrollableDirective,
 
