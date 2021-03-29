@@ -1,20 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
-
-import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
-import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
-import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
-
-import { StudentService } from 'src/app/classroom/services/student.service'
-import { UtilService } from 'src/app/shared/services/util.service'
-import { ModelService } from 'src/app/shared/services/model.service'
-import { HeaderService } from 'src/app/classroom/services/header.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
+import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
+import { HeaderService } from 'src/app/classroom/services/header.service'
+import { StudentService } from 'src/app/classroom/services/student.service'
+import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
+import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { ModelService } from 'src/app/shared/services/model.service'
+import { ToastService } from 'src/app/shared/services/toast.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'a13-student-profile',
@@ -155,7 +153,13 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   queryDayList(): void {
     this.dayListQuerySubscription = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
-        this.dayList = UtilService.mapCollection(result)
+        this.dayList = UtilService.mapCollection(result).map((elem) => {
+          return {
+            ...elem,
+            hideStudent: true,
+            student: { ...this.student }
+          }
+        })
 
         // Total dayList length
         this.headerService.mergeHeader({ length: this.dayList.length })

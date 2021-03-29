@@ -2,6 +2,14 @@ mat-card {
 
   &:focus {
     outline: -webkit-focus-ring-color auto 0;
+  }  
+
+  button {
+    opacity: .8;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 

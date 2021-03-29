@@ -21,7 +21,7 @@
     </div>
 
     <!-- Fav button -->
-    <button class="mr-h ml-h" mat-icon-button (click)="fav($event)">
+    <button class="mr-h ml-h" mat-icon-button (click)="fav($event); $event.stopPropagation()">
       <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star"></fa-icon>
     </button>
 

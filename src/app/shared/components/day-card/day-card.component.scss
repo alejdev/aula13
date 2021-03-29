@@ -1,3 +1,18 @@
+mat-card {
+
+  &:focus {
+    outline: -webkit-focus-ring-color auto 0;
+  }
+
+  button {
+    opacity: .8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 .header-info {
 
   .header-info-title,
@@ -14,4 +29,9 @@
 .text-date {
   min-width: 70px;
   text-align: right;
+}
+
+.action-buttons {
+  margin-right: -10px;
+  margin-top: -10px;
 }
