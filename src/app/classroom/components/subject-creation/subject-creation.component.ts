@@ -1,14 +1,14 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { debounceTime, switchMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
-
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
-
+import { debounceTime, switchMap } from 'rxjs/operators'
 import { ToastService } from 'src/app/shared/services/toast.service'
-import { SubjectService } from '../../services/subject.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
+
 import { StudentService } from '../../services/student.service'
+import { SubjectService } from '../../services/subject.service'
 
 @Component({
   selector: 'a13-subject-creation',
@@ -33,9 +33,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
     private studentService: StudentService,
     private dialogRef: MatDialogRef<SubjectCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.subject = this.data.entity
 
     // Init form controls
@@ -43,7 +41,6 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
       nameCtrl: [this.subject.name || '', Validators.required],
       studentListCtrl: [this.studentIdList || []]
     })
-
     // Listen name changes
     this.onSubjectChange()
 
@@ -52,6 +49,8 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
       this.queryEnrrolledStudents()
     }
   }
+
+  ngOnInit() { }
 
   onSubjectChange() {
     const nameCtrl = this.subjectFormGroup.controls.nameCtrl
