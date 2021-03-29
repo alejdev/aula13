@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
+import { ThemeService } from 'src/app/shared/services/theme.service'
 
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 
-import { ThemeService } from 'src/app/shared/services/theme.service'
 import { HeaderService } from '../../services/header.service'
 
 @Component({

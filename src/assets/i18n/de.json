@@ -191,6 +191,7 @@
 		"SUBJECT_DELETE_2": "Studierende, die in diesem Fach eingeschrieben sind, hören auf zu sein",
 		"SUBJECT_DELETE_OK": "Der Betreff wurde erfolgreich gelöscht",
 		"SUBJECT_UPDATE_OK": "Betreff geändert",
+		"THERE_IS_NO_ELEMENTS": "Es gibt keine Elemente mehr",
 		"WELCOME": "Hallo {{name}}!",
 		"YES_ACCOUNT": "Hast du schon ein Konto?"
 	},
@@ -215,6 +216,7 @@
 	"RESET_FILTER": "Filter zurücksetzen",
 	"REST_STUDENTS": "Andere Schüler",
 	"SAVE": "Speichern",
+	"SEARCH_DAY": "Tagebuch suchen",
 	"SEARCH_STUDENT": "Student suchen",
 	"SELECT": "Auswählen",
 	"SETTINGS": "Konfiguration",

@@ -25,7 +25,7 @@ export class DayService {
   private _query: QueryConfig = {
     path: 'days',
     field: 'date',
-    limit: 25,
+    limit: 10,
     reverse: true,
     prepend: false
   }
@@ -154,5 +154,9 @@ export class DayService {
       return this.query.prepend ? data[0].doc : data[data.length - 1].doc
     }
     return null
+  }
+
+  public searchDay() {
+    return this.subCollection.valueChanges()
   }
 }

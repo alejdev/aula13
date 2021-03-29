@@ -1,13 +1,27 @@
-<section class="container container-padd" a13Scrollable (scrollPosition)="scrollHandler($event)">
+<section class="container container-padd" a13Scrollable>
   <div class="container-max sm">
 
+    <!-- Filter -->
+    <mat-form-field appearance="outline">
+      <mat-label>{{'SEARCH_DAY' | translate}}</mat-label>
+      <input matInput [(ngModel)]="dayFilter" (ngModelChange)="searchDay($event)" attr.aria-label="{{'SEARCH_DAY' | translate}}" autocomplete="off">
+      <fa-icon *ngIf="!dayFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
+      <button class="reset-button" mat-button matSuffix *ngIf="dayFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
+        <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+      </button>
+    </mat-form-field>
+
     <!-- Days -->
-    <ng-container *ngFor="let day of dayList">
+    <ng-container *ngFor="let day of dayListFiltered">
       <a13-day-card [(day)]="day"></a13-day-card>
     </ng-container>
 
     <!-- Empty list -->
-    <h3 *ngIf="!dayList?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+    <h3 *ngIf="!dayListFiltered?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
+
+    <!-- List length > 0 -->
+    <h3 *ngIf="dayListFiltered?.length" class="mt-3 txt-center mat-hint">{{'No hay más elementos' | translate}}</h3>
+    
 
     <!-- Floating button -->
     <a13-floating-button text="DAY.ADD" icon="edit" (click)="createDay()"></a13-floating-button>

@@ -191,6 +191,7 @@
 		"SUBJECT_DELETE_2": "Les étudiants inscrits dans cette matière cesseront d'être",
 		"SUBJECT_DELETE_OK": "Le sujet a bien été supprimé",
 		"SUBJECT_UPDATE_OK": "Sujet modifié",
+		"THERE_IS_NO_ELEMENTS": "Il n'y a plus d'articles",
 		"WELCOME": "Salut {{name}}!",
 		"YES_ACCOUNT": "Avez-vous déjà un compte?"
 	},
@@ -215,6 +216,7 @@
 	"RESET_FILTER": "Réinitialiser le filtre",
 	"REST_STUDENTS": "Autres étudiants",
 	"SAVE": "Sauvegarder",
+	"SEARCH_DAY": "Rechercher dans le journal",
 	"SEARCH_STUDENT": "Recherche étudiant",
 	"SELECT": "sélectionner",
 	"SETTINGS": "La configuration",

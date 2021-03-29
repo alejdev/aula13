@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Subscription } from 'rxjs'
+import { HeaderService } from 'src/app/classroom/services/header.service'
+import { StudentService } from 'src/app/classroom/services/student.service'
+import { StudentPipe } from 'src/app/shared/pipes/student.pipe'
+import { ModelService } from 'src/app/shared/services/model.service'
+import { UtilService } from 'src/app/shared/services/util.service'
+
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material'
 
 import { StudentCreationComponent } from '../student-creation/student-creation.component'
-import { StudentPipe } from 'src/app/classroom/students/pipes/student.pipe'
-import { StudentService } from 'src/app/classroom/services/student.service'
-import { UtilService } from 'src/app/shared/services/util.service'
-import { ModelService } from 'src/app/shared/services/model.service'
-import { Subscription } from 'rxjs'
-
-import { MatDialog } from '@angular/material'
-import { HeaderService } from 'src/app/classroom/services/header.service'
 
 @Component({
   selector: 'a13-student-list',

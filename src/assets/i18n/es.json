@@ -191,6 +191,7 @@
 		"SUBJECT_DELETE_2": "Los alumnos matriculados en esta asignatura dejarán de estarlo",
 		"SUBJECT_DELETE_OK": "Se ha borrado correctamente la asignatura",
 		"SUBJECT_UPDATE_OK": "Asignatura modificada",
+		"THERE_IS_NO_ELEMENTS": "No hay más elementos",
 		"WELCOME": "¡Hola {{name}}!",
 		"YES_ACCOUNT": "¿Ya tienes una cuenta?"
 	},
@@ -215,6 +216,7 @@
 	"RESET_FILTER": "Reiniciar filtro",
 	"REST_STUDENTS": "Demás alumnos",
 	"SAVE": "Guardar",
+	"SEARCH_DAY": "Buscar diario",
 	"SEARCH_STUDENT": "Buscar alumno",
 	"SELECT": "Seleccionar",
 	"SETTINGS": "Configuración",
