@@ -1,24 +1,24 @@
-import { Component, OnInit, Inject } from '@angular/core'
-import { Validators, FormGroup, FormBuilder } from '@angular/forms'
-import { Router } from '@angular/router'
-
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-classic'
 import '@ckeditor/ckeditor5-build-classic/build/translations/es'
 import '@ckeditor/ckeditor5-build-classic/build/translations/en-gb'
 import '@ckeditor/ckeditor5-build-classic/build/translations/de'
 import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
-import _moment from 'moment'
-import { default as _rollupMoment } from 'moment'
-const moment = _rollupMoment || _moment
-
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
-
+import _moment, { default as _rollupMoment } from 'moment'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+
+import { Component, Inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
+import { Router } from '@angular/router'
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-classic'
+import { TranslateService } from '@ngx-translate/core'
+
 import { SettingService } from '../../services/setting.service'
+
+const moment = _rollupMoment || _moment
 
 @Component({
   selector: 'a13-day-creation',
@@ -40,6 +40,7 @@ export class DayCreationComponent implements OnInit {
     private dayService: DayService,
     private toastService: ToastService,
     private settingService: SettingService,
+    private translateService: TranslateService,
     private dialogRef: MatDialogRef<DayCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -123,6 +124,16 @@ export class DayCreationComponent implements OnInit {
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
+    }
+  }
+
+  cancel(): void {
+    if (this.dayFormGroup.dirty) {
+      if (confirm(this.translateService.instant('MSG.WILL_LOSE_THE_CHANGES'))) {
+        this.dialogRef.close()
+      }
+    } else {
+      this.dialogRef.close()
     }
   }
 }

@@ -6,6 +6,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
+import { TranslateService } from '@ngx-translate/core'
 
 import { StudentService } from '../../services/student.service'
 import { SubjectService } from '../../services/subject.service'
@@ -31,6 +32,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
     private toastService: ToastService,
     private subjectService: SubjectService,
     private studentService: StudentService,
+    private translateService: TranslateService,
     private dialogRef: MatDialogRef<SubjectCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -133,6 +135,16 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
+    }
+  }
+
+  cancel(): void {
+    if (this.subjectFormGroup.dirty) {
+      if (confirm(this.translateService.instant('MSG.WILL_LOSE_THE_CHANGES'))) {
+        this.dialogRef.close()
+      }
+    } else {
+      this.dialogRef.close()
     }
   }
 

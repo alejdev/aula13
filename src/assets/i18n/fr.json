@@ -193,6 +193,7 @@
 		"SUBJECT_UPDATE_OK": "Sujet modifié",
 		"THERE_IS_NO_ELEMENTS": "Il n'y a plus d'articles",
 		"WELCOME": "Salut {{name}}!",
+		"WILL_LOSE_THE_CHANGES": "Si vous continuez, vous perdrez toutes les modifications qui n'ont pas été enregistrées",
 		"YES_ACCOUNT": "Avez-vous déjà un compte?"
 	},
 	"NEXT": "Suivant",

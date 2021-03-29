@@ -28,6 +28,7 @@ export class StudentComponent implements OnInit {
       width: 'calc(100vw)',
       maxWidth: '800px',
       autoFocus: false,
+      disableClose: true,
       data: {
         idStudent: this.student.id,
         student: { ...this.student }

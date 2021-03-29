@@ -193,6 +193,7 @@
 		"SUBJECT_UPDATE_OK": "Betreff geändert",
 		"THERE_IS_NO_ELEMENTS": "Es gibt keine Elemente mehr",
 		"WELCOME": "Hallo {{name}}!",
+		"WILL_LOSE_THE_CHANGES": "Wenn Sie fortfahren, verlieren Sie alle Änderungen, die nicht gespeichert wurden",
 		"YES_ACCOUNT": "Hast du schon ein Konto?"
 	},
 	"NEXT": "Weiter",

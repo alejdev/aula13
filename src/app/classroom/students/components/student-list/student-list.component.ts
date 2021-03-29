@@ -69,6 +69,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
       width: 'calc(100vw)',
       maxWidth: '800px',
       autoFocus: false,
+      disableClose: true,
       data: {
         student: UtilService.clone(ModelService.studenModel)
       }

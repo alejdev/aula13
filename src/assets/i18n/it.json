@@ -193,6 +193,7 @@
 		"SUBJECT_UPDATE_OK": "Soggetto modificato",
 		"THERE_IS_NO_ELEMENTS": "Non ci sono più articoli",
 		"WELCOME": "Ciao {{name}}!",
+		"WILL_LOSE_THE_CHANGES": "Se continui perderai tutte le modifiche che non sono state salvate",
 		"YES_ACCOUNT": "Hai già un account?"
 	},
 	"NEXT": "Seguente",

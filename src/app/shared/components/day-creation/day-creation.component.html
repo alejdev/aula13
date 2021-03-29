@@ -3,21 +3,20 @@
   <h2 class="m-0" mat-dialog-title>{{(data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}</h2>
 
   <!-- Close dialog -->
-  <button class="button-close" mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
+  <button class="button-close" mat-icon-button attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">
     <fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
   </button>
 </div>
 
 <mat-dialog-content class="mat-typography">
 
-	<p class="mb-1 pb-h pl-q pr-q mat-hint">{{'DAY.CREATION_SUBTITLE' | translate}}.</p>
+  <p class="mb-1 pb-h pl-q pr-q mat-hint">{{'DAY.CREATION_SUBTITLE' | translate}}.</p>
 
   <form [formGroup]="dayFormGroup" autocomplete="off">
 
     <div class="mb-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
 
-      <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxFlex
-        ngClass.xs="full">
+      <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxFlex ngClass.xs="full">
 
         <!-- Student -->
         <a13-select-student class="mb-h" fxFlex="50" formControlName="dayStudentCtrl">
@@ -36,8 +35,7 @@
         <!-- Title -->
         <mat-form-field appearance="outline" fxFlex="100">
           <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
-          <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}"
-            maxlength="{{maxlengthTitle}}" autocomplete="off">
+          <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}" maxlength="{{maxlengthTitle}}" autocomplete="off">
           <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
           <mat-hint align="start">{{'HINT.TITLE' | translate}}</mat-hint>
           <mat-hint align="end">{{title.value.length}} / {{maxlengthTitle}}</mat-hint>
@@ -55,8 +53,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button color="warn" mat-dialog-close
-    attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
-  <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="dayFormGroup.invalid"
-    (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+  <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
+  <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="dayFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
 </mat-dialog-actions>

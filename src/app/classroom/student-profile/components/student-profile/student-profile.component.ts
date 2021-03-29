@@ -176,6 +176,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
         width: 'calc(100vw)',
         maxWidth: '800px',
         autoFocus: false,
+        disableClose: true,
         data: {
           day: newDay,
         }

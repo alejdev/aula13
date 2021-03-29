@@ -1,22 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
-
-import { AuthService } from 'src/app/shared/services/auth.service'
-import { UtilService } from 'src/app/shared/services/util.service'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { AuthService } from 'src/app/shared/services/auth.service'
+import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
-import { ClassroomCreationComponent } from '../classroom-creation/classroom-creation.component'
-import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
-import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
-import { SubjectDeleteDialogComponent } from '../subject-delete-dialog/subject-delete-dialog.component'
-import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material'
 
 import { indicatorRotate } from '../../classroom.animation'
-
-import { MatDialog } from '@angular/material'
+import { ClassroomCreationComponent } from '../classroom-creation/classroom-creation.component'
+import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
+import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
+import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
+import { SubjectDeleteDialogComponent } from '../subject-delete-dialog/subject-delete-dialog.component'
 
 @Component({
   selector: 'a13-side-menu',
@@ -118,6 +116,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
       width: 'calc(100vw)',
       maxWidth: '800px',
       autoFocus: false,
+      disableClose: true,
       data: {
         entity: UtilService.clone(item.model)
       }
@@ -131,6 +130,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         width: 'calc(100vw)',
         maxWidth: '800px',
         autoFocus: false,
+        disableClose: true,
         data: {
           entity: child
         }

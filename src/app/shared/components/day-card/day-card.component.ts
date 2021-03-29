@@ -25,6 +25,7 @@ export class DayCardComponent implements OnInit {
       width: 'calc(100vw)',
       maxWidth: '800px',
       autoFocus: false,
+      disableClose: true,
       data: {
         idDay: this.day.id,
         day: { ...this.day }

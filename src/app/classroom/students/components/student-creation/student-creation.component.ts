@@ -1,18 +1,17 @@
-import { Component, OnInit, Inject, ElementRef } from '@angular/core'
-import { Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms'
-import { Router } from '@angular/router'
-
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
-
+import _moment, { default as _rollupMoment } from 'moment'
+import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
-import { ModelService } from 'src/app/shared/services/model.service'
-import { SubjectService } from 'src/app/classroom/services/subject.service'
-import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 
-import _moment from 'moment'
-import { default as _rollupMoment } from 'moment'
+import { Component, ElementRef, Inject, OnInit } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
+import { Router } from '@angular/router'
+import { TranslateService } from '@ngx-translate/core'
+
 const moment = _rollupMoment || _moment
 
 @Component({
@@ -45,6 +44,7 @@ export class StudentCreationComponent implements OnInit {
     private subjectService: SubjectService,
     private classroomService: ClassroomService,
     private toastService: ToastService,
+    private translateService: TranslateService,
     private dialogRef: MatDialogRef<StudentCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -192,6 +192,16 @@ export class StudentCreationComponent implements OnInit {
         .catch((err: any) => {
           this.toastService.error('ERR.UNEXPECTED_ERROR')
         })
+    }
+  }
+
+  cancel(): void {
+    if (this.studentFormGroup.dirty) {
+      if (confirm(this.translateService.instant('MSG.WILL_LOSE_THE_CHANGES'))) {
+        this.dialogRef.close()
+      }
+    } else {
+      this.dialogRef.close()
     }
   }
 }

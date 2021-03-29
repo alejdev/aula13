@@ -193,6 +193,7 @@
 		"SUBJECT_UPDATE_OK": "Asignatura modificada",
 		"THERE_IS_NO_ELEMENTS": "No hay más elementos",
 		"WELCOME": "¡Hola {{name}}!",
+		"WILL_LOSE_THE_CHANGES": "Si continúa perderá todos los cambios que no se hayan guardado",
 		"YES_ACCOUNT": "¿Ya tienes una cuenta?"
 	},
 	"NEXT": "Siguiente",

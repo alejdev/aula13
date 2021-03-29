@@ -193,6 +193,7 @@
 		"SUBJECT_UPDATE_OK": "Subject modified",
 		"THERE_IS_NO_ELEMENTS": "There are no more elements",
 		"WELCOME": "Hi {{name}}!",
+		"WILL_LOSE_THE_CHANGES": "If you continue you will lose all changes that have not been saved",
 		"YES_ACCOUNT": "Do you already have an account?"
 	},
 	"NEXT": "Following",

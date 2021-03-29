@@ -1,49 +1,45 @@
 <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
 
-	<!-- Title -->
-	<h2 class="m-0" mat-dialog-title>{{(data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}</h2>
+  <!-- Title -->
+  <h2 class="m-0" mat-dialog-title>{{(data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}</h2>
 
-	<!-- Close dialog button -->
-	<button class="button-close" mat-icon-button mat-dialog-close attr.aria-label="{{'CANCEL' | translate}}">
-		<fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
-	</button>
+  <!-- Close dialog button -->
+  <button class="button-close" mat-icon-button attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">
+    <fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
+  </button>
 </div>
 
 <mat-dialog-content class="mat-typography">
 
-	<p class="mb-1 pb-h mat-hint">{{'CLASSROOM.CREATION_SUBTITLE' | translate}}.</p>
+  <p class="mb-1 pb-h mat-hint">{{'CLASSROOM.CREATION_SUBTITLE' | translate}}.</p>
 
-	<form [formGroup]="classroomFormGroup" autocomplete="off">
+  <form [formGroup]="classroomFormGroup" autocomplete="off">
 
-		<div class="f-wrap mb-1" fxLayout="column">
+    <div class="f-wrap mb-1" fxLayout="column">
 
-			<!-- Name -->
-			<mat-form-field appearance="outline" fxFlex="100">
-				<mat-label>{{'FORM.CLASSROOMS_NAME' | translate}}
-				</mat-label>
-				<input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.CLASSROOMS_NAME' | translate}}"
-					autocomplete="off">
-				<fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
-				<mat-error *ngIf="classroomFormGroup.controls.nameCtrl.hasError('nameTaken')">
-					{{'ERR.CLASSROOM_EXISTS' | translate}}
-				</mat-error>
-				<mat-error *ngIf="classroomFormGroup.controls.nameCtrl.hasError('required')">
-					{{'ERR.FIELD_REQUIRED' | translate}}
-				</mat-error>
-			</mat-form-field>
+      <!-- Name -->
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>{{'FORM.CLASSROOMS_NAME' | translate}}
+        </mat-label>
+        <input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.CLASSROOMS_NAME' | translate}}" autocomplete="off">
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+        <mat-error *ngIf="classroomFormGroup.controls.nameCtrl.hasError('nameTaken')">
+          {{'ERR.CLASSROOM_EXISTS' | translate}}
+        </mat-error>
+        <mat-error *ngIf="classroomFormGroup.controls.nameCtrl.hasError('required')">
+          {{'ERR.FIELD_REQUIRED' | translate}}
+        </mat-error>
+      </mat-form-field>
 
-			<!-- Student list -->
-			<a13-select-student [multiple]="true" formControlName="studentListCtrl" hint="HINT.CLASSROOM_STUDENT_LIST">
-			</a13-select-student>
-		</div>
-	</form>
+      <!-- Student list -->
+      <a13-select-student [multiple]="true" formControlName="studentListCtrl" hint="HINT.CLASSROOM_STUDENT_LIST">
+      </a13-select-student>
+    </div>
+  </form>
 
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-	<button mat-button color="warn" mat-dialog-close
-		attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
-	<button class="ml-h" mat-flat-button color="primary" mat-dialog-close
-		[disabled]="classroomFormGroup.invalid || validatingName" (click)="save()"
-		attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+  <button mat-button color="warn" (click)="cancel()" attr.aria-label="{{'CANCEL' | translate}}">{{'CANCEL' | translate}}</button>
+  <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="classroomFormGroup.invalid || validatingName" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
 </mat-dialog-actions>
