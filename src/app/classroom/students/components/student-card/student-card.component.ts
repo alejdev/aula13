@@ -23,7 +23,8 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  editStudent() {
+  editStudent(ev: Event) {
+    ev.stopImmediatePropagation()
     this.dialog.open(StudentCreationComponent, {
       width: 'calc(100vw)',
       maxWidth: '800px',

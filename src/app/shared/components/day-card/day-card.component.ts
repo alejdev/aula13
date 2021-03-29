@@ -20,7 +20,8 @@ export class DayCardComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  editDay() {
+  editDay(ev: Event) {
+    ev.stopImmediatePropagation()
     this.dialog.open(DayCreationComponent, {
       width: 'calc(100vw)',
       maxWidth: '800px',
@@ -33,7 +34,8 @@ export class DayCardComponent implements OnInit {
     })
   }
 
-  deleteDay() {
+  deleteDay(ev: Event) {
+    ev.stopImmediatePropagation()
     this.dialog.open(DayDeleteDialogComponent, {
       autoFocus: false,
       data: {

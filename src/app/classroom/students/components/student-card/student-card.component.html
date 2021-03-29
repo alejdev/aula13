@@ -24,12 +24,12 @@
     <div class="action-buttons" fxFlex="nogrow" fxLayout="row" fxLayoutAlign="space-between center">
 
       <!-- Fav button -->
-      <button mat-icon-button (click)="editStudent($event); $event.stopPropagation()">
+      <button mat-icon-button (click)="editStudent($event)">
         <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
       </button>
 
       <!-- Fav button -->
-      <button mat-icon-button (click)="fav($event); $event.stopPropagation()">
+      <button mat-icon-button (click)="fav($event)">
         <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-18 mat-hint" icon="star"></fa-icon>
       </button>
     </div>
