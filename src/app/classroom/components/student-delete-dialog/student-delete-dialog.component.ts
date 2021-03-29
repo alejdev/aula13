@@ -1,12 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { ToastService } from 'src/app/shared/services/toast.service'
+
+import { Component, Inject, OnInit } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 import { Router } from '@angular/router'
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
-
-import { StudentService } from '../../services/student.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
-import { UtilService } from 'src/app/shared/services/util.service'
 import { DayService } from '../../services/day.service'
+import { StudentService } from '../../services/student.service'
 
 @Component({
   selector: 'a13-student-delete-dialog',
@@ -40,7 +39,6 @@ export class StudentDeleteDialogComponent implements OnInit {
       .then((result: any) => {
         this.removeDaysToStudents()
         this.dialogRef.close(this.data.student)
-        this.router.navigate(['aula/alumnos'])
         this.toastService.success('MSG.STUDENT_DELETE_OK')
       })
       .catch((err: any) => {
