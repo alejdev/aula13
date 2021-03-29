@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core'
-
-import { UtilService } from 'src/app/shared/services/util.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { UtilService } from 'src/app/shared/services/util.service'
+
+import { Component, Input, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material'
+
+import { StudentCreationComponent } from '../student-creation/student-creation.component'
 
 @Component({
   selector: 'a13-student-card',
@@ -14,10 +17,24 @@ export class StudentComponent implements OnInit {
   mark: any = UtilService.mark
 
   constructor(
-    private studentService: StudentService
+    private studentService: StudentService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void { }
+
+  editStudent() {
+    this.dialog.open(StudentCreationComponent, {
+      width: 'calc(100vw)',
+      maxWidth: '800px',
+      autoFocus: false,
+      data: {
+        idStudent: this.student.id,
+        student: { ...this.student }
+      }
+    })
+  }
+
 
   fav(ev: Event): void {
     ev.stopImmediatePropagation()
