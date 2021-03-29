@@ -48,7 +48,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentService: StudentService,
-    private FilterPipe: FilterPipe,
+    private filterPipe: FilterPipe,
     private dialog: MatDialog,
     private headerService: HeaderService
   ) { }
@@ -89,7 +89,7 @@ export class StudentListComponent implements OnInit, OnDestroy {
   }
 
   searchStudent(ev: string): void {
-    this.studentListFiltered = this.FilterPipe.transform(this.studentList, ev)
+    this.studentListFiltered = this.filterPipe.transform(this.studentList, ev)
     this.filterStudents()
   }
 

@@ -155,8 +155,4 @@ export class DayService {
     }
     return null
   }
-
-  public searchDay() {
-    return this.subCollection.valueChanges()
-  }
 }

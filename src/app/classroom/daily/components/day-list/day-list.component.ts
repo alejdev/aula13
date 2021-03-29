@@ -29,7 +29,7 @@ export class DayListComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentService: StudentService,
-    private FilterPipe: FilterPipe,
+    private filterPipe: FilterPipe,
     private dayService: DayService,
     private dialog: MatDialog,
     private headerService: HeaderService,
@@ -43,19 +43,19 @@ export class DayListComponent implements OnInit, OnDestroy {
 
   private loadData(): void {
     this.dayList = []
-    this.dayService.observeDayList().subscribe((result) => {
+    this.dayListSubscription = this.dayService.observeDayList().subscribe((result) => {
       this.dayList = UtilService.mapCollection(result).map((day: any) => {
         return {
           student: this.studentService.savedStudentList.find((student: any) => student.id === day.studentId),
           ...day
         }
       })
-      this.assignList();
+      this.assignList()
     })
   }
 
   searchDay(query: string): void {
-    this.dayListFiltered = this.FilterPipe.transform(this.dayList, query)
+    this.dayListFiltered = this.filterPipe.transform(this.dayList, query)
     this.headerService.mergeHeader({ length: this.dayListFiltered.length })
   }
 
@@ -80,6 +80,8 @@ export class DayListComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {
+    this.dayListSubscription.unsubscribe()
+  }
 
 }
