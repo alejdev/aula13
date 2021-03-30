@@ -30,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core'
 
 import { DayCardComponent } from './components/day-card/day-card.component'
 import { DayCreationComponent } from './components/day-creation/day-creation.component'
+import { DayFiltersComponent } from './components/day-filters/day-filters.component'
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component'
 import { LoaderComponent } from './components/loader/loader.component'
 import { SelectStudentComponent } from './components/select-student/select-student.component'
@@ -72,6 +73,7 @@ registerLocaleData(localeFr, 'fr')
     DayCreationComponent,
     LoaderComponent,
     SelectStudentComponent,
+    DayFiltersComponent,
 
     StringByPipe,
     AgePipe,
@@ -156,7 +158,8 @@ registerLocaleData(localeFr, 'fr')
     DayCardComponent,
     DayCreationComponent,
     LoaderComponent,
-    SelectStudentComponent
+    SelectStudentComponent,
+    DayFiltersComponent,
   ],
   entryComponents: [
     ToastComponent

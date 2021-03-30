@@ -1,73 +1,14 @@
 <section class="container container-padd">
   <div class="container-max sm">
 
-    <!-- Filter -->
-    <mat-form-field appearance="outline">
-      <mat-label>{{'SEARCH_DAY' | translate}}</mat-label>
-      <input matInput [(ngModel)]="dayFilter" (ngModelChange)="filterList()" attr.aria-label="{{'SEARCH_DAY' | translate}}" autocomplete="off">
-      <fa-icon *ngIf="!dayFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
-      <button class="reset-button" mat-button matSuffix *ngIf="dayFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
-        <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
-      </button>
-    </mat-form-field>
-
-    <!-- Advanced filters -->
-    <div fxLayout="row" class="mb-1">
-      <span fxFlex></span>
-
-      <a class="link mat-small pointer" (click)="showMore()">
-        {{'ADVANCED_FILTERS' | translate}}
-        <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
-      </a>
-    </div>
-
-    <div *ngIf="moreInfoConfig.show" class="mt-1">
-
-      <!-- Dates -->
-      <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
-          <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
-          <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="filterList()" [max]="dateUntil">
-          <mat-datepicker #dateSincePicker></mat-datepicker>
-          <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateSincePicker">
-          </mat-datepicker-toggle>
-          <mat-hint align="start">{{'HINT.BIRTHDATE' | translate}}</mat-hint>
-        </mat-form-field>
-
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
-          <mat-label>{{'FORM.UNTIL' | translate}}</mat-label>
-          <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="filterList()" [min]="dateSince">
-          <mat-datepicker #dateUntilPicker></mat-datepicker>
-          <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateUntilPicker">
-          </mat-datepicker-toggle>
-        </mat-form-field>
-
-        <!-- Select quick date -->
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
-          <mat-label>{{'FORM.SELECT_DATE' | translate}}</mat-label>
-          <mat-select attr.aria-label="{{'FORM.SELECT_DATE' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
-            <mat-option *ngFor="let date of quickDates" [value]="date">
-              {{date.name | translate}}
-            </mat-option>
-          </mat-select>
-          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-h" icon="calendar"></fa-icon>
-        </mat-form-field>
-
-      </div>
-
-      <div class="mt-h mb-3" fxLayout="row" fxLayoutAlign="end center">
-        <fa-icon class="mat-icon-20 mat-hint pr-1" icon="box" [ngClass]="{'archived': showArchived}"></fa-icon>
-        <mat-slide-toggle labelPosition="before" (change)="filterList()" [(ngModel)]="showArchived">
-          {{'FORM.SHOW_ARCHIVED' | translate}}
-        </mat-slide-toggle>
-      </div>
-    </div>
+    <a13-day-filters [dayList]="dayList" (dayListFilter)="dayListFiltered = $event"></a13-day-filters>
 
     <!-- Days  | filterBy:dayFilter | dateFilter : dateSince : dateUntil"-->
-    <ng-container *ngFor="let day of dayListFiltered">
-      <a13-day-card [(day)]="day"></a13-day-card>
-    </ng-container>
+    <div class="mt-2">
+      <ng-container *ngFor="let day of dayListFiltered">
+        <a13-day-card [(day)]="day"></a13-day-card>
+      </ng-container>
+    </div>
 
     <!-- Empty list -->
     <h3 *ngIf="!dayListFiltered?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>

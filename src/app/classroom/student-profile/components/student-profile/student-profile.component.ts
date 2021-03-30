@@ -6,6 +6,8 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
+import { FilterPipe } from 'src/app/shared/pipes/student.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -17,14 +19,16 @@ import { ActivatedRoute, Router } from '@angular/router'
 @Component({
   selector: 'a13-student-profile',
   templateUrl: './student-profile.component.html',
-  styleUrls: ['./student-profile.component.scss']
+  styleUrls: ['./student-profile.component.scss'],
+  providers: [FilterPipe, DateFilterPipe]
 })
 export class StudentProfileComponent implements OnInit, OnDestroy {
 
   studentId: any
   student: any
   dayList: any[]
-
+  dayListFiltered: any[]
+  
   mark: any = UtilService.mark
   academicCourseList: any = ModelService.academicCourseList
   conservatoryCourseList: any = ModelService.conservatoryCourseList
@@ -160,9 +164,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             student: { ...this.student }
           }
         })
-
-        // Total dayList length
-        this.headerService.mergeHeader({ length: this.dayList.length })
+        this.dayListFiltered = Object.assign(this.dayList)
+        this.headerService.mergeHeader({ length: this.dayListFiltered.length })
       })
   }
 
