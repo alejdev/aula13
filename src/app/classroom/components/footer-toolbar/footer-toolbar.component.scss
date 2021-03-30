@@ -1,5 +1,7 @@
 .footer-toolbar {
   width: 100%;
+  position: fixed;
+  bottom: 0;
   height: var(--main-header-size);
   z-index: 20;
 

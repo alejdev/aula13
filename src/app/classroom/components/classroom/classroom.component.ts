@@ -1,13 +1,11 @@
-import { Component, ElementRef, HostBinding, OnInit, ViewChild, OnDestroy } from '@angular/core'
-import { Event, NavigationStart, Router } from '@angular/router'
-import { Subscription } from 'rxjs'
-
 import * as Hammer from 'hammerjs'
-
-import { MatSidenav } from '@angular/material/sidenav'
-
-import { ThemeService } from 'src/app/shared/services/theme.service'
+import { Subscription } from 'rxjs'
 import { SettingService } from 'src/app/shared/services/setting.service'
+import { ThemeService } from 'src/app/shared/services/theme.service'
+
+import { Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { MatSidenav } from '@angular/material/sidenav'
+import { Event, NavigationStart, Router } from '@angular/router'
 
 @Component({
   selector: 'a13-classroom',
@@ -53,6 +51,15 @@ export class ClassroomComponent implements OnInit, OnDestroy {
 
     // Set setting theme on first time
     this.themeService.setTheme(this.settingService.value.theme)
+
+    // set document height
+    this.setDocHeight()
+    addEventListener('resize', this.setDocHeight)
+    addEventListener('orientationchange', this.setDocHeight)
+  }
+
+  setDocHeight() {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`)
   }
 
   ngOnDestroy(): void {
