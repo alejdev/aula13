@@ -37,20 +37,20 @@ export class ToastService extends MatSnackBar {
     )
   }
 
-  success(data: any): void {
-    this.say({ type: 'success', ...data })
+  success(data: any, config?: any): void {
+    this.say({ type: 'success', ...data }, config)
   }
 
-  info(data: any): void {
-    this.say({ type: 'info', ...data })
+  info(data: any, config?: any): void {
+    this.say({ type: 'info', ...data }, config)
   }
 
-  warning(data: any): void {
-    this.say({ type: 'warning', ...data })
+  warning(data: any, config?: any): void {
+    this.say({ type: 'warning', ...data }, config)
   }
 
-  error(data: any): void {
-    this.say({ type: 'error', ...data })
+  error(data: any, config?: any): void {
+    this.say({ type: 'error', ...data }, config)
   }
 
   welcome(data: any, config?: any): void {

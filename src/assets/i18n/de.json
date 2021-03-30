@@ -176,6 +176,7 @@
 	"MARKS": "Hinweise",
 	"MSG": {
 		"APP_UPDATED": "Die Anwendung wurde mit neuen Funktionen aktualisiert",
+		"APP_UPDATE_READY": "Ein Update wird vorbereitet. Laden Sie die Seite neu, um die Verbesserungen zu erhalten.",
 		"BYE": "Bis bald",
 		"CLASSROOM_CREATE_OK": "Klassenzimmer erfolgreich erstellt",
 		"CLASSROOM_DELETE": "Möchten Sie diesen Klassenraum wirklich löschen?",
@@ -232,6 +233,7 @@
 		"LABEL_NO": "Kein Tag",
 		"NAME": "Name"
 	},
+	"REFRESH": "Nachladen",
 	"RESET": "Starten Sie neu",
 	"RESET_EMAIL": "E-Mail-Feld zurücksetzen",
 	"RESET_FILTER": "Filter zurücksetzen",

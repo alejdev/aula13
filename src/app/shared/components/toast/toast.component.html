@@ -23,8 +23,11 @@
     <!-- Spacer -->
     <span fxFlex></span>
 
-    <!-- buttons -->
-    <button *ngIf="!data?.navigate" mat-button (click)="close()">{{'OK' | translate}}</button>
-    <button *ngIf="data?.navigate" mat-button [routerLink]="data?.navigate?.route" (click)="close()">{{data?.navigate?.text | translate}}</button>
+    <div fxFLex="nogrow">
+      <!-- buttons -->
+      <button *ngIf="!data?.navigate && !data?.action" mat-flat-button (click)="close()">{{'OK' | translate}}</button>
+      <button *ngIf="data?.navigate" mat-flat-button color="primary" [routerLink]="data?.navigate?.route" (click)="close()">{{data?.navigate?.text | translate}}</button>
+      <button *ngIf="data?.action" mat-flat-button color="accent" (click)="data?.action?.f(); snackRef.dismiss()">{{data?.action?.text | translate}}</button>
+    </div>
   </div>
 </div>

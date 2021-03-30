@@ -176,6 +176,7 @@
 	"MARKS": "Remarques",
 	"MSG": {
 		"APP_UPDATED": "L'application a été mise à jour avec de nouvelles fonctionnalités",
+		"APP_UPDATE_READY": "Une mise à jour est préparée. Rechargez la page pour obtenir les améliorations.",
 		"BYE": "À bientôt!",
 		"CLASSROOM_CREATE_OK": "Salle de classe créée avec succès",
 		"CLASSROOM_DELETE": "Voulez-vous vraiment supprimer cette classe?",
@@ -232,6 +233,7 @@
 		"LABEL_NO": "Pas de balise",
 		"NAME": "Nom"
 	},
+	"REFRESH": "Recharger",
 	"RESET": "Redémarrer",
 	"RESET_EMAIL": "Réinitialiser le champ e-mail",
 	"RESET_FILTER": "Réinitialiser le filtre",

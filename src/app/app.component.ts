@@ -27,10 +27,13 @@ export class AppComponent implements OnInit, OnDestroy {
     // Service Worker
     if (this.swUpdate.isEnabled) {
       this.SwUpdateSubscription = this.swUpdate.available.subscribe(() => {
-        this.toastService.info({ text: 'MSG.APP_UPDATED'})
-        setTimeout(() => {
-          window.location.reload()
-        }, 3000)
+        this.toastService.info({
+          text: 'MSG.APP_UPDATE_READY',
+          action: {
+            text: 'REFRESH',
+            f: () => window.location.reload()
+          }
+        }, { duration: undefined })
       })
     }
 
