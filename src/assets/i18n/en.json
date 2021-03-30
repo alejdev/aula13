@@ -98,6 +98,7 @@
 			"SECONDARY": "High school",
 			"SUPERIOR": "Higher"
 		},
+		"CUSTOM_DATES": "Custom interval",
 		"DATE": "Date",
 		"FATHERS_NAME": "Father's name",
 		"GENDER": "Gender",

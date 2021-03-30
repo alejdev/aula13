@@ -27,7 +27,7 @@
        <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex="66" fxFlex.xs="100">
          <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
            <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
-           <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="filterList()" [max]="dateUntil">
+           <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="selectDate()" [max]="dateUntil">
            <mat-datepicker #dateSincePicker></mat-datepicker>
            <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateSincePicker">
            </mat-datepicker-toggle>
@@ -36,7 +36,7 @@
 
          <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
            <mat-label>{{'FORM.UNTIL' | translate}}</mat-label>
-           <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="filterList()" [min]="dateSince">
+           <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="selectDate()" [min]="dateSince">
            <mat-datepicker #dateUntilPicker></mat-datepicker>
            <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateUntilPicker">
            </mat-datepicker-toggle>
@@ -45,8 +45,8 @@
 
        <!-- Select quick date -->
        <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
-         <mat-label>{{'FORM.SELECT_DATE' | translate}}</mat-label>
-         <mat-select attr.aria-label="{{'FORM.SELECT_DATE' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
+         <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
+         <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
            <mat-option *ngFor="let date of quickDates" [value]="date">
              {{date.name | translate}}
            </mat-option>

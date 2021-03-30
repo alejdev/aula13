@@ -96,6 +96,11 @@ export class DayFiltersComponent implements OnInit {
     this.dayListFilter.emit(this.dayListFiltered)
   }
 
+  selectDate(): void {
+    this.quickDate = null
+    this.filterList()
+  }
+
   selectQuickDate(): void {
     this.dateSince = this.quickDate.since
     this.dateUntil = this.quickDate.until
