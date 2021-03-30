@@ -30,6 +30,10 @@ export class DayFiltersComponent implements OnInit {
   dateUntil: Moment
 
   quickDates: any[] = [{
+    name: 'DATES.ALL_TIME',
+    since: null,
+    until: null,
+  }, {
     name: 'DATES.TODAY',
     since: UtilService.firstMoment(moment()),
     until: UtilService.lastMoment(moment()),
@@ -73,13 +77,9 @@ export class DayFiltersComponent implements OnInit {
     name: 'DATES.THIS_YEAR',
     since: moment().clone().startOf('year'),
     until: moment().clone().endOf('year'),
-  }, {
-    name: 'DATES.ALL_TIME',
-    since: null,
-    until: null,
   }]
 
-  quickDate: any = this.quickDates[this.quickDates.length - 1]
+  quickDate: any = this.quickDates[0]
 
   constructor(
     private filterPipe: FilterPipe,
@@ -110,6 +110,11 @@ export class DayFiltersComponent implements OnInit {
   resetFilter(): void {
     this.dayFilter = ''
     this.filterList()
+  }
+
+  resetDate(date: string): void {
+    this[date] = null
+    this.selectDate()
   }
 
   showMore(): void {

@@ -8,7 +8,14 @@ import { Pipe, PipeTransform } from '@angular/core'
 export class DateFilterPipe implements PipeTransform {
 
   transform(array: any, ...args: Moment[]): any {
-    if (!array || (!args[0] && !args[1]) || (!args[0].isValid() && !args[1].isValid())) {
+    if (
+      !array ||
+      (!args[0] && !args[1]) ||
+      (
+        (args[0] && !args[0].isValid()) &&
+        (args[1] && !args[1].isValid())
+      )
+    ) {
       return array
     }
 
