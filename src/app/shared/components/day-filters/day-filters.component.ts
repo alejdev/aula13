@@ -18,7 +18,7 @@ export class DayFiltersComponent implements OnInit {
   @Input() dayList: any[]
   @Input() hideArchivedFilter: boolean
   @Output() dayListFilter: any = new EventEmitter<any[]>()
-  
+
   moreInfoConfig: any = {
     show: false,
     icon: 'caret-down'

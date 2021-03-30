@@ -28,7 +28,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   student: any
   dayList: any[]
   dayListFiltered: any[]
-  
+
   mark: any = UtilService.mark
   academicCourseList: any = ModelService.academicCourseList
   conservatoryCourseList: any = ModelService.conservatoryCourseList
