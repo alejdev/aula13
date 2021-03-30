@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core'
-import { Router } from '@angular/router'
+import { ToastService } from 'src/app/shared/services/toast.service'
 
+import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
 import { StudentService } from '../../services/student.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
 
 @Component({
   selector: 'a13-student-archive-dialog',
@@ -43,10 +42,10 @@ export class StudentArchiveDialogComponent implements OnInit {
     this.studentService.updateStudent(this.data.idStudent, this.student)
       .then((result: any) => {
         this.dialogRef.close(this.data.student)
-        this.toastService.success(this.textConfig.msgOk)
+        this.toastService.success({ text: this.textConfig.msgOk })
       })
       .catch((err: any) => {
-        this.toastService.error('ERR.UNEXPECTED_ERROR')
+        this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
       })
   }
 

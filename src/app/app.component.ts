@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { SwUpdate } from '@angular/service-worker'
 import { Subscription } from 'rxjs'
 
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { SwUpdate } from '@angular/service-worker'
 import { TranslateService } from '@ngx-translate/core'
 
 import { SettingService } from './shared/services/setting.service'
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // Service Worker
     if (this.swUpdate.isEnabled) {
       this.SwUpdateSubscription = this.swUpdate.available.subscribe(() => {
-        this.toastService.info('MSG.APP_UPDATED')
+        this.toastService.info({ text: 'MSG.APP_UPDATED'})
         setTimeout(() => {
           window.location.reload()
         }, 3000)

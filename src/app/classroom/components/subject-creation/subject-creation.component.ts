@@ -130,10 +130,10 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
           this.subject.id = result ? result.id : this.subject.id
           this.updateStudentSubjects()
           this.dialogRef.close(this.data.entity)
-          this.toastService.success(`MSG.SUBJECT_${result ? 'CREATE' : 'UPDATE'}_OK`)
+          this.toastService.success({ text: `MSG.SUBJECT_${result ? 'CREATE' : 'UPDATE'}_OK` })
         })
         .catch((err: any) => {
-          this.toastService.error('ERR.UNEXPECTED_ERROR')
+          this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
     }
   }

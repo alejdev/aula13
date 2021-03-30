@@ -1,12 +1,12 @@
-import { Injectable, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
+import { Observable } from 'rxjs'
 
+import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
+import { Router } from '@angular/router'
 
-import { ToastService } from './toast.service'
 import { LoaderService } from './loader.service'
-import { Observable } from 'rxjs'
+import { ToastService } from './toast.service'
 
 @Injectable({
   providedIn: 'root'
@@ -27,16 +27,16 @@ export class AuthService {
       console.log(error)
       switch (error.code) {
         case 'auth/wrong-password':
-          this.toastService.error('ERR.AUTH_INVALID')
+          this.toastService.error({ text: 'ERR.AUTH_INVALID' })
           break
         case 'auth/email-already-in-use':
-          this.toastService.error('ERR.EMAIL_ALREADY_IN_USE')
+          this.toastService.error({ text: 'ERR.EMAIL_ALREADY_IN_USE' })
           break
         case 'auth/user-not-found':
-          this.toastService.error('ERR.USER_NOT_FOUND')
+          this.toastService.error({ text: 'ERR.USER_NOT_FOUND' })
           break
         default:
-          this.toastService.error('ERR.UNEXPECTED_ERROR')
+          this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
           break
       }
     }
@@ -74,20 +74,20 @@ export class AuthService {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => {
         this.router.navigate(['aula'])
-        this.toastService.welcome(auth)
+        this.toastService.welcome({ user: auth })
       })
       .catch(this.error)
       .finally(() => this.loaderService.stop())
   }
 
   public loginWithGoogle(): void {
-    this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
+    this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
   }
   public loginWithFacebook(): void {
-    this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
+    this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
   }
   public loginWithTwitter(): void {
-    this.toastService.info('MSG.SERVICE_NOT_AVAILABLE')
+    this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
   }
 
   public signOut(): Promise<any> {
@@ -95,7 +95,7 @@ export class AuthService {
     return this.angularFireAuth.auth.signOut()
       .then(() => {
         this.router.navigate(['login'])
-        this.toastService.info('MSG.BYE')
+        this.toastService.info({ text: 'MSG.BYE' })
       })
       .catch(this.error)
       .finally(() => this.loaderService.stop())
@@ -113,7 +113,7 @@ export class AuthService {
       })
       .then((auth: any) => {
         this.router.navigate(['aula'])
-        this.toastService.welcome(auth)
+        this.toastService.welcome({ user: auth })
       })
       .catch(this.error)
       .finally(() => this.loaderService.stop())

@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { ToastService } from 'src/app/shared/services/toast.service'
 
+import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
-import { SubjectService } from '../../services/subject.service'
 import { StudentService } from '../../services/student.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
+import { SubjectService } from '../../services/subject.service'
 
 @Component({
   selector: 'a13-subject-delete-dialog',
@@ -47,10 +47,10 @@ export class SubjectDeleteDialogComponent implements OnInit {
       .then((result: any) => {
         this.removeSubjectsToStudents()
         this.dialogRef.close(this.data.entity)
-        this.toastService.success('MSG.SUBJECT_DELETE_OK')
+        this.toastService.success({ text: 'MSG.SUBJECT_DELETE_OK' })
       })
       .catch((err: any) => {
-        this.toastService.error('ERR.UNEXPECTED_ERROR')
+        this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
       })
   }
 

@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { FormControl } from '@angular/forms'
 import { Subscription } from 'rxjs'
-
-import { LanguageService } from 'src/app/classroom/services/language.service'
-import { ThemeService } from 'src/app/shared/services/theme.service'
-import { SettingService } from 'src/app/shared/services/setting.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
+import { LanguageService } from 'src/app/classroom/services/language.service'
+import { SettingService } from 'src/app/shared/services/setting.service'
+import { ThemeService } from 'src/app/shared/services/theme.service'
+import { ToastService } from 'src/app/shared/services/toast.service'
+
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { FormControl } from '@angular/forms'
 
 @Component({
   selector: 'a13-configuration',
@@ -67,7 +67,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
   togglePanSideMenu(): void {
     this.settingService.value = { canPanSideMenu: !this.settingService.value.canPanSideMenu }
-    this.toastService.info('MSG.RELOAD_PAGE_FOR_CHANGES')
+    this.toastService.info({ text: 'MSG.RELOAD_PAGE_FOR_CHANGES' })
   }
 
   ngOnDestroy(): void {

@@ -39,10 +39,10 @@ export class StudentDeleteDialogComponent implements OnInit {
       .then((result: any) => {
         this.removeDaysToStudents()
         this.dialogRef.close(this.data.student)
-        this.toastService.success('MSG.STUDENT_DELETE_OK')
+        this.toastService.success({ text: 'MSG.STUDENT_DELETE_OK' })
       })
       .catch((err: any) => {
-        this.toastService.error('ERR.UNEXPECTED_ERROR')
+        this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
       })
   }
 

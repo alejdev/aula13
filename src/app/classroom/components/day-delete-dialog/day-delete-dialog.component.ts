@@ -31,10 +31,10 @@ export class DayDeleteDialogComponent implements OnInit {
     this.dayService.deleteDay(this.data.idDay)
       .then((result: any) => {
         this.dialogRef.close(this.data.day)
-        this.toastService.success('MSG.DAY_DELETE_OK')
+        this.toastService.success({ text: 'MSG.DAY_DELETE_OK' })
       })
       .catch((err: any) => {
-        this.toastService.error('ERR.UNEXPECTED_ERROR')
+        this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
       })
   }
 

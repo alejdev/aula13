@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material'
 
 @Component({
@@ -15,9 +15,9 @@ export class ToastComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  case(messageType: string): boolean {
+  case(type: string): boolean {
     const reg = RegExp('success|info|warning|error', 'g')
-    return reg.test(messageType)
+    return reg.test(type)
   }
 
   close() {

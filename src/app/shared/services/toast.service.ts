@@ -1,9 +1,8 @@
-import { Injectable, Injector } from '@angular/core'
-
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material'
-import { Overlay } from '@angular/cdk/overlay'
 import { LiveAnnouncer } from '@angular/cdk/a11y'
 import { BreakpointObserver } from '@angular/cdk/layout'
+import { Overlay } from '@angular/cdk/overlay'
+import { Injectable, Injector } from '@angular/core'
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material'
 
 import { ToastComponent } from '../components/toast/toast.component'
 
@@ -23,45 +22,47 @@ export class ToastService extends MatSnackBar {
     super(overlay, live, injector, breakpointObserver, parentSnackBar, defaultConfig)
   }
 
-  say(text: string, type?: string, config?: any): void {
+  say(data: any, config?: any): void {
     this.openFromComponent(
       ToastComponent,
       {
         data: {
-          message: text,
-          messageType: type,
-          icon: type === 'success' ? 'check' : type === 'warning' ? 'exclamation' : type === 'error' ? 'skull-crossbones' : 'info'
+          type: 'info',
+          text: 'MSG.WELCOME',
+          icon: data.type === 'success' ? 'check' : data.type === 'warning' ? 'exclamation' : data.type === 'error' ? 'skull-crossbones' : 'info',
+          ...data
         },
         ...config
       }
     )
   }
 
-  success(text: string): void {
-    this.say(text, 'success')
+  success(data: any): void {
+    this.say({ type: 'success', ...data })
   }
 
-  info(text: string): void {
-    this.say(text, 'info')
+  info(data: any): void {
+    this.say({ type: 'info', ...data })
   }
 
-  warning(text: string): void {
-    this.say(text, 'warning')
+  warning(data: any): void {
+    this.say({ type: 'warning', ...data })
   }
 
-  error(text: string): void {
-    this.say(text, 'error')
+  error(data: any): void {
+    this.say({ type: 'error', ...data })
   }
 
-  welcome(user: any, config?: any): void {
+  welcome(data: any, config?: any): void {
     this.openFromComponent(
       ToastComponent,
       {
         data: {
-          messageType: 'welcome',
-          message: 'MSG.WELCOME',
-          name: user && user.name ? user.name : '😊',
-          icon: 'info'
+          type: 'welcome',
+          text: 'MSG.WELCOME',
+          icon: 'info',
+          name: data.user && data.user.name ? data.user.name : '😊',
+          ...data
         },
         ...config
       }

@@ -35,7 +35,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   menuProfile = [{
     name: 'PROFILE',
     icon: 'user',
-    action: () => { this.toastService.info('MSG.SERVICE_NOT_AVAILABLE') }
+    action: () => { this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' }) }
   }, {
     name: 'SIGN.OUT',
     icon: 'sign-out-alt',

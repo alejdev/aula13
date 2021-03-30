@@ -171,7 +171,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
 
   createDay(): void {
     if (this.student.archived) {
-      this.toastService.warning('MSG.DAY_STUDENT_ARCHIVED')
+      this.toastService.warning({ text: 'MSG.DAY_STUDENT_ARCHIVED' })
     } else {
       const newDay = ModelService.dayModel
       newDay.student = this.student

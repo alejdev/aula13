@@ -131,10 +131,10 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
           this.classroom.id = result ? result.id : this.classroom.id
           this.updateStudentClassrooms()
           this.dialogRef.close(this.data.entity)
-          this.toastService.success(`MSG.CLASSROOM_${result ? 'CREATE' : 'UPDATE'}_OK`)
+          this.toastService.success({ text: `MSG.CLASSROOM_${result ? 'CREATE' : 'UPDATE'}_OK` })
         })
         .catch((err: any) => {
-          this.toastService.error('ERR.UNEXPECTED_ERROR')
+          this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
     }
   }

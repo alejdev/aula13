@@ -182,15 +182,27 @@ export class StudentCreationComponent implements OnInit {
 
       setStudent
         .then((result: any) => {
-          this.toastService.success(`MSG.STUDENT_${this.data.idStudent ? 'UPDATE' : 'CREATE'}_OK`)
           this.dialogRef.close(this.data.student)
-          // Go to profile when create
-          if (result && result.id) {
-            this.router.navigate(['aula/alumno', result.id])
+          const routeId = this.router.url.match(/\/.*\/.*\/(.*)/)
+
+          if (result && result.id) {// Create
+            this.toastService.success({
+              text: 'MSG.STUDENT_CREATE_OK',
+              navigate: { text: 'SEE', route: ['aula/alumno', result.id] }
+            })
+          } else {// Modify
+            if (routeId && routeId[1] === this.data.idStudent) {
+              this.toastService.success({ text: 'MSG.STUDENT_UPDATE_OK' })
+            } else {
+              this.toastService.success({
+                text: 'MSG.STUDENT_UPDATE_OK',
+                navigate: { text: 'SEE', route: ['aula/alumno', this.data.idStudent] }
+              })
+            }
           }
         })
         .catch((err: any) => {
-          this.toastService.error('ERR.UNEXPECTED_ERROR')
+          this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
     }
   }
@@ -205,3 +217,4 @@ export class StudentCreationComponent implements OnInit {
     }
   }
 }
+

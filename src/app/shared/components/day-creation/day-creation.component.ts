@@ -114,15 +114,26 @@ export class DayCreationComponent implements OnInit {
 
       setDay
         .then((result: any) => {
-          this.toastService.success(`MSG.DAY_${this.data.idDay ? 'UPDATE' : 'CREATE'}_OK`)
-          this.dialogRef.close(this.data.day)
-          // Go to profile when create
-          if (result && result.id) {
-            this.router.navigate(['aula/dia', result.id])
+          const routeId = this.router.url.match(/\/.*\/.*\/(.*)/)
+
+          if (result && result.id) {// Create
+            this.toastService.success({
+              text: 'MSG.DAY_CREATE_OK',
+              navigate: { text: 'SEE', route: ['aula/dia', result.id] }
+            })
+          } else {// Modify
+            if (routeId && routeId[1] === this.data.idDay) {
+              this.toastService.success({ text: 'MSG.DAY_UPDATE_OK' })
+            } else {
+              this.toastService.success({
+                text: 'MSG.DAY_UPDATE_OK',
+                navigate: { text: 'SEE', route: ['aula/dia', this.data.idDay] }
+              })
+            }
           }
         })
         .catch((err: any) => {
-          this.toastService.error('ERR.UNEXPECTED_ERROR')
+          this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
     }
   }
