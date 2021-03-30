@@ -47,7 +47,6 @@
         <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
           <mat-label>{{'FORM.SELECT_DATE' | translate}}</mat-label>
           <mat-select attr.aria-label="{{'FORM.SELECT_DATE' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
-            <mat-option>-- {{'NONE' | translate}} --</mat-option>
             <mat-option *ngFor="let date of quickDates" [value]="date">
               {{date.name | translate}}
             </mat-option>
