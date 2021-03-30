@@ -110,11 +110,9 @@
         </ng-template>
         <div class="padding-content">
           <a13-day-filters [dayList]="dayList" [hideArchivedFilter]="true" (dayListFilter)="dayListFiltered = $event"></a13-day-filters>
-          <div class="mt-2">
-            <ng-container *ngFor="let day of dayListFiltered">
-              <a13-day-card [(day)]="day"></a13-day-card>
-            </ng-container>
-          </div>
+          <ng-container *ngFor="let day of dayListFiltered">
+            <a13-day-card [(day)]="day"></a13-day-card>
+          </ng-container>
           <a13-floating-button text="DAY.ADD" icon="edit" [disabled]="student?.archived" (click)="createDay()">
           </a13-floating-button>
         </div>
