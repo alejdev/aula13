@@ -1,9 +1,4 @@
-.header-main-title {
-  top: 5px;
-  width: 100%;
-
-  .logo-header {
-    width: calc(var(--main-header-size) - 10px);
-    border-radius: 50%;
-  }
+.logo-header {
+  width: calc(var(--main-header-size) - 10px);
+  border-radius: 50%;
 }

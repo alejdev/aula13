@@ -1,10 +1,6 @@
 <mat-toolbar class="header" [ngClass]="{'height-auto': !isTruncated}" [color]="themeName">
 
-  <div class="fixed">
-    <a13-title-logo fxHide.md fxHide.sm fxHide.xs></a13-title-logo>
-  </div>
-
-  <div class="container-max sm" fxLayout="row" fxLayoutAlign="start center">
+  <div class="container-max sm relative" fxLayout="row" fxLayoutAlign="start center">
 
     <!-- Back button  -->
     <button *ngIf="headerConfig.back" class="mr-h menu-button" [routerLink]="[ headerConfig.back ]" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
@@ -16,8 +12,9 @@
       {{headerConfig.title | translate}}
       <span *ngIf="headerConfig.length" class="mat-smadll translucide"> | {{headerConfig.length}}</span>
     </h2>
-
-    <!-- Spacer -->
+    
+    <!-- Logo -->
+    <a13-title-logo *ngIf="!headerConfig.menuOptions" class="fixed title-logo" [showLogo]="true"></a13-title-logo>
     <span fxFlex></span>
 
     <!-- Menu phone -->
