@@ -39,6 +39,8 @@ import { ScrollableDirective } from './directives/scrollable.directive'
 import { AgePipe } from './pipes/age.pipe'
 import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { DateFilterPipe } from './pipes/date-filter.pipe'
+import { ExcludeArchivedPipe } from './pipes/exclude-archived.pipe'
+import { ShowByPipe } from './pipes/show-by.pipe'
 import { SrcImagePipe } from './pipes/src-image.pipe'
 import { StringByPipe } from './pipes/string-by.pipe'
 import { StripHTMLPipe } from './pipes/strip-html.pipe'
@@ -83,8 +85,11 @@ registerLocaleData(localeFr, 'fr')
     SrcImagePipe,
     FilterPipe,
     DateFilterPipe,
+    ShowByPipe,
+    ExcludeArchivedPipe,
 
     ScrollableDirective,
+
   ],
   imports: [
     // Angular
@@ -151,6 +156,8 @@ registerLocaleData(localeFr, 'fr')
     SrcImagePipe,
     FilterPipe,
     DateFilterPipe,
+    ShowByPipe,
+    ExcludeArchivedPipe,
 
     ScrollableDirective,
 

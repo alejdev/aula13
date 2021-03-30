@@ -64,7 +64,7 @@
 
      <div *ngIf="!hideArchivedFilter" class="mt-h mb-1" fxLayout="row" fxLayoutAlign="end center">
        <fa-icon class="mat-icon-20 mat-hint pr-1" icon="box" [ngClass]="{'archived': showArchived}"></fa-icon>
-       <mat-slide-toggle labelPosition="before" (ngModelChange)="filterList()" [(ngModel)]="showArchived">
+       <mat-slide-toggle labelPosition="before" (change)="filterList()" [(ngModel)]="showArchived">
          {{'FORM.SHOW_ARCHIVED' | translate}}
        </mat-slide-toggle>
      </div>

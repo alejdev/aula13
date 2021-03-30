@@ -7,6 +7,7 @@ import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
+import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/student.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
@@ -20,7 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   selector: 'a13-student-profile',
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss'],
-  providers: [FilterPipe, DateFilterPipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe]
 })
 export class StudentProfileComponent implements OnInit, OnDestroy {
 

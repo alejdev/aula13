@@ -4,6 +4,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 import { DateFilterPipe } from '../../pipes/date-filter.pipe'
+import { ExcludeArchivedPipe } from '../../pipes/exclude-archived.pipe'
 import { FilterPipe } from '../../pipes/student.pipe'
 import { UtilService } from '../../services/util.service'
 
@@ -24,7 +25,6 @@ export class DayFiltersComponent implements OnInit {
     icon: 'caret-down'
   }
 
-  showArchived: boolean
   dayFilter: string = ''
   dateSince: Moment
   dateUntil: Moment
@@ -80,10 +80,12 @@ export class DayFiltersComponent implements OnInit {
   }]
 
   quickDate: any = this.quickDates[0]
+  showArchived: boolean = false
 
   constructor(
     private filterPipe: FilterPipe,
     private dateFilterPipe: DateFilterPipe,
+    private excludeArchivedPipe: ExcludeArchivedPipe,
     private headerService: HeaderService
   ) { }
 
@@ -91,7 +93,9 @@ export class DayFiltersComponent implements OnInit {
 
   filterList(): void {
     this.dayListFiltered = this.filterPipe.transform(this.dayList, this.dayFilter)
-    this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil).filter((elem) => !elem.student.archived || elem.student.archived == this.showArchived)
+    this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil)
+    this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayListFiltered, this.showArchived)
+
     this.headerService.mergeHeader({ length: this.dayListFiltered.length })
     this.dayListFilter.emit(this.dayListFiltered)
   }
