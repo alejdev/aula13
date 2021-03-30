@@ -28,10 +28,10 @@ export class DayListComponent implements OnInit, OnDestroy {
   dayListSubscription: Subscription
 
   // Filters
+  showArchived: boolean
   dayFilter: string = ''
   dayListFiltered: any[]
   dayListFilteredAux: any[]
-
   dateSince: Moment
   dateUntil: Moment
 
@@ -118,7 +118,7 @@ export class DayListComponent implements OnInit, OnDestroy {
 
   filterList(): void {
     this.dayListFiltered = this.filterPipe.transform(this.dayList, this.dayFilter)
-    this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil)
+    this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil).filter((elem) => !elem.student.archived || elem.student.archived == this.showArchived)
     this.headerService.mergeHeader({ length: this.dayListFiltered.length })
   }
 

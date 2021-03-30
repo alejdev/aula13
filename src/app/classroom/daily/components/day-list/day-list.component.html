@@ -12,7 +12,7 @@
     </mat-form-field>
 
     <!-- Dates -->
-    <div class="f-wrap mb-2" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
 
       <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
         <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
@@ -40,9 +40,16 @@
             {{date.name | translate}}
           </mat-option>
         </mat-select>
-        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="calendar"></fa-icon>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-h" icon="calendar"></fa-icon>
       </mat-form-field>
 
+    </div>
+
+    <div class="mb-2" fxLayout="row" fxLayoutAlign="end center">
+      <fa-icon class="mat-icon-20 mat-hint pr-1" icon="box" [ngClass]="{'archived': showArchived}"></fa-icon>
+      <mat-slide-toggle labelPosition="before" (change)="filterList()" [(ngModel)]="showArchived">
+        {{'FORM.SHOW_ARCHIVED' | translate}}
+      </mat-slide-toggle>
     </div>
 
     <!-- Days  | filterBy:dayFilter | dateFilter : dateSince : dateUntil"-->

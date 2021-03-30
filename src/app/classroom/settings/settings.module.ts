@@ -1,12 +1,10 @@
-import { NgModule } from '@angular/core'
-
-import { SettingsRoutingModule } from './settings-routing.module'
 import { SharedModule } from 'src/app/shared/shared.module'
 
-import { ConfigurationComponent } from './components/configuration/configuration.component'
-
+import { NgModule } from '@angular/core'
 import { MatDividerModule } from '@angular/material/divider'
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+
+import { ConfigurationComponent } from './components/configuration/configuration.component'
+import { SettingsRoutingModule } from './settings-routing.module'
 
 @NgModule({
   declarations: [
@@ -20,8 +18,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
     SharedModule,
 
     // Material
-    MatDividerModule,
-    MatSlideToggleModule,
+    MatDividerModule
   ]
 })
 export class SettingsModule { }
