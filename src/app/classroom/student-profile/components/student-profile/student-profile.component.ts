@@ -58,9 +58,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     // Get param id
     this.routerSubscription = this.activatedRoute.params.subscribe(params => this.studentId = params.id)
 
-    // Get student
-    this.getStudent(this.studentId)
-
     // Observe student
     this.dayListSubscription = this.studentService.observeStudent(this.studentId)
       .subscribe((result: any) => {
@@ -135,10 +132,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           this.router.navigate(['aula/alumnos'])
         }
       })
-  }
-
-  async getStudent(id: string): Promise<any> {
-    this.student = await this.studentService.readStudent(id)
   }
 
   showMore() {

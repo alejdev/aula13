@@ -60,7 +60,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
     this.studentList = []
     this.studentListFiltered = []
 
-    this.getStudentList()
     this.observeStudentList()
   }
 
@@ -74,10 +73,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
         student: UtilService.clone(ModelService.studenModel)
       }
     })
-  }
-
-  async getStudentList(): Promise<any> {
-    await this.studentService.getStudentList()
   }
 
   observeStudentList(): void {
