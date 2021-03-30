@@ -71,7 +71,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           // Config header
           this.headerService.configHeader({
             title: this.student.personal.name,
-            back: '/aula/alumnos',
+            back: true,
             student: this.student,
             truncable: true,
             menuOptions: [{
@@ -162,7 +162,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           return {
             ...elem,
             hideStudent: true,
-            student: { ...this.student }
+            student: { ...this.student },
           }
         })
         this.dayListFiltered = Object.assign(this.dayList)

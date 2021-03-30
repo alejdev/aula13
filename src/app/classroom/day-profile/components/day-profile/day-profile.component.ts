@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
-
-import { UtilService } from 'src/app/shared/services/util.service'
-import { HeaderService } from 'src/app/classroom/services/header.service'
-import { DayService } from 'src/app/classroom/services/day.service'
-import { StudentService } from 'src/app/classroom/services/student.service'
-
-import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
+import { DayService } from 'src/app/classroom/services/day.service'
+import { HeaderService } from 'src/app/classroom/services/header.service'
+import { StudentService } from 'src/app/classroom/services/student.service'
+import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { UtilService } from 'src/app/shared/services/util.service'
+
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'a13-day-profile',
@@ -63,7 +62,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
       // Config header
       this.headerService.configHeader({
         title: this.day.title,
-        back: '/aula/diario',
+        back: true,
         day: this.day,
         truncable: true,
         menuOptions: [{

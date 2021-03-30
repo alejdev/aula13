@@ -3,7 +3,7 @@
   <div class="container-max sm relative" fxLayout="row" fxLayoutAlign="start center">
 
     <!-- Back button  -->
-    <button *ngIf="headerConfig.back" class="mr-h menu-button" [routerLink]="[ headerConfig.back ]" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
+    <button *ngIf="headerConfig.back" class="mr-h menu-button" (click)="goBack()" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
       <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
     </button>
 
