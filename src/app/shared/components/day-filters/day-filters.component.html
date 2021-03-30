@@ -21,24 +21,26 @@
 <div *ngIf="moreInfoConfig.show" class="mt-1">
 
   <!-- Dates -->
-  <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="8px">
 
-    <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
-      <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
-      <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="filterList()" [max]="dateUntil">
-      <mat-datepicker #dateSincePicker></mat-datepicker>
-      <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateSincePicker">
-      </mat-datepicker-toggle>
-      <mat-hint align="start">{{'HINT.BIRTHDATE' | translate}}</mat-hint>
-    </mat-form-field>
+    <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex="66" fxFlex.xs="100">
+      <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
+        <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
+        <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="filterList()" [max]="dateUntil">
+        <mat-datepicker #dateSincePicker></mat-datepicker>
+        <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateSincePicker">
+        </mat-datepicker-toggle>
+        <mat-hint align="start">{{'HINT.BIRTHDATE' | translate}}</mat-hint>
+      </mat-form-field>
 
-    <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
-      <mat-label>{{'FORM.UNTIL' | translate}}</mat-label>
-      <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="filterList()" [min]="dateSince">
-      <mat-datepicker #dateUntilPicker></mat-datepicker>
-      <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateUntilPicker">
-      </mat-datepicker-toggle>
-    </mat-form-field>
+      <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
+        <mat-label>{{'FORM.UNTIL' | translate}}</mat-label>
+        <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="filterList()" [min]="dateSince">
+        <mat-datepicker #dateUntilPicker></mat-datepicker>
+        <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateUntilPicker">
+        </mat-datepicker-toggle>
+      </mat-form-field>
+    </div>
 
     <!-- Select quick date -->
     <mat-form-field class="mb-1" appearance="outline" fxFlex="33">
