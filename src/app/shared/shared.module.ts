@@ -25,7 +25,7 @@ import { MatSortModule } from '@angular/material/sort'
 import { RouterModule } from '@angular/router'
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 import { FaConfig, FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { faArrowLeft, faBars, faBirthdayCake, faBook, faBox, faBoxOpen, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFont, faGraduationCap, faGuitar, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSignature, faSignOutAlt, faSkullCrossbones, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faBars, faBirthdayCake, faBook, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFont, faGraduationCap, faGuitar, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSignature, faSignOutAlt, faSkullCrossbones, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
 import { DayCardComponent } from './components/day-card/day-card.component'
@@ -34,9 +34,9 @@ import { FloatingButtonComponent } from './components/floating-button/floating-b
 import { LoaderComponent } from './components/loader/loader.component'
 import { SelectStudentComponent } from './components/select-student/select-student.component'
 import { ToastComponent } from './components/toast/toast.component'
-import { ScrollableDirective } from './directives/scrollable.directive'
 import { AgePipe } from './pipes/age.pipe'
 import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
+import { DateFilterPipe } from './pipes/date-filter.pipe'
 import { SrcImagePipe } from './pipes/src-image.pipe'
 import { StringByPipe } from './pipes/string-by.pipe'
 import { StripHTMLPipe } from './pipes/strip-html.pipe'
@@ -79,7 +79,9 @@ registerLocaleData(localeFr, 'fr')
     ClassroomNamePipe,
     SrcImagePipe,
     FilterPipe,
-    ScrollableDirective,
+    DateFilterPipe,
+
+    // ScrollableDirective,
   ],
   imports: [
     // Angular
@@ -143,8 +145,9 @@ registerLocaleData(localeFr, 'fr')
     ClassroomNamePipe,
     SrcImagePipe,
     FilterPipe,
+    DateFilterPipe,
 
-    ScrollableDirective,
+    // ScrollableDirective,
 
     FloatingButtonComponent,
     DayCardComponent,
@@ -176,6 +179,7 @@ export class SharedModule {
       faBook,
       faBox,
       faBoxOpen,
+      faCalendar,
       faCalendarDay,
       faCalendarPlus,
       faCaretDown,

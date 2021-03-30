@@ -31,6 +31,20 @@
 	"CREATE_CLASSROOM": "Create classroom",
 	"CREATE_SUBJECT": "Create subject",
 	"DAILY": "Daily",
+	"DATES": {
+		"ALL_TIME": "All the time",
+		"LAST_15DAYS": "Last 15 days",
+		"LAST_3MONTH": "Last 3 months",
+		"LAST_6MONTH": "Last 6 months",
+		"LAST_MONTH": "Last 30 days",
+		"LAST_WEEK": "Last Week",
+		"LAST_YEAR": "Last year",
+		"THIS_MONTH": "This month",
+		"THIS_WEEK": "This week",
+		"THIS_YEAR": "This year",
+		"TODAY": "Today",
+		"YESTERDAY": "Yesterday"
+	},
 	"DAY": {
 		"ADD": "Add record",
 		"CREATION_SUBTITLE": "With these records you can track each student daily",
@@ -95,13 +109,16 @@
 		"PHONE": "Phone",
 		"PHONES": "Phones",
 		"PICTURE": "Image",
+		"SELECT_DATE": "Quick dates",
+		"SINCE": "Since",
 		"STUDENT": "Student",
 		"STUDENT_LIST": "Student List",
 		"SUBJECT": "Subject",
 		"SUBJECTS": "Subjects",
 		"SUBJECTS_NAME": "Name of the subject",
 		"SURNAME": "Surnames",
-		"TITLE": "Title"
+		"TITLE": "Title",
+		"UNTIL": "Until"
 	},
 	"GENERAL": "General",
 	"HIDE_PASSWORD": "Hide password",

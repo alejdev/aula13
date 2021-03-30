@@ -31,6 +31,20 @@
 	"CREATE_CLASSROOM": "Crear aula",
 	"CREATE_SUBJECT": "Crear asignatura",
 	"DAILY": "Diario",
+	"DATES": {
+		"ALL_TIME": "Todo el tiempo",
+		"LAST_15DAYS": "Últimos 15 días",
+		"LAST_3MONTH": "Últimos 3 meses",
+		"LAST_6MONTH": "Últimos 6 meses",
+		"LAST_MONTH": "Últimos 30 días",
+		"LAST_WEEK": "Última semana",
+		"LAST_YEAR": "Último año",
+		"THIS_MONTH": "Este mes",
+		"THIS_WEEK": "Esta semana",
+		"THIS_YEAR": "Este año",
+		"TODAY": "Hoy",
+		"YESTERDAY": "Ayer"
+	},
 	"DAY": {
 		"ADD": "Añadir registro",
 		"CREATION_SUBTITLE": "Con estos registros podrás hacer un seguimiento diario de cada alumno",
@@ -95,13 +109,16 @@
 		"PHONE": "Teléfono",
 		"PHONES": "Teléfonos",
 		"PICTURE": "Imagen",
+		"SELECT_DATE": "Fechas rápidas",
+		"SINCE": "Desde",
 		"STUDENT": "Alumno",
 		"STUDENT_LIST": "Lista de alumnos",
 		"SUBJECT": "Asignatura",
 		"SUBJECTS": "Asignaturas",
 		"SUBJECTS_NAME": "Nombre de la asignatura",
 		"SURNAME": "Apellidos",
-		"TITLE": "Título"
+		"TITLE": "Título",
+		"UNTIL": "Hasta"
 	},
 	"GENERAL": "General",
 	"HIDE_PASSWORD": "Ocultar contraseña",

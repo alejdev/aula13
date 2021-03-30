@@ -31,6 +31,20 @@
 	"CREATE_CLASSROOM": "Créer une salle de classe",
 	"CREATE_SUBJECT": "Créer un sujet",
 	"DAILY": "Tous les jours",
+	"DATES": {
+		"ALL_TIME": "Tout le temps",
+		"LAST_15DAYS": "15 derniers jours",
+		"LAST_3MONTH": "3 derniers mois",
+		"LAST_6MONTH": "6 derniers mois",
+		"LAST_MONTH": "30 derniers jours",
+		"LAST_WEEK": "Dernière semaine",
+		"LAST_YEAR": "Dernière année",
+		"THIS_MONTH": "Ce mois",
+		"THIS_WEEK": "Cette semaine",
+		"THIS_YEAR": "Cette année",
+		"TODAY": "Aujourd'hui",
+		"YESTERDAY": "Hier"
+	},
 	"DAY": {
 		"ADD": "Ajouter un enregistrement",
 		"CREATION_SUBTITLE": "Avec ces enregistrements, vous pouvez suivre chaque élève quotidiennement",
@@ -95,13 +109,16 @@
 		"PHONE": "Téléphone",
 		"PHONES": "Téléphones",
 		"PICTURE": "Image",
+		"SELECT_DATE": "Dates rapides",
+		"SINCE": "à partir de",
 		"STUDENT": "Étudiant",
 		"STUDENT_LIST": "Liste des étudiants",
 		"SUBJECT": "Objet",
 		"SUBJECTS": "Sujets",
 		"SUBJECTS_NAME": "Nom du sujet",
 		"SURNAME": "Nom de famille",
-		"TITLE": "Titre"
+		"TITLE": "Titre",
+		"UNTIL": "Jusqu'à"
 	},
 	"GENERAL": "Général",
 	"HIDE_PASSWORD": "Masquer le mot de passe",

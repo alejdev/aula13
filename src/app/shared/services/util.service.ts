@@ -1,6 +1,7 @@
+import { Moment } from 'moment'
+
 import { Injectable } from '@angular/core'
 import { AbstractControl } from '@angular/forms'
-
 import { Sort, SortDirection } from '@angular/material/sort'
 
 @Injectable({
@@ -74,6 +75,14 @@ export class UtilService {
   // Get today date
   public static today(): Date {
     return new Date()
+  }
+
+  public firstMoment(date: Moment) {
+    return date.set({hour:0,minute:0,second:0,millisecond:0})
+  }
+
+  public lastMoment(date: Moment) {
+    return date.set({hour:23,minute:59,second:59,millisecond:999})
   }
 
   // Transform first character to uppercase
