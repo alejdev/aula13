@@ -34,6 +34,7 @@ import { FloatingButtonComponent } from './components/floating-button/floating-b
 import { LoaderComponent } from './components/loader/loader.component'
 import { SelectStudentComponent } from './components/select-student/select-student.component'
 import { ToastComponent } from './components/toast/toast.component'
+import { ScrollableDirective } from './directives/scrollable.directive'
 import { AgePipe } from './pipes/age.pipe'
 import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { DateFilterPipe } from './pipes/date-filter.pipe'
@@ -81,7 +82,7 @@ registerLocaleData(localeFr, 'fr')
     FilterPipe,
     DateFilterPipe,
 
-    // ScrollableDirective,
+    ScrollableDirective,
   ],
   imports: [
     // Angular
@@ -149,7 +150,7 @@ registerLocaleData(localeFr, 'fr')
     FilterPipe,
     DateFilterPipe,
 
-    // ScrollableDirective,
+    ScrollableDirective,
 
     FloatingButtonComponent,
     DayCardComponent,

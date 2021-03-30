@@ -22,6 +22,11 @@ const moment = _rollupMoment || _moment
 })
 export class DayListComponent implements OnInit, OnDestroy {
 
+  moreInfoConfig: any = {
+    show: false,
+    icon: 'caret-down'
+  }
+
   dayList: any[]
   studentList: any[]
 
@@ -148,6 +153,14 @@ export class DayListComponent implements OnInit, OnDestroy {
         day: ModelService.dayModel
       }
     })
+  }
+
+  showMore() {
+    const state = this.moreInfoConfig.show
+    this.moreInfoConfig = {
+      show: state ? false : true,
+      icon: `caret-${state ? 'down' : 'up'}`
+    }
   }
 
   ngOnDestroy(): void {
