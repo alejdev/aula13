@@ -77,12 +77,12 @@ export class UtilService {
     return new Date()
   }
 
-  public firstMoment(date: Moment) {
-    return date.set({hour:0,minute:0,second:0,millisecond:0})
+  public static firstMoment(date: Moment) {
+    return date.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
   }
 
-  public lastMoment(date: Moment) {
-    return date.set({hour:23,minute:59,second:59,millisecond:999})
+  public static lastMoment(date: Moment) {
+    return date.set({ hour: 23, minute: 59, second: 59, millisecond: 999 })
   }
 
   // Transform first character to uppercase

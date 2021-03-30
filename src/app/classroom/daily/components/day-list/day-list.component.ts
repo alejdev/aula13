@@ -32,49 +32,49 @@ export class DayListComponent implements OnInit, OnDestroy {
   dayListFiltered: any[]
   dayListFilteredAux: any[]
 
-  dateSince: Moment //= moment().subtract(1, 'months')
-  dateUntil: Moment //= moment()
+  dateSince: Moment
+  dateUntil: Moment
 
   quickDates: any[] = [{
     name: 'DATES.TODAY',
-    since: this.utilService.firstMoment(moment()),
-    until: this.utilService.lastMoment(moment()),
+    since: UtilService.firstMoment(moment()),
+    until: UtilService.lastMoment(moment()),
   }, {
     name: 'DATES.YESTERDAY',
-    since: this.utilService.firstMoment(moment().subtract(1, 'days')),
-    until: this.utilService.lastMoment(moment().subtract(1, 'days')),
+    since: UtilService.firstMoment(moment().subtract(1, 'days')),
+    until: UtilService.lastMoment(moment().subtract(1, 'days')),
   }, {
     name: 'DATES.LAST_WEEK',
-    since: this.utilService.firstMoment(moment().subtract(6, 'days')),
-    until: this.utilService.lastMoment(moment()),
+    since: UtilService.firstMoment(moment().subtract(6, 'days')),
+    until: UtilService.lastMoment(moment()),
   }, {
     name: 'DATES.THIS_WEEK',
     since: moment().clone().startOf('isoWeek'),
     until: moment().clone().endOf('isoWeek'),
   }, {
     name: 'DATES.LAST_15DAYS',
-    since: this.utilService.firstMoment(moment().subtract(14, 'days')),
-    until: this.utilService.lastMoment(moment()),
+    since: UtilService.firstMoment(moment().subtract(14, 'days')),
+    until: UtilService.lastMoment(moment()),
   }, {
     name: 'DATES.LAST_MONTH',
-    since: this.utilService.firstMoment(moment().subtract(29, 'days')),
-    until: this.utilService.lastMoment(moment()),
+    since: UtilService.firstMoment(moment().subtract(29, 'days')),
+    until: UtilService.lastMoment(moment()),
   }, {
     name: 'DATES.THIS_MONTH',
     since: moment().clone().startOf('month'),
     until: moment().clone().endOf('month'),
   }, {
     name: 'DATES.LAST_3MONTH',
-    since: this.utilService.firstMoment(moment().subtract(3, 'months')),
-    until: this.utilService.lastMoment(moment()),
+    since: UtilService.firstMoment(moment().subtract(3, 'months')),
+    until: UtilService.lastMoment(moment()),
   }, {
     name: 'DATES.LAST_6MONTH',
-    since: this.utilService.firstMoment(moment().subtract(6, 'months')),
-    until: this.utilService.lastMoment(moment()),
+    since: UtilService.firstMoment(moment().subtract(6, 'months')),
+    until: UtilService.lastMoment(moment()),
   }, {
     name: 'DATES.LAST_YEAR',
-    since: this.utilService.firstMoment(moment().subtract(1, 'years')),
-    until: this.utilService.lastMoment(moment()),
+    since: UtilService.firstMoment(moment().subtract(1, 'years')),
+    until: UtilService.lastMoment(moment()),
   }, {
     name: 'DATES.THIS_YEAR',
     since: moment().clone().startOf('year'),
@@ -93,8 +93,7 @@ export class DayListComponent implements OnInit, OnDestroy {
     private dateFilterPipe: DateFilterPipe,
     private dayService: DayService,
     private dialog: MatDialog,
-    private headerService: HeaderService,
-    private utilService: UtilService
+    private headerService: HeaderService
   ) { }
 
   async ngOnInit(): Promise<any> {
