@@ -38,7 +38,7 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     private filterPipe: FilterPipe,
     private classroomPipe: ClassroomPipe,
     private subjectPipe: SubjectPipe,
-    private headerService: HeaderService,
+    public headerService: HeaderService,
     private subjectService: SubjectService,
     private classroomService: ClassroomService,
     private activatedRoute: ActivatedRoute,

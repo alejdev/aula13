@@ -38,7 +38,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     private filterPipe: FilterPipe,
     private dateFilterPipe: DateFilterPipe,
     private excludeArchivedPipe: ExcludeArchivedPipe,
-    private headerService: HeaderService,
+    public headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
