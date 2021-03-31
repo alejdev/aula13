@@ -1,32 +1,34 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
-import { FilterPipe } from 'src/app/shared/pipes/student.pipe'
+import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 
+import { AgroupByPipe } from '../../pipes/agroup-by.pipe'
+import { ClassroomPipe } from '../../pipes/classroom.pipe'
+import { SubjectPipe } from '../../pipes/subject.pipe'
 import { StudentCreationComponent } from '../student-creation/student-creation.component'
 
 @Component({
   selector: 'a13-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.scss'],
-  providers: [FilterPipe]
+  providers: [FilterPipe, ClassroomPipe, SubjectPipe, AgroupByPipe]
 })
 export class StudentListComponent implements OnInit, OnDestroy {
 
   studentList: any[]
-  studentListSubscription: Subscription
-
-  studentFilter: string = ''
   studentListFiltered: any[]
 
   favoriteListFiltered: any[]
   restListFiltered: any[]
   archivedListFiltered: any[]
+
+  studentListSubscription: Subscription
 
   toggleConfig: any = {
     favorite: {
@@ -54,13 +56,16 @@ export class StudentListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // Config header
     this.headerService.configHeader({ title: 'STUDENTS' })
+    this.loadData()
+  }
 
+  loadData(): void {
     this.studentList = []
-    this.studentListFiltered = []
-
-    this.observeStudentList()
+    this.studentListSubscription = this.studentService.observeStudentList().subscribe((result: any) => {
+      this.studentList = UtilService.mapCollection(result)
+      this.studentListFiltered = Object.assign(this.studentList)
+    })
   }
 
   createStudent(): void {
@@ -72,54 +77,6 @@ export class StudentListComponent implements OnInit, OnDestroy {
       data: {
         student: UtilService.clone(ModelService.studenModel)
       }
-    })
-  }
-
-  observeStudentList(): void {
-    this.studentListSubscription = this.studentService.observeStudentList()
-      .subscribe((result: any) => {
-        this.studentList = UtilService.mapCollection(result)
-        this.studentListFiltered = Object.assign(this.studentList)
-        this.filterStudents()
-      })
-  }
-
-  searchStudent(ev: string): void {
-    this.studentListFiltered = this.filterPipe.transform(this.studentList, ev)
-    this.filterStudents()
-  }
-
-  resetFilter(): void {
-    this.studentFilter = ''
-    this.studentListFiltered = Object.assign(this.studentList)
-    this.filterStudents()
-  }
-
-  filterStudents(): void {
-    this.favoriteListFiltered = this.studentListFiltered.filter(student => student.favorite && !student.archived)
-    this.restListFiltered = this.studentListFiltered.filter(student => !student.favorite && !student.archived)
-    this.archivedListFiltered = this.studentListFiltered.filter(student => student.archived)
-
-    // Show group list if search inside
-    if (this.studentFilter.length > 1) {
-      switch (true) {
-        case this.favoriteListFiltered.length > 0:
-          this.showMore('favorite', true)
-        case this.restListFiltered.length > 0:
-          this.showMore('rest', true)
-        case this.archivedListFiltered.length > 0:
-          this.showMore('archived', true)
-      }
-    } else if (this.studentFilter.length === 0) {
-      this.showMore('archived', false)
-    }
-
-    // Total listFiltered length
-    this.headerService.mergeHeader({
-      length:
-        this.favoriteListFiltered.length +
-        this.restListFiltered.length +
-        this.archivedListFiltered.length
     })
   }
 

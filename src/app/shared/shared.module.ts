@@ -34,17 +34,18 @@ import { DayFiltersComponent } from './components/day-filters/day-filters.compon
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component'
 import { LoaderComponent } from './components/loader/loader.component'
 import { SelectStudentComponent } from './components/select-student/select-student.component'
+import { StudentFiltersComponent } from './components/student-filters/student-filters.component'
 import { ToastComponent } from './components/toast/toast.component'
 import { ScrollableDirective } from './directives/scrollable.directive'
 import { AgePipe } from './pipes/age.pipe'
 import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { DateFilterPipe } from './pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from './pipes/exclude-archived.pipe'
+import { FilterPipe } from './pipes/filter-by.pipe'
 import { ShowByPipe } from './pipes/show-by.pipe'
 import { SrcImagePipe } from './pipes/src-image.pipe'
 import { StringByPipe } from './pipes/string-by.pipe'
 import { StripHTMLPipe } from './pipes/strip-html.pipe'
-import { FilterPipe } from './pipes/student.pipe'
 import { SubjectNamePipe } from './pipes/subject-name.pipe'
 import { LoaderService } from './services/loader.service'
 import { SettingService } from './services/setting.service'
@@ -75,6 +76,7 @@ registerLocaleData(localeFr, 'fr')
     DayCreationComponent,
     LoaderComponent,
     SelectStudentComponent,
+    StudentFiltersComponent,
     DayFiltersComponent,
 
     StringByPipe,
@@ -89,6 +91,7 @@ registerLocaleData(localeFr, 'fr')
     ExcludeArchivedPipe,
 
     ScrollableDirective,
+
 
   ],
   imports: [
@@ -166,6 +169,7 @@ registerLocaleData(localeFr, 'fr')
     DayCreationComponent,
     LoaderComponent,
     SelectStudentComponent,
+    StudentFiltersComponent,
     DayFiltersComponent,
   ],
   entryComponents: [

@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 
 import { DateFilterPipe } from '../../pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from '../../pipes/exclude-archived.pipe'
-import { FilterPipe } from '../../pipes/student.pipe'
+import { FilterPipe } from '../../pipes/filter-by.pipe'
 import { UtilService } from '../../services/util.service'
 
 @Component({

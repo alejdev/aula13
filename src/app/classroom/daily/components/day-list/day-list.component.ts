@@ -6,7 +6,7 @@ import { DayCreationComponent } from 'src/app/shared/components/day-creation/day
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
-import { FilterPipe } from 'src/app/shared/pipes/student.pipe'
+import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -48,7 +48,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cdRef.detectChanges()
   }
 
-  private loadData(): void {
+  loadData(): void {
     this.dayList = []
     this.dayListSubscription = this.dayService.observeDayList().subscribe((result) => {
       this.dayList = UtilService.mapCollection(result).map((day: any) => {
