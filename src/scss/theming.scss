@@ -37,10 +37,15 @@
     background-color: darken(map-get(map-get($colors, light-theme), background), 2%);
   }
   
-  .badge,
-  .mat-button.badge {
-    color: #888;
-    border-color:  darken(map-get(map-get($colors, light-theme), background), 2%);
+  .badge {
+    &.mat-button {
+      color: #888;
+      border-color:  darken(map-get(map-get($colors, light-theme), background), 2%);
+    }
+    &.badge-fill {
+      color: map-get(map-get($colors, light-theme), warn);
+      background-color: white;
+    }
   }
 
   .mat-tab-group .mat-tab-header {
@@ -111,6 +116,10 @@
   .badge {
     color: #ccc;
     border-color: #666;
+
+    &.badge-fill {
+      background-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
+    }
   }
 
   // 424242

@@ -25,7 +25,7 @@ import { MatSortModule } from '@angular/material/sort'
 import { RouterModule } from '@angular/router'
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 import { FaConfig, FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { faArrowLeft, faBars, faBirthdayCake, faBook, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFont, faGraduationCap, faGuitar, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSignature, faSignOutAlt, faSkullCrossbones, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faBars, faBirthdayCake, faBook, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFont, faGraduationCap, faGuitar, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
 import { DayCardComponent } from './components/day-card/day-card.component'
@@ -91,8 +91,6 @@ registerLocaleData(localeFr, 'fr')
     ExcludeArchivedPipe,
 
     ScrollableDirective,
-
-
   ],
   imports: [
     // Angular
@@ -223,6 +221,7 @@ export class SharedModule {
       faPoll,
       faSchool,
       faSearch,
+      faSearchMinus,
       faSignature,
       faSignOutAlt,
       faSkullCrossbones,

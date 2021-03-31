@@ -39,7 +39,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   async ngOnInit(): Promise<any> {
-    this.headerService.configHeader({ title: 'DAILY' })
+    this.headerService.configHeader({ title: 'DAILY', search: true })
     this.studentService.savedStudentList = await this.studentService.getStudentList()
   }
 

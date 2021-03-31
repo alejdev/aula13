@@ -4,7 +4,7 @@
 
       <!-- Avatar -->
       <a *ngIf="!day?.hideStudent && day?.student" [routerLink]="[ '/aula/alumno', day?.student?.id ]">
-        <img class="avatar avatar-xs p-0 mr-1" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
+        <img class="avatar avatar-xs p-0 mr-1 aumente aumente-big" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
       </a>
 
       <!-- Header info -->

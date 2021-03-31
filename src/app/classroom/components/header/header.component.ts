@@ -51,6 +51,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  toggleSearch() {
+    this.headerService.toggleSearch()
+  }
+
   goBack() {
     window.history.back()
   }

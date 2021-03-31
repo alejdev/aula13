@@ -31,13 +31,8 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   quickDates: any[] = ModelService.quickDatesModel
   quickDate: any
-
   showArchived: boolean = false
-
-  moreInfoConfig: any = {
-    show: true,
-    icon: 'caret-down'
-  }
+  query: any
 
   constructor(
     private filterPipe: FilterPipe,
@@ -81,20 +76,20 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   }
 
   goToQuery() {
+    this.formatQuery()
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
-      queryParams: { ...this.formatParams() }
+      queryParams: { ...this.query }
     })
   }
 
-  formatParams(): any {
-    const query: any = {}
-    if (this.dayFilter) { query.dayFilter = this.dayFilter }
-    if (this.showArchived) { query.showArchived = this.showArchived }
-    if (this.dateSince && this.dateSince.isValid()) { query.dateSince = this.dateSince.format('DD-MM-YYYY-H:mm:ss') }
-    if (this.dateUntil && this.dateUntil.isValid()) { query.dateUntil = UtilService.lastMoment(this.dateUntil).format('DD-MM-YYYY-H:mm:ss') }
-    if (this.quickDate) { query.quickDate = this.quickDate.id }
-    return query
+  formatQuery(): void {
+    this.query = {}
+    if (this.dayFilter) { this.query.dayFilter = this.dayFilter }
+    if (this.showArchived) { this.query.showArchived = this.showArchived }
+    if (this.dateSince && this.dateSince.isValid()) { this.query.dateSince = this.dateSince.format('DD-MM-YYYY-H:mm:ss') }
+    if (this.dateUntil && this.dateUntil.isValid()) { this.query.dateUntil = UtilService.lastMoment(this.dateUntil).format('DD-MM-YYYY-H:mm:ss') }
+    if (this.quickDate) { this.query.quickDate = this.quickDate.id }
   }
 
   selectDate(): void {
@@ -112,12 +107,13 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     this.selectDate()
   }
 
-  showMore(): void {
-    const state = this.moreInfoConfig.show
-    this.moreInfoConfig = {
-      show: state ? false : true,
-      icon: `caret-${state ? 'down' : 'up'}`
-    }
+  cleanFilters(): void {
+    this.dayFilter = ''
+    this.dateSince = null
+    this.dateUntil = null
+    this.showArchived = false
+    this.quickDate = ''
+    this.goToQuery()
   }
 
   ngOnDestroy(): void {

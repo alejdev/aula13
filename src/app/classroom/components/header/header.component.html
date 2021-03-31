@@ -3,26 +3,31 @@
   <div class="container-max sm relative" fxLayout="row" fxLayoutAlign="start center">
 
     <!-- Back button  -->
-    <button *ngIf="headerConfig.back" class="mr-h menu-button" (click)="goBack()" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
+    <button *ngIf="headerConfig?.back" class="mr-h menu-button" (click)="goBack()" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
       <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
     </button>
 
     <!-- Title -->
-    <h2 *ngIf="headerConfig.title" class="title pt-h pb-h" (click)="truncate()" [ngClass]="{'truncate': isTruncated}">
-      {{headerConfig.title | translate}}
-      <span *ngIf="headerConfig.length" class="mat-smadll translucide"> | {{headerConfig.length}}</span>
+    <h2 *ngIf="headerConfig?.title" class="title pt-h pb-h" (click)="truncate()" [ngClass]="{'truncate': isTruncated}">
+      {{headerConfig?.title | translate}}
+      <span *ngIf="headerConfig?.length" class="mat-smadll translucide"> | {{headerConfig?.length}}</span>
     </h2>
     
     <!-- Logo -->
-    <a13-title-logo *ngIf="!headerConfig.menuOptions" class="fixed title-logo" [showLogo]="true"></a13-title-logo>
+    <a13-title-logo *ngIf="!headerConfig?.menuOptions" class="fixed title-logo" [showLogo]="true"></a13-title-logo>
     <span fxFlex></span>
 
+    <!-- Seach button -->
+    <button *ngIf="headerConfig?.search" class="menu-button mr-q" mat-icon-button (click)="toggleSearch()" attr.aria-label="{{'SEARCH' | translate}}">
+      <fa-icon class="mat-icon-18" [icon]="headerService?.searchStatus ? 'search-minus' : 'search'"></fa-icon>
+    </button>
+
     <!-- Menu phone -->
-    <button *ngIf="headerConfig.student?.contactInformation?.phones?.length" class="menu-button" mat-icon-button [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
+    <button *ngIf="headerConfig?.student?.contactInformation?.phones?.length" class="menu-button" mat-icon-button [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
       <fa-icon class="mat-icon-18" icon="phone-alt"></fa-icon>
     </button>
     <mat-menu #menuPhones="matMenu">
-      <button *ngFor="let phone of headerConfig.student?.contactInformation?.phones" mat-menu-item>
+      <button *ngFor="let phone of headerConfig?.student?.contactInformation?.phones" mat-menu-item>
         <a class="clickable-phone-number" href="{{'tel:' + phone.number}}">
           <span *ngIf="phone.name" class="mat-hint">{{phone.name}}:</span>
           <span class="phone">{{phone.number}}</span>
@@ -31,18 +36,18 @@
     </mat-menu>
 
     <!-- Menu options-->
-    <button *ngIf="headerConfig.menuOptions?.length" class=" mr-0 menu-button" mat-icon-button [matMenuTriggerFor]="menuOptions" attr.aria-label="{{'OPTION_MENU' | translate}}">
+    <button *ngIf="headerConfig?.menuOptions?.length" class=" mr-0 menu-button" mat-icon-button [matMenuTriggerFor]="menuOptions" attr.aria-label="{{'OPTION_MENU' | translate}}">
       <fa-icon class="mat-icon-18" icon="ellipsis-v"></fa-icon>
     </button>
     <mat-menu #menuOptions="matMenu">
-      <button *ngFor="let item of headerConfig.menuOptions" mat-menu-item (click)="openDialog(item.dialog?.component, item.dialog?.config)">
+      <button *ngFor="let item of headerConfig?.menuOptions" mat-menu-item (click)="openDialog(item.dialog?.component, item.dialog?.config)">
         <fa-icon class="mat-icon-16 mat-hint" [icon]="item.icon"></fa-icon>
         <span>{{item.name | translate}}</span>
       </button>
     </mat-menu>
 
     <!-- Sign Out -->
-    <button *ngIf="headerConfig.signOut" class="menu-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">
+    <button *ngIf="headerConfig?.signOut" class="menu-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">
       <fa-icon class="mat-icon-18" icon="sign-out-alt"></fa-icon>
     </button>
 

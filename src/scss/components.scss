@@ -140,20 +140,19 @@ mat-form-field {
   border-radius: 3px;
   border: 1px solid transparent;
 
-  &.mat-button {
+  &.mat-button,
+  &.mat-flat-button,
+  &.mat-stroked-button,
+  &.mat-raised-button {
     padding: 6px 10px;
     margin: 2px;
     min-height: 0;
     line-height: 0;
     border: 1px solid transparent;
-}
+  }
 
   &:first-child {
     margin-left: 0;
-  }
-
-  &.badge-stroked {
-    background-color: transparent;
   }
 }
 
@@ -178,7 +177,7 @@ mat-form-field {
     }
 
     .ck-editor__main {
-      &>.ck-editor__editable {
+      & > .ck-editor__editable {
         background: transparent;
         border-radius: 0 0 5px 5px !important;
 
@@ -193,6 +192,14 @@ mat-form-field {
 // Link
 .link {
   color: map-get(map-get($colors, other), link-color);
+}
+
+.link-accent {
+  color: map-get(map-get($colors, light-theme), accent);
+}
+
+.link-warn {
+  color: map-get(map-get($colors, light-theme), warn);
 }
 
 // Scrollbar

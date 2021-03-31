@@ -51,10 +51,10 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
     private dialog: MatDialog,
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    this.headerService.configHeader({ title: 'STUDENTS' })
+    this.headerService.configHeader({ title: 'STUDENTS', search: true })
     this.loadData()
   }
 

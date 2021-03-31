@@ -1,36 +1,47 @@
 <div class="mb-1">
-  <!-- Filter -->
-  <mat-form-field appearance="outline">
-    <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
-    <input matInput [(ngModel)]="studentFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
-    <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
-    <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
-      <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+  <div *ngIf="headerService.searchStatus">
+    <!-- Filter -->
+    <mat-form-field appearance="outline">
+      <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
+      <input matInput [(ngModel)]="studentFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
+      <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
+      <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
+        <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="selects" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- Classroom -->
+      <mat-form-field appearance="outline" fxFlex="49">
+        <mat-label>{{'CLASSROOMS' | translate}}</mat-label>
+        <mat-select multiple [(ngModel)]="classroomsFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'CLASSROOMS' | translate}}">
+          <mat-option *ngFor="let classroom of classroomList" [value]="classroom.id">
+            {{classroom.name}}
+          </mat-option>
+        </mat-select>
+        <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="chalkboard"></fa-icon>
+      </mat-form-field>
+
+      <!-- Subjects -->
+      <mat-form-field appearance="outline" fxFlex="49">
+        <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
+        <mat-select multiple [(ngModel)]="subjectsFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
+          <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
+            {{subject.name}}
+          </mat-option>
+        </mat-select>
+        <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="book"></fa-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- clean all filters -->
+  <div *ngIf="studentFilter || classroomsFilter?.length || subjectsFilter?.length" class="selects" fxLayout="row" fxLayoutAlign="space-between center">
+    <span fxFlex></span>
+    <button mat-button color="warn" class="badge badge-fill warn mat-small pointer" (click)="cleanFilters()">
+      {{'CLEAN_ALL_FILTERS' | translate}}
+      <fa-icon class="ml-q mat-icon-14" icon="times"></fa-icon>
     </button>
-  </mat-form-field>
-
-  <div class="selects" fxLayout="row" fxLayoutAlign="space-between center">
-
-    <!-- Classroom -->
-    <mat-form-field appearance="outline" fxFlex="49">
-      <mat-label>{{'CLASSROOMS' | translate}}</mat-label>
-      <mat-select multiple [(ngModel)]="classroomsFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'CLASSROOMS' | translate}}">
-        <mat-option *ngFor="let classroom of classroomList" [value]="classroom.id">
-          {{classroom.name}}
-        </mat-option>
-      </mat-select>
-      <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="chalkboard"></fa-icon>
-    </mat-form-field>
-
-    <!-- Subjects -->
-    <mat-form-field appearance="outline" fxFlex="49">
-      <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
-      <mat-select multiple [(ngModel)]="subjectsFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
-        <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
-          {{subject.name}}
-        </mat-option>
-      </mat-select>
-      <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="book"></fa-icon>
-    </mat-form-field>
   </div>
 </div>

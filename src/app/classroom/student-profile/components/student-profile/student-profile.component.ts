@@ -71,6 +71,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             back: true,
             student: this.student,
             truncable: true,
+            search: true,
             menuOptions: [{
               name: 'EDIT_STUDENT',
               icon: 'pen',

@@ -32,11 +32,7 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   studentFilter: string
   classroomsFilter: any[]
   subjectsFilter: any[]
-
-  moreInfoConfig: any = {
-    show: false,
-    icon: 'caret-down'
-  }
+  query: any
 
   constructor(
     private filterPipe: FilterPipe,
@@ -46,10 +42,11 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     private subjectService: SubjectService,
     private classroomService: ClassroomService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
+    this.query = {}
     this.classroomListSubscription = this.classroomService.observeClassroomList()
       .subscribe((result) => this.classroomList = UtilService.mapCollection(result))
     this.subjectListSubscription = this.subjectService.observeSubjectList()
@@ -65,7 +62,9 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     this.studentListFiltered = this.classroomPipe.transform(this.studentListFiltered, this.classroomsFilter)
     this.studentListFiltered = this.subjectPipe.transform(this.studentListFiltered, this.subjectsFilter)
 
-    this.headerService.mergeHeader({ length: this.studentListFiltered.length })
+    if (this.studentListFiltered) {
+      this.headerService.mergeHeader({ length: this.studentListFiltered.length })
+    }
     this.studentListFilter.emit(this.studentListFiltered)
   }
 
@@ -76,22 +75,22 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   }
 
   goToQuery() {
+    this.formatQuery()
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
-      queryParams: { ...this.formatParams() }
+      queryParams: { ...this.query }
     })
   }
 
-  formatParams(): any {
-    const query: any = {}
-    if (this.studentFilter) { query.studentFilter = this.studentFilter }
+  formatQuery(): void {
+    this.query = {}
+    if (this.studentFilter) { this.query.studentFilter = this.studentFilter }
     if (this.classroomsFilter) {
-      query.classroomsFilter = typeof this.classroomsFilter == 'string' ? [this.classroomsFilter] : this.classroomsFilter
+      this.query.classroomsFilter = typeof this.classroomsFilter == 'string' ? [this.classroomsFilter] : this.classroomsFilter
     }
     if (this.subjectsFilter) {
-      query.subjectsFilter = typeof this.subjectsFilter == 'string' ? [this.subjectsFilter] : this.subjectsFilter
+      this.query.subjectsFilter = typeof this.subjectsFilter == 'string' ? [this.subjectsFilter] : this.subjectsFilter
     }
-    return query
   }
 
   resetFilter(): void {
@@ -99,12 +98,11 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     this.goToQuery()
   }
 
-  showMore(): void {
-    const state = this.moreInfoConfig.show
-    this.moreInfoConfig = {
-      show: state ? false : true,
-      icon: `caret-${state ? 'down' : 'up'}`
-    }
+  cleanFilters(): void {
+    this.studentFilter = ''
+    this.classroomsFilter = []
+    this.subjectsFilter = []
+    this.goToQuery()
   }
 
   ngOnDestroy(): void {

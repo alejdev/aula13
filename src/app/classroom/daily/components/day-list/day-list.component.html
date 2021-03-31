@@ -4,7 +4,7 @@
     <a13-day-filters [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
 
     <!-- Days  | filterBy:dayFilter | dateFilter : dateSince : dateUntil"-->
-    <div class="mt-2">
+    <div class="mt-1">
       <ng-container *ngFor="let day of dayListFiltered">
         <a13-day-card [(day)]="day"></a13-day-card>
       </ng-container>
