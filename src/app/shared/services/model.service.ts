@@ -1,4 +1,8 @@
+import moment from 'moment'
+
 import { Injectable } from '@angular/core'
+
+import { UtilService } from './util.service'
 
 @Injectable({
   providedIn: 'root'
@@ -158,6 +162,68 @@ export class ModelService {
   public static subjectModel: any = {
     name: ''
   }
+
+  public static quickDatesModel: any[] = [{
+    id: 'allTime',
+    name: 'DATES.ALL_TIME',
+    since: null,
+    until: null,
+  }, {
+    id: 'today',
+    name: 'DATES.TODAY',
+    since: UtilService.firstMoment(moment()),
+    until: UtilService.lastMoment(moment()),
+  }, {
+    id: 'yesterday',
+    name: 'DATES.YESTERDAY',
+    since: UtilService.firstMoment(moment().subtract(1, 'days')),
+    until: UtilService.lastMoment(moment().subtract(1, 'days')),
+  }, {
+    id: 'lastWeek',
+    name: 'DATES.LAST_WEEK',
+    since: UtilService.firstMoment(moment().subtract(6, 'days')),
+    until: UtilService.lastMoment(moment()),
+  }, {
+    id: 'thisWeek',
+    name: 'DATES.THIS_WEEK',
+    since: moment().clone().startOf('isoWeek'),
+    until: moment().clone().endOf('isoWeek'),
+  }, {
+    id: 'last15Days',
+    name: 'DATES.LAST_15DAYS',
+    since: UtilService.firstMoment(moment().subtract(14, 'days')),
+    until: UtilService.lastMoment(moment()),
+  }, {
+    id: 'lastMonth',
+    name: 'DATES.LAST_MONTH',
+    since: UtilService.firstMoment(moment().subtract(29, 'days')),
+    until: UtilService.lastMoment(moment()),
+  }, {
+    id: 'thisMonth',
+    name: 'DATES.THIS_MONTH',
+    since: moment().clone().startOf('month'),
+    until: moment().clone().endOf('month'),
+  }, {
+    id: 'last3Month',
+    name: 'DATES.LAST_3MONTH',
+    since: UtilService.firstMoment(moment().subtract(3, 'months')),
+    until: UtilService.lastMoment(moment()),
+  }, {
+    id: 'last6Month',
+    name: 'DATES.LAST_6MONTH',
+    since: UtilService.firstMoment(moment().subtract(6, 'months')),
+    until: UtilService.lastMoment(moment()),
+  }, {
+    id: 'lastYear',
+    name: 'DATES.LAST_YEAR',
+    since: UtilService.firstMoment(moment().subtract(1, 'years')),
+    until: UtilService.lastMoment(moment()),
+  }, {
+    id: 'thisYear',
+    name: 'DATES.THIS_YEAR',
+    since: moment().clone().startOf('year'),
+    until: moment().clone().endOf('year'),
+  }]
 
   constructor() { }
 }

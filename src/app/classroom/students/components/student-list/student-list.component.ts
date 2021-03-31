@@ -6,7 +6,7 @@ import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 
 import { AgroupByPipe } from '../../pipes/agroup-by.pipe'
@@ -20,7 +20,7 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
   styleUrls: ['./student-list.component.scss'],
   providers: [FilterPipe, ClassroomPipe, SubjectPipe, AgroupByPipe]
 })
-export class StudentListComponent implements OnInit, OnDestroy {
+export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   studentList: any[]
   studentListFiltered: any[]
@@ -50,11 +50,20 @@ export class StudentListComponent implements OnInit, OnDestroy {
     private studentService: StudentService,
     private dialog: MatDialog,
     private headerService: HeaderService,
-  ) { }
+    private cdRef: ChangeDetectorRef,
+    ) { }
 
   ngOnInit(): void {
     this.headerService.configHeader({ title: 'STUDENTS' })
+    this.loadData()
+  }
 
+  ngAfterViewInit() {
+    this.loadData()
+    this.cdRef.detectChanges()
+  }
+
+  loadData(): void {
     this.studentList = []
     this.studentListSubscription = this.studentService.observeStudentList().subscribe((result: any) => {
       this.studentList = UtilService.mapCollection(result)

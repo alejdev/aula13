@@ -1,11 +1,14 @@
 import moment, { Moment } from 'moment'
+import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { DateFilterPipe } from '../../pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from '../../pipes/exclude-archived.pipe'
 import { FilterPipe } from '../../pipes/filter-by.pipe'
+import { ModelService } from '../../services/model.service'
 import { UtilService } from '../../services/util.service'
 
 @Component({
@@ -13,107 +16,95 @@ import { UtilService } from '../../services/util.service'
   templateUrl: './day-filters.component.html',
   styleUrls: ['./day-filters.component.scss']
 })
-export class DayFiltersComponent implements OnInit {
+export class DayFiltersComponent implements OnInit, OnDestroy {
 
-  dayListFiltered: any[]
+  dayListFiltered: any[] = []
   @Input() dayList: any[]
   @Input() hideArchivedFilter: boolean
   @Output() dayListFilter: any = new EventEmitter<any[]>()
 
-  moreInfoConfig: any = {
-    show: false,
-    icon: 'caret-down'
-  }
+  routeSubscription: Subscription
 
   dayFilter: string = ''
   dateSince: Moment
   dateUntil: Moment
 
-  quickDates: any[] = [{
-    name: 'DATES.ALL_TIME',
-    since: null,
-    until: null,
-  }, {
-    name: 'DATES.TODAY',
-    since: UtilService.firstMoment(moment()),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    name: 'DATES.YESTERDAY',
-    since: UtilService.firstMoment(moment().subtract(1, 'days')),
-    until: UtilService.lastMoment(moment().subtract(1, 'days')),
-  }, {
-    name: 'DATES.LAST_WEEK',
-    since: UtilService.firstMoment(moment().subtract(6, 'days')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    name: 'DATES.THIS_WEEK',
-    since: moment().clone().startOf('isoWeek'),
-    until: moment().clone().endOf('isoWeek'),
-  }, {
-    name: 'DATES.LAST_15DAYS',
-    since: UtilService.firstMoment(moment().subtract(14, 'days')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    name: 'DATES.LAST_MONTH',
-    since: UtilService.firstMoment(moment().subtract(29, 'days')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    name: 'DATES.THIS_MONTH',
-    since: moment().clone().startOf('month'),
-    until: moment().clone().endOf('month'),
-  }, {
-    name: 'DATES.LAST_3MONTH',
-    since: UtilService.firstMoment(moment().subtract(3, 'months')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    name: 'DATES.LAST_6MONTH',
-    since: UtilService.firstMoment(moment().subtract(6, 'months')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    name: 'DATES.LAST_YEAR',
-    since: UtilService.firstMoment(moment().subtract(1, 'years')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    name: 'DATES.THIS_YEAR',
-    since: moment().clone().startOf('year'),
-    until: moment().clone().endOf('year'),
-  }]
+  quickDates: any[] = ModelService.quickDatesModel
+  quickDate: any
 
-  quickDate: any = this.quickDates[0]
   showArchived: boolean = false
+
+  moreInfoConfig: any = {
+    show: true,
+    icon: 'caret-down'
+  }
 
   constructor(
     private filterPipe: FilterPipe,
     private dateFilterPipe: DateFilterPipe,
     private excludeArchivedPipe: ExcludeArchivedPipe,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.quickDate = this.quickDates[0]
+    this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
+      this.setModels(result)
+      this.filterList()
+    })
+  }
 
-  filterList(): void {
-    this.dayListFiltered = this.filterPipe.transform(this.dayList, this.dayFilter)
+  filterList(list?: any[]): void {
+    this.dayListFiltered = this.filterPipe.transform(list ? list : this.dayList, this.dayFilter)
     this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil)
     this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayListFiltered, this.showArchived)
 
-    this.headerService.mergeHeader({ length: this.dayListFiltered.length })
-    this.dayListFilter.emit(this.dayListFiltered)
+    if (this.dayListFiltered) {
+      this.headerService.mergeHeader({ length: this.dayListFiltered.length })
+      this.dayListFilter.emit(this.dayListFiltered)
+    }
+  }
+
+  setModels(params: any): void {
+    this.dayFilter = params.dayFilter
+    this.showArchived = params.showArchived
+    this.quickDate = this.quickDates.find(elem => elem.id == params.quickDate)
+    if (this.quickDate) {
+      this.dateSince = this.quickDate.since
+      this.dateUntil = this.quickDate.until
+    } else {
+      this.dateSince = params.dateSince ? moment(params.dateSince, 'DD-MM-YYYY-H:mm:ss') : null
+      this.dateUntil = params.dateUntil ? moment(params.dateUntil, 'DD-MM-YYYY-H:mm:ss') : null
+    }
+  }
+
+  goToQuery() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { ...this.formatParams() }
+    })
+  }
+
+  formatParams(): any {
+    const query: any = {}
+    if (this.dayFilter) { query.dayFilter = this.dayFilter }
+    if (this.showArchived) { query.showArchived = this.showArchived }
+    if (this.dateSince && this.dateSince.isValid()) { query.dateSince = this.dateSince.format('DD-MM-YYYY-H:mm:ss') }
+    if (this.dateUntil && this.dateUntil.isValid()) { query.dateUntil = UtilService.lastMoment(this.dateUntil).format('DD-MM-YYYY-H:mm:ss') }
+    if (this.quickDate) { query.quickDate = this.quickDate.id }
+    return query
   }
 
   selectDate(): void {
     this.quickDate = null
-    this.filterList()
-  }
-
-  selectQuickDate(): void {
-    this.dateSince = this.quickDate.since
-    this.dateUntil = this.quickDate.until
-    this.filterList()
+    this.goToQuery()
   }
 
   resetFilter(): void {
     this.dayFilter = ''
-    this.filterList()
+    this.goToQuery()
   }
 
   resetDate(date: string): void {
@@ -127,6 +118,10 @@ export class DayFiltersComponent implements OnInit {
       show: state ? false : true,
       icon: `caret-${state ? 'down' : 'up'}`
     }
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe()
   }
 
 }

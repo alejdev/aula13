@@ -2,7 +2,7 @@
    <!-- Filter -->
    <mat-form-field appearance="outline">
      <mat-label>{{'SEARCH_DAY' | translate}}</mat-label>
-     <input matInput [(ngModel)]="dayFilter" (ngModelChange)="filterList()" attr.aria-label="{{'SEARCH_DAY' | translate}}" autocomplete="off">
+     <input matInput [(ngModel)]="dayFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_DAY' | translate}}" autocomplete="off">
      <fa-icon *ngIf="!dayFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
      <button class="reset-button" mat-button matSuffix *ngIf="dayFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
        <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
@@ -51,7 +51,7 @@
        <!-- Select quick date -->
        <mat-form-field appearance="outline" fxFlex="33">
          <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
-         <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
+         <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="goToQuery()">
            <mat-option *ngFor="let date of quickDates" [value]="date">
              {{date.name | translate}}
            </mat-option>
@@ -63,7 +63,7 @@
 
      <div *ngIf="!hideArchivedFilter" class="mt-h mb-1" fxLayout="row" fxLayoutAlign="end center">
        <fa-icon class="mat-icon-20 mat-hint pr-1" icon="box" [ngClass]="{'archived': showArchived}"></fa-icon>
-       <mat-slide-toggle labelPosition="before" (change)="filterList()" [(ngModel)]="showArchived">
+       <mat-slide-toggle labelPosition="before" (change)="goToQuery()" [(ngModel)]="showArchived">
          {{'FORM.SHOW_ARCHIVED' | translate}}
        </mat-slide-toggle>
      </div>

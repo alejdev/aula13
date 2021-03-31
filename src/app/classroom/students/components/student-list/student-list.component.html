@@ -1,7 +1,7 @@
 <section class="container container-padd">
   <div class="container-max sm">
 
-    <a13-student-filters [studentList]="studentList" (studentListFilter)="studentListFiltered = $event"></a13-student-filters>
+    <a13-student-filters [studentList]="studentList" (studentListFilter)="studentListFiltered=$event"></a13-student-filters>
 
     <!-- Students list-->
     <div class="pb-5 mt-1" *ngIf="studentListFiltered?.length">

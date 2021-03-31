@@ -59,6 +59,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
       })
       this.dayListFiltered = this.excludeArchivedPipe.transform(Object.assign(this.dayList), this.dayFilters.showArchived)
       this.headerService.mergeHeader({ length: this.dayListFiltered.length })
+      this.dayFilters.filterList(this.dayList)
     })
   }
 

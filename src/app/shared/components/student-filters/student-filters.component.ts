@@ -29,19 +29,13 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   subjectListSubscription: Subscription
   routeSubscription: Subscription
 
-  moreInfoConfig: any = {
-    show: false,
-    icon: 'caret-down'
-  }
-
   studentFilter: string
   classroomsFilter: any[]
   subjectsFilter: any[]
 
-  query: any = {
-    studentFilter: '',
-    classroomsFilter: [],
-    subjectsFilter: []
+  moreInfoConfig: any = {
+    show: false,
+    icon: 'caret-down'
   }
 
   constructor(
@@ -67,8 +61,7 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   }
 
   filterList(list?: any[]): void {
-    const listToFilter = list ? list : this.studentList
-    this.studentListFiltered = this.filterPipe.transform(listToFilter, this.studentFilter)
+    this.studentListFiltered = this.filterPipe.transform(list ? list : this.studentList, this.studentFilter)
     this.studentListFiltered = this.classroomPipe.transform(this.studentListFiltered, this.classroomsFilter)
     this.studentListFiltered = this.subjectPipe.transform(this.studentListFiltered, this.subjectsFilter)
 
