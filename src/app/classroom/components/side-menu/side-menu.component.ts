@@ -8,6 +8,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
+import { Router } from '@angular/router'
 
 import { indicatorRotate } from '../../classroom.animation'
 import { ClassroomCreationComponent } from '../classroom-creation/classroom-creation.component'
@@ -45,7 +46,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   menuItems = [[{
     name: 'CLASSROOMS',
     icon: 'chalkboard',
-    expanded: false,
+    expanded: true,
     create: ClassroomCreationComponent,
     delete: ClassroomDeleteDialogComponent,
     model: ModelService.classroomModel,
@@ -53,7 +54,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   }, {
     name: 'SUBJECTS',
     icon: 'book',
-    expanded: false,
+    expanded: true,
     create: SubjectCreationComponent,
     delete: SubjectDeleteDialogComponent,
     model: ModelService.subjectModel,
@@ -75,7 +76,8 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     private classroomService: ClassroomService,
     private subjectService: SubjectService,
     private dialog: MatDialog,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -85,13 +87,17 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
     this.classroomSubscription = this.classroomService.observeClassroomList()
       .subscribe((result: any) => {
-        this.menuItems[0][0].children = UtilService.mapCollection(result)
+        this.menuItems[0][0].children = UtilService.mapCollection(result).map((elem) => {
+          return { filter: 'classroomsFilter', ...elem }
+        })
         this.classroomService.cachedClassrooms = this.menuItems[0][0].children
       })
 
     this.subjectSubscription = this.subjectService.observeSubjectList()
       .subscribe((result: any) => {
-        this.menuItems[0][1].children = UtilService.mapCollection(result)
+        this.menuItems[0][1].children = UtilService.mapCollection(result).map((elem) => {
+          return { filter: 'subjectsFilter', ...elem }
+        })
         this.subjectService.cachedSubjects = this.menuItems[0][1].children
       })
   }
@@ -101,9 +107,11 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     this.user = auth.data()
   }
 
-  onItemSelected(item: any): void {
+  onItemSelected(ev: Event, item: any): void {
     if (!item.children || !item.children.length) {
-      // this.router.navigate([item.route])
+      this.router.navigate(['aula/alumnos'], {
+        queryParams: { [item.filter]: [item.id] }
+      })
     }
     if (item.children && item.children.length) {
       item.expanded = !item.expanded

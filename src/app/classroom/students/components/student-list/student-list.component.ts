@@ -1,11 +1,12 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 
 import { AgroupByPipe } from '../../pipes/agroup-by.pipe'
@@ -23,12 +24,9 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   studentList: any[]
   studentListFiltered: any[]
-
-  favoriteListFiltered: any[]
-  restListFiltered: any[]
-  archivedListFiltered: any[]
-
   studentListSubscription: Subscription
+
+  @ViewChild(StudentFiltersComponent, { static: true }) studentFilters: StudentFiltersComponent
 
   toggleConfig: any = {
     favorite: {
@@ -50,21 +48,18 @@ export class StudentListComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentService: StudentService,
-    private filterPipe: FilterPipe,
     private dialog: MatDialog,
-    private headerService: HeaderService
+    private headerService: HeaderService,
   ) { }
 
   ngOnInit(): void {
     this.headerService.configHeader({ title: 'STUDENTS' })
-    this.loadData()
-  }
 
-  loadData(): void {
     this.studentList = []
     this.studentListSubscription = this.studentService.observeStudentList().subscribe((result: any) => {
       this.studentList = UtilService.mapCollection(result)
       this.studentListFiltered = Object.assign(this.studentList)
+      this.studentFilters.filterList(this.studentList)
     })
   }
 

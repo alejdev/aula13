@@ -50,6 +50,10 @@
   &:focus {
     outline: -webkit-focus-ring-color auto 0;
   }
+
+  &.aumente-big:hover {
+    transform: scale(1.2);
+  }
 }
 
 // Colors

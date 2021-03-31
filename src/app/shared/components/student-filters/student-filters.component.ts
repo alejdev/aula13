@@ -7,6 +7,7 @@ import { SubjectPipe } from 'src/app/classroom/students/pipes/subject.pipe'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 
 import { FilterPipe } from '../../pipes/filter-by.pipe'
 
@@ -26,16 +27,22 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
 
   classroomListSubscription: Subscription
   subjectListSubscription: Subscription
+  routeSubscription: Subscription
 
   moreInfoConfig: any = {
     show: false,
     icon: 'caret-down'
   }
 
-  studentFilter: string = ''
-  classroomsFilter: any[] = []
-  subjectsFilter: any[] = []
-  showArchived: boolean = false
+  studentFilter: string
+  classroomsFilter: any[]
+  subjectsFilter: any[]
+
+  query: any = {
+    studentFilter: '',
+    classroomsFilter: [],
+    subjectsFilter: []
+  }
 
   constructor(
     private filterPipe: FilterPipe,
@@ -44,6 +51,8 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private subjectService: SubjectService,
     private classroomService: ClassroomService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,10 +60,15 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
       .subscribe((result) => this.classroomList = UtilService.mapCollection(result))
     this.subjectListSubscription = this.subjectService.observeSubjectList()
       .subscribe((result) => this.subjectList = UtilService.mapCollection(result))
+    this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
+      this.setModels(result)
+      this.filterList()
+    })
   }
 
-  filterList(): void {
-    this.studentListFiltered = this.filterPipe.transform(this.studentList, this.studentFilter)
+  filterList(list?: any[]): void {
+    const listToFilter = list ? list : this.studentList
+    this.studentListFiltered = this.filterPipe.transform(listToFilter, this.studentFilter)
     this.studentListFiltered = this.classroomPipe.transform(this.studentListFiltered, this.classroomsFilter)
     this.studentListFiltered = this.subjectPipe.transform(this.studentListFiltered, this.subjectsFilter)
 
@@ -62,9 +76,34 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     this.studentListFilter.emit(this.studentListFiltered)
   }
 
+  setModels(params: any): void {
+    this.studentFilter = params.studentFilter
+    this.classroomsFilter = typeof params.classroomsFilter == 'string' ? [params.classroomsFilter] : params.classroomsFilter
+    this.subjectsFilter = typeof params.subjectsFilter == 'string' ? [params.subjectsFilter] : params.subjectsFilter
+  }
+
+  goToQuery() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { ...this.formatParams() }
+    })
+  }
+
+  formatParams(): any {
+    const query: any = {}
+    if (this.studentFilter) { query.studentFilter = this.studentFilter }
+    if (this.classroomsFilter) {
+      query.classroomsFilter = typeof this.classroomsFilter == 'string' ? [this.classroomsFilter] : this.classroomsFilter
+    }
+    if (this.subjectsFilter) {
+      query.subjectsFilter = typeof this.subjectsFilter == 'string' ? [this.subjectsFilter] : this.subjectsFilter
+    }
+    return query
+  }
+
   resetFilter(): void {
     this.studentFilter = ''
-    this.filterList()
+    this.goToQuery()
   }
 
   showMore(): void {
@@ -78,5 +117,6 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.classroomListSubscription.unsubscribe()
     this.subjectListSubscription.unsubscribe()
+    this.routeSubscription.unsubscribe()
   }
 }
