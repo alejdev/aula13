@@ -65,16 +65,16 @@
         <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
 
           <!-- Classrooms -->
-          <div class="badge" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first">
+          <button mat-button class="badge" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{classroomsFilter: classroom}">
             <fa-icon class="mat-icon-12 mr-q mat-hint" icon="chalkboard"></fa-icon>
             <span class="mat-hint">{{classroom | classroomName}}</span>
-          </div>
+          </button>
 
           <!-- Subjects -->
-          <div class="badge badge-stroked" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
+          <button mat-button class="badge badge-stroked" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{subjectsFilter: subject}">
             <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
             <span class="mat-hint">{{subject | subjectName}}</span>
-          </div>
+          </button>
         </div>
 
         <!-- More Info -->

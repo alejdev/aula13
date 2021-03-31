@@ -140,6 +140,14 @@ mat-form-field {
   border-radius: 3px;
   border: 1px solid transparent;
 
+  &.mat-button {
+    padding: 6px 10px;
+    margin: 2px;
+    min-height: 0;
+    line-height: 0;
+    border: 1px solid transparent;
+}
+
   &:first-child {
     margin-left: 0;
   }

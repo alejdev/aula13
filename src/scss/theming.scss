@@ -37,7 +37,8 @@
     background-color: darken(map-get(map-get($colors, light-theme), background), 2%);
   }
   
-  .badge {
+  .badge,
+  .mat-button.badge {
     color: #888;
     border-color:  darken(map-get(map-get($colors, light-theme), background), 2%);
   }
@@ -102,7 +103,8 @@
   }
 
   .icon-button,
-  .badge {
+  .badge,
+  .mat-button.badge {
     background-color: #666;
   }
 
