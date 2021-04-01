@@ -30,7 +30,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   dateSince: Moment
   dateUntil: Moment
 
-  quickDates: any[] = ModelService.quickDatesModel
+  quickDates: any[] = ModelService.getQuickDatesModel(moment())
   quickDate: any
   showArchived: boolean = false
   query: any

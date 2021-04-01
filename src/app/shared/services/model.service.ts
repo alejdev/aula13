@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 
 import { Injectable } from '@angular/core'
 
@@ -163,67 +163,89 @@ export class ModelService {
     name: ''
   }
 
-  public static quickDatesModel: any[] = [{
-    id: 'allTime',
-    name: 'DATES.ALL_TIME',
-    since: null,
-    until: null,
-  }, {
-    id: 'today',
-    name: 'DATES.TODAY',
-    since: UtilService.firstMoment(moment()),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    id: 'yesterday',
-    name: 'DATES.YESTERDAY',
-    since: UtilService.firstMoment(moment().subtract(1, 'days')),
-    until: UtilService.lastMoment(moment().subtract(1, 'days')),
-  }, {
-    id: 'lastWeek',
-    name: 'DATES.LAST_WEEK',
-    since: UtilService.firstMoment(moment().subtract(6, 'days')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    id: 'thisWeek',
-    name: 'DATES.THIS_WEEK',
-    since: moment().clone().startOf('isoWeek'),
-    until: moment().clone().endOf('isoWeek'),
-  }, {
-    id: 'last15Days',
-    name: 'DATES.LAST_15DAYS',
-    since: UtilService.firstMoment(moment().subtract(14, 'days')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    id: 'lastMonth',
-    name: 'DATES.LAST_MONTH',
-    since: UtilService.firstMoment(moment().subtract(29, 'days')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    id: 'thisMonth',
-    name: 'DATES.THIS_MONTH',
-    since: moment().clone().startOf('month'),
-    until: moment().clone().endOf('month'),
-  }, {
-    id: 'last3Month',
-    name: 'DATES.LAST_3MONTH',
-    since: UtilService.firstMoment(moment().subtract(3, 'months')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    id: 'last6Month',
-    name: 'DATES.LAST_6MONTH',
-    since: UtilService.firstMoment(moment().subtract(6, 'months')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    id: 'lastYear',
-    name: 'DATES.LAST_YEAR',
-    since: UtilService.firstMoment(moment().subtract(1, 'years')),
-    until: UtilService.lastMoment(moment()),
-  }, {
-    id: 'thisYear',
-    name: 'DATES.THIS_YEAR',
-    since: moment().clone().startOf('year'),
-    until: moment().clone().endOf('year'),
-  }]
+  public static getQuickDatesModel(today: Moment): any[] {
+    return [{
+      id: 'allTime',
+      name: 'DATES.ALL_TIME',
+      since: null,
+      until: null,
+    }, {
+      id: 'today',
+      name: 'DATES.TODAY',
+      since: UtilService.firstMoment(moment(today)),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'yesterday',
+      name: 'DATES.YESTERDAY',
+      since: UtilService.firstMoment(moment(today).subtract(1, 'days')),
+      until: UtilService.lastMoment(moment(today).subtract(1, 'days')),
+    }, {
+      id: 'beforeYesterday',
+      name: 'DATES.BEFORE_YESTERDAY',
+      since: UtilService.firstMoment(moment(today).subtract(2, 'days')),
+      until: UtilService.lastMoment(moment(today).subtract(2, 'days')),
+    }, {
+      id: 'lastWeek',
+      name: 'DATES.LAST_WEEK',
+      since: UtilService.firstMoment(moment(today).subtract(6, 'days')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'thisWeek',
+      name: 'DATES.THIS_WEEK',
+      since: moment(today).clone().startOf('isoWeek'),
+      until: moment(today).clone().endOf('isoWeek'),
+    }, {
+      id: 'pastWeek',
+      name: 'DATES.PAST_WEEK',
+      since: moment(today).clone().startOf('isoWeek').subtract(1, 'week'),
+      until: moment(today).clone().endOf('isoWeek').subtract(1, 'week'),
+    }, {
+      id: 'last15Days',
+      name: 'DATES.LAST_15DAYS',
+      since: UtilService.firstMoment(moment(today).subtract(14, 'days')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'lastMonth',
+      name: 'DATES.LAST_MONTH',
+      since: UtilService.firstMoment(moment(today).subtract(29, 'days')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'thisMonth',
+      name: 'DATES.THIS_MONTH',
+      since: moment(today).clone().startOf('month'),
+      until: moment(today).clone().endOf('month'),
+    }, {
+      id: 'pastMonth',
+      name: 'DATES.PAST_MONTH',
+      since: moment(today).clone().startOf('month').subtract(1, 'month'),
+      until: moment(today).clone().endOf('month').subtract(1, 'month'),
+    }, {
+      id: 'last3Month',
+      name: 'DATES.LAST_3MONTH',
+      since: UtilService.firstMoment(moment(today).subtract(3, 'months')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'last6Month',
+      name: 'DATES.LAST_6MONTH',
+      since: UtilService.firstMoment(moment(today).subtract(6, 'months')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'lastYear',
+      name: 'DATES.LAST_YEAR',
+      since: UtilService.firstMoment(moment(today).subtract(1, 'years')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'thisYear',
+      name: 'DATES.THIS_YEAR',
+      since: moment(today).clone().startOf('year'),
+      until: moment(today).clone().endOf('year'),
+    }, {
+      id: 'pastYear',
+      name: 'DATES.PAST_YEAR',
+      since: moment(today).clone().startOf('year').subtract(1, 'year'),
+      until: moment(today).clone().endOf('year').subtract(1, 'year'),
+    }]
+  }
 
   constructor() { }
 }
