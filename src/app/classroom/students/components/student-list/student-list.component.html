@@ -7,7 +7,7 @@
     <div class="pb-5 mt-1" *ngIf="studentListFiltered?.length">
 
       <!-- Favorites -->
-      <div class="mb-1">
+      <div class="mb-1" *ngIf="(studentListFiltered | agroupBy: 'favorite').length">
         <button mat-button color="primary" (click)="showMore('favorite')">
           {{toggleConfig.favorite.text | translate}}
           <span class="translucide"> | {{(studentListFiltered | agroupBy: 'favorite').length}}</span>
@@ -21,7 +21,7 @@
       </div>
 
       <!-- Rest students -->
-      <div class="mb-1">
+      <div class="mb-1" *ngIf="(studentListFiltered | agroupBy).length">
         <button mat-button class="mat-hint" (click)="showMore('rest')">
           {{toggleConfig.rest.text | translate}}
           <span class="translucide"> | {{(studentListFiltered | agroupBy).length}}</span>
@@ -35,7 +35,7 @@
       </div>
 
       <!-- Archived students -->
-      <div class="mb-1">
+      <div class="mb-1" *ngIf="(studentListFiltered | agroupBy: 'archived').length">
         <button mat-button color="warn" (click)="showMore('archived')">
           {{toggleConfig.archived.text | translate}}
           <span class="translucide"> | {{(studentListFiltered | agroupBy: 'archived').length}}</span>
