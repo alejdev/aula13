@@ -18,7 +18,7 @@
     <h3 *ngIf="!dayListFiltered?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
 
     <!-- List length > 0 -->
-    <h3 *ngIf="dayListFiltered?.length" class="mt-3 txt-center mat-hint">{{'No hay más elementos' | translate}}</h3>
+    <h3 *ngIf="dayListFiltered?.length" class="mt-3 txt-center mat-hint">{{'MSG.NO_MORE_DAYS' | translate}}</h3>
 
     <!-- Floating button -->
     <a13-floating-button text="DAY.ADD" icon="edit" (click)="createDay()"></a13-floating-button>
