@@ -114,7 +114,7 @@
 
           <div class="mt-1">
             <ng-container *ngFor="let day of dayListFiltered">
-              <button mat-button class="mat-hint first-of-month">
+              <button *ngIf="day.firstOfMonth"mat-button class="mat-hint first-of-month">
                 <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
                 <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
               </button>
