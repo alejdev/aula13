@@ -6,6 +6,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
@@ -14,7 +15,7 @@ import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -43,6 +44,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   routerSubscription: Subscription
   dayListSubscription: Subscription
   dayListQuerySubscription: Subscription
+
+  @ViewChild(DayFiltersComponent, { static: true }) dayFilters: DayFiltersComponent
 
   constructor(
     private router: Router,
@@ -161,8 +164,9 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             student: { ...this.student },
           }
         })
-        this.dayListFiltered = this.agroupByDatePipe.transform(Object.assign(this.dayList))
+        this.dayListFiltered = Object.assign(this.dayList)
         this.headerService.mergeHeader({ length: this.dayListFiltered.length })
+        this.dayFilters.filterList(this.dayList)
       })
   }
 
