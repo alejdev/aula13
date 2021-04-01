@@ -1,0 +1,15 @@
+.credits-container {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: calc(var(--main-header-size) + 1rem);
+  text-align: center;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

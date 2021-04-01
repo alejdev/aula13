@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core'
 import { MatDividerModule } from '@angular/material/divider'
 
 import { ConfigurationComponent } from './components/configuration/configuration.component'
+import { CreditsComponent } from './components/credits/credits.component'
 import { SettingsRoutingModule } from './settings-routing.module'
 
 @NgModule({
   declarations: [
-    ConfigurationComponent
+    ConfigurationComponent,
+    CreditsComponent,
   ],
   imports: [
     // Routing
