@@ -116,4 +116,21 @@ export class UtilService {
       }
     })
   }
+
+  // return elem key value by string
+  public static keyByString(elem: any, keys: any) {
+    keys = keys.replace(/\[(\w+)\]/g, '.$1')
+    keys = keys.replace(/^\./, '')
+    const split = keys.split('.')
+
+    for (let i = 0, n = split.length; i < n; ++i) {
+      const key = split[i]
+      if (key in elem) {
+        elem = elem[key]
+      } else {
+        return
+      }
+    }
+    return elem
+  }
 }

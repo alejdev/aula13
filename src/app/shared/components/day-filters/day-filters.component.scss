@@ -1,6 +1,6 @@
 .dates,
 mat-form-field {
-  width: 100%;
+  width: 100% !important;
 }
 
 .dates-container {
@@ -9,6 +9,7 @@ mat-form-field {
 
 .quick-dates-container {
   margin-top: -17px;
+  width: 100% !important;
 }
 
 .archived {

@@ -1,3 +1,5 @@
+import { UtilService } from 'src/app/shared/services/util.service'
+
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
@@ -9,23 +11,6 @@ export class ShowByPipe implements PipeTransform {
     if (!array || !keys) {
       return array
     }
-    return array.filter((elem) => this.byString(elem, keys) == show)
-  }
-
-  // return elem key value by string
-  byString(elem: any, keys: any) {
-    keys = keys.replace(/\[(\w+)\]/g, '.$1')
-    keys = keys.replace(/^\./, '')
-    const split = keys.split('.')
-
-    for (let i = 0, n = split.length; i < n; ++i) {
-      const key = split[i]
-      if (key in elem) {
-        elem = elem[key]
-      } else {
-        return
-      }
-    }
-    return elem
+    return array.filter((elem) => UtilService.keyByString(elem, keys) == show)
   }
 }

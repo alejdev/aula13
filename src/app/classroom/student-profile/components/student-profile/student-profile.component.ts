@@ -5,6 +5,7 @@ import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
+import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
@@ -23,7 +24,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   selector: 'a13-student-profile',
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss'],
-  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe]
 })
 export class StudentProfileComponent implements OnInit, OnDestroy {
 

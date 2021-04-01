@@ -261,6 +261,8 @@
 		"OUT": "Fermer la session",
 		"UP": "Créer un compte"
 	},
+	"SORT_ALPHABETICALLY": "Trier par ordre alphabétique",
+	"SORT_BY_DATE": "Trier par date",
 	"SORT_COLUMN": "Colonne de tri",
 	"STUDENT": "Étudiant",
 	"STUDENTS": "Élèves",

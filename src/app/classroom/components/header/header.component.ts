@@ -53,6 +53,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleSearch() {
     this.headerService.toggleSearch()
+    if (this.headerService.searchStatus) {
+      setTimeout(() => { document.getElementById('searchInputFilter').focus() }, 300)
+    }
   }
 
   goBack() {

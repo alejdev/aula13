@@ -261,6 +261,8 @@
 		"OUT": "Sitzung schließen",
 		"UP": "Konto erstellen"
 	},
+	"SORT_ALPHABETICALLY": "alphabetisch sortieren",
+	"SORT_BY_DATE": "Sortieren nach Datum",
 	"SORT_COLUMN": "Spalte sortieren",
 	"STUDENT": "Student",
 	"STUDENTS": "Studenten",

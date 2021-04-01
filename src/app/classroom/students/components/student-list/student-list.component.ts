@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material'
 
 import { AgroupByPipe } from '../../pipes/agroup-by.pipe'
 import { ClassroomPipe } from '../../pipes/classroom.pipe'
+import { OrderByPipe } from '../../pipes/order-by.pipe'
 import { SubjectPipe } from '../../pipes/subject.pipe'
 import { StudentCreationComponent } from '../student-creation/student-creation.component'
 
@@ -18,7 +19,7 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
   selector: 'a13-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.scss'],
-  providers: [FilterPipe, ClassroomPipe, SubjectPipe, AgroupByPipe]
+  providers: [FilterPipe, ClassroomPipe, SubjectPipe, AgroupByPipe, OrderByPipe]
 })
 export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
 

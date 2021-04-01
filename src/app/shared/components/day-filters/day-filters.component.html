@@ -3,7 +3,7 @@
     <!-- Filter -->
     <mat-form-field appearance="outline">
       <mat-label>{{'SEARCH_DAY' | translate}}</mat-label>
-      <input matInput [(ngModel)]="dayFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_DAY' | translate}}" autocomplete="off">
+      <input id="searchInputFilter" matInput [(ngModel)]="dayFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_DAY' | translate}}" autofocus autocomplete="off">
       <fa-icon *ngIf="!dayFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
       <button class="reset-button" mat-button matSuffix *ngIf="dayFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
         <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
@@ -13,7 +13,7 @@
     <!-- Dates -->
     <div class="dates-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="8px">
 
-      <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex="66" fxFlex.xs="100">
+      <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex="50" fxFlex.xs="100">
         <mat-form-field appearance="outline" fxFlex="50">
           <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
           <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="selectDate()" [max]="dateUntil">
@@ -38,15 +38,21 @@
       </div>
 
       <!-- Select quick date -->
-      <mat-form-field appearance="outline" fxFlex="33" [ngClass.xs]="{'quick-dates-container': true}">
-        <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
-        <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="goToQuery()">
-          <mat-option *ngFor="let date of quickDates" [value]="date">
-            {{date.name | translate}}
-          </mat-option>
-        </mat-select>
-        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-h" icon="calendar"></fa-icon>
-      </mat-form-field>
+      <div [ngClass.xs]="{'quick-dates-container': true}" fxLayout="row" fxLayoutAlign="space-between center" fxFlex.gt-xs="50" fxFlex.xs="100%">
+        <mat-form-field appearance="outline">
+          <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
+          <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
+            <mat-option *ngFor="let date of quickDates" [value]="date">
+              {{date.name | translate}}
+            </mat-option>
+          </mat-select>
+          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-h" icon="calendar"></fa-icon>
+        </mat-form-field>
+
+        <button class="reset-button ml-h mb-1" mat-button mat-icon-button attr.aria-label="{{'SORT_ALPHABETICALLY' | translate}}" (click)="sort()">
+          <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': sortDirection}" [icon]="sortDirection ? 'sort-amount-down' : 'sort-amount-up-alt'"></fa-icon>
+        </button>
+      </div>
 
     </div>
 
@@ -59,7 +65,7 @@
   </div>
 
   <!-- clean all filters -->
-  <div *ngIf="dayFilter || dateSince || dateUntil || showArchived || quickDate" fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngIf="dayFilter || dateSince || dateUntil || showArchived || quickDate || sortDirection" fxLayout="row" fxLayoutAlign="space-between center">
     <span fxFlex></span>
     <button mat-button color="warn" class="badge badge-fill warn mat-small pointer" (click)="cleanFilters()">
       {{'CLEAN_ALL_FILTERS' | translate}}

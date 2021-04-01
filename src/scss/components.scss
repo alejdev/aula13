@@ -57,7 +57,8 @@
 }
 
 // Colors
-.color-primary {
+.light-theme .color-primary,
+.dark-theme .color-primary {
   color: $main-color;
 }
 

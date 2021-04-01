@@ -1,14 +1,21 @@
 <div class="mb-1">
   <div *ngIf="headerService.searchStatus">
+
     <!-- Filter -->
-    <mat-form-field appearance="outline">
-      <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
-      <input matInput [(ngModel)]="studentFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
-      <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
-      <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
-        <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
+        <input id="searchInputFilter" matInput [(ngModel)]="studentFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autofocus autocomplete="off">
+        <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
+        <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
+          <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+        </button>
+      </mat-form-field>
+
+      <button class="reset-button ml-h mb-1" mat-button mat-icon-button attr.aria-label="{{'SORT_ALPHABETICALLY' | translate}}" (click)="sort()">
+        <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': sortDirection}" [icon]="sortDirection ? 'sort-alpha-down' : 'sort-alpha-up-alt'"></fa-icon>
       </button>
-    </mat-form-field>
+    </div>
 
     <div class="selects" fxLayout="row" fxLayoutAlign="space-between center">
 
@@ -37,7 +44,7 @@
   </div>
 
   <!-- clean all filters -->
-  <div *ngIf="studentFilter || classroomsFilter?.length || subjectsFilter?.length" fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngIf="studentFilter || sortDirection || classroomsFilter?.length || subjectsFilter?.length" fxLayout="row" fxLayoutAlign="space-between center">
     <span fxFlex></span>
     <button mat-button color="warn" class="badge badge-fill warn mat-small pointer" (click)="cleanFilters()">
       {{'CLEAN_ALL_FILTERS' | translate}}

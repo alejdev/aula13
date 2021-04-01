@@ -261,6 +261,8 @@
 		"OUT": "Sign off",
 		"UP": "Create Account"
 	},
+	"SORT_ALPHABETICALLY": "Sort alphabetically",
+	"SORT_BY_DATE": "Sort by date",
 	"SORT_COLUMN": "Sort column",
 	"STUDENT": "Student",
 	"STUDENTS": "Students",
