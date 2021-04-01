@@ -50,7 +50,7 @@
 
     </div>
 
-    <div *ngIf="!hideArchivedFilter" class="mt-h mb-1" fxLayout="row" fxLayoutAlign="end center">
+    <div *ngIf="!hideArchivedFilter" class="mt-h mb-2" fxLayout="row" fxLayoutAlign="end center">
       <fa-icon class="mat-icon-20 mat-hint pr-1" icon="box" [ngClass]="{'archived': showArchived}"></fa-icon>
       <mat-slide-toggle labelPosition="before" (change)="goToQuery()" [(ngModel)]="showArchived">
         {{'FORM.SHOW_ARCHIVED' | translate}}
@@ -59,7 +59,7 @@
   </div>
 
   <!-- clean all filters -->
-  <div *ngIf="dayFilter || dateSince || dateUntil || showArchived || quickDate" class="selects" fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngIf="dayFilter || dateSince || dateUntil || showArchived || quickDate" fxLayout="row" fxLayoutAlign="space-between center">
     <span fxFlex></span>
     <button mat-button color="warn" class="badge badge-fill warn mat-small pointer" (click)="cleanFilters()">
       {{'CLEAN_ALL_FILTERS' | translate}}

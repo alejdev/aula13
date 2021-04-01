@@ -37,7 +37,7 @@
   </div>
 
   <!-- clean all filters -->
-  <div *ngIf="studentFilter || classroomsFilter?.length || subjectsFilter?.length" class="selects" fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngIf="studentFilter || classroomsFilter?.length || subjectsFilter?.length" fxLayout="row" fxLayoutAlign="space-between center">
     <span fxFlex></span>
     <button mat-button color="warn" class="badge badge-fill warn mat-small pointer" (click)="cleanFilters()">
       {{'CLEAN_ALL_FILTERS' | translate}}
