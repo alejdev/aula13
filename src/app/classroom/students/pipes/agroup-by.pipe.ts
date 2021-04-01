@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class AgroupByPipe implements PipeTransform {
 
-  transform(array: any, group: string): any {
+  transform(array: any, group?: string): any {
     if (!array) { return array }
 
     switch (group) {

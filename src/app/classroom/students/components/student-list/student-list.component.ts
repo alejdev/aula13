@@ -25,6 +25,9 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   studentList: any[]
   studentListFiltered: any[]
+  favoriteListFiltered: any[]
+  restListFiltered: any[]
+  archiveListFiltered: any[]
   studentListSubscription: Subscription
 
   @ViewChild(StudentFiltersComponent, { static: true }) studentFilters: StudentFiltersComponent
@@ -52,6 +55,7 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
     private dialog: MatDialog,
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
+    private agroupByPipe: AgroupByPipe
   ) { }
 
   ngOnInit(): void {
@@ -83,6 +87,12 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
         student: UtilService.clone(ModelService.studenModel)
       }
     })
+  }
+
+  agroupStudents($event: Event) {
+    this.favoriteListFiltered = this.agroupByPipe.transform($event, 'favorite')
+    this.restListFiltered = this.agroupByPipe.transform($event)
+    this.archiveListFiltered = this.agroupByPipe.transform($event, 'archived')
   }
 
   showMore(list: string, show?: boolean): void {

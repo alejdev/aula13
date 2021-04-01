@@ -1,48 +1,48 @@
 <section class="container container-padd">
   <div class="container-max sm">
 
-    <a13-student-filters [studentList]="studentList" (studentListFilter)="studentListFiltered=$event"></a13-student-filters>
+    <a13-student-filters [studentList]="studentList" (studentListFilter)="agroupStudents($event)"></a13-student-filters>
 
     <!-- Students list-->
     <div class="pb-5 mt-1" *ngIf="studentListFiltered?.length">
 
       <!-- Favorites -->
-      <div class="mb-1" *ngIf="(studentListFiltered | agroupBy: 'favorite').length">
+      <div class="mb-1" *ngIf="favoriteListFiltered.length">
         <button mat-button color="primary" (click)="showMore('favorite')">
           {{toggleConfig.favorite.text | translate}}
-          <span class="translucide"> | {{(studentListFiltered | agroupBy: 'favorite').length}}</span>
+          <span class="translucide"> | {{favoriteListFiltered.length}}</span>
           <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.favorite.icon"></fa-icon>
         </button>
         <ng-container *ngIf="toggleConfig.favorite.show">
-          <ng-container *ngFor="let student of studentListFiltered | agroupBy: 'favorite'">
+          <ng-container *ngFor="let student of favoriteListFiltered">
             <a13-student-card [(student)]="student"></a13-student-card>
           </ng-container>
         </ng-container>
       </div>
 
       <!-- Rest students -->
-      <div class="mb-1" *ngIf="(studentListFiltered | agroupBy).length">
+      <div class="mb-1" *ngIf="restListFiltered.length">
         <button mat-button class="mat-hint" (click)="showMore('rest')">
           {{toggleConfig.rest.text | translate}}
-          <span class="translucide"> | {{(studentListFiltered | agroupBy).length}}</span>
+          <span class="translucide"> | {{restListFiltered.length}}</span>
           <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.rest.icon"></fa-icon>
         </button>
         <ng-container *ngIf="toggleConfig.rest.show">
-          <ng-container *ngFor="let student of studentListFiltered | agroupBy">
+          <ng-container *ngFor="let student of restListFiltered">
             <a13-student-card [(student)]="student"></a13-student-card>
           </ng-container>
         </ng-container>
       </div>
 
       <!-- Archived students -->
-      <div class="mb-1" *ngIf="(studentListFiltered | agroupBy: 'archived').length">
+      <div class="mb-1" *ngIf="archiveListFiltered.length">
         <button mat-button color="warn" (click)="showMore('archived')">
           {{toggleConfig.archived.text | translate}}
-          <span class="translucide"> | {{(studentListFiltered | agroupBy: 'archived').length}}</span>
+          <span class="translucide"> | {{archiveListFiltered.length}}</span>
           <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.archived.icon"></fa-icon>
         </button>
         <ng-container *ngIf="toggleConfig.archived.show">
-          <ng-container *ngFor="let student of studentListFiltered | agroupBy: 'archived'">
+          <ng-container *ngFor="let student of archiveListFiltered">
             <a13-student-card [(student)]="student"></a13-student-card>
           </ng-container>
         </ng-container>
