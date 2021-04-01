@@ -9,6 +9,7 @@
 
 .profile-tabs {
   margin-top: -48px;
+  height: calc(100vh - var(--main-header-size) * 2 - var(--profile-header-height));
 }
 
 .first-of-month {

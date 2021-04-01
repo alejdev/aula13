@@ -1,5 +1,5 @@
 <section class="container container-nopadd">
-  <header class="profile-header shadow-bottom padding-content pb-h mat-card mat-elevation-z0">
+  <header #profileHeader class="profile-header shadow-bottom padding-content pb-h mat-card mat-elevation-z0">
 
     <div class="container-max sm mt-h" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
       <div fxLayout="column" fxLayoutAlign="start center">
@@ -100,8 +100,8 @@
   </header>
 
   <!-- Tabs -->
-  <div class="container-max sm profile-tabs">
-    <mat-tab-group mat-stretch-tabs color="primary">
+  <div class="container-max sm profile-tabs" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
+    <mat-tab-group mat-stretch-tabs color="primary" [(selectedIndex)]="selectedTab">
 
       <!-- Days -->
       <mat-tab>
@@ -114,7 +114,7 @@
 
           <div class="mt-1">
             <ng-container *ngFor="let day of dayListFiltered">
-              <button *ngIf="day.firstOfMonth"mat-button class="mat-hint first-of-month">
+              <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
                 <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
                 <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
               </button>
@@ -124,10 +124,10 @@
 
           <!-- Empty list -->
           <h3 *ngIf="!dayListFiltered?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
-      
+
           <!-- List length > 0 -->
           <h3 *ngIf="dayListFiltered?.length" class="mt-3 txt-center mat-hint">{{'MSG.NO_MORE_DAYS' | translate}}</h3>
-      
+
           <!-- Floating button -->
           <a13-floating-button text="DAY.ADD" icon="edit" [disabled]="student?.archived" (click)="createDay()">
           </a13-floating-button>
@@ -140,7 +140,7 @@
           <fa-icon class="mat-icon-20" icon="poll"></fa-icon>
         </ng-template>
         <div class="padding-content">
-          <p>{{'MARKS' | translate}}</p>
+          <p>Proximamente aquí aparecerán las {{'MARKS' | translate}}</p>
         </div>
       </mat-tab>
     </mat-tab-group>

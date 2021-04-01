@@ -16,7 +16,7 @@ import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -26,7 +26,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   styleUrls: ['./student-profile.component.scss'],
   providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe]
 })
-export class StudentProfileComponent implements OnInit, OnDestroy {
+export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
   studentId: any
   student: any
@@ -46,7 +46,15 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   dayListSubscription: Subscription
   dayListQuerySubscription: Subscription
 
+  swipeCoord: [number, number]
+  swipeTime: number
+  selectedTab: number = 0
+  tabCount: number = 2
+
+  profileHeaderHeight: number
+
   @ViewChild(DayFiltersComponent, { static: true }) dayFilters: DayFiltersComponent
+  @ViewChild('profileHeader', { static: true }) elementView: ElementRef
 
   constructor(
     private router: Router,
@@ -56,8 +64,11 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     private dayService: DayService,
     private headerService: HeaderService,
     private toastService: ToastService,
-    private agroupByDatePipe: AgroupByDatePipe,
+    private elementRef: ElementRef
   ) { }
+
+  ngAfterViewInit(): void {
+  }
 
   ngOnInit(): void {
 
@@ -165,11 +176,20 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             student: { ...this.student },
           }
         })
+
+        this.setProfileHeaderHeight()
+
         this.dayListFiltered = Object.assign(this.dayList)
         this.headerService.mergeHeader({ length: this.dayListFiltered.length })
         this.dayFilters.filterList(this.dayList)
       })
   }
+
+  setProfileHeaderHeight() {
+    this.profileHeaderHeight = this.elementView ? this.elementView.nativeElement.offsetHeight : 190
+    document.documentElement.style.setProperty('--profile-header-height', `${this.profileHeaderHeight}px`)
+  }
+
 
   createDay(): void {
     if (this.student.archived) {
@@ -186,6 +206,34 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           day: newDay,
         }
       })
+    }
+  }
+
+  swipe(e: TouchEvent, when: string): void {
+    const coord: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY]
+    const time = new Date().getTime()
+    if (when === 'start') {
+      this.swipeCoord = coord
+      this.swipeTime = time
+    } else if (when === 'end') {
+      const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]]
+      const duration = time - this.swipeTime
+      if (duration < 1000 //
+        && Math.abs(direction[0]) > 30 // Long enough
+        && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
+        const swipe = direction[0] < 0 ? 'next' : 'previous'
+        if (swipe === 'next') {
+          const isFirst = this.selectedTab === 0
+          if (this.selectedTab < this.tabCount - 1) {
+            this.selectedTab = isFirst ? 1 : this.selectedTab + 1
+          }
+        } else if (swipe === 'previous') {
+          const isLast = this.selectedTab === this.tabCount - 1
+          if (this.selectedTab >= 1) {
+            this.selectedTab = this.selectedTab - 1
+          }
+        }
+      }
     }
   }
 

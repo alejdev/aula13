@@ -8,7 +8,7 @@
   }
 
   &-nopadd {
-    max-height: calc(100vh - var(--main-header-size) * 2);
+    height: calc(100vh - var(--main-header-size) * 2);
   }
 }
 
@@ -145,7 +145,7 @@ mat-form-field {
   &.mat-flat-button,
   &.mat-stroked-button,
   &.mat-raised-button {
-    padding: 6px 10px;
+    padding: 5px 10px;
     margin: 2px;
     min-height: 0;
     line-height: 0;
