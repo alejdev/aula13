@@ -71,10 +71,6 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     this.studentListFiltered = this.subjectPipe.transform(this.studentListFiltered, this.subjectsFilter)
     this.studentListFiltered = this.orderByPipe.transform(this.studentListFiltered, `${this.sortDirection === 'reversed' ? '-' : ''}${this.sortBy}`)
 
-    // if (this.studentListFiltered[0]) {
-    //   console.log(`${this.studentListFiltered[0].personal.name} -> ${this.studentListFiltered[this.studentListFiltered.length - 1].personal.name}`);
-    // }
-
     if (this.studentListFiltered) {
       this.headerService.mergeHeader({ length: this.studentListFiltered.length })
     }

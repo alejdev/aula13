@@ -3,6 +3,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -55,7 +56,8 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
     private dialog: MatDialog,
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
-    private agroupByPipe: AgroupByPipe
+    private agroupByPipe: AgroupByPipe,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -70,11 +72,16 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loadData(): void {
     this.studentList = []
-    this.studentListSubscription = this.studentService.observeStudentList().subscribe((result: any) => {
-      this.studentList = UtilService.mapCollection(result)
-      this.studentListFiltered = Object.assign(this.studentList)
-      this.studentFilters.filterList(this.studentList)
-    })
+    this.loaderService.start()
+    this.studentListSubscription = this.studentService.observeStudentList().subscribe(
+      (result: any) => {
+        this.studentList = UtilService.mapCollection(result)
+        this.studentListFiltered = Object.assign(this.studentList)
+        this.studentFilters.filterList(this.studentList)
+      },
+      (error: any) => { },
+      () => { this.loaderService.stop() }
+    )
   }
 
   createStudent(): void {

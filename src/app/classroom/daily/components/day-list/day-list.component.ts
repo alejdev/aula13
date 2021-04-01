@@ -9,6 +9,7 @@ import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -38,7 +39,8 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
     private excludeArchivedPipe: ExcludeArchivedPipe,
-  ) { }
+    private loaderService: LoaderService
+    ) { }
 
   async ngOnInit(): Promise<any> {
     this.headerService.configHeader({ title: 'DAILY', search: true })
@@ -52,6 +54,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loadData(): void {
     this.dayList = []
+    this.loaderService.start()
     this.dayListSubscription = this.dayService.observeDayList().subscribe((result) => {
       this.dayList = UtilService.mapCollection(result).map((day: any) => {
         return {
@@ -62,7 +65,9 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.dayListFiltered = this.excludeArchivedPipe.transform(Object.assign(this.dayList), this.dayFilters.showArchived)
       this.headerService.mergeHeader({ length: this.dayListFiltered.length })
       this.dayFilters.filterList(this.dayList)
-    })
+    },
+    (error: any) => { },
+    () => { this.loaderService.stop() })
   }
 
   createDay(): void {
