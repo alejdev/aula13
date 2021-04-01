@@ -71,7 +71,7 @@
           </button>
 
           <!-- Subjects -->
-          <button mat-button class="badge badge-stroked" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{subjectsFilter: subject}">
+          <button mat-button class="badge badge-fill" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{subjectsFilter: subject}">
             <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
             <span class="mat-hint">{{subject | subjectName}}</span>
           </button>
