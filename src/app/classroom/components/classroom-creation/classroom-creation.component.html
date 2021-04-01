@@ -18,7 +18,7 @@
     <div class="f-wrap mb-1" fxLayout="column">
 
       <!-- Name -->
-      <mat-form-field appearance="outline" fxFlex="100">
+      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="100">
         <mat-label>{{'FORM.CLASSROOMS_NAME' | translate}}
         </mat-label>
         <input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.CLASSROOMS_NAME' | translate}}" autocomplete="off">

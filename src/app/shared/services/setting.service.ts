@@ -9,7 +9,8 @@ export class SettingService {
   private settings: any = {
     theme: 0,
     lang: 'es',
-    canPanSideMenu: true
+    canPanSideMenu: true,
+    inputAppearance: 'outline'
   }
 
   constructor() { }

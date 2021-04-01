@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { LanguageService } from 'src/app/classroom/services/language.service'
+import { ModelService } from 'src/app/shared/services/model.service'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
@@ -11,7 +12,7 @@ import { FormControl } from '@angular/forms'
 @Component({
   selector: 'a13-configuration',
   templateUrl: './configuration.component.html',
-  styleUrls: ['./configuration.component.scss']
+  styleUrls: ['./configuration.component.scss'],
 })
 export class ConfigurationComponent implements OnInit, OnDestroy {
 
@@ -19,8 +20,10 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   langControl = new FormControl('', [])
   languages: any
   themeControl: any
+  inputAppearance: boolean
   themeIsDark: boolean
   canPanSideMenu: boolean = this.settingService.value.canPanSideMenu
+  inputAppearances = ModelService.inputAppearances
 
   langSubscription: Subscription
   themeSubscription: Subscription
@@ -46,6 +49,9 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
       this.langControl.setValue(result)
     })
 
+    // Get input appearance
+    this.inputAppearance = this.settingService.value.inputAppearance
+
     // Get theme
     this.themeSubscription = this.themeService.theme.subscribe((result: any) => {
       this.themeControl = result
@@ -63,6 +69,10 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
   toggleTheme(): void {
     this.themeService.toggleTheme()
+  }
+
+  setInputAppearance(): void {
+    this.settingService.value = { inputAppearance: this.inputAppearance }
   }
 
   togglePanSideMenu(): void {

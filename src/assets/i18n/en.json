@@ -249,6 +249,12 @@
 	"SEARCH_STUDENT": "Search student",
 	"SEE": "Watch",
 	"SELECT": "Select",
+	"SETTING": {
+		"INPUT_APPEARANCE": "Appearance of forms",
+		"INPUT_APPEARANCE_DEFAULT": "Default",
+		"INPUT_APPEARANCE_FILL": "Filling",
+		"INPUT_APPEARANCE_OUTLINE": "Profiling"
+	},
 	"SETTINGS": "Configuration",
 	"SHOW_LESS": "Show less",
 	"SHOW_MORE": "Show more",

@@ -249,6 +249,12 @@
 	"SEARCH_STUDENT": "Student suchen",
 	"SEE": "Siehe",
 	"SELECT": "Auswählen",
+	"SETTING": {
+		"INPUT_APPEARANCE": "Erscheinungsbild der Formulare",
+		"INPUT_APPEARANCE_DEFAULT": "Normal",
+		"INPUT_APPEARANCE_FILL": "Füllen",
+		"INPUT_APPEARANCE_OUTLINE": "Profilierung"
+	},
 	"SETTINGS": "Konfiguration",
 	"SHOW_LESS": "Zeige weniger",
 	"SHOW_MORE": "Mehr anzeigen",

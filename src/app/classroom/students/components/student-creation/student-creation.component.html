@@ -23,7 +23,7 @@
       <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxFlex ngClass.xs="full">
 
         <!-- Name -->
-        <mat-form-field appearance="outline" fxFlex="100">
+        <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="100">
           <mat-label>{{'FORM.NAME' | translate}}{{'AND' | translate}} {{'FORM.SURNAME' | translate | lowercase}}
           </mat-label>
           <input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}" autocomplete="off">
@@ -31,7 +31,7 @@
         </mat-form-field>
 
         <!-- Birthdate -->
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
+        <mat-form-field class="mb-1" [appearance]="'inputAppearance' | settingValue" fxFlex="50">
           <mat-label>{{'FORM.BIRTHDATE' | translate}}</mat-label>
           <input class="pl-h" matInput formControlName="birthdateCtrl" [matDatepicker]="birthdatePicker" [max]="maxDate">
           <mat-datepicker #birthdatePicker></mat-datepicker>
@@ -41,7 +41,7 @@
         </mat-form-field>
 
         <!-- Academic course -->
-        <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
+        <mat-form-field class="mb-1" [appearance]="'inputAppearance' | settingValue" fxFlex="50">
           <mat-label>{{'FORM.ACADEMIC_COURSE' | translate}}</mat-label>
           <mat-select formControlName="academicCourseCtrl" [compareWith]="equals" attr.aria-label="{{'FORM.ACADEMIC_COURSE' | translate}}">
             <mat-option>-- {{'NONE' | translate}} --</mat-option>
@@ -56,7 +56,7 @@
       </div>
 
       <!-- Details -->
-      <mat-form-field appearance="outline" fxFlex="100">
+      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="100">
         <mat-label>{{'FORM.OBSERVATIONS' | translate}}</mat-label>
         <textarea matInput formControlName="observationsCtrl" rows="4"></textarea>
         <!-- <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="file-alt"></fa-icon> -->
@@ -75,14 +75,14 @@
           <ng-container formGroupName="{{i}}">
 
             <!-- Name -->
-            <mat-form-field fxFlex="45" appearance="outline">
+            <mat-form-field fxFlex="45" [appearance]="'inputAppearance' | settingValue">
               <mat-label>{{'FORM.NAME' | translate}}</mat-label>
               <input matInput formControlName="contactPhoneNameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}" maxlength="20" autocomplete="off">
               <!-- <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="user"></fa-icon> -->
             </mat-form-field>
 
             <!-- Phone -->
-            <mat-form-field fxFlex="45" appearance="outline">
+            <mat-form-field fxFlex="45" [appearance]="'inputAppearance' | settingValue">
               <mat-label>{{'FORM.PHONE' | translate}}</mat-label>
               <input matInput formControlName="contactPhoneNumberCtrl" attr.aria-label="{{'FORM.PHONE' | translate}}" autocomplete="off">
               <!-- <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="phone-alt"></fa-icon> -->
@@ -110,7 +110,7 @@
     <div formGroupName="musicalFormGroup" class="mb-H mt-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
 
       <!-- Conservatory course -->
-      <mat-form-field appearance="outline" fxFlex="50">
+      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
         <mat-label>{{'FORM.CONSERVATORY_COURSE' | translate}}</mat-label>
         <mat-select formControlName="courseCtrl" [compareWith]="equals" attr.aria-label="{{'FORM.CONSERVATORY_COURSE' | translate}}">
           <mat-option>-- {{'NONE' | translate}} --</mat-option>
@@ -124,14 +124,14 @@
       </mat-form-field>
 
       <!-- Teacher-->
-      <mat-form-field appearance="outline" fxFlex="50">
+      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
         <mat-label>{{'FORM.CONSERVATORY_TEACHER' | translate}}</mat-label>
         <input matInput formControlName="teacherCtrl" attr.aria-label="{{'FORM.CONSERVATORY_TEACHER' | translate}}" autocomplete="off">
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="chalkboard-teacher"></fa-icon>
       </mat-form-field>
 
       <!-- Instrument -->
-      <mat-form-field appearance="outline" fxFlex="100">
+      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="100">
         <mat-label>{{'FORM.INSTRUMENT' | translate}}</mat-label>
         <mat-select formControlName="instrumentCtrl" [compareWith]="equals" attr.aria-label="{{'FORM.INSTRUMENT' | translate}}">
           <mat-option>-- {{'NONE' | translate}} --</mat-option>
@@ -151,7 +151,7 @@
     <div formGroupName="classroomFormGroup" class="mb-H mt-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
 
       <!-- Classroom -->
-      <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
+      <mat-form-field class="mb-1" [appearance]="'inputAppearance' | settingValue" fxFlex="50">
         <mat-label>{{'CLASSROOMS' | translate}}</mat-label>
         <mat-select formControlName="classroomsCtrl" multiple attr.aria-label="{{'CLASSROOMS' | translate}}">
           <mat-option *ngFor="let classroom of classroomList" [value]="classroom.id">
@@ -163,7 +163,7 @@
       </mat-form-field>
 
       <!-- Subjects -->
-      <mat-form-field class="mb-1" appearance="outline" fxFlex="50">
+      <mat-form-field class="mb-1" [appearance]="'inputAppearance' | settingValue" fxFlex="50">
         <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
         <mat-select formControlName="subjectsCtrl" multiple attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
           <mat-option *ngFor="let subject of subjectList" [value]="subject.id">

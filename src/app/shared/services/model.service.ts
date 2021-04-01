@@ -11,6 +11,17 @@ export class ModelService {
 
   public static ageList: number[] = Array(100).fill(0).map((e, i) => i + 1)
 
+  public static inputAppearances: any[] = [{
+    name: 'SETTING.INPUT_APPEARANCE_DEFAULT',
+    id: 'standard'
+  }, {
+    name: 'SETTING.INPUT_APPEARANCE_OUTLINE',
+    id: 'outline'
+  }, {
+    name: 'SETTING.INPUT_APPEARANCE_FILL',
+    id: 'fill'
+  }]
+
   public static avatarList: string[] = [
     'user-default', 'boy-20', 'girl-9', 'girl-14',
     'boy-15', 'boy-10', 'girl-22', 'girl-1',

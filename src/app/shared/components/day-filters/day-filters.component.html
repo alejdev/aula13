@@ -1,7 +1,7 @@
 <div class="mb-1">
   <div *ngIf="headerService.searchStatus">
     <!-- Filter -->
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="'inputAppearance' | settingValue">
       <mat-label>{{'SEARCH_DAY' | translate}}</mat-label>
       <input id="searchInputFilter" matInput [(ngModel)]="dayFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_DAY' | translate}}" autofocus autocomplete="off">
       <fa-icon *ngIf="!dayFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
@@ -14,7 +14,7 @@
     <div class="dates-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="8px">
 
       <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex="50" fxFlex.xs="100">
-        <mat-form-field appearance="outline" fxFlex="50">
+        <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
           <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
           <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="selectDate()" [max]="dateUntil">
           <mat-datepicker #dateSincePicker></mat-datepicker>
@@ -25,7 +25,7 @@
           </button>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="50">
+        <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
           <mat-label>{{'FORM.UNTIL' | translate}}</mat-label>
           <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="selectDate()" [min]="dateSince">
           <mat-datepicker #dateUntilPicker></mat-datepicker>
@@ -39,7 +39,7 @@
 
       <!-- Select quick date -->
       <div [ngClass.xs]="{'quick-dates-container': true}" fxLayout="row" fxLayoutAlign="space-between center" fxFlex.gt-xs="50" fxFlex.xs="100%">
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="'inputAppearance' | settingValue">
           <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
           <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
             <mat-option *ngFor="let date of quickDates" [value]="date">

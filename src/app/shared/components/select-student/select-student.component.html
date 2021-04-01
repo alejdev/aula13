@@ -1,7 +1,7 @@
 <div [formGroup]="studentFormGroup">
 
 	<!-- Select simple -->
-	<mat-form-field *ngIf="!multiple" appearance="outline" fxFlex=100>
+	<mat-form-field *ngIf="!multiple" [appearance]="'inputAppearance' | settingValue" fxFlex=100>
 		<mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
 		<div matPrefix class="avatar-container">
 			<img class="avatar avatar-xs p-0"
@@ -23,7 +23,7 @@
 	</mat-form-field>
 
 	<!-- Select multiple-->
-	<mat-form-field *ngIf="multiple" appearance="outline" fxFlex=100>
+	<mat-form-field *ngIf="multiple" [appearance]="'inputAppearance' | settingValue" fxFlex=100>
 		<mat-label>{{'FORM.STUDENT_LIST' | translate}}</mat-label>
 		<mat-select formControlName="studentCtrl" multiple attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}">
 			<mat-option *ngFor="let student of studentList" [value]="student.id">

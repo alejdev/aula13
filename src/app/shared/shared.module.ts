@@ -25,7 +25,7 @@ import { MatSortModule } from '@angular/material/sort'
 import { RouterModule } from '@angular/router'
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 import { FaConfig, FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { faArrowLeft, faBars, faBirthdayCake, faBook, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGuitar, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faBars, faBirthdayCake, faBook, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGuitar, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faSquare, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
 import { DayCardComponent } from './components/day-card/day-card.component'
@@ -43,6 +43,7 @@ import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { DateFilterPipe } from './pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from './pipes/exclude-archived.pipe'
 import { FilterPipe } from './pipes/filter-by.pipe'
+import { SettingValuePipe } from './pipes/setting-value.pipe'
 import { ShowByPipe } from './pipes/show-by.pipe'
 import { SrcImagePipe } from './pipes/src-image.pipe'
 import { StringByPipe } from './pipes/string-by.pipe'
@@ -90,10 +91,10 @@ registerLocaleData(localeFr, 'fr')
     DateFilterPipe,
     ShowByPipe,
     ExcludeArchivedPipe,
+    AgroupByDatePipe,
+    SettingValuePipe,
 
     ScrollableDirective,
-
-    AgroupByDatePipe,
   ],
   imports: [
     // Angular
@@ -162,6 +163,8 @@ registerLocaleData(localeFr, 'fr')
     DateFilterPipe,
     ShowByPipe,
     ExcludeArchivedPipe,
+    AgroupByDatePipe,
+    SettingValuePipe,
 
     ScrollableDirective,
 
@@ -233,6 +236,7 @@ export class SharedModule {
       faSortAlphaUpAlt,
       faSortAmountDown,
       faSortAmountUpAlt,
+      faSquare,
       faStar,
       faStream,
       faSun,

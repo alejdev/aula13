@@ -4,10 +4,9 @@
     <!-- Lenguaje -->
     <h3 class="mat-h2 mt-h mat-hint">{{'GENERAL' | translate}}</h3>
 
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
-      <img class="flag-selected" [src]="getFlag(langControl.value)"
-        alt="{{'FLAG_OF' | translate}} {{langControl.value.name | translate}}">
-      <mat-form-field appearance="outline">
+    <div class="mb-2" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <img class="flag-selected" [src]="getFlag(langControl.value)" alt="{{'FLAG_OF' | translate}} {{langControl.value.name | translate}}">
+      <mat-form-field [appearance]="inputAppearance">
         <mat-label>{{'LANGUAGE' | translate}}</mat-label>
         <mat-select [formControl]="langControl" (selectionChange)="setLang()">
           <mat-option *ngFor="let lang of languages" [value]="lang">
@@ -26,11 +25,23 @@
     <!-- Theme -->
     <h3 class="mat-h2 mat-hint">{{'THEME' | translate}}</h3>
 
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+    <div class="mb-2" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
       <fa-icon class="mat-icon-22 color-primary" [icon]="themeControl.icon"></fa-icon>
       <mat-slide-toggle labelPosition="before" (change)="toggleTheme()" [(ngModel)]="themeIsDark">
         {{'THEMING.DARK_MODE' | translate}}
       </mat-slide-toggle>
+    </div>
+
+    <div class="mb-2" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <fa-icon class="mat-icon-22 color-primary mb-h" icon="square"></fa-icon>
+      <mat-form-field [appearance]="inputAppearance | settingValue">
+        <mat-label>{{'SETTING.INPUT_APPEARANCE' | translate}}</mat-label>
+        <mat-select [(ngModel)]="inputAppearance" (selectionChange)="setInputAppearance()">
+          <mat-option *ngFor="let appearance of inputAppearances" [value]="appearance.id">
+            <span>{{appearance.name | translate}}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <mat-divider class="mt-2 mb-1"></mat-divider>
@@ -38,7 +49,7 @@
     <!-- Behavior -->
     <h3 class="mat-h2 mat-hint">{{'BEHAVIOR.TITLE' | translate}}</h3>
 
-    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
+    <div class="mb-2" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
       <fa-icon class="mat-icon-20 color-primary color-primary" icon="stream"></fa-icon>
       <div fxLayout="column">
         <mat-slide-toggle labelPosition="before" (change)="togglePanSideMenu()" [(ngModel)]="canPanSideMenu">
