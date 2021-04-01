@@ -6,6 +6,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
@@ -21,7 +22,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   selector: 'a13-student-profile',
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss'],
-  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe]
 })
 export class StudentProfileComponent implements OnInit, OnDestroy {
 
@@ -50,7 +51,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     private studentService: StudentService,
     private dayService: DayService,
     private headerService: HeaderService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private agroupByDatePipe: AgroupByDatePipe,
   ) { }
 
   ngOnInit(): void {
@@ -159,7 +161,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             student: { ...this.student },
           }
         })
-        this.dayListFiltered = Object.assign(this.dayList)
+        this.dayListFiltered = this.agroupByDatePipe.transform(Object.assign(this.dayList))
         this.headerService.mergeHeader({ length: this.dayListFiltered.length })
       })
   }

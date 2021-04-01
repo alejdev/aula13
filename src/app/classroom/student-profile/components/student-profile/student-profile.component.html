@@ -109,10 +109,19 @@
           <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
         </ng-template>
         <div class="padding-content">
-          <a13-day-filters [dayList]="dayList" [hideArchivedFilter]="true" (dayListFilter)="dayListFiltered = $event"></a13-day-filters>
-          <ng-container *ngFor="let day of dayListFiltered">
-            <a13-day-card [(day)]="day"></a13-day-card>
-          </ng-container>
+
+          <a13-day-filters [dayList]="dayList" [hideArchivedFilter]="true" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+
+          <div class="mt-1">
+            <ng-container *ngFor="let day of dayListFiltered">
+              <button mat-button class="mat-hint first-of-month">
+                <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
+                <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
+              </button>
+              <a13-day-card [(day)]="day"></a13-day-card>
+            </ng-container>
+          </div>
+
           <a13-floating-button text="DAY.ADD" icon="edit" [disabled]="student?.archived" (click)="createDay()">
           </a13-floating-button>
         </div>

@@ -5,6 +5,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 
+import { AgroupByDatePipe } from '../../pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from '../../pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from '../../pipes/exclude-archived.pipe'
 import { FilterPipe } from '../../pipes/filter-by.pipe'
@@ -38,6 +39,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     private filterPipe: FilterPipe,
     private dateFilterPipe: DateFilterPipe,
     private excludeArchivedPipe: ExcludeArchivedPipe,
+    private agroupByDatePipe: AgroupByDatePipe,
     public headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -55,6 +57,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     this.dayListFiltered = this.filterPipe.transform(list ? list : this.dayList, this.dayFilter)
     this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil)
     this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayListFiltered, this.showArchived)
+    this.dayListFiltered = this.agroupByDatePipe.transform(this.dayListFiltered)
 
     if (this.dayListFiltered) {
       this.headerService.mergeHeader({ length: this.dayListFiltered.length })

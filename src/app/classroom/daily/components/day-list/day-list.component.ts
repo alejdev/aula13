@@ -4,6 +4,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
+import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
@@ -17,7 +18,7 @@ import { MatDialog } from '@angular/material'
   selector: 'a13-day-list',
   templateUrl: './day-list.component.html',
   styleUrls: ['./day-list.component.scss'],
-  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe]
 })
 export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
 

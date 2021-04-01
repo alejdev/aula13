@@ -10,3 +10,15 @@
 .profile-tabs {
   margin-top: -48px;
 }
+
+.first-of-month {
+  margin-top: 1rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &.mat-button span {
+    text-transform: capitalize;
+  }
+}

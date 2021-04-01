@@ -38,6 +38,7 @@ import { StudentFiltersComponent } from './components/student-filters/student-fi
 import { ToastComponent } from './components/toast/toast.component'
 import { ScrollableDirective } from './directives/scrollable.directive'
 import { AgePipe } from './pipes/age.pipe'
+import { AgroupByDatePipe } from './pipes/agroup-by-date.pipe'
 import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { DateFilterPipe } from './pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from './pipes/exclude-archived.pipe'
@@ -91,6 +92,8 @@ registerLocaleData(localeFr, 'fr')
     ExcludeArchivedPipe,
 
     ScrollableDirective,
+
+    AgroupByDatePipe,
   ],
   imports: [
     // Angular
