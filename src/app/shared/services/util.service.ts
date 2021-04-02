@@ -117,7 +117,7 @@ export class UtilService {
     })
   }
 
-  // return elem key value by string
+  // Return elem key value by string
   public static keyByString(elem: any, keys: any) {
     keys = keys.replace(/\[(\w+)\]/g, '.$1')
     keys = keys.replace(/^\./, '')

@@ -1,0 +1,32 @@
+.link-forgot-container {
+  height: 10px;
+
+  .link-forgot {
+    position: relative;
+    top: -15px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  min-width: 100px;
+
+  button[mat-icon-button] {
+    position: relative;
+    top: -8px;
+
+    fa-icon {
+      top: 0;
+      margin-left: 0;
+    }
+  }
+}
+
+.action-button {
+  height: 48px;
+}

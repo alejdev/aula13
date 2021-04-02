@@ -22,6 +22,20 @@ export class ModelService {
     id: 'fill'
   }]
 
+  public static signInSocialNetworks: any[] = [{
+    txt: 'SIGN.IN_WITH_GOOGLE',
+    icon: 'google-icon',
+    id: 'google',
+  }, {
+    txt: 'SIGN.IN_WITH_FACEBOOK',
+    icon: 'facebook-icon',
+    id: 'facebook',
+  }, {
+    txt: 'SIGN.IN_WITH_TWITTER',
+    icon: 'twitter-icon',
+    id: 'twitter',
+  }]
+
   public static avatarList: string[] = [
     'user-default', 'boy-20', 'girl-9', 'girl-14',
     'boy-15', 'boy-10', 'girl-22', 'girl-1',

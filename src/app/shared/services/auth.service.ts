@@ -90,11 +90,22 @@ export class AuthService {
     this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
   }
 
+  public forgotPassword(email: string): Promise<any> {
+    this.loaderService.start()
+    return this.angularFireAuth.auth.sendPasswordResetEmail(email)
+      .then(() => {
+        this.router.navigate(['authentication'])
+        this.toastService.info({ text: 'MSG.FORGOT_PASSWORD_EMAIL' })
+      })
+      .catch(this.error)
+      .finally(() => this.loaderService.stop())
+  }
+
   public signOut(): Promise<any> {
     this.loaderService.start()
     return this.angularFireAuth.auth.signOut()
       .then(() => {
-        this.router.navigate(['login'])
+        this.router.navigate(['authentication'])
         this.toastService.info({ text: 'MSG.BYE' })
       })
       .catch(this.error)

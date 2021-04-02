@@ -1,11 +1,28 @@
 import { NgModule } from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
+import { RouterModule, Routes } from '@angular/router'
 
-import { LoginComponent } from 'src/app/authentication/components/login/login.component'
+import { AuthenticationComponent } from './components/authentication/authentication.component'
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component'
+import { SignInComponent } from './components/sign-in/sign-in.component'
+import { SignUpComponent } from './components/sign-up/sign-up.component'
 
 const routes: Routes = [{
   path: '',
-  component: LoginComponent,
+  component: AuthenticationComponent,
+  children: [{
+    path: '',
+    redirectTo: 'signIn',
+    pathMatch: 'full'
+  }, {
+    path: 'signIn',
+    component: SignInComponent
+  }, {
+    path: 'signUp',
+    component: SignUpComponent
+  }, {
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent
+  }]
 }]
 
 @NgModule({
