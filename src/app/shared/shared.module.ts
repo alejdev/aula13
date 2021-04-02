@@ -7,7 +7,7 @@ import localeIt from '@angular/common/locales/it'
 import { LOCALE_ID, NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSlideToggleModule } from '@angular/material'
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSlideToggleModule, MatTooltipModule } from '@angular/material'
 import { MomentDateAdapter } from '@angular/material-moment-adapter'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
@@ -117,6 +117,7 @@ registerLocaleData(localeFr, 'fr')
     MatSortModule,
     MatDatepickerModule,
     MatSlideToggleModule,
+    MatTooltipModule,
 
     // Third parties
     FlexLayoutModule,
@@ -145,6 +146,7 @@ registerLocaleData(localeFr, 'fr')
     MatDatepickerModule,
     MatMenuModule,
     MatSlideToggleModule,
+    MatTooltipModule,
 
     // Third parties
     FlexLayoutModule,

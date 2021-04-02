@@ -10,7 +10,7 @@ export class SettingService {
     theme: 0,
     lang: 'es',
     canPanSideMenu: false,
-    inputAppearance: 'outline'
+    inputAppearance: 'fill'
   }
 
   constructor() { }

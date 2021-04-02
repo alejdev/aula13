@@ -50,10 +50,14 @@
     </div>
 
     <!-- Empty list -->
+    <h3 *ngIf="!studentList?.length" class="mt-3 txt-center mat-hint">{{'MSG.STUDENT_LIST_EMPTY' | translate}}
+    </h3>
+
+    <!-- Empty filtered list -->
     <h3 *ngIf="!studentListFiltered?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}
     </h3>
 
     <!-- Floating button -->
-    <a13-floating-button text="ADD_STUDENT" icon="user-plus" (click)="createStudent()"></a13-floating-button>
+    <a13-floating-button [pulse]="!studentList?.length" text="ADD_STUDENT" tooltip="ADD_STUDENT" icon="user-plus" (click)="createStudent()"></a13-floating-button>
   </div>
 </section>

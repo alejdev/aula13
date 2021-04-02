@@ -1,7 +1,7 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core'
-import { Router } from '@angular/router'
-
 import { animateFloatingButton } from 'src/app/classroom/classroom.animation'
+
+import { Component, HostListener, Input, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'a13-floating-button',
@@ -12,15 +12,17 @@ import { animateFloatingButton } from 'src/app/classroom/classroom.animation'
 export class FloatingButtonComponent implements OnInit {
 
   @Input() text: string
+  @Input() tooltip: string
   @Input() icon: string
   @Input() action: any
   @Input() route: any
   @Input() disabled: boolean
-  @Input() animate: boolean
+  @Input() rotate: boolean
+  @Input() pulse: boolean
 
   buttonState: any
-  @HostListener('mouseenter') onMouseEnter(): void { this.buttonState = this.animate ? 'enter' : false }
-  @HostListener('mouseleave') onMouseLeave(): void { this.buttonState = this.animate ? 'leave' : false }
+  @HostListener('mouseenter') onMouseEnter(): void { this.buttonState = this.rotate ? 'enter' : false }
+  @HostListener('mouseleave') onMouseLeave(): void { this.buttonState = this.rotate ? 'leave' : false }
 
   constructor(
     private router: Router

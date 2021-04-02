@@ -1,0 +1,28 @@
+@import "scss/variables";
+
+.pulse {
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba($main-color-dark, .4);
+  animation: pulse 1.7s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba($main-color-dark, .5);
+    transform: scale(.95);
+  }
+
+  30% {
+    transform: scale(1.05);
+  }
+
+  50% {
+    box-shadow: 0 0 0 15px rgba($main-color-dark, 0);    
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba($main-color-dark, 0);
+    transform: scale(.95);
+  }
+}

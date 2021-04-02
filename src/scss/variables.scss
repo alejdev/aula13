@@ -1,6 +1,8 @@
 // scss variables
 
-$main-color             : #0084ff;
+$main-color             : rgb(0, 132, 255);
+$main-color-dark        : darken($main-color, 20%);
+$main-color-light       : lighten($main-color, 20%);
 $main-light-hue         : 700;
 $main-dark-hue          : 400;
 
@@ -15,6 +17,8 @@ $tertiary-dark-hue      : 500;
 $colors: (
   light-theme: (
     primary             : $main-color,
+    primary-dark        : $main-color-dark,
+    primary-light       : $main-color-light,
     accent              : $second-color,
     warn                : $tertiary-color,
     background          : #f4f7fd,
@@ -22,6 +26,8 @@ $colors: (
   ),
   dark-theme: (
     primary             : $main-color,
+    primary-dark        : $main-color-dark,
+    primary-light       : $main-color-light,
     accent              : $second-color,
     warn                : $tertiary-color,
     background          : #333,

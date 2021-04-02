@@ -7,6 +7,10 @@
   border-radius: 50%;
   cursor: pointer;
 
+  &:hover:enabled {
+    animation: pulse 1.7s infinite;
+  }
+
   fa-icon {
     position: relative;
     top: 0px;
