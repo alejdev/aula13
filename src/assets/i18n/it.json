@@ -189,6 +189,7 @@
 		"CLASSROOM_DELETE_OK": "Classroom è stata eliminata correttamente",
 		"CLASSROOM_UPDATE_OK": "Aula modificata",
 		"DAY_CREATE_OK": "È stato creato un nuovo record",
+		"DAY_CREATION_DISABLED_NO_STUDENTS": "Per creare un nuovo record devi avere almeno uno studente iscritto alla tua scuola.",
 		"DAY_DELETE": "Sei sicuro di voler eliminare questo record?",
 		"DAY_DELETE_OK": "Il registro è stato cancellato con successo",
 		"DAY_NOT_EXIST": "Questo record non esiste",

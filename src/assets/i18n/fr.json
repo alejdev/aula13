@@ -189,6 +189,7 @@
 		"CLASSROOM_DELETE_OK": "La salle de classe a été supprimée avec succès",
 		"CLASSROOM_UPDATE_OK": "Salle de classe modifiée",
 		"DAY_CREATE_OK": "Un nouveau record a été créé",
+		"DAY_CREATION_DISABLED_NO_STUDENTS": "Pour créer un nouvel enregistrement, vous devez avoir au moins un élève inscrit dans votre école.",
 		"DAY_DELETE": "Voulez-vous vraiment supprimer cet enregistrement?",
 		"DAY_DELETE_OK": "Le registre a été supprimé avec succès",
 		"DAY_NOT_EXIST": "Cet enregistrement n'existe pas",

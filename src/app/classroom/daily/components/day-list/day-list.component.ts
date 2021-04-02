@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
@@ -11,10 +12,12 @@ import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
+import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'a13-day-list',
@@ -29,6 +32,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
   studentList: any[]
 
   dayListSubscription: Subscription
+  studentListSubscription: Subscription
 
   @ViewChild(DayFiltersComponent, { static: true }) dayFilters: DayFiltersComponent
 
@@ -39,8 +43,10 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
     private excludeArchivedPipe: ExcludeArchivedPipe,
-    private loaderService: LoaderService
-    ) { }
+    private loaderService: LoaderService,
+    private toastService: ToastService,
+    private router: Router
+  ) { }
 
   async ngOnInit(): Promise<any> {
     this.headerService.configHeader({ title: 'DAILY', search: true })
@@ -55,6 +61,8 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
   loadData(): void {
     this.dayList = []
     this.loaderService.start()
+
+    // Get days
     this.dayListSubscription = this.dayService.observeDayList().subscribe((result) => {
       this.dayList = UtilService.mapCollection(result).map((day: any) => {
         return {
@@ -66,24 +74,51 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.headerService.mergeHeader({ length: this.dayListFiltered.length })
       this.dayFilters.filterList(this.dayList)
     },
-    (error: any) => { },
-    () => { this.loaderService.stop() })
+      (error: any) => { },
+      () => { this.loaderService.stop() })
+
+    // Get students
+    this.studentListSubscription = this.studentService.observeStudentList().subscribe((result) => {
+      this.studentList = UtilService.mapCollection(result)
+    })
   }
 
   createDay(): void {
-    this.dialog.open(DayCreationComponent, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      disableClose: true,
-      data: {
-        day: ModelService.dayModel
-      }
-    })
+    if (!this.studentList.length) {
+      this.toastService.warning({
+        text: 'MSG.DAY_CREATION_DISABLED_NO_STUDENTS',
+        action: {
+          text: 'ADD_STUDENT',
+          f: () => {
+            this.router.navigate(['/aula/alumnos'])
+            this.dialog.open(StudentCreationComponent, {
+              width: 'calc(100vw)',
+              maxWidth: '800px',
+              autoFocus: false,
+              disableClose: true,
+              data: {
+                student: UtilService.clone(ModelService.studenModel)
+              }
+            })
+          }
+        }
+      })
+    } else {
+      this.dialog.open(DayCreationComponent, {
+        width: 'calc(100vw)',
+        maxWidth: '800px',
+        autoFocus: false,
+        disableClose: true,
+        data: {
+          day: ModelService.dayModel
+        }
+      })
+    }
   }
 
   ngOnDestroy(): void {
     this.dayListSubscription.unsubscribe()
+    this.studentListSubscription.unsubscribe()
   }
 
 }

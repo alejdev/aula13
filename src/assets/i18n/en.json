@@ -189,6 +189,7 @@
 		"CLASSROOM_DELETE_OK": "Classroom has been deleted successfully",
 		"CLASSROOM_UPDATE_OK": "Modified classroom",
 		"DAY_CREATE_OK": "A new record has been created",
+		"DAY_CREATION_DISABLED_NO_STUDENTS": "To create a new record you need to have at least one student enrolled in your school.",
 		"DAY_DELETE": "Are you sure you want to delete this record?",
 		"DAY_DELETE_OK": "Registry has been deleted successfully",
 		"DAY_NOT_EXIST": "This record does not exist",

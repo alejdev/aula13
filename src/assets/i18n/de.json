@@ -189,6 +189,7 @@
 		"CLASSROOM_DELETE_OK": "Das Klassenzimmer wurde erfolgreich gelöscht",
 		"CLASSROOM_UPDATE_OK": "Modifiziertes Klassenzimmer",
 		"DAY_CREATE_OK": "Ein neuer Datensatz wurde erstellt",
+		"DAY_CREATION_DISABLED_NO_STUDENTS": "Um einen neuen Datensatz zu erstellen, muss mindestens ein Schüler in Ihrer Schule eingeschrieben sein.",
 		"DAY_DELETE": "Möchten Sie diesen Datensatz wirklich löschen?",
 		"DAY_DELETE_OK": "Die Registrierung wurde erfolgreich gelöscht",
 		"DAY_NOT_EXIST": "Dieser Datensatz existiert nicht",

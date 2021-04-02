@@ -16,7 +16,7 @@ import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -26,7 +26,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   styleUrls: ['./student-profile.component.scss'],
   providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe]
 })
-export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StudentProfileComponent implements OnInit, OnDestroy {
 
   studentId: any
   student: any
@@ -64,12 +64,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewInit
     private dayService: DayService,
     private headerService: HeaderService,
     private toastService: ToastService,
-    private elementRef: ElementRef
   ) { }
-
-  ngAfterViewInit(): void {
-  }
-
   ngOnInit(): void {
 
     // Get param id

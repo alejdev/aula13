@@ -21,6 +21,6 @@
     <h3 *ngIf="dayListFiltered?.length" class="mt-3 txt-center mat-hint">{{'MSG.NO_MORE_DAYS' | translate}}</h3>
 
     <!-- Floating button -->
-    <a13-floating-button text="DAY.ADD" icon="edit" (click)="createDay()"></a13-floating-button>
+    <a13-floating-button text="DAY.ADD" icon="edit" [disabled]="!studentList?.length" (click)="createDay()"></a13-floating-button>
   </div>
 </section>
