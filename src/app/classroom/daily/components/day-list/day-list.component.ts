@@ -9,6 +9,7 @@ import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-f
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
+import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
@@ -23,7 +24,7 @@ import { Router } from '@angular/router'
   selector: 'a13-day-list',
   templateUrl: './day-list.component.html',
   styleUrls: ['./day-list.component.scss'],
-  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe]
 })
 export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -70,7 +71,9 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
           ...day
         }
       })
-      this.dayListFiltered = this.excludeArchivedPipe.transform(Object.assign(this.dayList), this.dayFilters.showArchived)
+      if (this.dayList.length) {
+        this.dayListFiltered = this.excludeArchivedPipe.transform(Object.assign(this.dayList), this.dayFilters.showArchived)
+      }
       this.headerService.mergeHeader({ length: this.dayListFiltered.length })
       this.dayFilters.filterList(this.dayList)
     },

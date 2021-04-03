@@ -37,10 +37,9 @@ export class StudentComponent implements OnInit {
     })
   }
 
-
   fav(ev: Event): void {
     ev.stopImmediatePropagation()
     this.student.favorite = !this.student.favorite
-    this.studentService.updateStudent(this.student.id, this.student)
+    this.studentService.updateStudent(this.student.id, this.studentService.normalizeStudent(this.student))
   }
 }

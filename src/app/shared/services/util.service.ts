@@ -62,6 +62,20 @@ export class UtilService {
     }
   }
 
+  // Return if a string is equal to 'true' or 'false'
+  public static isBoolean(str: string) {
+    const ref = RegExp(/^(true|false)$/, 'g')
+    const test = ref.test(str)
+    if (test) { return test }
+    return null
+  }
+
+  // Parse string to 'true' and 'false' to false
+  public static parseStringToBoolean(str: string) {
+    if (!str) { return null }
+    return str === 'true' ? true : str === 'false' ? false : null
+  }
+
   // Compare if two object are equal by property
   public static equals(o1: any, o2: any): boolean {
     return o1 && o2 ? o1.id === o2.id : o1 === o2

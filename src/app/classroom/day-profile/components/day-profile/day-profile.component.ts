@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs'
+import { DayArchiveDialogComponent } from 'src/app/classroom/components/day-archive-dialog/day-archive-dialog.component'
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
@@ -7,6 +8,7 @@ import { DayCreationComponent } from 'src/app/shared/components/day-creation/day
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
@@ -27,7 +29,8 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private dayService: DayService,
     private studentService: StudentService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -87,10 +90,10 @@ export class DayProfileComponent implements OnInit, OnDestroy {
             }
           }
         }, {
-          name: 'DAY.DELETE',
-          icon: 'trash',
+          name: `${!this.day.archived ? '' : 'UN'}ARCHIVE_DAY`,
+          icon: `box${!this.day.archived ? '' : '-open'}`,
           dialog: {
-            component: DayDeleteDialogComponent,
+            component: DayArchiveDialogComponent,
             config: {
               autoFocus: false,
               data: {
@@ -99,9 +102,41 @@ export class DayProfileComponent implements OnInit, OnDestroy {
               }
             }
           }
+        }, {
+          name: 'DAY.DELETE',
+          icon: 'trash',
+          dialog: {
+            component: DayDeleteDialogComponent,
+            config: {
+              width: 'calc(100vw)',
+              maxWidth: '800px',
+              autoFocus: false,
+              data: {
+                day: { ...this.day }
+              }
+            }
+          }
         }]
       })
     }
+  }
+
+  editDay() {
+    this.dialog.open(DayCreationComponent, {
+      width: 'calc(100vw)',
+      maxWidth: '800px',
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        idDay: this.dayId,
+        day: { ...this.day }
+      }
+    })
+  }
+
+  quickAction(key: string): void {
+    this.day[key] = !this.day[key]
+    this.dayService.updateDay(this.dayId, this.dayService.normalizeDay(this.day))
   }
 
   ngOnDestroy(): void {

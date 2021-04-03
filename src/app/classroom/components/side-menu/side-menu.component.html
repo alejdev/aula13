@@ -8,7 +8,7 @@
       </a>
       <div class="mt-1" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
         <span class="user-name">{{ user?.name || user?.email }}</span>
-        <button mat-icon-button [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger" attr.aria-label="{{'OPTION_MENU' | translate}}">
+        <button mat-icon-button [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger" attr.aria-label="{{'OPTION_MENU' | translate}}" class="action-button">
           <fa-icon class="mat-hint" icon="{{'caret-' + (openStatus.menuOpen ? 'up': 'down')}}"></fa-icon>
         </button>
         <mat-menu #menuProfileId="matMenu">
@@ -30,7 +30,7 @@
               <span class="mat-hint pl-h ml-q mr-q">{{ item?.name | translate}}</span>
               <span class="translucide mat-hint"> | {{item?.children?.length}}</span>
               <span fxFlex></span>
-              <button mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" (click)="createElement($event, item)">
+              <button class="action-button" mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" (click)="createElement($event, item)" [matTooltip]="item.tooltip | translate" [matTooltipShowDelay]="650">
                 <fa-icon class="mat-hint" icon="plus"></fa-icon>
               </button>
             </a>
@@ -39,7 +39,7 @@
                 <a mat-list-item (click)="onItemSelected($event, child)" [ngClass]="{'expanded': child.expanded}">
                   <span class="mat-hint pl-1 ml-1">{{child?.name}}</span>
                   <span fxFlex></span>
-                  <button mat-icon-button [matMenuTriggerFor]="menuOptionsId" attr.aria-label="{{'OPTION_MENU' | translate}}"(click)=$event.stopPropagation()>
+                  <button class="action-button"mat-icon-button [matMenuTriggerFor]="menuOptionsId" attr.aria-label="{{'OPTION_MENU' | translate}}" (click)=$event.stopPropagation()>
                     <fa-icon class="mat-hint" icon="ellipsis-v"></fa-icon>
                   </button>
                 </a>

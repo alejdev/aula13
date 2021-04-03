@@ -45,6 +45,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   menuItems = [[{
     name: 'CLASSROOMS',
+    tooltip: 'CREATE_CLASSROOM',
     icon: 'chalkboard',
     expanded: true,
     create: ClassroomCreationComponent,
@@ -53,6 +54,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     children: null
   }, {
     name: 'SUBJECTS',
+    tooltip: 'CREATE_SUBJECT',
     icon: 'book',
     expanded: true,
     create: SubjectCreationComponent,
@@ -110,7 +112,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   onItemSelected(ev: Event, item: any): void {
     if (!item.children || !item.children.length) {
       this.router.navigate(['aula/alumnos'], {
-        queryParams: { [item.filter]: [item.id] }
+        queryParams: { [item.filter]: [item.id], openSearch: true }
       })
     }
     if (item.children && item.children.length) {

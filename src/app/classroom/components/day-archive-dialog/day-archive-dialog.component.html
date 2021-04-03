@@ -1,0 +1,14 @@
+<!-- Title -->
+<h2 mat-dialog-title>{{textConfig.title | translate}}</h2>
+
+<!-- Content -->
+<p class="mat-hint mb-h" mat-dialog-content>
+	<b>{{textConfig.msg | translate}}</b>
+	{{textConfig.msg2 | translate}}.
+</p>
+
+<!-- Action -->
+<div class="mt-1" mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+	<button mat-button (click)="onNoClick()">{{'CANCEL' | translate}}</button>
+	<button mat-button color="warn" cdkFocusInitial (click)="ok()">{{textConfig.okButton | translate}}</button>
+</div>

@@ -7,7 +7,6 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 import _moment, { default as _rollupMoment } from 'moment'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
-import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -60,7 +59,7 @@ export class DayCreationComponent implements OnInit {
     // Init form controls
     this.dayFormGroup = this.formBuilder.group({
       dayStudentCtrl: [this.day.student, Validators.required],
-      dayDateCtrl: [this.formatInputDate(this.day.date), Validators.required],
+      dayDateCtrl: [this.dayService.formatInputDate(this.day.date), Validators.required],
       dayTitleCtrl: [this.day.title, Validators.required],
       dayContentCtrl: [this.day.content, Validators.required],
     })
@@ -71,20 +70,6 @@ export class DayCreationComponent implements OnInit {
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     )
-  }
-
-  formatInputDate(date: any): any {
-    if (date) {
-      return moment(new Date(date), 'DD/MM/YYYY')
-    }
-    return moment(UtilService.today(), 'DD/MM/YYYY')
-  }
-
-  formatOutputDate(date: any): any {
-    if (date && date._isAMomentObject && date._isValid) {
-      return moment(date, 'DD/MM/YYYY').unix() * 1000
-    }
-    return ''
   }
 
   getStudentId(): any {
@@ -98,12 +83,14 @@ export class DayCreationComponent implements OnInit {
   save(): void {
     if (this.dayFormGroup.valid) {
 
-      const day = {
+      const day = this.dayService.normalizeDay({
         studentId: this.getStudentId(),
-        date: this.formatOutputDate(this.dayFormGroup.value.dayDateCtrl),
-        title: UtilService.capitalize(this.dayFormGroup.value.dayTitleCtrl),
-        content: this.dayFormGroup.value.dayContentCtrl
-      }
+        date: this.dayFormGroup.value.dayDateCtrl,
+        title: this.dayFormGroup.value.dayTitleCtrl,
+        content: this.dayFormGroup.value.dayContentCtrl,
+        favorite: this.day.favorite,
+        archived: this.day.archived,
+      })
 
       let setDay: any
       if (this.data.idDay) {

@@ -12,7 +12,7 @@
         </button>
       </mat-form-field>
 
-      <button class="reset-button ml-h mb-1" mat-button mat-icon-button attr.aria-label="{{'SORT_ALPHABETICALLY' | translate}}" (click)="sort()">
+      <button class="reset-button ml-h mb-1" mat-button mat-icon-button attr.aria-label="{{'SORT_ALPHABETICALLY' | translate}}" [matTooltip]="'SORT_ALPHABETICALLY' | translate" [matTooltipShowDelay]="650" (click)="sort()">
         <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': sortDirection}" [icon]="sortDirection ? 'sort-alpha-down' : 'sort-alpha-up-alt'"></fa-icon>
       </button>
     </div>

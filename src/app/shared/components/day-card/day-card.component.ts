@@ -1,4 +1,5 @@
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
+import { DayService } from 'src/app/classroom/services/day.service'
 
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
@@ -15,7 +16,8 @@ export class DayCardComponent implements OnInit {
   @Input() day: any = null
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dayService: DayService
   ) { }
 
   ngOnInit(): void { }
@@ -43,6 +45,12 @@ export class DayCardComponent implements OnInit {
         day: { ...this.day }
       }
     })
+  }
+
+  quickAction(ev: Event, key: string): void {
+    ev.stopImmediatePropagation()
+    this.day[key] = !this.day[key]
+    this.dayService.updateDay(this.day.id, this.dayService.normalizeDay(this.day))
   }
 
 }

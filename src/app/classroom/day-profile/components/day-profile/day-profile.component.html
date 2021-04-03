@@ -1,25 +1,38 @@
 <section class="container container-nopadd">
-	<div class="profile-container">
-		<header class="profile-header shadow-bottom p-1 mat-card mat-elevation-z0">
-			<div class="container-max sm" fxLayout="row" fxLayoutAlign="start center" *ngIf="day?.student">
+  <div class="profile-container">
+    <header class="profile-header shadow-bottom p-1 mat-card mat-elevation-z0">
+      <div class="container-max sm" *ngIf="day?.student" fxLayout="row" fxLayoutAlign="space-between center">
 
-				<!-- Avatar -->
-				<a class="avatar border-theme mr-h" [routerLink]="[ '/aula/alumno', day?.studentId ]">
-					<img class="avatar-image p-0 mr-1" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
-				</a>
+        <!-- Header info -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <a class="avatar border-theme mr-h" [routerLink]="[ '/aula/alumno', day?.studentId ]">
+            <img class="avatar-image p-0 mr-1" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
+          </a>
 
-				<!-- Header info -->
-				<div class="header-info" fxLayout="column" fxLayoutAlign="center">
-					<span class="mat-h3 mb-0 pointer student-name"
-						[routerLink]="[ '/aula/alumno', day?.studentId ]">{{day?.student?.personal?.name}}</span>
-					<span class="mat-small mat-hint">{{day?.date | date: 'fullDate'}}</span>
-				</div>
-			</div>
-		</header>
+          <div class="header-info" fxLayout="column" fxLayoutAlign="center">
+            <span class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/aula/alumno', day?.studentId ]">{{day?.student?.personal?.name}}</span>
+            <span class="mat-small mat-hint">{{day?.date | date: 'fullDate'}}</span>
+          </div>
+        </div>
 
-		<!-- Content -->
-		<div class="container-padd">
-			<div class="container-max sm p-h" [innerHTML]="day?.content"></div>
-		</div>
-	</div>
+        <!-- Action button -->
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button class="action-button" mat-icon-button (click)="quickAction('favorite')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
+            <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-18 mat-hint" icon="star"></fa-icon>
+          </button>
+          <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
+            <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-18 mat-hint" icon="box"></fa-icon>
+          </button>
+          <button class="action-button" mat-icon-button (click)="editDay($event)" [matTooltip]="'DAY.EDIT' | translate" [matTooltipShowDelay]="650">
+            <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="container-padd">
+      <div class="container-max sm p-h" [innerHTML]="day?.content"></div>
+    </div>
+  </div>
 </section>

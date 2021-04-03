@@ -69,7 +69,7 @@ export class StudentCreationComponent implements OnInit {
       personalFormGroup: this.formBuilder.group({
         nameCtrl: [this.student.personal.name, Validators.required],
         avatarCtrl: [this.student.personal.avatar],
-        birthdateCtrl: [this.formatInputDate(this.student.personal.birthdate)],
+        birthdateCtrl: [this.studentService.formatInputDate(this.student.personal.birthdate)],
         academicCourseCtrl: [this.student.personal.academicCourse],
         observationsCtrl: [this.student.personal.observations]
       }),
@@ -93,20 +93,6 @@ export class StudentCreationComponent implements OnInit {
         this.addPhone(phone)
       }
     }
-  }
-
-  formatInputDate(date: any) {
-    if (date) {
-      return moment(date, 'DD/MM/YYYY')
-    }
-    return ''
-  }
-
-  formatOutputDate(date: any) {
-    if (date && date._isAMomentObject && date._isValid) {
-      return moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY')
-    }
-    return ''
   }
 
   initPhoneControls(phone: any): FormGroup {
@@ -149,29 +135,30 @@ export class StudentCreationComponent implements OnInit {
   save(): void {
     if (this.studentFormGroup.valid) {
       this.data.student.personal.avatar = this.studentAvatar
-      const student = {
-        archived: !!this.student.archived,
+
+      const student = this.studentService.normalizeStudent({
+        archived: this.student.archived,
         classroom: {
-          classrooms: this.studentFormGroup.value.classroomFormGroup.classroomsCtrl || [],
-          subjects: this.studentFormGroup.value.classroomFormGroup.subjectsCtrl || []
+          classrooms: this.studentFormGroup.value.classroomFormGroup.classroomsCtrl,
+          subjects: this.studentFormGroup.value.classroomFormGroup.subjectsCtrl
         },
         contactInformation: {
           phones: this.getPhoneListValues()
         },
-        favorite: !!this.student.favorite,
+        favorite: this.student.favorite,
         musical: {
-          course: this.studentFormGroup.value.musicalFormGroup.courseCtrl || '',
-          instrument: this.studentFormGroup.value.musicalFormGroup.instrumentCtrl || '',
+          course: this.studentFormGroup.value.musicalFormGroup.courseCtrl,
+          instrument: this.studentFormGroup.value.musicalFormGroup.instrumentCtrl,
           teacher: this.studentFormGroup.value.musicalFormGroup.teacherCtrl
         },
         personal: {
-          academicCourse: this.studentFormGroup.value.personalFormGroup.academicCourseCtrl || '',
+          academicCourse: this.studentFormGroup.value.personalFormGroup.academicCourseCtrl,
           avatar: this.data.student.personal.avatar,
-          birthdate: this.formatOutputDate(this.studentFormGroup.value.personalFormGroup.birthdateCtrl),
-          name: UtilService.capitalize(this.studentFormGroup.value.personalFormGroup.nameCtrl),
+          birthdate: this.studentFormGroup.value.personalFormGroup.birthdateCtrl,
+          name: this.studentFormGroup.value.personalFormGroup.nameCtrl,
           observations: this.studentFormGroup.value.personalFormGroup.observationsCtrl
         }
-      }
+      })
 
       let setStudent: any
       if (this.data.idStudent) {

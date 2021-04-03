@@ -51,24 +51,25 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.query = {}
-    let firstTime = true
+    let openSearch = false
     this.classroomListSubscription = this.classroomService.observeClassroomList()
       .subscribe((result) => this.classroomList = UtilService.mapCollection(result))
     this.subjectListSubscription = this.subjectService.observeSubjectList()
       .subscribe((result) => this.subjectList = UtilService.mapCollection(result))
     this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
+      openSearch = UtilService.parseStringToBoolean(result.openSearch)
       this.setModels(result)
       this.filterList()
       this.formatQuery()
-      if (firstTime) { this.headerService.searchStatus = Object.keys(this.query).length ? true : false }
-      firstTime = false
+      if (openSearch) { this.headerService.searchStatus = Object.keys(this.query).length ? true : false }
     })
   }
 
   filterList(list?: any[]): void {
-    this.studentListFiltered = this.filterPipe.transform(list ? list : this.studentList, this.studentFilter)
-    this.studentListFiltered = this.classroomPipe.transform(this.studentListFiltered, this.classroomsFilter)
-    this.studentListFiltered = this.subjectPipe.transform(this.studentListFiltered, this.subjectsFilter)
+    this.studentListFiltered = list ? list : this.studentList
+    if (this.studentFilter) { this.studentListFiltered = this.filterPipe.transform(this.studentListFiltered, this.studentFilter) }
+    if (this.classroomsFilter) { this.studentListFiltered = this.classroomPipe.transform(this.studentListFiltered, this.classroomsFilter) }
+    if (this.subjectsFilter) { this.studentListFiltered = this.subjectPipe.transform(this.studentListFiltered, this.subjectsFilter) }
     this.studentListFiltered = this.orderByPipe.transform(this.studentListFiltered, `${this.sortDirection === 'reversed' ? '-' : ''}${this.sortBy}`)
 
     if (this.studentListFiltered) {

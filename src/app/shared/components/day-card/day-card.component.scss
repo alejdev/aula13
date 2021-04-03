@@ -1,16 +1,23 @@
 mat-card {
 
+  .avatar-link {
+    width: 40px;
+    display: inline-table;
+
+    &.archived {
+      width: 60px;
+    }
+  }
+
   &:focus {
     outline: -webkit-focus-ring-color auto 0;
   }
+}
 
-  button {
-    opacity: .65;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
+.mat-icon-button.small-button {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
 }
 
 .header-info {
@@ -26,9 +33,13 @@ mat-card {
   font-size: .9rem;
 }
 
-.text-date {
-  min-width: 70px;
+.text-date-container {
+  min-width: 125px;
   text-align: right;
+}
+
+.text-date {
+  flex-wrap: nowrap;
 }
 
 .action-buttons {

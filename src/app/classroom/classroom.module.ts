@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module'
 import { ClassroomRoutingModule } from './classroom-routing.module'
 import { ClassroomCreationComponent } from './components/classroom-creation/classroom-creation.component'
 import { ClassroomDeleteDialogComponent } from './components/classroom-delete-dialog/classroom-delete-dialog.component'
+import { DayArchiveDialogComponent } from './components/day-archive-dialog/day-archive-dialog.component'
 import { DayDeleteDialogComponent } from './components/day-delete-dialog/day-delete-dialog.component'
 import { FooterToolbarComponent } from './components/footer-toolbar/footer-toolbar.component'
 import { LogoutDialogComponent } from './components/logout-dialog/logout-dialog.component'
@@ -41,6 +42,7 @@ import { StudentsModule } from './students/students.module'
     SubjectDeleteDialogComponent,
     DayDeleteDialogComponent,
     TitleLogoComponent,
+    DayArchiveDialogComponent,
   ],
   imports: [
     // Routing
@@ -67,7 +69,8 @@ import { StudentsModule } from './students/students.module'
     SubjectCreationComponent,
     ClassroomDeleteDialogComponent,
     SubjectDeleteDialogComponent,
-    DayDeleteDialogComponent
+    DayDeleteDialogComponent,
+    DayArchiveDialogComponent
   ]
 })
 export class ClassroomModule { }

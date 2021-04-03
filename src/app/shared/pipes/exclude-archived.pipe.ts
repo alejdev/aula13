@@ -8,7 +8,7 @@ export class ExcludeArchivedPipe implements PipeTransform {
   transform(array: any[], showArchived: boolean): any {
     if (!array || showArchived) { return array }
 
-    return array.filter((elem) => !elem.student.archived)
+    return array.filter((elem) => !elem || !elem.archived || !elem.student.archived)
   }
 
 }

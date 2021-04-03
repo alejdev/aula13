@@ -10,68 +10,74 @@
         </a>
 
         <!-- Fav button -->
-        <button class="mr-h ml-h" mat-icon-button (click)="fav()">
+        <button class="action-button" class="mr-h ml-h" mat-icon-button (click)="quickAction('favorite')" [matTooltip]="'MSG.MARK_STUDENT_FAV' | translate" [matTooltipShowDelay]="650">
           <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star">
           </fa-icon>
         </button>
       </div>
 
-      <!-- Student information -->
       <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between start">
 
-        <!-- Archived -->
-        <div *ngIf="student?.archived" class="mat-small error mb-q">
-          <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
-          <span class="error-color">
-            {{'STUDENT_ARCHIVED' | translate}}
-          </span>
-        </div>
+          <!-- Student information -->
+          <div>
+            <!-- Number info -->
+            <div class="mb-q" fxLayout="row" fxLayoutGap="1rem">
+              <div *ngIf="student?.personal?.birthdate" class="">
+                <span class="mb-0">{{student?.personal?.birthdate | age}}</span>
+                <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
+              </div>
+              <div *ngIf="student?.personal?.academicCourse" class="">
+                <span class="mb-0">{{student?.personal?.academicCourse?.viewValue}}</span>
+                <span class="mat-hint mat-small">
+                  {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
+                </span>
+              </div>
+              <div *ngIf="student?.musical?.course" class="">
+                <span class="mb-0">{{student?.musical?.course.viewValue}}</span>
+                <span class="mat-hint mat-small">
+                  {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
+                </span>
+              </div>
+            </div>
 
-        <!-- Number info -->
-        <div class="mb-q" fxLayout="row" fxLayoutGap="1rem">
-          <div *ngIf="student?.personal?.birthdate" class="">
-            <span class="mb-0">{{student?.personal?.birthdate | age}}</span>
-            <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
+            <!-- Instrument -->
+            <div *ngIf="student?.musical?.instrument" class="mat-small">
+              <span class="mat-hint">
+                {{'FORM.INSTRUMENT' | translate}}: </span>
+              <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
+            </div>
+
+            <!-- Teacher -->
+            <div *ngIf="student?.musical?.teacher" class="mat-small">
+              <span class="mat-hint">
+                {{'TEACHER' | translate}}: </span>
+              <span class="mb-0">{{student?.musical?.teacher}}</span>
+            </div>
           </div>
-          <div *ngIf="student?.personal?.academicCourse" class="">
-            <span class="mb-0">{{student?.personal?.academicCourse?.viewValue}}</span>
-            <span class="mat-hint mat-small">
-              {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
-            </span>
-          </div>
-          <div *ngIf="student?.musical?.course" class="">
-            <span class="mb-0">{{student?.musical?.course.viewValue}}</span>
-            <span class="mat-hint mat-small">
-              {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
-            </span>
-          </div>
-        </div>
 
-        <!-- Instrument -->
-        <div *ngIf="student?.musical?.instrument" class="mat-small">
-          <span class="mat-hint">
-            {{'FORM.INSTRUMENT' | translate}}: </span>
-          <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
-        </div>
-
-        <!-- Teacher -->
-        <div *ngIf="student?.musical?.teacher" class="mat-small">
-          <span class="mat-hint">
-            {{'TEACHER' | translate}}: </span>
-          <span class="mb-0">{{student?.musical?.teacher}}</span>
+          <!-- Action button -->
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_STUDENT' | translate" [matTooltipShowDelay]="650">
+              <fa-icon [ngClass]="{'error-color': student?.archived}" class="mat-icon-18 mat-hint" icon="box"></fa-icon>
+            </button>
+            <button class="action-button" mat-icon-button (click)="editStudent()" [matTooltip]="'EDIT_STUDENT' | translate" [matTooltipShowDelay]="650">
+              <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
+            </button>
+          </div>
         </div>
 
         <!-- Badges -->
         <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
 
           <!-- Classrooms -->
-          <button mat-button class="badge" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{classroomsFilter: classroom}">
+          <button mat-button class="badge" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{classroomsFilter: classroom, openSearch: true}">
             <fa-icon class="mat-icon-12 mr-q mat-hint" icon="chalkboard"></fa-icon>
             <span class="mat-hint">{{classroom | classroomName}}</span>
           </button>
 
           <!-- Subjects -->
-          <button mat-button class="badge badge-fill" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{subjectsFilter: subject}">
+          <button mat-button class="badge badge-fill" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{subjectsFilter: subject, openSearch: true}">
             <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
             <span class="mat-hint">{{subject | subjectName}}</span>
           </button>
@@ -110,7 +116,7 @@
         </ng-template>
         <div class="padding-content">
 
-          <a13-day-filters [dayList]="dayList" [hideArchivedFilter]="true" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+          <a13-day-filters [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
 
           <div class="mt-1">
             <ng-container *ngFor="let day of dayListFiltered">
@@ -129,7 +135,7 @@
           <h3 *ngIf="dayListFiltered?.length" class="mt-3 txt-center mat-hint">{{'MSG.NO_MORE_DAYS' | translate}}</h3>
 
           <!-- Floating button -->
-          <a13-floating-button text="DAY.ADD" icon="edit" [disabled]="student?.archived" (click)="createDay()">
+          <a13-floating-button text="DAY.ADD" icon="edit" (click)="createDay()">
           </a13-floating-button>
         </div>
       </mat-tab>

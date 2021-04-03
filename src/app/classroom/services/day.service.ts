@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import moment from 'moment'
 import { Observable } from 'rxjs'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
@@ -8,11 +9,11 @@ import { Injectable } from '@angular/core'
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 export interface QueryConfig {
-  path: string, //  path to collection
-  field: string, // field to orderBy
-  limit: number, // limit per query
-  reverse: boolean, // reverse order?
-  prepend: boolean // prepend to source?
+  path: string,
+  field: string,
+  limit: number,
+  reverse: boolean,
+  prepend: boolean
 }
 
 @Injectable({
@@ -154,5 +155,31 @@ export class DayService {
       return this.query.prepend ? data[0].doc : data[data.length - 1].doc
     }
     return null
+  }
+
+  // Normalize Day for save
+  public normalizeDay(day: any): any {
+    return {
+      content: day.content,
+      date: this.formatOutputDate(day.date),
+      studentId: day.studentId,
+      title: UtilService.capitalize(day.title),
+      favorite: !!day.favorite,
+      archived: !!day.archived
+    }
+  }
+
+  formatInputDate(date: any): any {
+    if (date) {
+      return moment(new Date(date), 'DD/MM/YYYY')
+    }
+    return moment(UtilService.today(), 'DD/MM/YYYY')
+  }
+
+  formatOutputDate(date: any): any {
+    if (date && date._isAMomentObject && date._isValid) {
+      return moment(date, 'DD/MM/YYYY').unix() * 1000
+    }
+    return date
   }
 }

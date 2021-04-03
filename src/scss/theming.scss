@@ -36,12 +36,13 @@
   .badge {
     background-color: darken(map-get(map-get($colors, light-theme), background), 2%);
   }
-  
+
   .badge {
     &.mat-button {
       color: #888;
-      border-color:  darken(map-get(map-get($colors, light-theme), background), 2%);
+      border-color: darken(map-get(map-get($colors, light-theme), background), 2%);
     }
+
     &.badge-fill {
       color: map-get(map-get($colors, light-theme), warn);
       background-color: white;
@@ -59,12 +60,16 @@
   .angular-editor .ck {
 
     .ck-toolbar {
-      background: map-get(map-get($colors, light-theme), background);
+      // background: white;
+      background: map-get(map-get($colors, other), input-color);
       border-color: $black-12-opacity;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-right-color: transparent;
     }
 
     .ck-editor__main {
-      &>.ck-editor__editable {
+      & > .ck-editor__editable {
         &:not(.ck-focused) {
           border-color: $black-12-opacity;
         }
@@ -161,7 +166,7 @@
     }
 
     .ck-editor__main {
-      &>.ck-editor__editable {
+      & > .ck-editor__editable {
         &:not(.ck-focused) {
           border-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3);
         }

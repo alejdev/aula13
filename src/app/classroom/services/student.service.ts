@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import moment from 'moment'
 import { Observable } from 'rxjs'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
@@ -109,6 +110,47 @@ export class StudentService {
     this.loaderService.start()
     return this.subCollection.doc(id).ref.delete()
       .finally(() => this.loaderService.stop())
+  }
+
+  // Normalize Student for save
+  public normalizeStudent(student: any): any {
+    return {
+      archived: !!student.archived,
+      classroom: {
+        classrooms: student.classroom.classrooms || [],
+        subjects: student.classroom.subjects || []
+      },
+      contactInformation: {
+        phones: student.contactInformation.phones || []
+      },
+      favorite: !!student.favorite,
+      musical: {
+        course: student.musical.course || '',
+        instrument: student.musical.instrument || '',
+        teacher: student.musical.teacher || ''
+      },
+      personal: {
+        academicCourse: student.personal.academicCourse || '',
+        avatar: student.personal.avatar,
+        birthdate: this.formatOutputDate(student.personal.birthdate),
+        name: UtilService.capitalize(student.personal.name),
+        observations: student.personal.observations || ''
+      }
+    }
+  }
+
+  public formatInputDate(date: any): any {
+    if (date) {
+      return moment(date, 'DD/MM/YYYY')
+    }
+    return ''
+  }
+
+  public formatOutputDate(date: any): any {
+    if (date && date._isAMomentObject && date._isValid) {
+      return moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY')
+    }
+    return date
   }
 
 }

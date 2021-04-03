@@ -42,6 +42,7 @@ import { AgroupByDatePipe } from './pipes/agroup-by-date.pipe'
 import { ClassroomNamePipe } from './pipes/classroom-name.pipe'
 import { DateFilterPipe } from './pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from './pipes/exclude-archived.pipe'
+import { FilterByKeyPipe } from './pipes/filter-by-key.pipe'
 import { FilterPipe } from './pipes/filter-by.pipe'
 import { SettingValuePipe } from './pipes/setting-value.pipe'
 import { ShowByPipe } from './pipes/show-by.pipe'
@@ -95,6 +96,8 @@ registerLocaleData(localeFr, 'fr')
     SettingValuePipe,
 
     ScrollableDirective,
+
+    FilterByKeyPipe,
   ],
   imports: [
     // Angular

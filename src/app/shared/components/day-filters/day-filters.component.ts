@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 
 import { AgroupByDatePipe } from '../../pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from '../../pipes/date-filter.pipe'
-import { ExcludeArchivedPipe } from '../../pipes/exclude-archived.pipe'
+import { FilterByKeyPipe } from '../../pipes/filter-by-key.pipe'
 import { FilterPipe } from '../../pipes/filter-by.pipe'
 import { ModelService } from '../../services/model.service'
 import { UtilService } from '../../services/util.service'
@@ -33,17 +33,20 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   quickDates: any[] = ModelService.getQuickDatesModel(moment())
   quickDate: any
+  showFavorites: boolean = false
   showArchived: boolean = false
   sortBy: string = 'date'
   sortDirection: string = 'reversed'
   query: any
 
+  isStudentProfile: boolean
+
   constructor(
     private filterPipe: FilterPipe,
     private dateFilterPipe: DateFilterPipe,
-    private excludeArchivedPipe: ExcludeArchivedPipe,
     private agroupByDatePipe: AgroupByDatePipe,
     private orderByPipe: OrderByPipe,
+    private filterByKeyPipe: FilterByKeyPipe,
     public headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -51,7 +54,6 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.query = {}
-    // this.quickDate = this.quickDates[0]
     let firstTime = true
     this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
       this.setModels(result)
@@ -59,13 +61,36 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
       this.formatQuery()
       if (firstTime) { this.headerService.searchStatus = Object.keys(this.query).length ? true : false }
       firstTime = false
+
     })
   }
 
   filterList(list?: any[]): void {
-    this.dayListFiltered = this.filterPipe.transform(list ? list : this.dayList, this.dayFilter)
-    this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil)
-    this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayListFiltered, this.showArchived)
+    this.dayListFiltered = list ? list : this.dayList
+
+    if (this.dayFilter) { this.dayListFiltered = this.filterPipe.transform(this.dayListFiltered, this.dayFilter) }
+
+    if (this.dateSince || this.dateUntil) { this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil) }
+
+    if (this.showFavorites && this.showArchived) {
+      this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { favorite: this.showFavorites, archived: this.showArchived, 'student.archived': this.showArchived }, true)
+    } else if (!this.showFavorites && !this.showArchived) {
+      this.isStudentProfile = this.dayListFiltered && this.dayListFiltered[0] && this.dayListFiltered[0].hideStudent ? true : false
+      if (this.isStudentProfile) {
+        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { archived: this.showArchived })
+      } else {
+        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { archived: this.showArchived, 'student.archived': this.showArchived })
+      }
+    } else if (this.showFavorites && !this.showArchived) {
+      if (this.isStudentProfile) {
+        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { favorite: this.showFavorites, 'student.archived': this.showArchived }, true)
+      } else {
+        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { favorite: this.showFavorites })
+      }
+    } else if (!this.showFavorites && this.showArchived) {
+      this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { archived: this.showArchived, 'student.archived': this.showArchived }, true)
+    }
+
     this.dayListFiltered = this.orderByPipe.transform(this.dayListFiltered, `${this.sortDirection === 'reversed' ? '' : '-'}${this.sortBy}`)
     this.dayListFiltered = this.agroupByDatePipe.transform(this.dayListFiltered)
 
@@ -77,7 +102,8 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   setModels(params: any): void {
     this.dayFilter = params.dayFilter
-    this.showArchived = params.showArchived
+    this.showArchived = UtilService.parseStringToBoolean(params.showArchived) ? true : false
+    this.showFavorites = UtilService.parseStringToBoolean(params.showFavorites) ? true : false
     this.sortDirection = params.sortDirection
     this.quickDate = this.quickDates.find(elem => elem.id == params.quickDate)
     if (this.quickDate) {
@@ -100,7 +126,8 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   formatQuery(): void {
     this.query = {}
     if (this.dayFilter) { this.query.dayFilter = this.dayFilter }
-    if (this.showArchived) { this.query.showArchived = this.showArchived }
+    if (this.showArchived === true) { this.query.showArchived = this.showArchived }
+    if (this.showFavorites === true) { this.query.showFavorites = this.showFavorites }
     if (this.sortDirection === 'reversed') { this.query.sortDirection = this.sortDirection }
     if (this.quickDate) { this.query.quickDate = this.quickDate.id }
     if (this.dateSince && this.dateSince.isValid()) { this.query.dateSince = this.dateSince.format('DD-MM-YYYY-H:mm:ss') }
@@ -109,6 +136,11 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   sort(): any {
     this.sortDirection = !this.sortDirection ? 'reversed' : ''
+    this.goToQuery()
+  }
+
+  toggle(param: string): any {
+    this[param] = !this[param]
     this.goToQuery()
   }
 
@@ -138,6 +170,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     this.dateSince = null
     this.dateUntil = null
     this.showArchived = false
+    this.showFavorites = false
     this.quickDate = ''
     this.sortDirection = ''
     this.goToQuery()

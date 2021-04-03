@@ -157,6 +157,16 @@ mat-form-field {
   }
 }
 
+.action-button {
+  opacity: .75;
+
+  &.active,
+  &:hover {
+    opacity: 1;
+  }
+
+}
+
 // Editor
 .angular-editor {
   width: 100%;
@@ -179,6 +189,7 @@ mat-form-field {
 
     .ck-editor__main {
       & > .ck-editor__editable {
+        // background: map-get(map-get($colors, other), input-color);
         background: transparent;
         border-radius: 0 0 5px 5px !important;
 

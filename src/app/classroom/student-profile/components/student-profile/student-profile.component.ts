@@ -11,9 +11,9 @@ import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-f
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
+import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
@@ -24,7 +24,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   selector: 'a13-student-profile',
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss'],
-  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe]
 })
 export class StudentProfileComponent implements OnInit, OnDestroy {
 
@@ -63,7 +63,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     private studentService: StudentService,
     private dayService: DayService,
     private headerService: HeaderService,
-    private toastService: ToastService,
   ) { }
   ngOnInit(): void {
 
@@ -156,11 +155,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  fav(): void {
-    this.student.favorite = !this.student.favorite
-    this.studentService.updateStudent(this.student.id, this.student)
-  }
-
   queryDayList(): void {
     this.dayListQuerySubscription = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
@@ -187,9 +181,9 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
 
 
   createDay(): void {
-    if (this.student.archived) {
-      this.toastService.warning({ text: 'MSG.DAY_STUDENT_ARCHIVED' })
-    } else {
+    // if (this.student.archived) {
+    //   this.toastService.warning({ text: 'MSG.DAY_STUDENT_ARCHIVED' })
+    // } else {
       const newDay = ModelService.dayModel
       newDay.student = this.student
       this.dialog.open(DayCreationComponent, {
@@ -201,7 +195,25 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           day: newDay,
         }
       })
-    }
+    // }
+  }
+
+  editStudent() {
+    this.dialog.open(StudentCreationComponent, {
+      width: 'calc(100vw)',
+      maxWidth: '800px',
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        idStudent: this.studentId,
+        student: { ...this.student }
+      }
+    })
+  }
+
+  quickAction(key: string): void {
+    this.student[key] = !this.student[key]
+    this.studentService.updateStudent(this.studentId, this.studentService.normalizeStudent(this.student))
   }
 
   swipe(e: TouchEvent, when: string): void {
