@@ -60,6 +60,7 @@
 		"DUPLICATE": "Duplicar registro",
 		"EDIT": "Editar registro"
 	},
+	"DAY_ARCHIVED": "Registro archivado",
 	"DELETE": "Borrar",
 	"DELETE_CLASSROOM": "Borrar aula",
 	"DELETE_ELEMENT": "Borrar elemento",
@@ -202,8 +203,8 @@
 		"DAY_NOT_EXIST": "Este registro no existe",
 		"DAY_STUDENT_ARCHIVED": "No puedes crear registros de un alumno archivado. Desarchívalo primero",
 		"DAY_UNARCHIVE": "¿Estás seguro que quieres desarchivar este registro?",
+		"DAY_UNARCHIVED_OK": "Registro desarchivado correctamente",
 		"DAY_UNARCHIVE_2": "Si lo hace volverá aparecer en la lista de registros",
-		"DAY_UNARCHIVE_OK": "Registro desarchivado correctamente",
 		"DAY_UPDATE_OK": "Registro modificado",
 		"FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
 		"FORGOT_PASSWORD_EMAIL": "Revisa tu correo. Te hemos enviado un email con las instrucciones para restaurar la contraseña.",

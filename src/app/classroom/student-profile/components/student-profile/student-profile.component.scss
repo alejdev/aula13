@@ -1,9 +1,19 @@
 .profile-header {
+  padding: var(--main-padding-size);
   padding-bottom: 48px !important;
 
-  .avatar {
-    max-width: 64px;
-    max-height: 64px;
+  .avatar-container {
+
+    flex: 0 0 6rem;
+
+    .avatar {
+      max-width: 64px;
+      max-height: 64px;
+    }
+  }
+
+  .action-buttons button {
+    margin-top: -10px;
   }
 }
 

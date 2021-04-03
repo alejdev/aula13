@@ -9,15 +9,16 @@
       </button>
 
       <!-- Archived -->
-      <button class="action-button small-button mr-h" mat-icon-button (click)="quickAction($event, 'archived')">
+      <!-- <button class="action-button small-button mr-h" mat-icon-button (click)="quickAction($event, 'archived')">
         <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-16 mat-hint ml-q" icon="box"></fa-icon>
-      </button>
+      </button> -->
 
       <!-- Date -->
       <span class="mat-small mat-hint mr-q text-date">{{day?.date | date: 'd MMM, yy'}}</span>
     </div>
 
     <div *ngIf="!day?.hideStudent && day?.student" class="student-container" fxLayout="row" fxLayoutAlign="end center">
+
       <!-- Name -->
       <a [routerLink]="[ '/aula/alumno', day?.student?.id ]" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
 
@@ -36,6 +37,13 @@
   <!-- Day content -->
   <div class="day-content-container" fxLayout="row" fxLayoutAlign="space-between end">
     <div class="day-content" fxLayout="column" fxLayoutAlign="start start">
+
+      <!-- Archived -->
+      <div *ngIf="day?.archived" class="mat-small error mb-h">
+        <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+        <span class="error-color"> {{'DAY_ARCHIVED' | translate}} </span>
+      </div>
+      
       <!-- Title -->
       <span class="mat-h3 mb-q day-title">{{day?.title}}</span>
 

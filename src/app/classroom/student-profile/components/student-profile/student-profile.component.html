@@ -1,8 +1,8 @@
 <section class="container container-nopadd">
   <header #profileHeader class="profile-header shadow-bottom padding-content pb-h mat-card mat-elevation-z0">
 
-    <div class="container-max sm mt-h" fxLayout="row" fxLayoutGap="2rem" fxLayoutGap.xs="1rem">
-      <div fxLayout="column" fxLayoutAlign="start center">
+    <div class="container-max sm mt-h" fxLayout="row">
+      <div class="avatar-container mr-q" fxLayout="column" fxLayoutAlign="start center">
 
         <!-- Avatar -->
         <a flex="grow" matRipple class="avatar border-theme">
@@ -21,19 +21,25 @@
 
           <!-- Student information -->
           <div>
+            <!-- Archived -->
+            <div *ngIf="student?.archived" class="mat-small error mb-h">
+              <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+              <span class="error-color"> {{'STUDENT_ARCHIVED' | translate}} </span>
+            </div>
+
             <!-- Number info -->
-            <div class="mb-q" fxLayout="row" fxLayoutGap="1rem">
-              <div *ngIf="student?.personal?.birthdate" class="">
+            <div class="mb-q" fxLayout="row wrap" fxLayoutGap="1rem">
+              <div fxLayout="row" *ngIf="student?.personal?.birthdate" class="personal-numbers">
                 <span class="mb-0">{{student?.personal?.birthdate | age}}</span>
                 <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
               </div>
-              <div *ngIf="student?.personal?.academicCourse" class="">
+              <div fxLayout="row" *ngIf="student?.personal?.academicCourse" class="personal-numbers">
                 <span class="mb-0">{{student?.personal?.academicCourse?.viewValue}}</span>
                 <span class="mat-hint mat-small">
                   {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
                 </span>
               </div>
-              <div *ngIf="student?.musical?.course" class="">
+              <div fxLayout="row" *ngIf="student?.musical?.course" class="personal-numbers">
                 <span class="mb-0">{{student?.musical?.course.viewValue}}</span>
                 <span class="mat-hint mat-small">
                   {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
@@ -57,10 +63,10 @@
           </div>
 
           <!-- Action button -->
-          <div fxLayout="row" fxLayoutAlign="end center">
-            <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_STUDENT' | translate" [matTooltipShowDelay]="650">
+          <div fxLayout="row" fxLayoutAlign="end center" class="action-buttons">
+            <!-- <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_STUDENT' | translate" [matTooltipShowDelay]="650">
               <fa-icon [ngClass]="{'error-color': student?.archived}" class="mat-icon-18 mat-hint" icon="box"></fa-icon>
-            </button>
+            </button> -->
             <button class="action-button" mat-icon-button (click)="editStudent()" [matTooltip]="'EDIT_STUDENT' | translate" [matTooltipShowDelay]="650">
               <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
             </button>

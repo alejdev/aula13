@@ -8,6 +8,14 @@
 
       <!-- Name & Surname -->
       <div fxLayout="column" fxLayoutAlign="space-around start">
+
+        <!-- Archived -->
+        <div *ngIf="student?.archived" class="mat-small error mb-h">
+          <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+          <span class="error-color"> {{'STUDENT_ARCHIVED' | translate}} </span>
+        </div>
+
+        <!-- Name -->
         <span>{{student?.personal?.name}}</span>
         <div fxLayout="row wrap">
           <span class="mat-small mat-hint mr-q" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">

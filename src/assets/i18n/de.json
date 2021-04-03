@@ -60,6 +60,7 @@
 		"DUPLICATE": "Datensatz duplizieren",
 		"EDIT": "Datensatz bearbeiten"
 	},
+	"DAY_ARCHIVED": "Archiviertes Protokoll",
 	"DELETE": "Löschen",
 	"DELETE_CLASSROOM": "Klassenzimmer löschen",
 	"DELETE_ELEMENT": "Element löschen",
@@ -202,8 +203,8 @@
 		"DAY_NOT_EXIST": "Dieser Datensatz existiert nicht",
 		"DAY_STUDENT_ARCHIVED": "Sie können keine Aufzeichnungen eines archivierten Schülers erstellen. Zuerst entladen",
 		"DAY_UNARCHIVE": "Sind Sie sicher, dass Sie diesen Datensatz unarchivieren wollen?",
+		"DAY_UNARCHIVED_OK": "Datensatz erfolgreich unarchiviert",
 		"DAY_UNARCHIVE_2": "Wenn dies der Fall ist, wird er in der Liste der Datensätze wieder angezeigt.",
-		"DAY_UNARCHIVE_OK": "Datensatz erfolgreich unarchiviert",
 		"DAY_UPDATE_OK": "Geänderter Datensatz",
 		"FORGOT_PASSWORD": "Haben Sie Ihr Passwort vergessen?",
 		"FORGOT_PASSWORD_EMAIL": "Prüfen Sie Ihre E-Mail. Wir haben Ihnen eine E-Mail mit Anweisungen zum Zurücksetzen Ihres Passworts gesendet.",

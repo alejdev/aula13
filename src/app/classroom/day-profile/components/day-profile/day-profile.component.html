@@ -10,6 +10,13 @@
           </a>
 
           <div class="header-info" fxLayout="column" fxLayoutAlign="center">
+
+            <!-- Archived -->
+            <div *ngIf="day?.archived" class="mat-small error mb-q">
+              <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+              <span class="error-color"> {{'DAY_ARCHIVED' | translate}} </span>
+            </div>
+
             <span class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/aula/alumno', day?.studentId ]">{{day?.student?.personal?.name}}</span>
             <span class="mat-small mat-hint">{{day?.date | date: 'fullDate'}}</span>
           </div>
@@ -20,9 +27,9 @@
           <button class="action-button" mat-icon-button (click)="quickAction('favorite')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
             <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-18 mat-hint" icon="star"></fa-icon>
           </button>
-          <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
+          <!-- <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
             <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-18 mat-hint" icon="box"></fa-icon>
-          </button>
+          </button> -->
           <button class="action-button" mat-icon-button (click)="editDay($event)" [matTooltip]="'DAY.EDIT' | translate" [matTooltipShowDelay]="650">
             <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
           </button>

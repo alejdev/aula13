@@ -60,6 +60,7 @@
 		"DUPLICATE": "Duplicate record",
 		"EDIT": "Edit record"
 	},
+	"DAY_ARCHIVED": "Archived record",
 	"DELETE": "Delete",
 	"DELETE_CLASSROOM": "Delete classroom",
 	"DELETE_ELEMENT": "Delete Item",
@@ -202,8 +203,8 @@
 		"DAY_NOT_EXIST": "This record does not exist",
 		"DAY_STUDENT_ARCHIVED": "You cannot create records of an archived student. Unarchive it first",
 		"DAY_UNARCHIVE": "Are you sure you want to unarchive this record?",
+		"DAY_UNARCHIVED_OK": "Record successfully unarchived",
 		"DAY_UNARCHIVE_2": "If it does so, it will reappear in the list of records.",
-		"DAY_UNARCHIVE_OK": "Record successfully unarchived",
 		"DAY_UPDATE_OK": "Modified Record",
 		"FORGOT_PASSWORD": "Forgot your password?",
 		"FORGOT_PASSWORD_EMAIL": "Check your email. We have sent you an email with instructions on how to reset your password.",

@@ -60,6 +60,7 @@
 		"DUPLICATE": "Record duplicato",
 		"EDIT": "Modifica record"
 	},
+	"DAY_ARCHIVED": "Registro archiviato",
 	"DELETE": "Cancellare",
 	"DELETE_CLASSROOM": "Elimina classe",
 	"DELETE_ELEMENT": "Elimina elemento",
@@ -202,8 +203,8 @@
 		"DAY_NOT_EXIST": "Questo record non esiste",
 		"DAY_STUDENT_ARCHIVED": "Non è possibile creare record di uno studente archiviato. Scaricalo prima",
 		"DAY_UNARCHIVE": "Sei sicuro di voler disarchiviare questo disco?",
+		"DAY_UNARCHIVED_OK": "Record disarchiviato con successo",
 		"DAY_UNARCHIVE_2": "Se lo fa, riapparirà nella lista dei record.",
-		"DAY_UNARCHIVE_OK": "Record disarchiviato con successo",
 		"DAY_UPDATE_OK": "Record modificato",
 		"FORGOT_PASSWORD": "Hai dimenticato la tua password?",
 		"FORGOT_PASSWORD_EMAIL": "Controlla la tua e-mail. Ti abbiamo inviato un'e-mail con le istruzioni su come reimpostare la tua password.",
