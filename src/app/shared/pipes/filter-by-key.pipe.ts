@@ -7,24 +7,24 @@ import { UtilService } from '../services/util.service'
 })
 export class FilterByKeyPipe implements PipeTransform {
 
-  transform(array: any[], object: any, inclusive?: boolean): any {
-    if (!array || !object) { return array }
+  transform(array: any[], config: any, inclusive?: boolean): any {
+    if (!array || !config) { return array }
 
     let list = []
     if (inclusive) {
-      for (const property in object) {
-        if (object.hasOwnProperty(property)) {
-          const aux = array.filter((elem) => UtilService.keyByString(elem, property) === object[property])
+      for (const property in config) {
+        if (config.hasOwnProperty(property)) {
+          const aux = array.filter((elem) => UtilService.keyByString(elem, property) === config[property])
           list = list.concat(aux.filter((elem) => !list.find((item) => item.id === elem.id)))
         }
       }
     } else {
       list = array
-      for (const property in object) {
-        if (object.hasOwnProperty(property)) {
+      for (const property in config) {
+        if (config.hasOwnProperty(property)) {
           list = list.filter((elem) => {
             const asfd = UtilService.keyByString(elem, property)
-            return asfd === object[property]
+            return asfd === config[property]
           })
         }
       }

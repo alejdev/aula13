@@ -39,8 +39,6 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   sortDirection: string = 'reversed'
   query: any
 
-  isStudentProfile: boolean
-
   constructor(
     private filterPipe: FilterPipe,
     private dateFilterPipe: DateFilterPipe,
@@ -61,7 +59,6 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
       this.formatQuery()
       if (firstTime) { this.headerService.searchStatus = Object.keys(this.query).length ? true : false }
       firstTime = false
-
     })
   }
 
@@ -69,28 +66,8 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     this.dayListFiltered = list ? list : this.dayList
 
     if (this.dayFilter) { this.dayListFiltered = this.filterPipe.transform(this.dayListFiltered, this.dayFilter) }
-
     if (this.dateSince || this.dateUntil) { this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil) }
-
-    if (this.showFavorites && this.showArchived) {
-      this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { favorite: this.showFavorites, archived: this.showArchived, 'student.archived': this.showArchived }, true)
-    } else if (!this.showFavorites && !this.showArchived) {
-      this.isStudentProfile = this.dayListFiltered && this.dayListFiltered[0] && this.dayListFiltered[0].hideStudent ? true : false
-      if (this.isStudentProfile) {
-        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { archived: this.showArchived })
-      } else {
-        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { archived: this.showArchived, 'student.archived': this.showArchived })
-      }
-    } else if (this.showFavorites && !this.showArchived) {
-      if (this.isStudentProfile) {
-        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { favorite: this.showFavorites, 'student.archived': this.showArchived }, true)
-      } else {
-        this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { favorite: this.showFavorites })
-      }
-    } else if (!this.showFavorites && this.showArchived) {
-      this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, { archived: this.showArchived, 'student.archived': this.showArchived }, true)
-    }
-
+    this.filterFavsAndArchived()
     this.dayListFiltered = this.orderByPipe.transform(this.dayListFiltered, `${this.sortDirection === 'reversed' ? '' : '-'}${this.sortBy}`)
     this.dayListFiltered = this.agroupByDatePipe.transform(this.dayListFiltered)
 
@@ -98,6 +75,37 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
       this.headerService.mergeHeader({ length: this.dayListFiltered.length })
       this.dayListFilter.emit(this.dayListFiltered)
     }
+  }
+
+  filterFavsAndArchived() {
+    switch (true) {
+      case !this.showFavorites && !this.showArchived:
+        this.configFavsAndArchived({})
+        break
+      case this.showFavorites && !this.showArchived:
+        this.configFavsAndArchived({ favorite: this.showFavorites })
+        break
+      case !this.showFavorites && this.showArchived:
+        this.configFavsAndArchived({}, true)
+        break
+      case this.showFavorites && this.showArchived:
+        this.configFavsAndArchived({ favorite: this.showFavorites }, true)
+        break
+    }
+  }
+
+  configFavsAndArchived(config: any, inclusive?: boolean) {
+    let filters = { archived: this.showArchived, ...config }
+    filters = this.isStudentProfile() ? { ...filters, ...config } : { ...filters, ...config, 'student.archived': this.showArchived }
+    this.filterBy(filters, inclusive)
+  }
+
+  filterBy(config: any, inclusive?: boolean) {
+    this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, config, inclusive)
+  }
+
+  isStudentProfile() {
+    return this.dayListFiltered && this.dayListFiltered[0] && this.dayListFiltered[0].hideStudent ? true : false
   }
 
   setModels(params: any): void {
