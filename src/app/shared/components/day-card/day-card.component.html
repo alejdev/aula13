@@ -23,12 +23,11 @@
 
       <!-- Avatar -->
       <div fxLayout="row" fxLayoutAlign="end center" class="avatar-container ml-h" [ngClass]="{archived: day?.student?.archived}">
+        <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived}" class="mat-icon-18 mat-hint mr-h" icon="box"></fa-icon>
         <a [routerLink]="[ '/aula/alumno', day?.student?.id ]">
           <img class="avatar avatar-xs p-0 aumente aumente-big" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
         </a>
-        <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived}" class="mat-icon-18 mat-hint ml-q" icon="box"></fa-icon>
       </div>
-
 
     </div>
 

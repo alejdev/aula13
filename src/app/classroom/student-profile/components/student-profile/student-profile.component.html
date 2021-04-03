@@ -10,7 +10,7 @@
         </a>
 
         <!-- Fav button -->
-        <button class="action-button" class="mr-h ml-h" mat-icon-button (click)="quickAction('favorite')" [matTooltip]="'MSG.MARK_STUDENT_FAV' | translate" [matTooltipShowDelay]="650">
+        <button class="mr-h ml-h action-button" mat-icon-button (click)="quickAction('favorite')" [matTooltip]="'MSG.MARK_STUDENT_FAV' | translate" [matTooltipShowDelay]="650">
           <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star">
           </fa-icon>
         </button>
