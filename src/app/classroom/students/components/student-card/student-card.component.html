@@ -1,8 +1,7 @@
-<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente" [ngClass]="{'archived-student': student?.archived}" matRipple
-  [routerLink]="[ '/aula/alumno', student.id ]">
+<mat-card class="p-1 pl-h pr-h mt-h mb-h mat-elevation-z0 aumente" [ngClass]="{'archived-student': student?.archived}" matRipple [routerLink]="[ '/aula/alumno', student.id ]">
   <div fxLayout="row" fxLayoutAlign="space-between center">
 
-    <div class="row mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
+    <div class="mr-h ml-h" fxLayout="row" fxLayoutAlign="start center">
 
       <!-- Avatar -->
       <img class="aumente aumente-big user-avatar-image mr-1" [src]="student?.personal?.avatar | srcImage" alt="Avatar">
@@ -11,8 +10,7 @@
       <div fxLayout="column" fxLayoutAlign="space-around start">
         <span>{{student?.personal?.name}}</span>
         <div fxLayout="row wrap">
-          <span class="mat-small mat-hint mr-q"
-            *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
+          <span class="mat-small mat-hint mr-q" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first">
             <span [ngClass]="{'txt-lowercase': !first}">{{subject | subjectName}}</span>
             <span>{{mark(student?.classroom?.subjects, i) | translate}}</span>
           </span>

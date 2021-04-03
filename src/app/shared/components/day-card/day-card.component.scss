@@ -1,48 +1,53 @@
 mat-card {
 
-  .avatar-link {
-    width: 40px;
-    display: inline-table;
-
-    &.archived {
-      width: 60px;
-    }
-  }
-
   &:focus {
     outline: -webkit-focus-ring-color auto 0;
   }
-}
 
-.mat-icon-button.small-button {
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-}
-
-.header-info {
-
-  .header-info-title,
-  .header-info-name {
-    line-height: 1.25;
+  .mat-icon-button.small-button {
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
   }
-}
 
-.day-container {
-  max-height: 80px;
-  font-size: .9rem;
-}
+  .date-container {
 
-.text-date-container {
-  min-width: 125px;
-  text-align: right;
-}
+    flex: 0 0 125px;
 
-.text-date {
-  flex-wrap: nowrap;
-}
+    .text-date {
+      flex-wrap: nowrap;
+    }
+  }
 
-.action-buttons {
-  margin-right: -10px;
-  margin-top: -10px;
+  .student-container {
+    flex-basis: 100%;
+
+    .avatar-container {
+      flex: 0 0 1.6rem;
+
+      &.archived {
+        flex: 0 0 2.8rem;
+      }
+    }
+
+    .student-name {
+      text-align: right;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .day-content-container {
+    .day-title {
+      line-height: 1.2;
+    }
+
+    .action-buttons button {
+      margin-right: -5px;
+      margin-bottom: -5px;
+    }
+  }
 }

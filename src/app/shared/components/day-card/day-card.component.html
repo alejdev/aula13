@@ -1,55 +1,60 @@
 <mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente" [ngClass]="{'archived-student': !day?.hideStudent && (day?.archived || day?.student?.archived) || (day?.hideStudent && day?.archived)}" matRipple [routerLink]="[ '/aula/dia' , day?.id ]">
-  <div fxLayout="row" fxLayoutAlign="space-between start">
-    <div class="mb-1" fxLayout="row" fxLayoutAlign="start center">
+
+  <div class="day-header mb-1" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <div class="date-container">
+      <!-- Favorite -->
+      <button class="action-button small-button mr-q" mat-icon-button (click)="quickAction($event, 'favorite')">
+        <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-16 mat-hint" icon="star"></fa-icon>
+      </button>
+
+      <!-- Archived -->
+      <button class="action-button small-button mr-h" mat-icon-button (click)="quickAction($event, 'archived')">
+        <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-16 mat-hint ml-q" icon="box"></fa-icon>
+      </button>
+
+      <!-- Date -->
+      <span class="mat-small mat-hint mr-q text-date">{{day?.date | date: 'd MMM, yy'}}</span>
+    </div>
+
+    <div *ngIf="!day?.hideStudent && day?.student" class="student-container" fxLayout="row" fxLayoutAlign="end center">
+      <!-- Name -->
+      <a [routerLink]="[ '/aula/alumno', day?.student?.id ]" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
 
       <!-- Avatar -->
-      <div *ngIf="!day?.hideStudent && day?.student" class="avatar-link" [ngClass]="{archived: day?.student?.archived}" fxLayout="row" fxLayoutAlign="start center" FxFlex="nogrow">
+      <div fxLayout="row" fxLayoutAlign="end center" class="avatar-container ml-h" [ngClass]="{archived: day?.student?.archived}">
         <a [routerLink]="[ '/aula/alumno', day?.student?.id ]">
           <img class="avatar avatar-xs p-0 aumente aumente-big" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
         </a>
         <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived}" class="mat-icon-18 mat-hint ml-q" icon="box"></fa-icon>
       </div>
 
-      <!-- Header info -->
-      <div class="header-info" fxLayout="column" fxLayoutAlign="center">
-        <span class="mat-h3 mb-q header-info-title">{{day?.title}}</span>
-        <span *ngIf="!day?.hideStudent && day?.student" class="mat-small mat-hint header-info-name">{{day?.student?.personal?.name}}</span>
-      </div>
+
     </div>
 
-    <!-- Spacer -->
-    <span fxFlex></span>
-
-    <div class="text-date-container" fxLayout="row" fxLayoutAlign="end center" fxFlex="nogrow">
-      <!-- Favorite -->
-      <button class="action-button small-button" mat-icon-button (click)="quickAction($event, 'favorite')">
-        <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-16 mat-hint" icon="star"></fa-icon>
-      </button>
-      <!-- Archived -->
-      <button class="action-button small-button ml-h" mat-icon-button (click)="quickAction($event, 'archived')">
-        <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-16 mat-hint" icon="box"></fa-icon>
-      </button>
-      <!-- Date -->
-      <span class="mat-small mat-hint ml-h text-date">{{day?.date | date: 'd MMM, yy'}}</span>
-    </div>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-between start">
+  <!-- Day content -->
+  <div class="day-content-container" fxLayout="row" fxLayoutAlign="space-between end">
+    <div class="day-content" fxLayout="column" fxLayoutAlign="start start">
+      <!-- Title -->
+      <span class="mat-h3 mb-q day-title">{{day?.title}}</span>
 
-    <!-- Day content -->
-    <div class="day-container truncate-2 mat-hint">
-      {{day?.content | stripHTML}}
+      <!-- Content -->
+      <div class="day-content-text txt-1 truncate-2 mat-hint">
+        {{day?.content | stripHTML}}
+      </div>
     </div>
-
-    <!-- Action button -->
-    <div class="action-buttons" fxFlex="nogrow" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="action-buttons" fxLayout="row" fxLayoutAlign="end center">
+      <!-- Edit -->
       <button class="action-button" mat-icon-button (click)="editDay($event)">
         <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
       </button>
-      <button class="action-button" mat-icon-button (click)="deleteDay($event)">
+      <!-- Delete -->
+      <!-- <button class="action-button" mat-icon-button (click)="deleteDay($event)">
         <fa-icon class="mat-icon-18 mat-hint" icon="trash"></fa-icon>
-      </button>
+      </button> -->
     </div>
-
   </div>
+
 </mat-card>
