@@ -10,7 +10,7 @@
     <!-- Title -->
     <h2 *ngIf="headerConfig?.title" class="title pt-h pb-h" (click)="truncate()" [ngClass]="{'truncate': isTruncated}">
       {{headerConfig?.title | translate}}
-      <span *ngIf="headerConfig?.length" class="mat-smadll translucide"> | {{headerConfig?.length}}</span>
+      <span *ngIf="headerConfig?.length !== 0" class="translucide"> | {{headerConfig?.length}}</span>
     </h2>
     
     <!-- Logo -->

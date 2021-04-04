@@ -70,8 +70,10 @@
 
     .ck-editor__main {
       & > .ck-editor__editable {
+        border-color: map-get(map-get($colors, other), input-color);
+        
         &:not(.ck-focused) {
-          border-color: $black-12-opacity;
+          border-color: map-get(map-get($colors, other), input-color);
         }
       }
     }
