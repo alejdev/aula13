@@ -24,7 +24,7 @@ export class DayDeleteDialogComponent implements OnInit {
   ngOnInit(): void {
     this.textConfig = {
       title: 'DAY.DELETE',
-      msg: 'MSG.DAY_DELETE',
+      msg2: 'MSG.DAY_DELETE',
       okButton: 'DELETE'
     }
   }
