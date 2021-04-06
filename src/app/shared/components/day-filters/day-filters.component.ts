@@ -27,6 +27,8 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   routeSubscription: Subscription
 
+  showFilters: boolean
+
   dayFilter: string = ''
   dateSince: Moment
   dateUntil: Moment
@@ -57,7 +59,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
       this.setModels(result)
       this.filterList()
       this.formatQuery()
-      if (firstTime) { this.headerService.searchStatus = Object.keys(this.query).length ? true : false }
+      if (firstTime) { this.showFilters = Object.keys(this.query).length ? true : false }
       firstTime = false
     })
   }
@@ -182,6 +184,10 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     this.quickDate = ''
     this.sortDirection = ''
     this.goToQuery()
+  }
+
+  toggleFilters(): void {
+    this.showFilters = !this.showFilters
   }
 
   ngOnDestroy(): void {

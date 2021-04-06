@@ -29,7 +29,6 @@ export class DayCreationComponent implements OnInit {
   day: any
   studentList: any[]
   dayFormGroup: FormGroup
-  maxlengthTitle: number = 50
   ckeditor: any = DecoupledEditor
   editorConfig: any
 
@@ -47,13 +46,30 @@ export class DayCreationComponent implements OnInit {
   ngOnInit(): void {
     this.day = this.data.day
     this.editorConfig = {
-      toolbar: ['bold', 'italic', 'bulletedList', 'numberedList', 'blockQuote', '|', 'heading'],
+      toolbar: [
+        'bold',
+        'italic',
+        '|',
+        'heading',
+        'link',
+        'bulletedList',
+        'numberedList',
+        '|',
+        'undo',
+        'redo',
+        '|',
+        'blockQuote',
+        'insertTable',
+        'indent',
+        'outdent',
+      ],
       language: this.settingService.value.lang,
       options: [
         { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
         { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
         { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-      ]
+      ],
+      placeholder: this.translateService.instant('FORM.DAY_EDITOR_PLACEHOLDER')
     }
 
     // Init form controls
@@ -124,7 +140,7 @@ export class DayCreationComponent implements OnInit {
         })
     }
   }
-
+  
   cancel(): void {
     if (this.dayFormGroup.dirty) {
       if (confirm(this.translateService.instant('MSG.WILL_LOSE_THE_CHANGES'))) {

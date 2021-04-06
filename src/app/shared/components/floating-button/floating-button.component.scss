@@ -4,16 +4,23 @@
   right: 1.75rem;
   z-index: 1;
   height: 4rem;
+  width: 4rem;
   border-radius: 50%;
   cursor: pointer;
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
 
-  &:hover:enabled {
-    animation: pulse 1.7s infinite;
+  &:hover {
+    animation-name: pulse, pulse-main;
+  }
+
+  &.disabled:hover {
+    animation-name: pulse, pulse-disable;
   }
 
   fa-icon {
     position: relative;
-    top: 0px;
+    top: 14px;
     left: 2px;
   }
 

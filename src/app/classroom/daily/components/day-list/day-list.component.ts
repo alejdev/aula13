@@ -2,8 +2,8 @@ import { Subscription } from 'rxjs'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
-import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
@@ -11,12 +11,11 @@ import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
-import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
@@ -26,7 +25,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./day-list.component.scss'],
   providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe]
 })
-export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   dayList: any[]
   dayListFiltered: any[]
@@ -44,24 +43,22 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
     private excludeArchivedPipe: ExcludeArchivedPipe,
-    private loaderService: LoaderService,
     private toastService: ToastService,
     private router: Router
   ) { }
 
-  async ngOnInit(): Promise<any> {
-    this.headerService.configHeader({ title: 'DAILY', search: true })
-    this.studentService.savedStudentList = await this.studentService.getStudentList()
+  ngOnInit(): void {
+    this.headerService.configHeader({ title: 'DAILY', showLogo: true })
+    this.loadData()
   }
 
-  ngAfterViewInit() {
-    this.loadData()
+  ngAfterViewChecked() {
     this.cdRef.detectChanges()
   }
 
-  loadData(): void {
-    this.dayList = []
-    this.loaderService.start()
+  async loadData(): Promise<any> {
+    // Get students
+    this.studentService.savedStudentList = await this.studentService.getStudentList()
 
     // Get days
     this.dayListSubscription = this.dayService.observeDayList().subscribe((result) => {
@@ -71,14 +68,13 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
           ...day
         }
       })
-      if (this.dayList.length) {
-        this.dayListFiltered = this.excludeArchivedPipe.transform(Object.assign(this.dayList), this.dayFilters.showArchived)
+
+      // Filter the list for first time
+      if (this.dayFilters && this.dayList.length) {
+        this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayList, this.dayFilters.showArchived)
+        this.dayFilters.filterList(this.dayList)
       }
-      this.headerService.mergeHeader({ length: this.dayListFiltered.length })
-      this.dayFilters.filterList(this.dayList)
-    },
-      (error: any) => { },
-      () => { this.loaderService.stop() })
+    })
 
     // Get students
     this.studentListSubscription = this.studentService.observeStudentList().subscribe((result) => {
@@ -94,24 +90,18 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewInit {
           text: 'ADD_STUDENT',
           f: () => {
             this.router.navigate(['/aula/alumnos'])
-            this.dialog.open(StudentCreationComponent, {
-              width: 'calc(100vw)',
-              maxWidth: '800px',
-              autoFocus: false,
-              disableClose: true,
-              data: {
-                student: UtilService.clone(ModelService.studenModel)
-              }
-            })
+            // this.dialog.open(StudentCreationComponent, {
+            //   ...DIALOG_CONFIG,
+            //   data: {
+            //     student: UtilService.clone(ModelService.studenModel)
+            //   }
+            // })
           }
         }
       })
     } else {
       this.dialog.open(DayCreationComponent, {
-        width: 'calc(100vw)',
-        maxWidth: '800px',
-        autoFocus: false,
-        disableClose: true,
+        ...DIALOG_CONFIG,
         data: {
           day: ModelService.dayModel
         }

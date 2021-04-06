@@ -1,58 +1,67 @@
-<div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
-  <!-- Title -->
-  <h2 class="m-0" mat-dialog-title>{{(data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}</h2>
+<form [formGroup]="dayFormGroup" autocomplete="off" class="mat-typography">
+  <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- Title -->
+    <h2 class="m-0" mat-dialog-title>
+      {{(data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
+    </h2>
 
-  <!-- Close dialog -->
-  <button class="button-close" mat-icon-button attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">
-    <fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
-  </button>
-</div>
+    <!-- Favorite -->
+    <button mat-button (click)="day.favorite=!day.favorite" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
+      <span class="mat-small mat-hint mr-q"> {{(day?.favorite ? 'FAVORITE'  : 'MARK_FAVORITE') | translate}} </span>
+      <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-22 mat-hint" icon="star"></fa-icon>
+    </button>
+  </header>
 
-<mat-dialog-content class="mat-typography">
+  <section class="dialog-content" fxLayout="column" fxLayoutAlign="start">
+    <!-- <p class="mb-1 pb-h pl-q pr-q mat-hint">{{'DAY.CREATION_SUBTITLE' | translate}}.</p> -->
 
-  <p class="mb-1 pb-h pl-q pr-q mat-hint">{{'DAY.CREATION_SUBTITLE' | translate}}.</p>
+    <div class="padding-content-h mb-q" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
 
-  <form [formGroup]="dayFormGroup" autocomplete="off">
+      <!-- Student -->
+      <a13-select-student fxFlex="50" formControlName="dayStudentCtrl">
+      </a13-select-student>
 
-    <div class="mb-1 f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center">
-
-      <div class="f-wrap" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxFlex ngClass.xs="full">
-
-        <!-- Student -->
-        <a13-select-student class="mb-h" fxFlex="50" formControlName="dayStudentCtrl">
-        </a13-select-student>
-
-        <!-- Date -->
-        <mat-form-field class="mb-h" ngClass.xs="mb-1" [appearance]="'inputAppearance' | settingValue" fxFlex="50">
-          <mat-label>{{'FORM.DATE' | translate}}</mat-label>
-          <input class="pl-h" matInput required formControlName="dayDateCtrl" [matDatepicker]="dp">
-          <mat-datepicker #dp></mat-datepicker>
-          <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dp">
-          </mat-datepicker-toggle>
-          <mat-hint align="start">{{'HINT.BIRTHDATE' | translate}}</mat-hint>
-        </mat-form-field>
-
-        <!-- Title -->
-        <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="100">
-          <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
-          <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}" maxlength="{{maxlengthTitle}}" autocomplete="off">
-          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
-          <mat-hint align="start">{{'HINT.TITLE' | translate}}</mat-hint>
-          <mat-hint align="end">{{title.value.length}} / {{maxlengthTitle}}</mat-hint>
-        </mat-form-field>
-
-        <!-- Content -->
-        <div class="angular-editor mt-1 pt-h pb-h">
-          <ckeditor id="ckeditor" [editor]="ckeditor" [config]="editorConfig" formControlName="dayContentCtrl">
-          </ckeditor>
-        </div>
-      </div>
+      <!-- Date -->
+      <mat-form-field class="pl-h" fxFlex="50" [appearance]="'inputAppearance' | settingValue">
+        <mat-label>{{'FORM.DATE' | translate}}</mat-label>
+        <input class="pl-h" matInput required formControlName="dayDateCtrl" [matDatepicker]="dp">
+        <mat-datepicker #dp></mat-datepicker>
+        <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dp">
+        </mat-datepicker-toggle>
+        <!-- <mat-hint align="start">{{'HINT.BIRTHDATE' | translate}}</mat-hint> -->
+      </mat-form-field>
     </div>
-  </form>
 
-</mat-dialog-content>
+    <!-- Title -->
+    <mat-form-field class="padding-content-h" [appearance]="'inputAppearance' | settingValue" fxFlex="100">
+      <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
+      <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}" autocomplete="off">
+      <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+      <mat-hint align="start">{{'HINT.TITLE' | translate}}</mat-hint>
+      <!-- <mat-hint align="end">{{title.value.length}} / {{maxlengthTitle}}</mat-hint> -->
+    </mat-form-field>
 
-<mat-dialog-actions align="end">
-  <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-  <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="dayFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
-</mat-dialog-actions>
+    <!-- Content -->
+    <div class="angular-editor mt-1 pt-h pb-h padding-content-h">
+      <ckeditor id="ckeditor" [editor]="ckeditor" [config]="editorConfig" formControlName="dayContentCtrl">
+      </ckeditor>
+    </div>
+
+  </section>
+
+  <footer class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <!-- Archived -->
+    <button mat-button (click)="day.archived=!day.archived" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
+      <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': day?.archived}" [icon]="day?.archived ? 'box' : 'box-open'"></fa-icon>
+      <span class="mat-small mat-hint ml-q"> {{(day?.archived ? 'DAY_ARCHIVED'  : 'ARCHIVE') | translate}} </span>
+    </button>
+
+    <!-- Action buttons -->
+    <div>
+      <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
+      <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="dayFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+    </div>
+  </footer>
+
+</form>

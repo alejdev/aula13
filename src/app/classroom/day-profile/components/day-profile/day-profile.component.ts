@@ -4,6 +4,7 @@ import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delet
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -66,9 +67,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           dialog: {
             component: DayCreationComponent,
             config: {
-              width: 'calc(100vw)',
-              maxWidth: '800px',
-              autoFocus: false,
+              ...DIALOG_CONFIG,
               data: {
                 idDay: this.dayId,
                 day: { ...this.day }
@@ -81,9 +80,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           dialog: {
             component: DayCreationComponent,
             config: {
-              width: 'calc(100vw)',
-              maxWidth: '800px',
-              autoFocus: false,
+              ...DIALOG_CONFIG,
               data: {
                 day: { ...this.day }
               }
@@ -108,8 +105,6 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           dialog: {
             component: DayDeleteDialogComponent,
             config: {
-              width: 'calc(100vw)',
-              maxWidth: '800px',
               autoFocus: false,
               data: {
                 day: { ...this.day }
@@ -123,10 +118,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
 
   editDay() {
     this.dialog.open(DayCreationComponent, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      disableClose: true,
+      ...DIALOG_CONFIG,
       data: {
         idDay: this.dayId,
         day: { ...this.day }

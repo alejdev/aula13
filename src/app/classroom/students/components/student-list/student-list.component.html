@@ -1,10 +1,10 @@
 <section class="container container-padd">
   <div class="container-max sm">
 
-    <a13-student-filters [studentList]="studentList" (studentListFilter)="agroupStudents($event)"></a13-student-filters>
+    <a13-student-filters *ngIf="studentList?.length" [studentList]="studentList" (studentListFilter)="agroupStudents($event)"></a13-student-filters>
 
     <!-- Students list-->
-    <div class="pb-5 mt-1" *ngIf="studentListFiltered?.length">
+    <div *ngIf="studentListFiltered?.length">
 
       <!-- Favorites -->
       <div class="mb-1" *ngIf="favoriteListFiltered.length">
@@ -49,13 +49,8 @@
       </div>
     </div>
 
-    <!-- Empty list -->
-    <h3 *ngIf="!studentList?.length" class="mt-3 txt-center mat-hint">{{'MSG.STUDENT_LIST_EMPTY' | translate}}
-    </h3>
-
-    <!-- Empty filtered list -->
-    <h3 *ngIf="!studentListFiltered?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}
-    </h3>
+    <!-- Empty list messages -->
+    <a13-empty-list *ngIf="studentList" [list]="studentList" [listFiltered]="studentListFiltered" listMessage="MSG.STUDENT_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_STUDENTS"></a13-empty-list>
 
     <!-- Floating button -->
     <a13-floating-button [pulse]="!studentList?.length" text="ADD_STUDENT" tooltip="ADD_STUDENT" icon="user-plus" (click)="createStudent()"></a13-floating-button>

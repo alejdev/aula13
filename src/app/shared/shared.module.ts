@@ -28,9 +28,11 @@ import { FaConfig, FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular
 import { faArrowLeft, faBars, faBirthdayCake, faBook, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGuitar, faHeart, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faSquare, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
+import { MY_DATE_FORMATS } from '../core/core.module'
 import { DayCardComponent } from './components/day-card/day-card.component'
 import { DayCreationComponent } from './components/day-creation/day-creation.component'
 import { DayFiltersComponent } from './components/day-filters/day-filters.component'
+import { EmptyListComponent } from './components/empty-list/empty-list.component'
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component'
 import { LoaderComponent } from './components/loader/loader.component'
 import { SelectStudentComponent } from './components/select-student/select-student.component'
@@ -50,20 +52,9 @@ import { SrcImagePipe } from './pipes/src-image.pipe'
 import { StringByPipe } from './pipes/string-by.pipe'
 import { StripHTMLPipe } from './pipes/strip-html.pipe'
 import { SubjectNamePipe } from './pipes/subject-name.pipe'
+import { TypeOfPipe } from './pipes/type-of.pipe'
 import { LoaderService } from './services/loader.service'
 import { SettingService } from './services/setting.service'
-
-export const MY_DATE_FORMATS = {
-  parse: {
-    dateInput: 'DD/MM/YYYY'
-  },
-  display: {
-    dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
-  }
-}
 
 registerLocaleData(localeEs, 'es')
 registerLocaleData(localeEn, 'en')
@@ -81,6 +72,9 @@ registerLocaleData(localeFr, 'fr')
     SelectStudentComponent,
     StudentFiltersComponent,
     DayFiltersComponent,
+    EmptyListComponent,
+
+    ScrollableDirective,
 
     StringByPipe,
     AgePipe,
@@ -94,10 +88,8 @@ registerLocaleData(localeFr, 'fr')
     ExcludeArchivedPipe,
     AgroupByDatePipe,
     SettingValuePipe,
-
-    ScrollableDirective,
-
     FilterByKeyPipe,
+    TypeOfPipe,
   ],
   imports: [
     // Angular
@@ -158,6 +150,17 @@ registerLocaleData(localeFr, 'fr')
     FontAwesomeModule,
 
     // Mine
+    FloatingButtonComponent,
+    DayCardComponent,
+    DayCreationComponent,
+    LoaderComponent,
+    SelectStudentComponent,
+    StudentFiltersComponent,
+    DayFiltersComponent,
+    EmptyListComponent,
+
+    ScrollableDirective,
+
     StringByPipe,
     AgePipe,
     StripHTMLPipe,
@@ -170,16 +173,7 @@ registerLocaleData(localeFr, 'fr')
     ExcludeArchivedPipe,
     AgroupByDatePipe,
     SettingValuePipe,
-
-    ScrollableDirective,
-
-    FloatingButtonComponent,
-    DayCardComponent,
-    DayCreationComponent,
-    LoaderComponent,
-    SelectStudentComponent,
-    StudentFiltersComponent,
-    DayFiltersComponent,
+    TypeOfPipe
   ],
   entryComponents: [
     ToastComponent

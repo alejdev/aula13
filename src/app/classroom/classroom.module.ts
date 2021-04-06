@@ -70,7 +70,7 @@ import { StudentsModule } from './students/students.module'
     ClassroomDeleteDialogComponent,
     SubjectDeleteDialogComponent,
     DayDeleteDialogComponent,
-    DayArchiveDialogComponent
+    DayArchiveDialogComponent,
   ]
 })
 export class ClassroomModule { }

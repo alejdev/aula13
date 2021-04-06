@@ -1,13 +1,13 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
-import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 
 import { AgroupByPipe } from '../../pipes/agroup-by.pipe'
@@ -22,7 +22,7 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
   styleUrls: ['./student-list.component.scss'],
   providers: [FilterPipe, ClassroomPipe, SubjectPipe, AgroupByPipe, OrderByPipe]
 })
-export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   studentList: any[]
   studentListFiltered: any[]
@@ -30,6 +30,8 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
   restListFiltered: any[]
   archiveListFiltered: any[]
   studentListSubscription: Subscription
+
+  delay: boolean
 
   @ViewChild(StudentFiltersComponent, { static: true }) studentFilters: StudentFiltersComponent
 
@@ -55,48 +57,44 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewInit {
     private studentService: StudentService,
     private dialog: MatDialog,
     private headerService: HeaderService,
-    private cdRef: ChangeDetectorRef,
     private agroupByPipe: AgroupByPipe,
-    private loaderService: LoaderService
+    private cdRef: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
-    this.headerService.configHeader({ title: 'STUDENTS', search: true })
+    this.headerService.configHeader({ title: 'STUDENTS', showLogo: true })
     this.loadData()
   }
 
-  ngAfterViewInit() {
-    this.loadData()
+  ngAfterViewChecked() {
     this.cdRef.detectChanges()
   }
 
   loadData(): void {
-    this.studentList = []
-    this.loaderService.start()
+    // Get students
     this.studentListSubscription = this.studentService.observeStudentList().subscribe(
       (result: any) => {
         this.studentList = UtilService.mapCollection(result)
-        this.studentListFiltered = Object.assign(this.studentList)
-        this.studentFilters.filterList(this.studentList)
-      },
-      (error: any) => { },
-      () => { this.loaderService.stop() }
-    )
+
+        // Filter the list for first time
+        this.studentListFiltered = UtilService.clone(this.studentList)
+        if (this.studentFilters && this.studentList.length) {
+          this.studentFilters.filterList(this.studentList)
+        }
+      })
   }
 
   createStudent(): void {
     this.dialog.open(StudentCreationComponent, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      disableClose: true,
+      ...DIALOG_CONFIG,
       data: {
         student: UtilService.clone(ModelService.studenModel)
       }
     })
   }
 
-  agroupStudents($event: Event) {
+  agroupStudents($event: any): void {
+    this.studentListFiltered = $event
     this.favoriteListFiltered = this.agroupByPipe.transform($event, 'favorite')
     this.restListFiltered = this.agroupByPipe.transform($event)
     this.archiveListFiltered = this.agroupByPipe.transform($event, 'archived')

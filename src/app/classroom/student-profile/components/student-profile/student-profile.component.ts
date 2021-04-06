@@ -6,6 +6,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
@@ -16,7 +17,7 @@ import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -26,7 +27,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   styleUrls: ['./student-profile.component.scss'],
   providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe]
 })
-export class StudentProfileComponent implements OnInit, OnDestroy {
+export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   studentId: any
   student: any
@@ -51,8 +52,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   selectedTab: number = 0
   tabCount: number = 2
 
-  profileHeaderHeight: number
-
   @ViewChild(DayFiltersComponent, { static: true }) dayFilters: DayFiltersComponent
   @ViewChild('profileHeader', { static: true }) elementView: ElementRef
 
@@ -63,9 +62,21 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
     private studentService: StudentService,
     private dayService: DayService,
     private headerService: HeaderService,
+    private cdRef: ChangeDetectorRef,
   ) { }
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    // Set proprofile header height
+    const profileHeaderHeight = this.elementView ? this.elementView.nativeElement.offsetHeight : 190
+    document.documentElement.style.setProperty('--profile-header-height', `${profileHeaderHeight}px`)
+    this.loadData()
+  }
+
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges()
+  }
+
+  loadData() {
     // Get param id
     this.routerSubscription = this.activatedRoute.params.subscribe(params => this.studentId = params.id)
 
@@ -82,16 +93,13 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             back: true,
             student: this.student,
             truncable: true,
-            search: true,
             menuOptions: [{
               name: 'EDIT_STUDENT',
               icon: 'pen',
               dialog: {
                 component: StudentCreationComponent,
                 config: {
-                  width: 'calc(100vw)',
-                  maxWidth: '800px',
-                  autoFocus: false,
+                  ...DIALOG_CONFIG,
                   data: {
                     idStudent: this.studentId,
                     student: { ...this.student }
@@ -104,9 +112,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
               dialog: {
                 component: StudentCreationComponent,
                 config: {
-                  width: 'calc(100vw)',
-                  maxWidth: '800px',
-                  autoFocus: false,
+                  ...DIALOG_CONFIG,
                   data: {
                     student: { ...this.student }
                   }
@@ -146,15 +152,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
       })
   }
 
-  showMore() {
-    const state = this.moreInfoConfig.show
-    this.moreInfoConfig = {
-      show: state ? false : true,
-      text: `SHOW_${state ? 'MORE' : 'LESS'}`,
-      icon: `caret-${state ? 'down' : 'up'}`
-    }
-  }
-
   queryDayList(): void {
     this.dayListQuerySubscription = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
       .subscribe((result: any) => {
@@ -165,45 +162,33 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
             student: { ...this.student },
           }
         })
-
-        this.setProfileHeaderHeight()
-
-        this.dayListFiltered = Object.assign(this.dayList)
-        this.headerService.mergeHeader({ length: this.dayListFiltered.length })
-        this.dayFilters.filterList(this.dayList)
+        
+        // Filter the list for first time        
+        if (this.dayFilters && this.dayList) {
+          this.dayListFiltered = UtilService.clone(this.dayList)
+          this.dayFilters.filterList(this.dayList)
+        }
       })
   }
-
-  setProfileHeaderHeight() {
-    this.profileHeaderHeight = this.elementView ? this.elementView.nativeElement.offsetHeight : 190
-    document.documentElement.style.setProperty('--profile-header-height', `${this.profileHeaderHeight}px`)
-  }
-
 
   createDay(): void {
     // if (this.student.archived) {
     //   this.toastService.warning({ text: 'MSG.DAY_STUDENT_ARCHIVED' })
     // } else {
-      const newDay = ModelService.dayModel
-      newDay.student = this.student
-      this.dialog.open(DayCreationComponent, {
-        width: 'calc(100vw)',
-        maxWidth: '800px',
-        autoFocus: false,
-        disableClose: true,
-        data: {
-          day: newDay,
-        }
-      })
+    const newDay = ModelService.dayModel
+    newDay.student = this.student
+    this.dialog.open(DayCreationComponent, {
+      ...DIALOG_CONFIG,
+      data: {
+        day: newDay,
+      }
+    })
     // }
   }
 
   editStudent() {
     this.dialog.open(StudentCreationComponent, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      disableClose: true,
+      ...DIALOG_CONFIG,
       data: {
         idStudent: this.studentId,
         student: { ...this.student }
@@ -241,6 +226,15 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
           }
         }
       }
+    }
+  }
+
+  showMore() {
+    const state = this.moreInfoConfig.show
+    this.moreInfoConfig = {
+      show: state ? false : true,
+      text: `SHOW_${state ? 'MORE' : 'LESS'}`,
+      icon: `caret-${state ? 'down' : 'up'}`
     }
   }
 

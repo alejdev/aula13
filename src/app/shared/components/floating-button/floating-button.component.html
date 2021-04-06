@@ -1,4 +1,4 @@
-<button class="floating-button" mat-flat-button color="primary" attr.arial-label="{{'ADD_STUDENT' | translate}}" [disabled]="disabled" [ngClass]="{pulse: pulse}" [@animateFloatingButton]="buttonState" (click)="toAction()" [matTooltip]="tooltip | translate" [matTooltipShowDelay]="650">
+<a class="floating-button" mat-flat-button color="primary" attr.arial-label="{{'ADD_STUDENT' | translate}}" (click)="toAction()" [ngClass]="{disabled: disabled, pulse: pulse}" [matTooltip]="tooltip | translate" [matTooltipShowDelay]="650">
   <fa-icon class="mat-icon-22" *ngIf="icon" [icon]="icon"></fa-icon>
   <span *ngIf="text" class="text-button">{{text | translate}}</span>
-</button>
+</a>

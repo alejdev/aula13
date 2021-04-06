@@ -1,10 +1,10 @@
 <section class="container container-padd">
   <div class="container-max sm">
 
-    <a13-day-filters [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+    <a13-day-filters *ngIf="dayList?.length" [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
 
     <!-- Days -->
-    <div class="mt-1">
+    <div>
       <ng-container *ngFor="let day of dayListFiltered">
         <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
           <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
@@ -14,17 +14,10 @@
       </ng-container>
     </div>
 
-    <!-- Empty list -->
-    <h3 *ngIf="!dayList?.length" class="mt-3 txt-center mat-hint">{{'MSG.DAY_LIST_EMPTY' | translate}}
-    </h3>
-
-    <!-- Empty filtered list -->
-    <h3 *ngIf="!dayListFiltered?.length" class="txt-5 mt-3 txt-center mat-hint">{{'MSG.NOTHING_MAN' | translate}}</h3>
-
-    <!-- Filtered list length > 0 -->
-    <h3 *ngIf="dayListFiltered?.length" class="mt-3 txt-center mat-hint">{{'MSG.NO_MORE_DAYS' | translate}}</h3>
+    <!-- Empty list messages -->
+    <a13-empty-list *ngIf="dayList" [list]="dayList" [listFiltered]="dayListFiltered" listMessage="MSG.DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
 
     <!-- Floating button -->
-    <a13-floating-button text="DAY.ADD" tooltip="DAY.ADD" [pulse]="studentList?.length && !dayList?.length" icon="edit" [disabled]="!studentList?.length" (click)="createDay()"></a13-floating-button>
+    <a13-floating-button [pulse]="!dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" [disabled]="!studentList?.length" (click)="createDay()"></a13-floating-button>
   </div>
 </section>

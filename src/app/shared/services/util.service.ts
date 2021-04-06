@@ -132,7 +132,7 @@ export class UtilService {
   }
 
   // Return elem key value by string
-  public static keyByString(elem: any, keys: any) {
+  public static keyByString(elem: any, keys: any): any {
     keys = keys.replace(/\[(\w+)\]/g, '.$1')
     keys = keys.replace(/^\./, '')
     const split = keys.split('.')
@@ -146,5 +146,18 @@ export class UtilService {
       }
     }
     return elem
+  }
+
+  // Stoge data in localStorage
+  public static storeData(key: string, data: any): void {
+    localStorage.removeItem(key);
+    localStorage.setItem(key, JSON.stringify(data))
+  }
+
+  // Retrieve data from localStorage
+  public static getStoredData(key: string): any {
+    const data = JSON.parse(localStorage.getItem(key))
+    localStorage.removeItem(key)
+    return data
   }
 }

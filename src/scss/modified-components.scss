@@ -1,0 +1,95 @@
+mat-form-field {
+  fa-icon {
+    position: relative;
+    top: -4px;
+    margin-left: 0.5rem;
+  }
+}
+
+// Dialogs
+.mat-dialog-content {
+  overflow-x: hidden !important;
+}
+
+.full-dialog {
+  height: calc(var(--vh, 1vh) * 100);
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  mat-dialog-container {
+    height: fit-content;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .dialog-content {
+    max-height: calc(var(--vh, 1vh) * 100 - (36px + 2rem) * 2);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+// CKEditor
+.angular-editor {
+  width: 100%;
+  box-sizing: border-box;
+
+  .ck {
+
+    .ck-editor__editable_inline {
+      word-break: break-all;
+      min-height: 220px;
+      // max-height: 400px;
+      max-width: 100%;
+    }
+
+    .ck-editor__top .ck-sticky-panel .ck-toolbar,
+    .ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
+      border-radius: 5px 5px 0 0 !important;
+    }
+
+    .ck-sticky-panel .ck-sticky-panel__content.ck-styky-panel__content-sticky {
+      position: sticky !important;
+    }
+
+    // .ck.ck-editor__top.ck-reset_all {
+    //   z-index: var(--ck-z-modal);
+    //   position: sticky;
+    //   top: 0;
+    // }
+
+    // .ck.ck-sticky-panel__placeholder {
+    //   display : none !important;
+    // }
+
+    // .ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
+    //   position: unset;
+    // }
+
+    .ck-reset_all {
+      position: sticky;
+      top: -1px;
+      z-index: 30;
+    }
+
+    .ck-editor__main {
+      & > .ck-editor__editable {
+        // background: map-get(map-get($colors, other), input-color);
+        background: transparent;
+        border-radius: 0 0 5px 5px !important;
+        border-width: 2px;
+
+        &.ck-focused {
+          border-width: 2px;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}

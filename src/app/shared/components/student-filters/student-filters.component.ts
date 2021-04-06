@@ -30,6 +30,8 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   subjectListSubscription: Subscription
   routeSubscription: Subscription
 
+  showFilters: boolean
+
   studentFilter: string
   classroomsFilter: any[]
   subjectsFilter: any[]
@@ -61,7 +63,7 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
       this.setModels(result)
       this.filterList()
       this.formatQuery()
-      if (openSearch) { this.headerService.searchStatus = Object.keys(this.query).length ? true : false }
+      if (openSearch) { this.showFilters = Object.keys(this.query).length ? true : false }
     })
   }
 
@@ -79,6 +81,10 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   }
 
   setModels(params: any): void {
+    
+    // TODO
+    // const { studentFilter } = params
+
     this.studentFilter = params.studentFilter
     this.sortDirection = params.sortDirection
     this.classroomsFilter = typeof params.classroomsFilter == 'string' ? [params.classroomsFilter] : params.classroomsFilter
@@ -113,6 +119,10 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   resetFilter(): void {
     this.studentFilter = ''
     this.goToQuery()
+  }
+
+  toggleFilters(): void {
+    this.showFilters = !this.showFilters
   }
 
   cleanFilters(): void {

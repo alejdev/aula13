@@ -1,15 +1,18 @@
 import { Subscription } from 'rxjs'
+import { TypeOfPipe } from 'src/app/shared/pipes/type-of.pipe'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
+import { Router } from '@angular/router'
 
 import { HeaderService } from '../../services/header.service'
 
 @Component({
   selector: 'a13-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  providers: [TypeOfPipe]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
@@ -23,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private themeService: ThemeService,
     private headerService: HeaderService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -51,15 +55,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleSearch() {
-    this.headerService.toggleSearch()
-    if (this.headerService.searchStatus) {
-      setTimeout(() => { document.getElementById('searchInputFilter').focus() }, 300)
-    }
-  }
+  // toggleSearch() {
+  //   this.headerService.toggleSearch()
+  //   if (this.headerService.searchStatus) {
+  //     setTimeout(() => { document.getElementById('searchInputFilter').focus() }, 300)
+  //   }
+  // }
 
   goBack() {
-    window.history.back()
+    if (this.headerConfig.backTo) {
+      this.router.navigate(this.headerConfig.backTo.path, this.headerConfig.backTo.extras)
+    } else {
+      window.history.back()
+    }
   }
 
   ngOnDestroy(): void {

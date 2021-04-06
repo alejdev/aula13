@@ -131,7 +131,26 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
           this.classroom.id = result ? result.id : this.classroom.id
           this.updateStudentClassrooms()
           this.dialogRef.close(this.data.entity)
-          this.toastService.success({ text: `MSG.CLASSROOM_${result ? 'CREATE' : 'UPDATE'}_OK` })
+
+          if (result && result.id) {// Create
+            this.toastService.success({
+              text: 'MSG.CLASSROOM_CREATE_OK',
+              navigate: {
+                text: 'SEE',
+                route: ['aula/alumnos'],
+                queryParams: { classroomsFilter: [this.classroom.id] }
+              }
+            })
+          } else {// Modify
+            this.toastService.success({
+              text: 'MSG.CLASSROOM_UPDATE_OK',
+              navigate: {
+                text: 'SEE',
+                route: ['aula/alumnos'],
+                queryParams: { classroomsFilter: [this.classroom.id] }
+              }
+            })
+          }
         })
         .catch((err: any) => {
           this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })

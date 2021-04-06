@@ -22,7 +22,8 @@ $colors: (
     accent              : $second-color,
     warn                : $tertiary-color,
     background          : #f4f7fd,
-    foreground          : #222
+    foreground          : #222,
+    white-light         : #f5f5f5
   ),
   dark-theme: (
     primary             : $main-color,
@@ -32,6 +33,7 @@ $colors: (
     warn                : $tertiary-color,
     background          : #333,
     foreground          : #bbbfc2,
+    black-light         : #111
   ),
   other: (
     link-color          : $main-color,
@@ -40,7 +42,7 @@ $colors: (
     info-color          : #5faef7,
     warning-color       : #f7ba5f,
     error-color         : #f75f5f,
-    input-color         : rgba(34, 34, 34, 0.04)
+    input-color         : rgba(34, 34, 34, 0.039)
   )
 );
 
@@ -51,7 +53,7 @@ $sizes: (
     radius-size         : .5rem,
     header-size         : 54px,
     border-size         : 1px,
-    scroll-size         : 7px,
+    scroll-size         : 4px,
     sidemenu-size       : 280px,
     lg-size             : 1280px,
     sm-size             : 960px,

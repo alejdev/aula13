@@ -1,6 +1,6 @@
 import { animateFloatingButton } from 'src/app/classroom/classroom.animation'
 
-import { Component, HostListener, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
 @Component({
@@ -20,16 +20,16 @@ export class FloatingButtonComponent implements OnInit {
   @Input() rotate: boolean
   @Input() pulse: boolean
 
-  buttonState: any
-  @HostListener('mouseenter') onMouseEnter(): void { this.buttonState = this.rotate ? 'enter' : false }
-  @HostListener('mouseleave') onMouseLeave(): void { this.buttonState = this.rotate ? 'leave' : false }
+  // buttonState: any
+  // @HostListener('mouseenter') onMouseEnter(): void { this.buttonState = this.rotate ? 'enter' : false }
+  // @HostListener('mouseleave') onMouseLeave(): void { this.buttonState = this.rotate ? 'leave' : false }
 
   constructor(
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.buttonState = 'leave'
+    // this.buttonState = 'leave'
   }
 
   toAction(): void {

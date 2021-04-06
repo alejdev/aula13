@@ -1,4 +1,5 @@
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Input, OnInit } from '@angular/core'
@@ -26,10 +27,7 @@ export class StudentComponent implements OnInit {
   editStudent(ev: Event) {
     ev.stopImmediatePropagation()
     this.dialog.open(StudentCreationComponent, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      disableClose: true,
+      ...DIALOG_CONFIG,
       data: {
         idStudent: this.student.id,
         student: { ...this.student }

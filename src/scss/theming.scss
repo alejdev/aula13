@@ -57,11 +57,19 @@
     border-color: darken(map-get(map-get($colors, light-theme), background), 2%);
   }
 
+  .floating-button.disabled {
+    color: rgba(map-get(map-get($colors, light-theme), foreground), .3);
+    background-color: $black-12-opacity;
+  }
+
   .angular-editor .ck {
+
+    .ck-reset_all,
+    .ck-reset_all * {}
 
     .ck-toolbar {
       // background: white;
-      background: map-get(map-get($colors, other), input-color);
+      background: map-get(map-get($colors, light-theme), white-light) !important;
       border-color: $black-12-opacity;
       border-top-color: transparent;
       border-left-color: transparent;
@@ -71,7 +79,7 @@
     .ck-editor__main {
       & > .ck-editor__editable {
         border-color: map-get(map-get($colors, other), input-color);
-        
+
         &:not(.ck-focused) {
           border-color: map-get(map-get($colors, other), input-color);
         }
@@ -106,7 +114,7 @@
   }
 
   .border-theme {
-    border-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3);
+    border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
 
     &-button:hover {
       border-color: map-get(map-get($colors, dark-theme), foreground);
@@ -138,6 +146,11 @@
     border-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
   }
 
+  .floating-button.disabled {
+    color: rgba(map-get(map-get($colors, dark-theme), foreground), .45);
+    background-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+  }
+
   .angular-editor .ck {
 
     .ck-reset_all,
@@ -146,7 +159,7 @@
     }
 
     &.ck-toolbar__separator {
-      background-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3) !important;
+      background-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3) !important;
     }
 
     .ck-button:not(.ck-disabled):hover,
@@ -162,7 +175,7 @@
     .ck-dropdown__panel,
     .ck-list {
       background-color: lighten(map-get(map-get($colors, dark-theme), background), 3%);
-      border-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3);
+      border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
       color: #ccc;
       border-radius: 5px;
     }
@@ -170,7 +183,7 @@
     .ck-editor__main {
       & > .ck-editor__editable {
         &:not(.ck-focused) {
-          border-color: rgba(map-get(map-get($colors, dark-theme), foreground), 0.3);
+          border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
         }
       }
     }

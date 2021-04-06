@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
@@ -123,10 +124,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   createElement(ev: Event, item: any): void {
     ev.stopImmediatePropagation()
     this.dialog.open(item.create, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      disableClose: true,
+      ...DIALOG_CONFIG,
       data: {
         entity: UtilService.clone(item.model)
       }
@@ -137,10 +135,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     ev.stopImmediatePropagation()
     if (option.id === 'edit') {
       this.dialog.open(item.create, {
-        width: 'calc(100vw)',
-        maxWidth: '800px',
-        autoFocus: false,
-        disableClose: true,
+        ...DIALOG_CONFIG,
         data: {
           entity: child
         }

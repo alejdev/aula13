@@ -10,17 +10,17 @@
     <!-- Title -->
     <h2 *ngIf="headerConfig?.title" class="title pt-h pb-h" (click)="truncate()" [ngClass]="{'truncate': isTruncated}">
       {{headerConfig?.title | translate}}
-      <span *ngIf="headerConfig?.length !== 0" class="translucide"> | {{headerConfig?.length}}</span>
+      <span *ngIf="headerConfig?.length | typeOf:'number'" class="translucide"> | {{headerConfig?.length}}</span>
     </h2>
-    
+
     <!-- Logo -->
-    <a13-title-logo *ngIf="!headerConfig?.menuOptions" class="fixed title-logo" [showLogo]="true"></a13-title-logo>
+    <a13-title-logo class="fixed title-logo" [showLogo]="headerConfig?.showLogo"></a13-title-logo>
     <span fxFlex></span>
 
     <!-- Seach button -->
-    <button *ngIf="headerConfig?.search" class="menu-button action-button mr-q" mat-icon-button (click)="toggleSearch()" attr.aria-label="{{'SEARCH' | translate}}">
+    <!-- <button *ngIf="headerConfig?.search" class="menu-button action-button mr-q" mat-icon-button (click)="toggleSearch()" attr.aria-label="{{'SEARCH' | translate}}">
       <fa-icon class="mat-icon-18" [icon]="headerService?.searchStatus ? 'times' : 'filter'"></fa-icon>
-    </button>
+    </button> -->
 
     <!-- Menu phone -->
     <button *ngIf="headerConfig?.student?.contactInformation?.phones?.length" class="menu-button action-button" mat-icon-button [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">

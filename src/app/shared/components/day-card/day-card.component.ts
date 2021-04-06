@@ -1,5 +1,6 @@
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
@@ -25,10 +26,7 @@ export class DayCardComponent implements OnInit {
   editDay(ev: Event) {
     ev.stopImmediatePropagation()
     this.dialog.open(DayCreationComponent, {
-      width: 'calc(100vw)',
-      maxWidth: '800px',
-      autoFocus: false,
-      disableClose: true,
+      ...DIALOG_CONFIG,
       data: {
         idDay: this.day.id,
         day: { ...this.day }

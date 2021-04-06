@@ -41,13 +41,27 @@ mat-card {
   }
 
   .day-content-container {
+
+    .day-content {
+      width: calc(100% - 2.2rem);
+    }
+
     .day-title {
       line-height: 1.2;
     }
 
-    .action-buttons button {
-      margin-right: -5px;
-      margin-bottom: -5px;
+
+    .day-content-text {
+      width: 100%;
+    }
+
+    .action-buttons {
+      // flex: 0 0 125px;
+
+      button {
+        margin-right: -5px;
+        margin-bottom: -5px;
+      }
     }
   }
 }
