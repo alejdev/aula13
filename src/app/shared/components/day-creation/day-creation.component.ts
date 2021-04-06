@@ -6,6 +6,7 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
 import _moment, { default as _rollupMoment } from 'moment'
 import { DayService } from 'src/app/classroom/services/day.service'
+import { CKEDITOR_CONFIG } from 'src/app/core/core.module'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
@@ -46,30 +47,9 @@ export class DayCreationComponent implements OnInit {
   ngOnInit(): void {
     this.day = this.data.day
     this.editorConfig = {
-      toolbar: [
-        'bold',
-        'italic',
-        '|',
-        'heading',
-        'link',
-        'bulletedList',
-        'numberedList',
-        '|',
-        'undo',
-        'redo',
-        '|',
-        'blockQuote',
-        'insertTable',
-        'indent',
-        'outdent',
-      ],
       language: this.settingService.value.lang,
-      options: [
-        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-      ],
-      placeholder: this.translateService.instant('FORM.DAY_EDITOR_PLACEHOLDER')
+      placeholder: this.translateService.instant('FORM.DAY_EDITOR_PLACEHOLDER'),
+      ...CKEDITOR_CONFIG,
     }
 
     // Init form controls
