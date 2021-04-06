@@ -24,6 +24,7 @@
 	"CLASSROOMS": "Classi",
 	"CLASSROOM_DELETE": "Elimina classe",
 	"CLEAN_ALL_FILTERS": "Cancella tutti i filtri",
+	"CLONE_STUDENT": "Studente clone",
 	"CLOSE_MENU": "Chiudi menu",
 	"CONFIRM_PASSWORD": "Conferma password",
 	"CONTACT": {
@@ -55,9 +56,9 @@
 	"DAY": {
 		"ADD": "Aggiungi record",
 		"ARCHIVE": "Record di archivio",
+		"CLONE": "Registro dei cloni",
 		"CREATION_SUBTITLE": "Con questi record puoi monitorare ogni studente ogni giorno",
 		"DELETE": "Elimina record",
-		"DUPLICATE": "Record duplicato",
 		"EDIT": "Modifica record"
 	},
 	"DAY_ARCHIVED": "Registro archiviato",
@@ -66,7 +67,6 @@
 	"DELETE_CLASSROOM": "Elimina classe",
 	"DELETE_ELEMENT": "Elimina elemento",
 	"DELETE_SUBJECT": "Elimina soggetto",
-	"DUPLICATE_STUDENT": "Studente duplicato",
 	"EDIT_CLASSROOM": "Modifica classe",
 	"EDIT_ELEMENT": "Modifica oggetto",
 	"EDIT_NAME": "Cambia nome",
@@ -269,7 +269,7 @@
 	"RESET_FILTER": "Reimposta filtro",
 	"REST_STUDENTS": "Altri studenti",
 	"SAVE": "Salvare",
-	"SEARCH_DAY": "Cerca nel diario",
+	"SEARCH_DAY": "cerca record",
 	"SEARCH_STUDENT": "Cerca studente",
 	"SEE": "Vista",
 	"SELECT": "Selezionare",

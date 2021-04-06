@@ -2,7 +2,7 @@
   <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
     <!-- Title -->
     <h2 class="m-0" mat-dialog-title>
-      {{(data.idStudent ? 'EDIT_STUDENT' : 'ADD_STUDENT') | translate}}
+      {{(data.isClone ? 'CLONE_STUDENT' : data.idStudent ? 'EDIT_STUDENT' : 'ADD_STUDENT') | translate}}
     </h2>
 
     <!-- Favorite -->

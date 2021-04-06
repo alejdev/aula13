@@ -2,7 +2,7 @@
   <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
     <!-- Title -->
     <h2 class="m-0" mat-dialog-title>
-      {{(data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
+      {{(data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
     </h2>
 
     <!-- Favorite -->

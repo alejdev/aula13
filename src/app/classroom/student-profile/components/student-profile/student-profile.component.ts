@@ -107,14 +107,15 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
                 }
               }
             }, {
-              name: 'DUPLICATE_STUDENT',
+              name: 'CLONE_STUDENT',
               icon: 'copy',
               dialog: {
                 component: StudentCreationComponent,
                 config: {
                   ...DIALOG_CONFIG,
                   data: {
-                    student: { ...this.student }
+                    student: { ...this.student },
+                    isClone: true
                   }
                 }
               }

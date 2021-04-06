@@ -24,6 +24,7 @@
 	"CLASSROOMS": "Classrooms",
 	"CLASSROOM_DELETE": "Delete classroom",
 	"CLEAN_ALL_FILTERS": "Clear all filters",
+	"CLONE_STUDENT": "Clone student",
 	"CLOSE_MENU": "Close menu",
 	"CONFIRM_PASSWORD": "Confirm password",
 	"CONTACT": {
@@ -55,9 +56,9 @@
 	"DAY": {
 		"ADD": "Add record",
 		"ARCHIVE": "Archive record",
+		"CLONE": "Clone registry",
 		"CREATION_SUBTITLE": "With these records you can track each student daily",
 		"DELETE": "Clear log",
-		"DUPLICATE": "Duplicate record",
 		"EDIT": "Edit record"
 	},
 	"DAY_ARCHIVED": "Archived record",
@@ -66,7 +67,6 @@
 	"DELETE_CLASSROOM": "Delete classroom",
 	"DELETE_ELEMENT": "Delete Item",
 	"DELETE_SUBJECT": "Delete subject",
-	"DUPLICATE_STUDENT": "Duplicate Student",
 	"EDIT_CLASSROOM": "Edit Classroom",
 	"EDIT_ELEMENT": "Edit Item",
 	"EDIT_NAME": "Rename",
@@ -269,7 +269,7 @@
 	"RESET_FILTER": "Reset filter",
 	"REST_STUDENTS": "Other students",
 	"SAVE": "Save",
-	"SEARCH_DAY": "Search diary",
+	"SEARCH_DAY": "Search record",
 	"SEARCH_STUDENT": "Search student",
 	"SEE": "Watch",
 	"SELECT": "Select",

@@ -24,6 +24,7 @@
 	"CLASSROOMS": "Klassen",
 	"CLASSROOM_DELETE": "Klassenzimmer löschen",
 	"CLEAN_ALL_FILTERS": "Alle Filter löschen",
+	"CLONE_STUDENT": "Schüler klonen",
 	"CLOSE_MENU": "Menü schließen",
 	"CONFIRM_PASSWORD": "Passwort bestätigen",
 	"CONTACT": {
@@ -55,9 +56,9 @@
 	"DAY": {
 		"ADD": "Datensatz hinzufügen",
 		"ARCHIVE": "Archivdatensatz",
+		"CLONE": "Registrierung klonen",
 		"CREATION_SUBTITLE": "Mit diesen Aufzeichnungen können Sie jeden Schüler täglich verfolgen",
 		"DELETE": "Registrierung löschen",
-		"DUPLICATE": "Datensatz duplizieren",
 		"EDIT": "Datensatz bearbeiten"
 	},
 	"DAY_ARCHIVED": "Archiviertes Protokoll",
@@ -66,7 +67,6 @@
 	"DELETE_CLASSROOM": "Klassenzimmer löschen",
 	"DELETE_ELEMENT": "Element löschen",
 	"DELETE_SUBJECT": "Betreff löschen",
-	"DUPLICATE_STUDENT": "Schüler duplizieren",
 	"EDIT_CLASSROOM": "Klassenzimmer bearbeiten",
 	"EDIT_ELEMENT": "Element bearbeiten",
 	"EDIT_NAME": "Ändern Sie den Namen",
@@ -269,7 +269,7 @@
 	"RESET_FILTER": "Filter zurücksetzen",
 	"REST_STUDENTS": "Andere Schüler",
 	"SAVE": "Speichern",
-	"SEARCH_DAY": "Tagebuch suchen",
+	"SEARCH_DAY": "Datensatz suchen",
 	"SEARCH_STUDENT": "Student suchen",
 	"SEE": "Siehe",
 	"SELECT": "Auswählen",

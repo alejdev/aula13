@@ -75,14 +75,15 @@ export class DayProfileComponent implements OnInit, OnDestroy {
             }
           }
         }, {
-          name: 'DAY.DUPLICATE',
+          name: 'DAY.CLONE',
           icon: 'copy',
           dialog: {
             component: DayCreationComponent,
             config: {
               ...DIALOG_CONFIG,
               data: {
-                day: { ...this.day }
+                day: { ...this.day },
+                isClone: true
               }
             }
           }

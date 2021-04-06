@@ -24,6 +24,7 @@
 	"CLASSROOMS": "Classes",
 	"CLASSROOM_DELETE": "Supprimer la classe",
 	"CLEAN_ALL_FILTERS": "Effacer tous les filtres",
+	"CLONE_STUDENT": "Étudiant clone",
 	"CLOSE_MENU": "Fermer le menu",
 	"CONFIRM_PASSWORD": "Confirmer mot de passe",
 	"CONTACT": {
@@ -55,9 +56,9 @@
 	"DAY": {
 		"ADD": "Ajouter un enregistrement",
 		"ARCHIVE": "Enregistrement d’archives",
+		"CLONE": "Registre de clonage",
 		"CREATION_SUBTITLE": "Avec ces enregistrements, vous pouvez suivre chaque élève quotidiennement",
 		"DELETE": "Supprimer l'inscription",
-		"DUPLICATE": "Enregistrement en double",
 		"EDIT": "Modifier l'enregistrement"
 	},
 	"DAY_ARCHIVED": "Journal archivé",
@@ -66,7 +67,6 @@
 	"DELETE_CLASSROOM": "Supprimer la classe",
 	"DELETE_ELEMENT": "Supprimer l'élément",
 	"DELETE_SUBJECT": "Supprimer le sujet",
-	"DUPLICATE_STUDENT": "Étudiant en double",
 	"EDIT_CLASSROOM": "Modifier la classe",
 	"EDIT_ELEMENT": "Modifier l'élément",
 	"EDIT_NAME": "Rebaptiser",
@@ -269,7 +269,7 @@
 	"RESET_FILTER": "Réinitialiser le filtre",
 	"REST_STUDENTS": "Autres étudiants",
 	"SAVE": "Sauvegarder",
-	"SEARCH_DAY": "Rechercher dans le journal",
+	"SEARCH_DAY": "Rechercher un enregistrement",
 	"SEARCH_STUDENT": "Recherche étudiant",
 	"SEE": "Regarder",
 	"SELECT": "sélectionner",
