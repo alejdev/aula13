@@ -37,7 +37,7 @@ export class DayCardComponent implements OnInit {
   deleteDay(ev: Event) {
     ev.stopImmediatePropagation()
     this.dialog.open(DayDeleteDialogComponent, {
-      autoFocus: false,
+      ...DIALOG_CONFIG,
       data: {
         idDay: this.day.id,
         day: { ...this.day }

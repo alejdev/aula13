@@ -131,24 +131,16 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
           this.updateStudentSubjects()
           this.dialogRef.close(this.data.entity)
 
+          const navigateTo = {
+            text: 'SEE',
+            route: ['aula/alumnos'],
+            queryParams: { subjectsFilter: [this.subject.id], openFilters: true }
+          }
+
           if (result && result.id) {// Create
-            this.toastService.success({
-              text: 'MSG.SUBJECT_CREATE_OK',
-              navigate: {
-                text: 'SEE',
-                route: ['aula/alumnos'],
-                queryParams: { subjectsFilter: [this.subject.id] }
-              }
-            })
+            this.toastService.success({ text: 'MSG.SUBJECT_CREATE_OK', navigate: navigateTo })
           } else {// Modify
-            this.toastService.success({
-              text: 'MSG.SUBJECT_UPDATE_OK',
-              navigate: {
-                text: 'SEE',
-                route: ['aula/alumnos'],
-                queryParams: { subjectsFilter: [this.subject.id] }
-              }
-            })
+            this.toastService.success({ text: 'MSG.SUBJECT_UPDATE_OK', navigate: navigateTo })
           }
         })
         .catch((err: any) => {

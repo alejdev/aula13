@@ -77,7 +77,13 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
   togglePanSideMenu(): void {
     this.settingService.value = { canPanSideMenu: !this.settingService.value.canPanSideMenu }
-    this.toastService.info({ text: 'MSG.RELOAD_PAGE_FOR_CHANGES' })
+    this.toastService.info({
+      text: 'MSG.RELOAD_PAGE_FOR_CHANGES',
+      action: {
+        text: 'REFRESH',
+        f: () => window.location.reload()
+      }
+    })
   }
 
   ngOnDestroy(): void {

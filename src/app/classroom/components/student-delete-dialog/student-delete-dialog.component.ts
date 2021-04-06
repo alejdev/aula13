@@ -9,10 +9,12 @@ import { StudentService } from '../../services/student.service'
 
 @Component({
   selector: 'a13-student-delete-dialog',
-  templateUrl: './student-delete-dialog.component.html',
+  templateUrl: '../templates/simple-dialog.template.html',
   styleUrls: ['./student-delete-dialog.component.scss']
 })
 export class StudentDeleteDialogComponent implements OnInit {
+
+  textConfig: any
 
   constructor(
     private router: Router,
@@ -23,12 +25,14 @@ export class StudentDeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void { }
-
-  onNoClick(): void {
-    this.dialogRef.close()
+  ngOnInit(): void {
+    this.textConfig = {
+      title: 'STUDENT_DELETE',
+      msg: 'MSG.STUDENT_DELETE',
+      msg2: 'MSG.STUDENT_DELETE_2',
+      okButton: 'DELETE'
+    }
   }
-
   async removeDaysToStudents() {
     const dayList = await this.dayService.getQueryDayList('studentId', '==', this.data.idStudent)
     this.dayService.deleteDayBatch(dayList)
@@ -46,4 +50,7 @@ export class StudentDeleteDialogComponent implements OnInit {
       })
   }
 
+  cancel(): void {
+    this.dialogRef.close()
+  }
 }

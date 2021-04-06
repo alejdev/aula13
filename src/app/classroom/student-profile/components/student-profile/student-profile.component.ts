@@ -124,7 +124,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
               dialog: {
                 component: StudentArchiveDialogComponent,
                 config: {
-                  autoFocus: false,
+                  ...DIALOG_CONFIG,
                   data: {
                     idStudent: this.studentId,
                     student: { ...this.student }
@@ -137,7 +137,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
               dialog: {
                 component: StudentDeleteDialogComponent,
                 config: {
-                  autoFocus: false,
+                  ...DIALOG_CONFIG,
                   data: {
                     idStudent: this.studentId,
                     student: { ...this.student }

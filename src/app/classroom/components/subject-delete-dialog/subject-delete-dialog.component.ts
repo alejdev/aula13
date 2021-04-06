@@ -8,10 +8,12 @@ import { SubjectService } from '../../services/subject.service'
 
 @Component({
   selector: 'a13-subject-delete-dialog',
-  templateUrl: './subject-delete-dialog.component.html',
+  templateUrl: '../templates/simple-dialog.template.html',
   styleUrls: ['./subject-delete-dialog.component.scss']
 })
 export class SubjectDeleteDialogComponent implements OnInit {
+
+  textConfig: any
 
   constructor(
     private subjectService: SubjectService,
@@ -21,9 +23,16 @@ export class SubjectDeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.textConfig = {
+      title: 'SUBJECT_DELETE',
+      msg: 'MSG.SUBJECT_DELETE',
+      msg2: 'MSG.SUBJECT_DELETE_2',
+      okButton: 'DELETE'
+    }
+  }
 
-  onNoClick(): void {
+  cancel(): void {
     this.dialogRef.close()
   }
 

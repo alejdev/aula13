@@ -2,29 +2,31 @@ import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
-import { Router } from '@angular/router'
 
 import { DayService } from '../../services/day.service'
 
 @Component({
   selector: 'a13-day-delete-dialog',
-  templateUrl: './day-delete-dialog.component.html',
+  templateUrl: '../templates/simple-dialog.template.html',
   styleUrls: ['./day-delete-dialog.component.scss']
 })
 export class DayDeleteDialogComponent implements OnInit {
 
+  textConfig: any
+
   constructor(
-    private router: Router,
     private dayService: DayService,
     private toastService: ToastService,
     private dialogRef: MatDialogRef<DayDeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void { }
-
-  onNoClick(): void {
-    this.dialogRef.close()
+  ngOnInit(): void {
+    this.textConfig = {
+      title: 'DAY.DELETE',
+      msg: 'MSG.DAY_DELETE',
+      okButton: 'DELETE'
+    }
   }
 
   ok(): void {
@@ -36,6 +38,10 @@ export class DayDeleteDialogComponent implements OnInit {
       .catch((err: any) => {
         this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
       })
+  }
+
+  cancel(): void {
+    this.dialogRef.close()
   }
 
 }

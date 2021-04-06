@@ -53,17 +53,17 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.query = {}
-    let openSearch = false
+    let openFilters = false
     this.classroomListSubscription = this.classroomService.observeClassroomList()
       .subscribe((result) => this.classroomList = UtilService.mapCollection(result))
     this.subjectListSubscription = this.subjectService.observeSubjectList()
       .subscribe((result) => this.subjectList = UtilService.mapCollection(result))
     this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
-      openSearch = UtilService.parseStringToBoolean(result.openSearch)
+      openFilters = UtilService.parseStringToBoolean(result.openFilters)
       this.setModels(result)
       this.filterList()
       this.formatQuery()
-      if (openSearch) { this.showFilters = Object.keys(this.query).length ? true : false }
+      if (openFilters) { this.showFilters = Object.keys(this.query).length ? true : false }
     })
   }
 

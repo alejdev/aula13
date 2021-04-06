@@ -92,7 +92,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           dialog: {
             component: DayArchiveDialogComponent,
             config: {
-              autoFocus: false,
+              ...DIALOG_CONFIG,
               data: {
                 idDay: this.dayId,
                 day: { ...this.day }
@@ -105,7 +105,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           dialog: {
             component: DayDeleteDialogComponent,
             config: {
-              autoFocus: false,
+              ...DIALOG_CONFIG,
               data: {
                 day: { ...this.day }
               }

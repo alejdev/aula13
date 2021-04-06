@@ -7,7 +7,7 @@ import { StudentService } from '../../services/student.service'
 
 @Component({
   selector: 'a13-student-archive-dialog',
-  templateUrl: './student-archive-dialog.component.html',
+  templateUrl: '../templates/simple-dialog.template.html',
   styleUrls: ['./student-archive-dialog.component.scss']
 })
 export class StudentArchiveDialogComponent implements OnInit {
@@ -33,10 +33,6 @@ export class StudentArchiveDialogComponent implements OnInit {
     }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close()
-  }
-
   ok(): void {
     this.student.archived = !this.student.archived
     this.studentService.updateStudent(this.data.idStudent, this.student)
@@ -47,6 +43,10 @@ export class StudentArchiveDialogComponent implements OnInit {
       .catch((err: any) => {
         this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
       })
+  }
+
+  cancel(): void {
+    this.dialogRef.close()
   }
 
 }

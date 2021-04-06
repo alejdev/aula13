@@ -41,7 +41,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   }, {
     name: 'SIGN.OUT',
     icon: 'sign-out-alt',
-    action: () => { this.dialog.open(LogoutDialogComponent) }
+    action: () => { this.dialog.open(LogoutDialogComponent, { ...DIALOG_CONFIG }) }
   }]
 
   menuItems = [[{
@@ -113,7 +113,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   onItemSelected(ev: Event, item: any): void {
     if (!item.children || !item.children.length) {
       this.router.navigate(['aula/alumnos'], {
-        queryParams: { [item.filter]: [item.id], openSearch: true }
+        queryParams: { [item.filter]: [item.id], openFilters: true }
       })
     }
     if (item.children && item.children.length) {
@@ -142,7 +142,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
       })
     } else {
       this.dialog.open(item.delete, {
-        autoFocus: false,
+        ...DIALOG_CONFIG,
         data: {
           entity: child
         }

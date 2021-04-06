@@ -8,10 +8,12 @@ import { StudentService } from '../../services/student.service'
 
 @Component({
   selector: 'a13-classroom-delete-dialog',
-  templateUrl: './classroom-delete-dialog.component.html',
+  templateUrl: '../templates/simple-dialog.template.html',
   styleUrls: ['./classroom-delete-dialog.component.scss']
 })
 export class ClassroomDeleteDialogComponent implements OnInit {
+
+  textConfig: any
 
   constructor(
     private classroomService: ClassroomService,
@@ -21,10 +23,13 @@ export class ClassroomDeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void { }
-
-  onNoClick(): void {
-    this.dialogRef.close()
+  ngOnInit(): void {
+    this.textConfig = {
+      title: 'CLASSROOM_DELETE',
+      msg: 'MSG.CLASSROOM_DELETE',
+      msg2: 'MSG.CLASSROOM_DELETE_2',
+      okButton: 'DELETE'
+    }
   }
 
   async removeClassroomsToStudents() {
@@ -52,5 +57,9 @@ export class ClassroomDeleteDialogComponent implements OnInit {
       .catch((err: any) => {
         this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
       })
+  }
+
+  cancel(): void {
+    this.dialogRef.close()
   }
 }

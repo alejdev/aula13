@@ -7,7 +7,7 @@ import { DayService } from '../../services/day.service'
 
 @Component({
   selector: 'a13-day-archive-dialog',
-  templateUrl: './day-archive-dialog.component.html',
+  templateUrl: '../templates/simple-dialog.template.html',
   styleUrls: ['./day-archive-dialog.component.scss']
 })
 export class DayArchiveDialogComponent implements OnInit {
@@ -33,7 +33,7 @@ export class DayArchiveDialogComponent implements OnInit {
     }
   }
 
-  onNoClick(): void {
+  cancel(): void {
     this.dialogRef.close()
   }
 
