@@ -81,7 +81,7 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   }
 
   setModels(params: any): void {
-    
+
     // TODO
     // const { studentFilter } = params
 

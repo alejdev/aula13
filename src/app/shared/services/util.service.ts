@@ -150,7 +150,7 @@ export class UtilService {
 
   // Stoge data in localStorage
   public static storeData(key: string, data: any): void {
-    localStorage.removeItem(key);
+    localStorage.removeItem(key)
     localStorage.setItem(key, JSON.stringify(data))
   }
 

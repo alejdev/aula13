@@ -162,8 +162,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
             student: { ...this.student },
           }
         })
-        
-        // Filter the list for first time        
+
+        // Filter the list for first time
         if (this.dayFilters && this.dayList) {
           this.dayListFiltered = UtilService.clone(this.dayList)
           this.dayFilters.filterList(this.dayList)

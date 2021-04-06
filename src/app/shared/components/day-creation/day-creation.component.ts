@@ -140,7 +140,7 @@ export class DayCreationComponent implements OnInit {
         })
     }
   }
-  
+
   cancel(): void {
     if (this.dayFormGroup.dirty) {
       if (confirm(this.translateService.instant('MSG.WILL_LOSE_THE_CHANGES'))) {
