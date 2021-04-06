@@ -13,6 +13,13 @@ import { ServiceWorkerModule } from '@angular/service-worker'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 
+export const DEFAULT_SETTINGS = {
+  theme: 0,
+  lang: 'es',
+  canPanSideMenu: false,
+  inputAppearance: 'fill'
+}
+
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY'

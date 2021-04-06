@@ -37,6 +37,9 @@ export class ClassroomComponent implements OnInit, OnDestroy {
       mc.on('panleft', (ev: any) => this.sideMenu.close())
     }
 
+    // Storage settings on first time
+    this.settingService.value = this.settingService.value
+
     // Detecting Router Changes
     this.routerSubscription = this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {

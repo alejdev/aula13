@@ -1,3 +1,5 @@
+import { DEFAULT_SETTINGS } from 'src/app/core/core.module'
+
 import { Injectable } from '@angular/core'
 
 @Injectable({
@@ -5,22 +7,13 @@ import { Injectable } from '@angular/core'
 })
 export class SettingService {
 
-  // Default settings
-  private settings: any = {
-    theme: 0,
-    lang: 'es',
-    canPanSideMenu: false,
-    inputAppearance: 'fill'
-  }
-
   constructor() { }
 
   public get value(): any {
-    return JSON.parse(localStorage.getItem('a13_settings')) || this.settings
+    return JSON.parse(localStorage.getItem('a13_settings')) || DEFAULT_SETTINGS
   }
 
   public set value(value: any) {
-    this.settings = { ...this.settings, ...value }
-    localStorage.setItem('a13_settings', JSON.stringify(this.settings))
+    localStorage.setItem('a13_settings', JSON.stringify({ ...DEFAULT_SETTINGS, ...value }))
   }
 }
