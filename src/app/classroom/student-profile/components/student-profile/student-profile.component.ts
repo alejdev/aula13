@@ -176,7 +176,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     // if (this.student.archived) {
     //   this.toastService.warning({ text: 'MSG.DAY_STUDENT_ARCHIVED' })
     // } else {
-    const newDay = ModelService.dayModel
+    const newDay = UtilService.clone(ModelService.dayModel)
     newDay.student = this.student
     this.dialog.open(DayCreationComponent, {
       ...DIALOG_CONFIG,
