@@ -3,6 +3,7 @@
 .pulse {
   animation-duration: 1.6s;
   animation-iteration-count: infinite;
+  animation-delay: 3s;
 
   &:not(.disabled) {
     animation-name: pulse, pulse-main;
