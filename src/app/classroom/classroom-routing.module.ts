@@ -1,7 +1,7 @@
+import { ClassroomComponent } from 'src/app/classroom/components/classroom/classroom.component'
+
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-
-import { ClassroomComponent } from 'src/app/classroom/components/classroom/classroom.component'
 
 const routes: Routes = [{
   path: '',

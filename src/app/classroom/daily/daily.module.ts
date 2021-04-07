@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core'
-
+import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { SharedModule } from 'src/app/shared/shared.module'
 
-import { DailyRoutingModule } from './daily-routing.module'
+import { NgModule } from '@angular/core'
 
 import { DayListComponent } from './components/day-list/day-list.component'
-import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { DailyRoutingModule } from './daily-routing.module'
 
 @NgModule({
   declarations: [
