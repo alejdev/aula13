@@ -41,7 +41,7 @@ export const DIALOG_CONFIG: MatDialogConfig = {
 }
 
 export const CKEDITOR_CONFIG: any = {
-  toolbar: ['bold', 'italic', '|', 'heading', 'link', 'bulletedList', 'numberedList', '|', 'undo', 'redo', '|', 'blockQuote', 'insertTable', 'indent', 'outdent'],
+  toolbar: ['bold', 'italic', '|', 'heading', 'blockQuote', 'bulletedList', 'numberedList', '|', 'undo', 'redo', '|', 'link', 'insertTable', 'indent', 'outdent'],
   options: [
     { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
     { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
