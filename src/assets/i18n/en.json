@@ -6,6 +6,7 @@
 	"APP_SUBTITLE": "Organize your private lessons",
 	"APP_TITLE": "Aula 13",
 	"ARCHIVE": "Archive",
+	"ARCHIVED": "Archived",
 	"ARCHIVED_STUDENTS": "Archived Students",
 	"ARCHIVE_DAY": "Archive record",
 	"ARCHIVE_STUDENT": "Archive student",
@@ -24,7 +25,10 @@
 	"CLASSROOMS": "Classrooms",
 	"CLASSROOM_DELETE": "Delete classroom",
 	"CLEAN_ALL_FILTERS": "Clear all filters",
+	"CLONE": "Clone",
+	"CLONE_CLASSROOM": "Clone classroom",
 	"CLONE_STUDENT": "Clone student",
+	"CLONE_SUBJECT": "Clone subject",
 	"CLOSE_MENU": "Close menu",
 	"CONFIRM_PASSWORD": "Confirm password",
 	"CONTACT": {
@@ -32,6 +36,7 @@
 		"PHONE": "Telephone contact",
 		"TITLE": "Contact"
 	},
+	"COPY_OF": "Copy of",
 	"CREATE_CLASSROOM": "Create classroom",
 	"CREATE_SUBJECT": "Create subject",
 	"DAILY": "Daily",

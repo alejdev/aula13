@@ -64,10 +64,12 @@ export class StudentCreationComponent implements OnInit {
     this.equals = UtilService.equals
     this.maxDate = UtilService.today()
 
+    const studentName = this.student.personal.name
+
     // Init form controls
     this.studentFormGroup = this.formBuilder.group({
       personalFormGroup: this.formBuilder.group({
-        nameCtrl: [this.student.personal.name, Validators.required],
+        nameCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${studentName}` : studentName, Validators.required],
         avatarCtrl: [this.student.personal.avatar],
         birthdateCtrl: [this.studentService.formatInputDate(this.student.personal.birthdate)],
         academicCourseCtrl: [this.student.personal.academicCourse],
@@ -172,7 +174,7 @@ export class StudentCreationComponent implements OnInit {
           this.dialogRef.close(this.data.student)
           const routeId = this.router.url.match(/\/.*\/.*\/(.*)/)
 
-          if (result && result.id) {// Create
+          if (result && result.id) { // Create
             this.toastService.success({
               text: 'MSG.STUDENT_CREATE_OK',
               navigate: { text: 'SEE', route: ['aula/alumno', result.id] }

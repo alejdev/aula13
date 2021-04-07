@@ -25,7 +25,8 @@ export class DayDeleteDialogComponent implements OnInit {
     this.textConfig = {
       title: 'DAY.DELETE',
       msg2: 'MSG.DAY_DELETE',
-      okButton: 'DELETE'
+      okButton: 'DELETE',
+      okButtonColor: 'warn'
     }
   }
 

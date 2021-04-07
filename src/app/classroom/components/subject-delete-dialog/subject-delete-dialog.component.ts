@@ -28,7 +28,8 @@ export class SubjectDeleteDialogComponent implements OnInit {
       title: 'SUBJECT_DELETE',
       msg: 'MSG.SUBJECT_DELETE',
       msg2: 'MSG.SUBJECT_DELETE_2',
-      okButton: 'DELETE'
+      okButton: 'DELETE',
+      okButtonColor: 'warn'
     }
   }
 

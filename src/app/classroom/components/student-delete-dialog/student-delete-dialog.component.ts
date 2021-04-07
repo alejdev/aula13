@@ -30,7 +30,8 @@ export class StudentDeleteDialogComponent implements OnInit {
       title: 'STUDENT_DELETE',
       msg: 'MSG.STUDENT_DELETE',
       msg2: 'MSG.STUDENT_DELETE_2',
-      okButton: 'DELETE'
+      okButton: 'DELETE',
+      okButtonColor: 'warn'
     }
   }
   async removeDaysToStudents() {

@@ -52,11 +52,13 @@ export class DayCreationComponent implements OnInit {
       ...CKEDITOR_CONFIG,
     }
 
+    const dayTitle = this.day.title
+
     // Init form controls
     this.dayFormGroup = this.formBuilder.group({
       dayStudentCtrl: [this.day.student, Validators.required],
       dayDateCtrl: [this.dayService.formatInputDate(this.day.date), Validators.required],
-      dayTitleCtrl: [this.day.title, Validators.required],
+      dayTitleCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${dayTitle}` : dayTitle, Validators.required],
       dayContentCtrl: [this.day.content, Validators.required],
     })
   }

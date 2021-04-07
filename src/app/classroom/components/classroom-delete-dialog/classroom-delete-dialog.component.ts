@@ -28,7 +28,8 @@ export class ClassroomDeleteDialogComponent implements OnInit {
       title: 'CLASSROOM_DELETE',
       msg: 'MSG.CLASSROOM_DELETE',
       msg2: 'MSG.CLASSROOM_DELETE_2',
-      okButton: 'DELETE'
+      okButton: 'DELETE',
+      okButtonColor: 'warn'
     }
   }
 

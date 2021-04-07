@@ -54,13 +54,13 @@
     <!-- Archived -->
     <button mat-button (click)="day.archived=!day.archived" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
       <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': day?.archived}" [icon]="day?.archived ? 'box' : 'box-open'"></fa-icon>
-      <span class="mat-small mat-hint ml-q"> {{(day?.archived ? 'DAY_ARCHIVED'  : 'ARCHIVE') | translate}} </span>
+      <span class="mat-small mat-hint ml-q"> {{(day?.archived ? 'ARCHIVED'  : 'ARCHIVE') | translate}} </span>
     </button>
 
     <!-- Action buttons -->
     <div>
       <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-      <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="dayFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+      <button class="ml-h" mat-flat-button [color]="data.isClone || !data.idDay? 'primary' : 'accent'" mat-dialog-close [disabled]="dayFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data.idDay ? 'SAVE' : 'DAY.ADD') | translate}}</button>
     </div>
   </footer>
 

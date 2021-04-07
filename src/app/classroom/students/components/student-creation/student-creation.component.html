@@ -102,7 +102,7 @@
 
             <!-- Delete phone -->
             <div class="pl-q mb-1">
-              <button mat-icon-button color="warn" class="action-button delete-phone-button" attr.aria-label="{{'DELETE' | translate}}" (click)="removePhone(i)">
+              <button mat-icon-button color="warn" class="action-button pr--h" attr.aria-label="{{'DELETE' | translate}}" (click)="removePhone(i)">
                 <fa-icon class="mat-icon-18" icon="trash"></fa-icon>
               </button>
             </div>
@@ -201,13 +201,13 @@
     <!-- Archived -->
     <button mat-button (click)="student.archived=!student.archived" [matTooltip]="'ARCHIVE_STUDENT' | translate" [matTooltipShowDelay]="650">
       <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': student?.archived}" [icon]="student?.archived ? 'box' : 'box-open'"></fa-icon>
-      <span class="mat-small mat-hint ml-q"> {{(student?.archived ? 'STUDENT_ARCHIVED'  : 'ARCHIVE') | translate}} </span>
+      <span class="mat-small mat-hint ml-q"> {{(student?.archived ? 'ARCHIVED'  : 'ARCHIVE') | translate}} </span>
     </button>
 
     <!-- Action buttons -->
-    <div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxFlex="0 0 240px">
       <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-      <button class="ml-h" mat-flat-button color="primary" mat-dialog-close [disabled]="studentFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+      <button class="ml-h" mat-flat-button [color]="data.isClone || !data.idStudent? 'primary' : 'accent'" mat-dialog-close [disabled]="studentFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data.idStudent ? 'SAVE' : 'ADD_STUDENT') | translate}}</button>
     </div>
   </footer>
 </form>

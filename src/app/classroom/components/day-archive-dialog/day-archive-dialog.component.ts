@@ -29,7 +29,8 @@ export class DayArchiveDialogComponent implements OnInit {
       msg: `MSG.DAY_${!this.day.archived ? '' : 'UN'}ARCHIVE`,
       msg2: `MSG.DAY_${!this.day.archived ? '' : 'UN'}ARCHIVE_2`,
       okButton: `${!this.day.archived ? '' : 'UN'}ARCHIVE`,
-      msgOk: `MSG.DAY_${!this.day.archived ? '' : 'UN'}ARCHIVED_OK`
+      msgOk: `MSG.DAY_${!this.day.archived ? '' : 'UN'}ARCHIVED_OK`,
+      okButtonColor: 'accent'
     }
   }
 

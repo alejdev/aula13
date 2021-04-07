@@ -29,7 +29,8 @@ export class StudentArchiveDialogComponent implements OnInit {
       msg: `MSG.STUDENT_${!this.student.archived ? '' : 'UN'}ARCHIVE`,
       msg2: `MSG.STUDENT_${!this.student.archived ? '' : 'UN'}ARCHIVE_2`,
       okButton: `${!this.student.archived ? '' : 'UN'}ARCHIVE`,
-      msgOk: `MSG.STUDENT_${!this.student.archived ? '' : 'UN'}ARCHIVED_OK`
+      msgOk: `MSG.STUDENT_${!this.student.archived ? '' : 'UN'}ARCHIVED_OK`,
+      okButtonColor: 'accent'
     }
   }
 

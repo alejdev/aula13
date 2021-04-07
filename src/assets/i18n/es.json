@@ -6,6 +6,7 @@
 	"APP_SUBTITLE": "Organiza tus clases particulares",
 	"APP_TITLE": "Aula 13",
 	"ARCHIVE": "Archivar",
+	"ARCHIVED": "Archivado",
 	"ARCHIVED_STUDENTS": "Alumnos archivados",
 	"ARCHIVE_DAY": "Archivar registro",
 	"ARCHIVE_STUDENT": "Archivar alumno",
@@ -24,7 +25,10 @@
 	"CLASSROOMS": "Aulas",
 	"CLASSROOM_DELETE": "Borrar aula",
 	"CLEAN_ALL_FILTERS": "Borrar todos los filtros",
+	"CLONE": "Clonar",
+	"CLONE_CLASSROOM": "Clonar aula",
 	"CLONE_STUDENT": "Clonar alumno",
+	"CLONE_SUBJECT": "Clonar asignatura",
 	"CLOSE_MENU": "Cerrar menú",
 	"CONFIRM_PASSWORD": "Confirmar contraseña",
 	"CONTACT": {
@@ -32,6 +36,7 @@
 		"PHONE": "Teléfono de contacto",
 		"TITLE": "Contacto"
 	},
+	"COPY_OF": "Copia de",
 	"CREATE_CLASSROOM": "Crear aula",
 	"CREATE_SUBJECT": "Crear asignatura",
 	"DAILY": "Diario",
@@ -61,7 +66,7 @@
 		"DELETE": "Borrar registro",
 		"EDIT": "Editar registro"
 	},
-	"DAY_ARCHIVED": "Archivado",
+	"DAY_ARCHIVED": "Registro archivado",
 	"DAY_FAVORITE": "Registro favorito",
 	"DELETE": "Borrar",
 	"DELETE_CLASSROOM": "Borrar aula",

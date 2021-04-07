@@ -26,6 +26,14 @@
   padding-bottom: var(--main-padding-size);
 }
 
+.pl--h {
+  margin-left: -.5rem !important;
+}
+
+.pr--h {
+  margin-right: -.5rem !important;
+}
+
 .stiky-top {
   position: sticky !important;
   top: 0;

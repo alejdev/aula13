@@ -20,6 +20,6 @@
   <!-- Action buttons -->
   <footer class="dialog-footer pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
     <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-    <button class="ml-h" mat-flat-button color="primary" mat-dialog-close (click)="ok()" attr.aria-label="{{textConfig.okButton | translate}}">{{textConfig.okButton | translate}}</button>
+    <button class="ml-h" mat-flat-button [color]="textConfig.okButtonColor ? textConfig.okButtonColor : 'primary'" mat-dialog-close (click)="ok()" attr.aria-label="{{textConfig.okButton | translate}}">{{textConfig.okButton | translate}}</button>
   </footer>
 </div>
