@@ -35,8 +35,15 @@ export class DayProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.routerSubscription = this.activatedRoute.params.subscribe(params => this.dayId = params.id)
+    // Observe new params
+    this.routerSubscription = this.activatedRoute.params.subscribe(params => {
+      this.dayId = params.id
+      if (this.daySubscription) { this.daySubscription.unsubscribe() }
+      this.loadData()
+    })
+  }
 
+  loadData() {
     this.daySubscription = this.dayService.observeDay(this.dayId)
       .subscribe((result: any) => {
         this.day = UtilService.mapDocument(result)

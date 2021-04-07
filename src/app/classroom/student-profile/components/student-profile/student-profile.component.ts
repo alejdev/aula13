@@ -69,7 +69,14 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     // Set proprofile header height
     const profileHeaderHeight = this.elementView ? this.elementView.nativeElement.offsetHeight : 190
     document.documentElement.style.setProperty('--profile-header-height', `${profileHeaderHeight}px`)
-    this.loadData()
+
+    // Observe new params
+    this.routerSubscription = this.activatedRoute.params.subscribe(params => {
+      this.studentId = params.id
+      if (this.dayListSubscription) { this.dayListSubscription.unsubscribe() }
+      if (this.dayListQuerySubscription) { this.dayListQuerySubscription.unsubscribe() }
+      this.loadData()
+    })
   }
 
   ngAfterViewChecked() {
@@ -77,9 +84,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   loadData() {
-    // Get param id
-    this.routerSubscription = this.activatedRoute.params.subscribe(params => this.studentId = params.id)
-
     // Observe student
     this.dayListSubscription = this.studentService.observeStudent(this.studentId)
       .subscribe((result: any) => {
@@ -163,10 +167,10 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
             student: { ...this.student },
           }
         })
+        this.dayListFiltered = UtilService.clone(this.dayList)
 
         // Filter the list for first time
         if (this.dayFilters && this.dayList) {
-          this.dayListFiltered = UtilService.clone(this.dayList)
           this.dayFilters.filterList(this.dayList)
         }
       })

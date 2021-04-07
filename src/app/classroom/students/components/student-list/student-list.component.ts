@@ -75,9 +75,9 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
     this.studentListSubscription = this.studentService.observeStudentList().subscribe(
       (result: any) => {
         this.studentList = UtilService.mapCollection(result)
+        this.studentListFiltered = UtilService.clone(this.studentList)
 
         // Filter the list for first time
-        this.studentListFiltered = UtilService.clone(this.studentList)
         if (this.studentFilters && this.studentList.length) {
           this.studentFilters.filterList(this.studentList)
         }
