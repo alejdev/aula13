@@ -91,53 +91,53 @@ export class DayService {
 
   // Promises
   public async getDayList(): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const days = await this.subCollection.get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapCollection(days)
   }
 
   public async getQueryDayList(key: string, operator: any, value: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const days = await this.dayList(key, operator, value).get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapCollection(days)
   }
 
   public createDay(data: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.add(data)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public async readDay(id: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const day = await this.subCollection.doc(id).get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapDocument(day)
   }
 
   public updateDay(id: string, day: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.doc(id).ref.set(day)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public deleteDay(id: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.doc(id).ref.delete()
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public deleteDayBatch(days: any[]): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const batch = firebase.firestore().batch()
     days.forEach((day: any) => {
       const ref = this.subCollection.doc(day.id).ref
       batch.delete(ref)
     })
     return batch.commit()
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public getCollection(cursor?: any): AngularFirestoreCollection<any> {

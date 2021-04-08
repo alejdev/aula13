@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Subscription } from 'rxjs'
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
+
+import { Component, OnDestroy, OnInit } from '@angular/core'
 
 @Component({
   selector: 'a13-loader',
@@ -10,23 +10,19 @@ import { LoaderService } from 'src/app/shared/services/loader.service'
 })
 export class LoaderComponent implements OnInit, OnDestroy {
 
-  isLoading: boolean = false
-  loadingSubscription: Subscription
+  isLoading = false
+  private loader$
 
   constructor(
-    private loaderService: LoaderService,
+    private loaderService: LoaderService
   ) { }
 
-  ngOnInit(): void {
-
-    // Loading status
-    this.loadingSubscription = this.loaderService.loadingStatus.subscribe((result) => {
-      this.isLoading = result
-    })
+  ngOnInit() {
+    this.loader$ = this.loaderService.loaderStatus
+      .subscribe(state => this.isLoading = state)
   }
 
-  ngOnDestroy(): void {
-    this.loadingSubscription.unsubscribe()
+  ngOnDestroy() {
+    this.loader$.unsubscribe()
   }
-
 }

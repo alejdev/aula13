@@ -7,6 +7,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
@@ -32,7 +33,8 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     private dayService: DayService,
     private studentService: StudentService,
     private headerService: HeaderService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,8 @@ export class DayProfileComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
+    this.loaderService.load()
+
     const day$ = this.dayService.observeDay(this.dayId)
 
     this.daySubscription$ = day$.pipe(
@@ -65,6 +69,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
       }
       this.day = result
       this.configHeader()
+      this.loaderService.down()
     })
   }
 

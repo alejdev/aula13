@@ -62,22 +62,22 @@ export class AuthService {
 
   // Promises
   public signUp(control: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => this.createUser(auth.user))
       .catch(this.error)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public signIn(control: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.angularFireAuth.auth.signInWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => {
         this.router.navigate(['aula'])
         this.toastService.welcome({ user: auth })
       })
       .catch(this.error)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public loginWithGoogle(): void {
@@ -91,29 +91,29 @@ export class AuthService {
   }
 
   public forgotPassword(email: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.angularFireAuth.auth.sendPasswordResetEmail(email)
       .then(() => {
         this.router.navigate(['authentication'])
         this.toastService.info({ text: 'MSG.FORGOT_PASSWORD_EMAIL' })
       })
       .catch(this.error)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public signOut(): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.angularFireAuth.auth.signOut()
       .then(() => {
         this.router.navigate(['authentication'])
         this.toastService.info({ text: 'MSG.BYE' })
       })
       .catch(this.error)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   private createUser(data: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.userData
       .doc(data.uid)
       .set({
@@ -127,13 +127,13 @@ export class AuthService {
         this.toastService.welcome({ user: auth })
       })
       .catch(this.error)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public readUser(id: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.userData.doc(id).ref.get()
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
 }

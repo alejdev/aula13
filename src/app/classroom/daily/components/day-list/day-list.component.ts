@@ -12,6 +12,7 @@ import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -44,7 +45,8 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
     private cdRef: ChangeDetectorRef,
     private excludeArchivedPipe: ExcludeArchivedPipe,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +59,8 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   async loadData(): Promise<any> {
+    this.loaderService.load()
+
     const studentList$ = this.studentService.observeStudentList()
     const dayList$ = this.dayService.observeDayList()
 
@@ -80,6 +84,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayList, this.dayFilters.showArchived)
         this.dayFilters.filterList(this.dayList)
       }
+      this.loaderService.down()
     })
   }
 

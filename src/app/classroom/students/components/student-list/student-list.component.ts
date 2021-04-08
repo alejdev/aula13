@@ -6,6 +6,7 @@ import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -57,12 +58,13 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
 
   constructor(
     private studentService: StudentService,
-    private dialog: MatDialog,
+    private subjectService: SubjectService,
     private headerService: HeaderService,
+    private dialog: MatDialog,
     private agroupByPipe: AgroupByPipe,
     private cdRef: ChangeDetectorRef,
     public router: Router,
-    private subjectService: SubjectService
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +77,8 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   loadData(): void {
+    this.loaderService.load()
+
     const studentList$ = this.studentService.observeStudentList()
     const subjectList$ = this.subjectService.observeSubjectList()
 
@@ -97,6 +101,7 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
       if (this.studentFilters && this.studentList.length) {
         this.studentFilters.filterList(this.studentList)
       }
+      this.loaderService.down()
     })
   }
 

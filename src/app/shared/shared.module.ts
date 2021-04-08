@@ -7,11 +7,11 @@ import localeIt from '@angular/common/locales/it'
 import { LOCALE_ID, NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatSlideToggleModule, MatTooltipModule } from '@angular/material'
+import { MAT_DATE_FORMATS, MatSlideToggleModule, MatTooltipModule } from '@angular/material'
 import { MomentDateAdapter } from '@angular/material-moment-adapter'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
-import { MatRippleModule } from '@angular/material/core'
+import { DateAdapter, MAT_DATE_LOCALE, MatRippleModule } from '@angular/material/core'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -53,7 +53,6 @@ import { StringByPipe } from './pipes/string-by.pipe'
 import { StripHTMLPipe } from './pipes/strip-html.pipe'
 import { SubjectNamePipe } from './pipes/subject-name.pipe'
 import { TypeOfPipe } from './pipes/type-of.pipe'
-import { LoaderService } from './services/loader.service'
 import { SettingService } from './services/setting.service'
 
 registerLocaleData(localeEs, 'es')
@@ -181,7 +180,6 @@ registerLocaleData(localeFr, 'fr')
   providers: [
     { provide: MatSnackBarConfig, useValue: { horizontalPosition: 'start', duration: 6000 } },
     { provide: LOCALE_ID, deps: [SettingService], useFactory: (settingService: any) => settingService.value.lang },
-    LoaderService,
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ]

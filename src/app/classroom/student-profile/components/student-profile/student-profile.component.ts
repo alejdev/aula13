@@ -15,6 +15,7 @@ import { DateFilterPipe } from 'src/app/shared/pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -62,6 +63,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     private dayService: DayService,
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +80,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   loadData() {
+    this.loaderService.load()
+
     const student$ = this.studentService.observeStudent(this.studentId)
     const dayList$ = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
 
@@ -110,6 +114,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
         this.dayListFiltered = UtilService.clone(this.dayList)
         this.dayFilters.filterList(this.dayList)
       }
+      this.loaderService.down()
     })
   }
 

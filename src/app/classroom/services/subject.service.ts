@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core'
-
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
-
-import { LoaderService } from 'src/app/shared/services/loader.service'
-import { AuthService } from 'src/app/shared/services/auth.service'
 import { Observable } from 'rxjs'
+import { AuthService } from 'src/app/shared/services/auth.service'
+import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
+
+import { Injectable } from '@angular/core'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 
 @Injectable({
   providedIn: 'root'
@@ -57,35 +56,35 @@ export class SubjectService {
 
   // Promises
   public async getSubjectList(): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const subjects = await this.subCollection.get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapCollection(subjects)
   }
 
   public createSubject(data: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.add(data)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public async readSubject(id: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const student = await this.subCollection.doc(id).get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapDocument(student)
   }
 
   public updateSubject(id: string, subject: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.doc(id).ref.set(subject)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public deleteSubject(id: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.doc(id).ref.delete()
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
 }

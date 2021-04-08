@@ -56,44 +56,44 @@ export class StudentService {
 
   // Promises
   public async queryEnrrolledStudents(property: string, classroom: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const students = await this.userData
       .collection(this.subCollectionName,
         ref => ref.where(property, 'array-contains', classroom)
       )
       .get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapCollection(students)
   }
 
   public async getStudentList(): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const students = await this.subCollection.get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapCollection(students)
   }
 
   public createStudent(data: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.add(data)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public async readStudent(id: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const student = await this.subCollection.doc(id).get().toPromise()
-    this.loaderService.stop()
+    this.loaderService.down()
     return UtilService.mapDocument(student)
   }
 
   public updateStudent(id: string, student: any): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.doc(id).ref.set(student)
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public updateStudentBatch(students: any[]): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     const batch = firebase.firestore().batch()
     students
       .filter(student => student)
@@ -103,13 +103,13 @@ export class StudentService {
         batch.update(ref, student)
       })
     return batch.commit()
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   public deleteStudent(id: string): Promise<any> {
-    this.loaderService.start()
+    this.loaderService.load()
     return this.subCollection.doc(id).ref.delete()
-      .finally(() => this.loaderService.stop())
+      .finally(() => this.loaderService.down())
   }
 
   // Normalize Student for save

@@ -1,36 +1,33 @@
-import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { Subject } from 'rxjs'
 
-@Injectable()
+import { Injectable } from '@angular/core'
+
+@Injectable({
+  providedIn: 'root'
+})
 export class LoaderService {
 
-  private activeRequests: number = 0
-  private loadingValue: boolean = false
-  public loadingStatus: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  private count = 0
+  private loading$ = new Subject<boolean>()
+  public loaderStatus = this.loading$.asObservable()
 
-  get loading(): boolean {
-    return this.loadingValue
-  }
+  constructor() { }
 
-  set loading(value) {
-    this.loadingValue = value
-    this.loadingStatus.next(value)
-  }
-
-  public start(): void {
-    if (this.activeRequests === 0) {
-      this.loading = true
+  load(): void {
+    if (this.count === 0) {
+      this.setRequestStatus(true)
     }
-    this.activeRequests++
+    this.count++
   }
 
-  public stop(): void {
-    this.activeRequests--
-    if (this.activeRequests === 0) {
-      // Request overlap
-      setTimeout(() => {
-        this.loading = false
-      }, 250)
+  down(): void {
+    this.count--
+    if (this.count === 0) {
+      this.setRequestStatus(false)
     }
+  }
+
+  setRequestStatus(inprogess: boolean) {
+    this.loading$.next(inprogess)
   }
 }
