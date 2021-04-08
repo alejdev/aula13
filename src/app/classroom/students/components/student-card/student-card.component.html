@@ -30,14 +30,17 @@
     <div fxFlex="nogrow" fxLayout="row" fxLayoutAlign="space-between center">
 
       <!-- Edit button -->
-      <button class="action-button" mat-icon-button (click)="editStudent($event)">
+      <!-- <button class="action-button" mat-icon-button (click)="editStudent($event)">
         <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
-      </button>
+      </button> -->
 
       <!-- Fav button -->
       <button class="action-button" mat-icon-button (click)="fav($event)">
-        <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-18 mat-hint" icon="star"></fa-icon>
+        <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-16 mat-hint" icon="star"></fa-icon>
       </button>
+
+      <!-- Menu options-->
+      <a13-menu-options [options]="menuOptions" [buttonSize]="16"></a13-menu-options>
     </div>
 
   </div>

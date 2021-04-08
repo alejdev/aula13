@@ -1,3 +1,5 @@
+import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
+import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -19,28 +21,73 @@ export class StudentComponent implements OnInit {
   @Input() fromUrl: string = null
   mark: any = UtilService.mark
 
+  menuOptions: any = {}
+
   constructor(
     private studentService: StudentService,
     private dialog: MatDialog,
     private router: Router
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.menuOptions = [{
+      name: 'EDIT_STUDENT',
+      icon: 'pen',
+      dialog: {
+        component: StudentCreationComponent,
+        config: {
+          ...DIALOG_CONFIG,
+          data: {
+            idStudent: this.student.id,
+            student: { ...this.student }
+          }
+        }
+      }
+    }, {
+      name: 'CLONE_STUDENT',
+      icon: 'copy',
+      dialog: {
+        component: StudentCreationComponent,
+        config: {
+          ...DIALOG_CONFIG,
+          data: {
+            student: { ...this.student },
+            isClone: true
+          }
+        }
+      }
+    }, {
+      name: `${!this.student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
+      icon: `box${!this.student.archived ? '' : '-open'}`,
+      dialog: {
+        component: StudentArchiveDialogComponent,
+        config: {
+          ...DIALOG_CONFIG,
+          data: {
+            idStudent: this.student.id,
+            student: { ...this.student }
+          }
+        }
+      }
+    }, {
+      name: 'STUDENT_DELETE',
+      icon: 'trash',
+      dialog: {
+        component: StudentDeleteDialogComponent,
+        config: {
+          ...DIALOG_CONFIG,
+          data: {
+            idStudent: this.student.id,
+            student: { ...this.student }
+          }
+        }
+      }
+    }]
+  }
 
   goTo() {
     this.router.navigateByUrl(`aula/alumno/${this.student.id}`, {
       state: { fromUrl: this.fromUrl }
-    })
-  }
-
-  editStudent(ev: Event) {
-    ev.stopImmediatePropagation()
-    this.dialog.open(StudentCreationComponent, {
-      ...DIALOG_CONFIG,
-      data: {
-        idStudent: this.student.id,
-        student: { ...this.student }
-      }
     })
   }
 

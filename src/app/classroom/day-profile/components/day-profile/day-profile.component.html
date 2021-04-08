@@ -5,7 +5,7 @@
 
         <!-- Header info -->
         <div fxLayout="row" fxLayoutAlign="start center">
-          <a class="avatar border-theme mr-h" [routerLink]="[ '/aula/alumno', day?.studentId ]">
+          <a class="avatar border-theme mr-h aumente" [routerLink]="[ '/aula/alumno', day?.studentId ]">
             <img class="avatar-image p-0 mr-1" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
           </a>
 
@@ -17,7 +17,7 @@
               <span class="error-color"> {{'ARCHIVED' | translate}} </span>
             </div>
 
-            <span class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/aula/alumno', day?.studentId ]">{{day?.student?.personal?.name}}</span>
+            <a class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/aula/alumno', day?.studentId ]">{{day?.student?.personal?.name}}</a>
             <span class="mat-small mat-hint">{{day?.date | date: 'fullDate'}}</span>
           </div>
         </div>
@@ -30,9 +30,9 @@
           <!-- <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
             <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-18 mat-hint" icon="box"></fa-icon>
           </button> -->
-          <button class="action-button" mat-icon-button (click)="editDay($event)" [matTooltip]="'DAY.EDIT' | translate" [matTooltipShowDelay]="650">
+          <!-- <button class="action-button" mat-icon-button (click)="editDay($event)" [matTooltip]="'DAY.EDIT' | translate" [matTooltipShowDelay]="650">
             <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
-          </button>
+          </button> -->
         </div>
       </div>
     </header>

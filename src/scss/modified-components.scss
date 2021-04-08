@@ -18,6 +18,23 @@ mat-form-field {
   }
 }
 
+// Snack bar
+.mat-snack-bar-container {
+  max-width: 560px !important;
+  width: 100%;
+}
+
+// Mat menu
+.mat-menu-item fa-icon {
+  position: relative;
+  top: 1px;
+  margin-right: 10px;
+
+  svg {
+    width: 16px !important;
+  }
+}
+
 // Dialogs
 .mat-dialog-content {
   overflow-x: hidden !important;

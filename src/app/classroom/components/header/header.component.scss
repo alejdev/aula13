@@ -18,6 +18,11 @@
     color: var(--light-theme-background);
   }
 
+  .list-count {
+    width: 2rem;
+    white-space: nowrap;
+  }
+
   &.height-auto {
     height: auto;
   }
@@ -31,12 +36,6 @@ a.clickable-phone-number {
     color: var(--light-theme-primary);
     margin-left: .5rem;
   }
-}
-
-.mat-menu-item fa-icon {
-  position: relative;
-  top: 1px;
-  margin-right: 10px;
 }
 
 .title-logo {

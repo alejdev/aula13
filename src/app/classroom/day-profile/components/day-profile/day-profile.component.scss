@@ -8,5 +8,11 @@
   .student-name {
     outline: 0;
     line-height: 1.4;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

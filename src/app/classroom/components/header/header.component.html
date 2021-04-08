@@ -10,8 +10,10 @@
     <!-- Title -->
     <h2 *ngIf="headerConfig?.title" class="title pt-h pb-h" (click)="truncate()" [ngClass]="{'truncate': isTruncated}">
       {{headerConfig?.title | translate}}
-      <span *ngIf="headerConfig?.length | typeOf:'number'" class="translucide"> | {{headerConfig?.length}}</span>
     </h2>
+    
+    <!-- List length -->
+    <span *ngIf="headerConfig?.length | typeOf:'number'" class="title translucide list-count ml-h"> | {{headerConfig?.length}}</span>
 
     <!-- Logo -->
     <a13-title-logo class="fixed title-logo" [showLogo]="headerConfig?.showLogo"></a13-title-logo>
@@ -36,15 +38,7 @@
     </mat-menu>
 
     <!-- Menu options-->
-    <button *ngIf="headerConfig?.menuOptions?.length" class=" mr-0 menu-button action-button" mat-icon-button [matMenuTriggerFor]="menuOptions" attr.aria-label="{{'OPTION_MENU' | translate}}">
-      <fa-icon class="mat-icon-18" icon="ellipsis-v"></fa-icon>
-    </button>
-    <mat-menu #menuOptions="matMenu">
-      <button *ngFor="let item of headerConfig?.menuOptions" mat-menu-item (click)="openDialog(item.dialog?.component, item.dialog?.config)">
-        <fa-icon class="mat-icon-16 mat-hint" [icon]="item.icon"></fa-icon>
-        <span>{{item.name | translate}}</span>
-      </button>
-    </mat-menu>
+    <a13-menu-options *ngIf="headerConfig?.menuOptions?.length" [options]="headerConfig?.menuOptions" [lightColor]="true"></a13-menu-options>
 
     <!-- Sign Out -->
     <button *ngIf="headerConfig?.signOut" class="menu-button action-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">

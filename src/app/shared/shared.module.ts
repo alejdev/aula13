@@ -35,6 +35,7 @@ import { DayFiltersComponent } from './components/day-filters/day-filters.compon
 import { EmptyListComponent } from './components/empty-list/empty-list.component'
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component'
 import { LoaderComponent } from './components/loader/loader.component'
+import { MenuOptionsComponent } from './components/menu-options/menu-options.component'
 import { SelectStudentComponent } from './components/select-student/select-student.component'
 import { StudentFiltersComponent } from './components/student-filters/student-filters.component'
 import { ToastComponent } from './components/toast/toast.component'
@@ -72,6 +73,7 @@ registerLocaleData(localeFr, 'fr')
     StudentFiltersComponent,
     DayFiltersComponent,
     EmptyListComponent,
+    MenuOptionsComponent,
 
     ScrollableDirective,
 
@@ -112,6 +114,7 @@ registerLocaleData(localeFr, 'fr')
     MatDatepickerModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatMenuModule,
 
     // Third parties
     FlexLayoutModule,
@@ -157,6 +160,7 @@ registerLocaleData(localeFr, 'fr')
     StudentFiltersComponent,
     DayFiltersComponent,
     EmptyListComponent,
+    MenuOptionsComponent,
 
     ScrollableDirective,
 
