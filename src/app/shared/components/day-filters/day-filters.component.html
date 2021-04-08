@@ -31,7 +31,7 @@
         <mat-datepicker #dateSincePicker></mat-datepicker>
         <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateSincePicker">
         </mat-datepicker-toggle>
-        <button mat-button matSuffix *ngIf="dateSince" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateSince')">
+        <button class="action-button" mat-button matSuffix *ngIf="dateSince" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateSince')">
           <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
         </button>
       </mat-form-field>
@@ -42,7 +42,7 @@
         <mat-datepicker #dateUntilPicker></mat-datepicker>
         <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateUntilPicker">
         </mat-datepicker-toggle>
-        <button mat-button matSuffix *ngIf="dateUntil" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateUntil')">
+        <button class="action-button" mat-button matSuffix *ngIf="dateUntil" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateUntil')">
           <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
         </button>
       </mat-form-field>

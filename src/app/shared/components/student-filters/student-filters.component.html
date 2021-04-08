@@ -6,7 +6,7 @@
       <mat-label>{{'SEARCH_STUDENT' | translate}}</mat-label>
       <input id="searchInputFilter" matInput [(ngModel)]="studentFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'SEARCH_STUDENT' | translate}}" autocomplete="off">
       <fa-icon *ngIf="!studentFilter" matSuffix class="mat-icon-20 mat-hint mr-h" icon="search"></fa-icon>
-      <button class="reset-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
+      <button class="reset-button action-button" mat-button matSuffix *ngIf="studentFilter" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetFilter()">
         <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
       </button>
     </mat-form-field>

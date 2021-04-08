@@ -1,4 +1,16 @@
 mat-form-field {
+
+  button[mat-icon-button].action-button {
+    position: relative;
+    top: -8px;
+
+    fa-icon {
+      top: -1px;
+      left: 1px;
+      margin-left: 0;
+    }
+  }
+
   fa-icon {
     position: relative;
     top: -4px;
