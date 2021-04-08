@@ -34,7 +34,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
   dayListSubscription: Subscription
   studentListSubscription: Subscription
 
-  @ViewChild(DayFiltersComponent, { static: true }) dayFilters: DayFiltersComponent
+  @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   constructor(
     private studentService: StudentService,

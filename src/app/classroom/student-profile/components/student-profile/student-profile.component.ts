@@ -1,4 +1,5 @@
-import { Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
+import { map, switchMap } from 'rxjs/operators'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
@@ -17,7 +18,7 @@ import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -43,17 +44,17 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     icon: 'caret-down'
   }
 
-  routerSubscription: Subscription
-  dayListSubscription: Subscription
-  dayListQuerySubscription: Subscription
+  student$: Observable<any>
+  dayList$: Observable<any>
+  studentSubscription$: Subscription
+  routerSubscription$: Subscription
 
   swipeCoord: [number, number]
   swipeTime: number
   selectedTab: number = 0
   tabCount: number = 2
 
-  @ViewChild(DayFiltersComponent, { static: true }) dayFilters: DayFiltersComponent
-  @ViewChild('profileHeader', { static: true }) elementView: ElementRef
+  @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   constructor(
     private router: Router,
@@ -66,15 +67,10 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   ) { }
 
   ngOnInit(): void {
-    // Set proprofile header height
-    const profileHeaderHeight = this.elementView ? this.elementView.nativeElement.offsetHeight : 190
-    document.documentElement.style.setProperty('--profile-header-height', `${profileHeaderHeight}px`)
-
     // Observe new params
-    this.routerSubscription = this.activatedRoute.params.subscribe(params => {
+    this.routerSubscription$ = this.activatedRoute.params.subscribe(params => {
       this.studentId = params.id
-      if (this.dayListSubscription) { this.dayListSubscription.unsubscribe() }
-      if (this.dayListQuerySubscription) { this.dayListQuerySubscription.unsubscribe() }
+      if (this.studentSubscription$) { this.studentSubscription$.unsubscribe() }
       this.loadData()
     })
   }
@@ -84,96 +80,102 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   loadData() {
-    // Observe student
-    this.dayListSubscription = this.studentService.observeStudent(this.studentId)
-      .subscribe((result: any) => {
-        this.student = UtilService.mapDocument(result)
-        this.queryDayList()
+    this.student$ = this.studentService.observeStudent(this.studentId)
+    this.dayList$ = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
 
-        if (this.student && this.student.personal) {
-          // Config header
-          this.headerService.configHeader({
-            title: this.student.personal.name,
-            back: true,
-            student: this.student,
-            truncable: true,
-            menuOptions: [{
-              name: 'EDIT_STUDENT',
-              icon: 'pen',
-              dialog: {
-                component: StudentCreationComponent,
-                config: {
-                  ...DIALOG_CONFIG,
-                  data: {
-                    idStudent: this.studentId,
-                    student: { ...this.student }
-                  }
-                }
-              }
-            }, {
-              name: 'CLONE_STUDENT',
-              icon: 'copy',
-              dialog: {
-                component: StudentCreationComponent,
-                config: {
-                  ...DIALOG_CONFIG,
-                  data: {
-                    student: { ...this.student },
-                    isClone: true
-                  }
-                }
-              }
-            }, {
-              name: `${!this.student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
-              icon: `box${!this.student.archived ? '' : '-open'}`,
-              dialog: {
-                component: StudentArchiveDialogComponent,
-                config: {
-                  ...DIALOG_CONFIG,
-                  data: {
-                    idStudent: this.studentId,
-                    student: { ...this.student }
-                  }
-                }
-              }
-            }, {
-              name: 'STUDENT_DELETE',
-              icon: 'trash',
-              dialog: {
-                component: StudentDeleteDialogComponent,
-                config: {
-                  ...DIALOG_CONFIG,
-                  data: {
-                    idStudent: this.studentId,
-                    student: { ...this.student }
-                  }
-                }
-              }
-            }]
-          })
-        } else {
+    this.studentSubscription$ = this.student$
+      .pipe(
+        map((student) => UtilService.mapDocument(student)),
+        switchMap((student) => {
+          return this.dayList$.pipe(map((dayList) => {
+            dayList = UtilService.mapCollection(dayList)
+              .map((elem) => {
+                return { ...elem, hideStudent: true, student }
+              })
+            return { student, dayList }
+          }))
+        })
+      )
+      .subscribe((result) => {
+
+        // If delete student or access to non exists studen URL
+        if (!result.student || !result.student.personal) {
           this.router.navigate(['aula/alumnos'])
+          return
+        }
+
+        this.student = result.student
+        this.dayList = result.dayList
+        this.configHeader()
+
+        // Filter the list for first time
+        if (this.dayFilters && this.dayList) {
+          this.dayListFiltered = UtilService.clone(this.dayList)
+          this.dayFilters.filterList(this.dayList)
         }
       })
   }
 
-  queryDayList(): void {
-    this.dayListQuerySubscription = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
-      .subscribe((result: any) => {
-        this.dayList = UtilService.mapCollection(result).map((elem) => {
-          return {
-            ...elem,
-            hideStudent: true,
-            student: { ...this.student },
+  configHeader(): void {
+    this.headerService.configHeader({
+      title: this.student.personal.name,
+      back: true,
+      student: this.student,
+      truncable: true,
+      menuOptions: [{
+        name: 'EDIT_STUDENT',
+        icon: 'pen',
+        dialog: {
+          component: StudentCreationComponent,
+          config: {
+            ...DIALOG_CONFIG,
+            data: {
+              idStudent: this.studentId,
+              student: { ...this.student }
+            }
           }
-        })
-        this.dayListFiltered = UtilService.clone(this.dayList)
-
-        // Filter the list for first time
-        if (this.dayFilters && this.dayList) {
-          this.dayFilters.filterList(this.dayList)
         }
-      })
+      }, {
+        name: 'CLONE_STUDENT',
+        icon: 'copy',
+        dialog: {
+          component: StudentCreationComponent,
+          config: {
+            ...DIALOG_CONFIG,
+            data: {
+              student: { ...this.student },
+              isClone: true
+            }
+          }
+        }
+      }, {
+        name: `${!this.student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
+        icon: `box${!this.student.archived ? '' : '-open'}`,
+        dialog: {
+          component: StudentArchiveDialogComponent,
+          config: {
+            ...DIALOG_CONFIG,
+            data: {
+              idStudent: this.studentId,
+              student: { ...this.student }
+            }
+          }
+        }
+      }, {
+        name: 'STUDENT_DELETE',
+        icon: 'trash',
+        dialog: {
+          component: StudentDeleteDialogComponent,
+          config: {
+            ...DIALOG_CONFIG,
+            data: {
+              idStudent: this.studentId,
+              student: { ...this.student }
+            }
+          }
+        }
+      }]
+    })
   }
 
   createDay(): void {
@@ -244,8 +246,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription.unsubscribe()
-    this.dayListSubscription.unsubscribe()
-    this.dayListQuerySubscription.unsubscribe()
+    this.routerSubscription$.unsubscribe()
+    this.studentSubscription$.unsubscribe()
   }
 }

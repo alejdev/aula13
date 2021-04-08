@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
@@ -29,11 +30,10 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
   favoriteListFiltered: any[]
   restListFiltered: any[]
   archiveListFiltered: any[]
-  studentListSubscription: Subscription
 
-  delay: boolean
+  studentListSubscription$: Subscription
 
-  @ViewChild(StudentFiltersComponent, { static: true }) studentFilters: StudentFiltersComponent
+  @ViewChild(StudentFiltersComponent, { static: false }) studentFilters: StudentFiltersComponent
 
   toggleConfig: any = {
     favorite: {
@@ -72,9 +72,12 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
 
   loadData(): void {
     // Get students
-    this.studentListSubscription = this.studentService.observeStudentList().subscribe(
-      (result: any) => {
-        this.studentList = UtilService.mapCollection(result)
+    this.studentListSubscription$ = this.studentService.observeStudentList()
+      .pipe(
+        map((studentList) => UtilService.mapCollection(studentList))
+      )
+      .subscribe((result: any) => {
+        this.studentList = result
         this.studentListFiltered = UtilService.clone(this.studentList)
 
         // Filter the list for first time
@@ -107,6 +110,6 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   ngOnDestroy(): void {
-    this.studentListSubscription.unsubscribe()
+    this.studentListSubscription$.unsubscribe()
   }
 }
