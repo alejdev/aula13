@@ -1,4 +1,4 @@
-import { Observable, of, Subscription } from 'rxjs'
+import { of, Subscription } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { DayArchiveDialogComponent } from 'src/app/classroom/components/day-archive-dialog/day-archive-dialog.component'
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
@@ -23,7 +23,6 @@ export class DayProfileComponent implements OnInit, OnDestroy {
   dayId: any
   day: any
 
-  day$: Observable<any>
   daySubscription$: Subscription
   routerSubscription$: Subscription
 
@@ -46,19 +45,17 @@ export class DayProfileComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
-    this.day$ = this.dayService.observeDay(this.dayId)
+    const day$ = this.dayService.observeDay(this.dayId)
 
-    this.daySubscription$ = this.day$.pipe(
+    this.daySubscription$ = day$.pipe(
       map((day) => UtilService.mapDocument(day)),
       switchMap((day) => {
         if (!day) { return of(day) }
         return this.studentService.observeStudent(day.studentId ? day.studentId : 'asd')
-          .pipe(map((student) => {
-            return {
-              ...day,
-              student: UtilService.mapDocument(student)
-            }
-          }))
+          .pipe(map((student) => ({
+            ...day,
+            student: UtilService.mapDocument(student)
+          })))
       })
     ).subscribe((result: any) => {
       // If not exists, go back to the route where came from

@@ -1,7 +1,8 @@
 import { Subscription } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
@@ -60,7 +61,8 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
     private headerService: HeaderService,
     private agroupByPipe: AgroupByPipe,
     private cdRef: ChangeDetectorRef,
-    public router: Router
+    public router: Router,
+    private subjectService: SubjectService
   ) { }
 
   ngOnInit(): void {
@@ -73,20 +75,29 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   loadData(): void {
-    // Get students
-    this.studentListSubscription$ = this.studentService.observeStudentList()
-      .pipe(
-        map((studentList) => UtilService.mapCollection(studentList))
-      )
-      .subscribe((result: any) => {
-        this.studentList = result
-        this.studentListFiltered = UtilService.clone(this.studentList)
+    const studentList$ = this.studentService.observeStudentList()
+    const subjectList$ = this.subjectService.observeSubjectList()
 
-        // Filter the list for first time
-        if (this.studentFilters && this.studentList.length) {
-          this.studentFilters.filterList(this.studentList)
-        }
+    this.studentListSubscription$ = subjectList$.pipe(
+      map((subjectList) => UtilService.mapCollection(subjectList)),
+      switchMap((subjectList) => {
+        return studentList$.pipe(map((studentList) => {
+          studentList = UtilService.mapCollection(studentList).map((student) => ({
+            ...student,
+            subjects: subjectList.filter((subject) => student.classroom.subjects.includes(subject.id))
+          }))
+          return studentList
+        }))
       })
+    ).subscribe((result: any) => {
+      this.studentList = result
+      this.studentListFiltered = UtilService.clone(this.studentList)
+
+      // Filter the list for first time
+      if (this.studentFilters && this.studentList.length) {
+        this.studentFilters.filterList(this.studentList)
+      }
+    })
   }
 
   createStudent(): void {

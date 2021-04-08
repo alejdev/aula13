@@ -23,7 +23,7 @@ export class StudentComponent implements OnInit {
     private studentService: StudentService,
     private dialog: MatDialog,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void { }
 

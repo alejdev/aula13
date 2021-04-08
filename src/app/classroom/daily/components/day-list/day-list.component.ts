@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs'
+import { map, switchMap } from 'rxjs/operators'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
@@ -31,8 +32,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
   dayListFiltered: any[]
   studentList: any[]
 
-  dayListSubscription: Subscription
-  studentListSubscription: Subscription
+  dayListSubscription$: Subscription
 
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
@@ -57,28 +57,29 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   async loadData(): Promise<any> {
-    // Get students
-    this.studentService.savedStudentList = await this.studentService.getStudentList()
+    const studentList$ = this.studentService.observeStudentList()
+    const dayList$ = this.dayService.observeDayList()
 
-    // Get days
-    this.dayListSubscription = this.dayService.observeDayList().subscribe((result) => {
-      this.dayList = UtilService.mapCollection(result).map((day: any) => {
-        return {
-          student: this.studentService.savedStudentList.find((student: any) => student.id === day.studentId),
-          ...day
-        }
+    this.dayListSubscription$ = studentList$.pipe(
+      map((studentList) => UtilService.mapCollection(studentList)),
+      switchMap((studentList) => {
+        return dayList$.pipe(map((dayList) => {
+          dayList = UtilService.mapCollection(dayList).map((day) => ({
+            ...day,
+            student: studentList.find((student: any) => student.id === day.studentId),
+          }))
+          return { dayList, studentList }
+        }))
       })
+    ).subscribe((result: any) => {
+      this.dayList = result.dayList
+      this.studentList = result.studentList
 
       // Filter the list for first time
       if (this.dayFilters && this.dayList.length) {
         this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayList, this.dayFilters.showArchived)
         this.dayFilters.filterList(this.dayList)
       }
-    })
-
-    // Get students
-    this.studentListSubscription = this.studentService.observeStudentList().subscribe((result) => {
-      this.studentList = UtilService.mapCollection(result)
     })
   }
 
@@ -110,8 +111,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngOnDestroy(): void {
-    this.dayListSubscription.unsubscribe()
-    this.studentListSubscription.unsubscribe()
+    this.dayListSubscription$.unsubscribe()
   }
 
 }

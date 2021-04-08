@@ -90,17 +90,15 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
     this.classroomSubscription = this.classroomService.observeClassroomList()
       .subscribe((result: any) => {
-        this.menuItems[0][0].children = UtilService.mapCollection(result).map((elem) => {
-          return { filter: 'classroomsFilter', ...elem }
-        })
+        this.menuItems[0][0].children = UtilService.mapCollection(result)
+          .map((elem) => ({ filter: 'classroomsFilter', ...elem }))
         this.classroomService.cachedClassrooms = this.menuItems[0][0].children
       })
 
     this.subjectSubscription = this.subjectService.observeSubjectList()
       .subscribe((result: any) => {
-        this.menuItems[0][1].children = UtilService.mapCollection(result).map((elem) => {
-          return { filter: 'subjectsFilter', ...elem }
-        })
+        this.menuItems[0][1].children = UtilService.mapCollection(result)
+          .map((elem) => ({ filter: 'subjectsFilter', ...elem }))
         this.subjectService.cachedSubjects = this.menuItems[0][1].children
       })
   }

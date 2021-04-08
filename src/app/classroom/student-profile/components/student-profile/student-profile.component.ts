@@ -1,4 +1,4 @@
-import { Observable, of, Subscription } from 'rxjs'
+import { of, Subscription } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
@@ -44,8 +44,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     icon: 'caret-down'
   }
 
-  student$: Observable<any>
-  dayList$: Observable<any>
   studentSubscription$: Subscription
   routerSubscription$: Subscription
 
@@ -80,18 +78,19 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   loadData() {
-    this.student$ = this.studentService.observeStudent(this.studentId)
-    this.dayList$ = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
+    const student$ = this.studentService.observeStudent(this.studentId)
+    const dayList$ = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
 
-    this.studentSubscription$ = this.student$.pipe(
+    this.studentSubscription$ = student$.pipe(
       map((student) => UtilService.mapDocument(student)),
       switchMap((student) => {
         if (!student) { return of(student) }
-        return this.dayList$.pipe(map((dayList) => {
-          dayList = UtilService.mapCollection(dayList)
-            .map((elem) => {
-              return { ...elem, hideStudent: true, student }
-            })
+        return dayList$.pipe(map((dayList) => {
+          dayList = UtilService.mapCollection(dayList).map((elem) => ({
+            ...elem,
+            hideStudent: true,
+            student
+          }))
           return { student, dayList }
         }))
       }),
