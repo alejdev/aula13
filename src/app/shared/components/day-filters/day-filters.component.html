@@ -22,9 +22,9 @@
   </div>
 
   <!-- Dates -->
-  <div *ngIf="showFilters" class="dates-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="8px">
+  <div *ngIf="showFilters" class="dates-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap=".5rem">
 
-    <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex="50" fxFlex.xs="100">
+    <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex.gt-xs="50" fxFlex.xs="100">
       <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
         <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
         <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="selectDate()" [max]="dateUntil">
@@ -50,7 +50,7 @@
 
     <!-- Select quick date -->
     <div [ngClass.xs]="{'quick-dates-container': true}" fxLayout="row" fxLayoutAlign="space-between center" fxFlex.gt-xs="50" fxFlex.xs="100%">
-      <mat-form-field [appearance]="'inputAppearance' | settingValue">
+      <mat-form-field fxFlex="calc(100% - 6rem)" [appearance]="'inputAppearance' | settingValue">
         <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
         <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
           <mat-option *ngFor="let date of quickDates" [value]="date">
