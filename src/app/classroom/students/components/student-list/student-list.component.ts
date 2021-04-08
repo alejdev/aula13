@@ -10,6 +10,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 
 import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
+import { Router } from '@angular/router'
 
 import { AgroupByPipe } from '../../pipes/agroup-by.pipe'
 import { ClassroomPipe } from '../../pipes/classroom.pipe'
@@ -59,6 +60,7 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
     private headerService: HeaderService,
     private agroupByPipe: AgroupByPipe,
     private cdRef: ChangeDetectorRef,
+    public router: Router
   ) { }
 
   ngOnInit(): void {

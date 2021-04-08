@@ -130,7 +130,7 @@
                 <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
                 <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
               </button>
-              <a13-day-card [(day)]="day"></a13-day-card>
+              <a13-day-card [(day)]="day" [fromUrl]="router.url"></a13-day-card>
             </ng-container>
           </div>
 

@@ -4,6 +4,7 @@ import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
+import { Router } from '@angular/router'
 
 import { StudentCreationComponent } from '../student-creation/student-creation.component'
 
@@ -15,14 +16,22 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
 export class StudentComponent implements OnInit {
 
   @Input() student: any = null
+  @Input() fromUrl: string = null
   mark: any = UtilService.mark
 
   constructor(
     private studentService: StudentService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private router: Router
+    ) { }
 
   ngOnInit(): void { }
+
+  goTo() {
+    this.router.navigateByUrl(`aula/alumno/${this.student.id}`, {
+      state: { fromUrl: this.fromUrl }
+    })
+  }
 
   editStudent(ev: Event) {
     ev.stopImmediatePropagation()

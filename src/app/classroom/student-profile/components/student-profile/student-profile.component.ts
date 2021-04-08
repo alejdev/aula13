@@ -1,4 +1,4 @@
-import { Observable, Subscription } from 'rxjs'
+import { Observable, of, Subscription } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
@@ -57,7 +57,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   constructor(
-    private router: Router,
+    public router: Router,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
@@ -83,37 +83,35 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     this.student$ = this.studentService.observeStudent(this.studentId)
     this.dayList$ = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
 
-    this.studentSubscription$ = this.student$
-      .pipe(
-        map((student) => UtilService.mapDocument(student)),
-        switchMap((student) => {
-          return this.dayList$.pipe(map((dayList) => {
-            dayList = UtilService.mapCollection(dayList)
-              .map((elem) => {
-                return { ...elem, hideStudent: true, student }
-              })
-            return { student, dayList }
-          }))
-        })
-      )
-      .subscribe((result) => {
+    this.studentSubscription$ = this.student$.pipe(
+      map((student) => UtilService.mapDocument(student)),
+      switchMap((student) => {
+        if (!student) { return of(student) }
+        return this.dayList$.pipe(map((dayList) => {
+          dayList = UtilService.mapCollection(dayList)
+            .map((elem) => {
+              return { ...elem, hideStudent: true, student }
+            })
+          return { student, dayList }
+        }))
+      }),
+    ).subscribe((result) => {
+      // If not exists, go back to the route where came from
+      if (!result) {
+        this.router.navigateByUrl(`${history.state.fromUrl ? history.state.fromUrl : 'aula/alumnos'}`)
+        return
+      }
 
-        // If delete student or access to non exists studen URL
-        if (!result.student || !result.student.personal) {
-          this.router.navigate(['aula/alumnos'])
-          return
-        }
+      this.student = result.student
+      this.dayList = result.dayList
+      this.configHeader()
 
-        this.student = result.student
-        this.dayList = result.dayList
-        this.configHeader()
-
-        // Filter the list for first time
-        if (this.dayFilters && this.dayList) {
-          this.dayListFiltered = UtilService.clone(this.dayList)
-          this.dayFilters.filterList(this.dayList)
-        }
-      })
+      // Filter the list for first time
+      if (this.dayFilters && this.dayList) {
+        this.dayListFiltered = UtilService.clone(this.dayList)
+        this.dayFilters.filterList(this.dayList)
+      }
+    })
   }
 
   configHeader(): void {

@@ -23,8 +23,7 @@ export class FilterByKeyPipe implements PipeTransform {
       for (const property in config) {
         if (config.hasOwnProperty(property)) {
           list = list.filter((elem) => {
-            const asfd = UtilService.keyByString(elem, property)
-            return asfd === config[property]
+            return UtilService.keyByString(elem, property) === config[property]
           })
         }
       }

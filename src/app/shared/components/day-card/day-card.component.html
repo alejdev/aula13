@@ -1,4 +1,4 @@
-<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente" [ngClass]="{'archived-student': !day?.hideStudent && (day?.archived || day?.student?.archived) || (day?.hideStudent && day?.archived)}" matRipple [routerLink]="[ '/aula/dia' , day?.id ]">
+<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente" [ngClass]="{'archived-student': !day?.hideStudent && (day?.archived || day?.student?.archived) || (day?.hideStudent && day?.archived)}" matRipple (click)="goTo()">
 
   <div class="day-header mb-1" fxLayout="row" fxLayoutAlign="space-between center">
 
@@ -20,7 +20,7 @@
     <div *ngIf="!day?.hideStudent && day?.student" class="student-container" fxLayout="row" fxLayoutAlign="end center">
 
       <!-- Name -->
-      <a [routerLink]="[ '/aula/alumno', day?.student?.id ]" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
+      <a [routerLink]="[ '/aula/alumno', day?.student?.id ]" [state]="{ fromUrl: router.url }" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
 
       <!-- Avatar -->
       <div fxLayout="row" fxLayoutAlign="end center" class="avatar-container ml-h" [ngClass]="{archived: day?.student?.archived}">
@@ -43,7 +43,7 @@
         <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
         <span class="error-color"> {{'ARCHIVED' | translate}} </span>
       </div>
-      
+
       <!-- Title -->
       <span class="mat-h3 mb-q day-title">{{day?.title}}</span>
 

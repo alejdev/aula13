@@ -106,14 +106,12 @@ export class UtilService {
 
   // Map firestore document
   public static mapDocument(doc: any): any {
-    return doc.payload ?
-      {
-        id: doc.payload.id,
-        ...doc.payload.data()
-      } : {
-        id: doc.id,
-        ...doc.data()
-      }
+    if (doc.payload) {
+      const payloadData = doc.payload.data()
+      return payloadData ? { id: doc.payload.id, ...payloadData } : undefined
+    }
+    const data = doc.data()
+    return data ? { id: doc.id, ...data } : undefined
   }
 
   // Map firestore collecction
@@ -139,7 +137,7 @@ export class UtilService {
 
     for (let i = 0, n = split.length; i < n; ++i) {
       const key = split[i]
-      if (key in elem) {
+      if (elem && key in elem) {
         elem = elem[key]
       } else {
         return

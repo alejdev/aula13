@@ -15,7 +15,7 @@
         </button>
         <ng-container *ngIf="toggleConfig.favorite.show">
           <ng-container *ngFor="let student of favoriteListFiltered">
-            <a13-student-card [(student)]="student"></a13-student-card>
+            <a13-student-card [(student)]="student" [fromUrl]="router.url"></a13-student-card>
           </ng-container>
         </ng-container>
       </div>
@@ -29,7 +29,7 @@
         </button>
         <ng-container *ngIf="toggleConfig.rest.show">
           <ng-container *ngFor="let student of restListFiltered">
-            <a13-student-card [(student)]="student"></a13-student-card>
+            <a13-student-card [(student)]="student" [fromUrl]="router.url"></a13-student-card>
           </ng-container>
         </ng-container>
       </div>
@@ -43,7 +43,7 @@
         </button>
         <ng-container *ngIf="toggleConfig.archived.show">
           <ng-container *ngFor="let student of archiveListFiltered">
-            <a13-student-card [(student)]="student"></a13-student-card>
+            <a13-student-card [(student)]="student" [fromUrl]="router.url"></a13-student-card>
           </ng-container>
         </ng-container>
       </div>
