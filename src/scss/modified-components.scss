@@ -19,12 +19,16 @@ mat-form-field {
 }
 
 // Skeleton
-.skeleton ngx-skeleton-loader .loader {
+ngx-skeleton-loader.skeleton .loader {
   // border-radius: 3px !important;
   outline: 0;
   
   &.circle {
     margin: 0;
+  }
+
+  &.progress:before {
+    animation-duration: 1s !important;
   }
 }
 

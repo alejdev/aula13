@@ -2,8 +2,8 @@
   <div class="container-max sm">
 
     <ng-template #studentListSkeleton>
-      <ng-container class="skeleton" *ngFor="let loader of skeleton.listSmall">
-        <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+      <ng-container *ngFor="let loader of skeleton.listSmall">
+        <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
       </ng-container>
     </ng-template>
 

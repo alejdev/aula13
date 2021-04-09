@@ -3,8 +3,8 @@
 
     <!-- Skeleton -->
     <ng-template #dayListSkeleton>
-      <ng-container class="skeleton" *ngFor="let loader of skeleton.list">
-        <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+      <ng-container *ngFor="let loader of skeleton.list">
+        <ngx-skeleton-loader class="skeleton" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
       </ng-container>
     </ng-template>
 

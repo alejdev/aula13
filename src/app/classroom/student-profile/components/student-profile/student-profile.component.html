@@ -9,7 +9,7 @@
         </div>
         <div fxFlex="100">
           <ng-container *ngFor="let loader of skeleton.lines">
-            <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+            <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
           </ng-container>
         </div>
       </div>
@@ -130,7 +130,7 @@
           <!-- Skeleton -->
           <ng-template #dayListSkeleton>
             <ng-container *ngFor="let loader of skeleton.list">
-              <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+              <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
             </ng-container>
           </ng-template>
 
@@ -139,7 +139,7 @@
             <a13-day-filters *ngIf="data?.dayList?.length" [dayList]="data?.dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
 
             <div>
-              <ng-container class="skeleton" *ngFor="let day of dayListFiltered">
+              <ng-container *ngFor="let day of dayListFiltered">
                 <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
                   <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
                   <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
