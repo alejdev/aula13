@@ -1,21 +1,31 @@
-<ng-template #showSkeleton>
-  <!-- <h1>LOADING</h1> -->
-</ng-template>
-
-<section class="container container-nopadd" *ngIf="data$ | async as data else showSkeleton">
+<section class="container container-nopadd">
   <header class="profile-header mat-card shadow-bottom padding-content pb-h mat-elevation-z0">
 
-    <div class="container-max sm mt-h" fxLayout="row">
+    <!-- Skeleton -->
+    <ng-template #studentSkeleton>
+      <div fxLayout="row" fxLayoutAlign="start center" class="skeleton container-max sm mt-h">
+        <div>
+          <ngx-skeleton-loader count="1" appearance="circle" [animation]="skeleton.animation" [theme]="skeleton.circle.theme"></ngx-skeleton-loader>
+        </div>
+        <div fxFlex="100">
+          <ng-container *ngFor="let loader of skeleton.lines">
+            <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+
+    <div *ngIf="(data$ | async)?.student as student else studentSkeleton" class="container-max sm mt-h" fxLayout="row">
       <div class="avatar-container mr-q" fxLayout="column" fxLayoutAlign="start center">
 
         <!-- Avatar -->
         <a flex="grow" matRipple class="avatar border-theme">
-          <img class="avatar-image" [src]="data?.student?.personal?.avatar | srcImage" alt="{{data?.student?.personal?.avatar}}">
+          <img class="avatar-image" [src]="student?.personal?.avatar | srcImage" alt="{{student?.personal?.avatar}}">
         </a>
 
         <!-- Fav button -->
-        <button class="mr-h ml-h action-button" mat-icon-button (click)="quickAction(data?.student,'favorite')" [matTooltip]="'MSG.MARK_STUDENT_FAV' | translate" [matTooltipShowDelay]="650">
-          <fa-icon [ngClass]="{'star-active': data?.student?.favorite}" class="mat-icon-20 mat-hint" icon="star">
+        <button class="mr-h ml-h action-button" mat-icon-button (click)="quickAction(student,'favorite')" [matTooltip]="'MSG.MARK_STUDENT_FAV' | translate" [matTooltipShowDelay]="650">
+          <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star">
           </fa-icon>
         </button>
       </div>
@@ -26,71 +36,71 @@
           <!-- Student information -->
           <div>
             <!-- Archived -->
-            <div *ngIf="data?.student?.archived" class="mat-small error mb-h">
+            <div *ngIf="student?.archived" class="mat-small error mb-h">
               <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
               <span class="error-color"> {{'STUDENT_ARCHIVED' | translate}} </span>
             </div>
 
             <!-- Number info -->
             <div class="mb-q" fxLayout="row wrap" fxLayoutGap="1rem">
-              <div fxLayout="row" *ngIf="data?.student?.personal?.birthdate" class="personal-numbers">
-                <span class="mb-0 mr-q">{{data?.student?.personal?.birthdate | age}}</span>
+              <div fxLayout="row" *ngIf="student?.personal?.birthdate" class="personal-numbers">
+                <span class="mb-0 mr-q">{{student?.personal?.birthdate | age}}</span>
                 <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
               </div>
-              <div fxLayout="row" *ngIf="data?.student?.personal?.academicCourse" class="personal-numbers">
-                <span class="mb-0 mr-q">{{data?.student?.personal?.academicCourse?.viewValue}}</span>
+              <div fxLayout="row" *ngIf="student?.personal?.academicCourse" class="personal-numbers">
+                <span class="mb-0 mr-q">{{student?.personal?.academicCourse?.viewValue}}</span>
                 <span class="mat-hint mat-small">
-                  {{data?.student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
+                  {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
                 </span>
               </div>
-              <div fxLayout="row" *ngIf="data?.student?.musical?.course" class="personal-numbers">
-                <span class="mb-0 mr-q">{{data?.student?.musical?.course.viewValue}}</span>
+              <div fxLayout="row" *ngIf="student?.musical?.course" class="personal-numbers">
+                <span class="mb-0 mr-q">{{student?.musical?.course.viewValue}}</span>
                 <span class="mat-hint mat-small">
-                  {{data?.student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
+                  {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
                 </span>
               </div>
             </div>
 
             <!-- Instrument -->
-            <div *ngIf="data?.student?.musical?.instrument" class="mat-small">
+            <div *ngIf="student?.musical?.instrument" class="mat-small">
               <span class="mat-hint">
                 {{'FORM.INSTRUMENT' | translate}}: </span>
-              <span class="mb-0">{{'INSTRUMENT.' + data?.student?.musical?.instrument?.viewValue | translate}}</span>
+              <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
             </div>
 
             <!-- Teacher -->
-            <div *ngIf="data?.student?.musical?.teacher" class="mat-small">
+            <div *ngIf="student?.musical?.teacher" class="mat-small">
               <span class="mat-hint">
                 {{'TEACHER' | translate}}: </span>
-              <span class="mb-0">{{data?.student?.musical?.teacher}}</span>
+              <span class="mb-0">{{student?.musical?.teacher}}</span>
             </div>
           </div>
         </div>
 
         <!-- Badges -->
-        <div *ngIf="data?.student?.classroom?.classrooms?.length || data?.student?.classroom?.subjects?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+        <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
 
           <!-- Classrooms -->
-          <button mat-button class="badge mt-0 ml-0" *ngFor="let classroom of data?.student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{classroomsFilter: classroom, openFilters: true}">
+          <button mat-button class="badge mt-0 ml-0" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{classroomsFilter: classroom, openFilters: true}">
             <fa-icon class="mat-icon-12 mr-q mat-hint" icon="chalkboard"></fa-icon>
             <span class="mat-hint">{{classroom | classroomName}}</span>
           </button>
 
           <!-- Subjects -->
-          <button mat-button class="badge badge-fill mt-0 ml-0" *ngFor="let subject of data?.student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{subjectsFilter: subject, openFilters: true}">
+          <button mat-button class="badge badge-fill mt-0 ml-0" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/aula/alumnos']" [queryParams]="{subjectsFilter: subject, openFilters: true}">
             <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
             <span class="mat-hint">{{subject | subjectName}}</span>
           </button>
         </div>
 
         <!-- More Info -->
-        <div *ngIf="data?.student?.personal?.observations">
+        <div *ngIf="student?.personal?.observations">
 
           <!-- Observations -->
           <div *ngIf="moreInfoConfig.show" class="mat-small">
             <span class="mat-hint">
               {{'FORM.OBSERVATIONS' | translate}}: </span>
-            <span class="mb-0">{{data?.student?.personal?.observations}}</span>
+            <span class="mb-0">{{student?.personal?.observations}}</span>
           </div>
 
           <!-- More Info button-->
@@ -114,26 +124,37 @@
         <ng-template mat-tab-label class="stiky-top">
           <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
         </ng-template>
+
         <div class="padding-content">
 
-          <a13-day-filters *ngIf="data?.dayList?.length" [dayList]="data?.dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
-
-          <div>
-            <ng-container *ngFor="let day of dayListFiltered">
-              <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
-                <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
-                <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
-              </button>
-              <a13-day-card [(day)]="day" [fromUrl]="router.url"></a13-day-card>
+          <!-- Skeleton -->
+          <ng-template #dayListSkeleton>
+            <ng-container *ngFor="let loader of skeleton.list">
+              <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
             </ng-container>
+          </ng-template>
+
+          <div *ngIf="data$ | async as data else dayListSkeleton">
+
+            <a13-day-filters *ngIf="data?.dayList?.length" [dayList]="data?.dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+
+            <div>
+              <ng-container class="skeleton" *ngFor="let day of dayListFiltered">
+                <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
+                  <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
+                  <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
+                </button>
+                <a13-day-card [(day)]="day" [fromUrl]="router.url"></a13-day-card>
+              </ng-container>
+            </div>
+
+            <!-- Empty list messages -->
+            <a13-empty-list *ngIf="data?.dayList" [list]="data?.dayList" [listFiltered]="dayListFiltered" listMessage="MSG.STUDENT_DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
+
+            <!-- Floating button -->
+            <a13-floating-button [pulse]="!data?.dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" (click)="createDay(data?.student)">
+            </a13-floating-button>
           </div>
-
-          <!-- Empty list messages -->
-          <a13-empty-list *ngIf="data?.dayList" [list]="data?.dayList" [listFiltered]="dayListFiltered" listMessage="MSG.STUDENT_DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
-
-          <!-- Floating button -->
-          <a13-floating-button [pulse]="!data?.dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" (click)="createDay(data?.student)">
-          </a13-floating-button>
         </div>
       </mat-tab>
 

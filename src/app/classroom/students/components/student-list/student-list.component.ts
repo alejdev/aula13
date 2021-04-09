@@ -3,7 +3,7 @@ import { map, tap } from 'rxjs/operators'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
-import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/core.module'
 import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
@@ -37,6 +37,7 @@ export class StudentListComponent implements OnInit, AfterViewChecked {
 
   @ViewChild(StudentFiltersComponent, { static: false }) studentFilters: StudentFiltersComponent
 
+  skeleton: any = SKELETON_CONFIG
   toggleConfig: any = {
     favorite: {
       show: true,

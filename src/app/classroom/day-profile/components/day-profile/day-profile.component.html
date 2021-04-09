@@ -1,11 +1,22 @@
-<ng-template #showSkeleton>
-  <!-- <h1>LOADING</h1> -->
-</ng-template>
-
-<section class="container container-nopadd" *ngIf="data$ | async as day else showSkeleton">
+<section class="container container-nopadd">
   <div class="profile-container">
     <header class="profile-header shadow-bottom p-1 mat-card mat-elevation-z0">
-      <div class="container-max sm" *ngIf="day?.student" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- Skeleton -->
+      <ng-template #daySkeleton>
+        <div fxLayout="row" fxLayoutAlign="start center" class="skeleton container-max sm mt-h">
+          <div>
+            <ngx-skeleton-loader count="1" appearance="circle" [animation]="skeleton.animation" [theme]="skeleton.circleSmall.theme"></ngx-skeleton-loader>
+          </div>
+          <div fxFlex="100">
+            <ng-container *ngFor="let loader of skeleton.linesSmall">
+              <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+            </ng-container>
+          </div>
+        </div>
+      </ng-template>
+
+      <div *ngIf="data$ | async as day; else daySkeleton" class="container-max sm" fxLayout="row" fxLayoutAlign="space-between center">
 
         <!-- Header info -->
         <div fxLayout="row" fxLayoutAlign="start center">
@@ -37,7 +48,17 @@
 
     <!-- Content -->
     <div class="container-padd">
-      <div class="container-max sm p-h" [innerHTML]="day?.content"></div>
+      <div class="container-max sm p-h">
+
+        <!-- Skeleton -->
+        <ng-template #dayContentSkeleton>
+          <ng-container class="skeleton" *ngFor="let loader of skeleton.text">
+            <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+          </ng-container>
+        </ng-template>
+
+        <div *ngIf="data$ | async as day; else dayContentSkeleton" [innerHTML]="day?.content"></div>
+      </div>
     </div>
   </div>
 </section>

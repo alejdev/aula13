@@ -7,7 +7,7 @@ import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
-import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/core.module'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
@@ -41,14 +41,15 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   academicCourseList: any = ModelService.academicCourseList
   conservatoryCourseList: any = ModelService.conservatoryCourseList
 
+  selectedTab: number = 0
+  tabCount: number = 2
+
+  skeleton: any = SKELETON_CONFIG
   moreInfoConfig: any = {
     show: false,
     text: 'SHOW_MORE',
     icon: 'caret-down'
   }
-
-  selectedTab: number = 0
-  tabCount: number = 2
 
   constructor(
     public router: Router,

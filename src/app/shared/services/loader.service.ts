@@ -49,7 +49,6 @@ export class LoaderService {
       this.setStatus(true)
     }
     this.increment()
-    console.log('++', this.countTracker$.value)
   }
 
   // Stop request
@@ -58,6 +57,5 @@ export class LoaderService {
     if (this.countTracker$.value === 0) {
       this.setStatus(false)
     }
-    console.log('--', this.countTracker$.value)
   }
 }

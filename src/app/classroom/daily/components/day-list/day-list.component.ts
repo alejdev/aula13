@@ -4,7 +4,7 @@ import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
-import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/core.module'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
@@ -34,6 +34,8 @@ export class DayListComponent implements OnInit, AfterViewChecked {
 
   dayListFiltered: any[]
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
+
+  skeleton: any = SKELETON_CONFIG
 
   constructor(
     private studentService: StudentService,

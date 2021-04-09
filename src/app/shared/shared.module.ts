@@ -1,3 +1,5 @@
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader'
+
 import { CommonModule, registerLocaleData } from '@angular/common'
 import localeDe from '@angular/common/locales/de'
 import localeEn from '@angular/common/locales/en'
@@ -120,7 +122,8 @@ registerLocaleData(localeFr, 'fr')
     FlexLayoutModule,
     TranslateModule,
     CKEditorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxSkeletonLoaderModule
   ],
   exports: [
     // Angular
@@ -150,6 +153,7 @@ registerLocaleData(localeFr, 'fr')
     TranslateModule,
     CKEditorModule,
     FontAwesomeModule,
+    NgxSkeletonLoaderModule,
 
     // Mine
     FloatingButtonComponent,

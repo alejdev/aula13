@@ -49,6 +49,57 @@ export const CKEDITOR_CONFIG: any = {
   ]
 }
 
+export const SKELETON_CONFIG: any = {
+  animation: 'progress', // pulse | progress
+  search: { theme: { height: '50px', margin: '0 0 2rem 0' } },
+  circle: { theme: { width: '80px', height: '80px', margin: '5px 12px 0 .5rem' } },
+  circleSmall: { theme: { width: '54px', height: '54px', margin: '0 .5rem 0 0' } },
+  lines: [
+    { theme: { 'max-width': '250px', height: '12px', 'margin-bottom': '8px' } },
+    { theme: { 'max-width': '170px', height: '10px', 'margin-bottom': '5px' } },
+    { theme: { 'max-width': '200px', height: '10px', 'margin-bottom': '8px' } },
+    { theme: { 'max-width': '350px', height: '15px', 'margin-bottom': '8' } },
+    { theme: { 'max-width': '80px', height: '8px', 'margin-bottom': '0' } },
+  ],
+  linesSmall: [
+    { theme: { 'max-width': '220px', height: '12px', 'margin-bottom': '8px' } },
+    { theme: { 'max-width': '110px', height: '10px', 'margin-bottom': '0' } },
+  ],
+  list: [
+    { theme: { 'max-width': '90%', height: '50px', margin: '0 0 2rem 0' } },
+    { theme: { 'max-width': '100px', height: '20px', margin: '0 0 1rem 0' } },
+    { theme: { height: '110px', margin: '0 0 .5rem 0' } },
+    { theme: { height: '110px', margin: '0 0 .5rem 0' } },
+    { theme: { 'max-width': '90px', height: '20px', margin: '2rem 0 1rem 0' } },
+    { theme: { height: '110px', margin: '0 0 .5rem 0' } },
+  ],
+  listSmall: [
+    { theme: { 'max-width': '90%', height: '50px', margin: '0 0 2rem 0' } },
+    { theme: { 'max-width': '100px', height: '20px', margin: '0 0 1rem 0' } },
+    { theme: { height: '70px', margin: '0 0 .5rem 0' } },
+    { theme: { height: '70px', margin: '0 0 .5rem 0' } },
+    { theme: { height: '70px', margin: '0 0 .5rem 0' } },
+    { theme: { 'max-width': '90px', height: '20px', margin: '2rem 0 1rem 0' } },
+    { theme: { height: '70px', margin: '0 0 .5rem 0' } },
+    { theme: { height: '70px', margin: '0 0 .5rem 0' } },
+  ],
+  text: [
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '30%', height: '12px', 'margin-bottom': '30px' } },
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '80%', height: '12px', 'margin-bottom': '30px' } },
+    { theme: { 'max-width': '40%', height: '12px', 'margin-bottom': '30px' } },
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '55%', height: '12px', 'margin-bottom': '30px' } },
+    { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
+    { theme: { 'max-width': '75%', height: '12px', 'margin-bottom': '0' } },
+  ],
+}
+
 @NgModule({
   imports: [
     // Angular

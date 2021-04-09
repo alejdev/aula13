@@ -1,27 +1,34 @@
-<ng-template #showSkeleton>
-  <!-- <h1>LOADING</h1> -->
-</ng-template>
-
-<section class="container container-padd" *ngIf="data$ | async as dayList else showSkeleton">
+<section class="container container-padd">
   <div class="container-max sm">
 
-    <a13-day-filters *ngIf="dayList?.length" [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
-
-    <!-- Days -->
-    <div>
-      <ng-container *ngFor="let day of dayListFiltered">
-        <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
-          <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
-          <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
-        </button>
-        <a13-day-card [(day)]="day" [fromUrl]="router.url"></a13-day-card>
+    <!-- Skeleton -->
+    <ng-template #dayListSkeleton>
+      <ng-container class="skeleton" *ngFor="let loader of skeleton.list">
+        <ngx-skeleton-loader fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
       </ng-container>
+    </ng-template>
+
+    <div *ngIf="data$ | async as dayList else dayListSkeleton">
+
+      <!-- Filters -->
+      <a13-day-filters *ngIf="dayList?.length" [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+
+      <!-- Days -->
+      <div>
+        <ng-container *ngFor="let day of dayListFiltered">
+          <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
+            <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
+            <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
+          </button>
+          <a13-day-card [(day)]="day" [fromUrl]="router.url"></a13-day-card>
+        </ng-container>
+      </div>
+
+      <!-- Empty list messages -->
+      <a13-empty-list *ngIf="dayList" [list]="dayList" [listFiltered]="dayListFiltered" listMessage="MSG.DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
+
+      <!-- Floating button -->
+      <a13-floating-button [pulse]="!dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" [disabled]="!studentList?.length" (click)="createDay()"></a13-floating-button>
     </div>
-
-    <!-- Empty list messages -->
-    <a13-empty-list *ngIf="dayList" [list]="dayList" [listFiltered]="dayListFiltered" listMessage="MSG.DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
-
-    <!-- Floating button -->
-    <a13-floating-button [pulse]="!dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" [disabled]="!studentList?.length" (click)="createDay()"></a13-floating-button>
   </div>
 </section>

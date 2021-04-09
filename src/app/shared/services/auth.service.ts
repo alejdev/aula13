@@ -24,7 +24,6 @@ export class AuthService {
     private loaderService: LoaderService
   ) {
     this.error = (error: any) => {
-      console.log(error)
       switch (error.code) {
         case 'auth/wrong-password':
           this.toastService.error({ text: 'ERR.AUTH_INVALID' })

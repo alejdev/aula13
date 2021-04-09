@@ -18,6 +18,16 @@ mat-form-field {
   }
 }
 
+// Skeleton
+.skeleton ngx-skeleton-loader .loader {
+  // border-radius: 3px !important;
+  outline: 0;
+  
+  &.circle {
+    margin: 0;
+  }
+}
+
 // Snack bar
 .mat-snack-bar-container {
   max-width: 560px !important;

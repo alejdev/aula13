@@ -23,6 +23,10 @@
     }
   }
 
+  ngx-skeleton-loader .loader {
+    background-color: map-get(map-get($colors, light-theme), loader);
+  }
+
   .border-theme {
     border-color: $black-12-opacity;
 
@@ -106,6 +110,14 @@
     &:active,
     &:focus {
       background-color: map-get(map-get($colors, dark-theme), background) !important;
+    }
+  }
+
+  ngx-skeleton-loader .loader {
+    background-color: map-get(map-get($colors, dark-theme), loader);
+
+    &.progress:before {
+      background-image: linear-gradient(90deg, rgba(70,70,70,0), rgba(70,70,70,.6), rgba(70,70,70,0));
     }
   }
 
