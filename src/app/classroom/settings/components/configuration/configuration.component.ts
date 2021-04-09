@@ -24,7 +24,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   themeIsDark: boolean
   canPanSideMenu: boolean = this.settingService.value.canPanSideMenu
   inputAppearances = ModelService.inputAppearances
-  inputAppearanceIcon: string[]
+  inputAppearanceIcon: string
 
   langSubscription: Subscription
   themeSubscription: Subscription
@@ -77,7 +77,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     this.inputAppearanceIcon = this.getInputAppearanceIcon()
   }
 
-  getInputAppearanceIcon(): string[] {
+  getInputAppearanceIcon(): string {
     const inputIcon = this.inputAppearances.find((input) => input.id === this.settingService.value.inputAppearance)
     return inputIcon ? inputIcon.icon : 'fill'
   }

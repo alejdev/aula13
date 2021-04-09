@@ -14,15 +14,15 @@ export class ModelService {
   public static inputAppearances: any[] = [{
     name: 'SETTING.INPUT_APPEARANCE_DEFAULT',
     id: 'standard',
-    icon: ['fas', 'grip-lines']
+    icon: 'grip-lines'
   }, {
     name: 'SETTING.INPUT_APPEARANCE_OUTLINE',
     id: 'outline',
-    icon: ['far', 'square']
+    icon: 'border-style'
   }, {
     name: 'SETTING.INPUT_APPEARANCE_FILL',
     id: 'fill',
-    icon: ['fas', 'square']
+    icon: 'square'
   }]
 
   public static signInSocialNetworks: any[] = [{
