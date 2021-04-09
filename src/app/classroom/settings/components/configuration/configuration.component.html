@@ -32,12 +32,14 @@
       </mat-slide-toggle>
     </div>
 
+    <!-- Input appearance -->
     <div class="mb-2" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1rem">
-      <fa-icon class="mat-icon-22 color-primary mb-h" icon="square"></fa-icon>
+      <fa-icon class="mat-icon-20 color-primary mb-h" [icon]="inputAppearanceIcon"></fa-icon>
       <mat-form-field [appearance]="inputAppearance | settingValue">
         <mat-label>{{'SETTING.INPUT_APPEARANCE' | translate}}</mat-label>
         <mat-select [(ngModel)]="inputAppearance" (selectionChange)="setInputAppearance()">
           <mat-option *ngFor="let appearance of inputAppearances" [value]="appearance.id">
+            <fa-icon class="mat-icon-20 input-icon mat-hint mr-h" [icon]="appearance.icon"></fa-icon>
             <span>{{appearance.name | translate}}</span>
           </mat-option>
         </mat-select>
@@ -60,6 +62,6 @@
     </div>
 
     <!-- Credits -->
-    <a13-credits></a13-credits>    
+    <a13-credits></a13-credits>
   </div>
 </section>

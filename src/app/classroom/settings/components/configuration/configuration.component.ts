@@ -24,6 +24,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   themeIsDark: boolean
   canPanSideMenu: boolean = this.settingService.value.canPanSideMenu
   inputAppearances = ModelService.inputAppearances
+  inputAppearanceIcon: string[]
 
   langSubscription: Subscription
   themeSubscription: Subscription
@@ -51,6 +52,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
     // Get input appearance
     this.inputAppearance = this.settingService.value.inputAppearance
+    this.inputAppearanceIcon = this.getInputAppearanceIcon()
 
     // Get theme
     this.themeSubscription = this.themeService.theme.subscribe((result: any) => {
@@ -66,13 +68,18 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   getFlag(lang: any): string {
     return `/assets/svgs/flags/${lang.id}.svg`
   }
-
   toggleTheme(): void {
     this.themeService.toggleTheme()
   }
 
   setInputAppearance(): void {
     this.settingService.value = { inputAppearance: this.inputAppearance }
+    this.inputAppearanceIcon = this.getInputAppearanceIcon()
+  }
+
+  getInputAppearanceIcon(): string[] {
+    const inputIcon = this.inputAppearances.find((input) => input.id === this.settingService.value.inputAppearance)
+    return inputIcon ? inputIcon.icon : 'fill'
   }
 
   togglePanSideMenu(): void {

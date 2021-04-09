@@ -14,6 +14,11 @@ mat-form-field {
   height: 24px;
 }
 
+.input-icon {
+  position: relative;
+  top: 2px;
+}
+
 mat-hint {
   line-height: 1.6;
   display: block !important;
