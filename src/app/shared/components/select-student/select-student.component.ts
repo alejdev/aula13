@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, OnDestroy, forwardRef } from '@angular/core'
-import { FormGroup, FormBuilder, Validators, NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, Validator, AbstractControl, ValidationErrors } from '@angular/forms'
-import { Subscription } from 'rxjs'
-
+import { Observable, Subscription } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { StudentService } from 'src/app/classroom/services/student.service'
+
+import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core'
+import { AbstractControl, ControlValueAccessor, FormBuilder, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms'
+
 import { UtilService } from '../../services/util.service'
 
 @Component({
@@ -24,12 +26,10 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   @Input() multiple: boolean
   @Input() hint: string
 
-  studentFormGroup: FormGroup
-  studentList: any[]
-  ready: boolean
+  data$: Observable<any>
 
-  studentListSubscription: Subscription
-  studentFormGroupSubscription: Subscription
+  studentFormGroup$: Subscription
+  studentFormGroup: FormGroup
 
   equals: any = UtilService.equals
 
@@ -39,10 +39,14 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   ) { }
 
   ngOnInit() {
-    this.studentListSubscription = this.studentService.observeStudentList()
-      .subscribe((result: any) => {
-        this.studentList = UtilService.mapCollection(result).filter((student: any) => !student.archived)
+    this.data$ = this.studentService.observeStudentList().pipe(
+      map((result) => {
+        const studentList = UtilService.mapCollection(result)
+        return studentList
+          .filter((student: any) => !student.archived)
+          .concat(studentList.filter((student: any) => student.archived))
       })
+    )
 
     this.studentFormGroup = this.formBuilder.group({
       studentCtrl: [null]
@@ -56,7 +60,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   }
 
   registerOnChange(fn: any): void {
-    this.studentFormGroupSubscription = this.studentFormGroup.valueChanges.subscribe(fn)
+    this.studentFormGroup$ = this.studentFormGroup.valueChanges.subscribe(fn)
   }
 
   registerOnTouched(fn: any): void {
@@ -79,7 +83,6 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
   }
 
   ngOnDestroy(): void {
-    this.studentListSubscription.unsubscribe()
-    this.studentFormGroupSubscription.unsubscribe()
+    this.studentFormGroup$.unsubscribe()
   }
 }
