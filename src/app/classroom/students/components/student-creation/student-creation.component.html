@@ -207,7 +207,7 @@
     <!-- Action buttons -->
     <div fxLayout="row" fxLayoutAlign="end center" fxFlex="0 0 240px">
       <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-      <button class="ml-h" mat-flat-button [color]="data.isClone || !data.idStudent? 'primary' : 'accent'" mat-dialog-close [disabled]="studentFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data.idStudent ? 'SAVE' : 'ADD_STUDENT') | translate}}</button>
+      <button class="ml-h" mat-flat-button [color]="data.isClone || !data.idStudent? 'primary' : 'accent'" mat-dialog-close [disabled]="studentFormGroup.invalid || studentFormGroup.pristine" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data.idStudent ? 'SAVE' : 'ADD_STUDENT') | translate}}</button>
     </div>
   </footer>
 </form>

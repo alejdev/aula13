@@ -60,7 +60,7 @@
     <!-- Action buttons -->
     <div>
       <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-      <button class="ml-h" mat-flat-button [color]="data.isClone || !data.idDay? 'primary' : 'accent'" mat-dialog-close [disabled]="dayFormGroup.invalid" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data.idDay ? 'SAVE' : 'DAY.ADD') | translate}}</button>
+      <button class="ml-h" mat-flat-button [color]="data.isClone || !data.idDay? 'primary' : 'accent'" mat-dialog-close [disabled]="dayFormGroup.invalid || dayFormGroup.pristine" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data.idDay ? 'SAVE' : 'DAY.ADD') | translate}}</button>
     </div>
   </footer>
 
