@@ -6,9 +6,9 @@
     </h2>
 
     <!-- Favorite -->
-    <button mat-button (click)="day.favorite=!day.favorite" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
-      <span class="mat-small mat-hint mr-q"> {{(day?.favorite ? 'FAVORITE'  : 'MARK_FAVORITE') | translate}} </span>
-      <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-22 mat-hint" icon="star"></fa-icon>
+    <button mat-button (click)="toggleBooleanCrl('dayFavoriteCtrl')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
+      <span class="mat-small mat-hint mr-q"> {{(dayFormGroup?.value.dayFavoriteCtrl ? 'FAVORITE'  : 'MARK_FAVORITE') | translate}} </span>
+      <fa-icon [ngClass]="{'star-active': dayFormGroup?.value.dayFavoriteCtrl}" class="mat-icon-22 mat-hint" icon="star"></fa-icon>
     </button>
   </header>
 
@@ -52,9 +52,9 @@
   <footer class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
 
     <!-- Archived -->
-    <button mat-button (click)="day.archived=!day.archived" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
-      <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': day?.archived}" [icon]="day?.archived ? 'box' : 'box-open'"></fa-icon>
-      <span class="mat-small mat-hint ml-q"> {{(day?.archived ? 'ARCHIVED'  : 'ARCHIVE') | translate}} </span>
+    <button mat-button (click)="toggleBooleanCrl('dayArchivedCtrl')" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
+      <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': dayFormGroup?.value.dayArchivedCtrl}" [icon]="dayFormGroup?.value.dayArchivedCtrl ? 'box' : 'box-open'"></fa-icon>
+      <span class="mat-small mat-hint ml-q"> {{(dayFormGroup?.value.dayArchivedCtrl ? 'ARCHIVED'  : 'ARCHIVE') | translate}} </span>
     </button>
 
     <!-- Action buttons -->

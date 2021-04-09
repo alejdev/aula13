@@ -86,6 +86,10 @@ export class StudentCreationComponent implements OnInit {
       classroomFormGroup: this.formBuilder.group({
         classroomsCtrl: [this.student.classroom.classrooms],
         subjectsCtrl: [this.student.classroom.subjects]
+      }),
+      booleanFormGroup: this.formBuilder.group({
+        favoriteCtrl: [this.student.favorite],
+        archivedCtrl: [this.student.archived]
       })
     })
 
@@ -134,12 +138,21 @@ export class StudentCreationComponent implements OnInit {
     return []
   }
 
+  toggleBooleanCrl(control: string): void {
+    if (!this.studentFormGroup.dirty) {
+      this.studentFormGroup.markAsDirty()
+      this.studentFormGroup.markAsTouched()
+    }
+    const formCtrl = this.studentFormGroup.get('booleanFormGroup').get(control)
+    formCtrl.setValue(!formCtrl.value)
+  }
+
   save(): void {
     if (this.studentFormGroup.valid) {
       this.data.student.personal.avatar = this.studentAvatar
 
       const student = this.studentService.normalizeStudent({
-        archived: this.student.archived,
+        archived: this.studentFormGroup.value.booleanFormGroup.archivedCtrl,
         classroom: {
           classrooms: this.studentFormGroup.value.classroomFormGroup.classroomsCtrl,
           subjects: this.studentFormGroup.value.classroomFormGroup.subjectsCtrl
@@ -147,7 +160,7 @@ export class StudentCreationComponent implements OnInit {
         contactInformation: {
           phones: this.getPhoneListValues()
         },
-        favorite: this.student.favorite,
+        favorite: this.studentFormGroup.value.booleanFormGroup.favoriteCtrl,
         musical: {
           course: this.studentFormGroup.value.musicalFormGroup.courseCtrl,
           instrument: this.studentFormGroup.value.musicalFormGroup.instrumentCtrl,

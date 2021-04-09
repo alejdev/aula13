@@ -60,6 +60,8 @@ export class DayCreationComponent implements OnInit {
       dayDateCtrl: [this.dayService.formatInputDate(this.day.date), Validators.required],
       dayTitleCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${dayTitle}` : dayTitle, Validators.required],
       dayContentCtrl: [this.day.content, Validators.required],
+      dayFavoriteCtrl: [this.day.favorite],
+      dayArchivedCtrl: [this.day.archived],
     })
   }
 
@@ -78,6 +80,15 @@ export class DayCreationComponent implements OnInit {
     return dayStudentCtrl.id
   }
 
+  toggleBooleanCrl(control: string): void {
+    if (!this.dayFormGroup.dirty) {
+      this.dayFormGroup.markAsDirty()
+      this.dayFormGroup.markAsTouched()
+    }
+    const formCtrl = this.dayFormGroup.get(control)
+    formCtrl.setValue(!formCtrl.value)
+  }
+
   save(): void {
     if (this.dayFormGroup.valid) {
 
@@ -86,8 +97,8 @@ export class DayCreationComponent implements OnInit {
         date: this.dayFormGroup.value.dayDateCtrl,
         title: this.dayFormGroup.value.dayTitleCtrl,
         content: this.dayFormGroup.value.dayContentCtrl,
-        favorite: this.day.favorite,
-        archived: this.day.archived,
+        favorite: this.dayFormGroup.value.dayFavoriteCtrl,
+        archived: this.dayFormGroup.value.dayArchivedCtrl,
       })
 
       let setDay: any
