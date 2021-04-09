@@ -1,5 +1,5 @@
-import { of, Subscription } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { Observable, of, Subscription } from 'rxjs'
+import { map, switchMap, tap } from 'rxjs/operators'
 import { DayArchiveDialogComponent } from 'src/app/classroom/components/day-archive-dialog/day-archive-dialog.component'
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
@@ -11,7 +11,6 @@ import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
@@ -21,11 +20,8 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class DayProfileComponent implements OnInit, OnDestroy {
 
-  dayId: any
-  day: any
-
-  daySubscription$: Subscription
-  routerSubscription$: Subscription
+  data$: Observable<any>
+  router$: Subscription
 
   constructor(
     private router: Router,
@@ -33,51 +29,39 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     private dayService: DayService,
     private studentService: StudentService,
     private headerService: HeaderService,
-    private dialog: MatDialog,
     private loaderService: LoaderService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Observe new params
-    this.routerSubscription$ = this.activatedRoute.params.subscribe(params => {
-      this.dayId = params.id
-      if (this.daySubscription$) { this.daySubscription$.unsubscribe() }
-      this.loadData()
-    })
+    this.router$ = this.activatedRoute.params.subscribe(params => this.loadData(params.id))
   }
 
-  loadData() {
-    this.loaderService.load()
-
-    const day$ = this.dayService.observeDay(this.dayId)
-
-    this.daySubscription$ = day$.pipe(
+  loadData(dayId: string): void {
+    this.data$ = this.dayService.observeDay(dayId).pipe(
+      tap(() => this.loaderService.load()),
       map((day) => UtilService.mapDocument(day)),
       switchMap((day) => {
         if (!day) { return of(day) }
-        return this.studentService.observeStudent(day.studentId ? day.studentId : 'asd')
-          .pipe(map((student) => ({
-            ...day,
-            student: UtilService.mapDocument(student)
-          })))
+        return this.studentService.observeStudent(day.studentId)
+          .pipe(map((student) => ({ ...day, student: UtilService.mapDocument(student) })))
+      }),
+      tap((day) => {
+        this.loaderService.down()
+        if (!day) {
+          this.router.navigateByUrl(history.state.fromUrl)
+          return
+        }
+        this.configHeader(day)
       })
-    ).subscribe((result: any) => {
-      // If not exists, go back to the route where came from
-      if (!result) {
-        this.router.navigateByUrl(history.state.fromUrl)
-        return
-      }
-      this.day = result
-      this.configHeader()
-      this.loaderService.down()
-    })
+    )
   }
 
-  configHeader() {
+  configHeader(day: any): void {
     this.headerService.configHeader({
-      title: this.day.title,
+      title: day.title,
       back: true,
-      day: this.day,
+      day,
       truncable: true,
       menuOptions: [{
         name: 'DAY.EDIT',
@@ -87,8 +71,8 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           config: {
             ...DIALOG_CONFIG,
             data: {
-              idDay: this.dayId,
-              day: { ...this.day }
+              idDay: day.id,
+              day: { ...day }
             }
           }
         }
@@ -100,21 +84,21 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           config: {
             ...DIALOG_CONFIG,
             data: {
-              day: { ...this.day },
+              day: { ...day },
               isClone: true
             }
           }
         }
       }, {
-        name: `${!this.day.archived ? '' : 'UN'}ARCHIVE_DAY`,
-        icon: `box${!this.day.archived ? '' : '-open'}`,
+        name: `${!day.archived ? '' : 'UN'}ARCHIVE_DAY`,
+        icon: `box${!day.archived ? '' : '-open'}`,
         dialog: {
           component: DayArchiveDialogComponent,
           config: {
             ...DIALOG_CONFIG,
             data: {
-              idDay: this.dayId,
-              day: { ...this.day }
+              idDay: day.id,
+              day: { ...day }
             }
           }
         }
@@ -126,7 +110,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           config: {
             ...DIALOG_CONFIG,
             data: {
-              day: { ...this.day }
+              day: { ...day }
             }
           }
         }
@@ -134,23 +118,12 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     })
   }
 
-  editDay() {
-    this.dialog.open(DayCreationComponent, {
-      ...DIALOG_CONFIG,
-      data: {
-        idDay: this.dayId,
-        day: { ...this.day }
-      }
-    })
-  }
-
-  quickAction(key: string): void {
-    this.day[key] = !this.day[key]
-    this.dayService.updateDay(this.dayId, this.dayService.normalizeDay(this.day))
+  quickAction(day: any, key: string): void {
+    day[key] = !day[key]
+    this.dayService.updateDay(day.id, this.dayService.normalizeDay(day))
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription$.unsubscribe()
-    this.daySubscription$.unsubscribe()
+    this.router$.unsubscribe()
   }
 }

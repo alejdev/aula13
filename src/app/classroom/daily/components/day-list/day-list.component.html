@@ -1,4 +1,8 @@
-<section class="container container-padd">
+<ng-template #showSkeleton>
+  <!-- <h1>LOADING</h1> -->
+</ng-template>
+
+<section class="container container-padd" *ngIf="data$ | async as dayList else showSkeleton">
   <div class="container-max sm">
 
     <a13-day-filters *ngIf="dayList?.length" [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>

@@ -1,5 +1,5 @@
-import { Subscription } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { combineLatest, Observable } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
@@ -10,7 +10,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
@@ -26,15 +26,14 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
   styleUrls: ['./student-list.component.scss'],
   providers: [FilterPipe, ClassroomPipe, SubjectPipe, AgroupByPipe, OrderByPipe]
 })
-export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class StudentListComponent implements OnInit, AfterViewChecked {
 
-  studentList: any[]
+  data$: Observable<any>
+
   studentListFiltered: any[]
   favoriteListFiltered: any[]
   restListFiltered: any[]
   archiveListFiltered: any[]
-
-  studentListSubscription$: Subscription
 
   @ViewChild(StudentFiltersComponent, { static: false }) studentFilters: StudentFiltersComponent
 
@@ -77,32 +76,26 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   loadData(): void {
-    this.loaderService.load()
-
     const studentList$ = this.studentService.observeStudentList()
     const subjectList$ = this.subjectService.observeSubjectList()
 
-    this.studentListSubscription$ = subjectList$.pipe(
-      map((subjectList) => UtilService.mapCollection(subjectList)),
-      switchMap((subjectList) => {
-        return studentList$.pipe(map((studentList) => {
-          studentList = UtilService.mapCollection(studentList).map((student) => ({
-            ...student,
-            subjects: subjectList.filter((subject) => student.classroom.subjects.includes(subject.id))
-          }))
-          return studentList
+    this.data$ = combineLatest([studentList$, subjectList$]).pipe(
+      tap(() => this.loaderService.load()),
+      map((result) => {
+        return UtilService.mapCollection(result[0]).map((student) => ({
+          ...student,
+          subjects: UtilService.mapCollection(result[1])
+            .filter((subject: any) => student.classroom.subjects.includes(subject.id))
         }))
+      }),
+      tap((studentList) => {
+        this.loaderService.down()
+        if (this.studentFilters && studentList.length) {
+          this.studentListFiltered = UtilService.clone(studentList)
+          this.studentFilters.filterList(studentList)
+        }
       })
-    ).subscribe((result: any) => {
-      this.studentList = result
-      this.studentListFiltered = UtilService.clone(this.studentList)
-
-      // Filter the list for first time
-      if (this.studentFilters && this.studentList.length) {
-        this.studentFilters.filterList(this.studentList)
-      }
-      this.loaderService.down()
-    })
+    )
   }
 
   createStudent(): void {
@@ -125,9 +118,5 @@ export class StudentListComponent implements OnInit, OnDestroy, AfterViewChecked
     const state = typeof show === 'undefined' ? !this.toggleConfig[list].show : show
     this.toggleConfig[list].show = state
     this.toggleConfig[list].icon = `caret-${!state ? 'down' : 'up'}`
-  }
-
-  ngOnDestroy(): void {
-    this.studentListSubscription$.unsubscribe()
   }
 }

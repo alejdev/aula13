@@ -1,28 +1,20 @@
 
 import { LoaderService } from 'src/app/shared/services/loader.service'
 
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'a13-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss']
 })
-export class LoaderComponent implements OnInit, OnDestroy {
+export class LoaderComponent implements OnInit {
 
-  isLoading = false
-  private loader$
+  loader$ = this.loaderService.getStatus()
 
   constructor(
     private loaderService: LoaderService
   ) { }
 
-  ngOnInit() {
-    this.loader$ = this.loaderService.loaderStatus
-      .subscribe(state => this.isLoading = state)
-  }
-
-  ngOnDestroy() {
-    this.loader$.unsubscribe()
-  }
+  ngOnInit() { }
 }

@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 
 import { Injectable } from '@angular/core'
 
@@ -7,27 +7,57 @@ import { Injectable } from '@angular/core'
 })
 export class LoaderService {
 
-  private count = 0
-  private loading$ = new Subject<boolean>()
-  public loaderStatus = this.loading$.asObservable()
+  private initialCount: number = 0
+  private countTracker$: BehaviorSubject<number> = new BehaviorSubject<number>(this.initialCount)
+  private loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   constructor() { }
 
-  load(): void {
-    if (this.count === 0) {
-      this.setRequestStatus(true)
-    }
-    this.count++
+  // Get number of asynchronous request
+  getCount(): Observable<number> {
+    return this.countTracker$.asObservable()
   }
 
-  down(): void {
-    this.count--
-    if (this.count === 0) {
-      this.setRequestStatus(false)
-    }
+  setCount(val: number, delta: number): void {
+    this.countTracker$.next(val + delta)
   }
 
-  setRequestStatus(inprogess: boolean) {
+  increment(): void {
+    this.setCount(this.countTracker$.value, 1)
+  }
+
+  decrement(): void {
+    this.setCount(this.countTracker$.value, -1)
+  }
+
+  resetCount(): void {
+    this.countTracker$.next(this.initialCount)
+  }
+
+  // Get satus of loader
+  getStatus(): Observable<boolean> {
+    return this.loading$.asObservable()
+  }
+
+  setStatus(inprogess: boolean) {
     this.loading$.next(inprogess)
+  }
+
+  // Load request
+  load(): void {
+    if (this.countTracker$.value === 0) {
+      this.setStatus(true)
+    }
+    this.increment()
+    console.log('++', this.countTracker$.value)
+  }
+
+  // Stop request
+  down(): void {
+    this.decrement()
+    if (this.countTracker$.value === 0) {
+      this.setStatus(false)
+    }
+    console.log('--', this.countTracker$.value)
   }
 }

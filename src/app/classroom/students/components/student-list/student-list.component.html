@@ -1,4 +1,8 @@
-<section class="container container-padd">
+<ng-template #showSkeleton>
+  <!-- <h1>LOADING</h1> -->
+</ng-template>
+
+<section class="container container-padd" *ngIf="data$ | async as studentList else showSkeleton">
   <div class="container-max sm">
 
     <a13-student-filters *ngIf="studentList?.length" [studentList]="studentList" (studentListFilter)="agroupStudents($event)"></a13-student-filters>

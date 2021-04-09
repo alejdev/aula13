@@ -41,6 +41,6 @@
   <footer class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
     <!-- Action buttons -->
     <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-    <button class="ml-h" mat-flat-button [color]="data.isClone || !data?.entity?.id ? 'primary' : 'accent'" mat-dialog-close [disabled]="classroomFormGroup.invalid || classroomFormGroup.pristine || validatingName" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data?.entity?.id ? 'SAVE' : 'CREATE_CLASSROOM') | translate}}</button>
+    <button class="ml-h" mat-flat-button [color]="data.isClone || !data?.entity?.id ? 'primary' : 'accent'" mat-dialog-close [disabled]="classroomFormGroup.invalid || (classroomFormGroup.pristine && !data.isClone) || validatingName" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data?.entity?.id ? 'SAVE' : 'CREATE_CLASSROOM') | translate}}</button>
   </footer>
 </form>

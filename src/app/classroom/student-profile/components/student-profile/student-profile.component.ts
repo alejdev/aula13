@@ -1,5 +1,5 @@
-import { of, Subscription } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { combineLatest, Observable, Subscription } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
@@ -31,29 +31,24 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChecked {
 
-  studentId: any
-  student: any
-  dayList: any[]
+  data$: Observable<any>
+  router$: Subscription
+
   dayListFiltered: any[]
+  @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   mark: any = UtilService.mark
   academicCourseList: any = ModelService.academicCourseList
   conservatoryCourseList: any = ModelService.conservatoryCourseList
+
   moreInfoConfig: any = {
     show: false,
     text: 'SHOW_MORE',
     icon: 'caret-down'
   }
 
-  studentSubscription$: Subscription
-  routerSubscription$: Subscription
-
-  swipeCoord: [number, number]
-  swipeTime: number
   selectedTab: number = 0
   tabCount: number = 2
-
-  @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   constructor(
     public router: Router,
@@ -68,61 +63,45 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
 
   ngOnInit(): void {
     // Observe new params
-    this.routerSubscription$ = this.activatedRoute.params.subscribe(params => {
-      this.studentId = params.id
-      if (this.studentSubscription$) { this.studentSubscription$.unsubscribe() }
-      this.loadData()
-    })
+    this.router$ = this.activatedRoute.params.subscribe(params => this.loadData(params.id))
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.cdRef.detectChanges()
   }
 
-  loadData() {
-    this.loaderService.load()
+  loadData(studentId: string): void {
+    const student$ = this.studentService.observeStudent(studentId)
+    const dayList$ = this.dayService.observeQueryDayList('studentId', '==', studentId)
 
-    const student$ = this.studentService.observeStudent(this.studentId)
-    const dayList$ = this.dayService.observeQueryDayList('studentId', '==', this.studentId)
-
-    this.studentSubscription$ = student$.pipe(
-      map((student) => UtilService.mapDocument(student)),
-      switchMap((student) => {
-        if (!student) { return of(student) }
-        return dayList$.pipe(map((dayList) => {
-          dayList = UtilService.mapCollection(dayList).map((elem) => ({
-            ...elem,
-            hideStudent: true,
-            student
-          }))
-          return { student, dayList }
-        }))
+    this.data$ = combineLatest([student$, dayList$]).pipe(
+      tap(() => this.loaderService.load()),
+      map((result) => {
+        const student = UtilService.mapDocument(result[0])
+        const dayList = UtilService.mapCollection(result[1])
+          .map((day) => ({ ...day, hideStudent: true, student }))
+        return { student, dayList }
       }),
-    ).subscribe((result) => {
-      // If not exists, go back to the route where came from
-      if (!result) {
-        this.router.navigateByUrl(`${history.state.fromUrl ? history.state.fromUrl : 'aula/alumnos'}`)
-        return
-      }
-
-      this.student = result.student
-      this.dayList = result.dayList
-      this.configHeader()
-
-      // Filter the list for first time
-      if (this.dayFilters && this.dayList) {
-        this.dayListFiltered = UtilService.clone(this.dayList)
-        this.dayFilters.filterList(this.dayList)
-      }
-      this.loaderService.down()
-    })
+      tap((result) => {
+        this.loaderService.down()
+        if (!result.student) {
+          this.router.navigateByUrl(history.state.fromUrl)
+          return
+        }
+        this.configHeader(result.student)
+        if (this.dayFilters && result.dayList) {
+          this.dayListFiltered = UtilService.clone(result.dayList)
+          this.dayFilters.filterList(result.dayList)
+        }
+      })
+    )
   }
 
-  configHeader(): void {
+  configHeader(student: any): void {
     this.headerService.configHeader({
-      title: this.student.personal.name,
+      title: student.personal.name,
       back: true,
-      student: this.student,
+      student,
       truncable: true,
       menuOptions: [{
         name: 'EDIT_STUDENT',
@@ -132,8 +111,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
           config: {
             ...DIALOG_CONFIG,
             data: {
-              idStudent: this.studentId,
-              student: { ...this.student }
+              idStudent: student.id,
+              student: { ...student }
             }
           }
         }
@@ -145,21 +124,21 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
           config: {
             ...DIALOG_CONFIG,
             data: {
-              student: { ...this.student },
+              student: { ...student },
               isClone: true
             }
           }
         }
       }, {
-        name: `${!this.student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
-        icon: `box${!this.student.archived ? '' : '-open'}`,
+        name: `${!student.archived ? '' : 'UN'}ARCHIVE_STUDENT`,
+        icon: `box${!student.archived ? '' : '-open'}`,
         dialog: {
           component: StudentArchiveDialogComponent,
           config: {
             ...DIALOG_CONFIG,
             data: {
-              idStudent: this.studentId,
-              student: { ...this.student }
+              idStudent: student.id,
+              student: { ...student }
             }
           }
         }
@@ -171,8 +150,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
           config: {
             ...DIALOG_CONFIG,
             data: {
-              idStudent: this.studentId,
-              student: { ...this.student }
+              idStudent: student.id,
+              student: { ...student }
             }
           }
         }
@@ -180,45 +159,33 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     })
   }
 
-  createDay(): void {
-    // if (this.student.archived) {
-    //   this.toastService.warning({ text: 'MSG.DAY_STUDENT_ARCHIVED' })
-    // } else {
+  createDay(student: any): void {
     const newDay = UtilService.clone(ModelService.dayModel)
-    newDay.student = this.student
+    newDay.student = student
     this.dialog.open(DayCreationComponent, {
       ...DIALOG_CONFIG,
       data: {
         day: newDay,
       }
     })
-    // }
   }
 
-  editStudent() {
-    this.dialog.open(StudentCreationComponent, {
-      ...DIALOG_CONFIG,
-      data: {
-        idStudent: this.studentId,
-        student: { ...this.student }
-      }
-    })
-  }
-
-  quickAction(key: string): void {
-    this.student[key] = !this.student[key]
-    this.studentService.updateStudent(this.studentId, this.studentService.normalizeStudent(this.student))
+  quickAction(student: any, key: string): void {
+    student[key] = !student[key]
+    this.studentService.updateStudent(student.id, this.studentService.normalizeStudent(student))
   }
 
   swipe(e: TouchEvent, when: string): void {
     const coord: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY]
     const time = new Date().getTime()
+    let swipeCoord
+    let swipeTime
     if (when === 'start') {
-      this.swipeCoord = coord
-      this.swipeTime = time
+      swipeCoord = coord
+      swipeTime = time
     } else if (when === 'end') {
-      const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]]
-      const duration = time - this.swipeTime
+      const direction = [coord[0] - swipeCoord[0], coord[1] - swipeCoord[1]]
+      const duration = time - swipeTime
       if (duration < 1000 //
         && Math.abs(direction[0]) > 30 // Long enough
         && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
@@ -248,7 +215,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription$.unsubscribe()
-    this.studentSubscription$.unsubscribe()
+    this.router$.unsubscribe()
   }
 }

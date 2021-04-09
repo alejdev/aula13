@@ -1,4 +1,8 @@
-<section class="container container-nopadd">
+<ng-template #showSkeleton>
+  <!-- <h1>LOADING</h1> -->
+</ng-template>
+
+<section class="container container-nopadd" *ngIf="data$ | async as day else showSkeleton">
   <div class="profile-container">
     <header class="profile-header shadow-bottom p-1 mat-card mat-elevation-z0">
       <div class="container-max sm" *ngIf="day?.student" fxLayout="row" fxLayoutAlign="space-between center">
@@ -24,15 +28,9 @@
 
         <!-- Action button -->
         <div fxLayout="row" fxLayoutAlign="end center">
-          <button class="action-button" mat-icon-button (click)="quickAction('favorite')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
+          <button class="action-button" mat-icon-button (click)="quickAction(day, 'favorite')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
             <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-18 mat-hint" icon="star"></fa-icon>
           </button>
-          <!-- <button class="action-button" mat-icon-button (click)="quickAction('archived')" [matTooltip]="'ARCHIVE_DAY' | translate" [matTooltipShowDelay]="650">
-            <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-18 mat-hint" icon="box"></fa-icon>
-          </button> -->
-          <!-- <button class="action-button" mat-icon-button (click)="editDay($event)" [matTooltip]="'DAY.EDIT' | translate" [matTooltipShowDelay]="650">
-            <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
-          </button> -->
         </div>
       </div>
     </header>

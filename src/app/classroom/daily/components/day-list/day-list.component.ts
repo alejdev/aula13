@@ -1,5 +1,5 @@
-import { Subscription } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { combineLatest, Observable } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
@@ -17,7 +17,7 @@ import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
@@ -27,14 +27,12 @@ import { Router } from '@angular/router'
   styleUrls: ['./day-list.component.scss'],
   providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe]
 })
-export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class DayListComponent implements OnInit, AfterViewChecked {
 
-  dayList: any[]
-  dayListFiltered: any[]
+  data$: Observable<any>
   studentList: any[]
 
-  dayListSubscription$: Subscription
-
+  dayListFiltered: any[]
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   constructor(
@@ -59,33 +57,26 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   async loadData(): Promise<any> {
-    this.loaderService.load()
-
-    const studentList$ = this.studentService.observeStudentList()
     const dayList$ = this.dayService.observeDayList()
+    const studentList$ = this.studentService.observeStudentList()
 
-    this.dayListSubscription$ = studentList$.pipe(
-      map((studentList) => UtilService.mapCollection(studentList)),
-      switchMap((studentList) => {
-        return dayList$.pipe(map((dayList) => {
-          dayList = UtilService.mapCollection(dayList).map((day) => ({
-            ...day,
-            student: studentList.find((student: any) => student.id === day.studentId),
-          }))
-          return { dayList, studentList }
+    this.data$ = combineLatest([dayList$, studentList$]).pipe(
+      tap(() => this.loaderService.load()),
+      map((result) => {
+        this.studentList = UtilService.mapCollection(result[1])
+        return UtilService.mapCollection(result[0]).map((day) => ({
+          ...day,
+          student: this.studentList.find((student: any) => student.id === day.studentId),
         }))
+      }),
+      tap((dayList) => {
+        this.loaderService.down()
+        if (this.dayFilters && dayList.length) {
+          this.dayListFiltered = this.excludeArchivedPipe.transform(dayList, this.dayFilters.showArchived)
+          this.dayFilters.filterList(dayList)
+        }
       })
-    ).subscribe((result: any) => {
-      this.dayList = result.dayList
-      this.studentList = result.studentList
-
-      // Filter the list for first time
-      if (this.dayFilters && this.dayList.length) {
-        this.dayListFiltered = this.excludeArchivedPipe.transform(this.dayList, this.dayFilters.showArchived)
-        this.dayFilters.filterList(this.dayList)
-      }
-      this.loaderService.down()
-    })
+    )
   }
 
   createDay(): void {
@@ -94,15 +85,7 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
         text: 'MSG.DAY_CREATION_DISABLED_NO_STUDENTS',
         action: {
           text: 'ADD_STUDENT',
-          f: () => {
-            this.router.navigate(['/aula/alumnos'])
-            // this.dialog.open(StudentCreationComponent, {
-            //   ...DIALOG_CONFIG,
-            //   data: {
-            //     student: UtilService.clone(ModelService.studenModel)
-            //   }
-            // })
-          }
+          f: () => this.router.navigate(['/aula/alumnos'])
         }
       })
     } else {
@@ -114,9 +97,4 @@ export class DayListComponent implements OnInit, OnDestroy, AfterViewChecked {
       })
     }
   }
-
-  ngOnDestroy(): void {
-    this.dayListSubscription$.unsubscribe()
-  }
-
 }

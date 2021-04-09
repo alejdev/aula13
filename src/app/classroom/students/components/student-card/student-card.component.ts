@@ -5,7 +5,6 @@ import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Input, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
 import { StudentCreationComponent } from '../student-creation/student-creation.component'
@@ -25,7 +24,6 @@ export class StudentComponent implements OnInit {
 
   constructor(
     private studentService: StudentService,
-    private dialog: MatDialog,
     private router: Router
   ) { }
 
