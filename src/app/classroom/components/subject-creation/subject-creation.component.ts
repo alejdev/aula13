@@ -111,7 +111,10 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   }
 
   save(): any {
-    if (this.subjectFormGroup.valid) {
+    if (this.subjectFormGroup.valid && (
+      (this.data.entity.id && !this.subjectFormGroup.pristine) || // Edit && pristine
+      (!this.data.entity.id) // Create or Clone
+    )) {
 
       const subject = {
         name: UtilService.capitalize(this.subjectFormGroup.value.nameCtrl || '')
@@ -146,6 +149,8 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
         .catch((err: any) => {
           this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
+    } else if (this.data.entity.id && this.subjectFormGroup.valid) {// If Edit and valid
+      this.dialogRef.close()
     }
   }
 

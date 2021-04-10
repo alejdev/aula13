@@ -4,7 +4,6 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/de'
 import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
-import _moment, { default as _rollupMoment } from 'moment'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { CKEDITOR_CONFIG } from 'src/app/core/core.module'
 import { ToastService } from 'src/app/shared/services/toast.service'
@@ -18,8 +17,6 @@ import { TranslateService } from '@ngx-translate/core'
 
 import { SettingService } from '../../services/setting.service'
 import { UtilService } from '../../services/util.service'
-
-const moment = _rollupMoment || _moment
 
 @Component({
   selector: 'a13-day-creation',
@@ -91,7 +88,13 @@ export class DayCreationComponent implements OnInit {
   }
 
   save(): void {
-    if (this.dayFormGroup.valid) {
+    // If save, mark as touched for error control in ckeditor
+    this.dayFormGroup.markAsTouched()
+
+    if (this.dayFormGroup.valid && (
+      (this.data.idDay && !this.dayFormGroup.pristine) || // Edit && pristine
+      (!this.data.idDay) // Create or Clone
+    )) {
 
       const day = this.dayService.normalizeDay({
         studentId: this.getStudentId(),
@@ -133,6 +136,8 @@ export class DayCreationComponent implements OnInit {
         .catch((err: any) => {
           this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
+    } else if (this.data.idDay && this.dayFormGroup.valid) {// If Edit and valid
+      this.dialogRef.close()
     }
   }
 

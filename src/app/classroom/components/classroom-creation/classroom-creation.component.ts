@@ -112,7 +112,10 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   }
 
   save(): any {
-    if (this.classroomFormGroup.valid) {
+    if (this.classroomFormGroup.valid && (
+      (this.data.entity.id && !this.classroomFormGroup.pristine) || // Edit && pristine
+      (!this.data.entity.id) // Create or Clone
+    )) {
 
       const classroom = {
         name: UtilService.capitalize(this.classroomFormGroup.value.nameCtrl || '')
@@ -147,6 +150,8 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
         .catch((err: any) => {
           this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
+    } else if (this.data.entity.id && this.classroomFormGroup.valid) {// If Edit and valid
+      this.dialogRef.close()
     }
   }
 

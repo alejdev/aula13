@@ -55,3 +55,15 @@
     box-shadow: 0 0 0 0 rgba(grey, 0);
   }
 }
+
+.rotate-animation svg {
+  animation: rotate-animation 1.3s infinite linear;
+}
+
+@keyframes rotate-animation {
+  0% {}
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

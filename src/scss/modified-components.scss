@@ -22,7 +22,7 @@ mat-form-field {
 ngx-skeleton-loader.skeleton .loader {
   // border-radius: 3px !important;
   outline: 0;
-  
+
   &.circle {
     margin: 0;
   }
@@ -82,6 +82,13 @@ ngx-skeleton-loader.skeleton .loader {
 .angular-editor {
   width: 100%;
   box-sizing: border-box;
+
+  &.ng-invalid.ng-touched {
+
+    .ck-editor__editable {
+      border-color: #f53838 !important;
+    }
+  }
 
   .ck {
 

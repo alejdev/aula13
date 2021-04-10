@@ -148,7 +148,10 @@ export class StudentCreationComponent implements OnInit {
   }
 
   save(): void {
-    if (this.studentFormGroup.valid) {
+    if (this.studentFormGroup.valid && (
+      (this.data.idStudent && !this.studentFormGroup.pristine) || // Edit && pristine
+      (!this.data.idStudent) // Create or Clone
+    )) {
       this.data.student.personal.avatar = this.studentAvatar
 
       const student = this.studentService.normalizeStudent({
@@ -206,6 +209,8 @@ export class StudentCreationComponent implements OnInit {
         .catch((err: any) => {
           this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
+    } else if (this.data.idStudent && this.studentFormGroup.valid) {// If Edit and valid
+      this.dialogRef.close()
     }
   }
 

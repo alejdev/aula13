@@ -23,6 +23,7 @@
         </mat-label>
         <input matInput required formControlName="nameCtrl" attr.aria-label="{{'FORM.SUBJECTS_NAME' | translate}}" autocomplete="off">
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+        <fa-icon *ngIf="validatingName" matSuffix class="mat-icon-20 ml-q  mat-hint rotate-animation" icon="spinner"></fa-icon>
         <mat-error *ngIf="subjectFormGroup.controls.nameCtrl.hasError('nameTaken')">
           {{'ERR.SUBJECT_EXISTS' | translate}}
         </mat-error>
@@ -41,6 +42,7 @@
   <footer class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
     <!-- Action buttons -->
     <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
-    <button class="ml-h" mat-flat-button [color]="data.isClone || !data?.entity?.id ? 'primary' : 'accent'" mat-dialog-close [disabled]="subjectFormGroup.invalid || (subjectFormGroup.pristine && !data.isClone) || validatingName" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data?.entity?.id ? 'SAVE' : 'CREATE_SUBJECT') | translate}}</button>
+    <button class="ml-h" mat-flat-button [color]="data.isClone || !data?.entity?.id ? 'primary' : 'accent'" [disabled]="validatingName" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data?.entity?.id ? 'SAVE' : 'CREATE_SUBJECT') | translate}}
+    </button>
   </footer>
 </form>
