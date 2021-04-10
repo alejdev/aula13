@@ -91,7 +91,7 @@ export class StudentListComponent implements OnInit, AfterViewChecked {
       }),
       tap((studentList) => {
         this.loaderService.down()
-        if (this.studentFilters && studentList.length) {
+        if (this.studentFilters) {
           this.studentListFiltered = UtilService.clone(studentList)
           this.studentFilters.filterList(studentList)
         }

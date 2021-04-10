@@ -73,7 +73,7 @@ export class DayListComponent implements OnInit, AfterViewChecked {
       }),
       tap((dayList) => {
         this.loaderService.down()
-        if (this.dayFilters && dayList.length) {
+        if (this.dayFilters) {
           this.dayListFiltered = this.excludeArchivedPipe.transform(dayList, this.dayFilters.showArchived)
           this.dayFilters.filterList(dayList)
         }
