@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
@@ -29,10 +30,8 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   title = 'Aula 13'
   user: any
 
-  classroomList: any[]
-  subjectList: any[]
-  classroomSubscription: Subscription
-  subjectSubscription: Subscription
+  classroomList$: Subscription
+  subjectList$: Subscription
 
   menuProfile = [{
     name: 'PROFILE',
@@ -88,19 +87,21 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     // Set user
     this.setUserLogged()
 
-    this.classroomSubscription = this.classroomService.observeClassroomList()
-      .subscribe((result: any) => {
-        this.menuItems[0][0].children = UtilService.mapCollection(result)
-          .map((elem) => ({ filter: 'classroomsFilter', ...elem }))
-        this.classroomService.cachedClassrooms = this.menuItems[0][0].children
-      })
+    this.classroomList$ = this.classroomService.observeClassroomList().pipe(
+      map((result) => UtilService.mapCollection(result)
+        .map((elem) => ({ filter: 'classroomsFilter', ...elem })))
+    ).subscribe((classroomList) => {
+      this.menuItems[0][0].children = classroomList
+      this.classroomService.cachedClassrooms = classroomList
+    })
 
-    this.subjectSubscription = this.subjectService.observeSubjectList()
-      .subscribe((result: any) => {
-        this.menuItems[0][1].children = UtilService.mapCollection(result)
-          .map((elem) => ({ filter: 'subjectsFilter', ...elem }))
-        this.subjectService.cachedSubjects = this.menuItems[0][1].children
-      })
+    this.subjectList$ = this.subjectService.observeSubjectList().pipe(
+      map((result) => UtilService.mapCollection(result)
+        .map((elem) => ({ filter: 'subjectsFilter', ...elem })))
+    ).subscribe((subjectList) => {
+      this.menuItems[0][1].children = subjectList
+      this.subjectService.cachedSubjects = subjectList
+    })
   }
 
   async setUserLogged(): Promise<any> {
@@ -149,7 +150,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.classroomSubscription.unsubscribe()
-    this.subjectSubscription.unsubscribe()
+    this.classroomList$.unsubscribe()
+    this.subjectList$.unsubscribe()
   }
 }

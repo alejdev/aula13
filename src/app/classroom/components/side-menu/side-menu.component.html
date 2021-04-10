@@ -37,7 +37,7 @@
             <div *ngIf="item.expanded">
               <ng-container *ngFor="let child of item.children">
                 <a mat-list-item (click)="onItemSelected($event, child)" [ngClass]="{'expanded': child.expanded}">
-                  <span class="mat-hint pl-1 ml-1">{{child?.name}}</span>
+                  <span class="mat-hint pl-1 ml-1 truncate">{{child?.name}}</span>
                   <span fxFlex></span>
                   <button class="action-button"mat-icon-button [matMenuTriggerFor]="menuOptionsId" attr.aria-label="{{'OPTION_MENU' | translate}}" (click)=$event.stopPropagation()>
                     <fa-icon class="mat-hint" icon="ellipsis-v"></fa-icon>
@@ -46,7 +46,7 @@
                 <mat-menu #menuOptionsId="matMenu">
                   <button *ngFor="let option of menuOptions" mat-menu-item (click)="openMenuOption($event, item, child, option)">
                     <fa-icon class="mat-icon-16 mat-hint" [icon]="option.icon"></fa-icon>
-                    <span>{{option.name | translate}}</span>
+                    <span class="truncate">{{option.name | translate}}</span>
                   </button>
                 </mat-menu>
               </ng-container>
