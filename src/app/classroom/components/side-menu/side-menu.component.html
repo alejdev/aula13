@@ -1,20 +1,14 @@
 <div class="sidenav-container">
-  <div class="side-menu-container" fxLayout="column" fxLayoutGap="10px">
+  <div class="side-menu-container" fxLayout="column">
 
-    <!-- User -->
-    <div class="mt-1 mb-2" fxLayout="column" fxLayoutAlign="center center">
-      <a matRipple class="avatar avatar-button border-theme border-theme-button">
-        <img class="avatar-image" [src]="user?.avatar | srcImage" alt="Avatar">
-      </a>
-      <div class="mt-1" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-
-
-      </div>
+    <!-- Logo -->
+    <div class="mt-1 mb-3" fxLayout="column" fxLayoutAlign="center center">
+      <a13-title-logo class="title-logo" [config]="logoConfig"></a13-title-logo>
     </div>
 
     <!-- Menu -->
     <div class="overflow-scroll-container">
-      <mat-nav-list class="m-0 p-0 mb-1 overflow-scroll" *ngFor="let menu of menuItems; index as i">
+      <mat-nav-list class="m-0 p-0 overflow-scroll" *ngFor="let menu of menuItems; index as i">
         <div class="overflow-scroll-content nav-list">
           <ng-container *ngFor="let item of menu">
             <a mat-list-item (click)="onItemSelected($event, item)" [ngClass]="{'active': item.expanded}">
@@ -53,12 +47,7 @@
       </mat-nav-list>
     </div>
 
-    <!-- Configuration -->
-    <mat-nav-list class="m-0 p-0 last-item">
-      <a mat-list-item [routerLink]="[ '/classroom/settings' ]" routerLinkActive="active">
-        <fa-icon class="mat-hint" icon="cog"></fa-icon>
-        <span class="mat-hint pl-h ml-q">{{ 'SETTINGS' | translate}}</span>
-      </a>
-    </mat-nav-list>
+    <!-- Credits -->
+    <a13-credits class="last-item"></a13-credits>
   </div>
 </div>

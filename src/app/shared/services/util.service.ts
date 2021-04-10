@@ -159,4 +159,8 @@ export class UtilService {
     localStorage.removeItem(key)
     return data
   }
+
+  public static getRandomElement(array: any[]): any {
+    return array[Math.floor(Math.random() * array.length)]
+  }
 }

@@ -141,6 +141,18 @@
 		"UNTIL": "Until"
 	},
 	"GENERAL": "General",
+	"GRETTING": {
+		"MSG_1": "Today I want to learn",
+		"MSG_10": "I wish I were a",
+		"MSG_2": "My body is asking for",
+		"MSG_3": "How well my teacher teaches",
+		"MSG_4": "I will invite you to a concert of",
+		"MSG_5": "Interesting, a book in morse about",
+		"MSG_6": "Broke my",
+		"MSG_7": "I once knew a repairman of",
+		"MSG_8": "I have a keychain in the shape of a",
+		"MSG_9": "Sometimes I dream of my"
+	},
 	"HIDE_PASSWORD": "Hide password",
 	"HINT": {
 		"ADD_NEW_PHONE": "Add a new phone",

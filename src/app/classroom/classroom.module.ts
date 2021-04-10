@@ -22,6 +22,7 @@ import { SubjectDeleteDialogComponent } from './components/subject-delete-dialog
 import { TitleLogoComponent } from './components/title-logo/title-logo.component'
 import { DailyModule } from './daily/daily.module'
 import { DayProfileModule } from './day-profile/day-profile.module'
+import { CreditsComponent } from './settings/components/credits/credits.component'
 import { SettingsModule } from './settings/settings.module'
 import { StudentProfileModule } from './student-profile/student-profile.module'
 import { StudentsModule } from './students/students.module'
@@ -43,6 +44,7 @@ import { StudentsModule } from './students/students.module'
     DayDeleteDialogComponent,
     TitleLogoComponent,
     DayArchiveDialogComponent,
+    CreditsComponent,
   ],
   imports: [
     // Routing

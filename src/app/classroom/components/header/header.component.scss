@@ -41,6 +41,7 @@ a.clickable-phone-number {
 .title-logo {
   top: 5px;
   left: calc(100vw/2 - 22px);
+  width: calc(var(--main-header-size) - 10px);
 }
 
 .header-avatar-button {

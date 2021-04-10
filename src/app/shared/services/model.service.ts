@@ -191,6 +191,10 @@ export class ModelService {
     name: ''
   }
 
+  public static grettings: any[] = ['MSG_1', 'MSG_2', 'MSG_3', 'MSG_4', 'MSG_5', 'MSG_6', 'MSG_7', 'MSG_8', 'MSG_9', 'MSG_10']
+
+  public static emojis: any[] = ['🤪', '😂', '😄', '😋', '😙', '😗', '😦', '😬', '🤭', '😨', '🤐', '🥴', '😐', '🤨', '😝', '😍', '🥰', '😇', '🙃']
+
   public static getQuickDatesModel(today: Moment): any[] {
     return [{
       id: 'allTime',

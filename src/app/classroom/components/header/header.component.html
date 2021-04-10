@@ -16,7 +16,9 @@
     <span *ngIf="headerConfig?.length | typeOf:'number'" class="title translucide list-count ml-h"> | {{headerConfig?.length}}</span>
 
     <!-- Logo -->
-    <a13-title-logo class="fixed title-logo" [showLogo]="headerConfig?.showLogo"></a13-title-logo>
+    <a13-title-logo class="fixed title-logo" [config]="logoConfig"></a13-title-logo>
+
+    <!-- Spacer -->
     <span fxFlex></span>
 
     <!-- Seach button -->

@@ -16,6 +16,7 @@ import { ClassroomCreationComponent } from '../classroom-creation/classroom-crea
 import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
 import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
 import { SubjectDeleteDialogComponent } from '../subject-delete-dialog/subject-delete-dialog.component'
+import { LogoConfig } from '../title-logo/title-logo.component'
 
 @Component({
   selector: 'a13-side-menu',
@@ -30,6 +31,15 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   classroomList$: Subscription
   subjectList$: Subscription
+
+  logoConfig: LogoConfig = {
+    showLogo: true,
+    showTagline: true,
+    imageInvertedIfDarkTheme: true,
+    shake: true,
+    color: 'black',
+    size: '80px',
+  }
 
   menuItems = [[{
     name: 'CLASSROOMS',

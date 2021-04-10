@@ -141,6 +141,18 @@
 		"UNTIL": "Jusqu'à"
 	},
 	"GENERAL": "Général",
+	"GRETTING": {
+		"MSG_1": "Aujourd'hui, je veux apprendre le",
+		"MSG_10": "J'aimerais être un",
+		"MSG_2": "Le corps me demande du",
+		"MSG_3": "La qualité de l'enseignement de mon professeur de",
+		"MSG_4": "Je vous invite à un concert de",
+		"MSG_5": "Intéressant, un livre en morse au",
+		"MSG_6": "S'est cassé mon",
+		"MSG_7": "J'ai connu un réparateur de",
+		"MSG_8": "J'ai un porte-clés en forme de",
+		"MSG_9": "Parfois, je rêve de mon"
+	},
 	"HIDE_PASSWORD": "Masquer le mot de passe",
 	"HINT": {
 		"ADD_NEW_PHONE": "Ajouter un nouveau téléphone",

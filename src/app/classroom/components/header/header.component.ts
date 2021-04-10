@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 
 import { HeaderService } from '../../services/header.service'
 import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
+import { LogoConfig } from '../title-logo/title-logo.component'
 
 @Component({
   selector: 'a13-header',
@@ -25,6 +26,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   themeConfigSubscription: Subscription
   headerConfigSubscription: Subscription
+
+  logoConfig: LogoConfig = {
+    shake: true,
+    color: 'transparent'
+  }
 
   menuProfile: any = [{
     name: 'PROFILE',
@@ -61,6 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.headerConfigSubscription = this.headerService.config.subscribe((config: any) => {
       this.headerConfig = config
       this.isTruncated = true
+      this.logoConfig.showLogo = config.showLogo
     })
   }
 

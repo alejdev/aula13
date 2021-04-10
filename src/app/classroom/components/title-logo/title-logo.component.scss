@@ -1,4 +1,11 @@
 .logo-header {
-  width: calc(var(--main-header-size) - 10px);
+  width: 100%;
+  max-width: 100%;
   border-radius: 50%;
+}
+
+.a13-tooltip {
+  text-align: center;
+  color: white !important;
+  background: rgba(50, 50, 50, 0.95) !important;
 }

@@ -141,6 +141,18 @@
 		"UNTIL": "Hasta"
 	},
 	"GENERAL": "General",
+	"GRETTING": {
+		"MSG_1": "Hoy quiero aprender",
+		"MSG_10": "Ojalá ser",
+		"MSG_2": "El cuerpo me pide",
+		"MSG_3": "Qué bien enseña mi profe de",
+		"MSG_4": "Te voy a invitar a un concierto de",
+		"MSG_5": "Interesante, un libro en morse sobre sobre",
+		"MSG_6": "Se me ha roto mi",
+		"MSG_7": "Una vez conocí a un reparador de",
+		"MSG_8": "Tengo un llavero con forma de",
+		"MSG_9": "A veces sueño con mi"
+	},
 	"HIDE_PASSWORD": "Ocultar contraseña",
 	"HINT": {
 		"ADD_NEW_PHONE": "Añade un nuevo teléfono",

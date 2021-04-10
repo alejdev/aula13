@@ -141,6 +141,18 @@
 		"UNTIL": "Bis zu"
 	},
 	"GENERAL": "Allgemeines",
+	"GRETTING": {
+		"MSG_1": "Heute möchte ich lernen",
+		"MSG_10": "Ich wünschte, ich wäre ein",
+		"MSG_2": "Der Körper fragt mich",
+		"MSG_3": "Wie gut mein unterrichtet",
+		"MSG_4": "Ich lade Sie zu einem ein",
+		"MSG_5": "Interessant, ein Buch in Morsezeichen auf dem",
+		"MSG_6": "Ist kaputt mein",
+		"MSG_7": "Ich kannte mal einen mechaniker",
+		"MSG_8": "Ich habe einen Schlüsselanhänger in Form eines",
+		"MSG_9": "Manchmal träume ich von meinem"
+	},
 	"HIDE_PASSWORD": "Passwort verstecken",
 	"HINT": {
 		"ADD_NEW_PHONE": "Fügen Sie ein neues Telefon hinzu",

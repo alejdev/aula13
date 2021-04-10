@@ -117,7 +117,7 @@
     background-color: map-get(map-get($colors, dark-theme), loader);
 
     &.progress:before {
-      background-image: linear-gradient(90deg, rgba(70,70,70,0), rgba(70,70,70,.6), rgba(70,70,70,0));
+      background-image: linear-gradient(90deg, rgba(70, 70, 70, 0), rgba(70, 70, 70, .6), rgba(70, 70, 70, 0));
     }
   }
 
@@ -199,5 +199,9 @@
         }
       }
     }
+  }
+
+  .title-logo img.logo-header.image-inverted {
+    filter: invert(100%);
   }
 }
