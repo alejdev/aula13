@@ -42,3 +42,18 @@ a.clickable-phone-number {
   top: 5px;
   left: calc(100vw/2 - 22px);
 }
+
+.header-avatar-button {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, .35);
+  padding: 3px;
+
+  img {
+    position: relative;
+    top: -2px;
+    width: 100%;
+    border-radius: 50%;
+    vertical-align: inherit;
+  }
+}

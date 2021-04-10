@@ -5,7 +5,6 @@ import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { ModelService } from 'src/app/shared/services/model.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
@@ -15,7 +14,6 @@ import { Router } from '@angular/router'
 import { indicatorRotate } from '../../classroom.animation'
 import { ClassroomCreationComponent } from '../classroom-creation/classroom-creation.component'
 import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
-import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
 import { SubjectDeleteDialogComponent } from '../subject-delete-dialog/subject-delete-dialog.component'
 
@@ -32,16 +30,6 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   classroomList$: Subscription
   subjectList$: Subscription
-
-  menuProfile = [{
-    name: 'PROFILE',
-    icon: 'user',
-    action: () => { this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' }) }
-  }, {
-    name: 'SIGN.OUT',
-    icon: 'sign-out-alt',
-    action: () => { this.dialog.open(LogoutDialogComponent, { ...DIALOG_CONFIG }) }
-  }]
 
   menuItems = [[{
     name: 'CLASSROOMS',
@@ -78,7 +66,6 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     private classroomService: ClassroomService,
     private subjectService: SubjectService,
     private dialog: MatDialog,
-    private toastService: ToastService,
     private router: Router,
   ) { }
 

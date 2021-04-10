@@ -7,16 +7,8 @@
         <img class="avatar-image" [src]="user?.avatar | srcImage" alt="Avatar">
       </a>
       <div class="mt-1" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-        <button mat-button [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger" attr.aria-label="{{'OPTION_MENU' | translate}}" class="action-button">
-          <span class="user-name mr-h">{{ user?.name || user?.email }}</span>
-          <fa-icon class="mat-hint" icon="{{'caret-' + (openStatus.menuOpen ? 'up': 'down')}}"></fa-icon>
-        </button>
-        <mat-menu #menuProfileId="matMenu">
-          <button *ngFor="let option of menuProfile" mat-menu-item (click)="option.action()" [disabled]="option.disabled">
-            <fa-icon class="mat-icon-20 mat-hint" [icon]="option.icon"></fa-icon>
-            <span>{{option.name | translate}}</span>
-          </button>
-        </mat-menu>
+
+        
       </div>
     </div>
 

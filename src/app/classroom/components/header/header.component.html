@@ -11,7 +11,7 @@
     <h2 *ngIf="headerConfig?.title" class="title pt-h pb-h" (click)="truncate()" [ngClass]="{'truncate': isTruncated}">
       {{headerConfig?.title | translate}}
     </h2>
-    
+
     <!-- List length -->
     <span *ngIf="headerConfig?.length | typeOf:'number'" class="title translucide list-count ml-h"> | {{headerConfig?.length}}</span>
 
@@ -45,5 +45,22 @@
       <fa-icon class="mat-icon-18" icon="sign-out-alt"></fa-icon>
     </button>
 
+    <!-- Profile options -->
+    <ng-container *ngIf="headerConfig?.showProfile">
+      <a mat-icon-button class="header-avatar-button action-button" [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger">
+        <img class="header-avatar" [src]="menuProfile?.user?.avatar | srcImage:true" alt="Avatar">
+      </a>
+      <mat-menu #menuProfileId="matMenu">
+        <ng-container *ngFor="let option of menuProfile">
+          <button *ngIf="!option.divider else separator" mat-menu-item (click)="option.action()" [disabled]="option.disabled">
+            <fa-icon class="mat-icon-20 mat-hint" [icon]="option.icon"></fa-icon>
+            <span>{{option.name | translate}}</span>
+          </button>
+          <ng-template #separator>
+            <mat-divider></mat-divider>
+          </ng-template>
+        </ng-container>
+      </mat-menu>
+    </ng-container>
   </div>
 </mat-toolbar>

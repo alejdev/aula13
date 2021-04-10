@@ -68,7 +68,7 @@ export class StudentListComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit(): void {
-    this.headerService.configHeader({ title: 'STUDENTS', showLogo: true })
+    this.headerService.configHeader({ title: 'STUDENTS', showLogo: true, showProfile: true })
     this.loadData()
   }
 

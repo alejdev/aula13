@@ -50,7 +50,7 @@ export class DayListComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit(): void {
-    this.headerService.configHeader({ title: 'DAILY', showLogo: true })
+    this.headerService.configHeader({ title: 'DAILY', showLogo: true, showProfile: true })
     this.loadData()
   }
 

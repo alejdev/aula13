@@ -1,12 +1,15 @@
 import { Subscription } from 'rxjs'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { TypeOfPipe } from 'src/app/shared/pipes/type-of.pipe'
 import { ThemeService } from 'src/app/shared/services/theme.service'
+import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
 import { HeaderService } from '../../services/header.service'
+import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 
 @Component({
   selector: 'a13-header',
@@ -23,14 +26,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
   themeConfigSubscription: Subscription
   headerConfigSubscription: Subscription
 
+  menuProfile: any = [{
+    name: 'PROFILE',
+    icon: 'user',
+    action: () => this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
+  }, {
+    name: 'SETTINGS',
+    icon: 'cog',
+    action: () => this.router.navigate(['/classroom/settings'])
+  },
+  { divider: true },
+  {
+    name: 'SIGN.OUT',
+    icon: 'sign-out-alt',
+    action: () => this.dialog.open(LogoutDialogComponent, { ...DIALOG_CONFIG })
+  }]
+
   constructor(
     private themeService: ThemeService,
     private headerService: HeaderService,
     private dialog: MatDialog,
     private router: Router,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
+
     // Get theme
     this.themeConfigSubscription = this.themeService.theme.subscribe((result: any) => {
       this.themeName = result.isDark ? '' : 'primary'

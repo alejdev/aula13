@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class SrcImagePipe implements PipeTransform {
 
-  transform(value: any, ...args: any[]): any {
-    return `assets/svgs/avatars/${value ? value : 'user-default'}.svg`
+  transform(value: any, white: boolean): any {
+    return `assets/svgs/avatars/${value ? value : `user-default${white ? '-white' : ''}`}.svg`
   }
 
 }
