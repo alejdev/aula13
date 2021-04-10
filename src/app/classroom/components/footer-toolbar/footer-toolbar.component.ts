@@ -11,11 +11,11 @@ export class FooterToolbarComponent implements OnInit {
 
   toolbarItems: any = [{
     name: 'STUDENTS',
-    url: 'alumnos',
+    url: 'students',
     icon: 'user-graduate'
   }, {
     name: 'DAILY',
-    url: 'diario',
+    url: 'daily',
     icon: 'calendar-day'
   }]
 

@@ -20,7 +20,7 @@
 
         <!-- Header info -->
         <div fxLayout="row" fxLayoutAlign="start center">
-          <a class="avatar border-theme mr-h aumente" [routerLink]="[ '/aula/alumno', day?.studentId ]">
+          <a class="avatar border-theme mr-h aumente" [routerLink]="[ '/classroom/student', day?.studentId ]">
             <img class="avatar-image p-0 mr-1" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
           </a>
 
@@ -32,7 +32,7 @@
               <span class="error-color"> {{'ARCHIVED' | translate}} </span>
             </div>
 
-            <a class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/aula/alumno', day?.studentId ]">{{day?.student?.personal?.name}}</a>
+            <a class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/classroom/student', day?.studentId ]">{{day?.student?.personal?.name}}</a>
             <span class="mat-small mat-hint">{{day?.date | date: 'fullDate'}}</span>
           </div>
         </div>

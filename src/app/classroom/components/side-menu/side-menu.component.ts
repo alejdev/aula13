@@ -111,7 +111,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   onItemSelected(ev: Event, item: any): void {
     if (!item.children || !item.children.length) {
-      this.router.navigate(['aula/alumnos'], {
+      this.router.navigate(['classroom/students'], {
         queryParams: { [item.filter]: [item.id], openFilters: true }
       })
     }

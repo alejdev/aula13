@@ -84,7 +84,7 @@ export class StudentComponent implements OnInit {
   }
 
   goTo() {
-    this.router.navigateByUrl(`aula/alumno/${this.student.id}`, {
+    this.router.navigateByUrl(`classroom/student/${this.student.id}`, {
       state: { fromUrl: this.fromUrl }
     })
   }

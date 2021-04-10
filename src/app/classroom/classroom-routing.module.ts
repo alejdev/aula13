@@ -8,22 +8,22 @@ const routes: Routes = [{
   component: ClassroomComponent,
   children: [{
     path: '',
-    redirectTo: 'diario',
+    redirectTo: 'daily',
     pathMatch: 'full'
   }, {
-    path: 'diario',
+    path: 'daily',
     loadChildren: () => import('./daily/daily.module').then(m => m.DailyModule)
   }, {
-    path: 'dia/:id',
+    path: 'day/:id',
     loadChildren: () => import('./day-profile/day-profile.module').then(m => m.DayProfileModule)
   }, {
-    path: 'alumnos',
+    path: 'students',
     loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
   }, {
-    path: 'alumno/:id',
+    path: 'student/:id',
     loadChildren: () => import('./student-profile/student-profile.module').then(m => m.StudentProfileModule)
   }, {
-    path: 'configuracion',
+    path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
   }]
 }]

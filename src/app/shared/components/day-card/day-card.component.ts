@@ -83,7 +83,7 @@ export class DayCardComponent implements OnInit {
   }
 
   goTo() {
-    this.router.navigateByUrl(`aula/dia/${this.day.id}`, {
+    this.router.navigateByUrl(`classroom/day/${this.day.id}`, {
       state: { fromUrl: this.fromUrl }
     })
   }

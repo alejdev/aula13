@@ -9,13 +9,13 @@ const routes: Routes = [{
   loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule),
   canActivate: [NoAuthGuard]
 }, {
-  path: 'aula',
+  path: 'classroom',
   loadChildren: () => import('./classroom/classroom.module').then(m => m.ClassroomModule),
   canActivate: [AuthGuard]
 }, {
-  path: '', redirectTo: 'aula', pathMatch: 'full'
+  path: '', redirectTo: 'classroom', pathMatch: 'full'
 }, {
-  path: '**', redirectTo: 'aula'
+  path: '**', redirectTo: 'classroom'
 }]
 
 @NgModule({

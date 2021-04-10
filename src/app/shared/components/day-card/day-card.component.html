@@ -20,12 +20,12 @@
     <div class="student-container mr--q" fxLayout="row" fxLayoutAlign="end center">
 
       <!-- Name -->
-      <a *ngIf="!day?.hideStudent && day?.student" [routerLink]="[ '/aula/alumno', day?.student?.id ]" [state]="{ fromUrl: router.url }" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
+      <a *ngIf="!day?.hideStudent && day?.student" [routerLink]="[ '/classroom/student', day?.student?.id ]" [state]="{ fromUrl: router.url }" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
 
       <!-- Avatar -->
       <div *ngIf="!day?.hideStudent && day?.student" fxLayout="row" fxLayoutAlign="end center" class="avatar-container ml-h" [ngClass]="{archived: day?.student?.archived}">
         <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived}" class="mat-icon-16 mat-hint mr-h" icon="box"></fa-icon>
-        <a [routerLink]="[ '/aula/alumno', day?.student?.id ]">
+        <a [routerLink]="[ '/classroom/student', day?.student?.id ]">
           <img class="avatar avatar-xs p-0 aumente aumente-big" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
         </a>
       </div>

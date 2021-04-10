@@ -134,7 +134,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
           const navigateTo = {
             text: 'SEE',
-            route: ['aula/alumnos'],
+            route: ['classroom/students'],
             queryParams: { classroomsFilter: [this.classroom.id], openFilters: true }
           }
 

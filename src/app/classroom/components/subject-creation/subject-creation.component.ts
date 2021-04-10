@@ -133,7 +133,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
 
           const navigateTo = {
             text: 'SEE',
-            route: ['aula/alumnos'],
+            route: ['classroom/students'],
             queryParams: { subjectsFilter: [this.subject.id], openFilters: true }
           }
 

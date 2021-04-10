@@ -87,7 +87,7 @@ export class DayListComponent implements OnInit, AfterViewChecked {
         text: 'MSG.DAY_CREATION_DISABLED_NO_STUDENTS',
         action: {
           text: 'ADD_STUDENT',
-          f: () => this.router.navigate(['/aula/alumnos'])
+          f: () => this.router.navigate(['/classroom/students'])
         }
       })
     } else {

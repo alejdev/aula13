@@ -190,7 +190,7 @@ export class StudentCreationComponent implements OnInit {
           if (result && result.id) { // Create
             this.toastService.success({
               text: 'MSG.STUDENT_CREATE_OK',
-              navigate: { text: 'SEE', route: ['aula/alumno', result.id] }
+              navigate: { text: 'SEE', route: ['classroom/student', result.id] }
             })
           } else {// Modify
             if (routeId && routeId[1] === this.data.idStudent) {
@@ -198,7 +198,7 @@ export class StudentCreationComponent implements OnInit {
             } else {
               this.toastService.success({
                 text: 'MSG.STUDENT_UPDATE_OK',
-                navigate: { text: 'SEE', route: ['aula/alumno', this.data.idStudent] }
+                navigate: { text: 'SEE', route: ['classroom/student', this.data.idStudent] }
               })
             }
           }

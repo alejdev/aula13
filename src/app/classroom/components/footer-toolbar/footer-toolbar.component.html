@@ -3,7 +3,7 @@
 
     <!-- Items -->
     <ng-container *ngFor="let item of toolbarItems">
-      <button class="menu-button action-button" mat-icon-button [routerLink]="[ '/aula/' + item?.url ]" attr.aria-label="{{item?.name | translate}}" routerLinkActive="active" [matTooltip]="item?.name | translate" [matTooltipShowDelay]="650">
+      <button class="menu-button action-button" mat-icon-button [routerLink]="[ '/classroom/' + item?.url ]" attr.aria-label="{{item?.name | translate}}" routerLinkActive="active" [matTooltip]="item?.name | translate" [matTooltipShowDelay]="650">
         <fa-icon class="mat-hint mat-icon-22" [icon]="item.icon"></fa-icon>
       </button>
     </ng-container>

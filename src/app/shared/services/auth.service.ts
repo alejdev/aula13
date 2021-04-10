@@ -72,7 +72,7 @@ export class AuthService {
     this.loaderService.load()
     return this.angularFireAuth.auth.signInWithEmailAndPassword(control.email, control.password)
       .then((auth: any) => {
-        this.router.navigate(['aula'])
+        this.router.navigate(['classroom'])
         this.toastService.welcome({ user: auth })
       })
       .catch(this.error)
@@ -122,7 +122,7 @@ export class AuthService {
         name: data.displayName
       })
       .then((auth: any) => {
-        this.router.navigate(['aula'])
+        this.router.navigate(['classroom'])
         this.toastService.welcome({ user: auth })
       })
       .catch(this.error)

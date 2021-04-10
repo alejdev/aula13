@@ -115,7 +115,7 @@ export class DayCreationComponent implements OnInit {
           if (result && result.id) {// Create
             this.toastService.success({
               text: 'MSG.DAY_CREATE_OK',
-              navigate: { text: 'SEE', route: ['aula/dia', result.id] }
+              navigate: { text: 'SEE', route: ['classroom/day', result.id] }
             })
           } else {// Modify
             if (routeId && routeId[1] === this.data.idDay) {
@@ -123,7 +123,7 @@ export class DayCreationComponent implements OnInit {
             } else {
               this.toastService.success({
                 text: 'MSG.DAY_UPDATE_OK',
-                navigate: { text: 'SEE', route: ['aula/dia', this.data.idDay] }
+                navigate: { text: 'SEE', route: ['classroom/day', this.data.idDay] }
               })
             }
           }
