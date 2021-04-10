@@ -8,9 +8,10 @@
     </div>
     <mat-select formControlName="studentCtrl" attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}" [compareWith]="equals">
       <mat-option *ngFor="let student of data$ | async" [value]="student">
-        <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span [ngClass]="{'archived-student': student?.archived}" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
           <img class="avatar avatar-xs p-0 mr-h" [src]="student.personal?.avatar | srcImage" alt="Avatar">
           <span>
+            <fa-icon *ngIf="student?.archived" class="mat-icon-14 error-color mr-q" icon="box"></fa-icon>
             <fa-icon *ngIf="student?.favorite" class="mat-icon-14 star-active mr-q" icon="star"></fa-icon>
             {{student?.personal?.name}}
           </span>
