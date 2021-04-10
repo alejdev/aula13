@@ -43,6 +43,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
 
   selectedTab: number = 0
   tabCount: number = 2
+  swipeCoord: [number, number]
+  swipeTime: number
 
   skeleton: any = SKELETON_CONFIG
   moreInfoConfig: any = {
@@ -179,14 +181,12 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   swipe(e: TouchEvent, when: string): void {
     const coord: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY]
     const time = new Date().getTime()
-    let swipeCoord
-    let swipeTime
     if (when === 'start') {
-      swipeCoord = coord
-      swipeTime = time
+      this.swipeCoord = coord
+      this.swipeTime = time
     } else if (when === 'end') {
-      const direction = [coord[0] - swipeCoord[0], coord[1] - swipeCoord[1]]
-      const duration = time - swipeTime
+      const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]]
+      const duration = time - this.swipeTime
       if (duration < 1000 //
         && Math.abs(direction[0]) > 30 // Long enough
         && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
