@@ -104,7 +104,9 @@ export class DayProfileComponent implements OnInit, OnDestroy {
             }
           }
         }
-      }, {
+      },
+      { divider: true },
+      {
         name: 'DAY.DELETE',
         icon: 'trash',
         dialog: {

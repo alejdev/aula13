@@ -9,7 +9,7 @@ import localeIt from '@angular/common/locales/it'
 import { LOCALE_ID, NgModule } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { MAT_DATE_FORMATS, MatSlideToggleModule, MatTooltipModule } from '@angular/material'
+import { MAT_DATE_FORMATS, MatDividerModule, MatSlideToggleModule, MatTooltipModule } from '@angular/material'
 import { MomentDateAdapter } from '@angular/material-moment-adapter'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
@@ -117,6 +117,7 @@ registerLocaleData(localeFr, 'fr')
     MatSlideToggleModule,
     MatTooltipModule,
     MatMenuModule,
+    MatDividerModule,
 
     // Third parties
     FlexLayoutModule,
@@ -147,6 +148,7 @@ registerLocaleData(localeFr, 'fr')
     MatMenuModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatDividerModule,
 
     // Third parties
     FlexLayoutModule,

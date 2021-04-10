@@ -55,7 +55,9 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     id: 'edit',
     name: 'EDIT_ELEMENT',
     icon: 'pen'
-  }, {
+  },
+  { divider: true },
+  {
     id: 'delete',
     name: 'DELETE_ELEMENT',
     icon: 'trash'

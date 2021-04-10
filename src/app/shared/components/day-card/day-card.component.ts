@@ -67,7 +67,9 @@ export class DayCardComponent implements OnInit {
           }
         }
       }
-    }, {
+    },
+    { divider: true },
+    {
       name: 'DAY.DELETE',
       icon: 'trash',
       dialog: {

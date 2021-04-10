@@ -2,6 +2,8 @@ import { StudentArchiveDialogComponent } from 'src/app/classroom/components/stud
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
+import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Input, OnInit } from '@angular/core'
@@ -20,7 +22,7 @@ export class StudentComponent implements OnInit {
   @Input() fromUrl: string = null
   mark: any = UtilService.mark
 
-  menuOptions: any = {}
+  menuOptions: any
 
   constructor(
     private studentService: StudentService,
@@ -29,6 +31,20 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuOptions = [{
+      name: 'DAY.ADD',
+      icon: 'edit',
+      dialog: {
+        component: DayCreationComponent,
+        config: {
+          ...DIALOG_CONFIG,
+          data: {
+            day: { ...ModelService.dayModel, student: this.student }
+          }
+        }
+      }
+    },
+    { divider: true },
+    {
       name: 'EDIT_STUDENT',
       icon: 'pen',
       dialog: {
@@ -67,7 +83,9 @@ export class StudentComponent implements OnInit {
           }
         }
       }
-    }, {
+    },
+    { divider: true },
+    {
       name: 'STUDENT_DELETE',
       icon: 'trash',
       dialog: {

@@ -145,7 +145,9 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
             }
           }
         }
-      }, {
+      },
+      { divider: true },
+      {
         name: 'STUDENT_DELETE',
         icon: 'trash',
         dialog: {

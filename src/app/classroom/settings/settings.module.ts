@@ -1,7 +1,6 @@
 import { SharedModule } from 'src/app/shared/shared.module'
 
 import { NgModule } from '@angular/core'
-import { MatDividerModule } from '@angular/material/divider'
 
 import { ConfigurationComponent } from './components/configuration/configuration.component'
 import { CreditsComponent } from './components/credits/credits.component'
@@ -17,10 +16,7 @@ import { SettingsRoutingModule } from './settings-routing.module'
     SettingsRoutingModule,
 
     // App modules
-    SharedModule,
-
-    // Material
-    MatDividerModule
+    SharedModule
   ]
 })
 export class SettingsModule { }
