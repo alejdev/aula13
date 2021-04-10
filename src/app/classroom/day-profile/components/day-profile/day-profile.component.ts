@@ -51,7 +51,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
       tap((day) => {
         this.loaderService.down()
         if (!day) {
-          this.router.navigateByUrl(history.state.fromUrl)
+          this.router.navigateByUrl(history.state.fromUrl ? history.state.fromUrl : 'classroom/daily')
           return
         }
         this.configHeader(day)

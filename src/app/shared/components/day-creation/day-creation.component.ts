@@ -17,6 +17,7 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-classic'
 import { TranslateService } from '@ngx-translate/core'
 
 import { SettingService } from '../../services/setting.service'
+import { UtilService } from '../../services/util.service'
 
 const moment = _rollupMoment || _moment
 
@@ -110,7 +111,7 @@ export class DayCreationComponent implements OnInit {
 
       setDay
         .then((result: any) => {
-          const routeId = this.router.url.match(/\/.*\/.*\/(.*)/)
+          this.dialogRef.close(result)
 
           if (result && result.id) {// Create
             this.toastService.success({
@@ -118,6 +119,7 @@ export class DayCreationComponent implements OnInit {
               navigate: { text: 'SEE', route: ['classroom/day', result.id] }
             })
           } else {// Modify
+            const routeId = this.router.url.match(UtilService.regExp.idInUrl)
             if (routeId && routeId[1] === this.data.idDay) {
               this.toastService.success({ text: 'MSG.DAY_UPDATE_OK' })
             } else {

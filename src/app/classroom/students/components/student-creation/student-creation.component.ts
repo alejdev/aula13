@@ -184,8 +184,7 @@ export class StudentCreationComponent implements OnInit {
 
       setStudent
         .then((result: any) => {
-          this.dialogRef.close(this.data.student)
-          const routeId = this.router.url.match(/\/.*\/.*\/(.*)/)
+          this.dialogRef.close(result)
 
           if (result && result.id) { // Create
             this.toastService.success({
@@ -193,6 +192,7 @@ export class StudentCreationComponent implements OnInit {
               navigate: { text: 'SEE', route: ['classroom/student', result.id] }
             })
           } else {// Modify
+            const routeId = this.router.url.match(UtilService.regExp.idInUrl)
             if (routeId && routeId[1] === this.data.idStudent) {
               this.toastService.success({ text: 'MSG.STUDENT_UPDATE_OK' })
             } else {

@@ -86,7 +86,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
       tap((result) => {
         this.loaderService.down()
         if (!result.student) {
-          this.router.navigateByUrl(history.state.fromUrl)
+          this.router.navigateByUrl(history.state.fromUrl ? history.state.fromUrl : 'classroom/students')
           return
         }
         this.configHeader(result.student)
