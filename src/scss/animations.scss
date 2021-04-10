@@ -1,20 +1,20 @@
 @import "scss/variables";
 
-.pulse {
+.pulse-animation {
   animation-duration: 1.6s;
   animation-iteration-count: infinite;
   animation-delay: 1s;
 
   &:not(.disabled) {
-    animation-name: pulse, pulse-main;
+    animation-name: pulse-animation, pulse-main;
   }
 
   &.disabled {
-    animation-name: pulse, pulse-disable;
+    animation-name: pulse-animation, pulse-disable;
   }
 }
 
-@keyframes pulse {
+@keyframes pulse-animation {
   0% {
     transform: scale(1);
   }

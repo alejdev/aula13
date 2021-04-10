@@ -11,11 +11,11 @@
   animation-iteration-count: infinite;
 
   &:hover {
-    animation-name: pulse, pulse-main;
+    animation-name: pulse-animation, pulse-main;
   }
 
   &.disabled:hover {
-    animation-name: pulse, pulse-disable;
+    animation-name: pulse-animation, pulse-disable;
   }
 
   fa-icon {
