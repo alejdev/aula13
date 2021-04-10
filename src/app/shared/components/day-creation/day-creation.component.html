@@ -42,7 +42,7 @@
     </mat-form-field>
 
     <!-- Content -->
-    <div class="angular-editor mt-1 pt-h pb-h padding-content-h" [ngClass]="{'ng-invalid': this.dayFormGroup.controls.dayContentCtrl.invalid, 'ng-touched': this.dayFormGroup.controls.dayContentCtrl.touched || this.dayFormGroup.touched}">
+    <div class="angular-editor mt-1 pt-h pb-h padding-content-h" [ngClass]="{'ng-invalid': this.dayFormGroup.controls.dayContentCtrl.invalid, 'ng-touched': this.dayFormGroup.controls.dayContentCtrl.touched}">
       <ckeditor id="ckeditor" [editor]="ckeditor" [config]="editorConfig" formControlName="dayContentCtrl">
       </ckeditor>
     </div>
