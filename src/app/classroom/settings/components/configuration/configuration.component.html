@@ -52,7 +52,7 @@
     <h3 class="mat-h2 mat-hint">{{'BEHAVIOR.TITLE' | translate}}</h3>
 
     <div class="mb-2" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
-      <fa-icon class="mat-icon-20 color-primary color-primary" icon="stream"></fa-icon>
+      <fa-icon class="mat-icon-20 color-primary color-primary" [icon]="canPanSideMenu ? 'stream' : 'bars'"></fa-icon>
       <div fxLayout="column">
         <mat-slide-toggle labelPosition="before" (change)="togglePanSideMenu()" [(ngModel)]="canPanSideMenu">
           {{'BEHAVIOR.PAN_SIDEMENU' | translate}}

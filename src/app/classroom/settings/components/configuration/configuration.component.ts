@@ -68,6 +68,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   getFlag(lang: any): string {
     return `/assets/svgs/flags/${lang.id}.svg`
   }
+
   toggleTheme(): void {
     this.themeService.toggleTheme()
   }
