@@ -204,14 +204,14 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: #888;
-  border-radius: map-get(map-get($sizes, main), scroll-size) * 2;
+  border-radius: 2px;
   border-width: 0;
   border-style: solid;
   border-color: transparent;
 }
 
 ::-webkit-scrollbar-track {
-  border-radius: map-get(map-get($sizes, main), scroll-size) * 2;
+  border-radius: 2px;
 }
 
 // Overflow scroll
