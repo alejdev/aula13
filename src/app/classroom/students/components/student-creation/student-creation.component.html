@@ -22,7 +22,7 @@
       <div class="mb-q" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
 
         <!-- Avatar -->
-        <a13-pickup-image ngClass.xs="full-avatar mb-1 pb-h" class="avatar-selected" [(image)]="studentAvatar" [imageList]="avatars" fxFlex="20">
+        <a13-pickup-image ngClass.xs="full-avatar mb-1 pb-h" class="avatar-selected" [(image)]="studentAvatar" [imageList]="avatars" fxFlex="20" (click)="markFormAsDirty()">
         </a13-pickup-image>
 
         <div class="mb-q full" fxLayout="column" fxLayoutAlign="start" fxFlex="80">

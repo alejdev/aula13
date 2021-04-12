@@ -150,12 +150,16 @@ export class StudentCreationComponent implements OnInit {
   }
 
   toggleBooleanCrl(control: string): void {
+    this.markFormAsDirty()
+    const formCtrl = this.studentFormGroup.get('booleanFormGroup').get(control)
+    formCtrl.setValue(!formCtrl.value)
+  }
+
+  markFormAsDirty(): void {
     if (!this.studentFormGroup.dirty) {
       this.studentFormGroup.markAsDirty()
       this.studentFormGroup.markAsTouched()
     }
-    const formCtrl = this.studentFormGroup.get('booleanFormGroup').get(control)
-    formCtrl.setValue(!formCtrl.value)
   }
 
   save(): void {
