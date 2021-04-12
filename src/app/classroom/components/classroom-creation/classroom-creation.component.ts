@@ -141,10 +141,12 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
             queryParams: { classroomsFilter: [this.classroom.id], openFilters: true }
           }
 
-          if (result && result.id) {// Create
-            this.toastService.success({ text: 'MSG.CLASSROOM_CREATE_OK', navigate: navigateTo })
-          } else {// Modify
-            this.toastService.success({ text: 'MSG.CLASSROOM_UPDATE_OK', navigate: navigateTo })
+          if (!this.data.noToast) {
+            if (result && result.id) {// Create
+              this.toastService.success({ text: 'MSG.CLASSROOM_CREATE_OK', navigate: navigateTo })
+            } else {// Modify
+              this.toastService.success({ text: 'MSG.CLASSROOM_UPDATE_OK', navigate: navigateTo })
+            }
           }
         })
         .catch((err: any) => {

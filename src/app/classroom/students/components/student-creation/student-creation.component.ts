@@ -1,18 +1,21 @@
-import _moment, { default as _rollupMoment } from 'moment'
+import _moment from 'moment'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { ClassroomCreationComponent } from 'src/app/classroom/components/classroom-creation/classroom-creation.component'
+import { SubjectCreationComponent } from 'src/app/classroom/components/subject-creation/subject-creation.component'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { DIALOG_CONFIG } from 'src/app/core/core.module'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, ElementRef, Inject, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material'
 import { Router } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
-
-const moment = _rollupMoment || _moment
 
 @Component({
   selector: 'a13-student-creation',
@@ -26,9 +29,10 @@ export class StudentCreationComponent implements OnInit {
   academicCourses: any[]
   conservatoryCourses: any[]
   instruments: any[]
-  classroomList: any[]
-  subjectList: any[]
   arrayPhones: any = {}
+
+  classroomList$: Observable<any>
+  subjectList$: Observable<any>
 
   studentFormGroup: FormGroup
   student: any
@@ -45,19 +49,26 @@ export class StudentCreationComponent implements OnInit {
     private classroomService: ClassroomService,
     private toastService: ToastService,
     private translateService: TranslateService,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<StudentCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
+    this.classroomList$ = this.classroomService.observeClassroomList()
+      .pipe(map((result) => UtilService.mapCollection(result)))
+    this.subjectList$ = this.subjectService.observeSubjectList()
+      .pipe(map((result) => UtilService.mapCollection(result)))
 
+    this.generateForm()
+  }
+
+  generateForm(): void {
     this.ages = ModelService.ageList
     this.avatars = ModelService.avatarList
     this.academicCourses = ModelService.academicCourseList
     this.conservatoryCourses = ModelService.conservatoryCourseList
     this.instruments = ModelService.instrumentList
-    this.classroomList = this.classroomService.cachedClassrooms
-    this.subjectList = this.subjectService.cachedSubjects
 
     this.student = this.data.student
     this.studentAvatar = this.student.personal.avatar
@@ -211,7 +222,29 @@ export class StudentCreationComponent implements OnInit {
         })
     } else if (this.data.idStudent && this.studentFormGroup.valid) {// If Edit and valid
       this.dialogRef.close()
+    } else if (this.studentFormGroup.invalid) { // ScrollTop if errors
+      document.querySelector('section.dialog-content').scrollTop = 0
     }
+  }
+
+  createClassroom(): void {
+    this.dialog.open(ClassroomCreationComponent, {
+      ...DIALOG_CONFIG,
+      data: {
+        entity: UtilService.clone(ModelService.classroomModel),
+        noToast: true
+      }
+    })
+  }
+
+  createSubject(): void {
+    this.dialog.open(SubjectCreationComponent, {
+      ...DIALOG_CONFIG,
+      data: {
+        entity: UtilService.clone(ModelService.subjectModel),
+        noToast: true
+      }
+    })
   }
 
   cancel(): void {

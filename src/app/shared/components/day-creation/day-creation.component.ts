@@ -138,6 +138,8 @@ export class DayCreationComponent implements OnInit {
         })
     } else if (this.data.idDay && this.dayFormGroup.valid) {// If Edit and valid
       this.dialogRef.close()
+    } else if (this.dayFormGroup.invalid) { // ScrollTop if errors
+      document.querySelector('section.dialog-content').scrollTop = 0
     }
   }
 

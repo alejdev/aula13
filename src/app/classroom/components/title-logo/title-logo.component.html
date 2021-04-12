@@ -1,5 +1,5 @@
 <div class="title-logo" fxLayoutAlign="start center">
-  <h1 *ngIf="showTitle" class="header-main-title mr-h"> {{ 'CLASSROOM.NAME' | translate }} </h1>
+  <h1 *ngIf="config.showTitle" class="header-main-title mr-h"> {{ 'CLASSROOM.NAME' | translate }} </h1>
   <div fxLayout="column" fxLayoutAlign="center center">
     <img *ngIf="config.showLogo" alt="{{ 'APP_TITLE' | translate }}" class="logo-header" [ngClass]="{'shake-animation': config.shake, 'image-inverted': config.imageInvertedIfDarkTheme}" [ngStyle]="{width: config.size ? config.size : '100%', height: config.size ? config.size : '100%'}" [src]="'/assets/svgs/logo-' + config.color + '.svg'" #tooltip="matTooltip" [matTooltip]="" matTooltipPosition="below" matTooltipClass="a13-tooltip" (click)="toggleTooltip(tooltip)" (mouseenter)="$event.stopImmediatePropagation()" (mouseleave)="$event.stopImmediatePropagation()">
     <span *ngIf="config.showTagline" class="mat-hint mat-small txt-uppercase txt-bold">{{'APP_TITLE' | translate}}</span>

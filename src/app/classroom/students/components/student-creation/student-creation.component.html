@@ -168,29 +168,54 @@
       <h3 class="mat-h2 mat-hint">{{'CLASSROOM.NAME' | translate}}</h3>
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap=".5rem">
+
         <!-- Classroom -->
-        <mat-form-field class="mb-1" [appearance]="'inputAppearance' | settingValue" fxFlex="50" fxFlex.xs="100">
-          <mat-label>{{'CLASSROOMS' | translate}}</mat-label>
-          <mat-select formControlName="classroomsCtrl" multiple attr.aria-label="{{'CLASSROOMS' | translate}}">
-            <mat-option *ngFor="let classroom of classroomList" [value]="classroom.id">
-              {{classroom.name}}
-            </mat-option>
-          </mat-select>
-          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="chalkboard"></fa-icon>
-          <mat-hint align="start">{{'HINT.CLASSROOM' | translate}}</mat-hint>
-        </mat-form-field>
+        <div class="mb-1" fxLayout="column" fxFlex="50" fxFlex.xs="100">
+          <ng-container *ngIf="classroomList$ | async as classroomList">
+            <mat-form-field *ngIf="classroomList.length" [appearance]="'inputAppearance' | settingValue">
+              <mat-label>{{'CLASSROOMS' | translate}}</mat-label>
+              <mat-select formControlName="classroomsCtrl" multiple attr.aria-label="{{'CLASSROOMS' | translate}}">
+                <mat-option *ngFor="let classroom of classroomList" [value]="classroom.id">
+                  {{classroom.name}}
+                </mat-option>
+              </mat-select>
+              <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="chalkboard"></fa-icon>
+              <mat-hint align="start">{{'HINT.CLASSROOM' | translate}}</mat-hint>
+            </mat-form-field>
+          </ng-container>
+
+          <!-- Add new Classroom -->
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button class="button-text-icon" mat-flat-button attr.arial-label="{{'CREATE_CLASSROOM' | translate}}" (click)="createClassroom()">
+              <span class="text-button mat-hint mr-1">{{'CREATE_CLASSROOM' | translate}}</span>
+              <fa-icon class="mat-icon-18" icon="plus"></fa-icon>
+            </button>
+          </div>
+        </div>
 
         <!-- Subjects -->
-        <mat-form-field class="mb-1" [appearance]="'inputAppearance' | settingValue" fxFlex="50" fxFlex.xs="100">
-          <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
-          <mat-select formControlName="subjectsCtrl" multiple attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
-            <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
-              {{subject.name}}
-            </mat-option>
-          </mat-select>
-          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="book"></fa-icon>
-          <mat-hint align="start">{{'HINT.SUBJECTS' | translate}}</mat-hint>
-        </mat-form-field>
+        <div class="mb-1" fxLayout="column" fxFlex="50" fxFlex.xs="100">
+          <ng-container *ngIf="subjectList$ | async as subjectList">
+            <mat-form-field *ngIf="subjectList.length" [appearance]="'inputAppearance' | settingValue">
+              <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
+              <mat-select formControlName="subjectsCtrl" multiple attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
+                <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
+                  {{subject.name}}
+                </mat-option>
+              </mat-select>
+              <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="book"></fa-icon>
+              <mat-hint>{{'HINT.SUBJECTS' | translate}}</mat-hint>
+            </mat-form-field>
+          </ng-container>
+
+          <!-- Add new Subject -->
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button class="button-text-icon" mat-flat-button attr.arial-label="{{'CREATE_SUBJECT' | translate}}" (click)="createSubject()">
+              <span class="text-button mat-hint mr-1">{{'CREATE_SUBJECT' | translate}}</span>
+              <fa-icon class="mat-icon-18" icon="plus"></fa-icon>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
