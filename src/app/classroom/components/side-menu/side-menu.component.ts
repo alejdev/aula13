@@ -65,6 +65,10 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     id: 'edit',
     name: 'EDIT_ELEMENT',
     icon: 'pen'
+  }, {
+    id: 'clone',
+    name: 'CLONE_ELEMENT',
+    icon: 'copy'
   },
   { divider: true },
   {
@@ -131,20 +135,33 @@ export class SideMenuComponent implements OnInit, OnDestroy {
 
   openMenuOption(ev: Event, item: any, child: any, option: any): void {
     ev.stopImmediatePropagation()
-    if (option.id === 'edit') {
-      this.dialog.open(item.create, {
-        ...DIALOG_CONFIG,
-        data: {
-          entity: child
-        }
-      })
-    } else {
-      this.dialog.open(item.delete, {
-        ...DIALOG_CONFIG,
-        data: {
-          entity: child
-        }
-      })
+
+    switch (option.id) {
+      case 'edit':
+        this.dialog.open(item.create, {
+          ...DIALOG_CONFIG,
+          data: {
+            entity: child
+          }
+        })
+        break
+      case 'clone':
+        this.dialog.open(item.create, {
+          ...DIALOG_CONFIG,
+          data: {
+            entity: child,
+            isClone: true
+          }
+        })
+        break
+      default:
+        this.dialog.open(item.delete, {
+          ...DIALOG_CONFIG,
+          data: {
+            entity: child
+          }
+        })
+        break
     }
   }
 

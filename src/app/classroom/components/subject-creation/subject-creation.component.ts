@@ -40,7 +40,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
 
     // Init form controls
     this.subjectFormGroup = this.formBuilder.group({
-      nameCtrl: [this.subject.name || '', Validators.required],
+      nameCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${this.subject.name}` : this.subject.name || '', Validators.required],
       studentListCtrl: [this.studentIdList || []]
     })
     // Listen name changes
@@ -78,6 +78,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
     const students = await this.studentService.queryEnrrolledStudents('classroom.subjects', this.subject.id)
     this.studentIdList = students.map((student: any) => student.id)
     this.subjectFormGroup.controls.studentListCtrl.setValue(this.studentIdList)
+    if (this.data.isClone) { delete this.subject.id }
   }
 
   formatStudentIdList(): any[] {

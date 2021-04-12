@@ -40,7 +40,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
     // Init form controls
     this.classroomFormGroup = this.formBuilder.group({
-      nameCtrl: [this.classroom.name || '', Validators.required],
+      nameCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${this.classroom.name}` : this.classroom.name, Validators.required],
       studentListCtrl: [this.studentIdList || []]
     })
 
@@ -79,6 +79,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
     const students = await this.studentService.queryEnrrolledStudents('classroom.classrooms', this.classroom.id)
     this.studentIdList = students.map((student: any) => student.id)
     this.classroomFormGroup.controls.studentListCtrl.setValue(this.studentIdList)
+    if (this.data.isClone) { delete this.classroom.id }
   }
 
   formatStudentIdList(): any[] {

@@ -160,7 +160,15 @@ export class UtilService {
     return data
   }
 
+  // Return a random element of a array
   public static getRandomElement(array: any[]): any {
     return array[Math.floor(Math.random() * array.length)]
+  }
+
+  // Return a copy of a object without id
+  public static removeId(object: any): any {
+    if (!object) { return {} }
+    delete object.id
+    return object
   }
 }
