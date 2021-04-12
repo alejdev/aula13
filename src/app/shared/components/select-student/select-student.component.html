@@ -1,4 +1,9 @@
-<ng-container *ngIf="data$ | async as studentList">
+<!-- Skeleton -->
+<ng-template #selectStudentSkeleton>
+  <ngx-skeleton-loader class="skeleton" [animation]="skeleton.animation" [theme]="skeleton.search.theme"></ngx-skeleton-loader>
+</ng-template>
+
+<ng-container *ngIf="data$ | async as studentList" else selectStudentSkeleton>
   <div [formGroup]="studentFormGroup" *ngIf="studentList.length">
 
     <!-- Select simple -->
