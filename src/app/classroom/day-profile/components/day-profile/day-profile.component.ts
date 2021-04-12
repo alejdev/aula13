@@ -11,6 +11,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
@@ -31,7 +32,8 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     private dayService: DayService,
     private studentService: StudentService,
     private headerService: HeaderService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -119,6 +121,16 @@ export class DayProfileComponent implements OnInit, OnDestroy {
           }
         }
       }]
+    })
+  }
+
+  tapToEdit(day: any): void {
+    this.dialog.open(DayCreationComponent, {
+      ...DIALOG_CONFIG,
+      data: {
+        idDay: day.id,
+        day: { ...day }
+      }
     })
   }
 

@@ -20,7 +20,7 @@
 
         <!-- Avatar -->
         <a flex="grow" matRipple class="avatar border-theme">
-          <img class="avatar-image" [src]="student?.personal?.avatar | srcImage" alt="{{student?.personal?.avatar}}">
+          <img class="avatar-image" [src]="student?.personal?.avatar | srcImage" alt="{{student?.personal?.avatar}}" (click)="tapToEdit(student)">
         </a>
 
         <!-- Fav button -->
@@ -31,7 +31,7 @@
       </div>
 
       <div fxFlex>
-        <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="space-between start" (dblclick)="tapToEdit(student)">
 
           <!-- Student information -->
           <div>
@@ -44,7 +44,7 @@
             <!-- Number info -->
             <div class="mb-q" fxLayout="row wrap" fxLayoutGap="1rem">
               <div fxLayout="row" *ngIf="student?.personal?.birthdate" class="personal-numbers">
-                <span class="mb-0 mr-q">{{student?.personal?.birthdate | age}}</span>
+                <span class=" mb-0 mr-q">{{student?.personal?.birthdate | age}}</span>
                 <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
               </div>
               <div fxLayout="row" *ngIf="student?.personal?.academicCourse" class="personal-numbers">
@@ -67,13 +67,6 @@
                 {{'FORM.INSTRUMENT' | translate}}: </span>
               <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
             </div>
-
-            <!-- Teacher -->
-            <div *ngIf="student?.musical?.teacher" class="mat-small">
-              <span class="mat-hint">
-                {{'TEACHER' | translate}}: </span>
-              <span class="mb-0">{{student?.musical?.teacher}}</span>
-            </div>
           </div>
         </div>
 
@@ -94,21 +87,35 @@
         </div>
 
         <!-- More Info -->
-        <div *ngIf="student?.personal?.observations">
+        <div *ngIf="moreInfoConfig.show" (dblclick)="tapToEdit(student)">
+
+          <!-- Teacher -->
+          <div *ngIf="student?.musical?.teacher" class="mat-small">
+            <span class="mat-hint">
+              {{'TEACHER' | translate}}: </span>
+            <span class="mb-0">{{student?.musical?.teacher}}</span>
+          </div>
+
+          <!-- Birthday -->
+          <div *ngIf="student?.personal?.birthdate" class="mat-small">
+            <span class="mat-hint">
+              {{'FORM.BIRTHDATE' | translate}}: </span>
+            <span class="mb-0">{{student?.personal?.birthdate}}</span>
+          </div>
 
           <!-- Observations -->
-          <div *ngIf="moreInfoConfig.show" class="mat-small">
+          <div *ngIf="student?.personal?.observations" class="mat-small">
             <span class="mat-hint">
               {{'FORM.OBSERVATIONS' | translate}}: </span>
             <span class="mb-0">{{student?.personal?.observations}}</span>
           </div>
-
-          <!-- More Info button-->
-          <a class="link mat-small pointer" (click)="showMore()">
-            {{moreInfoConfig.text | translate}}
-            <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
-          </a>
         </div>
+
+        <!-- More Info button-->
+        <a class="link mat-small pointer" (click)="showMore()">
+          {{moreInfoConfig.text | translate}}
+          <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
+        </a>
 
       </div>
     </div>

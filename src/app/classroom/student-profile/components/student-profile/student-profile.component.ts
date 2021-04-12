@@ -164,6 +164,16 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     })
   }
 
+  tapToEdit(student: any): void {
+    this.dialog.open(StudentCreationComponent, {
+      ...DIALOG_CONFIG,
+      data: {
+        idStudent: student.id,
+        student: { ...student }
+      }
+    })
+  }
+
   createDay(student: any): void {
     const newDay = UtilService.clone(ModelService.dayModel)
     newDay.student = student
