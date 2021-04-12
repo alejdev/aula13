@@ -39,14 +39,19 @@ ngx-skeleton-loader.skeleton .loader {
 }
 
 // Mat menu
-.mat-menu-item fa-icon {
-  position: relative;
-  top: 1px;
-  margin-right: 10px;
 
-  svg {
-    width: 16px !important;
-  }
+.mat-menu-panel {
+  max-width: 100% !important;
+
+  // .mat-menu-item fa-icon {
+  //   position: relative;
+  //   top: 1px;
+  //   margin-right: 10px;
+
+  //   svg {
+  //     width: 16px !important;
+  //   }
+  // }
 }
 
 // Dialogs

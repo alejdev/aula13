@@ -28,13 +28,23 @@
   }
 }
 
-a.clickable-phone-number {
-  display: block;
-  text-decoration: none !important;
+.phone-numbers {
 
-  .phone {
-    color: var(--light-theme-primary);
-    margin-left: .5rem;
+  a.phone-icon {
+    margin-left: -10px;
+    margin-right: -5px;
+    position: relative;
+    top: -1px;
+  }
+
+  a.clickable-phone-number {
+    display: block;
+    text-decoration: none !important;
+
+    .phone {
+      color: var(--light-theme-primary);
+      margin-left: .5rem;
+    }
   }
 }
 

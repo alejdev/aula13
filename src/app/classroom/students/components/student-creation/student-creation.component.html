@@ -95,7 +95,7 @@
               <!-- Phone -->
               <mat-form-field fxFlex="50" [appearance]="'inputAppearance' | settingValue">
                 <mat-label>{{'FORM.PHONE' | translate}}</mat-label>
-                <input matInput formControlName="contactPhoneNumberCtrl" attr.aria-label="{{'FORM.PHONE' | translate}}" autocomplete="off">
+                <input type="tel" matInput formControlName="contactPhoneNumberCtrl" attr.aria-label="{{'FORM.PHONE' | translate}}" autocomplete="off">
                 <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="phone-alt"></fa-icon>
               </mat-form-field>
             </div>

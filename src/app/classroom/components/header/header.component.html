@@ -31,12 +31,18 @@
       <fa-icon class="mat-icon-18" icon="phone-alt"></fa-icon>
     </button>
     <mat-menu #menuPhones="matMenu">
-      <button *ngFor="let phone of headerConfig?.student?.contactInformation?.phones" mat-menu-item>
-        <a class="clickable-phone-number" href="{{'tel:' + phone.number}}">
-          <span *ngIf="phone.name" class="mat-hint">{{phone.name}}:</span>
-          <span class="phone">{{phone.number}}</span>
+      <div class="phone-numbers" mat-menu-item *ngFor="let phone of headerConfig?.student?.contactInformation?.phones" fxLayout="row" fxLayoutAlign="start center">
+        <!-- <a class="phone-icon" mat-icon-button href="{{'tel:' + phone.number}}">
+          <fa-icon class="mat-icon-15 mat-hint" icon="phone-alt"></fa-icon>
+        </a> -->
+        <a class="phone-icon" color="accent" mat-icon-button target="_blank" href="{{'https://wa.me/' + phone.number}}">
+          <fa-icon class="mat-icon-18" [icon]="['fab', 'whatsapp']"></fa-icon>
         </a>
-      </button>
+        <a class="clickable-phone-number" target="_blank" href="{{'tel:' + phone.number}}">
+          <span *ngIf="phone.name" class="mat-hint">{{phone.name}}:</span>
+          <span class="phone">{{phone.number | phone:false:false:true}}</span>
+        </a>
+      </div>
     </mat-menu>
 
     <!-- Menu options-->
@@ -55,7 +61,7 @@
       <mat-menu #menuProfileId="matMenu">
         <ng-container *ngFor="let option of menuProfile">
           <button *ngIf="!option.divider else separator" mat-menu-item (click)="option.action()" [disabled]="option.disabled">
-            <fa-icon class="mat-icon-20 mat-hint" [icon]="option.icon"></fa-icon>
+            <fa-icon class="mat-icon-20 mr-h mat-hint" [icon]="option.icon"></fa-icon>
             <span>{{option.name | translate}}</span>
           </button>
           <ng-template #separator>

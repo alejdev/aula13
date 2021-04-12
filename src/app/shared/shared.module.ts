@@ -27,6 +27,7 @@ import { MatSortModule } from '@angular/material/sort'
 import { RouterModule } from '@angular/router'
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 import { FaConfig, FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { faArrowLeft, faBars, faBirthdayCake, faBook, faBorderStyle, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGripLines, faGuitar, faHeart, faInfo, faMoon, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faSpinner, faSquare, faStar, faStream, faSun, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
@@ -49,6 +50,7 @@ import { DateFilterPipe } from './pipes/date-filter.pipe'
 import { ExcludeArchivedPipe } from './pipes/exclude-archived.pipe'
 import { FilterByKeyPipe } from './pipes/filter-by-key.pipe'
 import { FilterPipe } from './pipes/filter-by.pipe'
+import { PhonePipe } from './pipes/phone.pipe'
 import { SettingValuePipe } from './pipes/setting-value.pipe'
 import { ShowByPipe } from './pipes/show-by.pipe'
 import { SrcImagePipe } from './pipes/src-image.pipe'
@@ -93,6 +95,7 @@ registerLocaleData(localeFr, 'fr')
     SettingValuePipe,
     FilterByKeyPipe,
     TypeOfPipe,
+    PhonePipe,
   ],
   imports: [
     // Angular
@@ -182,7 +185,8 @@ registerLocaleData(localeFr, 'fr')
     ExcludeArchivedPipe,
     AgroupByDatePipe,
     SettingValuePipe,
-    TypeOfPipe
+    TypeOfPipe,
+    PhonePipe,
   ],
   entryComponents: [
     ToastComponent
@@ -258,6 +262,7 @@ export class SharedModule {
       faUser,
       faUserGraduate,
       faUserPlus,
+      faWhatsapp,
     )
   }
 }

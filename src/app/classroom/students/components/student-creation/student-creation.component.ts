@@ -7,6 +7,7 @@ import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { PhonePipe } from 'src/app/shared/pipes/phone.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -20,7 +21,8 @@ import { TranslateService } from '@ngx-translate/core'
 @Component({
   selector: 'a13-student-creation',
   templateUrl: './student-creation.component.html',
-  styleUrls: ['./student-creation.component.scss']
+  styleUrls: ['./student-creation.component.scss'],
+  providers: [PhonePipe]
 })
 export class StudentCreationComponent implements OnInit {
 
@@ -49,6 +51,7 @@ export class StudentCreationComponent implements OnInit {
     private classroomService: ClassroomService,
     private toastService: ToastService,
     private translateService: TranslateService,
+    private phonePipe: PhonePipe,
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<StudentCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -115,7 +118,7 @@ export class StudentCreationComponent implements OnInit {
   initPhoneControls(phone: any): FormGroup {
     return this.formBuilder.group({
       contactPhoneNameCtrl: [phone ? phone.name : '', [Validators.required]],
-      contactPhoneNumberCtrl: [phone ? phone.number : '', [Validators.required, Validators.pattern(UtilService.regExp.phone)]]
+      contactPhoneNumberCtrl: [phone ? this.phonePipe.transform(phone.number, true, true) : '', [Validators.required, Validators.pattern(UtilService.regExp.phone)]]
     })
   }
 
@@ -142,11 +145,18 @@ export class StudentCreationComponent implements OnInit {
       return this.arrayPhones.value.map((phone: any) => {
         return {
           name: phone.contactPhoneNameCtrl,
-          number: phone.contactPhoneNumberCtrl,
+          number: this.normalizePhone(phone.contactPhoneNumberCtrl),
         }
       })
     }
     return []
+  }
+
+  normalizePhone(number: string): string {
+    if (!UtilService.regExp.phoneWithPrefix.test(number)) {
+      number = `+34 ${number}`
+    }
+    return number.replace(/[\s-]/g, '')
   }
 
   toggleBooleanCrl(control: string): void {
