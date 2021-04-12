@@ -6,6 +6,11 @@
 
 // Light theme
 .light-theme {
+
+  .main-content-bg {
+    background-image: url('src/assets/svgs/logo-background-light.svg');
+  }
+
   .nav-list-item {
     &.active {
       background-color: rgba($main-color, 7%);
@@ -95,6 +100,11 @@
 
 // Dark theme
 .dark-theme {
+
+  .main-content-bg {
+    background-image: url('src/assets/svgs/logo-background-dark.svg');
+  }
+
   .nav-list-item {
     &.active {
       background-color: lighten(map-get(map-get($colors, dark-theme), background), 3%);
