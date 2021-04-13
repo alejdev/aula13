@@ -1,13 +1,14 @@
 <form [formGroup]="studentFormGroup" autocomplete="off" class="mat-typography">
-  <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
+  <header class="dialog-header padding-content-h pt-1 pb-1" [ngClass]="{'height-auto': !isTruncated}" fxLayout="row" fxLayoutAlign="space-between center">
     <!-- Title -->
-    <h2 class="m-0" mat-dialog-title>
-      {{(data.isClone ? 'CLONE_STUDENT' : data.idStudent ? 'EDIT_STUDENT' : 'ADD_STUDENT') | translate}}
+    <h2 class="m-0 pointer" [ngClass]="{truncate: !isTruncated}" (click)="isTruncated=!isTruncated" fxFlex="calc(100% - 140px)">
+      <!-- {{(data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}} -->
+      {{(studentFormGroup?.controls?.personalFormGroup?.controls?.nameCtrl?.value ? studentFormGroup?.controls?.personalFormGroup?.controls?.nameCtrl?.value : data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
     </h2>
 
     <!-- Favorite -->
     <button mat-button (click)="toggleBooleanCrl('favoriteCtrl')" [matTooltip]="'MSG.MARK_STUDENT_FAV' | translate" [matTooltipShowDelay]="650">
-      <span class="mat-small mat-hint mr-q"> {{(studentFormGroup?.value.booleanFormGroup.favoriteCtrl ? 'FAVORITE'  : 'MARK_FAVORITE') | translate}} </span>
+      <span class="mat-small mat-hint mr-q"> {{'FAVORITE' | translate}} </span>
       <fa-icon [ngClass]="{'star-active': studentFormGroup?.value.booleanFormGroup.favoriteCtrl}" class="mat-icon-22 mat-hint" icon="star"></fa-icon>
     </button>
   </header>
@@ -17,15 +18,16 @@
     <!--PERSONAL -->
     <div formGroupName="personalFormGroup" fxLayout="column" class="mb-2">
 
-      <h3 class="mat-h2 mat-hint">{{'STUDENT_PERSONAL_DATA' | translate}}</h3>
-
-      <div class="mb-q" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+      <div class="mb-q" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-between center">
 
         <!-- Avatar -->
-        <a13-pickup-image ngClass.xs="full-avatar mb-1 pb-h" class="avatar-selected" [(image)]="studentAvatar" [imageList]="avatars" fxFlex="20" (click)="markFormAsDirty()">
+        <a13-pickup-image ngClass.xs="full-avatar mb-1 pb-h" class="avatar-selected full-avatar" [(image)]="studentAvatar" [imageList]="avatars" (click)="markFormAsDirty()">
         </a13-pickup-image>
 
         <div class="mb-q full" fxLayout="column" fxLayoutAlign="start" fxFlex="80">
+
+          <h2 class="mb-h">{{'STUDENT_PERSONAL_DATA' | translate}}</h2>
+          <p class="mb-1 pb-h mat-hint">{{'STUDENT_CREATION_PERSONAL' | translate}}</p>
 
           <!-- Name -->
           <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="100">
@@ -75,7 +77,8 @@
 
     <!-- CONTACT INFORMATION -->
     <div formGroupName="contactInformationFormGroup" fxLayout="column" class="mb-2">
-      <h3 class="mat-h2 mat-hint">{{'CONTACT.TITLE' | translate}}</h3>
+      <h2 class="mb-h">{{'CONTACT.TITLE' | translate}}</h2>
+      <p class="mb-1 pb-h mat-hint">{{'STUDENT_CREATION_CONTACT' | translate}}</p>
 
       <!-- Phones -->
       <div class="phone-list" *ngIf="arrayPhones.controls" formArrayName="phonesFormArray">
@@ -121,7 +124,8 @@
 
     <!-- MUSICAL -->
     <div formGroupName="musicalFormGroup" fxLayout="column" class="mb-2">
-      <h3 class="mat-h2 mat-hint">{{'STUDENT_CONSERVATORY_DATA' | translate}}</h3>
+      <h2 class="mb-h">{{'STUDENT_CONSERVATORY_DATA' | translate}}</h2>
+      <p class="mb-1 pb-h mat-hint">{{'STUDENT_CREATION_CONSERVATORY' | translate}}</p>
 
       <div fxLayout="row">
 
@@ -159,13 +163,15 @@
           </mat-optgroup>
         </mat-select>
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="guitar"></fa-icon>
+        <mat-hint align="start">{{'HINT.INSTRUMENT' | translate}}</mat-hint>
       </mat-form-field>
 
     </div>
 
     <!-- CLASSROOM -->
     <div formGroupName="classroomFormGroup" fxLayout="column" class="mb-2">
-      <h3 class="mat-h2 mat-hint">{{'CLASSROOM.NAME' | translate}}</h3>
+      <h2 class="mb-h">{{'CLASSROOM.NAME' | translate}}</h2>
+      <p class="mb-1 pb-h mat-hint">{{'STUDENT_CREATION_CLASSROOM' | translate}}</p>
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap=".5rem">
 

@@ -42,6 +42,8 @@ export class StudentCreationComponent implements OnInit {
   equals: any
   maxDate: Date
 
+  isTruncated: boolean
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,

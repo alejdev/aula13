@@ -160,6 +160,7 @@
 		"BIRTHDATE": "Press the calendar or enter the date (DD/MM/YYYY)",
 		"CLASSROOM": "You can group students in different classrooms",
 		"CLASSROOM_STUDENT_LIST": "Select the students enrolled in this classroom",
+		"INSTRUMENT": "",
 		"OBSERVATIONS": "Add a brief description of the student",
 		"SUBJECTS": "Mark the subjects that will be taught to the student",
 		"SUBJECT_STUDENT_LIST": "Select the students enrolled in this subject",
@@ -319,9 +320,14 @@
 	"STUDENTS": "Students",
 	"STUDENT_ARCHIVED": "Filed student",
 	"STUDENT_CONSERVATORY_DATA": "Conservatory",
+	"STUDENT_CREATION_CLASSROOM": "",
+	"STUDENT_CREATION_CONSERVATORY": "",
+	"STUDENT_CREATION_CONTACT": "",
+	"STUDENT_CREATION_GENERAL DATA": "",
+	"STUDENT_CREATION_PERSONAL": "",
 	"STUDENT_DELETE": "Delete student",
 	"STUDENT_PARENTS_DATA": "Parents",
-	"STUDENT_PERSONAL_DATA": "Student",
+	"STUDENT_PERSONAL_DATA": "",
 	"SUBJECT": {
 		"CREATION_SUBTITLE": "You can add or modify subjects to teach your students and enroll as many as you need in them"
 	},

@@ -1,6 +1,6 @@
 
 // Mat menu
-.mat-menu-item fa-icon {
+button.mat-menu-item fa-icon {
   // position: relative;
   // top: 1px;
   margin-right: 10px;
@@ -8,4 +8,9 @@
   // svg {
   //   width: 16px !important;
   // }
+}
+
+// Mat menu
+a.mat-menu-item  {
+  // margin-right: 10px;
 }

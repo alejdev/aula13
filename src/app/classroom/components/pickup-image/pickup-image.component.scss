@@ -1,10 +1,12 @@
 .avatar {
-  max-width: 102px;
-  max-height: 102px;
+  width: 280px;
+  max-width: 100%;
+  max-height: 100%;
 
   &.xs {
-    max-width: 212px;
-    max-height: 212px;
+    width: 100%;
+    max-width: 280px;
+    max-height: 280px;
   }
 }
 
@@ -23,7 +25,7 @@
     cursor: pointer;
 
     &.selected {
-      background-color: #ddd;
+      background-color: var(--light-theme-primary-light);
     }
 
     &:hover {

@@ -31,6 +31,8 @@ export class DayCreationComponent implements OnInit {
   ckeditor: any = DecoupledEditor
   editorConfig: any
 
+  isTruncated: boolean
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,

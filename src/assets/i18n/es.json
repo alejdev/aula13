@@ -160,6 +160,7 @@
 		"BIRTHDATE": "Pulse el calendario o escribe la fecha (DD/MM/AAAA)",
 		"CLASSROOM": "Puedes agrupar los alumnos en diferentes aulas",
 		"CLASSROOM_STUDENT_LIST": "Seleccione los alumnos matriculados en este aula",
+		"INSTRUMENT": "¿Qué instrumento toca?",
 		"OBSERVATIONS": "Añade una breve descripción del alumno",
 		"SUBJECTS": "Marque las asignaturas que le impartirá al alumno",
 		"SUBJECT_STUDENT_LIST": "Seleccione los alumnos matriculados en esta asignatura",
@@ -319,9 +320,14 @@
 	"STUDENTS": "Alumnos",
 	"STUDENT_ARCHIVED": "Alumno archivado",
 	"STUDENT_CONSERVATORY_DATA": "Conservatorio",
+	"STUDENT_CREATION_CLASSROOM": "Para organizar mejor a tus alumnos, puedes agruparlos en diferentes aulas y matricularlos en tantas asignaturas como necesiten",
+	"STUDENT_CREATION_CONSERVATORY": "Rellena los datos relacionados con el conservatorio",
+	"STUDENT_CREATION_CONTACT": "Añade uno o varios teléfonos para ponerte en contacto con él o con sus padres/tutores",
+	"STUDENT_CREATION_GENERAL DATA": "Datos generales",
+	"STUDENT_CREATION_PERSONAL": "Introduce los datos personales del alumno",
 	"STUDENT_DELETE": "Borrar alumno",
 	"STUDENT_PARENTS_DATA": "Padres",
-	"STUDENT_PERSONAL_DATA": "Alumno",
+	"STUDENT_PERSONAL_DATA": "Datos personales",
 	"SUBJECT": {
 		"CREATION_SUBTITLE": "Puedes añadir o modificar asignaturas para impartir a tus alumnos y matricular a tantos como necesites en ellas"
 	},

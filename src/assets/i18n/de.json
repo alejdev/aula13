@@ -160,6 +160,7 @@
 		"BIRTHDATE": "Drücken Sie auf den Kalender oder geben Sie das Datum ein (TT/MM/JJJJ)",
 		"CLASSROOM": "Sie können Schüler in verschiedenen Klassenräumen gruppieren",
 		"CLASSROOM_STUDENT_LIST": "Wählen Sie die Schüler aus, die in diesem Klassenzimmer eingeschrieben sind",
+		"INSTRUMENT": "",
 		"OBSERVATIONS": "Fügen Sie eine kurze Beschreibung des Schülers hinzu",
 		"SUBJECTS": "Markieren Sie die Fächer, die dem Schüler beigebracht werden",
 		"SUBJECT_STUDENT_LIST": "Wählen Sie die in diesem Fach eingeschriebenen Schüler aus",
@@ -319,9 +320,14 @@
 	"STUDENTS": "Studenten",
 	"STUDENT_ARCHIVED": "Abgelegter Student",
 	"STUDENT_CONSERVATORY_DATA": "Wintergarten",
+	"STUDENT_CREATION_CLASSROOM": "",
+	"STUDENT_CREATION_CONSERVATORY": "",
+	"STUDENT_CREATION_CONTACT": "",
+	"STUDENT_CREATION_GENERAL DATA": "",
+	"STUDENT_CREATION_PERSONAL": "",
 	"STUDENT_DELETE": "Schüler löschen",
 	"STUDENT_PARENTS_DATA": "Vater",
-	"STUDENT_PERSONAL_DATA": "Student",
+	"STUDENT_PERSONAL_DATA": "",
 	"SUBJECT": {
 		"CREATION_SUBTITLE": "Sie können Fächer hinzufügen oder ändern, um Ihren Schülern beizubringen und so viele Fächer einzuschreiben, wie Sie benötigen"
 	},

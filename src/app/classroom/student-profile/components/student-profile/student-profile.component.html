@@ -19,7 +19,7 @@
       <div class="avatar-container mr-q" fxLayout="column" fxLayoutAlign="start center">
 
         <!-- Avatar -->
-        <a flex="grow" matRipple class="avatar border-theme">
+        <a flex="grow" matRipple class="avatar avatar-button border-theme border-theme-button">
           <img class="avatar-image" [src]="student?.personal?.avatar | srcImage" alt="{{student?.personal?.avatar}}" (click)="tapToEdit(student)">
         </a>
 
@@ -128,7 +128,7 @@
 
       <!-- Days -->
       <mat-tab>
-        <ng-template mat-tab-label class="stiky-top">
+        <ng-template mat-tab-label>
           <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
         </ng-template>
 
@@ -167,7 +167,7 @@
 
       <!-- Marks -->
       <mat-tab>
-        <ng-template mat-tab-label class="stiky-top">
+        <ng-template mat-tab-label>
           <fa-icon class="mat-icon-20" icon="poll"></fa-icon>
         </ng-template>
         <div class="padding-content">

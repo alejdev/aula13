@@ -22,10 +22,6 @@
     width: 2rem;
     white-space: nowrap;
   }
-
-  &.height-auto {
-    height: auto;
-  }
 }
 
 .phone-numbers {
@@ -69,7 +65,7 @@
   }
 }
 
-.mat-menu-item fa-icon {
+.mat-menu-item > fa-icon {
   position: relative;
   top: 1px;
   margin-right: 10px;

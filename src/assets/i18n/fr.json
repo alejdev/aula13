@@ -160,6 +160,7 @@
 		"BIRTHDATE": "Appuyez sur le calendrier ou entrez la date (JJ/MM/AAAA)",
 		"CLASSROOM": "Vous pouvez regrouper les élèves dans différentes classes",
 		"CLASSROOM_STUDENT_LIST": "Sélectionnez les étudiants inscrits dans cette classe",
+		"INSTRUMENT": "",
 		"OBSERVATIONS": "Ajouter une brève description de l'élève",
 		"SUBJECTS": "Marquez les matières qui seront enseignées à l'élève",
 		"SUBJECT_STUDENT_LIST": "Sélectionnez les étudiants inscrits dans ce sujet",
@@ -319,9 +320,14 @@
 	"STUDENTS": "Élèves",
 	"STUDENT_ARCHIVED": "Étudiant classé",
 	"STUDENT_CONSERVATORY_DATA": "Conservatoire",
+	"STUDENT_CREATION_CLASSROOM": "",
+	"STUDENT_CREATION_CONSERVATORY": "",
+	"STUDENT_CREATION_CONTACT": "",
+	"STUDENT_CREATION_GENERAL DATA": "",
+	"STUDENT_CREATION_PERSONAL": "",
 	"STUDENT_DELETE": "Supprimer l'élève",
 	"STUDENT_PARENTS_DATA": "Les pères",
-	"STUDENT_PERSONAL_DATA": "Étudiant",
+	"STUDENT_PERSONAL_DATA": "",
 	"SUBJECT": {
 		"CREATION_SUBTITLE": "Vous pouvez ajouter ou modifier des matières pour enseigner à vos élèves et en inscrire autant que vous en avez besoin"
 	},

@@ -1,21 +1,22 @@
 <form [formGroup]="dayFormGroup" autocomplete="off" class="mat-typography">
-  <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
+  <header class="dialog-header padding-content-h pt-1 pb-1" [ngClass]="{'height-auto': !isTruncated}" fxLayout="row" fxLayoutAlign="space-between center">
     <!-- Title -->
-    <h2 class="m-0" mat-dialog-title>
-      {{(data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
+    <h2 class="m-0 pointer" [ngClass]="{truncate: !isTruncated}" (click)="isTruncated=!isTruncated" fxFlex="calc(100% - 140px)">
+      <!-- {{(data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}} -->
+      {{(dayFormGroup?.controls?.dayTitleCtrl?.value ? dayFormGroup?.controls?.dayTitleCtrl?.value : data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
     </h2>
 
     <!-- Favorite -->
-    <button mat-button (click)="toggleBooleanCrl('dayFavoriteCtrl')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
-      <span class="mat-small mat-hint mr-q"> {{(dayFormGroup?.value.dayFavoriteCtrl ? 'FAVORITE'  : 'MARK_FAVORITE') | translate}} </span>
+    <button mat-button (click)="toggleBooleanCrl('dayFavoriteCtrl')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650" fxFlex="nogrow">
+      <span class="mat-small mat-hint mr-q"> {{'FAVORITE' | translate}} </span>
       <fa-icon [ngClass]="{'star-active': dayFormGroup?.value.dayFavoriteCtrl}" class="mat-icon-22 mat-hint" icon="star"></fa-icon>
     </button>
   </header>
 
-  <section class="dialog-content" fxLayout="column" fxLayoutAlign="start">
-    <!-- <p class="mb-1 pb-h pl-q pr-q mat-hint">{{'DAY.CREATION_SUBTITLE' | translate}}.</p> -->
+  <section class="dialog-content padding-content-h" fxLayout="column" fxLayoutAlign="start">
+    <p class="mb-1 pb-h pl-q pr-q mat-hint">{{'DAY.CREATION_SUBTITLE' | translate}}</p>
 
-    <div class="padding-content-h mb-q" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+    <div class="mb-q" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
 
       <!-- Student -->
       <a13-select-student fxFlex="50" formControlName="dayStudentCtrl">
@@ -33,7 +34,7 @@
     </div>
 
     <!-- Title -->
-    <mat-form-field class="padding-content-h" [appearance]="'inputAppearance' | settingValue" fxFlex="100">
+    <mat-form-field class="" [appearance]="'inputAppearance' | settingValue" fxFlex="100">
       <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
       <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}" autocomplete="off">
       <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
@@ -42,7 +43,7 @@
     </mat-form-field>
 
     <!-- Content -->
-    <div class="angular-editor mt-1 pt-h pb-h padding-content-h" [ngClass]="{'ng-invalid': this.dayFormGroup.controls.dayContentCtrl.invalid, 'ng-touched': this.dayFormGroup.controls.dayContentCtrl.touched}">
+    <div class="angular-editor mt-1 pt-h pb-h " [ngClass]="{'ng-invalid': this.dayFormGroup.controls.dayContentCtrl.invalid, 'ng-touched': this.dayFormGroup.controls.dayContentCtrl.touched}">
       <ckeditor id="ckeditor" [editor]="ckeditor" [config]="editorConfig" formControlName="dayContentCtrl">
       </ckeditor>
     </div>
