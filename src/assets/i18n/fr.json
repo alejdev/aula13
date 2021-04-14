@@ -13,8 +13,10 @@
 	"AVATAR": "Image de profil",
 	"BACK": "Revenir",
 	"BEHAVIOR": {
-		"PAN_SIDEMENU": "Menu des diapositives",
-		"PAN_SIDEMENU_HINT": "Faites glisser votre doigt horizontalement sur l'écran pour ouvrir le menu latéral",
+		"SLIDE_ROUTES": "Naviguer en glissant",
+		"SLIDE_ROUTES_HINT": "Faites glisser votre doigt horizontalement sur les pages principales (élèves et journal intime) pour vous déplacer entre elles de manière pratique",
+		"SLIDE_SIDEMENU": "Menu des diapositives",
+		"SLIDE_SIDEMENU_HINT": "Faites glisser votre doigt horizontalement sur l'écran pour ouvrir le menu latéral",
 		"TITLE": "Comportement"
 	},
 	"CANCEL": "Annuler",

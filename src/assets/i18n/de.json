@@ -13,8 +13,10 @@
 	"AVATAR": "Profilbild",
 	"BACK": "Zurück",
 	"BEHAVIOR": {
-		"PAN_SIDEMENU": "Menü schieben",
-		"PAN_SIDEMENU_HINT": "Ziehen Sie Ihren Finger horizontal über den Bildschirm, um das Seitenmenü zu öffnen",
+		"SLIDE_ROUTES": "Navigieren durch Wischen",
+		"SLIDE_ROUTES_HINT": "Ziehen Sie Ihren Finger horizontal über die Hauptseiten (Schüler und Tagebuch), um bequem zwischen ihnen zu wechseln",
+		"SLIDE_SIDEMENU": "Menü schieben",
+		"SLIDE_SIDEMENU_HINT": "Ziehen Sie Ihren Finger horizontal über den Bildschirm, um das Seitenmenü zu öffnen",
 		"TITLE": "Verhalten"
 	},
 	"CANCEL": "Abbrechen",

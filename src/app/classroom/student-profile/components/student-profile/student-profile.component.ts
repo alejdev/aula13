@@ -228,11 +228,13 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
           const isFirst = this.selectedTab === 0
           if (this.selectedTab < this.tabCount - 1) {
             this.selectedTab = isFirst ? 1 : this.selectedTab + 1
+            e.stopPropagation()
           }
         } else if (swipe === 'previous') {
-          const isLast = this.selectedTab === this.tabCount - 1
+          // const isLast = this.selectedTab === this.tabCount - 1
           if (this.selectedTab >= 1) {
             this.selectedTab = this.selectedTab - 1
+            e.stopPropagation()
           }
         }
       }

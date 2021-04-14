@@ -13,8 +13,10 @@
 	"AVATAR": "Imagen de perfil",
 	"BACK": "Volver",
 	"BEHAVIOR": {
-		"PAN_SIDEMENU": "Deslizar menú",
-		"PAN_SIDEMENU_HINT": "Arrastra el dedo horizontalmente por la pantalla para abrir el menú lateral",
+		"SLIDE_ROUTES": "Navega deslizando el dedo",
+		"SLIDE_ROUTES_HINT": "Arrastra el dedo horizontalmente por las páginas principales (alumnos y diario) para moverte entre ellas cómodamente",
+		"SLIDE_SIDEMENU": "Deslizar menú",
+		"SLIDE_SIDEMENU_HINT": "Arrastra el dedo horizontalmente por la pantalla para abrir el menú lateral",
 		"TITLE": "Comportamiento"
 	},
 	"CANCEL": "Cancelar",

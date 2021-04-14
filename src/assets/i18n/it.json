@@ -13,8 +13,10 @@
 	"AVATAR": "Immagine del profilo",
 	"BACK": "Ritorno",
 	"BEHAVIOR": {
-		"PAN_SIDEMENU": "Menu scorrevole",
-		"PAN_SIDEMENU_HINT": "Trascina il dito in orizzontale sullo schermo per aprire il menu laterale",
+		"SLIDE_ROUTES": "Navigare con lo swiping",
+		"SLIDE_ROUTES_HINT": "Trascina il dito orizzontalmente sulle pagine principali (studenti e diario) per spostarti comodamente tra di esse",
+		"SLIDE_SIDEMENU": "Menu scorrevole",
+		"SLIDE_SIDEMENU_HINT": "Trascina il dito in orizzontale sullo schermo per aprire il menu laterale",
 		"TITLE": "Comportamento"
 	},
 	"CANCEL": "Annullare",

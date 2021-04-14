@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
 
   <!-- Side-menu -->
   <mat-sidenav #sideMenu class="sidenav border-0" [mode]="mobileQueryL.matches ? 'over' : 'side'" [opened]="!mobileQueryL.matches" [fixedInViewport]="true" [autoFocus]="false">

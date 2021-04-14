@@ -16,7 +16,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 export const DEFAULT_SETTINGS = {
   theme: 0,
   lang: 'es',
-  canPanSideMenu: false,
+  canSlideSideMenu: true,
+  canSlideRoutes: true,
   inputAppearance: 'fill'
 }
 

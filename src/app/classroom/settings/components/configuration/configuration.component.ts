@@ -4,7 +4,6 @@ import { LanguageService } from 'src/app/classroom/services/language.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
@@ -22,7 +21,8 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   themeControl: any
   inputAppearance: boolean
   themeIsDark: boolean
-  canPanSideMenu: boolean = this.settingService.value.canPanSideMenu
+  canSlideSideMenu: boolean = this.settingService.value.canSlideSideMenu
+  canSlideRoutes: boolean = this.settingService.value.canSlideRoutes
   inputAppearances = ModelService.inputAppearances
   inputAppearanceIcon: string
 
@@ -33,7 +33,6 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private themeService: ThemeService,
     private settingService: SettingService,
-    private toastService: ToastService,
     private headerService: HeaderService
   ) { }
 
@@ -83,15 +82,12 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     return inputIcon ? inputIcon.icon : 'fill'
   }
 
-  togglePanSideMenu(): void {
-    this.settingService.value = { canPanSideMenu: !this.settingService.value.canPanSideMenu }
-    this.toastService.info({
-      text: 'MSG.RELOAD_PAGE_FOR_CHANGES',
-      action: {
-        text: 'REFRESH',
-        f: () => window.location.reload()
-      }
-    })
+  toggleSlideSideMenu(): void {
+    this.settingService.value = { canSlideSideMenu: !this.settingService.value.canSlideSideMenu }
+  }
+
+  toggleSlideRoutes(): void {
+    this.settingService.value = { canSlideRoutes: !this.settingService.value.canSlideRoutes }
   }
 
   ngOnDestroy(): void {
