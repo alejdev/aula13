@@ -26,7 +26,6 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
 
   @Input() multiple: boolean
   @Input() hint: string
-  @Input() tab: number = 0
 
   data$: Observable<any>
 
