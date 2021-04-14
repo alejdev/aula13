@@ -141,7 +141,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         this.dialog.open(item.create, {
           ...DIALOG_CONFIG,
           data: {
-            entity: child
+            entity: UtilService.clone(child)
           }
         })
         break
@@ -149,7 +149,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         this.dialog.open(item.create, {
           ...DIALOG_CONFIG,
           data: {
-            entity: child,
+            entity: UtilService.clone(child),
             isClone: true
           }
         })
@@ -158,7 +158,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         this.dialog.open(item.delete, {
           ...DIALOG_CONFIG,
           data: {
-            entity: child
+            entity: UtilService.clone(child)
           }
         })
         break

@@ -69,6 +69,10 @@ ngx-skeleton-loader.skeleton .loader {
     box-sizing: border-box;
   }
 
+  .dialog-title {
+    word-break: break-word;
+  }
+
   mat-dialog-container {
     height: fit-content;
     overflow: hidden;

@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs'
-import { debounceTime, switchMap } from 'rxjs/operators'
+import { debounceTime, first, switchMap, tap } from 'rxjs/operators'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -23,9 +23,11 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   studentIdList: any[]
   subject: any
 
-  subjectNameSubscription: Subscription
   querySubjectNameSubscription: Subscription
+  querySubjectNameFirstTimeSubscription: Subscription
   validatingName: boolean
+
+  isTruncated: boolean
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,8 +45,9 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
       nameCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${this.subject.name}` : this.subject.name || '', Validators.required],
       studentListCtrl: [this.studentIdList || []]
     })
+
     // Listen name changes
-    this.onSubjectChange()
+    this.checkIfNameIsTaken()
 
     // If edit
     if (this.subject.id) {
@@ -54,24 +57,36 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
 
   ngOnInit() { }
 
-  onSubjectChange() {
+  checkIfNameIsTaken() {
     const nameCtrl = this.subjectFormGroup.controls.nameCtrl
 
-    this.subjectNameSubscription = nameCtrl.valueChanges
-      .subscribe(() => this.validatingName = true)
+    // First time
+    if (this.data.isClone) {
+      this.subjectService.querySubject(UtilService.capitalize(nameCtrl.value))
+        .pipe(
+          first(),
+          tap(() => this.validatingName = true),
+          debounceTime(500)
+        ).subscribe(this.isNameTaken)
+    }
 
+    // Control changes
     this.querySubjectNameSubscription = nameCtrl.valueChanges
       .pipe(
+        tap(() => this.validatingName = true),
         debounceTime(500),
         switchMap(() => this.subjectService.querySubject(UtilService.capitalize(nameCtrl.value)))
-      ).subscribe((result: any) => {
-        if (result.length && this.data.entity.name !== result[0].payload.doc.data().name) {
-          nameCtrl.setErrors({ nameTaken: true })
-        }
-        nameCtrl.setErrors(nameCtrl.errors)
-        nameCtrl.markAsTouched()
-        this.validatingName = false
-      })
+      ).subscribe(this.isNameTaken)
+  }
+
+  isNameTaken = (result: any) => {
+    const nameCtrl = this.subjectFormGroup.controls.nameCtrl
+    if (result.length && (this.subject.id !== result[0].payload.doc.id)) {
+      nameCtrl.setErrors({ nameTaken: true })
+    }
+    nameCtrl.setErrors(nameCtrl.errors)
+    nameCtrl.markAsTouched()
+    this.validatingName = false
   }
 
   async queryEnrrolledStudents(): Promise<any> {
@@ -168,7 +183,6 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subjectNameSubscription.unsubscribe()
     this.querySubjectNameSubscription.unsubscribe()
   }
 }

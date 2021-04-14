@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs'
-import { debounceTime, switchMap } from 'rxjs/operators'
+import { debounceTime, first, switchMap, tap } from 'rxjs/operators'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -23,9 +23,11 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   studentIdList: any[]
   classroom: any
 
-  classroomNameSubscription: Subscription
   queryClassroomNameSubscription: Subscription
+  queryClassroomNameFirstTimeSubscription: Subscription
   validatingName: boolean
+
+  isTruncated: boolean
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,12 +42,12 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
     // Init form controls
     this.classroomFormGroup = this.formBuilder.group({
-      nameCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${this.classroom.name}` : this.classroom.name, Validators.required],
+      nameCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${this.classroom.name}` : this.classroom.name || '', Validators.required],
       studentListCtrl: [this.studentIdList || []]
     })
 
     // Listen name changes
-    this.onClassroomChange()
+    this.checkIfNameIsTaken()
 
     // If edit
     if (this.classroom.id) {
@@ -55,24 +57,36 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
   ngOnInit() { }
 
-  onClassroomChange() {
+  checkIfNameIsTaken() {
     const nameCtrl = this.classroomFormGroup.controls.nameCtrl
 
-    this.classroomNameSubscription = nameCtrl.valueChanges
-      .subscribe(() => this.validatingName = true)
+    // First time
+    if (this.data.isClone) {
+      this.classroomService.queryClassroom(UtilService.capitalize(nameCtrl.value))
+        .pipe(
+          first(),
+          tap(() => this.validatingName = true),
+          debounceTime(500)
+        ).subscribe(this.isNameTaken)
+    }
 
+    // Control changes
     this.queryClassroomNameSubscription = nameCtrl.valueChanges
       .pipe(
+        tap(() => this.validatingName = true),
         debounceTime(500),
         switchMap(() => this.classroomService.queryClassroom(UtilService.capitalize(nameCtrl.value)))
-      ).subscribe((result: any) => {
-        if (result.length && this.data.entity.name !== result[0].payload.doc.data().name) {
-          nameCtrl.setErrors({ nameTaken: true })
-        }
-        nameCtrl.setErrors(nameCtrl.errors)
-        nameCtrl.markAsTouched()
-        this.validatingName = false
-      })
+      ).subscribe(this.isNameTaken)
+  }
+
+  isNameTaken = (result: any) => {
+    const nameCtrl = this.classroomFormGroup.controls.nameCtrl
+    if (result.length && (this.classroom.id !== result[0].payload.doc.id)) {
+      nameCtrl.setErrors({ nameTaken: true })
+    }
+    nameCtrl.setErrors(nameCtrl.errors)
+    nameCtrl.markAsTouched()
+    this.validatingName = false
   }
 
   async queryEnrrolledStudents(): Promise<any> {
@@ -169,7 +183,6 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.classroomNameSubscription.unsubscribe()
     this.queryClassroomNameSubscription.unsubscribe()
   }
 }

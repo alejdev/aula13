@@ -1,8 +1,9 @@
 <form [formGroup]="classroomFormGroup" autocomplete="off" class="mat-typography">
-  <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
+  <header class="dialog-header padding-content-h pt-1 pb-1" [ngClass]="{'height-auto': !isTruncated}" fxLayout="row" fxLayoutAlign="space-between center">
     <!-- Title -->
-    <h2 class="m-0" mat-dialog-title>
-      {{(data.isClone ? 'CLONE_CLASSROOM' : data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}
+    <h2 class="m-0 pointer dialog-title" [ngClass]="{truncate: !isTruncated}" (click)="isTruncated=!isTruncated" fxFlex="calc(100% - 40px)">
+      <!-- {{(data.isClone ? 'CLONE_CLASSROOM' : data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}} -->
+      {{(classroomFormGroup?.value.nameCtrl ? classroomFormGroup?.value.nameCtrl : data.isClone ? 'CLONE_CLASSROOM' : data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}
     </h2>
 
     <!-- Close dialog -->
