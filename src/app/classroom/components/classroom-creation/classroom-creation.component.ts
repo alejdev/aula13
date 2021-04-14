@@ -27,8 +27,6 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   queryClassroomNameFirstTimeSubscription: Subscription
   validatingName: boolean
 
-  isTruncated: boolean
-
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,

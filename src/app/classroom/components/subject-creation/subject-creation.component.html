@@ -1,7 +1,7 @@
 <form [formGroup]="subjectFormGroup" autocomplete="off" class="mat-typography">
-  <header class="dialog-header padding-content-h pt-1 pb-1" [ngClass]="{'height-auto': !isTruncated}" fxLayout="row" fxLayoutAlign="space-between center">
+  <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
     <!-- Title -->
-    <h2 class="m-0 pointer dialog-title" [ngClass]="{truncate: !isTruncated}" (click)="isTruncated=!isTruncated" fxFlex="calc(100% - 40px)">
+    <h2 class="m-0 dialog-title truncate" fxFlex="calc(100% - 40px)">
       <!-- {{(data.isClone ? 'CLONE_SUBJECT' : data?.entity?.id ? 'EDIT_SUBJECT' : 'CREATE_SUBJECT') | translate}} -->
       {{(subjectFormGroup?.value.nameCtrl ? subjectFormGroup?.value.nameCtrl : data.isClone ? 'CLONE_SUBJECT' : data?.entity?.id ? 'EDIT_SUBJECT' : 'CREATE_SUBJECT') | translate}}
     </h2>

@@ -27,8 +27,6 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   querySubjectNameFirstTimeSubscription: Subscription
   validatingName: boolean
 
-  isTruncated: boolean
-
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,
