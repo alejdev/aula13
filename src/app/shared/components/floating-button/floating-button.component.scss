@@ -1,7 +1,7 @@
 .floating-button {
   position: fixed;
   bottom: 5rem;
-  right: calc((100% - var(--main-sm-size)) / 2 + var(--main-padding-size));
+  // right: calc((100% - var(--main-sm-size)) / 2 + var(--main-padding-size));
   z-index: 1;
   height: 4rem;
   width: 4rem;
@@ -9,6 +9,7 @@
   cursor: pointer;
   animation-duration: 1.6s;
   animation-iteration-count: infinite;
+  transition: right .2s;
 
   &:hover {
     animation-name: pulse-animation, pulse-main;
@@ -36,10 +37,4 @@
   position: relative;
   top: 1px;
   margin-left: 5px;
-}
-
-@media only screen and (max-width: 960px) {
-  .floating-button {
-    right: 1.75rem;
-  }
 }

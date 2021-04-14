@@ -3,7 +3,7 @@
     <!-- Title -->
     <h2 class="m-0 pointer" [ngClass]="{truncate: !isTruncated}" (click)="isTruncated=!isTruncated" fxFlex="calc(100% - 140px)">
       <!-- {{(data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}} -->
-      {{(studentFormGroup?.controls?.personalFormGroup?.controls?.nameCtrl?.value ? studentFormGroup?.controls?.personalFormGroup?.controls?.nameCtrl?.value : data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
+      {{(studentFormGroup?.value?.personalFormGroup?.nameCtrl ? studentFormGroup?.value?.personalFormGroup?.nameCtrl : data.isClone ? 'DAY.CLONE' : data.idDay ? 'DAY.EDIT' : 'DAY.ADD') | translate}}
     </h2>
 
     <!-- Favorite -->

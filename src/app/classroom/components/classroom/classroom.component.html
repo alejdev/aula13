@@ -1,12 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
 
   <!-- Side-menu -->
-  <mat-sidenav #sideMenu class="sidenav border-0" mode="over" [fixedInViewport]="true" [autoFocus]="false">
+  <mat-sidenav #sideMenu class="sidenav border-0" [mode]="mobileQueryL.matches ? 'over' : 'side'" [opened]="!mobileQueryL.matches" [fixedInViewport]="true" [autoFocus]="false">
     <a13-side-menu></a13-side-menu>
   </mat-sidenav>
 
   <!-- Content -->
-  <mat-sidenav-content id="main-content-container">
+  <mat-sidenav-content id="main-content-container" [ngClass]="(sidenavStatus$ | async) === true ? 'sidenav-opened' : 'sidenav-closed'">
     <div class="main-content overflow-scroll-container" fxLayout="column">
       <!-- Header -->
       <a13-header></a13-header>

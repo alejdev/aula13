@@ -1,5 +1,5 @@
 mat-sidenav-container.sidenav-container {
-  height: calc(var(--vh, 1vh) * 100 - var(--main-header-size));
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 mat-sidenav.sidenav {
@@ -8,9 +8,9 @@ mat-sidenav.sidenav {
 }
 
 #main-content-container {
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 .main-content {
-  padding-top: var(--main-header-size);
+  // padding-top: var(--main-header-size);
 }

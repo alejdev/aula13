@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { MatSidenav } from '@angular/material'
 
 @Component({
   selector: 'a13-footer-toolbar',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core'
 })
 export class FooterToolbarComponent implements OnInit {
 
-  @Input() sidenav: any
+  @Input() sidenav: MatSidenav
 
   toolbarItems: any = [{
     name: 'STUDENTS',

@@ -1,5 +1,5 @@
 import * as Hammer from 'hammerjs'
-import { Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 
@@ -19,6 +19,10 @@ export class ClassroomComponent implements OnInit, OnDestroy {
 
   routerSubscription: Subscription
   themeSubscription: Subscription
+  sidenavStatus$: Observable<any>
+
+  public sidenavOpened: boolean
+  public mobileQueryL: MediaQueryList
 
   constructor(
     private elementRef: ElementRef,
@@ -29,6 +33,9 @@ export class ClassroomComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    // Event listender for toggle menu on mobile
+    this.mobileQueryL = window.matchMedia('(max-width: 1280px)')
+
     // Swipe sideMenu on mobile
     if (this.settingService.value.canPanSideMenu) {
       const mc = new Hammer.Manager(this.elementRef.nativeElement, {})
@@ -37,12 +44,14 @@ export class ClassroomComponent implements OnInit, OnDestroy {
       mc.on('panleft', (ev: any) => this.sideMenu.close())
     }
 
+    this.sidenavStatus$ = this.sideMenu.openedChange
+
     // Storage settings on first time
     this.settingService.value = this.settingService.value
 
     // Detecting Router Changes
     this.routerSubscription = this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
+      if (event instanceof NavigationStart && this.mobileQueryL.matches) {
         this.sideMenu.close()
       }
     })

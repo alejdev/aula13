@@ -11,13 +11,13 @@
   }
 
   .nav-list {
-    max-height: calc(100vh - 80px - 4rem - 61px);
+    max-height: calc(var(--vh, 1vh) * 100 - 80px - 4rem - 61px);
   }
 }
 
 a[mat-list-item].active span,
 a[mat-list-item].active fa-icon {
-  color: var(--light-theme-primary)
+  color: var(--light-theme-primary);
 }
 
 .mat-menu-item fa-icon {

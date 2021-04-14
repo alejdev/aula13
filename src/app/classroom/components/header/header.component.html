@@ -1,4 +1,4 @@
-<mat-toolbar class="header" [ngClass]="{'height-auto': !isTruncated}" [color]="themeName">
+<mat-toolbar class="header stiky-top" [ngClass]="{'height-auto': !isTruncated}" [color]="themeName">
 
   <div class="container-max sm relative" fxLayout="row" fxLayoutAlign="start center">
 
@@ -16,7 +16,7 @@
     <span *ngIf="headerConfig?.length | typeOf:'number'" class="title translucide list-count ml-h"> | {{headerConfig?.length}}</span>
 
     <!-- Logo -->
-    <a13-title-logo class="fixed title-logo" [config]="logoConfig"></a13-title-logo>
+    <a13-title-logo class="title-logo" [config]="logoConfig"></a13-title-logo>
 
     <!-- Spacer -->
     <span fxFlex></span>
