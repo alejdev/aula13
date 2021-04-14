@@ -2,9 +2,11 @@ import { combineLatest, Observable, Subscription } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
+import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/core.module'
@@ -32,6 +34,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   data$: Observable<any>
+  badges$: Subscription
   router$: Subscription
 
   dayListFiltered: any[]
@@ -59,6 +62,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
     private dayService: DayService,
+    private classroomService: ClassroomService,
+    private subjectService: SubjectService,
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
     private loaderService: LoaderService
@@ -66,11 +71,27 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
 
   ngOnInit(): void {
     // Observe new params
+    this.loadBadges()
     this.router$ = this.activatedRoute.params.subscribe(params => this.loadData(params.id))
   }
 
   ngAfterViewChecked(): void {
     this.cdRef.detectChanges()
+  }
+
+  loadBadges(): void {
+    const classroomList$ = this.classroomService.observeClassroomList()
+    const subjectList$ = this.subjectService.observeSubjectList()
+
+    this.badges$ = combineLatest([classroomList$, subjectList$]).pipe(
+      map((result) => ({
+        classroomList: UtilService.mapCollection(result[0]),
+        subjectList: UtilService.mapCollection(result[1])
+      }))
+    ).subscribe((result) => {
+      this.classroomService.cachedClassrooms = result.classroomList
+      this.subjectService.cachedSubjects = result.subjectList
+    })
   }
 
   loadData(studentId: string): void {
@@ -229,5 +250,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
 
   ngOnDestroy(): void {
     this.router$.unsubscribe()
+    this.badges$.unsubscribe()
   }
 }

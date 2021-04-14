@@ -36,7 +36,7 @@
     </mat-form-field>
 
     <!-- Subjects -->
-    <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="49">
+    <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="49" color="accent">
       <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
       <mat-select multiple [(ngModel)]="subjectsFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
         <mat-option *ngFor="let subject of subjectList" [value]="subject.id">

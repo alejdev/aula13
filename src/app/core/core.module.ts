@@ -98,6 +98,17 @@ export const SKELETON_CONFIG: any = {
     { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
     { theme: { 'max-width': '75%', height: '12px', 'margin-bottom': '0' } },
   ],
+  sidenav: [
+    { theme: { height: '30px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '80%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '60%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '70%', height: '20px', 'margin-bottom': '30px' } },
+    { theme: { height: '30px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '60%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '50%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '75%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '65%', height: '20px', 'margin-bottom': '30px' } },
+  ]
 }
 
 @NgModule({

@@ -15,13 +15,32 @@
   }
 }
 
-a[mat-list-item].active span,
-a[mat-list-item].active fa-icon {
-  color: var(--light-theme-primary);
+a[mat-list-item].active {
+
+  &.primary {
+
+    span,
+    fa-icon {
+      color: var(--light-theme-primary);
+    }
+  }
+
+  &.accent {
+
+    span,
+    fa-icon {
+      color: var(--light-theme-accent);
+    }
+  }
 }
 
 .mat-menu-item fa-icon {
   position: relative;
   top: 1px;
   margin-right: 10px;
+}
+
+.list-count {
+  white-space: nowrap;
+  text-align: right;
 }

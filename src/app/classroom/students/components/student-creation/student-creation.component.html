@@ -202,7 +202,7 @@
         <!-- Subjects -->
         <div class="mb-1" fxLayout="column" fxFlex="50" fxFlex.xs="100">
           <ng-container *ngIf="subjectList$ | async as subjectList">
-            <mat-form-field *ngIf="subjectList.length" [appearance]="'inputAppearance' | settingValue">
+            <mat-form-field *ngIf="subjectList.length" [appearance]="'inputAppearance' | settingValue" color="accent">
               <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
               <mat-select formControlName="subjectsCtrl" multiple attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
                 <mat-option *ngFor="let subject of subjectList" [value]="subject.id">

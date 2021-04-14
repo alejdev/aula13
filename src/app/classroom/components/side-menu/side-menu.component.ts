@@ -1,17 +1,18 @@
-import { Subscription } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { combineLatest, Observable } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
-import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/core.module'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
 import { indicatorRotate } from '../../classroom.animation'
+import { StudentService } from '../../services/student.service'
 import { ClassroomCreationComponent } from '../classroom-creation/classroom-creation.component'
 import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
 import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
@@ -24,13 +25,13 @@ import { LogoConfig } from '../title-logo/title-logo.component'
   styleUrls: ['./side-menu.component.scss'],
   animations: [indicatorRotate]
 })
-export class SideMenuComponent implements OnInit, OnDestroy {
+export class SideMenuComponent implements OnInit {
 
   title = 'Aula 13'
   user: any
 
-  classroomList$: Subscription
-  subjectList$: Subscription
+  data$: Observable<any>
+  skeleton: any = SKELETON_CONFIG
 
   logoConfig: LogoConfig = {
     showLogo: true,
@@ -42,18 +43,22 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   }
 
   menuItems = [[{
+    id: 'classroomList',
     name: 'CLASSROOMS',
     tooltip: 'CREATE_CLASSROOM',
     icon: 'chalkboard',
+    color: 'primary',
     expanded: true,
     create: ClassroomCreationComponent,
     delete: ClassroomDeleteDialogComponent,
     model: ModelService.classroomModel,
     children: null
   }, {
+    id: 'subjectList',
     name: 'SUBJECTS',
     tooltip: 'CREATE_SUBJECT',
     icon: 'book',
+    color: 'accent',
     expanded: true,
     create: SubjectCreationComponent,
     delete: SubjectDeleteDialogComponent,
@@ -81,6 +86,7 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private classroomService: ClassroomService,
     private subjectService: SubjectService,
+    private studentService: StudentService,
     private dialog: MatDialog,
     private router: Router,
   ) { }
@@ -90,21 +96,30 @@ export class SideMenuComponent implements OnInit, OnDestroy {
     // Set user
     this.setUserLogged()
 
-    this.classroomList$ = this.classroomService.observeClassroomList().pipe(
-      map((result) => UtilService.mapCollection(result)
-        .map((elem) => ({ filter: 'classroomsFilter', ...elem })))
-    ).subscribe((classroomList) => {
-      this.menuItems[0][0].children = classroomList
-      this.classroomService.cachedClassrooms = classroomList
-    })
+    const classroomList$ = this.classroomService.observeClassroomList()
+    const subjectList$ = this.subjectService.observeSubjectList()
+    const studentList$ = this.studentService.observeStudentList()
 
-    this.subjectList$ = this.subjectService.observeSubjectList().pipe(
-      map((result) => UtilService.mapCollection(result)
-        .map((elem) => ({ filter: 'subjectsFilter', ...elem })))
-    ).subscribe((subjectList) => {
-      this.menuItems[0][1].children = subjectList
-      this.subjectService.cachedSubjects = subjectList
-    })
+    this.data$ = combineLatest([studentList$, classroomList$, subjectList$]).pipe(
+      tap((result) => {
+        const studentList = UtilService.mapCollection(result[0])
+        const classroomList = UtilService.mapCollection(result[1]).map((classroom) => ({
+          ...classroom,
+          filter: 'classroomsFilter',
+          studentList: studentList.filter((elem: any) => elem.classroom.classrooms.some((classroomId) => classroomId === classroom.id))
+        }))
+        const subjectList = UtilService.mapCollection(result[2]).map((subject) => ({
+          ...subject,
+          filter: 'subjectsFilter',
+          studentList: studentList.filter((elem: any) => elem.classroom.subjects.some((subjectId) => subjectId === subject.id))
+        }))
+        this.menuItems[0][0].children = classroomList
+        this.menuItems[0][1].children = subjectList
+        this.classroomService.cachedClassrooms = classroomList
+        this.subjectService.cachedSubjects = subjectList
+        return { classroomList, subjectList }
+      })
+    )
   }
 
   async setUserLogged(): Promise<any> {
@@ -163,10 +178,5 @@ export class SideMenuComponent implements OnInit, OnDestroy {
         })
         break
     }
-  }
-
-  ngOnDestroy(): void {
-    this.classroomList$.unsubscribe()
-    this.subjectList$.unsubscribe()
   }
 }
