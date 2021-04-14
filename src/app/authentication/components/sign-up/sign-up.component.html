@@ -3,7 +3,7 @@
   <!-- Email -->
   <mat-form-field class="mb-q" [appearance]="'inputAppearance' | settingValue">
     <mat-label>{{'EMAIL' | translate}}</mat-label>
-    <input matInput type="text" required formControlName="email">
+    <input matInput tabindex="1" type="text" required formControlName="email">
     <button mat-button *ngIf="formGroup.controls.email.value" matSuffix mat-icon-button attr.aria-label="{{'RESET_EMAIL' | translate}}" (click)="formGroup.controls.email.reset()">
       <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
     </button>
@@ -16,7 +16,7 @@
     <!-- Password -->
     <mat-form-field class="mb-h" [appearance]="'inputAppearance' | settingValue">
       <mat-label>{{'PASSWORD' | translate}}</mat-label>
-      <input matInput type="{{passwordType}}" required formControlName="password">
+      <input matInput tabindex="2" type="{{passwordType}}" required formControlName="password">
       <button mat-button *ngIf="formGroup.controls.password.value" matSuffix mat-icon-button attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}" (click)="togglePasswordVisibility()">
         <fa-icon class="mat-icon-20 mat-hint" [icon]="passwordType === 'password' ? 'eye' : 'eye-slash'">
         </fa-icon>
@@ -28,7 +28,7 @@
     <!-- Confirm password -->
     <mat-form-field class="mb-h" [appearance]="'inputAppearance' | settingValue">
       <mat-label>{{'CONFIRM_PASSWORD' | translate}}</mat-label>
-      <input matInput type="{{passwordType}}" required formControlName="confirmPassword">
+      <input matInput tabindex="3" type="{{passwordType}}" required formControlName="confirmPassword">
       <button mat-button *ngIf="formGroup.controls.confirmPassword.value" matSuffix mat-icon-button attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}" (click)="togglePasswordVisibility()">
         <fa-icon class="mat-icon-20 mat-hint" [icon]="passwordType === 'password' ? 'eye' : 'eye-slash'">
         </fa-icon>
@@ -41,7 +41,7 @@
 
   <!-- Sign Up button -->
   <div class="mb-1" action="row" fxLayoutAlign="space-between center">
-    <button class="sign-button" fxFlex="100" mat-flat-button color="primary" (click)="signUpWithEmail()" attr.arial-label="{{'SIGN.UP'| translate}}">
+    <button tabindex="4" class="sign-button" fxFlex="100" mat-flat-button color="primary" (click)="signUpWithEmail()" attr.arial-label="{{'SIGN.UP'| translate}}">
       <div class="pt-H">{{'SIGN.UP' | translate}}</div>
     </button>
   </div>
@@ -49,7 +49,7 @@
 
 <!-- SignUp RS buttons -->
 <div fxLayout="row" fxLayoutGap="1rem">
-  <button fxFlex="33" *ngFor="let social of signInSocialNetworks" mat-stroked-button (click)="signUpWithSocial(social.id)" attr.arial-label="{{social.txt | translate}}">
+  <button tabindex="{{5+i}}" fxFlex="33" *ngFor="let social of signInSocialNetworks; let i = index" mat-stroked-button (click)="signUpWithSocial(social.id)" attr.arial-label="{{social.txt | translate}}">
     <img [src]="'/assets/svgs/social/' + social.icon + '.svg'" class="mat-icon-24" [alt]="'Logo ' + social.id">
   </button>
 </div>
@@ -57,5 +57,5 @@
 <!-- Go to SignIn button -->
 <div class="mt-1" fxLayout="row" fxLayoutAlign="end center">
   <span class="mat-body mat-hint mr-h">{{'MSG.YES_ACCOUNT' | translate}}</span>
-  <button mat-button color="accent" [routerLink]="['/authentication/signIn']" attr.arial-label="{{'SIGN.UP' | translate}}">{{'SIGN.IN' | translate}}</button>
+  <button tabindex="8" mat-button color="accent" [routerLink]="['/authentication/signIn']" attr.arial-label="{{'SIGN.UP' | translate}}">{{'SIGN.IN' | translate}}</button>
 </div>
