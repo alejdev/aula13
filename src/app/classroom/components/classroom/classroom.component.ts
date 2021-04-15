@@ -1,39 +1,13 @@
 import { Observable, Subscription } from 'rxjs'
+import { OPACITY, SLIDE_LEFT, SLIDE_RIGHT } from 'src/app/core/core.module'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { animate, group, query, style, transition, trigger } from '@angular/animations'
+import { style, transition, trigger } from '@angular/animations'
 import { Component, HostBinding, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatSidenav } from '@angular/material/sidenav'
 import { Event, NavigationStart, Router, RouterOutlet } from '@angular/router'
-
-const slideLeft = [
-  query(':leave', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(0%,0,0)' }), { optional: true }),
-  query(':enter', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(-100%,0,0)' }), { optional: true }),
-  group([
-    query(':leave', group([
-      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(100%,0,0)' })), // y: '-100%'
-    ]), { optional: true }),
-    query(':enter', group([
-      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(0%,0,0)' })),
-    ]), { optional: true })
-  ])
-]
-
-const slideRight = [
-  query(':leave', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(0%,0,0)' }), { optional: true }),
-  query(':enter', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(100%,0,0)' }), { optional: true }),
-
-  group([
-    query(':leave', group([
-      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(-100%,0,0)' })), // y: '-100%'
-    ]), { optional: true }),
-    query(':enter', group([
-      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(0%,0,0)' })),
-    ]), { optional: true })
-  ])
-]
 
 @Component({
   selector: 'a13-classroom',
@@ -41,8 +15,9 @@ const slideRight = [
   styleUrls: ['./classroom.component.scss'],
   animations: [
     trigger('routerAnimations', [
-      transition('students => daily', slideRight),
-      transition('daily => students', slideLeft),
+      transition('students => daily', SLIDE_RIGHT),
+      transition('daily => students', SLIDE_LEFT),
+      transition('* => *', OPACITY),
     ])
   ]
 })
@@ -108,9 +83,10 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     this.selectedTab = UtilService.regExp.dayListUrl.test(this.router.url) ? 1 : 0
   }
 
-  prepareRouteTransition(outlet: RouterOutlet): string | null {
-    const animation = outlet.activatedRouteData.animation || {}
-    return animation.value || null
+  prepareRouteTransition(outlet: RouterOutlet): string {
+    return outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData.animation
   }
 
   setDocHeight(): void {

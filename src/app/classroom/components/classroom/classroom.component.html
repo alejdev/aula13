@@ -6,14 +6,14 @@
   </mat-sidenav>
 
   <!-- Content -->
-  <mat-sidenav-content id="main-content-container" [ngClass]="(sidenavStatus$ | async) === true ? 'sidenav-opened' : 'sidenav-closed'">
+  <mat-sidenav-content id="main-content-container">
     <div class="main-content overflow-scroll-container" fxLayout="column">
       <!-- Header -->
       <a13-header></a13-header>
 
       <!-- Router -->
-      <main class="main-content-bg overflow-scroll mat-typography" [@routerAnimations]="prepareRouteTransition(o)">
-        <router-outlet #o="outlet"></router-outlet>
+      <main class="main-content-bg overflow-scroll mat-typography relative" [@routerAnimations]="prepareRouteTransition(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
       </main>
 
       <!-- Footer toolbar -->

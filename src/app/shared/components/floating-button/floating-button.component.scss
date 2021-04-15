@@ -1,7 +1,7 @@
 .floating-button {
-  position: fixed;
-  bottom: 5rem;
-  // right: calc((100% - var(--main-sm-size)) / 2 + var(--main-padding-size));
+  position: absolute;
+  bottom: 2rem;
+  right: calc((100% - var(--main-sm-size)) / 2 + var(--main-padding-size));
   z-index: 1;
   height: 4rem;
   width: 4rem;

@@ -75,26 +75,6 @@ $fonts: (
   @include set-map($sizes);
 }
 
-// Media queries
-@media only screen and (min-width: 1280px) {
-  .sidenav-closed .floating-button {
-    right: calc((100% - var(--main-sm-size)) / 2 + var(--main-padding-size));
-  }
-
-  // Floating button when sidemeu is opened
-  .sidenav-opened .floating-button {
-    right: calc((100% - var(--main-sm-size) - var(--main-sidemenu-size)) / 2 + var(--main-padding-size));
-  }
-}
-
-@media only screen and (max-width: 1280px) {
-
-  // Floating button when sidemeu is opened
-  .floating-button {
-    right: calc((100% - var(--main-sm-size)) / 2 + var(--main-padding-size));
-  }
-}
-
 @media only screen and (max-width: 960px) {
   :root {
     --main-padding-size: 1.2rem;

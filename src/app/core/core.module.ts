@@ -1,5 +1,6 @@
 import { environment } from 'src/environments/dev'
 
+import { animate, group, query, style } from '@angular/animations'
 import { CommonModule } from '@angular/common'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
@@ -111,6 +112,46 @@ export const SKELETON_CONFIG: any = {
     { theme: { 'max-width': '65%', height: '20px', 'margin-bottom': '30px' } },
   ]
 }
+
+export const OPACITY = [
+  query(':leave', style({ position: 'absolute', left: 0, right: 0, opacity: 1 }), { optional: true }),
+  query(':enter', style({ position: 'absolute', left: 0, right: 0, opacity: 0 }), { optional: true }),
+  group([
+    query(':leave', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 0 })), // y: '-100%'
+    ]), { optional: true }),
+    query(':enter', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 1 })),
+    ]), { optional: true })
+  ])
+]
+
+export const SLIDE_LEFT = [
+  query(':leave', style({ position: 'absolute', left: 0, right: 0, opacity: 1, transform: 'translate3d(0%,0,0)' }), { optional: true }),
+  query(':enter', style({ position: 'absolute', left: 0, right: 0, opacity: 0, transform: 'translate3d(-100%,0,0)' }), { optional: true }),
+  group([
+    query(':leave', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 0, transform: 'translate3d(100%,0,0)' })), // y: '-100%'
+    ]), { optional: true }),
+    query(':enter', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 1, transform: 'translate3d(0%,0,0)' })),
+    ]), { optional: true })
+  ])
+]
+
+export const SLIDE_RIGHT = [
+  query(':leave', style({ position: 'absolute', left: 0, right: 0, opacity: 1, transform: 'translate3d(0%,0,0)' }), { optional: true }),
+  query(':enter', style({ position: 'absolute', left: 0, right: 0, opacity: 0, transform: 'translate3d(100%,0,0)' }), { optional: true }),
+
+  group([
+    query(':leave', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 0, transform: 'translate3d(-100%,0,0)' })), // y: '-100%'
+    ]), { optional: true }),
+    query(':enter', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ opacity: 1, transform: 'translate3d(0%,0,0)' })),
+    ]), { optional: true })
+  ])
+]
 
 @NgModule({
   imports: [

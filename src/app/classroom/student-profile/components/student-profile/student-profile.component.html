@@ -157,10 +157,6 @@
 
             <!-- Empty list messages -->
             <a13-empty-list *ngIf="data?.dayList" [list]="data?.dayList" [listFiltered]="dayListFiltered" listMessage="MSG.STUDENT_DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
-
-            <!-- Floating button -->
-            <a13-floating-button [pulse]="!data?.dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" (click)="createDay(data?.student)">
-            </a13-floating-button>
           </div>
         </div>
       </mat-tab>
@@ -175,5 +171,9 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+
+    <!-- Floating button -->
+    <a13-floating-button [pulse]="!data?.dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" (click)="createDay(data?.student)">
+    </a13-floating-button>
   </div>
 </section>

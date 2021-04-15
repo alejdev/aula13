@@ -4,7 +4,7 @@
 
   &-padd {
     padding: var(--main-padding-size);
-    max-height: calc(var(--vh, 1vh) * 100 - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
+    height: calc(var(--vh, 1vh) * 100 - var(--main-padding-size) * 2 - var(--main-header-size) * 2);
   }
 
   &-nopadd {
