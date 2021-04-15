@@ -85,9 +85,9 @@ export class DayListComponent implements OnInit, AfterViewChecked {
     if (!this.studentList.length) {
       this.toastService.warning({
         text: 'MSG.DAY_CREATION_DISABLED_NO_STUDENTS',
-        action: {
+        navigate: {
           text: 'ADD_STUDENT',
-          f: () => this.router.navigate(['/classroom/students'])
+          route: ['classroom/students']
         }
       })
     } else {

@@ -3,7 +3,7 @@
   <div [ngSwitch]="true" [ngClass]="data?.type" fxLayout="row" fxLayoutAlign="start center">
 
     <!-- Icon -->
-    <fa-icon class="mat-icon-18 mr-1" [icon]="data?.icon || 'info'"></fa-icon>
+    <fa-icon class="mat-icon-20 mr-1" [icon]="data?.icon || 'info'"></fa-icon>
 
     <!-- Welcome -->
     <span *ngSwitchCase="data?.type === 'welcome'" class="info">
@@ -19,15 +19,15 @@
     <span *ngSwitchDefault fxLayout="row">
       {{ data?.text | translate }}
     </span>
+  </div>
 
-    <!-- Spacer -->
-    <span fxFlex></span>
+  <!-- Spacer -->
+  <!-- <span fxFlex></span> -->
 
-    <div class="pl-q" fxFLex="nogrow">
-      <!-- buttons -->
-      <button *ngIf="!data?.navigate && !data?.action" mat-button (click)="close()">{{'OK' | translate}}</button>
-      <button *ngIf="data?.navigate" mat-flat-button color="primary" [routerLink]="data?.navigate?.route" [queryParams]="data?.navigate?.queryParams" (click)="close()">{{data?.navigate?.text | translate}}</button>
-      <button *ngIf="data?.action" mat-flat-button color="accent" (click)="data?.action?.f(); snackRef.dismiss()">{{data?.action?.text | translate}}</button>
-    </div>
+  <div fxLayoutAlign="end" class="mt-1">
+    <!-- buttons -->
+    <button mat-button (click)="close()">{{'OK' | translate}}</button>
+    <button *ngIf="data?.navigate" class="ml-h" mat-flat-button color="primary" [routerLink]="data?.navigate?.route" [queryParams]="data?.navigate?.queryParams" (click)="close()">{{data?.navigate?.text | translate}}</button>
+    <button *ngIf="data?.action" class="ml-h" mat-flat-button color="accent" (click)="data?.action?.fn(); snackRef.dismiss()">{{data?.action?.text | translate}}</button>
   </div>
 </div>

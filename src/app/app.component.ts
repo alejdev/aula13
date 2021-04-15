@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
           text: 'MSG.APP_UPDATE_READY',
           action: {
             text: 'REFRESH',
-            f: () => window.location.reload()
+            fn: () => window.location.reload()
           }
         }, { duration: undefined })
       })

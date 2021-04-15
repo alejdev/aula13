@@ -23,5 +23,4 @@ export class ToastComponent implements OnInit {
   close() {
     this.snackRef.dismiss()
   }
-
 }
