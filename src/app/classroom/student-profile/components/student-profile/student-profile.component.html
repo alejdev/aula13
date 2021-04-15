@@ -112,7 +112,7 @@
         </div>
 
         <!-- More Info button-->
-        <a class="link mat-small pointer" (click)="showMore()">
+        <a *ngIf="student?.musical?.teacher || student?.personal?.birthdate || student?.personal?.observations || student?.personal?.observations" class="link mat-small pointer" (click)="showMore()">
           {{moreInfoConfig.text | translate}}
           <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
         </a>
