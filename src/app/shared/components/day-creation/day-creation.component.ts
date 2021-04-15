@@ -79,10 +79,7 @@ export class DayCreationComponent implements OnInit {
   }
 
   toggleBooleanCrl(control: string): void {
-    if (!this.dayFormGroup.dirty) {
-      this.dayFormGroup.markAsDirty()
-      this.dayFormGroup.markAsTouched()
-    }
+    if (!this.dayFormGroup.dirty) { this.dayFormGroup.markAsDirty() }
     const formCtrl = this.dayFormGroup.get(control)
     formCtrl.setValue(!formCtrl.value)
   }

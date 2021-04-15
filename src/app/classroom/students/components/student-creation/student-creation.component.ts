@@ -166,10 +166,7 @@ export class StudentCreationComponent implements OnInit {
   }
 
   markFormAsDirty(): void {
-    if (!this.studentFormGroup.dirty) {
-      this.studentFormGroup.markAsDirty()
-      this.studentFormGroup.markAsTouched()
-    }
+    if (!this.studentFormGroup.dirty) { this.studentFormGroup.markAsDirty() }
   }
 
   save(): void {

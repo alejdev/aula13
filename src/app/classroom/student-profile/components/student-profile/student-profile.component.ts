@@ -37,6 +37,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   badges$: Subscription
   router$: Subscription
 
+  student: any
+
   dayListFiltered: any[]
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
@@ -101,10 +103,10 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     this.data$ = combineLatest([student$, dayList$]).pipe(
       tap(() => this.loaderService.load()),
       map((result) => {
-        const student = UtilService.mapDocument(result[0])
+        this.student = UtilService.mapDocument(result[0])
         const dayList = UtilService.mapCollection(result[1])
-          .map((day) => ({ ...day, hideStudent: true, student }))
-        return { student, dayList }
+          .map((day) => ({ ...day, hideStudent: true, student: this.student }))
+        return { student: this.student, dayList }
       }),
       tap((result) => {
         this.loaderService.down()
