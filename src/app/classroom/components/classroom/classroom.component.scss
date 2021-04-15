@@ -1,5 +1,11 @@
-mat-sidenav-container.sidenav-container {
-  height: calc(var(--vh, 1vh) * 100);
+mat-sidenav-container {
+  .sidenav-container {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+mat-sidenav-content {
+  overflow-x: hidden;
 }
 
 mat-sidenav.sidenav {

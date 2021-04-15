@@ -12,13 +12,15 @@ const routes: Routes = [{
     pathMatch: 'full'
   }, {
     path: 'daily',
-    loadChildren: () => import('./daily/daily.module').then(m => m.DailyModule)
+    loadChildren: () => import('./daily/daily.module').then(m => m.DailyModule),
+    data: { animation: { value: 'daily' } }
   }, {
     path: 'day/:id',
     loadChildren: () => import('./day-profile/day-profile.module').then(m => m.DayProfileModule)
   }, {
     path: 'students',
-    loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
+    loadChildren: () => import('./students/students.module').then(m => m.StudentsModule),
+    data: { animation: { value: 'students' } }
   }, {
     path: 'student/:id',
     loadChildren: () => import('./student-profile/student-profile.module').then(m => m.StudentProfileModule)

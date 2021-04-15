@@ -3,14 +3,48 @@ import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
+import { animate, group, query, style, transition, trigger } from '@angular/animations'
 import { Component, HostBinding, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatSidenav } from '@angular/material/sidenav'
-import { Event, NavigationStart, Router } from '@angular/router'
+import { Event, NavigationStart, Router, RouterOutlet } from '@angular/router'
+
+const slideLeft = [
+  query(':leave', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(0%,0,0)' }), { optional: true }),
+  query(':enter', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(-100%,0,0)' }), { optional: true }),
+  group([
+    query(':leave', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(100%,0,0)' })), // y: '-100%'
+    ]), { optional: true }),
+    query(':enter', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(0%,0,0)' })),
+    ]), { optional: true })
+  ])
+]
+
+const slideRight = [
+  query(':leave', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(0%,0,0)' }), { optional: true }),
+  query(':enter', style({ position: 'absolute', left: 0, right: 0, transform: 'translate3d(100%,0,0)' }), { optional: true }),
+
+  group([
+    query(':leave', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(-100%,0,0)' })), // y: '-100%'
+    ]), { optional: true }),
+    query(':enter', group([
+      animate('500ms cubic-bezier(.35,0,.25,1)', style({ transform: 'translate3d(0%,0,0)' })),
+    ]), { optional: true })
+  ])
+]
 
 @Component({
   selector: 'a13-classroom',
   templateUrl: './classroom.component.html',
-  styleUrls: ['./classroom.component.scss']
+  styleUrls: ['./classroom.component.scss'],
+  animations: [
+    trigger('routerAnimations', [
+      transition('students => daily', slideRight),
+      transition('daily => students', slideLeft),
+    ])
+  ]
 })
 export class ClassroomComponent implements OnInit, OnDestroy {
 
@@ -24,7 +58,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
   public sidenavOpened: boolean
   public mobileQueryL: MediaQueryList
 
-  selectedTab: number = 0
+  selectedTab: number
   tabCount: number = 2
   swipeCoord: [number, number]
   swipeTime: number
@@ -45,9 +79,12 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     // Storage settings on first time
     this.settingService.value = this.settingService.value
 
+    // Select default tab
+    this.setCurrentTab()
+
     // Detecting Router Changes
     this.routerSubscription = this.router.events.subscribe((event: Event) => {
-      this.selectedTab = UtilService.regExp.dayListUrl.test(this.router.url) ? 1 : 0
+      this.setCurrentTab()
       if (event instanceof NavigationStart && this.mobileQueryL.matches) {
         this.sideMenu.close()
       }
@@ -67,7 +104,16 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     addEventListener('orientationchange', this.setDocHeight)
   }
 
-  setDocHeight() {
+  setCurrentTab(): void {
+    this.selectedTab = UtilService.regExp.dayListUrl.test(this.router.url) ? 1 : 0
+  }
+
+  prepareRouteTransition(outlet: RouterOutlet): string | null {
+    const animation = outlet.activatedRouteData.animation || {}
+    return animation.value || null
+  }
+
+  setDocHeight(): void {
     document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`)
   }
 
