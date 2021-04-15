@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { LanguageService } from 'src/app/classroom/services/language.service'
-import { INPUT_APPEARANCE } from 'src/app/core/core.module'
+import { INPUT_APPEARANCE, InputAppearance } from 'src/app/core/core.module'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 
@@ -19,7 +19,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   langControl = new FormControl('', [])
   languages: any
   themeControl: any
-  inputAppearance: boolean
+  inputAppearance: InputAppearance
   themeIsDark: boolean
   canSlideSideMenu: boolean = this.settingService.value.canSlideSideMenu
   canSlideRoutes: boolean = this.settingService.value.canSlideRoutes

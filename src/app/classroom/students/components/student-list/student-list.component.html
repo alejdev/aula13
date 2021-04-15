@@ -12,7 +12,12 @@
       <a13-student-filters *ngIf="studentList?.length" [studentList]="studentList" (studentListFilter)="agroupStudents($event)"></a13-student-filters>
 
       <!-- Students list-->
-      <div *ngIf="studentListFiltered?.length">
+      <div [ngClass]="{'grid-layout': grid}" *ngIf="studentListFiltered?.length" class="relative mt-1">
+
+        <!-- Layout -->
+        <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="650" (click)="switchLayout()">
+          <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': grid}" [icon]="grid ? 'th' : 'list-ul'"></fa-icon>
+        </button>
 
         <!-- Favorites -->
         <div class="mb-1" *ngIf="favoriteListFiltered.length">
@@ -21,11 +26,11 @@
             <span class="translucide"> | {{favoriteListFiltered.length}}</span>
             <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.favorite.icon"></fa-icon>
           </button>
-          <ng-container *ngIf="toggleConfig.favorite.show">
+          <div class="card-container" *ngIf="toggleConfig.favorite.show">
             <ng-container *ngFor="let student of favoriteListFiltered">
-              <a13-student-card [(student)]="student" [fromUrl]="router.url"></a13-student-card>
+              <a13-student-card [grid]="grid" [(student)]="student" [fromUrl]="router.url"></a13-student-card>
             </ng-container>
-          </ng-container>
+          </div>
         </div>
 
         <!-- Rest students -->
@@ -35,11 +40,11 @@
             <span class="translucide"> | {{restListFiltered.length}}</span>
             <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.rest.icon"></fa-icon>
           </button>
-          <ng-container *ngIf="toggleConfig.rest.show">
+          <div class="card-container" *ngIf="toggleConfig.rest.show">
             <ng-container *ngFor="let student of restListFiltered">
-              <a13-student-card [(student)]="student" [fromUrl]="router.url"></a13-student-card>
+              <a13-student-card [grid]="grid" [(student)]="student" [fromUrl]="router.url"></a13-student-card>
             </ng-container>
-          </ng-container>
+          </div>
         </div>
 
         <!-- Archived students -->
@@ -49,11 +54,11 @@
             <span class="translucide"> | {{archiveListFiltered.length}}</span>
             <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.archived.icon"></fa-icon>
           </button>
-          <ng-container *ngIf="toggleConfig.archived.show">
+          <div class="card-container" *ngIf="toggleConfig.archived.show">
             <ng-container *ngFor="let student of archiveListFiltered">
-              <a13-student-card [(student)]="student" [fromUrl]="router.url"></a13-student-card>
+              <a13-student-card [grid]="grid" [(student)]="student" [fromUrl]="router.url"></a13-student-card>
             </ng-container>
-          </ng-container>
+          </div>
         </div>
       </div>
 

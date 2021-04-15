@@ -14,12 +14,13 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
 @Component({
   selector: 'a13-student-card',
   templateUrl: './student-card.component.html',
-  styleUrls: ['./student-card.component.scss']
+  styleUrls: ['./student-card.component.scss'],
 })
 export class StudentComponent implements OnInit {
 
   @Input() student: any = null
   @Input() fromUrl: string = null
+  @Input() grid: boolean
   mark: any = UtilService.mark
 
   menuOptions: any

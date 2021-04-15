@@ -156,6 +156,10 @@
     border: 1px solid transparent;
   }
 
+  &.badge-big {
+    padding: 9px 7px;
+  }
+
   &:first-child {
     margin-left: 0;
   }
@@ -174,6 +178,11 @@
 // Link
 .link {
   color: map-get(map-get($colors, other), link-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .link-accent {
