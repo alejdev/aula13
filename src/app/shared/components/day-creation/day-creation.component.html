@@ -19,7 +19,7 @@
     <div class="mb-q" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
 
       <!-- Student -->
-      <a13-select-student fxFlex="50" formControlName="dayStudentCtrl">
+      <a13-select-student [ngClass]="{'form-error': dayFormGroup.controls.dayStudentCtrl.hasError('required') && dayFormGroup.controls.dayStudentCtrl.touched}" fxFlex="50" formControlName="dayStudentCtrl">
       </a13-select-student>
 
       <!-- Date -->
@@ -43,7 +43,7 @@
     </mat-form-field>
 
     <!-- Content -->
-    <div class="angular-editor mt-1 pt-h pb-h " [ngClass]="{'ng-invalid': this.dayFormGroup.controls.dayContentCtrl.invalid, 'ng-touched': this.dayFormGroup.controls.dayContentCtrl.touched}">
+    <div class="angular-editor mt-1 pt-h pb-h " [ngClass]="{'ng-invalid': this.dayFormGroup.controls.dayContentCtrl.invalid, 'ng-touched': this.dayFormGroup.controls.dayStudentCtrl.touched}">
       <ckeditor id="ckeditor" [editor]="ckeditor" [config]="editorConfig" formControlName="dayContentCtrl">
       </ckeditor>
     </div>

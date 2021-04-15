@@ -87,6 +87,14 @@ ngx-skeleton-loader.skeleton .loader {
   }
 }
 
+.form-error .mat-form-field .mat-form-field-ripple,
+.form-error .mat-form-field .mat-form-field-ripple.mat-accent {
+  background-color: #f53838 !important;
+  opacity: 1;
+  transform: scaleX(1);
+  transition: opacity .6s cubic-bezier(.25, .8, .25, 1);
+}
+
 // CKEditor
 .angular-editor {
   width: 100%;
@@ -96,6 +104,7 @@ ngx-skeleton-loader.skeleton .loader {
 
     .ck-editor__editable {
       border-color: #f53838 !important;
+      transition: opacity .6s cubic-bezier(.25, .8, .25, 1);
     }
   }
 

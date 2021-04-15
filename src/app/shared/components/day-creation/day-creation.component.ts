@@ -86,7 +86,7 @@ export class DayCreationComponent implements OnInit {
 
   save(): void {
     // If save, mark dayContentCtrl as touched for error control in ckeditor
-    this.dayFormGroup.controls.dayContentCtrl.markAsTouched()
+    this.dayFormGroup.controls.dayStudentCtrl.markAsTouched()
 
     if (this.dayFormGroup.valid && (
       (this.data.idDay && !this.dayFormGroup.pristine) || // Edit && pristine
