@@ -40,7 +40,7 @@ export class DayArchiveDialogComponent implements OnInit {
 
   ok(): void {
     this.day.archived = !this.day.archived
-    this.dayService.updateDay(this.data.idDay, this.day)
+    this.dayService.updateDay(this.data.idDay, this.dayService.normalizeDay(this.day))
       .then((result: any) => {
         this.dialogRef.close(this.data.day)
         this.toastService.success({ text: this.textConfig.msgOk })

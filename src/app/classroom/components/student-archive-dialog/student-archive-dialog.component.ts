@@ -36,7 +36,7 @@ export class StudentArchiveDialogComponent implements OnInit {
 
   ok(): void {
     this.student.archived = !this.student.archived
-    this.studentService.updateStudent(this.data.idStudent, this.student)
+    this.studentService.updateStudent(this.data.idStudent, this.studentService.normalizeStudent(this.student))
       .then((result: any) => {
         this.dialogRef.close(this.data.student)
         this.toastService.success({ text: this.textConfig.msgOk })
