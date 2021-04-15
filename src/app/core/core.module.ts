@@ -22,6 +22,20 @@ export const DEFAULT_SETTINGS = {
   inputAppearance: 'fill'
 }
 
+export const INPUT_APPEARANCE: any[] = [{
+  name: 'SETTING.INPUT_APPEARANCE_DEFAULT',
+  id: 'standard',
+  icon: 'window-minimize'
+}, {
+  name: 'SETTING.INPUT_APPEARANCE_OUTLINE',
+  id: 'outline',
+  icon: 'border-style'
+}, {
+  name: 'SETTING.INPUT_APPEARANCE_FILL',
+  id: 'fill',
+  icon: 'square'
+}]
+
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY'

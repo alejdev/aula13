@@ -11,20 +11,6 @@ export class ModelService {
 
   public static ageList: number[] = Array(100).fill(0).map((e, i) => i + 1)
 
-  public static inputAppearances: any[] = [{
-    name: 'SETTING.INPUT_APPEARANCE_DEFAULT',
-    id: 'standard',
-    icon: 'grip-lines'
-  }, {
-    name: 'SETTING.INPUT_APPEARANCE_OUTLINE',
-    id: 'outline',
-    icon: 'border-style'
-  }, {
-    name: 'SETTING.INPUT_APPEARANCE_FILL',
-    id: 'fill',
-    icon: 'square'
-  }]
-
   public static signInSocialNetworks: any[] = [{
     txt: 'SIGN.IN_WITH_GOOGLE',
     icon: 'google-icon',

@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { LanguageService } from 'src/app/classroom/services/language.service'
-import { ModelService } from 'src/app/shared/services/model.service'
+import { INPUT_APPEARANCE } from 'src/app/core/core.module'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 
@@ -23,7 +23,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   themeIsDark: boolean
   canSlideSideMenu: boolean = this.settingService.value.canSlideSideMenu
   canSlideRoutes: boolean = this.settingService.value.canSlideRoutes
-  inputAppearances = ModelService.inputAppearances
+  inputAppearances = INPUT_APPEARANCE
   inputAppearanceIcon: string
 
   langSubscription: Subscription
