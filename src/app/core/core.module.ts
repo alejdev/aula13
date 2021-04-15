@@ -14,25 +14,43 @@ import { ServiceWorkerModule } from '@angular/service-worker'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 
-export const DEFAULT_SETTINGS = {
+export enum InputAppearance {
+  standard = 'standard',
+  outline = 'outline',
+  fill = 'fill'
+}
+
+export interface DefaultSettings {
+  theme?: number
+  lang?: string
+  canSlideSideMenu?: boolean
+  canSlideRoutes?: boolean
+  inputAppearance?: InputAppearance,
+  gridStudentLayout?: boolean
+  gridDailyLayout?: boolean
+}
+
+export const DEFAULT_SETTINGS: DefaultSettings = {
   theme: 0,
   lang: 'es',
   canSlideSideMenu: true,
   canSlideRoutes: true,
-  inputAppearance: 'fill'
+  inputAppearance: InputAppearance.fill,
+  gridStudentLayout: false,
+  gridDailyLayout: false
 }
 
 export const INPUT_APPEARANCE: any[] = [{
   name: 'SETTING.INPUT_APPEARANCE_DEFAULT',
-  id: 'standard',
+  id: InputAppearance.standard,
   icon: 'window-minimize'
 }, {
   name: 'SETTING.INPUT_APPEARANCE_OUTLINE',
-  id: 'outline',
+  id: InputAppearance.outline,
   icon: 'border-style'
 }, {
   name: 'SETTING.INPUT_APPEARANCE_FILL',
-  id: 'fill',
+  id: InputAppearance.fill,
   icon: 'square'
 }]
 
