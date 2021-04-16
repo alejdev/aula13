@@ -27,9 +27,9 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   classroomList: Classroom[]
   subjectList: Subject[]
 
-  classroomListSubscription: Subscription
-  subjectListSubscription: Subscription
-  routeSubscription: Subscription
+  classroomList$: Subscription
+  subjectList$: Subscription
+  route$: Subscription
 
   showFilters: boolean
 
@@ -55,11 +55,11 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.query = {}
     let openFilters = false
-    this.classroomListSubscription = this.classroomService.observeClassroomList()
+    this.classroomList$ = this.classroomService.observeClassroomList()
       .subscribe((result) => this.classroomList = UtilService.mapCollection(result))
-    this.subjectListSubscription = this.subjectService.observeSubjectList()
+    this.subjectList$ = this.subjectService.observeSubjectList()
       .subscribe((result) => this.subjectList = UtilService.mapCollection(result))
-    this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
+    this.route$ = this.activatedRoute.queryParams.subscribe((result) => {
       openFilters = UtilService.parseStringToBoolean(result.openFilters)
       this.setModels(result)
       this.filterList()
@@ -131,8 +131,8 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.classroomListSubscription.unsubscribe()
-    this.subjectListSubscription.unsubscribe()
-    this.routeSubscription.unsubscribe()
+    this.classroomList$.unsubscribe()
+    this.subjectList$.unsubscribe()
+    this.route$.unsubscribe()
   }
 }

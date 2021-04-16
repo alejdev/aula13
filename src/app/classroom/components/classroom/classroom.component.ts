@@ -27,8 +27,8 @@ export class ClassroomComponent implements OnInit, OnDestroy {
   @HostBinding('class') componentCssClass: string
   @ViewChild(MatSidenav, { static: true }) sideMenu: MatSidenav
 
-  routerSubscription: Subscription
-  themeSubscription: Subscription
+  router$: Subscription
+  theme$: Subscription
   sidenavStatus$: Observable<any>
 
   public sidenavOpened: boolean
@@ -59,7 +59,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     this.setCurrentTab()
 
     // Detecting Router Changes
-    this.routerSubscription = this.router.events.subscribe((event: Event) => {
+    this.router$ = this.router.events.subscribe((event: Event) => {
       this.setCurrentTab()
       if (event instanceof NavigationStart && this.mobileQueryL.matches) {
         this.sideMenu.close()
@@ -67,7 +67,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     })
 
     // Theming service
-    this.themeSubscription = this.themeService.theme.subscribe((theme: ThemeElement) => {
+    this.theme$ = this.themeService.theme.subscribe((theme: ThemeElement) => {
       this.componentCssClass = theme.id
     })
 
@@ -127,7 +127,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription.unsubscribe()
-    this.themeSubscription.unsubscribe()
+    this.router$.unsubscribe()
+    this.theme$.unsubscribe()
   }
 }

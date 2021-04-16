@@ -25,7 +25,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   @Input() hideArchivedFilter: boolean
   @Output() dayListFilter: any = new EventEmitter<Day[]>()
 
-  routeSubscription: Subscription
+  route$: Subscription
 
   showFilters: boolean
 
@@ -55,7 +55,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.query = {}
     let firstTime = true
-    this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
+    this.route$ = this.activatedRoute.queryParams.subscribe((result) => {
       this.setModels(result)
       this.filterList()
       this.formatQuery()
@@ -275,7 +275,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe()
+    this.route$.unsubscribe()
   }
 
 }

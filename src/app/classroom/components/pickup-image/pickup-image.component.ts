@@ -45,7 +45,7 @@ export class PickupImageComponent implements OnInit, OnDestroy {
   @Input() imageList: any[]
   @Output() imageChange: any = new EventEmitter<boolean>()
 
-  dialogSubscription: Subscription
+  dialog$: Subscription
 
   constructor(
     private dialog: MatDialog
@@ -62,15 +62,15 @@ export class PickupImageComponent implements OnInit, OnDestroy {
       }
     })
 
-    this.dialogSubscription = dialogRef.afterClosed().subscribe(result => {
+    this.dialog$ = dialogRef.afterClosed().subscribe(result => {
       this.image = result ? result : this.image
       this.imageChange.emit(this.image)
     })
   }
 
   ngOnDestroy(): void {
-    if (this.dialogSubscription) {
-      this.dialogSubscription.unsubscribe()
+    if (this.dialog$) {
+      this.dialog$.unsubscribe()
     }
   }
 

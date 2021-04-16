@@ -25,8 +25,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   studentIdList: Student[]
   classroom: Classroom
 
-  queryClassroomNameSubscription: Subscription
-  queryClassroomNameFirstTimeSubscription: Subscription
+  queryClassroomName$: Subscription
   validatingName: boolean
 
   constructor(
@@ -71,7 +70,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
     }
 
     // Control changes
-    this.queryClassroomNameSubscription = nameCtrl.valueChanges
+    this.queryClassroomName$ = nameCtrl.valueChanges
       .pipe(
         tap(() => this.validatingName = true),
         debounceTime(500),
@@ -183,6 +182,6 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.queryClassroomNameSubscription.unsubscribe()
+    this.queryClassroomName$.unsubscribe()
   }
 }

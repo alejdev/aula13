@@ -4,6 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { SwUpdate } from '@angular/service-worker'
 import { TranslateService } from '@ngx-translate/core'
 
+import { Language } from './core/interfaces'
 import { SettingService } from './shared/services/setting.service'
 import { ToastService } from './shared/services/toast.service'
 
@@ -14,7 +15,7 @@ import { ToastService } from './shared/services/toast.service'
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  SwUpdateSubscription: Subscription
+  SwUpdate$: Subscription
 
   constructor(
     private settingsService: SettingService,
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Service Worker
     if (this.swUpdate.isEnabled) {
-      this.SwUpdateSubscription = this.swUpdate.available.subscribe(() => {
+      this.SwUpdate$ = this.swUpdate.available.subscribe(() => {
         this.toastService.info({
           text: 'MSG.APP_UPDATE_READY',
           action: {
@@ -38,11 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     // Set translations
-    this.translateService.setDefaultLang('es')
+    this.translateService.setDefaultLang(Language.es)
     this.translateService.use(this.settingsService.value.lang)
   }
 
   ngOnDestroy(): void {
-    this.SwUpdateSubscription.unsubscribe()
+    this.SwUpdate$.unsubscribe()
   }
 }

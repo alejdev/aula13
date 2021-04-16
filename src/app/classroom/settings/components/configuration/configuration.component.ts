@@ -26,8 +26,8 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   inputAppearances: InputAppearanceElement[] = INPUT_APPEARANCE
   inputAppearanceIcon: string
 
-  langSubscription: Subscription
-  themeSubscription: Subscription
+  lang$: Subscription
+  theme$: Subscription
 
   constructor(
     private languageService: LanguageService,
@@ -45,7 +45,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     this.languages = this.languageService.languages
 
     // Get language
-    this.langSubscription = this.languageService.lang.subscribe((language: LanguageElement) => {
+    this.lang$ = this.languageService.lang.subscribe((language: LanguageElement) => {
       this.langControl.setValue(language)
     })
 
@@ -54,7 +54,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     this.inputAppearanceIcon = this.getInputAppearanceIcon()
 
     // Get theme
-    this.themeSubscription = this.themeService.theme.subscribe((theme: ThemeElement) => {
+    this.theme$ = this.themeService.theme.subscribe((theme: ThemeElement) => {
       this.themeControl = theme
       this.themeIsDark = theme.isDark
     })
@@ -91,7 +91,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.langSubscription.unsubscribe()
-    this.themeSubscription.unsubscribe()
+    this.lang$.unsubscribe()
+    this.theme$.unsubscribe()
   }
 }

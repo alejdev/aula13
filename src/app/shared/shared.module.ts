@@ -31,6 +31,7 @@ import { faWhatsapp as fasWhastapp } from '@fortawesome/free-brands-svg-icons'
 import { faArrowLeft, faBars, faBirthdayCake, faBook, faBorderStyle, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGripLines, faHeart, faInfo, faListUl, faMoon, faMusic, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faSpinner, faSquare, faStar, faStream, faSun, faTh, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus, faWindowMinimize, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
+import { Language } from '../core/interfaces'
 import { MY_DATE_FORMATS } from '../core/settings'
 import { DayCardComponent } from './components/day-card/day-card.component'
 import { DayCreationComponent } from './components/day-creation/day-creation.component'
@@ -60,11 +61,11 @@ import { SubjectNamePipe } from './pipes/subject-name.pipe'
 import { TypeOfPipe } from './pipes/type-of.pipe'
 import { SettingService } from './services/setting.service'
 
-registerLocaleData(localeEs, 'es')
-registerLocaleData(localeEn, 'en')
-registerLocaleData(localeDe, 'de')
-registerLocaleData(localeIt, 'it')
-registerLocaleData(localeFr, 'fr')
+registerLocaleData(localeEs, Language.es)
+registerLocaleData(localeEn, Language.en)
+registerLocaleData(localeDe, Language.en)
+registerLocaleData(localeIt, Language.it)
+registerLocaleData(localeFr, Language.fr)
 
 @NgModule({
   declarations: [

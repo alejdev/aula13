@@ -24,8 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   headerConfig: any
   isTruncated: boolean
 
-  themeConfigSubscription: Subscription
-  headerConfigSubscription: Subscription
+  themeConfig$: Subscription
+  headerConfig$: Subscription
 
   logoConfig: LogoConfig = {
     color: 'transparent',
@@ -59,12 +59,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     // Get theme
-    this.themeConfigSubscription = this.themeService.theme.subscribe((result: ThemeElement) => {
+    this.themeConfig$ = this.themeService.theme.subscribe((result: ThemeElement) => {
       this.themeName = result.isDark ? '' : 'primary'
     })
 
     // Header config
-    this.headerConfigSubscription = this.headerService.config.subscribe((config: HeaderConfig) => {
+    this.headerConfig$ = this.headerService.config.subscribe((config: HeaderConfig) => {
       this.headerConfig = config
       this.isTruncated = true
       this.logoConfig.showLogo = config.showLogo
@@ -92,7 +92,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.themeConfigSubscription.unsubscribe()
-    this.headerConfigSubscription.unsubscribe()
+    this.themeConfig$.unsubscribe()
+    this.headerConfig$.unsubscribe()
   }
 }

@@ -25,8 +25,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   studentIdList: string[]
   subject: Subject
 
-  querySubjectNameSubscription: Subscription
-  querySubjectNameFirstTimeSubscription: Subscription
+  querySubjectName$: Subscription
   validatingName: boolean
 
   constructor(
@@ -71,7 +70,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
     }
 
     // Control changes
-    this.querySubjectNameSubscription = nameCtrl.valueChanges
+    this.querySubjectName$ = nameCtrl.valueChanges
       .pipe(
         tap(() => this.validatingName = true),
         debounceTime(500),
@@ -183,6 +182,6 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.querySubjectNameSubscription.unsubscribe()
+    this.querySubjectName$.unsubscribe()
   }
 }
