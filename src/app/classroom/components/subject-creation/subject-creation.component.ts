@@ -1,9 +1,11 @@
 import { Subscription } from 'rxjs'
 import { debounceTime, first, switchMap, tap } from 'rxjs/operators'
+import { Student, Subject } from 'src/app/core/interfaces'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { DocumentReference } from '@angular/fire/firestore'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
@@ -19,9 +21,9 @@ import { SubjectService } from '../../services/subject.service'
 export class SubjectCreationComponent implements OnInit, OnDestroy {
 
   subjectFormGroup: FormGroup
-  studentList: any[]
-  studentIdList: any[]
-  subject: any
+  studentList: Student[]
+  studentIdList: string[]
+  subject: Subject
 
   querySubjectNameSubscription: Subscription
   querySubjectNameFirstTimeSubscription: Subscription
@@ -89,7 +91,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
 
   async queryEnrrolledStudents(): Promise<any> {
     const students = await this.studentService.queryEnrrolledStudents('classroom.subjects', this.subject.id)
-    this.studentIdList = students.map((student: any) => student.id)
+    this.studentIdList = students.map((student: Student) => student.id)
     this.subjectFormGroup.controls.studentListCtrl.setValue(this.studentIdList)
     if (this.data.isClone) { delete this.subject.id }
   }
@@ -102,7 +104,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
   async updateStudentSubjects(): Promise<any> {
     const enrrolledStudents = this.formatStudentIdList()
     const students = await this.studentService.getStudentList()
-    const studentsMap = students.map((student: any) => {
+    const studentsMap = students.map((student: Student) => {
       const subjects = student.classroom.subjects
       if (enrrolledStudents.includes(student.id)) {
         return !subjects.includes(this.data.entity.id) ? {
@@ -117,7 +119,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
         id: student.id,
         classroom: {
           classrooms: student.classroom.classrooms,
-          subjects: subjects.filter((elem: any) => elem !== this.data.entity.id)
+          subjects: subjects.filter((subject: Subject) => subject !== this.data.entity.id)
         }
       } : undefined
     })
@@ -142,7 +144,7 @@ export class SubjectCreationComponent implements OnInit, OnDestroy {
       }
 
       setSubject
-        .then((result: any) => {
+        .then((result: DocumentReference) => {
           // If edit
           this.subject.id = result ? result.id : this.subject.id
           this.updateStudentSubjects()

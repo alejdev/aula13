@@ -4,6 +4,7 @@ import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
+import { Day, Student } from 'src/app/core/interfaces'
 import { DAY_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
@@ -31,9 +32,9 @@ import { Router } from '@angular/router'
 export class DayListComponent implements OnInit, AfterViewChecked {
 
   data$: Observable<any>
-  studentList: any[]
+  studentList: Student[]
 
-  dayListFiltered: any[]
+  dayListFiltered: Day[]
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   grid: boolean = this.settingService.value.gridDailyLayout
@@ -69,9 +70,9 @@ export class DayListComponent implements OnInit, AfterViewChecked {
       tap(() => this.loaderService.load()),
       map((result) => {
         this.studentList = UtilService.mapCollection(result[1])
-        return UtilService.mapCollection(result[0]).map((day) => ({
+        return UtilService.mapCollection(result[0]).map((day: Day) => ({
           ...day,
-          student: this.studentList.find((student: any) => student.id === day.studentId),
+          student: this.studentList.find((student: Student) => student.id === day.studentId),
         }))
       }),
       tap((dayList) => {

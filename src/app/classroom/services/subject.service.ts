@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs'
+import { Subject } from 'src/app/core/interfaces'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -12,7 +13,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 export class SubjectService {
 
   private subCollectionName: string = 'subjects'
-  private cachedSubjectList: any[] = []
+  private _cachedSubjectList: any[] = []
 
   constructor(
     private firestore: AngularFirestore,
@@ -29,12 +30,12 @@ export class SubjectService {
     return this.userData.collection(this.subCollectionName)
   }
 
-  public get cachedSubjects(): any[] {
-    return this.cachedSubjectList
+  public get cachedSubjects(): Subject[] {
+    return this._cachedSubjectList
   }
 
-  public set cachedSubjects(cachedSubjectList: any[]) {
-    this.cachedSubjectList = cachedSubjectList
+  public set cachedSubjects(list: Subject[]) {
+    this._cachedSubjectList = list
   }
 
   // Observables

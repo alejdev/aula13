@@ -1,19 +1,10 @@
+import { Instrument, LogoConfig } from 'src/app/core/interfaces'
 import { EMOJIS, INSTRUMENT_LIST } from 'src/app/core/settings'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { MatTooltip } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
-
-export interface LogoConfig {
-  showLogo?: boolean
-  showTitle?: boolean
-  showTagline?: boolean
-  imageInvertedIfDarkTheme?: boolean
-  shake?: boolean
-  color?: string // blue|black|transparent
-  size?: string
-}
 
 @Component({
   selector: 'a13-title-logo',
@@ -26,7 +17,7 @@ export class TitleLogoComponent implements OnInit {
   @Input() config: LogoConfig
   instruments: any = INSTRUMENT_LIST
     .reduce((acc, current) => acc = acc.concat(current.group), [])
-    .map((instrument) => instrument.viewValue)
+    .map((instrument: Instrument) => instrument.viewValue)
 
   constructor(
     private translateService: TranslateService

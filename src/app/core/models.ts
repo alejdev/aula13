@@ -25,10 +25,12 @@ export const STUDENT_MODEL: Student = {
 }
 
 export const DAY_MODEL: Day = {
+  archived: false,
   content: '',
   date: null,
+  favorite: false,
   studentId: '',
-  title: ''
+  title: '',
 }
 
 export const CLASSROOM_MODEL: Classroom = {

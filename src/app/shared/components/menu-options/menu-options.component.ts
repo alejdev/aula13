@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
+import { MatDialog, MatDialogConfig } from '@angular/material'
 
 @Component({
   selector: 'a13-menu-options',
@@ -18,7 +18,7 @@ export class MenuOptionsComponent implements OnInit {
 
   ngOnInit() { }
 
-  openDialog(component: any, config: any) {
+  openDialog(component: any, config: MatDialogConfig) {
     if (component && config) {
       this.dialog.open(component, config)
     }

@@ -1,3 +1,5 @@
+import { Student } from 'src/app/core/interfaces'
+
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
@@ -5,16 +7,16 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class AgroupByPipe implements PipeTransform {
 
-  transform(array: any, group?: string): any {
+  transform(array: Student[], group?: string): Student[] {
     if (!array) { return array }
 
     switch (group) {
       case 'favorite':
-        return array.filter(student => student.favorite && !student.archived)
+        return array.filter((student: Student) => student.favorite && !student.archived)
       case 'archived':
-        return array.filter(student => student.archived)
+        return array.filter((student: Student) => student.archived)
       default:
-        return array.filter(student => !student.favorite && !student.archived)
+        return array.filter((student: Student) => !student.favorite && !student.archived)
     }
   }
 

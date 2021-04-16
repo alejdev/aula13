@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import moment from 'moment'
 import { Observable } from 'rxjs'
+import { Day } from 'src/app/core/interfaces'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -22,7 +23,7 @@ export interface QueryConfig {
 export class DayService {
 
   private subCollectionName: string = 'days'
-  private _savedDayList: any[] = []
+  private _cachedDayList: Day[] = []
   private _query: QueryConfig = {
     path: 'days',
     field: 'date',
@@ -46,12 +47,12 @@ export class DayService {
     return this.userData.collection(this.subCollectionName)
   }
 
-  public get savedDayList(): any[] {
-    return this._savedDayList
+  public get cachedDayList(): Day[] {
+    return this._cachedDayList
   }
 
-  public set savedDayList(list) {
-    this._savedDayList = list
+  public set cachedDayList(list: Day[]) {
+    this._cachedDayList = list
   }
 
   public get query(): QueryConfig {
@@ -104,7 +105,7 @@ export class DayService {
     return UtilService.mapCollection(days)
   }
 
-  public createDay(data: any): Promise<any> {
+  public createDay(data: Day): Promise<any> {
     this.loaderService.load()
     return this.subCollection.add(data)
       .finally(() => this.loaderService.down())
@@ -117,7 +118,7 @@ export class DayService {
     return UtilService.mapDocument(day)
   }
 
-  public updateDay(id: string, day: any): Promise<any> {
+  public updateDay(id: string, day: Day): Promise<any> {
     this.loaderService.load()
     return this.subCollection.doc(id).ref.set(day)
       .finally(() => this.loaderService.down())
@@ -129,10 +130,10 @@ export class DayService {
       .finally(() => this.loaderService.down())
   }
 
-  public deleteDayBatch(days: any[]): Promise<any> {
+  public deleteDayBatch(days: Day[]): Promise<any> {
     this.loaderService.load()
     const batch = firebase.firestore().batch()
-    days.forEach((day: any) => {
+    days.forEach((day: Day) => {
       const ref = this.subCollection.doc(day.id).ref
       batch.delete(ref)
     })
@@ -158,7 +159,7 @@ export class DayService {
   }
 
   // Normalize Day for save
-  public normalizeDay(day: any): any {
+  public normalizeDay(day: Day): Day {
     return {
       content: day.content,
       date: this.formatOutputDate(day.date),

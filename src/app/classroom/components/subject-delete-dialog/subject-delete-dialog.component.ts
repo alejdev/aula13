@@ -1,3 +1,4 @@
+import { Student, Subject } from 'src/app/core/interfaces'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
@@ -39,13 +40,13 @@ export class SubjectDeleteDialogComponent implements OnInit {
 
   async removeSubjectsToStudents() {
     const students = await this.studentService.queryEnrrolledStudents('classroom.subjects', this.data.entity.id)
-    const studentList = students.map((student: any) => {
+    const studentList = students.map((student: Student) => {
       const subjects = student.classroom.subjects
       return subjects.includes(this.data.entity.id) ? {
         id: student.id,
         classroom: {
           classrooms: student.classroom.classrooms,
-          subjects: subjects.filter((elem: any) => elem !== this.data.entity.id)
+          subjects: subjects.filter((elem: Subject) => elem !== this.data.entity.id)
         }
       } : undefined
     })
@@ -54,7 +55,7 @@ export class SubjectDeleteDialogComponent implements OnInit {
 
   ok(): void {
     this.subjectService.deleteSubject(this.data.entity.id)
-      .then((result: any) => {
+      .then(() => {
         this.removeSubjectsToStudents()
         this.dialogRef.close(this.data.entity)
         this.toastService.success({ text: 'MSG.SUBJECT_DELETE_OK' })

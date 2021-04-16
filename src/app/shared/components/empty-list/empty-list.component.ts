@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from '@angular/core'
 })
 export class EmptyListComponent implements OnInit {
 
-  @Input() list: any
-  @Input() listFiltered: any
+  @Input() list: any[]
+  @Input() listFiltered: any[]
 
   @Input() listMessage: string
   @Input() listFilteredMessage: string

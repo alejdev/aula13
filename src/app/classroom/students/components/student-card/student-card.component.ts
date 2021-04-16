@@ -1,6 +1,7 @@
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { Student } from 'src/app/core/interfaces'
 import { DAY_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
@@ -18,7 +19,7 @@ import { StudentCreationComponent } from '../student-creation/student-creation.c
 })
 export class StudentComponent implements OnInit {
 
-  @Input() student: any = null
+  @Input() student: Student = null
   @Input() fromUrl: string = null
   @Input() grid: boolean
   mark: any = UtilService.mark

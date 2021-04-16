@@ -1,9 +1,11 @@
 import { Subscription } from 'rxjs'
 import { debounceTime, first, switchMap, tap } from 'rxjs/operators'
+import { Classroom, Student } from 'src/app/core/interfaces'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { DocumentReference } from '@angular/fire/firestore'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core'
@@ -19,9 +21,9 @@ import { StudentService } from '../../services/student.service'
 export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
   classroomFormGroup: FormGroup
-  studentList: any[]
-  studentIdList: any[]
-  classroom: any
+  studentList: Student[]
+  studentIdList: Student[]
+  classroom: Classroom
 
   queryClassroomNameSubscription: Subscription
   queryClassroomNameFirstTimeSubscription: Subscription
@@ -89,7 +91,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
 
   async queryEnrrolledStudents(): Promise<any> {
     const students = await this.studentService.queryEnrrolledStudents('classroom.classrooms', this.classroom.id)
-    this.studentIdList = students.map((student: any) => student.id)
+    this.studentIdList = students.map((student: Student) => student.id)
     this.classroomFormGroup.controls.studentListCtrl.setValue(this.studentIdList)
     if (this.data.isClone) { delete this.classroom.id }
   }
@@ -102,7 +104,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
   async updateStudentClassrooms(): Promise<any> {
     const enrrolledStudents = this.formatStudentIdList()
     const students = await this.studentService.getStudentList()
-    const studentsMap = students.map((student: any) => {
+    const studentsMap = students.map((student: Student) => {
       const classrooms = student.classroom.classrooms
       if (enrrolledStudents.includes(student.id)) {
         return !classrooms.includes(this.data.entity.id) ? {
@@ -116,7 +118,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
       return classrooms.includes(this.data.entity.id) ? {
         id: student.id,
         classroom: {
-          classrooms: classrooms.filter((elem: any) => elem !== this.data.entity.id),
+          classrooms: classrooms.filter((classroom: Classroom) => classroom !== this.data.entity.id),
           subjects: student.classroom.subjects
         }
       } : undefined
@@ -142,7 +144,7 @@ export class ClassroomCreationComponent implements OnInit, OnDestroy {
       }
 
       setClassroom
-        .then((result: any) => {
+        .then((result: DocumentReference) => {
           // If edit
           this.classroom.id = result ? result.id : this.classroom.id
           this.updateStudentClassrooms()

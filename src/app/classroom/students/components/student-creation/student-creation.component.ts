@@ -6,6 +6,7 @@ import { SubjectCreationComponent } from 'src/app/classroom/components/subject-c
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { AcademicCourse, Classroom, ConservatoryCourse, Instrument, Phone, Student, Subject } from 'src/app/core/interfaces'
 import { CLASSROOM_MODEL, SUBJECT_MODEL } from 'src/app/core/models'
 import { ACADEMIC_COURSE_LIST, AVATAR_LIST, CONSERVATORY_COURSE_LIST, DIALOG_CONFIG, INSTRUMENT_LIST } from 'src/app/core/settings'
 import { PhonePipe } from 'src/app/shared/pipes/phone.pipe'
@@ -13,6 +14,7 @@ import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, ElementRef, Inject, OnInit } from '@angular/core'
+import { DocumentReference } from '@angular/fire/firestore'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material'
 import { Router } from '@angular/router'
@@ -26,17 +28,17 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class StudentCreationComponent implements OnInit {
 
-  avatars: any = AVATAR_LIST
-  academicCourses: any[] = ACADEMIC_COURSE_LIST
-  conservatoryCourses: any[] = CONSERVATORY_COURSE_LIST
-  instruments: any[] = INSTRUMENT_LIST
+  avatars: string[] = AVATAR_LIST
+  academicCourses: AcademicCourse[] = ACADEMIC_COURSE_LIST
+  conservatoryCourses: ConservatoryCourse[] = CONSERVATORY_COURSE_LIST
+  instruments: Instrument[] = INSTRUMENT_LIST
   arrayPhones: any = {}
 
   classroomList$: Observable<any>
   subjectList$: Observable<any>
 
   studentFormGroup: FormGroup
-  student: any
+  student: Student
   studentAvatar: string
   equals: any
   maxDate: Date
@@ -58,9 +60,9 @@ export class StudentCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.classroomList$ = this.classroomService.observeClassroomList()
-      .pipe(map((result) => UtilService.mapCollection(result)))
+      .pipe(map((result: Classroom) => UtilService.mapCollection(result)))
     this.subjectList$ = this.subjectService.observeSubjectList()
-      .pipe(map((result) => UtilService.mapCollection(result)))
+      .pipe(map((result: Subject) => UtilService.mapCollection(result)))
 
     this.generateForm()
   }
@@ -115,7 +117,7 @@ export class StudentCreationComponent implements OnInit {
     })
   }
 
-  addPhone(phone?: any, focus?: boolean): void {
+  addPhone(phone?: Phone, focus?: boolean): void {
     this.arrayPhones = this.studentFormGroup.get('contactInformationFormGroup').get('phonesFormArray') as FormArray
     this.arrayPhones.push(this.initPhoneControls(phone))
     if (focus) {
@@ -129,18 +131,16 @@ export class StudentCreationComponent implements OnInit {
     lastPhone.focus()
   }
 
-  removePhone(index: any): void {
+  removePhone(index: number): void {
     this.arrayPhones.removeAt(index)
   }
 
-  getPhoneListValues(): any[] {
+  getPhoneListValues(): Phone[] {
     if (this.arrayPhones.value) {
-      return this.arrayPhones.value.map((phone: any) => {
-        return {
-          name: phone.contactPhoneNameCtrl,
-          number: this.normalizePhone(phone.contactPhoneNumberCtrl),
-        }
-      })
+      return this.arrayPhones.value.map((phone: any) => ({
+        name: phone.contactPhoneNameCtrl,
+        number: this.normalizePhone(phone.contactPhoneNumberCtrl),
+      }))
     }
     return []
   }
@@ -201,7 +201,7 @@ export class StudentCreationComponent implements OnInit {
       }
 
       setStudent
-        .then((result: any) => {
+        .then((result: DocumentReference) => {
           this.dialogRef.close(result)
 
           if (result && result.id) { // Create

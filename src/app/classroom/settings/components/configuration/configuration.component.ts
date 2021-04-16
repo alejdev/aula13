@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { LanguageService } from 'src/app/classroom/services/language.service'
-import { InputAppearance, InputAppearanceElement } from 'src/app/core/interfaces'
+import { InputAppearance, InputAppearanceElement, LanguageElement, ThemeElement } from 'src/app/core/interfaces'
 import { INPUT_APPEARANCE } from 'src/app/core/settings'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
@@ -16,15 +16,14 @@ import { FormControl } from '@angular/forms'
 })
 export class ConfigurationComponent implements OnInit, OnDestroy {
 
-  title: string = 'SETTINGS'
   langControl = new FormControl('', [])
-  languages: any
+  languages: LanguageElement[]
   themeControl: any
   inputAppearance: InputAppearance
   themeIsDark: boolean
   canSlideSideMenu: boolean = this.settingService.value.canSlideSideMenu
   canSlideRoutes: boolean = this.settingService.value.canSlideRoutes
-  inputAppearances = INPUT_APPEARANCE
+  inputAppearances: InputAppearanceElement[] = INPUT_APPEARANCE
   inputAppearanceIcon: string
 
   langSubscription: Subscription
@@ -46,8 +45,8 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     this.languages = this.languageService.languages
 
     // Get language
-    this.langSubscription = this.languageService.lang.subscribe((result: any) => {
-      this.langControl.setValue(result)
+    this.langSubscription = this.languageService.lang.subscribe((language: LanguageElement) => {
+      this.langControl.setValue(language)
     })
 
     // Get input appearance
@@ -55,9 +54,9 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     this.inputAppearanceIcon = this.getInputAppearanceIcon()
 
     // Get theme
-    this.themeSubscription = this.themeService.theme.subscribe((result: any) => {
-      this.themeControl = result
-      this.themeIsDark = result.isDark
+    this.themeSubscription = this.themeService.theme.subscribe((theme: ThemeElement) => {
+      this.themeControl = theme
+      this.themeIsDark = theme.isDark
     })
   }
 
@@ -65,7 +64,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     this.languageService.setLang(this.langControl.value)
   }
 
-  getFlag(lang: any): string {
+  getFlag(lang: LanguageElement): string {
     return `/assets/svgs/flags/${lang.id}.svg`
   }
 

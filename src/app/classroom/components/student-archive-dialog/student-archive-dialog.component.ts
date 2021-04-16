@@ -1,3 +1,4 @@
+import { Student } from 'src/app/core/interfaces'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
@@ -12,7 +13,7 @@ import { StudentService } from '../../services/student.service'
 })
 export class StudentArchiveDialogComponent implements OnInit {
 
-  student: any
+  student: Student
   textConfig: any
 
   constructor(
@@ -37,7 +38,7 @@ export class StudentArchiveDialogComponent implements OnInit {
   ok(): void {
     this.student.archived = !this.student.archived
     this.studentService.updateStudent(this.data.idStudent, this.studentService.normalizeStudent(this.student))
-      .then((result: any) => {
+      .then(() => {
         this.dialogRef.close(this.data.student)
         this.toastService.success({ text: this.textConfig.msgOk })
       })

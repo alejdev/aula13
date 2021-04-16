@@ -32,7 +32,7 @@ export class DayDeleteDialogComponent implements OnInit {
 
   ok(): void {
     this.dayService.deleteDay(this.data.day.id)
-      .then((result: any) => {
+      .then(() => {
         this.dialogRef.close()
         this.toastService.success({ text: 'MSG.DAY_DELETE_OK' })
       })

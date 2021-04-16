@@ -5,10 +5,12 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
 import { DayService } from 'src/app/classroom/services/day.service'
+import { Day, Student } from 'src/app/core/interfaces'
 import { CKEDITOR_CONFIG } from 'src/app/core/settings'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
+import { DocumentReference } from '@angular/fire/firestore'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 import { Router } from '@angular/router'
@@ -25,8 +27,8 @@ import { UtilService } from '../../services/util.service'
 })
 export class DayCreationComponent implements OnInit {
 
-  day: any
-  studentList: any[]
+  day: Day
+  studentList: Student[]
   dayFormGroup: FormGroup
   ckeditor: any = DecoupledEditor
   editorConfig: any
@@ -110,7 +112,7 @@ export class DayCreationComponent implements OnInit {
       }
 
       setDay
-        .then((result: any) => {
+        .then((result: DocumentReference) => {
           this.dialogRef.close(result)
 
           if (result && result.id) {// Create

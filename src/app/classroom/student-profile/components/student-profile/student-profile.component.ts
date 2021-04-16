@@ -9,6 +9,7 @@ import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
+import { Day, Student } from 'src/app/core/interfaces'
 import { DAY_MODEL } from 'src/app/core/models'
 import { ACADEMIC_COURSE_LIST, CONSERVATORY_COURSE_LIST, DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
@@ -37,9 +38,9 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   badges$: Subscription
   router$: Subscription
 
-  student: any
-  dayList: any
-  dayListFiltered: any[]
+  student: Student
+  dayList: Day[]
+  dayListFiltered: Day[]
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   mark: any = UtilService.mark
@@ -105,7 +106,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
       map((result) => {
         this.student = UtilService.mapDocument(result[0])
         this.dayList = UtilService.mapCollection(result[1])
-          .map((day) => ({ ...day, hideStudent: true, student: this.student }))
+          .map((day: Day) => ({ ...day, hideStudent: true, student: this.student }))
         return { student: this.student, dayList: this.dayList }
       }),
       tap((result) => {
@@ -123,7 +124,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     )
   }
 
-  configHeader(student: any): void {
+  configHeader(student: Student): void {
     this.headerService.configHeader({
       title: student.personal.name,
       back: true,
@@ -187,7 +188,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     })
   }
 
-  tapToEdit(student: any): void {
+  tapToEdit(student: Student): void {
     this.dialog.open(StudentCreationComponent, {
       ...DIALOG_CONFIG,
       data: {
@@ -197,7 +198,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     })
   }
 
-  createDay(student: any): void {
+  createDay(student: Student): void {
     const newDay = UtilService.clone(DAY_MODEL)
     newDay.student = student
     this.dialog.open(DayCreationComponent, {
@@ -208,7 +209,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     })
   }
 
-  quickAction(student: any, key: string): void {
+  quickAction(student: Student, key: string): void {
     student[key] = !student[key]
     this.studentService.updateStudent(student.id, this.studentService.normalizeStudent(student))
   }

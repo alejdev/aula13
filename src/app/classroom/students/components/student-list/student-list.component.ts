@@ -4,6 +4,7 @@ import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { Classroom, Student, Subject } from 'src/app/core/interfaces'
 import { STUDENT_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
@@ -32,10 +33,10 @@ export class StudentListComponent implements OnInit, AfterViewChecked {
 
   data$: Observable<any>
 
-  studentListFiltered: any[]
-  favoriteListFiltered: any[]
-  restListFiltered: any[]
-  archiveListFiltered: any[]
+  studentListFiltered: Student[]
+  favoriteListFiltered: Student[]
+  restListFiltered: Student[]
+  archiveListFiltered: Student[]
 
   @ViewChild(StudentFiltersComponent, { static: false }) studentFilters: StudentFiltersComponent
 
@@ -92,12 +93,12 @@ export class StudentListComponent implements OnInit, AfterViewChecked {
         return UtilService.mapCollection(result[0]).map((student) => ({
           ...student,
           classrooms: UtilService.mapCollection(result[1])
-            .filter((classroom: any) => student.classroom.classrooms.includes(classroom.id)),
+            .filter((classroom: Classroom) => student.classroom.classrooms.includes(classroom.id)),
           subjects: UtilService.mapCollection(result[2])
-            .filter((subject: any) => student.classroom.subjects.includes(subject.id))
+            .filter((subject: Subject) => student.classroom.subjects.includes(subject.id))
         }))
       }),
-      tap((studentList) => {
+      tap((studentList: Student[]) => {
         this.loaderService.down()
         if (this.studentFilters) {
           this.studentListFiltered = UtilService.clone(studentList)

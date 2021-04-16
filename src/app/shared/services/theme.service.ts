@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core'
-import { OverlayContainer } from '@angular/cdk/overlay'
-
 import { BehaviorSubject } from 'rxjs'
+import { Theme, ThemeElement } from 'src/app/core/interfaces'
+import { THEME_LIST } from 'src/app/core/settings'
+
+import { OverlayContainer } from '@angular/cdk/overlay'
+import { Injectable } from '@angular/core'
 
 import { SettingService } from './setting.service'
 
@@ -10,18 +12,8 @@ import { SettingService } from './setting.service'
 })
 export class ThemeService {
 
-  public theme: BehaviorSubject<any>
-  private themeList: any = [{
-    id: 'light-theme',
-    name: 'THEMING.LIGHT_THEME',
-    icon: 'sun',
-    isDark: false
-  }, {
-    id: 'dark-theme',
-    name: 'THEMING.DARK_THEME',
-    icon: 'moon',
-    isDark: true
-  }]
+  public theme: BehaviorSubject<ThemeElement>
+  private themeList: ThemeElement[] = THEME_LIST
 
   constructor(
     private settingsService: SettingService,
@@ -58,7 +50,7 @@ export class ThemeService {
     this.setOverlay(this.themeList[this.settingsService.value.theme].id)
   }
 
-  private setOverlay(theme: string): void {
+  private setOverlay(theme: Theme): void {
     const overlayClasses = this.overlayContainer.getContainerElement().classList
     const themeClassesToRemove = Array.from(overlayClasses).filter((item: string) => item.includes('-theme'))
     if (themeClassesToRemove.length) {

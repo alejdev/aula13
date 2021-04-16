@@ -1,10 +1,10 @@
 import { DayArchiveDialogComponent } from 'src/app/classroom/components/day-archive-dialog/day-archive-dialog.component'
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
+import { Day } from 'src/app/core/interfaces'
 import { DIALOG_CONFIG } from 'src/app/core/settings'
 
 import { Component, Input, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
 import { DayCreationComponent } from '../day-creation/day-creation.component'
@@ -16,14 +16,13 @@ import { DayCreationComponent } from '../day-creation/day-creation.component'
 })
 export class DayCardComponent implements OnInit {
 
-  @Input() day: any = null
+  @Input() day: Day = null
   @Input() fromUrl: string = ''
   @Input() grid: boolean
 
   menuOptions: any = {}
 
   constructor(
-    private dialog: MatDialog,
     private dayService: DayService,
     private router: Router
   ) { }
@@ -85,7 +84,7 @@ export class DayCardComponent implements OnInit {
     }]
   }
 
-  goTo() {
+  goTo(): void {
     this.router.navigateByUrl(`classroom/day/${this.day.id}`, {
       state: { fromUrl: this.fromUrl }
     })

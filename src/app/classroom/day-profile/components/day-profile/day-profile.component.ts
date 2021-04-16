@@ -5,6 +5,7 @@ import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delet
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { Day, Student } from 'src/app/core/interfaces'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { LoaderService } from 'src/app/shared/services/loader.service'
@@ -45,12 +46,12 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     this.data$ = this.dayService.observeDay(dayId).pipe(
       tap(() => this.loaderService.load()),
       map((day) => UtilService.mapDocument(day)),
-      switchMap((day) => {
+      switchMap((day: Day) => {
         if (!day) { return of(day) }
         return this.studentService.observeStudent(day.studentId)
-          .pipe(map((student) => ({ ...day, student: UtilService.mapDocument(student) })))
+          .pipe(map((student: Student) => ({ ...day, student: UtilService.mapDocument(student) })))
       }),
-      tap((day) => {
+      tap((day: Day) => {
         this.loaderService.down()
         if (!day) {
           this.router.navigateByUrl(history.state.fromUrl ? history.state.fromUrl : 'classroom/daily')
@@ -61,7 +62,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     )
   }
 
-  configHeader(day: any): void {
+  configHeader(day: Day): void {
     this.headerService.configHeader({
       title: day.title,
       back: true,
@@ -134,7 +135,7 @@ export class DayProfileComponent implements OnInit, OnDestroy {
     })
   }
 
-  quickAction(day: any, key: string): void {
+  quickAction(day: Day, key: string): void {
     day[key] = !day[key]
     this.dayService.updateDay(day.id, this.dayService.normalizeDay(day))
   }

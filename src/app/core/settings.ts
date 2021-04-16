@@ -1,31 +1,65 @@
 import { MatDialogConfig } from '@angular/material'
 
-import { DefaultSetting, InputAppearance, InputAppearanceElement, SocialNetwork } from './interfaces'
+import { DefaultSetting, InputAppearance, InputAppearanceElement, Language, LanguageElement, SocialNetwork, Theme, ThemeElement } from './interfaces'
 
 // Default app settings
 export const DEFAULT_SETTINGS: DefaultSetting = {
-  theme: 0,
-  lang: 'es',
-  canSlideSideMenu: true,
   canSlideRoutes: true,
-  inputAppearance: InputAppearance.fill,
+  canSlideSideMenu: true,
+  gridDailyLayout: false,
   gridStudentLayout: false,
-  gridDailyLayout: false
-} as const
+  inputAppearance: InputAppearance.fill,
+  lang: Language.es,
+  theme: 0,
+}
+
+export const THEME_LIST: ThemeElement[] = [{
+  icon: 'sun',
+  id: Theme.light,
+  isDark: false,
+  name: 'THEMING.LIGHT_THEME',
+}, {
+  icon: 'moon',
+  id: Theme.dark,
+  isDark: true,
+  name: 'THEMING.DARK_THEME',
+}]
+
+export const LANGUAGE_LIST: LanguageElement[] = [{
+  id: Language.es,
+  name: 'LANG.ES',
+  tip: '“El lago parece mar, el viento sirve de abrigo: todo se vuelve a inventar si lo comparto contigo.” —Silvio Rodriguez'
+}, {
+  id: Language.en,
+  name: 'LANG.EN',
+  tip: '“Work is life, you know, and without it, there’s nothing but fear and insecurity.” —John Lennon'
+}, {
+  id: Language.de,
+  name: 'LANG.DE',
+  tip: '“Alles, was man tun muss, ist, die richtige Taste zum richtigen Zeitpunkt zu treffen und das Instrument spielt von ganz allein.” —Johann Sebastian Bach'
+}, {
+  id: Language.it,
+  name: 'LANG.IT',
+  tip: '“Non ci si improvvisa. Per diventare grandi serve molta esperienza alle spalle, dalla serata allo spettacolo, dalla piccola televisione alla radio.” —Raffaella Carrà'
+}, {
+  id: Language.fr,
+  name: 'LANG.FR',
+  tip: '“J\'aime la vie profondément, j\'aime l\'humain. Je sais qu\'il est capable des pires choses comme des plus belles choses. J\'ai envie de valoriser les belles choses.” —Isabelle Geffroy (Zaz)'
+}]
 
 // Input appearance settings
 export const INPUT_APPEARANCE: InputAppearanceElement[] = [{
-  name: 'SETTING.INPUT_APPEARANCE_DEFAULT',
+  icon: 'window-minimize',
   id: InputAppearance.standard,
-  icon: 'window-minimize'
+  name: 'SETTING.INPUT_APPEARANCE_DEFAULT',
 }, {
-  name: 'SETTING.INPUT_APPEARANCE_OUTLINE',
+  icon: 'border-style',
   id: InputAppearance.outline,
-  icon: 'border-style'
+  name: 'SETTING.INPUT_APPEARANCE_OUTLINE',
 }, {
-  name: 'SETTING.INPUT_APPEARANCE_FILL',
+  icon: 'square',
   id: InputAppearance.fill,
-  icon: 'square'
+  name: 'SETTING.INPUT_APPEARANCE_FILL',
 }]
 
 // App date formtas
@@ -34,26 +68,25 @@ export const MY_DATE_FORMATS = {
     dateInput: 'DD/MM/YYYY'
   },
   display: {
-    dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
+    dateInput: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+    monthYearLabel: 'MMM YYYY',
   }
 }
 
 // My custom dialog config
 export const DIALOG_CONFIG: MatDialogConfig = {
-  width: 'calc(100vw)',
-  maxWidth: '800px',
   autoFocus: false,
   disableClose: true,
-  panelClass: 'full-dialog'
+  maxWidth: '800px',
+  panelClass: 'full-dialog',
+  width: 'calc(100vw)',
 }
 
 // Skeleton config
 export const SKELETON_CONFIG: any = {
   animation: 'progress', // pulse | progress
-  search: { theme: { height: '50px', margin: '0 0 2rem 0' } },
   circle: { theme: { width: '80px', height: '80px', margin: '5px 12px 0 .5rem' } },
   circleSmall: { theme: { width: '54px', height: '54px', margin: '0 .5rem 0 0' } },
   lines: [
@@ -85,6 +118,18 @@ export const SKELETON_CONFIG: any = {
     { theme: { height: '70px', margin: '0 0 .5rem 0' } },
     { theme: { height: '70px', margin: '0 0 .5rem 0' } },
   ],
+  search: { theme: { height: '50px', margin: '0 0 2rem 0' } },
+  sidenav: [
+    { theme: { height: '30px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '80%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '60%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '70%', height: '20px', 'margin-bottom': '30px' } },
+    { theme: { height: '30px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '60%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '50%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '75%', height: '20px', 'margin-bottom': '15px' } },
+    { theme: { 'max-width': '65%', height: '20px', 'margin-bottom': '30px' } },
+  ],
   text: [
     { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
     { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
@@ -100,42 +145,31 @@ export const SKELETON_CONFIG: any = {
     { theme: { 'max-width': '100%', height: '12px', 'margin-bottom': '10px' } },
     { theme: { 'max-width': '75%', height: '12px', 'margin-bottom': '0' } },
   ],
-  sidenav: [
-    { theme: { height: '30px', 'margin-bottom': '15px' } },
-    { theme: { 'max-width': '80%', height: '20px', 'margin-bottom': '15px' } },
-    { theme: { 'max-width': '60%', height: '20px', 'margin-bottom': '15px' } },
-    { theme: { 'max-width': '70%', height: '20px', 'margin-bottom': '30px' } },
-    { theme: { height: '30px', 'margin-bottom': '15px' } },
-    { theme: { 'max-width': '60%', height: '20px', 'margin-bottom': '15px' } },
-    { theme: { 'max-width': '50%', height: '20px', 'margin-bottom': '15px' } },
-    { theme: { 'max-width': '75%', height: '20px', 'margin-bottom': '15px' } },
-    { theme: { 'max-width': '65%', height: '20px', 'margin-bottom': '30px' } },
-  ]
 }
 
 // Ckeditor config
 export const CKEDITOR_CONFIG: any = {
-  toolbar: ['bold', 'italic', '|', 'heading', 'blockQuote', 'bulletedList', 'numberedList', '|', 'undo', 'redo', '|', 'link', 'insertTable', 'indent', 'outdent'],
   options: [
     { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
     { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
     { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-  ]
+  ],
+  toolbar: ['bold', 'italic', '|', 'heading', 'blockQuote', 'bulletedList', 'numberedList', '|', 'undo', 'redo', '|', 'link', 'insertTable', 'indent', 'outdent'],
 }
 
 // Social network list for sign in/up
 export const SOCIAL_NETWORK_LIST: SocialNetwork[] = [{
-  txt: 'SIGN.IN_WITH_GOOGLE',
   icon: 'google-icon',
   id: 'google',
+  txt: 'SIGN.IN_WITH_GOOGLE',
 }, {
-  txt: 'SIGN.IN_WITH_FACEBOOK',
   icon: 'facebook-icon',
   id: 'facebook',
+  txt: 'SIGN.IN_WITH_FACEBOOK',
 }, {
-  txt: 'SIGN.IN_WITH_TWITTER',
   icon: 'twitter-icon',
   id: 'twitter',
+  txt: 'SIGN.IN_WITH_TWITTER',
 }]
 
 // Student avatar list
@@ -157,7 +191,6 @@ export const AVATAR_LIST: string[] = [
 // Academic course list for student creation form
 export const ACADEMIC_COURSE_LIST: any[] = [{
   name: 'FORM.COURSE.PRIMARY',
-  groupId: 0,
   group: [
     { id: '0', viewValue: '1º' },
     { id: '1', viewValue: '2º' },
@@ -165,38 +198,38 @@ export const ACADEMIC_COURSE_LIST: any[] = [{
     { id: '3', viewValue: '4º' },
     { id: '4', viewValue: '5º' },
     { id: '5', viewValue: '6º' }
-  ]
+  ],
+  groupId: 0,
 }, {
   name: 'FORM.COURSE.SECONDARY',
-  groupId: 1,
   group: [
     { id: '6', viewValue: '1º' },
     { id: '7', viewValue: '2º' },
     { id: '8', viewValue: '3º' },
     { id: '9', viewValue: '4º' }
-  ]
+  ],
+  groupId: 1,
 }, {
   name: 'FORM.COURSE.HIGH_SCHOOL',
-  groupId: 2,
   group: [
     { id: '10', viewValue: '1º' },
     { id: '11', viewValue: '2º' }
-  ]
+  ],
+  groupId: 2,
 }]
 
 // Conservatory course list for student creation form
 export const CONSERVATORY_COURSE_LIST: any[] = [{
   name: 'FORM.COURSE.ELEMENTARY',
-  groupId: 0,
   group: [
     { id: '0', viewValue: '1º' },
     { id: '1', viewValue: '2º' },
     { id: '2', viewValue: '3º' },
     { id: '3', viewValue: '4º' }
-  ]
+  ],
+  groupId: 0,
 }, {
   name: 'FORM.COURSE.PROFESSIONAL',
-  groupId: 1,
   group: [
     { id: '4', viewValue: '1º' },
     { id: '5', viewValue: '2º' },
@@ -204,23 +237,23 @@ export const CONSERVATORY_COURSE_LIST: any[] = [{
     { id: '7', viewValue: '4º' },
     { id: '8', viewValue: '5º' },
     { id: '9', viewValue: '6º' }
-  ]
+  ],
+  groupId: 1,
 }, {
   name: 'FORM.COURSE.SUPERIOR',
-  groupId: 2,
   group: [
     { id: '10', viewValue: '1º' },
     { id: '11', viewValue: '2º' },
     { id: '12', viewValue: '3º' },
     { id: '13', viewValue: '4º' },
     { id: '14', viewValue: '5º' }
-  ]
+  ],
+  groupId: 2,
 }]
 
 // Instrument list for student creation form
 export const INSTRUMENT_LIST: any[] = [{
   name: 'INSTRUMENT.GROUP.STRING',
-  groupId: 0,
   group: [
     { id: '0', viewValue: 'VIOLIN' },
     { id: '1', viewValue: 'VIOLA' },
@@ -229,10 +262,10 @@ export const INSTRUMENT_LIST: any[] = [{
     { id: '4', viewValue: 'PIANO' },
     { id: '5', viewValue: 'GUITAR' },
     { id: '6', viewValue: 'HARP' }
-  ]
+  ],
+  groupId: 0,
 }, {
   name: 'INSTRUMENT.GROUP.WIND',
-  groupId: 1,
   group: [
     { id: '7', viewValue: 'ACCORDION' },
     { id: '8', viewValue: 'CLARINET' },
@@ -246,13 +279,14 @@ export const INSTRUMENT_LIST: any[] = [{
     { id: '16', viewValue: 'HORN' },
     { id: '17', viewValue: 'TRUMPET' },
     { id: '18', viewValue: 'TUBA' },
-  ]
+  ],
+  groupId: 1,
 }, {
   name: 'INSTRUMENT.GROUP.PERCUSSION',
-  groupId: 2,
   group: [
     { id: '19', viewValue: 'PERCUSSION' }
-  ]
+  ],
+  groupId: 2,
 }]
 
 export const EMOJIS: any[] = ['🤪', '😂', '😄', '😋', '😙', '😗', '😦', '😬', '🤭', '😨', '🤐', '🥴', '😐', '🤨', '😝', '😍', '🥰', '😇', '🙃']

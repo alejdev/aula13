@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import moment from 'moment'
 import { Observable } from 'rxjs'
+import { Student } from 'src/app/core/interfaces'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -14,7 +15,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 export class StudentService {
 
   private subCollectionName: string = 'students'
-  private _savedStudentList: any[] = []
+  private _cachedStudentList: Student[] = []
 
   constructor(
     private firestore: AngularFirestore,
@@ -31,12 +32,12 @@ export class StudentService {
     return this.userData.collection(this.subCollectionName)
   }
 
-  public get savedStudentList(): any[] {
-    return this._savedStudentList
+  public get cachedStudentList(): Student[] {
+    return this._cachedStudentList
   }
 
-  public set savedStudentList(list) {
-    this._savedStudentList = list
+  public set cachedStudentList(list: Student[]) {
+    this._cachedStudentList = list
   }
 
   // Observables
@@ -73,7 +74,7 @@ export class StudentService {
     return UtilService.mapCollection(students)
   }
 
-  public createStudent(data: any): Promise<any> {
+  public createStudent(data: Student): Promise<any> {
     this.loaderService.load()
     return this.subCollection.add(data)
       .finally(() => this.loaderService.down())
@@ -92,12 +93,12 @@ export class StudentService {
       .finally(() => this.loaderService.down())
   }
 
-  public updateStudentBatch(students: any[]): Promise<any> {
+  public updateStudentBatch(students: Student[]): Promise<any> {
     this.loaderService.load()
     const batch = firebase.firestore().batch()
     students
       .filter(student => student)
-      .forEach((student: any) => {
+      .forEach((student: Student) => {
         const ref = this.subCollection.doc(student.id).ref
         delete student.id
         batch.update(ref, student)
@@ -113,7 +114,7 @@ export class StudentService {
   }
 
   // Normalize Student for save
-  public normalizeStudent(student: any): any {
+  public normalizeStudent(student: Student): Student {
     return {
       archived: !!student.archived,
       classroom: {
@@ -125,12 +126,12 @@ export class StudentService {
       },
       favorite: !!student.favorite,
       musical: {
-        course: student.musical.course || '',
-        instrument: student.musical.instrument || '',
+        course: student.musical.course || null,
+        instrument: student.musical.instrument || null,
         teacher: student.musical.teacher || ''
       },
       personal: {
-        academicCourse: student.personal.academicCourse || '',
+        academicCourse: student.personal.academicCourse || null,
         avatar: student.personal.avatar,
         birthdate: this.formatOutputDate(student.personal.birthdate),
         name: UtilService.capitalize(student.personal.name),

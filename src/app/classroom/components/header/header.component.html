@@ -21,11 +21,6 @@
     <!-- Spacer -->
     <span fxFlex></span>
 
-    <!-- Seach button -->
-    <!-- <button *ngIf="headerConfig?.search" class="menu-button action-button mr-q" mat-icon-button (click)="toggleSearch()" attr.aria-label="{{'SEARCH' | translate}}">
-      <fa-icon class="mat-icon-18" [icon]="headerService?.searchStatus ? 'times' : 'filter'"></fa-icon>
-    </button> -->
-
     <!-- Menu phone -->
     <button *ngIf="headerConfig?.student?.contactInformation?.phones?.length" class="menu-button action-button" mat-icon-button [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
       <fa-icon class="mat-icon-18" icon="phone-alt"></fa-icon>

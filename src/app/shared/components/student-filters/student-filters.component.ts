@@ -5,6 +5,7 @@ import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { ClassroomPipe } from 'src/app/classroom/students/pipes/classroom.pipe'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
 import { SubjectPipe } from 'src/app/classroom/students/pipes/subject.pipe'
+import { Classroom, Student, Subject } from 'src/app/core/interfaces'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
@@ -19,12 +20,12 @@ import { FilterPipe } from '../../pipes/filter-by.pipe'
 })
 export class StudentFiltersComponent implements OnInit, OnDestroy {
 
-  studentListFiltered: any[]
-  @Input() studentList: any[]
-  @Output() studentListFilter: any = new EventEmitter<any[]>()
+  studentListFiltered: Student[]
+  @Input() studentList: Student[]
+  @Output() studentListFilter: any = new EventEmitter<any>()
 
-  classroomList: any[]
-  subjectList: any[]
+  classroomList: Classroom[]
+  subjectList: Subject[]
 
   classroomListSubscription: Subscription
   subjectListSubscription: Subscription
@@ -33,8 +34,8 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   showFilters: boolean
 
   studentFilter: string
-  classroomsFilter: any[]
-  subjectsFilter: any[]
+  classroomsFilter: Classroom[]
+  subjectsFilter: Subject[]
   sortBy: string = 'personal.name'
   sortDirection: string = ''
   query: any
@@ -67,7 +68,7 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
     })
   }
 
-  filterList(list?: any[]): void {
+  filterList(list?: Student[]): void {
     this.studentListFiltered = list ? list : this.studentList
     if (this.studentFilter) { this.studentListFiltered = this.filterPipe.transform(this.studentListFiltered, this.studentFilter) }
     if (this.classroomsFilter) { this.studentListFiltered = this.classroomPipe.transform(this.studentListFiltered, this.classroomsFilter) }
@@ -81,10 +82,6 @@ export class StudentFiltersComponent implements OnInit, OnDestroy {
   }
 
   setModels(params: any): void {
-
-    // TODO
-    // const { studentFilter } = params
-
     this.studentFilter = params.studentFilter
     this.sortDirection = params.sortDirection
     this.classroomsFilter = typeof params.classroomsFilter == 'string' ? [params.classroomsFilter] : params.classroomsFilter

@@ -1,3 +1,4 @@
+import { Day } from 'src/app/core/interfaces'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
@@ -12,7 +13,7 @@ import { DayService } from '../../services/day.service'
 })
 export class DayArchiveDialogComponent implements OnInit {
 
-  day: any
+  day: Day
   textConfig: any
 
   constructor(
@@ -41,7 +42,7 @@ export class DayArchiveDialogComponent implements OnInit {
   ok(): void {
     this.day.archived = !this.day.archived
     this.dayService.updateDay(this.data.idDay, this.dayService.normalizeDay(this.day))
-      .then((result: any) => {
+      .then(() => {
         this.dialogRef.close(this.data.day)
         this.toastService.success({ text: this.textConfig.msgOk })
       })

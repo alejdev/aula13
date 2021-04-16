@@ -1,6 +1,7 @@
 import { Observable, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { Student } from 'src/app/core/interfaces'
 import { SKELETON_CONFIG } from 'src/app/core/settings'
 
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core'
@@ -45,7 +46,7 @@ export class SelectStudentComponent implements OnInit, OnDestroy, ControlValueAc
       map((result) => {
         const studentList = UtilService.mapCollection(result)
         return studentList
-          .filter((student: any) => !student.archived)
+          .filter((student: Student) => !student.archived)
           .concat(studentList.filter((student: any) => student.archived))
       })
     )

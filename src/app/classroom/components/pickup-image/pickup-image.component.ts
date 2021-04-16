@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Inject, Output, EventEmitter, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material'
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material'
 
 @Component({
   selector: 'a13-pickup-image-dialog',
@@ -42,7 +42,7 @@ export class PickupImageDialogComponent implements OnInit {
 export class PickupImageComponent implements OnInit, OnDestroy {
 
   @Input() image: any
-  @Input() imageList: any
+  @Input() imageList: any[]
   @Output() imageChange: any = new EventEmitter<boolean>()
 
   dialogSubscription: Subscription

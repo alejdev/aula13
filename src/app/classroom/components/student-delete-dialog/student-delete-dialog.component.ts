@@ -41,7 +41,7 @@ export class StudentDeleteDialogComponent implements OnInit {
 
   ok(): void {
     this.studentService.deleteStudent(this.data.idStudent)
-      .then((result: any) => {
+      .then(() => {
         this.removeDaysToStudents()
         this.dialogRef.close(this.data.student)
         this.toastService.success({ text: 'MSG.STUDENT_DELETE_OK' })

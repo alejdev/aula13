@@ -1,86 +1,144 @@
+export enum Theme {
+  dark = 'dark-theme',
+  light = 'light-theme',
+}
+
+export interface ThemeElement {
+  icon: string
+  id: Theme
+  isDark: boolean
+  name: string
+}
+
+export enum Language {
+  de = 'de',
+  en = 'en',
+  es = 'es',
+  fr = 'fr',
+  it = 'it',
+}
+
+export interface LanguageElement {
+  id: Language
+  name: string
+  tip: string
+}
+
 export enum InputAppearance {
-  standard = 'standard',
+  fill = 'fill',
   outline = 'outline',
-  fill = 'fill'
+  standard = 'standard',
 }
 
 export interface InputAppearanceElement {
-  name: string,
-  id: InputAppearance,
   icon: string
+  id: InputAppearance
+  name: string
 }
 
 export interface DefaultSetting {
-  theme?: number
-  lang?: string
-  canSlideSideMenu?: boolean
   canSlideRoutes?: boolean
-  inputAppearance?: InputAppearance,
-  gridStudentLayout?: boolean
+  canSlideSideMenu?: boolean
   gridDailyLayout?: boolean
+  gridStudentLayout?: boolean
+  inputAppearance?: InputAppearance
+  lang?: string
+  theme?: number
+}
+
+export interface HeaderConfig {
+  back?: boolean
+  day?: Day
+  length?: number
+  menuOptions?: any
+  showLogo?: boolean
+  showProfile?: boolean
+  student?: Student
+  title?: string
+  truncable?: boolean
+}
+
+export interface LogoConfig {
+  color?: string // blue|black|transparent
+  imageInvertedIfDarkTheme?: boolean
+  shake?: boolean
+  showLogo?: boolean
+  showTagline?: boolean
+  showTitle?: boolean
+  size?: string
 }
 
 export interface SocialNetwork {
-  txt: string,
-  icon: string,
-  id: string,
+  icon: string
+  id: string
+  txt: string
 }
 
 export interface Classroom {
   name: string
+  id?: string
 }
 
 export interface Subject {
   name: string
+  id?: string
 }
 
 export interface Phone {
-  name: string,
+  name: string
   number: string
 }
 
-export interface Course {
-  id: string,
+export interface ConservatoryCourse {
+  id: string
   viewValue: string
 }
 
 export interface Instrument {
-  id: string,
+  id: string
   viewValue: string
 }
 
 export interface AcademicCourse {
-  id: string,
+  id: string
   viewValue: string
 }
 
 export interface Student {
-  archived: boolean,
+  archived: boolean
   classroom: {
-    classrooms: Classroom[],
+    classrooms: Classroom[]
     subjects: Subject[]
   },
+  classrooms?: Classroom[] // Temp
   contactInformation: {
     phones: Phone[]
-  },
-  favorite: boolean,
+  }
+  favorite: boolean
+  id?: string // Temp
   musical: {
-    course: Course,
-    instrument: Instrument,
+    course: ConservatoryCourse
+    instrument: Instrument
     teacher: string
-  },
+  }
   personal: {
-    academicCourse: AcademicCourse,
-    avatar: string,
-    birthdate: string,
-    name: string,
+    academicCourse: AcademicCourse
+    avatar: string
+    birthdate: string
+    name: string
     observations: string
   }
+  subjects?: Subject[] // Temp
 }
 
 export interface Day {
-  content: string,
-  date: number,
-  studentId: string,
+  archived: boolean
+  content: string
+  date: number
+  favorite: boolean
+  hideStudent?: boolean // Temp
+  id?: string // Temp
+  student?: Student // Temp
+  studentId: string
   title: string
 }

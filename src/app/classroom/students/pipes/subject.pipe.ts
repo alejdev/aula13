@@ -1,3 +1,5 @@
+import { Student, Subject } from 'src/app/core/interfaces'
+
 import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
@@ -5,14 +7,13 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class SubjectPipe implements PipeTransform {
 
-  transform(array: any, subjects: any[]): any {
+  transform(array: Student[], subjects: any[]): Student[] {
     if (!array || !subjects || !subjects.length) {
       return array
     }
 
-    return array.filter((elem) => {
-      return elem.classroom.subjects.some((item) => subjects.includes(item))
+    return array.filter((student: Student) => {
+      return student.classroom.subjects.some((subject: Subject) => subjects.includes(subject))
     })
   }
-
 }

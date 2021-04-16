@@ -2,6 +2,7 @@ import moment, { Moment } from 'moment'
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
+import { Day } from 'src/app/core/interfaces'
 
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -19,10 +20,10 @@ import { UtilService } from '../../services/util.service'
 })
 export class DayFiltersComponent implements OnInit, OnDestroy {
 
-  dayListFiltered: any[] = []
-  @Input() dayList: any[]
+  dayListFiltered: Day[] = []
+  @Input() dayList: Day[]
   @Input() hideArchivedFilter: boolean
-  @Output() dayListFilter: any = new EventEmitter<any[]>()
+  @Output() dayListFilter: any = new EventEmitter<Day[]>()
 
   routeSubscription: Subscription
 
@@ -51,7 +52,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.query = {}
     let firstTime = true
     this.routeSubscription = this.activatedRoute.queryParams.subscribe((result) => {
@@ -63,7 +64,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     })
   }
 
-  filterList(list?: any[]): void {
+  filterList(list?: Day[]): void {
     this.dayListFiltered = list ? list : this.dayList
 
     if (this.dayFilter) { this.dayListFiltered = this.filterPipe.transform(this.dayListFiltered, this.dayFilter) }
@@ -78,7 +79,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterFavsAndArchived() {
+  filterFavsAndArchived(): void {
     switch (true) {
       case !this.showFavorites && !this.showArchived:
         this.configFavsAndArchived({})
@@ -95,13 +96,13 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
-  configFavsAndArchived(config: any, inclusive?: boolean) {
+  configFavsAndArchived(config: any, inclusive?: boolean): void {
     let filters = { archived: this.showArchived, ...config }
     filters = this.isStudentProfile() ? { ...filters, ...config } : { ...filters, ...config, 'student.archived': this.showArchived }
     this.filterBy(filters, inclusive)
   }
 
-  filterBy(config: any, inclusive?: boolean) {
+  filterBy(config: any, inclusive?: boolean): void {
     this.dayListFiltered = this.filterByKeyPipe.transform(this.dayListFiltered, config, inclusive)
   }
 
@@ -124,7 +125,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     }
   }
 
-  goToQuery() {
+  goToQuery(): void {
     this.formatQuery()
     this.router.navigate([], {
       relativeTo: this.activatedRoute,

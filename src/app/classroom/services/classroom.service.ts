@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs'
+import { Classroom } from 'src/app/core/interfaces'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -12,7 +13,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 export class ClassroomService {
 
   private subCollectionName: string = 'classrooms'
-  private cachedClassroomList: any[] = []
+  private cachedClassroomList: Classroom[] = []
 
   constructor(
     private firestore: AngularFirestore,
@@ -29,12 +30,12 @@ export class ClassroomService {
     return this.userData.collection(this.subCollectionName)
   }
 
-  public get cachedClassrooms(): any[] {
+  public get cachedClassrooms(): Classroom[] {
     return this.cachedClassroomList
   }
 
-  public set cachedClassrooms(cachedClassroomList: any[]) {
-    this.cachedClassroomList = cachedClassroomList
+  public set cachedClassrooms(list: Classroom[]) {
+    this.cachedClassroomList = list
   }
 
   // Observables
@@ -62,7 +63,7 @@ export class ClassroomService {
     return UtilService.mapCollection(classrooms)
   }
 
-  public createClassroom(data: any): Promise<any> {
+  public createClassroom(data: Classroom): Promise<any> {
     this.loaderService.load()
     return this.subCollection.add(data)
       .finally(() => this.loaderService.down())
@@ -75,7 +76,7 @@ export class ClassroomService {
     return UtilService.mapDocument(student)
   }
 
-  public updateClassroom(id: string, classroom: any): Promise<any> {
+  public updateClassroom(id: string, classroom: Classroom): Promise<any> {
     this.loaderService.load()
     return this.subCollection.doc(id).ref.set(classroom)
       .finally(() => this.loaderService.down())

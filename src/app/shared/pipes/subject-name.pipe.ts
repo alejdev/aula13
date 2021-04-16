@@ -1,5 +1,7 @@
-import { Pipe, PipeTransform } from '@angular/core'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { Subject } from 'src/app/core/interfaces'
+
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   name: 'subjectName'
@@ -10,10 +12,10 @@ export class SubjectNamePipe implements PipeTransform {
     private subjectService: SubjectService
   ) { }
 
-  transform(value: any, ...args: any[]): any {
+  transform(value: string, ...args: any[]): any {
     return this.subjectService
       .cachedSubjects
-      .find((elem: any) => elem.id === value)
+      .find((elem: Subject) => elem.id === value)
       .name
   }
 

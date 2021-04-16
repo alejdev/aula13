@@ -1,16 +1,16 @@
 import { Subscription } from 'rxjs'
+import { HeaderConfig, LogoConfig, ThemeElement } from 'src/app/core/interfaces'
 import { DIALOG_CONFIG } from 'src/app/core/settings'
 import { TypeOfPipe } from 'src/app/shared/pipes/type-of.pipe'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
+import { MatDialog, MatDialogConfig } from '@angular/material'
 import { Router } from '@angular/router'
 
 import { HeaderService } from '../../services/header.service'
 import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
-import { LogoConfig } from '../title-logo/title-logo.component'
 
 @Component({
   selector: 'a13-header',
@@ -20,7 +20,7 @@ import { LogoConfig } from '../title-logo/title-logo.component'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  themeName: any
+  themeName: string
   headerConfig: any
   isTruncated: boolean
 
@@ -28,8 +28,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   headerConfigSubscription: Subscription
 
   logoConfig: LogoConfig = {
+    color: 'transparent',
     shake: true,
-    color: 'transparent'
   }
 
   menuProfile: any = [{
@@ -59,19 +59,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     // Get theme
-    this.themeConfigSubscription = this.themeService.theme.subscribe((result: any) => {
+    this.themeConfigSubscription = this.themeService.theme.subscribe((result: ThemeElement) => {
       this.themeName = result.isDark ? '' : 'primary'
     })
 
     // Header config
-    this.headerConfigSubscription = this.headerService.config.subscribe((config: any) => {
+    this.headerConfigSubscription = this.headerService.config.subscribe((config: HeaderConfig) => {
       this.headerConfig = config
       this.isTruncated = true
       this.logoConfig.showLogo = config.showLogo
     })
   }
 
-  openDialog(component: any, config: any) {
+  openDialog(component: any, config: MatDialogConfig) {
     if (component && config) {
       this.dialog.open(component, config)
     }
@@ -82,13 +82,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isTruncated = !this.isTruncated
     }
   }
-
-  // toggleSearch() {
-  //   this.headerService.toggleSearch()
-  //   if (this.headerService.searchStatus) {
-  //     setTimeout(() => { document.getElementById('searchInputFilter').focus() }, 300)
-  //   }
-  // }
 
   goBack() {
     if (this.headerConfig.backTo) {

@@ -3,6 +3,7 @@ import { map, tap } from 'rxjs/operators'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { INDICATOR_ROTATE } from 'src/app/core/animations'
+import { Classroom, LogoConfig, Subject } from 'src/app/core/interfaces'
 import { CLASSROOM_MODEL, SUBJECT_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { AuthService } from 'src/app/shared/services/auth.service'
@@ -17,7 +18,6 @@ import { ClassroomCreationComponent } from '../classroom-creation/classroom-crea
 import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
 import { SubjectCreationComponent } from '../subject-creation/subject-creation.component'
 import { SubjectDeleteDialogComponent } from '../subject-delete-dialog/subject-delete-dialog.component'
-import { LogoConfig } from '../title-logo/title-logo.component'
 
 @Component({
   selector: 'a13-side-menu',
@@ -27,59 +27,58 @@ import { LogoConfig } from '../title-logo/title-logo.component'
 })
 export class SideMenuComponent implements OnInit {
 
-  title = 'Aula 13'
   user: any
 
   data$: Observable<any>
   skeleton: any = SKELETON_CONFIG
 
   logoConfig: LogoConfig = {
-    showLogo: true,
-    showTagline: true,
+    color: 'black',
     imageInvertedIfDarkTheme: true,
     shake: true,
-    color: 'black',
+    showLogo: true,
+    showTagline: true,
     size: '80px',
   }
 
   menuItems = [[{
-    id: 'classroomList',
-    name: 'CLASSROOMS',
-    tooltip: 'CREATE_CLASSROOM',
-    icon: 'chalkboard',
+    children: null,
     color: 'primary',
-    expanded: true,
     create: ClassroomCreationComponent,
     delete: ClassroomDeleteDialogComponent,
-    model: CLASSROOM_MODEL,
-    children: null
-  }, {
-    id: 'subjectList',
-    name: 'SUBJECTS',
-    tooltip: 'CREATE_SUBJECT',
-    icon: 'book',
-    color: 'accent',
     expanded: true,
+    icon: 'chalkboard',
+    id: 'classroomList',
+    model: CLASSROOM_MODEL,
+    name: 'CLASSROOMS',
+    tooltip: 'CREATE_CLASSROOM',
+  }, {
+    children: null,
+    color: 'accent',
     create: SubjectCreationComponent,
     delete: SubjectDeleteDialogComponent,
+    expanded: true,
+    icon: 'book',
+    id: 'subjectList',
     model: SUBJECT_MODEL,
-    children: null
+    name: 'SUBJECTS',
+    tooltip: 'CREATE_SUBJECT',
   }]]
 
   menuOptions = [{
+    icon: 'pen',
     id: 'edit',
     name: 'EDIT_ELEMENT',
-    icon: 'pen'
   }, {
+    icon: 'copy',
     id: 'clone',
     name: 'CLONE_ELEMENT',
-    icon: 'copy'
   },
   { divider: true },
   {
+    icon: 'trash',
     id: 'delete',
     name: 'DELETE_ELEMENT',
-    icon: 'trash'
   }]
 
   constructor(
@@ -103,15 +102,15 @@ export class SideMenuComponent implements OnInit {
     this.data$ = combineLatest([studentList$, classroomList$, subjectList$]).pipe(
       tap((result) => {
         const studentList = UtilService.mapCollection(result[0])
-        const classroomList = UtilService.mapCollection(result[1]).map((classroom) => ({
+        const classroomList = UtilService.mapCollection(result[1]).map((classroom: Classroom) => ({
           ...classroom,
           filter: 'classroomsFilter',
-          studentList: studentList.filter((elem: any) => elem.classroom.classrooms.some((classroomId) => classroomId === classroom.id))
+          studentList: studentList.filter((elem: any) => elem.classroom.classrooms.some((classroomId: string) => classroomId === classroom.id))
         }))
-        const subjectList = UtilService.mapCollection(result[2]).map((subject) => ({
+        const subjectList = UtilService.mapCollection(result[2]).map((subject: Subject) => ({
           ...subject,
           filter: 'subjectsFilter',
-          studentList: studentList.filter((elem: any) => elem.classroom.subjects.some((subjectId) => subjectId === subject.id))
+          studentList: studentList.filter((elem: any) => elem.classroom.subjects.some((subjectId: string) => subjectId === subject.id))
         }))
         this.menuItems[0][0].children = classroomList
         this.menuItems[0][1].children = subjectList

@@ -1,5 +1,6 @@
 import { Observable, Subscription } from 'rxjs'
 import { OPACITY, SLIDE_LEFT, SLIDE_RIGHT } from 'src/app/core/animations'
+import { ThemeElement } from 'src/app/core/interfaces'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -66,7 +67,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
     })
 
     // Theming service
-    this.themeSubscription = this.themeService.theme.subscribe((theme: any) => {
+    this.themeSubscription = this.themeService.theme.subscribe((theme: ThemeElement) => {
       this.componentCssClass = theme.id
     })
 

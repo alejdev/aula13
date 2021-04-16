@@ -1,4 +1,5 @@
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
+import { Classroom } from 'src/app/core/interfaces'
 
 import { Pipe, PipeTransform } from '@angular/core'
 
@@ -11,10 +12,10 @@ export class ClassroomNamePipe implements PipeTransform {
     private classroomService: ClassroomService
   ) { }
 
-  transform(value: any, ...args: any[]): any {
+  transform(value: string, ...args: any[]): any {
     return this.classroomService
       .cachedClassrooms
-      .find((elem: any) => elem.id === value)
+      .find((elem: Classroom) => elem.id === value)
       .name
   }
 

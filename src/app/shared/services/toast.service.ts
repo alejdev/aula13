@@ -22,7 +22,7 @@ export class ToastService extends MatSnackBar {
     super(overlay, live, injector, breakpointObserver, parentSnackBar, defaultConfig)
   }
 
-  say(data: any, config?: any): void {
+  say(data: any, config?: MatSnackBarConfig): void {
     this.openFromComponent(
       ToastComponent,
       {
@@ -37,23 +37,23 @@ export class ToastService extends MatSnackBar {
     )
   }
 
-  success(data: any, config?: any): void {
+  success(data: any, config?: MatSnackBarConfig): void {
     this.say({ type: 'success', ...data }, config)
   }
 
-  info(data: any, config?: any): void {
+  info(data: any, config?: MatSnackBarConfig): void {
     this.say({ type: 'info', ...data }, config)
   }
 
-  warning(data: any, config?: any): void {
+  warning(data: any, config?: MatSnackBarConfig): void {
     this.say({ type: 'warning', ...data }, config)
   }
 
-  error(data: any, config?: any): void {
+  error(data: any, config?: MatSnackBarConfig): void {
     this.say({ type: 'error', ...data }, config)
   }
 
-  welcome(data: any, config?: any): void {
+  welcome(data: any, config?: MatSnackBarConfig): void {
     this.openFromComponent(
       ToastComponent,
       {
