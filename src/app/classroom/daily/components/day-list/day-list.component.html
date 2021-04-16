@@ -14,7 +14,7 @@
       <a13-day-filters *ngIf="dayList?.length" [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
 
       <!-- Days -->
-      <div [ngClass]="{'grid-layout': grid}" class="relative mt-1">
+      <div *ngIf="dayList?.length" [ngClass]="{'grid-layout': grid}" class="relative mt-1">
 
         <!-- Layout -->
         <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="650" (click)="switchLayout()">

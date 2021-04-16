@@ -143,7 +143,7 @@
 
           <div *ngIf="data$ | async as data else dayListSkeleton">
 
-            <a13-day-filters *ngIf="data?.dayList?.length" [dayList]="data?.dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+            <a13-day-filters [ngClass]="{'d-none': !data?.dayList.length}" [dayList]="data?.dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
 
             <div>
               <ng-container *ngFor="let day of dayListFiltered">
