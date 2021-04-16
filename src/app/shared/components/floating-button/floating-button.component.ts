@@ -1,4 +1,4 @@
-import { animateFloatingButton } from 'src/app/classroom/classroom.animation'
+import { ANIMATE_FLOATING_BUTTON } from 'src/app/core/animations'
 
 import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
@@ -7,7 +7,7 @@ import { Router } from '@angular/router'
   selector: 'a13-floating-button',
   templateUrl: './floating-button.component.html',
   styleUrls: ['./floating-button.component.scss'],
-  animations: [animateFloatingButton]
+  animations: [ANIMATE_FLOATING_BUTTON]
 })
 export class FloatingButtonComponent implements OnInit {
 

@@ -1,7 +1,8 @@
 import { Subscription } from 'rxjs'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { LanguageService } from 'src/app/classroom/services/language.service'
-import { INPUT_APPEARANCE, InputAppearance } from 'src/app/core/core.module'
+import { InputAppearance, InputAppearanceElement } from 'src/app/core/interfaces'
+import { INPUT_APPEARANCE } from 'src/app/core/settings'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 
@@ -78,8 +79,8 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   }
 
   getInputAppearanceIcon(): string {
-    const inputIcon = this.inputAppearances.find((input) => input.id === this.settingService.value.inputAppearance)
-    return inputIcon ? inputIcon.icon : 'fill'
+    const inputIcon = this.inputAppearances.find((input: InputAppearanceElement) => input.id === this.settingService.value.inputAppearance)
+    return inputIcon ? inputIcon.icon : InputAppearance.fill
   }
 
   toggleSlideSideMenu(): void {

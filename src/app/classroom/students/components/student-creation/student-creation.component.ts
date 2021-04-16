@@ -6,7 +6,7 @@ import { SubjectCreationComponent } from 'src/app/classroom/components/subject-c
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
-import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG } from 'src/app/core/settings'
 import { PhonePipe } from 'src/app/shared/pipes/phone.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'

@@ -5,7 +5,7 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
 import { DayService } from 'src/app/classroom/services/day.service'
-import { CKEDITOR_CONFIG } from 'src/app/core/core.module'
+import { CKEDITOR_CONFIG } from 'src/app/core/settings'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'

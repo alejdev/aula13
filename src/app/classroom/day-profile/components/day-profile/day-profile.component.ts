@@ -5,7 +5,7 @@ import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delet
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
-import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { UtilService } from 'src/app/shared/services/util.service'

@@ -1,7 +1,7 @@
 import { Observable, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { StudentService } from 'src/app/classroom/services/student.service'
-import { SKELETON_CONFIG } from 'src/app/core/core.module'
+import { SKELETON_CONFIG } from 'src/app/core/settings'
 
 import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core'
 import { AbstractControl, ControlValueAccessor, FormBuilder, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms'

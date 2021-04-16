@@ -31,7 +31,7 @@ import { faWhatsapp as fasWhastapp } from '@fortawesome/free-brands-svg-icons'
 import { faArrowLeft, faBars, faBirthdayCake, faBook, faBorderStyle, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGripLines, faHeart, faInfo, faListUl, faMoon, faMusic, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faSpinner, faSquare, faStar, faStream, faSun, faTh, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus, faWindowMinimize, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
-import { MY_DATE_FORMATS } from '../core/core.module'
+import { MY_DATE_FORMATS } from '../core/settings'
 import { DayCardComponent } from './components/day-card/day-card.component'
 import { DayCreationComponent } from './components/day-creation/day-creation.component'
 import { DayFiltersComponent } from './components/day-filters/day-filters.component'

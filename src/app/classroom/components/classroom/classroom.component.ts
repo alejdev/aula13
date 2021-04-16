@@ -1,10 +1,10 @@
 import { Observable, Subscription } from 'rxjs'
-import { OPACITY, SLIDE_LEFT, SLIDE_RIGHT } from 'src/app/core/core.module'
+import { OPACITY, SLIDE_LEFT, SLIDE_RIGHT } from 'src/app/core/animations'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
-import { style, transition, trigger } from '@angular/animations'
+import { transition, trigger } from '@angular/animations'
 import { Component, HostBinding, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatSidenav } from '@angular/material/sidenav'
 import { Event, NavigationStart, Router, RouterOutlet } from '@angular/router'

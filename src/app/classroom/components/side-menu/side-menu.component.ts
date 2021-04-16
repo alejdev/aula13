@@ -2,7 +2,8 @@ import { combineLatest, Observable } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
-import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/core.module'
+import { INDICATOR_ROTATE } from 'src/app/core/animations'
+import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -11,7 +12,6 @@ import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
-import { indicatorRotate } from '../../classroom.animation'
 import { StudentService } from '../../services/student.service'
 import { ClassroomCreationComponent } from '../classroom-creation/classroom-creation.component'
 import { ClassroomDeleteDialogComponent } from '../classroom-delete-dialog/classroom-delete-dialog.component'
@@ -23,7 +23,7 @@ import { LogoConfig } from '../title-logo/title-logo.component'
   selector: 'a13-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
-  animations: [indicatorRotate]
+  animations: [INDICATOR_ROTATE]
 })
 export class SideMenuComponent implements OnInit {
 

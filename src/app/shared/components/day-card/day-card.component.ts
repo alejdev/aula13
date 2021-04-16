@@ -1,7 +1,7 @@
 import { DayArchiveDialogComponent } from 'src/app/classroom/components/day-archive-dialog/day-archive-dialog.component'
 import { DayDeleteDialogComponent } from 'src/app/classroom/components/day-delete-dialog/day-delete-dialog.component'
 import { DayService } from 'src/app/classroom/services/day.service'
-import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG } from 'src/app/core/settings'
 
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'

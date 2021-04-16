@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs'
-import { DIALOG_CONFIG } from 'src/app/core/core.module'
+import { DIALOG_CONFIG } from 'src/app/core/settings'
 import { TypeOfPipe } from 'src/app/shared/pipes/type-of.pipe'
 import { ThemeService } from 'src/app/shared/services/theme.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
