@@ -6,7 +6,7 @@ import { SubjectCreationComponent } from 'src/app/classroom/components/subject-c
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
-import { DIALOG_CONFIG } from 'src/app/core/settings'
+import { ACADEMIC_COURSE_LIST, AVATAR_LIST, CONSERVATORY_COURSE_LIST, DIALOG_CONFIG, INSTRUMENT_LIST } from 'src/app/core/settings'
 import { PhonePipe } from 'src/app/shared/pipes/phone.pipe'
 import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
@@ -26,11 +26,10 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class StudentCreationComponent implements OnInit {
 
-  ages: number[]
-  avatars: any
-  academicCourses: any[]
-  conservatoryCourses: any[]
-  instruments: any[]
+  avatars: any = AVATAR_LIST
+  academicCourses: any[] = ACADEMIC_COURSE_LIST
+  conservatoryCourses: any[] = CONSERVATORY_COURSE_LIST
+  instruments: any[] = INSTRUMENT_LIST
   arrayPhones: any = {}
 
   classroomList$: Observable<any>
@@ -67,12 +66,6 @@ export class StudentCreationComponent implements OnInit {
   }
 
   generateForm(): void {
-    this.ages = ModelService.ageList
-    this.avatars = ModelService.avatarList
-    this.academicCourses = ModelService.academicCourseList
-    this.conservatoryCourses = ModelService.conservatoryCourseList
-    this.instruments = ModelService.instrumentList
-
     this.student = this.data.student
     this.studentAvatar = this.student.personal.avatar
     this.equals = UtilService.equals

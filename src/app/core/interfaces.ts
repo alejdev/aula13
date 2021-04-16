@@ -19,3 +19,9 @@ export interface DefaultSetting {
   gridStudentLayout?: boolean
   gridDailyLayout?: boolean
 }
+
+export interface SocialNetwork {
+  txt: string,
+  icon: string,
+  id: string,
+}

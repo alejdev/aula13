@@ -47,6 +47,11 @@ export class UtilService {
     return Math.floor(Math.random() * max) + min
   }
 
+  // Return a random element of a array
+  public static getRandomElement(array: any[]): any {
+    return array[this.rand(array.length)]
+  }
+
   // Password match validator
   public static passwordMatchValidator(control: AbstractControl) {
     const password: string = control.get('password').value
@@ -163,11 +168,6 @@ export class UtilService {
     const data = JSON.parse(localStorage.getItem(key))
     localStorage.removeItem(key)
     return data
-  }
-
-  // Return a random element of a array
-  public static getRandomElement(array: any[]): any {
-    return array[Math.floor(Math.random() * array.length)]
   }
 
   // Return a copy of a object without id

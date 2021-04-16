@@ -9,7 +9,7 @@ import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
-import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
+import { ACADEMIC_COURSE_LIST, CONSERVATORY_COURSE_LIST, DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
 import { AgroupByDatePipe } from 'src/app/shared/pipes/agroup-by-date.pipe'
@@ -43,8 +43,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
   mark: any = UtilService.mark
-  academicCourseList: any = ModelService.academicCourseList
-  conservatoryCourseList: any = ModelService.conservatoryCourseList
+  academicCourseList: any = ACADEMIC_COURSE_LIST
+  conservatoryCourseList: any = CONSERVATORY_COURSE_LIST
 
   selectedTab: number = 0
   tabCount: number = 2

@@ -10,7 +10,6 @@ import { AgroupByDatePipe } from '../../pipes/agroup-by-date.pipe'
 import { DateFilterPipe } from '../../pipes/date-filter.pipe'
 import { FilterByKeyPipe } from '../../pipes/filter-by-key.pipe'
 import { FilterPipe } from '../../pipes/filter-by.pipe'
-import { ModelService } from '../../services/model.service'
 import { UtilService } from '../../services/util.service'
 
 @Component({
@@ -33,7 +32,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   dateSince: Moment
   dateUntil: Moment
 
-  quickDates: any[] = ModelService.getQuickDatesModel(moment())
+  quickDates: any[] = this.getQuickDatesModel(moment())
   quickDate: any
   showFavorites: boolean = false
   showArchived: boolean = false
@@ -188,6 +187,90 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   toggleFilters(): void {
     this.showFilters = !this.showFilters
+  }
+
+  getQuickDatesModel(today: Moment): any[] {
+    return [{
+      id: 'allTime',
+      name: 'DATES.ALL_TIME',
+      since: null,
+      until: null,
+    }, {
+      id: 'today',
+      name: 'DATES.TODAY',
+      since: UtilService.firstMoment(moment(today)),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'yesterday',
+      name: 'DATES.YESTERDAY',
+      since: UtilService.firstMoment(moment(today).subtract(1, 'days')),
+      until: UtilService.lastMoment(moment(today).subtract(1, 'days')),
+    }, {
+      id: 'beforeYesterday',
+      name: 'DATES.BEFORE_YESTERDAY',
+      since: UtilService.firstMoment(moment(today).subtract(2, 'days')),
+      until: UtilService.lastMoment(moment(today).subtract(2, 'days')),
+    }, {
+      id: 'lastWeek',
+      name: 'DATES.LAST_WEEK',
+      since: UtilService.firstMoment(moment(today).subtract(6, 'days')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'thisWeek',
+      name: 'DATES.THIS_WEEK',
+      since: moment(today).clone().startOf('isoWeek'),
+      until: moment(today).clone().endOf('isoWeek'),
+    }, {
+      id: 'pastWeek',
+      name: 'DATES.PAST_WEEK',
+      since: moment(today).clone().startOf('isoWeek').subtract(1, 'week'),
+      until: moment(today).clone().endOf('isoWeek').subtract(1, 'week'),
+    }, {
+      id: 'last15Days',
+      name: 'DATES.LAST_15DAYS',
+      since: UtilService.firstMoment(moment(today).subtract(14, 'days')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'lastMonth',
+      name: 'DATES.LAST_MONTH',
+      since: UtilService.firstMoment(moment(today).subtract(29, 'days')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'thisMonth',
+      name: 'DATES.THIS_MONTH',
+      since: moment(today).clone().startOf('month'),
+      until: moment(today).clone().endOf('month'),
+    }, {
+      id: 'pastMonth',
+      name: 'DATES.PAST_MONTH',
+      since: moment(today).clone().startOf('month').subtract(1, 'month'),
+      until: moment(today).clone().endOf('month').subtract(1, 'month'),
+    }, {
+      id: 'last3Month',
+      name: 'DATES.LAST_3MONTH',
+      since: UtilService.firstMoment(moment(today).subtract(3, 'months')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'last6Month',
+      name: 'DATES.LAST_6MONTH',
+      since: UtilService.firstMoment(moment(today).subtract(6, 'months')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'lastYear',
+      name: 'DATES.LAST_YEAR',
+      since: UtilService.firstMoment(moment(today).subtract(1, 'years')),
+      until: UtilService.lastMoment(moment(today)),
+    }, {
+      id: 'thisYear',
+      name: 'DATES.THIS_YEAR',
+      since: moment(today).clone().startOf('year'),
+      until: moment(today).clone().endOf('year'),
+    }, {
+      id: 'pastYear',
+      name: 'DATES.PAST_YEAR',
+      since: moment(today).clone().startOf('year').subtract(1, 'year'),
+      until: moment(today).clone().endOf('year').subtract(1, 'year'),
+    }]
   }
 
   ngOnDestroy(): void {

@@ -1,5 +1,6 @@
+import { SocialNetwork } from 'src/app/core/interfaces'
+import { SOCIAL_NETWORK_LIST } from 'src/app/core/settings'
 import { AuthService } from 'src/app/shared/services/auth.service'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnInit } from '@angular/core'
@@ -16,7 +17,7 @@ export class SignInComponent implements OnInit {
   formValidators: any
   passwordType = 'password'
 
-  signInSocialNetworks: any[] = ModelService.signInSocialNetworks
+  signInSocialNetworks: SocialNetwork[] = SOCIAL_NETWORK_LIST
 
   constructor(
     private formBuilder: FormBuilder,

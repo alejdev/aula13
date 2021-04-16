@@ -1,4 +1,4 @@
-import { ModelService } from 'src/app/shared/services/model.service'
+import { EMOJIS, INSTRUMENT_LIST } from 'src/app/core/settings'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
@@ -24,7 +24,7 @@ export interface LogoConfig {
 export class TitleLogoComponent implements OnInit {
 
   @Input() config: LogoConfig
-  instruments: any = ModelService.instrumentList
+  instruments: any = INSTRUMENT_LIST
     .reduce((acc, current) => acc = acc.concat(current.group), [])
     .map((instrument) => instrument.viewValue)
 
@@ -44,11 +44,10 @@ export class TitleLogoComponent implements OnInit {
   }
 
   getTooltipMessage(): string {
-    const message = UtilService.getRandomElement(ModelService.grettings)
     const instrument = UtilService.getRandomElement(this.instruments)
-    const emoji = UtilService.getRandomElement(ModelService.emojis)
+    const emoji = UtilService.getRandomElement(EMOJIS)
 
-    const translateMessage = this.translateService.instant(`GRETTING.${message}`)
+    const translateMessage = this.translateService.instant(`GRETTING.MSG_${UtilService.rand(10, 1)}`)
     const translateInstrument = this.translateService.instant(`INSTRUMENT.${instrument}`).toLowerCase()
 
     return `${translateMessage} ${translateInstrument} ${emoji}`
