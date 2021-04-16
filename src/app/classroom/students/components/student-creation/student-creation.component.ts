@@ -6,9 +6,9 @@ import { SubjectCreationComponent } from 'src/app/classroom/components/subject-c
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { CLASSROOM_MODEL, SUBJECT_MODEL } from 'src/app/core/models'
 import { ACADEMIC_COURSE_LIST, AVATAR_LIST, CONSERVATORY_COURSE_LIST, DIALOG_CONFIG, INSTRUMENT_LIST } from 'src/app/core/settings'
 import { PhonePipe } from 'src/app/shared/pipes/phone.pipe'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -235,7 +235,7 @@ export class StudentCreationComponent implements OnInit {
     this.dialog.open(ClassroomCreationComponent, {
       ...DIALOG_CONFIG,
       data: {
-        entity: UtilService.clone(ModelService.classroomModel),
+        entity: UtilService.clone(CLASSROOM_MODEL),
         noToast: true
       }
     })
@@ -245,7 +245,7 @@ export class StudentCreationComponent implements OnInit {
     this.dialog.open(SubjectCreationComponent, {
       ...DIALOG_CONFIG,
       data: {
-        entity: UtilService.clone(ModelService.subjectModel),
+        entity: UtilService.clone(SUBJECT_MODEL),
         noToast: true
       }
     })

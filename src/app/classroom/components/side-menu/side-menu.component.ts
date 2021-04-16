@@ -3,9 +3,9 @@ import { map, tap } from 'rxjs/operators'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { INDICATOR_ROTATE } from 'src/app/core/animations'
+import { CLASSROOM_MODEL, SUBJECT_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { AuthService } from 'src/app/shared/services/auth.service'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnInit } from '@angular/core'
@@ -51,7 +51,7 @@ export class SideMenuComponent implements OnInit {
     expanded: true,
     create: ClassroomCreationComponent,
     delete: ClassroomDeleteDialogComponent,
-    model: ModelService.classroomModel,
+    model: CLASSROOM_MODEL,
     children: null
   }, {
     id: 'subjectList',
@@ -62,7 +62,7 @@ export class SideMenuComponent implements OnInit {
     expanded: true,
     create: SubjectCreationComponent,
     delete: SubjectDeleteDialogComponent,
-    model: ModelService.subjectModel,
+    model: SUBJECT_MODEL,
     children: null
   }]]
 

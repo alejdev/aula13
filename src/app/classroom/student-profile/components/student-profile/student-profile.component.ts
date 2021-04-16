@@ -9,6 +9,7 @@ import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { StudentCreationComponent } from 'src/app/classroom/students/components/student-creation/student-creation.component'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
+import { DAY_MODEL } from 'src/app/core/models'
 import { ACADEMIC_COURSE_LIST, CONSERVATORY_COURSE_LIST, DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
@@ -18,7 +19,6 @@ import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
@@ -198,7 +198,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   }
 
   createDay(student: any): void {
-    const newDay = UtilService.clone(ModelService.dayModel)
+    const newDay = UtilService.clone(DAY_MODEL)
     newDay.student = student
     this.dialog.open(DayCreationComponent, {
       ...DIALOG_CONFIG,

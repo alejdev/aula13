@@ -4,11 +4,11 @@ import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { STUDENT_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { StudentFiltersComponent } from 'src/app/shared/components/student-filters/student-filters.component'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -111,7 +111,7 @@ export class StudentListComponent implements OnInit, AfterViewChecked {
     this.dialog.open(StudentCreationComponent, {
       ...DIALOG_CONFIG,
       data: {
-        student: UtilService.clone(ModelService.studenModel)
+        student: UtilService.clone(STUDENT_MODEL)
       }
     })
   }

@@ -4,6 +4,7 @@ import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
+import { DAY_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
 import { DayFiltersComponent } from 'src/app/shared/components/day-filters/day-filters.component'
@@ -13,7 +14,6 @@ import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { SettingService } from 'src/app/shared/services/setting.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
@@ -97,7 +97,7 @@ export class DayListComponent implements OnInit, AfterViewChecked {
       this.dialog.open(DayCreationComponent, {
         ...DIALOG_CONFIG,
         data: {
-          day: ModelService.dayModel
+          day: UtilService.clone(DAY_MODEL)
         }
       })
     }

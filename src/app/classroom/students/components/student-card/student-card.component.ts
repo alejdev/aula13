@@ -1,9 +1,9 @@
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { DAY_MODEL } from 'src/app/core/models'
 import { DIALOG_CONFIG } from 'src/app/core/settings'
 import { DayCreationComponent } from 'src/app/shared/components/day-creation/day-creation.component'
-import { ModelService } from 'src/app/shared/services/model.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, Input, OnInit } from '@angular/core'
@@ -39,7 +39,7 @@ export class StudentComponent implements OnInit {
         config: {
           ...DIALOG_CONFIG,
           data: {
-            day: { ...ModelService.dayModel, student: this.student }
+            day: { ...DAY_MODEL, student: this.student }
           }
         }
       }
