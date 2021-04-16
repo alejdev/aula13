@@ -14,14 +14,22 @@
       <a13-day-filters *ngIf="dayList?.length" [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
 
       <!-- Days -->
-      <div>
-        <ng-container *ngFor="let day of dayListFiltered">
-          <button *ngIf="day.firstOfMonth" mat-button class="mat-hint first-of-month">
-            <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
-            <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
-          </button>
-          <a13-day-card [(day)]="day" [fromUrl]="router.url"></a13-day-card>
-        </ng-container>
+      <div [ngClass]="{'grid-layout': grid}" class="relative mt-1">
+
+        <!-- Layout -->
+        <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="650" (click)="switchLayout()">
+          <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': grid}" [icon]="grid ? 'th' : 'list-ul'"></fa-icon>
+        </button>
+
+        <div class="card-container" [ngClass]="{'pt-2': grid}">
+          <ng-container *ngFor="let day of dayListFiltered">
+            <button *ngIf="day.firstOfMonth && !grid" mat-button class="mat-hint first-of-month">
+              <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
+              <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
+            </button>
+            <a13-day-card [grid]="grid" [(day)]="day" [fromUrl]="router.url"></a13-day-card>
+          </ng-container>
+        </div>
       </div>
 
       <!-- Empty list messages -->

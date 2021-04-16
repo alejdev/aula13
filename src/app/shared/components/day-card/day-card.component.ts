@@ -18,6 +18,7 @@ export class DayCardComponent implements OnInit {
 
   @Input() day: any = null
   @Input() fromUrl: string = ''
+  @Input() grid: boolean
 
   menuOptions: any = {}
 

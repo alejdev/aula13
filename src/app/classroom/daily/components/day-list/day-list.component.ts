@@ -14,6 +14,7 @@ import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
 import { ModelService } from 'src/app/shared/services/model.service'
+import { SettingService } from 'src/app/shared/services/setting.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
@@ -35,6 +36,7 @@ export class DayListComponent implements OnInit, AfterViewChecked {
   dayListFiltered: any[]
   @ViewChild(DayFiltersComponent, { static: false }) dayFilters: DayFiltersComponent
 
+  grid: boolean = this.settingService.value.gridDailyLayout
   skeleton: any = SKELETON_CONFIG
 
   constructor(
@@ -45,9 +47,10 @@ export class DayListComponent implements OnInit, AfterViewChecked {
     private cdRef: ChangeDetectorRef,
     private excludeArchivedPipe: ExcludeArchivedPipe,
     private toastService: ToastService,
-    private router: Router,
-    private loaderService: LoaderService
-  ) { }
+    public router: Router,
+    private loaderService: LoaderService,
+    private settingService: SettingService,
+    ) { }
 
   ngOnInit(): void {
     this.headerService.configHeader({ title: 'DAILY', showLogo: true, showProfile: true })
@@ -98,5 +101,10 @@ export class DayListComponent implements OnInit, AfterViewChecked {
         }
       })
     }
+  }
+
+  switchLayout(): void {
+    this.settingService.value = { gridDailyLayout: !this.settingService.value.gridDailyLayout }
+    this.grid = this.settingService.value.gridDailyLayout
   }
 }

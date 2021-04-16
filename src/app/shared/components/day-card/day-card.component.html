@@ -1,37 +1,34 @@
-<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente" [ngClass]="{'archived-student': !day?.hideStudent && (day?.archived || day?.student?.archived) || (day?.hideStudent && day?.archived)}" matRipple (click)="goTo()">
+<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente relative" [ngClass]="{'archived-student': !day?.hideStudent && (day?.archived || day?.student?.archived) || (day?.hideStudent && day?.archived), grid: grid}" matRipple (click)="goTo()">
 
-  <div class="day-header mb-h mt--q" fxLayout="row" fxLayoutAlign="space-between center">
-
+  <div class="card-header mb-h mt--q">
     <div class="date-container ml--q">
       <!-- Favorite -->
       <button class="action-button small-button mr-h" mat-icon-button (click)="quickAction($event, 'favorite')">
         <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-16 mat-hint" icon="star"></fa-icon>
       </button>
 
-      <!-- Archived -->
-      <!-- <button class="action-button small-button mr-h" mat-icon-button (click)="quickAction($event, 'archived')">
-        <fa-icon [ngClass]="{'error-color': day?.archived}" class="mat-icon-16 mat-hint ml-q" icon="box"></fa-icon>
-      </button> -->
-
       <!-- Date -->
-      <span class="mat-small mat-hint mr-q text-date">{{day?.date | date: 'd MMM, yy'}}</span>
+      <span class="mat-small mat-hint mr-q text-date">
+        <span *ngIf="!grid">{{day?.date | date: 'd MMM, yy'}}</span>
+        <span *ngIf="grid">{{day?.date | date: 'd MMMM, yyyy'}}</span>
+      </span>
     </div>
 
-    <div class="student-container mr--q" fxLayout="row" fxLayoutAlign="end center">
+    <div class="student-container mr--q">
 
       <!-- Name -->
       <a *ngIf="!day?.hideStudent && day?.student" [routerLink]="[ '/classroom/student', day?.student?.id ]" [state]="{ fromUrl: router.url }" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
 
       <!-- Avatar -->
       <div *ngIf="!day?.hideStudent && day?.student" fxLayout="row" fxLayoutAlign="end center" class="avatar-container ml-h" [ngClass]="{archived: day?.student?.archived}">
-        <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived}" class="mat-icon-16 mat-hint mr-h" icon="box"></fa-icon>
+        <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived, 'mat-icon-16': !grid, 'mat-icon-18': grid}" class="mat-hint mr-h" icon="box"></fa-icon>
         <a [routerLink]="[ '/classroom/student', day?.student?.id ]">
-          <img class="avatar avatar-xs p-0 aumente aumente-big" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
+          <img class="avatar avatar-xs p-0 aumente" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
         </a>
       </div>
 
       <!-- Menu options-->
-      <a13-menu-options [options]="menuOptions" [buttonSize]="16"></a13-menu-options>
+      <a13-menu-options class="menu-options" [options]="menuOptions" [buttonSize]="16"></a13-menu-options>
     </div>
   </div>
 
@@ -41,7 +38,7 @@
 
       <!-- Archived -->
       <div *ngIf="day?.archived" class="mat-small error mb-h">
-        <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+        <fa-icon class="mr-q  error-color" icon="box" [ngClass]="{'mat-icon-14': !grid, 'mat-icon-16': grid}"></fa-icon>
         <span class="error-color"> {{'ARCHIVED' | translate}} </span>
       </div>
 
@@ -49,21 +46,10 @@
       <span class="mat-h3 mb-h day-title">{{day?.title}}</span>
 
       <!-- Content -->
-      <div class="day-content-text txt-1 truncate-2 mat-hint">
+      <div class="day-content-text txt-1 mat-hint" [ngClass]="{'truncate-2': !grid, 'truncate-6': grid}">
         {{day?.content | stripHTML}}
       </div>
     </div>
-    <!-- <div class="action-buttons" fxLayout="row" fxLayoutAlign="end center"> -->
-      <!-- Edit -->
-      <!-- <button class="action-button" mat-icon-button (click)="editDay($event)">
-        <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
-      </button> -->
-
-      <!-- Delete -->
-      <!-- <button class="action-button" mat-icon-button (click)="deleteDay($event)">
-        <fa-icon class="mat-icon-18 mat-hint" icon="trash"></fa-icon>
-      </button> -->
-    <!-- </div> -->
   </div>
 
 </mat-card>
