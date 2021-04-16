@@ -11,12 +11,12 @@
       </button>
     </mat-form-field>
 
-    <button class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'SORT_BY_DATE' | translate}}" (click)="sort()" [matTooltip]="'SORT_BY_DATE' | translate" [matTooltipShowDelay]="650">
+    <button class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'SORT_BY_DATE' | translate}}" (click)="sort()" [matTooltip]="'SORT_BY_DATE' | translate" [matTooltipShowDelay]="300">
       <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': sortDirection}" [icon]="sortDirection ? 'sort-amount-down' : 'sort-amount-up-alt'"></fa-icon>
     </button>
 
     <!-- Toggle filter button -->
-    <button class="menu-button action-button ml-q mb-1" mat-button mat-icon-button (click)="toggleFilters()" attr.aria-label="{{'ADVANCED_FILTERS' | translate}}" [matTooltip]="'ADVANCED_FILTERS' | translate" [matTooltipShowDelay]="650">
+    <button class="menu-button action-button ml-q mb-1" mat-button mat-icon-button (click)="toggleFilters()" attr.aria-label="{{'ADVANCED_FILTERS' | translate}}" [matTooltip]="'ADVANCED_FILTERS' | translate" [matTooltipShowDelay]="300">
       <fa-icon class="mat-icon-18 mat-hint" [ngClass]="{'color-primary': showFilters}" icon="filter"></fa-icon>
     </button>
   </div>
@@ -61,12 +61,12 @@
       </mat-form-field>
 
       <!-- Fav -->
-      <button class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_FAVORITES' | translate}}" (click)="toggle('showFavorites')" [matTooltip]="'FORM.SHOW_FAVORITES' | translate" [matTooltipShowDelay]="650">
+      <button class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_FAVORITES' | translate}}" (click)="toggle('showFavorites')" [matTooltip]="'FORM.SHOW_FAVORITES' | translate" [matTooltipShowDelay]="300">
         <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'star-active': showFavorites}" icon="star"></fa-icon>
       </button>
 
       <!-- Archived -->
-      <button *ngIf="!hideArchivedFilter" class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_ARCHIVED' | translate}}" (click)="toggle('showArchived')" [matTooltip]="'FORM.SHOW_ARCHIVED' | translate" [matTooltipShowDelay]="650">
+      <button *ngIf="!hideArchivedFilter" class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_ARCHIVED' | translate}}" (click)="toggle('showArchived')" [matTooltip]="'FORM.SHOW_ARCHIVED' | translate" [matTooltipShowDelay]="300">
         <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': showArchived}" icon="box"></fa-icon>
       </button>
     </div>

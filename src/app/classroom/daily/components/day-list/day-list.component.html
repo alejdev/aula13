@@ -17,7 +17,7 @@
       <div *ngIf="dayList?.length" [ngClass]="{'grid-layout': grid}" class="relative mt-1">
 
         <!-- Layout -->
-        <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="650" (click)="switchLayout()">
+        <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="300" (click)="switchLayout()">
           <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': grid}" [icon]="grid ? 'th' : 'list-ul'"></fa-icon>
         </button>
 

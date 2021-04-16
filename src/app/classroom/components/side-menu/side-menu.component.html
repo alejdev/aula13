@@ -18,7 +18,7 @@
                   <span class="mat-hint pl-h ml-q mr-q">{{ item?.name | translate}}</span>
                   <span class="translucide mat-hint"> | {{item?.children?.length}}</span>
                   <span fxFlex></span>
-                  <button class="action-button" mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" (click)="createElement($event, item)" [matTooltip]="item.tooltip | translate" [matTooltipShowDelay]="650">
+                  <button class="action-button" mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" (click)="createElement($event, item)" [matTooltip]="item.tooltip | translate" [matTooltipShowDelay]="300">
                     <fa-icon class="mat-hint" icon="plus"></fa-icon>
                   </button>
                 </a>

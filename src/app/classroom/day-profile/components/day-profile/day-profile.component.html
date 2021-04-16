@@ -39,7 +39,7 @@
 
         <!-- Action button -->
         <div fxLayout="row" fxLayoutAlign="end center">
-          <button class="action-button" mat-icon-button (click)="quickAction(day, 'favorite')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="650">
+          <button class="action-button" mat-icon-button (click)="quickAction(day, 'favorite')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="300">
             <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-18 mat-hint" icon="star"></fa-icon>
           </button>
         </div>
