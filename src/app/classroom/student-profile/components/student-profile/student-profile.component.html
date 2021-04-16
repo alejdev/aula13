@@ -63,8 +63,8 @@
 
             <!-- Instrument -->
             <div *ngIf="student?.musical?.instrument" class="mat-small">
-              <span class="mat-hint">
-                {{'FORM.INSTRUMENT' | translate}}: </span>
+              <!-- <span class="mat-hint"> {{'FORM.INSTRUMENT' | translate}}: </span> -->
+              <fa-icon class="mat-icon-12 mr-q mat-hint" icon="music"></fa-icon>
               <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
             </div>
           </div>
