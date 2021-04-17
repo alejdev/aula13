@@ -20,6 +20,7 @@ import { ExcludeArchivedPipe } from 'src/app/shared/pipes/exclude-archived.pipe'
 import { FilterByKeyPipe } from 'src/app/shared/pipes/filter-by-key.pipe'
 import { FilterPipe } from 'src/app/shared/pipes/filter-by.pipe'
 import { LoaderService } from 'src/app/shared/services/loader.service'
+import { SettingService } from 'src/app/shared/services/setting.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
@@ -52,6 +53,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
   swipeCoord: [number, number]
   swipeTime: number
 
+  grid: boolean = this.settingService.value.gridDailyLayout
   skeleton: any = SKELETON_CONFIG
   moreInfoConfig: any = {
     show: false,
@@ -69,7 +71,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
     private subjectService: SubjectService,
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private settingService: SettingService,
   ) { }
 
   ngOnInit(): void {
@@ -251,6 +254,11 @@ export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChec
       text: `SHOW_${state ? 'MORE' : 'LESS'}`,
       icon: `caret-${state ? 'down' : 'up'}`
     }
+  }
+
+  switchLayout(): void {
+    this.settingService.value = { gridDailyLayout: !this.settingService.value.gridDailyLayout }
+    this.grid = this.settingService.value.gridDailyLayout
   }
 
   ngOnDestroy(): void {
