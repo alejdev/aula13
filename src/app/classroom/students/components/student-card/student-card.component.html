@@ -23,7 +23,8 @@
       </div>
       <div class="subjectList">
         <span class="mat-small mat-hint mr-q" *ngFor="let subject of student?.subjects; let i=index; let first = first">
-          <a class="mat-hint link" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: subject.id, openFilters: true}" [ngClass]="{'txt-lowercase': !first}" (click)="$event.stopPropagation()">{{subject.name}}</a>
+          <!-- <a class="mat-hint link" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: subject.id, openFilters: true}" [ngClass]="{'txt-lowercase': !first}" (click)="$event.stopPropagation()">{{subject.name}}</a> -->
+          <span class="mat-hint" [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
           <span>{{mark(student?.subjects, i) | translate}}</span>
         </span>
       </div>
