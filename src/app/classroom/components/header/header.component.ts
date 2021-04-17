@@ -1,15 +1,15 @@
 import { Subscription } from 'rxjs'
-import { HeaderConfig, LogoConfig, ThemeElement } from 'src/app/core/interfaces'
+import { HeaderConfig, LogoConfig, ThemeElement, User } from 'src/app/core/interfaces'
 import { DIALOG_CONFIG } from 'src/app/core/settings'
 import { TypeOfPipe } from 'src/app/shared/pipes/type-of.pipe'
 import { ThemeService } from 'src/app/shared/services/theme.service'
-import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog, MatDialogConfig } from '@angular/material'
 import { Router } from '@angular/router'
 
 import { HeaderService } from '../../services/header.service'
+import { UserService } from '../../services/user.service'
 import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 
 @Component({
@@ -20,6 +20,7 @@ import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  user: User
   themeName: string
   headerConfig: any
   isTruncated: boolean
@@ -53,10 +54,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private dialog: MatDialog,
     private router: Router,
-    private toastService: ToastService
+    private userService: UserService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
 
     // Get theme
     this.themeConfig$ = this.themeService.theme.subscribe((result: ThemeElement) => {
@@ -69,6 +70,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isTruncated = true
       this.logoConfig.showLogo = config.showLogo
     })
+
+    this.user = await this.userService.readUser()
   }
 
   openDialog(component: any, config: MatDialogConfig) {

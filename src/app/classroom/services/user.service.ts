@@ -2,6 +2,7 @@ import { Observable } from 'rxjs'
 import { User } from 'src/app/core/interfaces'
 import { AuthService } from 'src/app/shared/services/auth.service'
 import { LoaderService } from 'src/app/shared/services/loader.service'
+import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Injectable } from '@angular/core'
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore'
@@ -23,6 +24,13 @@ export class UserService {
 
   public observeUser(): Observable<any> {
     return this.userData.snapshotChanges()
+  }
+
+  public async readUser(): Promise<any> {
+    this.loaderService.load()
+    const user = await this.userData.get().toPromise()
+    this.loaderService.down()
+    return UtilService.mapDocument(user)
   }
 
   public updateUser(user: User): Promise<any> {

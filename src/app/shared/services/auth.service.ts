@@ -65,7 +65,10 @@ export class AuthService {
   public signUp(control: any): Promise<any> {
     this.loaderService.load()
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(control.email, control.password)
-      .then((authData: any) => this.createUser(authData.user))
+      .then((authData: any) => {
+        const user = this.normalizeUser(authData)
+        this.setUser(user.id, user)
+      })
       .catch(this.error)
       .finally(() => this.loaderService.down())
   }
@@ -82,7 +85,6 @@ export class AuthService {
   }
 
   public loginWithGoogle(): void {
-    // this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
     this.loginWithPopup(new auth.GoogleAuthProvider())
   }
 
@@ -99,13 +101,11 @@ export class AuthService {
   public loginWithPopup(provider: any): Promise<void> {
     return this.angularFireAuth.auth.signInWithPopup(provider)
       .then((authData: any) => {
+        const user = this.normalizeUser(authData)
         if (authData.additionalUserInfo.isNewUser) {
-          this.createUser(authData.user)
+          this.setUser(user.id, user)
         } else {
-          this.ngZone.run(() => {
-            this.router.navigate(['classroom'])
-            this.toastService.welcome({ user: authData })
-          })
+          this.setUser(user.id, user, ['avatar'])
         }
       })
       .catch(this.error)
@@ -134,17 +134,11 @@ export class AuthService {
       .finally(() => this.loaderService.down())
   }
 
-  private createUser(data: any): Promise<any> {
+  private setUser(uid: string, user: any, mergeFields?: string[]): Promise<any> {
     this.loaderService.load()
     return this.userData
-      .doc(data.uid)
-      .set({
-        creationDate: data.metadata.a,
-        email: data.email,
-        id: data.uid,
-        name: data.displayName,
-        avatar: data.photoURL
-      })
+      .doc(uid)
+      .set(user, { mergeFields })
       .then((authData: any) => {
         this.ngZone.run(() => {
           this.router.navigate(['classroom'])
@@ -159,6 +153,16 @@ export class AuthService {
     this.loaderService.load()
     return this.userData.doc(id).ref.get()
       .finally(() => this.loaderService.down())
+  }
+
+  public normalizeUser(authData: any): any {
+    return {
+      creationDate: authData.user.metadata.a,
+      email: authData.user.email,
+      id: authData.user.uid,
+      name: authData.user.displayName,
+      avatar: authData.user.photoURL
+    }
   }
 
 }

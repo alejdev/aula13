@@ -18,7 +18,7 @@
   <!-- Header -->
   <header class="padding-content-v" fxLayout="column" fxLayoutAlign="start center">
     <a matRipple class="avatar avatar-button border-theme border-theme-button mt-1 mb-2">
-      <img class="avatar-image" [src]="'' | srcImage" (click)="changeAvatar(user)">
+      <img class="avatar-image" [src]="user.avatar || ('' | srcImage)" (click)="changeAvatar(user)">
     </a>
     <h1 class="txt-center">{{user.name}}</h1>
     <span class="txt-center mat-hint">{{user.email}}</span>
@@ -39,7 +39,7 @@
     </section>
 
     <!-- Action buttons -->
-    <footer class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
+    <footer *ngIf="!userFormGroup.pristine" class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
       <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="initForm(userOriginal)">{{'CANCEL' | translate}}</button>
       <button class="ml-h" mat-flat-button color="accent" (click)="save(user)" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
     </footer>

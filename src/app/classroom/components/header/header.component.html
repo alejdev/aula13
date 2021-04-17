@@ -50,8 +50,8 @@
 
     <!-- Profile options -->
     <ng-container *ngIf="headerConfig?.showProfile">
-      <a mat-icon-button class="header-avatar-button action-button" [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger">
-        <img class="header-avatar" [src]="menuProfile?.user?.avatar | srcImage:true" alt="Avatar">
+      <a mat-icon-button class="header-avatar-button" [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger">
+        <img class="header-avatar" [src]="user?.avatar || ('' | srcImage:true)" alt="Avatar">
       </a>
       <mat-menu #menuProfileId="matMenu">
         <ng-container *ngFor="let option of menuProfile">
