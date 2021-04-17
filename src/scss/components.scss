@@ -117,7 +117,7 @@
   }
 
   &-button:hover {
-    padding: 7px !important;
+    // padding: 7px !important;
   }
 
   &-xs {
@@ -135,6 +135,7 @@
 .border-theme {
   border-width: map-get(map-get($sizes, main), border-size);
   border-style: solid;
+  border-color: transparent;
 }
 
 // Badge

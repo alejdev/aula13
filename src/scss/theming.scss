@@ -33,11 +33,12 @@
   }
 
   .border-theme {
-    border-color: $black-12-opacity;
+    // border-color: $black-12-opacity;
 
     &-button:hover {
-      border-color: #555;
-      border-width: 2px;
+      // border-color: #555;
+      border-color: $black-12-opacity;
+      // border-width: 2px;
     }
   }
 
@@ -163,11 +164,12 @@
   }
 
   .border-theme {
-    border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+    // border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
 
     &-button:hover {
-      border-color: map-get(map-get($colors, dark-theme), foreground);
-      border-width: 2px;
+      // border-color: map-get(map-get($colors, dark-theme), foreground);
+      border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+      // border-width: 2px;
     }
   }
 

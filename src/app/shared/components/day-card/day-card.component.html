@@ -23,7 +23,7 @@
       <div *ngIf="!day?.hideStudent && day?.student" fxLayout="row" fxLayoutAlign="end center" class="avatar-container ml-h" [ngClass]="{archived: day?.student?.archived}">
         <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived, 'mat-icon-16': !grid, 'mat-icon-18': grid}" class="mat-hint mr-h" icon="box"></fa-icon>
         <a [routerLink]="[ '/classroom/student', day?.student?.id ]">
-          <img class="avatar avatar-xs p-0 aumente" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
+          <img class="avatar avatar-button border-theme border-theme-button avatar-xs p-0" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
         </a>
       </div>
 
