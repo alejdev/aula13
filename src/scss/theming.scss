@@ -42,16 +42,16 @@
   }
 
   .table table {
-    border-color: #e3e3e3;
+    // border-color: #e3e3e3;
     background-color: white;
 
     th {
       background-color: #f8f8f8;
+      // border-color: #eee;
     }
 
-    th,
     td {
-      border-color: #e3e3e3;
+      // border-color: #f8f8f8;
     }
   }
 
@@ -146,16 +146,15 @@
   }
 
   .table table {
-    border-color: #444;
+    // border-color: #444;
     background-color: #2a2a2a;
 
     th {
       background-color: #252525;
     }
 
-    th,
     td {
-      border-color: #444;
+      // border-color: #444;
     }
   }
 
