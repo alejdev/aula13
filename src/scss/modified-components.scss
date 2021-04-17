@@ -175,7 +175,9 @@ ngx-skeleton-loader.skeleton .loader {
     box-sizing: border-box;
     border-collapse: collapse;
     table-layout: auto;
-    border: 0px solid transparent;
+    border: 1px solid transparent;
+    box-shadow: -2px 0 2px rgba($color: #000000, $alpha: .12);
+
 
     thead {
       th {
@@ -184,11 +186,18 @@ ngx-skeleton-loader.skeleton .loader {
       }
     }
 
+    th {
+      border-width: 0;
+    }
+
+    td {
+      border-bottom: 1px solid transparent;
+    }
+
     th,
     td {
       text-align: inherit;
       padding: .75rem;
-      border-bottom: 1px solid transparent;
       max-width: 140px;
     }
 
