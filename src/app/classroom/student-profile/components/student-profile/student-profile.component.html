@@ -60,53 +60,49 @@
                 </span>
               </div>
             </div>
-
-            <!-- Instrument -->
-            <div *ngIf="student?.musical?.instrument" class="mat-small">
-              <!-- <span class="mat-hint"> {{'FORM.INSTRUMENT' | translate}}: </span> -->
-              <fa-icon class="mat-icon-12 mr-q mat-hint" icon="music"></fa-icon>
-              <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
-            </div>
           </div>
         </div>
 
-        <!-- Badges -->
-        <div *ngIf="student?.classroom?.classrooms?.length || student?.classroom?.subjects?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
-
-          <!-- Classrooms -->
-          <button mat-button class="badge mt-0 ml-0" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/classroom/students']" [queryParams]="{classroomsFilter: classroom, openFilters: true}">
-            <fa-icon class="mat-icon-12 mr-q mat-hint" icon="chalkboard"></fa-icon>
+        <!-- Classrooms -->
+        <div *ngIf="student?.classroom?.classrooms?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+          <fa-icon class="header-icon mat-icon-14 mr-q mb-q mat-hint" icon="chalkboard"></fa-icon>
+          <button mat-button class="badge badge-big mt-0 ml-0" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/classroom/students']" [queryParams]="{classroomsFilter: classroom, openFilters: true}">
             <span class="mat-hint">{{classroom | classroomName}}</span>
           </button>
+        </div>
 
-          <!-- Subjects -->
-          <button mat-button class="badge badge-fill mt-0 ml-0" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: subject, openFilters: true}">
-            <fa-icon class="mat-icon-12 mr-q mat-hint" icon="book"></fa-icon>
+        <!-- Subjects -->
+        <div *ngIf="student?.classroom?.subjects?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+          <fa-icon class="header-icon mat-icon-14 mr-q mb-q mat-hint" icon="book"></fa-icon>
+          <button mat-button class="badge badge-big badge-fill mt-0 ml-0" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: subject, openFilters: true}">
             <span class="mat-hint">{{subject | subjectName}}</span>
           </button>
+        </div>
+
+        <!-- Instrument -->
+        <div *ngIf="student?.musical?.instrument" class="mat-small">
+          <fa-icon class="header-icon mat-icon-14 mr-h pr-q mb-q mat-hint" icon="music"></fa-icon>
+          <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
         </div>
 
         <!-- More Info -->
         <div *ngIf="moreInfoConfig.show" (dblclick)="tapToEdit(student)">
 
           <!-- Teacher -->
-          <div *ngIf="student?.musical?.teacher" class="mat-small">
-            <span class="mat-hint">
-              {{'TEACHER' | translate}}: </span>
+          <div *ngIf="student?.musical?.teacher" class="mat-small mt-q mb-q">
+            <fa-icon class="header-icon mat-icon-14 mr-h mat-hint" icon="chalkboard-teacher"></fa-icon>
             <span class="mb-0">{{student?.musical?.teacher}}</span>
           </div>
 
           <!-- Birthday -->
-          <div *ngIf="student?.personal?.birthdate" class="mat-small">
-            <span class="mat-hint">
-              {{'FORM.BIRTHDATE' | translate}}: </span>
+          <div *ngIf="student?.personal?.birthdate" class="mat-small mt-q mb-q">
+            <fa-icon class="header-icon mat-icon-14 mr-h pr-q mat-hint" icon="birthday-cake"></fa-icon>
             <span class="mb-0">{{student?.personal?.birthdate}}</span>
           </div>
 
           <!-- Observations -->
-          <div *ngIf="student?.personal?.observations" class="mat-small">
-            <span class="mat-hint">
-              {{'FORM.OBSERVATIONS' | translate}}: </span>
+          <div *ngIf="student?.personal?.observations" class="mat-small mt-q mb-q">
+            <fa-icon class="header-icon mat-icon-14 mr-h mat-hint" icon="eye"></fa-icon>
             <span class="mb-0">{{student?.personal?.observations}}</span>
           </div>
         </div>
