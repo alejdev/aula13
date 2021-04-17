@@ -88,6 +88,7 @@ export const DIALOG_CONFIG: MatDialogConfig = {
 export const SKELETON_CONFIG: any = {
   animation: 'progress', // pulse | progress
   circle: { theme: { width: '80px', height: '80px', margin: '5px 12px 0 .5rem' } },
+  circleBig: { theme: { width: '200px', height: '200px', margin: '0 .5rem 0 0' } },
   circleSmall: { theme: { width: '54px', height: '54px', margin: '0 .5rem 0 0' } },
   lines: [
     { theme: { 'max-width': '250px', height: '12px', 'margin-bottom': '8px' } },
@@ -99,6 +100,12 @@ export const SKELETON_CONFIG: any = {
   linesSmall: [
     { theme: { 'max-width': '220px', height: '12px', 'margin-bottom': '8px' } },
     { theme: { 'max-width': '110px', height: '10px', 'margin-bottom': '0' } },
+  ],
+  linesUser: [
+    { theme: { 'max-width': '240px', height: '32px', 'margin-bottom': '1rem' } },
+    { theme: { 'max-width': '130px', height: '20px', 'margin-bottom': '.5rem' } },
+    { theme: { 'max-width': '320px', height: '20px', 'margin-bottom': '3rem' } },
+    { theme: { 'max-width': '100%', height: '50px', 'margin-bottom': '0' } },
   ],
   list: [
     { theme: { 'max-width': '90%', height: '50px', margin: '0 0 2rem 0' } },
