@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   menuProfile: any = [{
     name: 'PROFILE',
     icon: 'user',
-    action: () => this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
+    action: () => this.router.navigate(['/classroom/profile'])
   }, {
     name: 'SETTINGS',
     icon: 'cog',

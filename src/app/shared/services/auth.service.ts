@@ -1,7 +1,7 @@
 import { auth } from 'firebase/app'
 import { Observable } from 'rxjs'
 
-import { Injectable } from '@angular/core'
+import { Injectable, NgZone } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
 import { Router } from '@angular/router'
@@ -22,7 +22,8 @@ export class AuthService {
     private firestore: AngularFirestore,
     private router: Router,
     private toastService: ToastService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public ngZone: NgZone,
   ) {
     this.error = (error: any) => {
       switch (error.code) {
@@ -101,8 +102,10 @@ export class AuthService {
         if (authData.additionalUserInfo.isNewUser) {
           this.createUser(authData.user)
         } else {
-          this.router.navigate(['classroom'])
-          this.toastService.welcome({ user: authData })
+          this.ngZone.run(() => {
+            this.router.navigate(['classroom'])
+            this.toastService.welcome({ user: authData })
+          })
         }
       })
       .catch(this.error)
@@ -143,8 +146,10 @@ export class AuthService {
         avatar: data.photoURL
       })
       .then((authData: any) => {
-        this.router.navigate(['classroom'])
-        this.toastService.welcome({ user: authData })
+        this.ngZone.run(() => {
+          this.router.navigate(['classroom'])
+          this.toastService.welcome({ user: authData })
+        })
       })
       .catch(this.error)
       .finally(() => this.loaderService.down())

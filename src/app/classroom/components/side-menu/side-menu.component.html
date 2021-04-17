@@ -14,7 +14,7 @@
             <ng-container *ngFor="let item of menu">
               <div class="mb-1">
                 <a mat-list-item (click)="onItemSelected($event, item)" class="{{item.color}}" [ngClass]="{'active': item.expanded}">
-                  <fa-icon class="mat-hint" [icon]="item.icon"></fa-icon>
+                  <fa-icon class="mat-hint ml-h" [icon]="item.icon"></fa-icon>
                   <span class="mat-hint pl-h ml-q mr-q">{{ item?.name | translate}}</span>
                   <span class="translucide mat-hint"> | {{item?.children?.length}}</span>
                   <span fxFlex></span>

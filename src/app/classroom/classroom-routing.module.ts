@@ -30,6 +30,10 @@ const routes: Routes = [{
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
     data: { animation: 'settings' }
+  }, {
+    path: 'profile',
+    loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule),
+    data: { animation: 'user' }
   }]
 }]
 

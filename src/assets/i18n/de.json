@@ -1,4 +1,5 @@
 {
+	"ACCOUNT_CREATION_DATE": "Konto erstellt am",
 	"ACTION_NOT_REVERSED": "Diese Aktion kann nicht rückgängig gemacht werden.",
 	"ADD_STUDENT": "Schüler hinzufügen",
 	"ADVANCED_FILTERS": "Erweiterte Filter",
@@ -266,6 +267,7 @@
 		"SUBJECT_LIST_EMPTY": "Sie haben noch keine Themen erstellt",
 		"SUBJECT_UPDATE_OK": "Betreff geändert",
 		"THERE_IS_NO_ELEMENTS": "Es gibt keine Elemente mehr",
+		"USER_UPDATE_OK": "Geänderter Benutzer",
 		"WELCOME": "Hallo {{name}}!",
 		"WILL_LOSE_THE_CHANGES": "Wenn Sie fortfahren, verlieren Sie alle Änderungen, die nicht gespeichert wurden",
 		"YES_ACCOUNT": "Hast du schon ein Konto?"

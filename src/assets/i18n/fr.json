@@ -1,4 +1,5 @@
 {
+	"ACCOUNT_CREATION_DATE": "Compte créé le",
 	"ACTION_NOT_REVERSED": "Cette action ne peut pas être annulée.",
 	"ADD_STUDENT": "Ajouter un étudiant",
 	"ADVANCED_FILTERS": "Filtres avancés",
@@ -266,6 +267,7 @@
 		"SUBJECT_LIST_EMPTY": "Vous n'avez pas encore créé de sujets",
 		"SUBJECT_UPDATE_OK": "Sujet modifié",
 		"THERE_IS_NO_ELEMENTS": "Il n'y a plus d'articles",
+		"USER_UPDATE_OK": "Utilisateur modifié",
 		"WELCOME": "Salut {{name}}!",
 		"WILL_LOSE_THE_CHANGES": "Si vous continuez, vous perdrez toutes les modifications qui n'ont pas été enregistrées",
 		"YES_ACCOUNT": "Avez-vous déjà un compte?"

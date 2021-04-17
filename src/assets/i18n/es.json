@@ -1,4 +1,5 @@
 {
+	"ACCOUNT_CREATION_DATE": "Cuenta creada el",
 	"ACTION_NOT_REVERSED": "Esta acción no podrá ser revertida",
 	"ADD_STUDENT": "Añadir alumno",
 	"ADVANCED_FILTERS": "Filtros avanzados",
@@ -266,6 +267,7 @@
 		"SUBJECT_LIST_EMPTY": "No has creado ninguna asignatura todavía",
 		"SUBJECT_UPDATE_OK": "Asignatura modificada",
 		"THERE_IS_NO_ELEMENTS": "No hay más elementos",
+		"USER_UPDATE_OK": "Usuario modificado",
 		"WELCOME": "¡Hola {{name}}!",
 		"WILL_LOSE_THE_CHANGES": "Si continúa perderá todos los cambios que no se hayan guardado",
 		"YES_ACCOUNT": "¿Ya tienes una cuenta?"

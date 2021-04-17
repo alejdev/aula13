@@ -1,0 +1,48 @@
+<!-- Skeleton -->
+<ng-template #userSkeleton>
+  <div fxLayout="row" fxLayoutAlign="start center" class="skeleton container-max sm mt-h">
+    <div>
+      <ngx-skeleton-loader count="1" appearance="circle" [animation]="skeleton.animation" [theme]="skeleton.circle.theme"></ngx-skeleton-loader>
+    </div>
+    <div fxFlex="100">
+      <ng-container *ngFor="let loader of skeleton.lines">
+        <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Form -->
+<form *ngIf="user" [formGroup]="userFormGroup" autocomplete="off" class="mat-typography" class="container container-nopadd">
+
+  <!-- Header -->
+  <header class="padding-content-v" fxLayout="column" fxLayoutAlign="start center">
+    <a matRipple class="avatar avatar-button border-theme border-theme-button mt-1 mb-2">
+      <img class="avatar-image" [src]="'' | srcImage" (click)="changeAvatar(user)">
+    </a>
+    <h1 class="txt-center">{{user.name}}</h1>
+    <span class="txt-center mat-hint">{{user.email}}</span>
+    <span class="txt-center mat-hint mt-q">{{'ACCOUNT_CREATION_DATE' | translate}} {{user.creationDate | date: 'fullDate'}}</span>
+  </header>
+
+  <!-- Content -->
+  <div class="container-max sm mt-2">
+    <section class="padding-content-h">
+
+      <!-- Name -->
+      <mat-form-field [appearance]="'inputAppearance' | settingValue">
+        <mat-label>{{'FORM.NAME' | translate}}{{'AND' | translate}} {{'FORM.SURNAME' | translate | lowercase}}
+        </mat-label>
+        <input matInput formControlName="userNameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}" autocomplete="off">
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+      </mat-form-field>
+    </section>
+
+    <!-- Action buttons -->
+    <footer class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="initForm(userOriginal)">{{'CANCEL' | translate}}</button>
+      <button class="ml-h" mat-flat-button color="accent" (click)="save(user)" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+    </footer>
+  </div>
+
+</form>
