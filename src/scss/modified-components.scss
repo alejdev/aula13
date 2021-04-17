@@ -161,3 +161,33 @@ ngx-skeleton-loader.skeleton .loader {
     }
   }
 }
+
+// Tables
+.table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0 2rem;
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    min-width: 800px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    border: 1px solid transparent;
+
+    thead {
+      th {
+        border-bottom: 2px solid transparent;
+        border-bottom-width: 2px;
+      }
+    }
+
+    th,
+    td {
+      text-align: inherit;
+      padding: .75rem;
+      border: 1px solid transparent;
+    }
+  }
+}
