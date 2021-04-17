@@ -1,4 +1,4 @@
-import { Classroom, Day, Student, Subject } from './interfaces'
+import { Classroom, Day, Student, Subject, User } from './interfaces'
 
 export const STUDENT_MODEL: Student = {
   archived: false,
@@ -39,4 +39,12 @@ export const CLASSROOM_MODEL: Classroom = {
 
 export const SUBJECT_MODEL: Subject = {
   name: ''
+}
+
+export const USER_MODEL: User = {
+  avatar: null,
+  creationDate: null,
+  email: null,
+  id: null,
+  name: null,
 }

@@ -142,3 +142,11 @@ export interface Day {
   studentId: string
   title: string
 }
+
+export interface User {
+  avatar: string
+  creationDate: string
+  email: string
+  id: string
+  name: string
+}

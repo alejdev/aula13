@@ -1,3 +1,4 @@
+import { auth } from 'firebase/app'
 import { Observable } from 'rxjs'
 
 import { Injectable } from '@angular/core'
@@ -63,7 +64,7 @@ export class AuthService {
   public signUp(control: any): Promise<any> {
     this.loaderService.load()
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(control.email, control.password)
-      .then((auth: any) => this.createUser(auth.user))
+      .then((authData: any) => this.createUser(authData.user))
       .catch(this.error)
       .finally(() => this.loaderService.down())
   }
@@ -71,22 +72,41 @@ export class AuthService {
   public signIn(control: any): Promise<any> {
     this.loaderService.load()
     return this.angularFireAuth.auth.signInWithEmailAndPassword(control.email, control.password)
-      .then((auth: any) => {
+      .then((authData: any) => {
         this.router.navigate(['classroom'])
-        this.toastService.welcome({ user: auth })
+        this.toastService.welcome({ user: authData })
       })
       .catch(this.error)
       .finally(() => this.loaderService.down())
   }
 
   public loginWithGoogle(): void {
-    this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
+    // this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
+    this.loginWithPopup(new auth.GoogleAuthProvider())
   }
+
   public loginWithFacebook(): void {
     this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
+    // this.loginWithPopup(new auth.FacebookAuthProvider())
   }
+
   public loginWithTwitter(): void {
     this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
+    // this.loginWithPopup(new auth.TwitterAuthProvider())
+  }
+
+  public loginWithPopup(provider: any): Promise<void> {
+    return this.angularFireAuth.auth.signInWithPopup(provider)
+      .then((authData: any) => {
+        if (authData.additionalUserInfo.isNewUser) {
+          this.createUser(authData.user)
+        } else {
+          this.router.navigate(['classroom'])
+          this.toastService.welcome({ user: authData })
+        }
+      })
+      .catch(this.error)
+      .finally(() => this.loaderService.down())
   }
 
   public forgotPassword(email: string): Promise<any> {
@@ -119,11 +139,12 @@ export class AuthService {
         creationDate: data.metadata.a,
         email: data.email,
         id: data.uid,
-        name: data.displayName
+        name: data.displayName,
+        avatar: data.photoURL
       })
-      .then((auth: any) => {
+      .then((authData: any) => {
         this.router.navigate(['classroom'])
-        this.toastService.welcome({ user: auth })
+        this.toastService.welcome({ user: authData })
       })
       .catch(this.error)
       .finally(() => this.loaderService.down())
