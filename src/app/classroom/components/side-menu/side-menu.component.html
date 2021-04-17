@@ -25,9 +25,13 @@
                 <div *ngIf="item.expanded">
                   <ng-container *ngFor="let child of item.children">
                     <a mat-list-item (click)="onItemSelected($event, child)" [ngClass]="{'expanded': child.expanded}">
-                      <span class="title translucide mat-small list-count ml-h">{{child.studentList.length}}</span>
-                      <span class="pl-q pr-q translucide mat-small">|</span>
-                      <span class="mat-hint truncate">{{child?.name}}</span>
+                      <span class="child-container relative truncate">
+                        <span class="list-count-container">
+                          <span class="translucide mat-small list-count">{{child.studentList.length}}</span>
+                          <span class="pl-q pr-q translucide mat-small">|</span>
+                        </span>
+                        <span class="mat-hint ml-1 pl-h">{{child?.name}}</span>
+                      </span>
                       <span fxFlex></span>
                       <button class="action-button" mat-icon-button [matMenuTriggerFor]="menuOptionsId" attr.aria-label="{{'OPTION_MENU' | translate}}" (click)=$event.stopPropagation()>
                         <fa-icon class="mat-hint" icon="ellipsis-v"></fa-icon>

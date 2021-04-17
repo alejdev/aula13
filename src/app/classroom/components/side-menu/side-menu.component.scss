@@ -40,7 +40,18 @@ a[mat-list-item].active {
   margin-right: 10px;
 }
 
-.list-count {
-  white-space: nowrap;
-  text-align: right;
+.child-container {
+  padding-left: .5rem;
+
+  .list-count-container {
+    position: absolute;
+    left: -1px;
+    text-align: right;
+    width: 2rem;
+
+    .list-count {
+      white-space: nowrap;
+      text-align: left;
+    }
+  }
 }
