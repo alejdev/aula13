@@ -161,7 +161,7 @@ export class DayService {
   // Normalize Day for save
   public normalizeDay(day: Day): Day {
     return {
-      content: day.content,
+      content: day.content.replace(/&nbsp;/g, ''),
       date: this.formatOutputDate(day.date),
       studentId: day.studentId,
       title: UtilService.capitalize(day.title),
