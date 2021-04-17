@@ -33,15 +33,15 @@
       <mat-form-field [appearance]="'inputAppearance' | settingValue">
         <mat-label>{{'FORM.NAME' | translate}}{{'AND' | translate}} {{'FORM.SURNAME' | translate | lowercase}}
         </mat-label>
-        <input matInput formControlName="userNameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}" autocomplete="off">
+        <input tabindex="1" matInput formControlName="userNameCtrl" attr.aria-label="{{'FORM.NAME' | translate}}" autocomplete="off">
         <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
       </mat-form-field>
     </section>
 
     <!-- Action buttons -->
     <footer *ngIf="!userFormGroup.pristine" class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
-      <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="initForm(userOriginal)">{{'CANCEL' | translate}}</button>
-      <button class="ml-h" mat-flat-button color="accent" (click)="save(user)" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+      <button tabindex="3" mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="initForm(userOriginal)">{{'CANCEL' | translate}}</button>
+      <button tabindex="2" class="ml-h" mat-flat-button color="accent" (click)="save(user)" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
     </footer>
   </div>
 

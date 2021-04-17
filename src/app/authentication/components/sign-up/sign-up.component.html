@@ -49,7 +49,7 @@
 
 <!-- SignUp RS buttons -->
 <div fxLayout="row" fxLayoutGap="1rem">
-  <button tabindex="{{5+i}}" fxFlex="33" *ngFor="let social of signInSocialNetworks; let i = index" mat-stroked-button (click)="signUpWithSocial(social.id)" attr.arial-label="{{social.txt | translate}}">
+  <button type="button" tabindex="{{5+i}}" fxFlex="33" *ngFor="let social of signInSocialNetworks; let i = index" mat-stroked-button (click)="signUpWithSocial(social.id)" attr.arial-label="{{social.txt | translate}}">
     <img [src]="'/assets/svgs/social/' + social.icon + '.svg'" class="mat-icon-24" [alt]="'Logo ' + social.id">
   </button>
 </div>
