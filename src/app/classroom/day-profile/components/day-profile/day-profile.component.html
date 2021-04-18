@@ -32,8 +32,16 @@
               <span class="error-color"> {{'ARCHIVED' | translate}} </span>
             </div>
 
+            <!-- Name -->
             <a class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/classroom/student', day?.studentId ]">{{day?.student?.personal?.name}}</a>
-            <span class="mat-small mat-hint" (dblclick)="tapToEdit(day)">{{day?.date | date: 'fullDate'}}</span>
+
+            <!-- Subject -->
+            <div *ngIf="day?.subjectId" class="subject mt-q">
+              <fa-icon class="header-icon mat-icon-14 mat-hint mr-q" icon="book"></fa-icon>
+              <button mat-button class="badge badge-big badge-fill mt-0 ml-0" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: day?.subjectId, openFilters: true}">
+                <span class="mat-hint">{{day?.subjectId | subjectName}}</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -48,7 +56,7 @@
 
     <!-- Content -->
     <div class="container-padd">
-      <div class="container-max sm p-h">
+      <div class="container-max sm">
 
         <!-- Skeleton -->
         <ng-template #dayContentSkeleton>
@@ -57,7 +65,16 @@
           </ng-container>
         </ng-template>
 
-        <div *ngIf="data$ | async as day; else dayContentSkeleton" [innerHTML]="day?.content" (dblclick)="tapToEdit(day)"></div>
+        <div *ngIf="data$ | async as day; else dayContentSkeleton" (dblclick)="tapToEdit(day)">
+          <!-- Date -->
+          <div class="mat-small mat-hint mb-h pb-q txt-right">
+            <fa-icon class="mat-icon-14 mat-hint mr-q" icon="calendar-day"></fa-icon>
+            {{day?.date | date: 'fullDate'}}
+          </div>
+
+          <!-- Content -->
+          <div [innerHTML]="day?.content"></div>
+        </div>
       </div>
     </div>
   </div>

@@ -22,8 +22,32 @@
       <a13-select-student [ngClass]="{'form-error': dayFormGroup.controls.dayStudentCtrl.hasError('required') && dayFormGroup.controls.dayStudentCtrl.touched}" fxFlex="50" formControlName="dayStudentCtrl">
       </a13-select-student>
 
+      <!-- Subjects -->
+      <mat-form-field class="pl-h" *ngIf="subjectList?.length" [appearance]="'inputAppearance' | settingValue" color="accent" fxFlex="50">
+        <mat-label>{{'FORM.SUBJECT' | translate}}</mat-label>
+        <mat-select formControlName="daySubjectCtrl" attr.aria-label="{{'FORM.SUBJECT' | translate}}">
+          <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
+            {{subject.name}}
+          </mat-option>
+        </mat-select>
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="book"></fa-icon>
+        <mat-hint>{{'HINT.SUBJECT' | translate}}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-q" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+
+      <!-- Title -->
+      <mat-form-field class="" [appearance]="'inputAppearance' | settingValue" fxFlex="60">
+        <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
+        <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}" autocomplete="off">
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+        <mat-hint align="start">{{'HINT.TITLE' | translate}}</mat-hint>
+        <!-- <mat-hint align="end">{{title.value.length}} / {{maxlengthTitle}}</mat-hint> -->
+      </mat-form-field>
+
       <!-- Date -->
-      <mat-form-field class="pl-h" fxFlex="50" [appearance]="'inputAppearance' | settingValue">
+      <mat-form-field class="pl-h" fxFlex="40" [appearance]="'inputAppearance' | settingValue">
         <mat-label>{{'FORM.DATE' | translate}}</mat-label>
         <input class="pl-h" matInput required formControlName="dayDateCtrl" [matDatepicker]="dp">
         <mat-datepicker #dp></mat-datepicker>
@@ -32,15 +56,6 @@
         <!-- <mat-hint align="start">{{'HINT.BIRTHDATE' | translate}}</mat-hint> -->
       </mat-form-field>
     </div>
-
-    <!-- Title -->
-    <mat-form-field class="" [appearance]="'inputAppearance' | settingValue" fxFlex="100">
-      <mat-label>{{'FORM.TITLE' | translate}}</mat-label>
-      <input matInput #title required formControlName="dayTitleCtrl" attr.aria-label="{{'FORM.TITLE' | translate}}" autocomplete="off">
-      <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
-      <mat-hint align="start">{{'HINT.TITLE' | translate}}</mat-hint>
-      <!-- <mat-hint align="end">{{title.value.length}} / {{maxlengthTitle}}</mat-hint> -->
-    </mat-form-field>
 
     <!-- Content -->
     <div class="angular-editor mt-1 pt-h pb-h " [ngClass]="{'ng-invalid': this.dayFormGroup.controls.dayContentCtrl.invalid, 'ng-touched': this.dayFormGroup.controls.dayStudentCtrl.touched}">

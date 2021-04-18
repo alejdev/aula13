@@ -76,7 +76,7 @@
   <!-- clean all filters -->
   <div *ngIf="dayFilter || dateSince || dateUntil || showArchived || showFavorites || quickDate || sortDirection" fxLayout="row" fxLayoutAlign="space-between center">
     <span fxFlex></span>
-    <button mat-button color="warn" class="badge badge-fill warn mat-small pointer" (click)="cleanFilters()">
+    <button mat-button color="warn" class="badge badge-fill badge-error warn mat-small error-color pointer" (click)="cleanFilters()">
       <span class="mr-q"> {{'CLEAN_ALL_FILTERS' | translate}}</span>
       <fa-icon class="mat-icon-14" icon="times"></fa-icon>
     </button>

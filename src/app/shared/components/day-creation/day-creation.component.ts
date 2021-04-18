@@ -5,7 +5,9 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
 import { DayService } from 'src/app/classroom/services/day.service'
-import { Day, Student } from 'src/app/core/interfaces'
+import { StudentService } from 'src/app/classroom/services/student.service'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
+import { Day, Student, Subject } from 'src/app/core/interfaces'
 import { CKEDITOR_CONFIG } from 'src/app/core/settings'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
@@ -29,6 +31,7 @@ export class DayCreationComponent implements OnInit {
 
   day: Day
   studentList: Student[]
+  subjectList: Subject[]
   dayFormGroup: FormGroup
   ckeditor: any = DecoupledEditor
   editorConfig: any
@@ -37,6 +40,8 @@ export class DayCreationComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private dayService: DayService,
+    private subjectService: SubjectService,
+    private studentService: StudentService,
     private toastService: ToastService,
     private settingService: SettingService,
     private translateService: TranslateService,
@@ -54,15 +59,26 @@ export class DayCreationComponent implements OnInit {
 
     const dayTitle = this.day.title
 
+    this.subjectList = this.getStudentSubjectList(this.day.student)
+
     // Init form controls
     this.dayFormGroup = this.formBuilder.group({
       dayStudentCtrl: [this.day.student, Validators.required],
       dayDateCtrl: [this.dayService.formatInputDate(this.day.date), Validators.required],
       dayTitleCtrl: [this.data.isClone ? `${this.translateService.instant('COPY_OF')} ${dayTitle}` : dayTitle, Validators.required],
       dayContentCtrl: [this.day.content, Validators.required],
+      daySubjectCtrl: [this.day.subjectId],
       dayFavoriteCtrl: [this.day.favorite],
       dayArchivedCtrl: [this.day.archived],
     })
+
+    this.dayFormGroup.controls.dayStudentCtrl.valueChanges
+      .subscribe(result => {
+        this.subjectList = this.getStudentSubjectList(result.studentCtrl)
+        if (!this.subjectList.some((subject: Subject) => subject.id === this.dayFormGroup.controls.daySubjectCtrl.value)) {
+          this.dayFormGroup.controls.daySubjectCtrl.reset()
+        }
+      })
   }
 
   onReady(editor: any): void {
@@ -78,6 +94,13 @@ export class DayCreationComponent implements OnInit {
       return dayStudentCtrl.studentCtrl.id
     }
     return dayStudentCtrl.id
+  }
+
+  getStudentSubjectList(student: Student): Subject[] {
+    if (!student) { return this.subjectService.cachedSubjects }
+    return this.subjectService.cachedSubjects.filter((subject: Subject) => {
+      return student.classroom.subjects.some((subjectId: any) => subjectId === subject.id)
+    })
   }
 
   toggleBooleanCrl(control: string): void {
@@ -99,6 +122,7 @@ export class DayCreationComponent implements OnInit {
         studentId: this.getStudentId(),
         date: this.dayFormGroup.value.dayDateCtrl,
         title: this.dayFormGroup.value.dayTitleCtrl,
+        subjectId: this.dayFormGroup.value.daySubjectCtrl,
         content: this.dayFormGroup.value.dayContentCtrl,
         favorite: this.dayFormGroup.value.dayFavoriteCtrl,
         archived: this.dayFormGroup.value.dayArchivedCtrl,

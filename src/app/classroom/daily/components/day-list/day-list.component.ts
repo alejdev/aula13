@@ -3,6 +3,7 @@ import { map, tap } from 'rxjs/operators'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { StudentService } from 'src/app/classroom/services/student.service'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
 import { Day, Student } from 'src/app/core/interfaces'
 import { DAY_MODEL } from 'src/app/core/models'
@@ -44,6 +45,7 @@ export class DayListComponent implements OnInit, AfterViewChecked {
     private studentService: StudentService,
     private dayService: DayService,
     private dialog: MatDialog,
+    private subjectService: SubjectService,
     private headerService: HeaderService,
     private cdRef: ChangeDetectorRef,
     private excludeArchivedPipe: ExcludeArchivedPipe,
@@ -65,11 +67,13 @@ export class DayListComponent implements OnInit, AfterViewChecked {
   async loadData(): Promise<any> {
     const dayList$ = this.dayService.observeDayList()
     const studentList$ = this.studentService.observeStudentList()
+    const subjectList$ = this.subjectService.observeSubjectList()
 
-    this.data$ = combineLatest([dayList$, studentList$]).pipe(
+    this.data$ = combineLatest([dayList$, studentList$, subjectList$]).pipe(
       tap(() => this.loaderService.load()),
       map((result) => {
         this.studentList = UtilService.mapCollection(result[1])
+        this.subjectService.cachedSubjects = UtilService.mapCollection(result[2])
         return UtilService.mapCollection(result[0]).map((day: Day) => ({
           ...day,
           student: this.studentList.find((student: Student) => student.id === day.studentId),

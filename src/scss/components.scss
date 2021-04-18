@@ -269,9 +269,12 @@
 }
 
 // Arhived student
-.translucide,
-.archived-student {
+.translucide {
   opacity: .5;
+}
+
+.archived-student {
+  opacity: .65;
 }
 
 .archived-student:hover {

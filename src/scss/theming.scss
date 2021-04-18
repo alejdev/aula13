@@ -68,6 +68,11 @@
     }
 
     &.badge-fill {
+      color: map-get(map-get($colors, light-theme), foreground);
+      background-color: rgb(255, 255, 255);
+    }
+
+    &.badge-error {
       color: map-get(map-get($colors, light-theme), warn);
       background-color: white;
     }
@@ -185,7 +190,7 @@
     border-color: #666;
 
     &.badge-fill {
-      background-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
+      background-color: lighten(map-get(map-get($colors, dark-theme), background), 12%);
     }
   }
 

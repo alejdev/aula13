@@ -140,6 +140,7 @@ export interface Day {
   id?: string // Temp
   student?: Student // Temp
   studentId: string
+  subjectId: string
   title: string
 }
 

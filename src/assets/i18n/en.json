@@ -166,6 +166,7 @@
 		"CLASSROOM_STUDENT_LIST": "Select the students enrolled in this classroom",
 		"INSTRUMENT": "What instrument do you play?",
 		"OBSERVATIONS": "Add a brief description of the student",
+		"SUBJECT": "",
 		"SUBJECTS": "Mark the subjects that will be taught to the student",
 		"SUBJECT_STUDENT_LIST": "Select the students enrolled in this subject",
 		"TITLE": "Add a small descriptive title."

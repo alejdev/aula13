@@ -25,6 +25,13 @@ mat-card {
     }
   }
 
+  .subject {
+    fa-icon {
+      position: relative;
+      top: 3px;
+    }
+  }
+
   .student-container {
     display: flex;
     flex-direction: row;

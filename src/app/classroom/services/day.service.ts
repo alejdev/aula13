@@ -164,6 +164,7 @@ export class DayService {
       content: day.content.replace(/&nbsp;/g, ''),
       date: this.formatOutputDate(day.date),
       studentId: day.studentId,
+      subjectId: day.subjectId,
       title: UtilService.capitalize(day.title),
       favorite: !!day.favorite,
       archived: !!day.archived

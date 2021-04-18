@@ -38,7 +38,7 @@
 
       <!-- Archived -->
       <div *ngIf="day?.archived" class="mat-small error mb-h">
-        <fa-icon class="mr-q  error-color" icon="box" [ngClass]="{'mat-icon-14': !grid, 'mat-icon-16': grid}"></fa-icon>
+        <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
         <span class="error-color"> {{'ARCHIVED' | translate}} </span>
       </div>
 
@@ -48,6 +48,14 @@
       <!-- Content -->
       <div class="day-content-text txt-1 mat-hint" [ngClass]="{'truncate-2': !grid, 'truncate-6': grid}">
         {{day?.content | stripHTML}}
+      </div>
+
+      <!-- Subject -->
+      <div *ngIf="day?.subjectId && grid" class="subject mt-h txt-right mb--1">
+        <button mat-button class="badge badge-big badge-fill mt-0 ml-0" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: day?.subjectId, openFilters: true}">
+          <span class="mat-hint">{{day?.subjectId | subjectName}}</span>
+        </button>
+        <!-- <fa-icon class="header-icon mat-icon-14 mat-hint mr-q" icon="book"></fa-icon> -->
       </div>
     </div>
   </div>

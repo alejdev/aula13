@@ -30,6 +30,7 @@ export const DAY_MODEL: Day = {
   date: null,
   favorite: false,
   studentId: '',
+  subjectId: '',
   title: '',
 }
 
