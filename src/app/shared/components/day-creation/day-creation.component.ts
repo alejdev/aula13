@@ -5,7 +5,6 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/it'
 import '@ckeditor/ckeditor5-build-classic/build/translations/fr'
 
 import { DayService } from 'src/app/classroom/services/day.service'
-import { StudentService } from 'src/app/classroom/services/student.service'
 import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { Day, Student, Subject } from 'src/app/core/interfaces'
 import { CKEDITOR_CONFIG } from 'src/app/core/settings'
@@ -41,7 +40,6 @@ export class DayCreationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dayService: DayService,
     private subjectService: SubjectService,
-    private studentService: StudentService,
     private toastService: ToastService,
     private settingService: SettingService,
     private translateService: TranslateService,
