@@ -166,7 +166,7 @@
 		"CLASSROOM_STUDENT_LIST": "Sélectionnez les étudiants inscrits dans cette classe",
 		"INSTRUMENT": "De quel instrument jouez-vous ?",
 		"OBSERVATIONS": "Ajouter une brève description de l'élève",
-		"SUBJECT": "",
+		"SUBJECT": "Sujet de l'inscription",
 		"SUBJECTS": "Marquez les matières qui seront enseignées à l'élève",
 		"SUBJECT_STUDENT_LIST": "Sélectionnez les étudiants inscrits dans ce sujet",
 		"TITLE": "Ajoutez un petit titre descriptif."
@@ -276,6 +276,10 @@
 	},
 	"NEXT": "Suivant",
 	"NONE": "Aucun",
+	"NO_NETWORK": {
+		"MSG": "Assurez-vous que votre appareil dispose d'une connexion active et stable à Internet",
+		"TITLE": "Sans connexion"
+	},
 	"OK": "OK",
 	"OPEN_CLOSE_MENU": "Ouvrir / Fermer le menu",
 	"OPEN_MENU": "Ouvrir le menu",
@@ -295,6 +299,7 @@
 	"RESET_EMAIL": "Réinitialiser le champ e-mail",
 	"RESET_FILTER": "Réinitialiser le filtre",
 	"REST_STUDENTS": "Autres étudiants",
+	"RETRY_AGAIN": "Réessayer",
 	"SAVE": "Sauvegarder",
 	"SEARCH_DAY": "Rechercher un enregistrement",
 	"SEARCH_STUDENT": "Recherche étudiant",

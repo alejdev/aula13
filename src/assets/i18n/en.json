@@ -166,7 +166,7 @@
 		"CLASSROOM_STUDENT_LIST": "Select the students enrolled in this classroom",
 		"INSTRUMENT": "What instrument do you play?",
 		"OBSERVATIONS": "Add a brief description of the student",
-		"SUBJECT": "",
+		"SUBJECT": "Subject of record",
 		"SUBJECTS": "Mark the subjects that will be taught to the student",
 		"SUBJECT_STUDENT_LIST": "Select the students enrolled in this subject",
 		"TITLE": "Add a small descriptive title."
@@ -276,6 +276,10 @@
 	},
 	"NEXT": "Following",
 	"NONE": "None",
+	"NO_NETWORK": {
+		"MSG": "Make sure your device has an active and stable connection to the Internet",
+		"TITLE": "Without connection"
+	},
 	"OK": "OK",
 	"OPEN_CLOSE_MENU": "Open / Close menu",
 	"OPEN_MENU": "Open Menu",
@@ -295,6 +299,7 @@
 	"RESET_EMAIL": "Reset email field",
 	"RESET_FILTER": "Reset filter",
 	"REST_STUDENTS": "Other students",
+	"RETRY_AGAIN": "Try again",
 	"SAVE": "Save",
 	"SEARCH_DAY": "Search record",
 	"SEARCH_STUDENT": "Search student",

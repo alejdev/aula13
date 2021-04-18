@@ -166,7 +166,7 @@
 		"CLASSROOM_STUDENT_LIST": "Wählen Sie die Schüler aus, die in diesem Klassenzimmer eingeschrieben sind",
 		"INSTRUMENT": "Welches Instrument spielen Sie?",
 		"OBSERVATIONS": "Fügen Sie eine kurze Beschreibung des Schülers hinzu",
-		"SUBJECT": "",
+		"SUBJECT": "Thema der Registrierung",
 		"SUBJECTS": "Markieren Sie die Fächer, die dem Schüler beigebracht werden",
 		"SUBJECT_STUDENT_LIST": "Wählen Sie die in diesem Fach eingeschriebenen Schüler aus",
 		"TITLE": "Fügen Sie einen kleinen beschreibenden Titel hinzu."
@@ -276,6 +276,10 @@
 	},
 	"NEXT": "Weiter",
 	"NONE": "Keine",
+	"NO_NETWORK": {
+		"MSG": "Stellen Sie sicher, dass Ihr Gerät eine aktive und stabile Verbindung zum Internet hat",
+		"TITLE": "Ohne Verbindung"
+	},
 	"OK": "OK",
 	"OPEN_CLOSE_MENU": "Menü öffnen / schließen",
 	"OPEN_MENU": "Menü öffnen",
@@ -295,6 +299,7 @@
 	"RESET_EMAIL": "E-Mail-Feld zurücksetzen",
 	"RESET_FILTER": "Filter zurücksetzen",
 	"REST_STUDENTS": "Andere Schüler",
+	"RETRY_AGAIN": "Versuchen Sie es nochmal",
 	"SAVE": "Speichern",
 	"SEARCH_DAY": "Datensatz suchen",
 	"SEARCH_STUDENT": "Student suchen",

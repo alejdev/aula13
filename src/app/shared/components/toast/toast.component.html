@@ -21,12 +21,16 @@
     </span>
   </div>
 
+  <p *ngIf="data?.text2" class="mb-0">
+    {{ data?.text2 | translate }}
+  </p>
+
   <!-- Spacer -->
   <!-- <span fxFlex></span> -->
 
   <div fxLayoutAlign="end" class="mt-1">
     <!-- buttons -->
-    <button mat-button (click)="close()">{{'OK' | translate}}</button>
+    <button *ngIf="!data?.noOk" mat-button (click)="close()">{{'OK' | translate}}</button>
     <button *ngIf="data?.navigate" class="ml-h" mat-flat-button color="primary" [routerLink]="data?.navigate?.route" [queryParams]="data?.navigate?.queryParams" (click)="close()">{{data?.navigate?.text | translate}}</button>
     <button *ngIf="data?.action" class="ml-h" mat-flat-button color="accent" (click)="data?.action?.fn(); snackRef.dismiss()">{{data?.action?.text | translate}}</button>
   </div>

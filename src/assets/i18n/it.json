@@ -166,7 +166,7 @@
 		"CLASSROOM_STUDENT_LIST": "Seleziona gli studenti iscritti in questa classe",
 		"INSTRUMENT": "Che strumento suoni?",
 		"OBSERVATIONS": "Aggiungi una breve descrizione dello studente",
-		"SUBJECT": "",
+		"SUBJECT": "Oggetto della registrazione",
 		"SUBJECTS": "Segna le materie che verranno insegnate allo studente",
 		"SUBJECT_STUDENT_LIST": "Seleziona gli studenti iscritti a questa materia",
 		"TITLE": "Aggiungi un piccolo titolo descrittivo."
@@ -276,6 +276,10 @@
 	},
 	"NEXT": "Seguente",
 	"NONE": "Nessuno/a",
+	"NO_NETWORK": {
+		"MSG": "Assicurati che il tuo dispositivo abbia una connessione attiva e stabile a Internet",
+		"TITLE": "Senza connessione"
+	},
 	"OK": "OK",
 	"OPEN_CLOSE_MENU": "Apri / Chiudi menu",
 	"OPEN_MENU": "Apri il menu",
@@ -295,6 +299,7 @@
 	"RESET_EMAIL": "Reimposta campo email",
 	"RESET_FILTER": "Reimposta filtro",
 	"REST_STUDENTS": "Altri studenti",
+	"RETRY_AGAIN": "Riprova",
 	"SAVE": "Salvare",
 	"SEARCH_DAY": "cerca record",
 	"SEARCH_STUDENT": "Cerca studente",

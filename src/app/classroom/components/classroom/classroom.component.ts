@@ -42,7 +42,7 @@ export class ClassroomComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private themeService: ThemeService,
-    private settingService: SettingService
+    private settingService: SettingService,
   ) { }
 
   ngOnInit(): void {

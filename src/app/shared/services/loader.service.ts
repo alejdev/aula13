@@ -30,8 +30,9 @@ export class LoaderService {
     this.setCount(this.countTracker$.value, -1)
   }
 
-  resetCount(): void {
+  reset(): void {
     this.countTracker$.next(this.initialCount)
+    this.setStatus(false)
   }
 
   // Get satus of loader

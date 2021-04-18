@@ -276,6 +276,10 @@
 	},
 	"NEXT": "Siguiente",
 	"NONE": "Ninguno/a",
+	"NO_NETWORK": {
+		"MSG": "Asegúrate de que tu dispositivo tenga una conexión activa y estable a Internet",
+		"TITLE": "Sin conexión"
+	},
 	"OK": "OK",
 	"OPEN_CLOSE_MENU": "Abrir / Cerrar menú",
 	"OPEN_MENU": "Abrir menú",
@@ -295,6 +299,7 @@
 	"RESET_EMAIL": "Reiniciar campo de correo electrónico",
 	"RESET_FILTER": "Reiniciar filtro",
 	"REST_STUDENTS": "Demás alumnos",
+	"RETRY_AGAIN": "Volver a intentarlo",
 	"SAVE": "Guardar",
 	"SEARCH_DAY": "Buscar registro",
 	"SEARCH_STUDENT": "Buscar alumno",

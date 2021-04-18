@@ -28,7 +28,7 @@ import { RouterModule } from '@angular/router'
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 import { FaConfig, FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faWhatsapp as fasWhastapp } from '@fortawesome/free-brands-svg-icons'
-import { faArrowLeft, faBars, faBirthdayCake, faBook, faBorderStyle, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGripLines, faHeart, faInfo, faListUl, faMoon, faMusic, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faSpinner, faSquare, faStar, faStream, faSun, faTh, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus, faWindowMinimize, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faBars, faBirthdayCake, faBook, faBorderStyle, faBox, faBoxOpen, faCalendar, faCalendarDay, faCalendarPlus, faCaretDown, faCaretUp, faChalkboard, faChalkboardTeacher, faCheck, faChevronRight, faCog, faCopy, faEdit, faEllipsisV, faExclamation, faEye, faEyeSlash, faFileAlt, faFilter, faFont, faGraduationCap, faGripLines, faHeart, faInfo, faListUl, faMoon, faMusic, faPen, faPhoneAlt, faPlus, faPoll, faSchool, faSearch, faSearchMinus, faSignature, faSignOutAlt, faSkullCrossbones, faSortAlphaDown, faSortAlphaUpAlt, faSortAmountDown, faSortAmountUpAlt, faSpinner, faSquare, faStar, faStream, faSun, faSyncAlt, faTh, faTimes, faTrash, faUniversity, faUser, faUserGraduate, faUserPlus, faWindowMinimize, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { TranslateModule } from '@ngx-translate/core'
 
 import { Language } from '../core/interfaces'
@@ -40,6 +40,7 @@ import { EmptyListComponent } from './components/empty-list/empty-list.component
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component'
 import { LoaderComponent } from './components/loader/loader.component'
 import { MenuOptionsComponent } from './components/menu-options/menu-options.component'
+import { NoNetworkComponent } from './components/no-network/no-network.component'
 import { SelectStudentComponent } from './components/select-student/select-student.component'
 import { StudentFiltersComponent } from './components/student-filters/student-filters.component'
 import { ToastComponent } from './components/toast/toast.component'
@@ -79,6 +80,7 @@ registerLocaleData(localeFr, Language.fr)
     DayFiltersComponent,
     EmptyListComponent,
     MenuOptionsComponent,
+    NoNetworkComponent,
 
     ScrollableDirective,
 
@@ -171,6 +173,7 @@ registerLocaleData(localeFr, Language.fr)
     DayFiltersComponent,
     EmptyListComponent,
     MenuOptionsComponent,
+    NoNetworkComponent,
 
     ScrollableDirective,
 
@@ -258,6 +261,7 @@ export class SharedModule {
       faStar,
       faStream,
       faSun,
+      faSyncAlt,
       faTh,
       faTimes,
       faTrash,
