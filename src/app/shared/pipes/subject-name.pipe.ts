@@ -13,10 +13,8 @@ export class SubjectNamePipe implements PipeTransform {
   ) { }
 
   transform(value: string, ...args: any[]): any {
-    return this.subjectService
-      .cachedSubjects
-      .find((elem: Subject) => elem.id === value)
-      .name
+    const subject = this.subjectService.cachedSubjects.find((elem: Subject) => elem.id === value)
+    return subject ? subject.name : ''
   }
 
 }

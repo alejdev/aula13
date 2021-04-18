@@ -13,10 +13,8 @@ export class ClassroomNamePipe implements PipeTransform {
   ) { }
 
   transform(value: string, ...args: any[]): any {
-    return this.classroomService
-      .cachedClassrooms
-      .find((elem: Classroom) => elem.id === value)
-      .name
+    const classroom = this.classroomService.cachedClassrooms.find((elem: Classroom) => elem.id === value)
+    return classroom ? classroom.name : ''
   }
 
 }

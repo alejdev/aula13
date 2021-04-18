@@ -1,9 +1,10 @@
-import { Student, Subject } from 'src/app/core/interfaces'
+import { Day, Student, Subject } from 'src/app/core/interfaces'
 import { ToastService } from 'src/app/shared/services/toast.service'
 
 import { Component, Inject, OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
+import { DayService } from '../../services/day.service'
 import { StudentService } from '../../services/student.service'
 import { SubjectService } from '../../services/subject.service'
 
@@ -19,6 +20,7 @@ export class SubjectDeleteDialogComponent implements OnInit {
   constructor(
     private subjectService: SubjectService,
     private studentService: StudentService,
+    private dayService: DayService,
     private toastService: ToastService,
     private dialogRef: MatDialogRef<SubjectDeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -53,10 +55,17 @@ export class SubjectDeleteDialogComponent implements OnInit {
     this.studentService.updateStudentBatch(studentList)
   }
 
+  async removeSubjectsToDays() {
+    const days = await this.dayService.queryDaysBy('subjectId', this.data.entity.id)
+    const dayList = days.map((day: Day) => ({ ...day, subjectId: null }))
+    this.dayService.updateDayBatch(dayList)
+  }
+
   ok(): void {
     this.subjectService.deleteSubject(this.data.entity.id)
       .then(() => {
         this.removeSubjectsToStudents()
+        this.removeSubjectsToDays()
         this.dialogRef.close(this.data.entity)
         this.toastService.success({ text: 'MSG.SUBJECT_DELETE_OK' })
       })

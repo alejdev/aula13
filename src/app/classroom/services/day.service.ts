@@ -91,6 +91,17 @@ export class DayService {
   }
 
   // Promises
+  public async queryDaysBy(property: string, value: string): Promise<any> {
+    this.loaderService.load()
+    const days = await this.userData
+      .collection(this.subCollectionName,
+        ref => ref.where(property, '==', value)
+      )
+      .get().toPromise()
+    this.loaderService.down()
+    return UtilService.mapCollection(days)
+  }
+
   public async getDayList(): Promise<any> {
     this.loaderService.load()
     const days = await this.subCollection.get().toPromise()
@@ -121,6 +132,20 @@ export class DayService {
   public updateDay(id: string, day: Day): Promise<any> {
     this.loaderService.load()
     return this.subCollection.doc(id).ref.set(day)
+      .finally(() => this.loaderService.down())
+  }
+
+  public updateDayBatch(days: Day[]): Promise<any> {
+    this.loaderService.load()
+    const batch = firebase.firestore().batch()
+    days
+      .filter(day => day)
+      .forEach((day: Day) => {
+        const ref = this.subCollection.doc(day.id).ref
+        delete day.id
+        batch.update(ref, day)
+      })
+    return batch.commit()
       .finally(() => this.loaderService.down())
   }
 
