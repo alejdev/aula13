@@ -173,7 +173,6 @@ registerLocaleData(localeFr, Language.fr)
     DayFiltersComponent,
     EmptyListComponent,
     MenuOptionsComponent,
-    NoNetworkComponent,
 
     ScrollableDirective,
 

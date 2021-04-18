@@ -48,10 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((isOnline) => {
         if (isOnline) {
           if (!this.firstTime) {
-            this.toastService.success({
-              text: 'NO_NETWORK.TITLE',
-              text2: 'NO_NETWORK.MSG'
-            })
+            this.toastService.success({ text: 'NO_NETWORK.ONLINE_AGAIN' })
             this.loaderService.reset()
           }
         } else {

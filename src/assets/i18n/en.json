@@ -278,6 +278,7 @@
 	"NONE": "None",
 	"NO_NETWORK": {
 		"MSG": "Make sure your device has an active and stable connection to the Internet",
+		"ONLINE_AGAIN": "You are back online",
 		"TITLE": "Without connection"
 	},
 	"OK": "OK",
