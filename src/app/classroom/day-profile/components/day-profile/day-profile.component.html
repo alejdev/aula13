@@ -1,6 +1,6 @@
 <section class="container container-nopadd">
   <div class="profile-container">
-    <header class="profile-header shadow-bottom p-1 mat-card mat-elevation-z0">
+    <header class="profile-header shadow-bottom stiky-top p-1 mat-card mat-elevation-z0">
 
       <!-- Skeleton -->
       <ng-template #daySkeleton>
@@ -55,7 +55,7 @@
     </header>
 
     <!-- Content -->
-    <div class="container-padd">
+    <div class="container-padd day-content-containaer">
       <div class="container-max sm">
 
         <!-- Skeleton -->
@@ -73,7 +73,7 @@
           </div>
 
           <!-- Content -->
-          <div [innerHTML]="day?.content"></div>
+          <div class="pb-1" [innerHTML]="day?.content"></div>
         </div>
       </div>
     </div>

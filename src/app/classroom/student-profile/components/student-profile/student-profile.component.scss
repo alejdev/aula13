@@ -24,7 +24,8 @@
 
 .profile-tabs {
   margin-top: -48px;
-  height: calc(100vh - var(--main-header-size) * 2 - 190px);
+  box-sizing: border-box;
+  height: calc(var(--vh, 1vh) * 100 - var(--main-header-size) * 2 - 190px);
 }
 
 .first-of-month {
