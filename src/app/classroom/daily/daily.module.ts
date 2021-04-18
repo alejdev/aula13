@@ -5,10 +5,12 @@ import { NgModule } from '@angular/core'
 
 import { DayListComponent } from './components/day-list/day-list.component'
 import { DailyRoutingModule } from './daily-routing.module'
+import { SubjectDayPipe } from './pipes/subject-day.pipe'
 
 @NgModule({
   declarations: [
-    DayListComponent
+    DayListComponent,
+    SubjectDayPipe
   ],
   imports: [
     // Routing

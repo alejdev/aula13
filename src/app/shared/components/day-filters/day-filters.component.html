@@ -21,60 +21,76 @@
     </button>
   </div>
 
-  <!-- Dates -->
-  <div *ngIf="showFilters" class="dates-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap=".5rem">
 
-    <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex.gt-xs="50" fxFlex.xs="100">
-      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
-        <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
-        <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="selectDate()" [max]="dateUntil">
-        <mat-datepicker #dateSincePicker></mat-datepicker>
-        <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateSincePicker">
-        </mat-datepicker-toggle>
-        <button class="action-button" mat-button matSuffix *ngIf="dateSince" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateSince')">
-          <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+  <ng-container *ngIf="showFilters">
+
+    <!-- Subjects -->
+    <mat-form-field class="selects" [appearance]="'inputAppearance' | settingValue" color="accent">
+      <mat-label>{{'FORM.SUBJECTS' | translate}}</mat-label>
+      <mat-select multiple [(ngModel)]="subjectsFilter" (ngModelChange)="goToQuery()" attr.aria-label="{{'FORM.SUBJECTS' | translate}}">
+        <mat-option *ngFor="let subject of subjectService.cachedSubjects" [value]="subject.id">
+          {{subject.name}}
+        </mat-option>
+      </mat-select>
+      <fa-icon matPrefix class="mat-icon-18 mat-hint pr-1" icon="book"></fa-icon>
+    </mat-form-field>
+
+    <!-- Dates -->
+    <div class="dates-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap=".5rem">
+
+      <!-- Dates -->
+      <div class="dates" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px" fxFlex.gt-xs="50" fxFlex.xs="100">
+        <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
+          <mat-label>{{'FORM.SINCE' | translate}}</mat-label>
+          <input class="pl-h" matInput [matDatepicker]="dateSincePicker" [(ngModel)]="dateSince" (ngModelChange)="selectDate()" [max]="dateUntil">
+          <mat-datepicker #dateSincePicker></mat-datepicker>
+          <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateSincePicker">
+          </mat-datepicker-toggle>
+          <button class="action-button" mat-button matSuffix *ngIf="dateSince" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateSince')">
+            <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
+          <mat-label>{{'FORM.UNTIL' | translate}}</mat-label>
+          <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="selectDate()" [min]="dateSince">
+          <mat-datepicker #dateUntilPicker></mat-datepicker>
+          <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateUntilPicker">
+          </mat-datepicker-toggle>
+          <button class="action-button" mat-button matSuffix *ngIf="dateUntil" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateUntil')">
+            <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <!-- Select quick date -->
+      <div [ngClass.xs]="{'quick-dates-container': true}" fxLayout="row" fxLayoutAlign="space-between center" fxFlex.gt-xs="50" fxFlex.xs="100%">
+        <mat-form-field fxFlex="calc(100% - 6rem)" [appearance]="'inputAppearance' | settingValue">
+          <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
+          <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
+            <mat-option *ngFor="let date of quickDates" [value]="date">
+              {{date.name | translate}}
+            </mat-option>
+          </mat-select>
+          <fa-icon matPrefix class="mat-icon-20 mat-hint pr-h" icon="calendar"></fa-icon>
+        </mat-form-field>
+
+        <!-- Fav -->
+        <button class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_FAVORITES' | translate}}" (click)="toggle('showFavorites')" [matTooltip]="'FORM.SHOW_FAVORITES' | translate" [matTooltipShowDelay]="300">
+          <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'star-active': showFavorites}" icon="star"></fa-icon>
         </button>
-      </mat-form-field>
 
-      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="50">
-        <mat-label>{{'FORM.UNTIL' | translate}}</mat-label>
-        <input class="pl-h" matInput [matDatepicker]="dateUntilPicker" [(ngModel)]="dateUntil" (ngModelChange)="selectDate()" [min]="dateSince">
-        <mat-datepicker #dateUntilPicker></mat-datepicker>
-        <mat-datepicker-toggle class="mat-hint" matPrefix [for]="dateUntilPicker">
-        </mat-datepicker-toggle>
-        <button class="action-button" mat-button matSuffix *ngIf="dateUntil" mat-icon-button attr.aria-label="{{'RESET_FILTER' | translate}}" (click)="resetDate('dateUntil')">
-          <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+        <!-- Archived -->
+        <button *ngIf="!hideArchivedFilter" class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_ARCHIVED' | translate}}" (click)="toggle('showArchived')" [matTooltip]="'FORM.SHOW_ARCHIVED' | translate" [matTooltipShowDelay]="300">
+          <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': showArchived}" icon="box"></fa-icon>
         </button>
-      </mat-form-field>
+      </div>
+
     </div>
-
-    <!-- Select quick date -->
-    <div [ngClass.xs]="{'quick-dates-container': true}" fxLayout="row" fxLayoutAlign="space-between center" fxFlex.gt-xs="50" fxFlex.xs="100%">
-      <mat-form-field fxFlex="calc(100% - 6rem)" [appearance]="'inputAppearance' | settingValue">
-        <mat-label>{{'FORM.CUSTOM_DATES' | translate}}</mat-label>
-        <mat-select attr.aria-label="{{'FORM.CUSTOM_DATES' | translate}}" [(ngModel)]="quickDate" (ngModelChange)="selectQuickDate()">
-          <mat-option *ngFor="let date of quickDates" [value]="date">
-            {{date.name | translate}}
-          </mat-option>
-        </mat-select>
-        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-h" icon="calendar"></fa-icon>
-      </mat-form-field>
-
-      <!-- Fav -->
-      <button class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_FAVORITES' | translate}}" (click)="toggle('showFavorites')" [matTooltip]="'FORM.SHOW_FAVORITES' | translate" [matTooltipShowDelay]="300">
-        <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'star-active': showFavorites}" icon="star"></fa-icon>
-      </button>
-
-      <!-- Archived -->
-      <button *ngIf="!hideArchivedFilter" class="action-button ml-q mb-1" mat-button mat-icon-button attr.aria-label="{{'FORM.SHOW_ARCHIVED' | translate}}" (click)="toggle('showArchived')" [matTooltip]="'FORM.SHOW_ARCHIVED' | translate" [matTooltipShowDelay]="300">
-        <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'error-color': showArchived}" icon="box"></fa-icon>
-      </button>
-    </div>
-
-  </div>
+  </ng-container>
 
   <!-- clean all filters -->
-  <div *ngIf="dayFilter || dateSince || dateUntil || showArchived || showFavorites || quickDate || sortDirection" fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngIf="dayFilter || subjectsFilter?.length || dateSince || dateUntil || showArchived || showFavorites || quickDate || sortDirection" fxLayout="row" fxLayoutAlign="space-between center">
     <span fxFlex></span>
     <button mat-button color="warn" class="badge badge-fill badge-error warn mat-small error-color pointer" (click)="cleanFilters()">
       <span class="mr-q"> {{'CLEAN_ALL_FILTERS' | translate}}</span>

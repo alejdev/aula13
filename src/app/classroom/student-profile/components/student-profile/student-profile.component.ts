@@ -2,6 +2,7 @@ import { combineLatest, Observable, Subscription } from 'rxjs'
 import { map, tap } from 'rxjs/operators'
 import { StudentArchiveDialogComponent } from 'src/app/classroom/components/student-archive-dialog/student-archive-dialog.component'
 import { StudentDeleteDialogComponent } from 'src/app/classroom/components/student-delete-dialog/student-delete-dialog.component'
+import { SubjectDayPipe } from 'src/app/classroom/daily/pipes/subject-day.pipe'
 import { ClassroomService } from 'src/app/classroom/services/classroom.service'
 import { DayService } from 'src/app/classroom/services/day.service'
 import { HeaderService } from 'src/app/classroom/services/header.service'
@@ -31,7 +32,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   selector: 'a13-student-profile',
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss'],
-  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe, SubjectDayPipe]
 })
 export class StudentProfileComponent implements OnInit, OnDestroy, AfterViewChecked {
 

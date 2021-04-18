@@ -1,8 +1,10 @@
 import moment, { Moment } from 'moment'
 import { Subscription } from 'rxjs'
+import { SubjectDayPipe } from 'src/app/classroom/daily/pipes/subject-day.pipe'
 import { HeaderService } from 'src/app/classroom/services/header.service'
+import { SubjectService } from 'src/app/classroom/services/subject.service'
 import { OrderByPipe } from 'src/app/classroom/students/pipes/order-by.pipe'
-import { Day } from 'src/app/core/interfaces'
+import { Day, Subject } from 'src/app/core/interfaces'
 
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -30,6 +32,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   showFilters: boolean
 
   dayFilter: string = ''
+  subjectsFilter: Subject[]
   dateSince: Moment
   dateUntil: Moment
 
@@ -47,7 +50,9 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     private agroupByDatePipe: AgroupByDatePipe,
     private orderByPipe: OrderByPipe,
     private filterByKeyPipe: FilterByKeyPipe,
+    private subjectDayPipe: SubjectDayPipe,
     public headerService: HeaderService,
+    public subjectService: SubjectService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
@@ -68,6 +73,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
     this.dayListFiltered = list ? list : this.dayList
 
     if (this.dayFilter) { this.dayListFiltered = this.filterPipe.transform(this.dayListFiltered, this.dayFilter) }
+    if (this.subjectsFilter) { this.dayListFiltered = this.subjectDayPipe.transform(this.dayListFiltered, this.subjectsFilter) }
     if (this.dateSince || this.dateUntil) { this.dayListFiltered = this.dateFilterPipe.transform(this.dayListFiltered, this.dateSince, this.dateUntil) }
     this.filterFavsAndArchived()
     this.dayListFiltered = this.orderByPipe.transform(this.dayListFiltered, `${this.sortDirection === 'reversed' ? '' : '-'}${this.sortBy}`)
@@ -112,6 +118,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   setModels(params: any): void {
     this.dayFilter = params.dayFilter
+    this.subjectsFilter = typeof params.subjectsFilter == 'string' ? [params.subjectsFilter] : params.subjectsFilter
     this.showArchived = UtilService.parseStringToBoolean(params.showArchived) ? true : false
     this.showFavorites = UtilService.parseStringToBoolean(params.showFavorites) ? true : false
     this.sortDirection = params.sortDirection
@@ -136,6 +143,9 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
   formatQuery(): void {
     this.query = {}
     if (this.dayFilter) { this.query.dayFilter = this.dayFilter }
+    if (this.subjectsFilter) {
+      this.query.subjectsFilter = typeof this.subjectsFilter == 'string' ? [this.subjectsFilter] : this.subjectsFilter
+    }
     if (this.showArchived === true) { this.query.showArchived = this.showArchived }
     if (this.showFavorites === true) { this.query.showFavorites = this.showFavorites }
     if (this.sortDirection === 'reversed') { this.query.sortDirection = this.sortDirection }
@@ -177,6 +187,7 @@ export class DayFiltersComponent implements OnInit, OnDestroy {
 
   cleanFilters(): void {
     this.dayFilter = ''
+    this.subjectsFilter = []
     this.dateSince = null
     this.dateUntil = null
     this.showArchived = false

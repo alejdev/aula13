@@ -4,7 +4,7 @@
 </ng-template>
 
 <ng-container *ngIf="data$ | async as studentList" else selectStudentSkeleton>
-  <div [formGroup]="studentFormGroup" *ngIf="studentList.length">
+  <div [formGroup]="studentFormGroup">
 
     <!-- Select simple -->
     <mat-form-field *ngIf="!multiple" [appearance]="'inputAppearance' | settingValue" fxFlex=100>

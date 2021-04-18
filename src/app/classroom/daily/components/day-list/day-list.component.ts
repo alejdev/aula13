@@ -24,11 +24,13 @@ import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ViewChild } fro
 import { MatDialog } from '@angular/material'
 import { Router } from '@angular/router'
 
+import { SubjectDayPipe } from '../../pipes/subject-day.pipe'
+
 @Component({
   selector: 'a13-day-list',
   templateUrl: './day-list.component.html',
   styleUrls: ['./day-list.component.scss'],
-  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe]
+  providers: [FilterPipe, DateFilterPipe, ExcludeArchivedPipe, AgroupByDatePipe, OrderByPipe, FilterByKeyPipe, SubjectDayPipe]
 })
 export class DayListComponent implements OnInit, AfterViewChecked {
 
