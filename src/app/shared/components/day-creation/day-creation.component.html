@@ -23,7 +23,7 @@
       </a13-select-student>
 
       <!-- Subjects -->
-      <mat-form-field class="pl-h" *ngIf="subjectList?.length" [appearance]="'inputAppearance' | settingValue" color="accent" fxFlex="50">
+      <mat-form-field class="pl-h" *ngIf="subjectList" [appearance]="'inputAppearance' | settingValue" color="accent" fxFlex="50">
         <mat-label>{{'FORM.SUBJECT' | translate}}</mat-label>
         <mat-select formControlName="daySubjectCtrl" attr.aria-label="{{'FORM.SUBJECT' | translate}}">
           <mat-option>-- {{'NONE' | translate}} --</mat-option>
