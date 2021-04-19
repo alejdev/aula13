@@ -94,8 +94,7 @@ export class AuthService {
   }
 
   public loginWithTwitter(): void {
-    this.toastService.info({ text: 'MSG.SERVICE_NOT_AVAILABLE' })
-    // this.loginWithPopup(new auth.TwitterAuthProvider())
+    this.loginWithPopup(new auth.TwitterAuthProvider())
   }
 
   public loginWithPopup(provider: any): Promise<void> {
