@@ -74,6 +74,12 @@
 	"DAY_ARCHIVED": "Journal archivé",
 	"DAY_FAVORITE": "Enregistrement préféré",
 	"DELETE": "Supprimer",
+	"DELETE_ACCOUNT": {
+		"MSG": "",
+		"MSG_2": "",
+		"MSG_OK": "",
+		"TITLE": ""
+	},
 	"DELETE_CLASSROOM": "Supprimer la classe",
 	"DELETE_ELEMENT": "Supprimer l'élément",
 	"DELETE_SUBJECT": "Supprimer le sujet",

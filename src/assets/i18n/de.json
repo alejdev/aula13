@@ -74,6 +74,12 @@
 	"DAY_ARCHIVED": "Archiviertes Protokoll",
 	"DAY_FAVORITE": "Bevorzugte Registrierung",
 	"DELETE": "Löschen",
+	"DELETE_ACCOUNT": {
+		"MSG": "",
+		"MSG_2": "",
+		"MSG_OK": "",
+		"TITLE": ""
+	},
 	"DELETE_CLASSROOM": "Klassenzimmer löschen",
 	"DELETE_ELEMENT": "Element löschen",
 	"DELETE_SUBJECT": "Betreff löschen",

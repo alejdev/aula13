@@ -39,9 +39,10 @@ export class UserService {
       .finally(() => this.loaderService.down())
   }
 
-  public deleteUser(): Promise<any> {
+  public deleteUserAccount(): Promise<any> {
     this.loaderService.load()
     return this.userData.ref.delete()
+      .then(() => this.authService.deleteAccount())
       .finally(() => this.loaderService.down())
   }
 }

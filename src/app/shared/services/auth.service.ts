@@ -154,6 +154,17 @@ export class AuthService {
       .finally(() => this.loaderService.down())
   }
 
+  public deleteAccount() {
+    this.loaderService.load()
+    this.angularFireAuth.auth.currentUser.delete()
+      .then((result) => {
+        this.router.navigate(['authentication'])
+        this.toastService.info({ text: 'DELETE_ACCOUNT.MSG_OK' })
+      })
+      .catch(this.error)
+      .finally(() => this.loaderService.down())
+  }
+
   public normalizeUser(authData: any): any {
     return {
       creationDate: authData.user.metadata.a,

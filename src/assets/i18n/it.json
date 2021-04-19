@@ -74,6 +74,12 @@
 	"DAY_ARCHIVED": "Registro archiviato",
 	"DAY_FAVORITE": "Registrazione preferita",
 	"DELETE": "Cancellare",
+	"DELETE_ACCOUNT": {
+		"MSG": "",
+		"MSG_2": "",
+		"MSG_OK": "",
+		"TITLE": ""
+	},
 	"DELETE_CLASSROOM": "Elimina classe",
 	"DELETE_ELEMENT": "Elimina elemento",
 	"DELETE_SUBJECT": "Elimina soggetto",

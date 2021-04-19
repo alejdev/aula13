@@ -39,9 +39,13 @@
     </section>
 
     <!-- Action buttons -->
-    <footer *ngIf="!userFormGroup.pristine" class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
-      <button tabindex="3" mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="initForm(userOriginal)">{{'CANCEL' | translate}}</button>
-      <button tabindex="2" class="ml-h" mat-flat-button color="accent" (click)="save(user)" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+    <footer class="dialog-footer pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
+      <button *ngIf="!userFormGroup.pristine" tabindex="3" mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="initForm(userOriginal)">{{'CANCEL' | translate}}</button>
+      <button *ngIf="!userFormGroup.pristine" tabindex="2" class="ml-h" mat-flat-button color="accent" (click)="save(user)" attr.aria-label="{{'SAVE' | translate}}">{{'SAVE' | translate}}</button>
+      <button tabindex="4" class="ml-h" mat-flat-button color="warn" (click)="deleteAccount()" attr.aria-label="{{'SAVE' | translate}}">
+        <fa-icon matPrefix class="mat-icon-20 pr-h" icon="trash"></fa-icon>
+        {{'DELETE_ACCOUNT.TITLE' | translate}}
+      </button>
     </footer>
   </div>
 

@@ -74,6 +74,12 @@
 	"DAY_ARCHIVED": "Archived record",
 	"DAY_FAVORITE": "Favorite registration",
 	"DELETE": "Delete",
+	"DELETE_ACCOUNT": {
+		"MSG": "",
+		"MSG_2": "",
+		"MSG_OK": "",
+		"TITLE": ""
+	},
 	"DELETE_CLASSROOM": "Delete classroom",
 	"DELETE_ELEMENT": "Delete Item",
 	"DELETE_SUBJECT": "Delete subject",

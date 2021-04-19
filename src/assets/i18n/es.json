@@ -74,6 +74,12 @@
 	"DAY_ARCHIVED": "Registro archivado",
 	"DAY_FAVORITE": "Registro favorito",
 	"DELETE": "Borrar",
+	"DELETE_ACCOUNT": {
+		"MSG": "¡Atención! Esta acción no puede ser revertida.",
+		"MSG_2": "Si borras la cuenta perderás todos tus datos de forma permanente. ¿Estás seguro de que quieres hacerlo?",
+		"MSG_OK": "Tu ha sido borrada correctamente. Esperamos que vuelvas pronto.",
+		"TITLE": "Borrar cuenta"
+	},
 	"DELETE_CLASSROOM": "Borrar aula",
 	"DELETE_ELEMENT": "Borrar elemento",
 	"DELETE_SUBJECT": "Borrar asignatura",

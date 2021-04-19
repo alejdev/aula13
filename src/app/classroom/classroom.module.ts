@@ -20,6 +20,7 @@ import { StudentDeleteDialogComponent } from './components/student-delete-dialog
 import { SubjectCreationComponent } from './components/subject-creation/subject-creation.component'
 import { SubjectDeleteDialogComponent } from './components/subject-delete-dialog/subject-delete-dialog.component'
 import { TitleLogoComponent } from './components/title-logo/title-logo.component'
+import { UserDeleteDialogComponent } from './components/user-delete-dialog/user-delete-dialog.component'
 import { DailyModule } from './daily/daily.module'
 import { DayProfileModule } from './day-profile/day-profile.module'
 import { CreditsComponent } from './settings/components/credits/credits.component'
@@ -45,6 +46,7 @@ import { StudentsModule } from './students/students.module'
     TitleLogoComponent,
     DayArchiveDialogComponent,
     CreditsComponent,
+    UserDeleteDialogComponent,
   ],
   imports: [
     // Routing
@@ -73,6 +75,7 @@ import { StudentsModule } from './students/students.module'
     SubjectDeleteDialogComponent,
     DayDeleteDialogComponent,
     DayArchiveDialogComponent,
+    UserDeleteDialogComponent,
   ]
 })
 export class ClassroomModule { }

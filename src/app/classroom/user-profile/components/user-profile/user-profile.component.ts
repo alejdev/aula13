@@ -1,15 +1,18 @@
 import { Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { UserDeleteDialogComponent } from 'src/app/classroom/components/user-delete-dialog/user-delete-dialog.component'
 import { HeaderService } from 'src/app/classroom/services/header.service'
 import { UserService } from 'src/app/classroom/services/user.service'
 import { User } from 'src/app/core/interfaces'
-import { SKELETON_CONFIG } from 'src/app/core/settings'
+import { DIALOG_CONFIG, SKELETON_CONFIG } from 'src/app/core/settings'
+import { AuthService } from 'src/app/shared/services/auth.service'
 import { ToastService } from 'src/app/shared/services/toast.service'
 import { UtilService } from 'src/app/shared/services/util.service'
 
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { DocumentReference } from '@angular/fire/firestore'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MatDialog } from '@angular/material'
 
 @Component({
   selector: 'a13-user-profile',
@@ -29,9 +32,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private headerService: HeaderService,
     private formBuilder: FormBuilder,
     private toastService: ToastService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -47,10 +52,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   initForm(userData: User): void {
-    this.userFormGroup = this.formBuilder.group({
-      userAvatarCtrl: [userData.avatar],
-      userNameCtrl: [userData.name, Validators.required],
-    })
+    if (userData) {
+      this.userFormGroup = this.formBuilder.group({
+        userAvatarCtrl: [userData.avatar],
+        userNameCtrl: [userData.name, Validators.required],
+      })
+    }
   }
 
   changeAvatar(): void {
@@ -78,6 +85,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           this.toastService.error({ text: 'ERR.UNEXPECTED_ERROR' })
         })
     }
+  }
+
+  deleteAccount(): void {
+    this.dialog.open(UserDeleteDialogComponent, {
+      ...DIALOG_CONFIG
+    })
   }
 
   ngOnDestroy(): void {
