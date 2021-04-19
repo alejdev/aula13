@@ -75,10 +75,10 @@
 	"DAY_FAVORITE": "Registrazione preferita",
 	"DELETE": "Cancellare",
 	"DELETE_ACCOUNT": {
-		"MSG": "",
-		"MSG_2": "",
-		"MSG_OK": "",
-		"TITLE": ""
+		"MSG": "Attenzione! Questa azione non può essere invertita.",
+		"MSG_2": "Se cancelli il tuo account perderai tutti i tuoi dati in modo permanente. Sei sicuro di volerlo fare?",
+		"MSG_OK": "Sei stato cancellato con successo. Speriamo che torni presto.",
+		"TITLE": "Cancellare l'account"
 	},
 	"DELETE_CLASSROOM": "Elimina classe",
 	"DELETE_ELEMENT": "Elimina elemento",

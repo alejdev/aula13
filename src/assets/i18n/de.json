@@ -75,10 +75,10 @@
 	"DAY_FAVORITE": "Bevorzugte Registrierung",
 	"DELETE": "Löschen",
 	"DELETE_ACCOUNT": {
-		"MSG": "",
-		"MSG_2": "",
-		"MSG_OK": "",
-		"TITLE": ""
+		"MSG": "Achtung! Diese Aktion kann nicht rückgängig gemacht werden.",
+		"MSG_2": "Wenn Sie Ihr Konto löschen, verlieren Sie alle Ihre Daten dauerhaft. Sind Sie sicher, dass Sie das tun wollen?",
+		"MSG_OK": "Sie wurden erfolgreich gelöscht. Wir hoffen, dass Sie bald wiederkommen werden.",
+		"TITLE": "Konto löschen"
 	},
 	"DELETE_CLASSROOM": "Klassenzimmer löschen",
 	"DELETE_ELEMENT": "Element löschen",

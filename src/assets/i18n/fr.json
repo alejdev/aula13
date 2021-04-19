@@ -75,10 +75,10 @@
 	"DAY_FAVORITE": "Enregistrement préféré",
 	"DELETE": "Supprimer",
 	"DELETE_ACCOUNT": {
-		"MSG": "",
-		"MSG_2": "",
-		"MSG_OK": "",
-		"TITLE": ""
+		"MSG": "Attention ! Cette action ne peut être inversée.",
+		"MSG_2": "Si vous supprimez votre compte, vous perdrez définitivement toutes vos données. Êtes-vous sûr de vouloir faire cela ?",
+		"MSG_OK": "Vous avez été supprimé avec succès. Nous espérons que vous reviendrez bientôt.",
+		"TITLE": "Supprimer le compte"
 	},
 	"DELETE_CLASSROOM": "Supprimer la classe",
 	"DELETE_ELEMENT": "Supprimer l'élément",

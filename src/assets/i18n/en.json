@@ -75,10 +75,10 @@
 	"DAY_FAVORITE": "Favorite registration",
 	"DELETE": "Delete",
 	"DELETE_ACCOUNT": {
-		"MSG": "",
-		"MSG_2": "",
-		"MSG_OK": "",
-		"TITLE": ""
+		"MSG": "Attention! This action cannot be reversed.",
+		"MSG_2": "If you delete the account you will lose all your data permanently. Are you sure you want to do this?",
+		"MSG_OK": "You have been successfully deleted. We hope you will be back soon.",
+		"TITLE": "Delete account"
 	},
 	"DELETE_CLASSROOM": "Delete classroom",
 	"DELETE_ELEMENT": "Delete Item",
