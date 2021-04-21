@@ -1,0 +1,48 @@
+<form [formGroup]="classroomFormGroup" autocomplete="off" class="mat-typography">
+  <header class="dialog-header padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- Title -->
+    <h2 class="m-0 dialog-title truncate" fxFlex="calc(100% - 40px)">
+      <!-- {{(data.isClone ? 'CLONE_CLASSROOM' : data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}} -->
+      {{(classroomFormGroup?.value.nameCtrl ? classroomFormGroup?.value.nameCtrl : data.isClone ? 'CLONE_CLASSROOM' : data?.entity?.id ? 'EDIT_CLASSROOM' : 'CREATE_CLASSROOM') | translate}}
+    </h2>
+
+    <!-- Close dialog -->
+    <button tabindex="-1" class="button-close action-button" mat-icon-button attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">
+      <fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
+    </button>
+  </header>
+
+  <section class="dialog-content" fxLayout="column" fxLayoutAlign="start">
+    <!-- Subtitle -->
+    <p class="padding-content-h mb-h pb-h mat-hint">{{'CLASSROOM.CREATION_SUBTITLE' | translate}}.</p>
+
+    <div class="padding-content-h mb-q" fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+      <!-- Name -->
+      <mat-form-field [appearance]="'inputAppearance' | settingValue" fxFlex="40" fxFlex.xs="100">
+        <mat-label>{{'FORM.CLASSROOMS_NAME' | translate}}
+        </mat-label>
+        <input matInput tabindex="1" required formControlName="nameCtrl" attr.aria-label="{{'FORM.CLASSROOMS_NAME' | translate}}" autocomplete="off">
+        <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="font"></fa-icon>
+        <fa-icon *ngIf="validatingName" matSuffix class="mat-icon-20 ml-q  mat-hint rotate-animation" icon="spinner"></fa-icon>
+        <mat-error *ngIf="classroomFormGroup.controls.nameCtrl.hasError('nameTaken')">
+          {{'ERR.CLASSROOM_EXISTS' | translate}}
+        </mat-error>
+        <mat-error *ngIf="classroomFormGroup.controls.nameCtrl.hasError('required')">
+          {{'ERR.FIELD_REQUIRED' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Student list -->
+      <a13-select-student [multiple]="true" formControlName="studentListCtrl" hint="HINT.CLASSROOM_STUDENT_LIST" fxFlex="59" fxFlex.xs="100">
+      </a13-select-student>
+    </div>
+
+  </section>
+
+  <footer class="dialog-footer padding-content-h pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
+    <!-- Action buttons -->
+    <button tabindex="4" mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
+    <button tabindex="3" class="ml-h" mat-flat-button [color]="data.isClone || !data?.entity?.id ? 'primary' : 'accent'" [disabled]="validatingName" (click)="save()" attr.aria-label="{{'SAVE' | translate}}">{{(data.isClone ? 'CLONE' : data?.entity?.id ? 'SAVE' : 'CREATE_CLASSROOM') | translate}}</button>
+  </footer>
+</form>

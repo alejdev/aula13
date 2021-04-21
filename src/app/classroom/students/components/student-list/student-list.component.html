@@ -1,0 +1,72 @@
+<section class="container container-padd">
+  <div class="container-max sm">
+
+    <ng-template #studentListSkeleton>
+      <ng-container *ngFor="let loader of skeleton.listSmall">
+        <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+      </ng-container>
+    </ng-template>
+
+    <div *ngIf="data$ | async as studentList else studentListSkeleton">
+
+      <a13-student-filters *ngIf="studentList?.length" [studentList]="studentList" (studentListFilter)="agroupStudents($event)"></a13-student-filters>
+
+      <!-- Students list-->
+      <div [ngClass]="{'grid-layout': grid}" *ngIf="studentListFiltered?.length" class="relative mt-1">
+
+        <!-- Layout -->
+        <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="300" (click)="switchLayout()">
+          <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': grid}" [icon]="grid ? 'th' : 'list-ul'"></fa-icon>
+        </button>
+
+        <!-- Favorites -->
+        <div class="mb-1" *ngIf="favoriteListFiltered.length">
+          <button mat-button color="primary" (click)="showMore('favorite')">
+            {{toggleConfig.favorite.text | translate}}
+            <span class="translucide"> | {{favoriteListFiltered.length}}</span>
+            <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.favorite.icon"></fa-icon>
+          </button>
+          <div class="card-container" *ngIf="toggleConfig.favorite.show">
+            <ng-container *ngFor="let student of favoriteListFiltered">
+              <a13-student-card [grid]="grid" [(student)]="student" [fromUrl]="router.url"></a13-student-card>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Rest students -->
+        <div class="mb-1" *ngIf="restListFiltered.length">
+          <button mat-button class="mat-hint" (click)="showMore('rest')">
+            {{toggleConfig.rest.text | translate}}
+            <span class="translucide"> | {{restListFiltered.length}}</span>
+            <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.rest.icon"></fa-icon>
+          </button>
+          <div class="card-container" *ngIf="toggleConfig.rest.show">
+            <ng-container *ngFor="let student of restListFiltered">
+              <a13-student-card [grid]="grid" [(student)]="student" [fromUrl]="router.url"></a13-student-card>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Archived students -->
+        <div class="mb-1" *ngIf="archiveListFiltered.length">
+          <button mat-button color="warn" (click)="showMore('archived')">
+            {{toggleConfig.archived.text | translate}}
+            <span class="translucide"> | {{archiveListFiltered.length}}</span>
+            <fa-icon class="ml-q mat-icon-14" [icon]="toggleConfig.archived.icon"></fa-icon>
+          </button>
+          <div class="card-container" *ngIf="toggleConfig.archived.show">
+            <ng-container *ngFor="let student of archiveListFiltered">
+              <a13-student-card [grid]="grid" [(student)]="student" [fromUrl]="router.url"></a13-student-card>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty list messages -->
+      <a13-empty-list *ngIf="studentList" [list]="studentList" [listFiltered]="studentListFiltered" listMessage="MSG.STUDENT_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_STUDENTS"></a13-empty-list>
+
+      <!-- Floating button -->
+      <a13-floating-button [pulse]="!studentList?.length" text="ADD_STUDENT" tooltip="ADD_STUDENT" icon="user-plus" (click)="createStudent()"></a13-floating-button>
+    </div>
+  </div>
+</section>

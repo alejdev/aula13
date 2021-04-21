@@ -1,0 +1,41 @@
+.avatar-selected {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.full-avatar {
+  width: 100%;
+  max-width: 240px;
+  max-height: 240px;
+}
+
+.full {
+  width: 100%;
+  max-width: 100%;
+}
+
+.phone-list {
+
+  .phone {
+    margin-bottom: -5px;
+  }
+}
+
+.button-text-icon {
+
+  fa-icon {
+    position: relative;
+    top: 1px;
+    color: var(--light-theme-accent);
+  }
+
+  &[disabled="true"] fa-icon {
+    filter: grayscale(100%);
+  }
+
+  .text-button {
+    position: relative;
+    top: 1px;
+    margin-left: 5px;
+  }
+}

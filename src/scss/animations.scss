@@ -1,0 +1,100 @@
+@import "scss/variables";
+
+.pulse-animation {
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+
+  &:not(.disabled) {
+    animation-name: pulse-animation, pulse-main;
+  }
+
+  &.disabled {
+    animation-name: pulse-animation, pulse-disable;
+  }
+}
+
+@keyframes pulse-animation {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-main {
+  0% {
+    box-shadow: 0 0 0 0 rgba($main-color-dark, .5);
+  }
+
+  50% {
+    box-shadow: 0 0 0 18px rgba($main-color-dark, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba($main-color-dark, 0);
+  }
+}
+
+@keyframes pulse-disable {
+  0% {
+    box-shadow: 0 0 0 0 rgba(grey, .5);
+  }
+
+  50% {
+    box-shadow: 0 0 0 18px rgba(grey, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(grey, 0);
+  }
+}
+
+.rotate-animation svg {
+  animation: rotate-animation 1.3s infinite linear;
+}
+
+@keyframes rotate-animation {
+  0% {}
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.shake-animation:hover {
+  animation: shake-animation 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake-animation {
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

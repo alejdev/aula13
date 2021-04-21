@@ -1,47 +1,252 @@
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
+@include mat-core();
 
-// Angular Material styles
-@include mat-core;
+@include set-custom-theme('light-theme', map-get($colors, light-theme), false, $main-light-hue, $second-light-hue, $tertiary-light-hue);
+@include set-custom-theme('dark-theme', map-get($colors, dark-theme), true, $main-dark-hue, $second-dark-hue, $tertiary-dark-hue);
 
-// Palettes
-$primary: mat-palette($mat-blue, 600, 400, 900); // Default, lighter, and darker hue.
-$accent: mat-palette($mat-light-blue, 400, 200, 700);
-$warn: mat-palette($mat-red);
-// $background-color: map_get($mat-blue-grey, 50);
+// Light theme
+.light-theme {
 
-// Theme
-$theme: mat-light-theme($primary, $accent, $warn);
+  .main-content-bg {
+    background-image: url('src/assets/svgs/logo-background-light.svg');
+  }
 
-// Custom background color
-$custom-background-color: var(--bg-main-color);
-$background: map-get($theme, background);
-$background: map_merge($background, (background: $custom-background-color));
-$theme: map_merge($theme, (background: $background));
+  .nav-list-item {
+    &.active {
+      background-color: rgba($main-color, 7%);
+      color: lighten($main-color, 10%);
 
-// Set theme
-@include angular-material-theme($theme);
+      mat-icon,
+      span {
+        color: lighten($main-color, 10%);
+      }
+    }
 
-// Helper color classes
-.bg-primary {
-  @include bg-color(var(--primary-color));
+    &:hover,
+    &:focus {
+      background-color: rgba(saturate($main-color, 10%), 10%) !important;
+    }
+  }
+
+  ngx-skeleton-loader .loader {
+    background-color: map-get(map-get($colors, light-theme), loader);
+  }
+
+  .border-theme {
+    // border-color: $black-12-opacity;
+
+    &-button:hover {
+      // border-color: #555;
+      border-color: $black-12-opacity;
+      // border-width: 2px;
+    }
+  }
+
+  .table table {
+    border-color: #eee;
+    background-color: white;
+
+    th {
+      background-color: #f8f8f8;
+      border-color: #eee;
+    }
+
+    td {
+      // border-color: #f8f8f8;
+    }
+  }
+
+  .icon-button,
+  .badge {
+    background-color: darken(map-get(map-get($colors, light-theme), background), 2%);
+  }
+
+  .badge {
+    &.mat-button {
+      color: #888;
+      border-color: darken(map-get(map-get($colors, light-theme), background), 2%);
+    }
+
+    &.badge-fill {
+      color: map-get(map-get($colors, light-theme), foreground);
+      background-color: rgb(255, 255, 255);
+    }
+
+    &.badge-error {
+      color: map-get(map-get($colors, light-theme), warn);
+      background-color: white;
+    }
+  }
+
+  .mat-tab-group .mat-tab-header {
+    background-color: white;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-color: darken(map-get(map-get($colors, light-theme), background), 2%);
+  }
+
+  .floating-button.disabled {
+    color: rgba(map-get(map-get($colors, light-theme), foreground), .3);
+    background-color: $black-12-opacity;
+  }
+
+  .angular-editor .ck {
+
+    .ck-reset_all,
+    .ck-reset_all * {}
+
+    .ck-toolbar {
+      // background: white;
+      background: map-get(map-get($colors, light-theme), white-light) !important;
+      border-color: $black-12-opacity;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-right-color: transparent;
+    }
+
+    .ck-editor__main {
+      & > .ck-editor__editable {
+        border-color: map-get(map-get($colors, other), input-color);
+
+        &:not(.ck-focused) {
+          border-color: map-get(map-get($colors, other), input-color);
+        }
+      }
+    }
+  }
+
 }
 
-.bg-accent {
-  @include bg-color(var(--accent-color));
-}
+// Dark theme
+.dark-theme {
 
-.bg-warn {
-  @include bg-color(var(--warn-color));
-}
+  .main-content-bg {
+    background-image: url('src/assets/svgs/logo-background-dark.svg');
+  }
 
-.color-primary {
-  @include color(var(--primary-color));
-}
+  .nav-list-item {
+    &.active {
+      background-color: lighten(map-get(map-get($colors, dark-theme), background), 3%);
+      color: white;
 
-.color-accent {
-  @include color(var(--accent-color));
-}
+      mat-icon,
+      span {
+        color: white;
+      }
+    }
 
-.color-warn {
-  @include color(var(--warn-color));
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: map-get(map-get($colors, dark-theme), background) !important;
+    }
+  }
+
+  ngx-skeleton-loader .loader {
+    background-color: map-get(map-get($colors, dark-theme), loader);
+
+    &.progress:before {
+      background-image: linear-gradient(90deg, rgba(70, 70, 70, 0), rgba(70, 70, 70, .6), rgba(70, 70, 70, 0));
+    }
+  }
+
+  .table table {
+    border-color: #333;
+    background-color: #2a2a2a;
+
+    th {
+      background-color: #252525;
+      border-color: #333;
+    }
+
+    td {
+      // border-color: #444;
+    }
+  }
+
+  .mat-dialog-container {
+    @include mat-elevation(5);
+  }
+
+  .border-theme {
+    // border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+
+    &-button:hover {
+      // border-color: map-get(map-get($colors, dark-theme), foreground);
+      border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+      // border-width: 2px;
+    }
+  }
+
+  .icon-button,
+  .badge,
+  .mat-button.badge {
+    background-color: #666;
+  }
+
+  .badge {
+    color: #ccc;
+    border-color: #666;
+
+    &.badge-fill {
+      background-color: lighten(map-get(map-get($colors, dark-theme), background), 12%);
+    }
+  }
+
+  // 424242
+  .mat-tab-group .mat-tab-header {
+    background-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-color: lighten(map-get(map-get($colors, dark-theme), background), 6%);
+  }
+
+  .floating-button.disabled {
+    color: rgba(map-get(map-get($colors, dark-theme), foreground), .45);
+    background-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+  }
+
+  .angular-editor .ck {
+
+    .ck-reset_all,
+    .ck-reset_all * {
+      color: #ccc;
+    }
+
+    &.ck-toolbar__separator {
+      background-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3) !important;
+    }
+
+    .ck-button:not(.ck-disabled):hover,
+    a.ck.ck-button:not(.ck-disabled):hover,
+    .ck-button:not(.ck-disabled):active,
+    a.ck.ck-button:not(.ck-disabled):active,
+    .ck-button.ck-on,
+    a.ck.ck-button.ck-on {
+      background-color: map-get(map-get($colors, dark-theme), background);
+    }
+
+    .ck-toolbar,
+    .ck-dropdown__panel,
+    .ck-list {
+      background-color: lighten(map-get(map-get($colors, dark-theme), background), 3%);
+      border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+      color: #ccc;
+      border-radius: 5px;
+    }
+
+    .ck-editor__main {
+      & > .ck-editor__editable {
+        &:not(.ck-focused) {
+          border-color: rgba(map-get(map-get($colors, dark-theme), foreground), .3);
+        }
+      }
+    }
+  }
+
+  .title-logo img.logo-header.image-inverted {
+    filter: invert(100%);
+  }
 }

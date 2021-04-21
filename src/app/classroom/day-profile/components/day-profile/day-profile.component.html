@@ -1,0 +1,81 @@
+<section class="container container-nopadd">
+  <div class="profile-container">
+    <header class="profile-header shadow-bottom stiky-top p-1 mat-card mat-elevation-z0">
+
+      <!-- Skeleton -->
+      <ng-template #daySkeleton>
+        <div fxLayout="row" fxLayoutAlign="start center" class="skeleton container-max sm mt-h">
+          <div>
+            <ngx-skeleton-loader class="skeleton" count="1" appearance="circle" [animation]="skeleton.animation" [theme]="skeleton.circleSmall.theme"></ngx-skeleton-loader>
+          </div>
+          <div fxFlex="100">
+            <ng-container *ngFor="let loader of skeleton.linesSmall">
+              <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+            </ng-container>
+          </div>
+        </div>
+      </ng-template>
+
+      <div *ngIf="data$ | async as day; else daySkeleton" class="container-max sm" fxLayout="row" fxLayoutAlign="space-between center">
+
+        <!-- Header info -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <a class="avatar avatar-button border-theme border-theme-button mr-h" [routerLink]="[ '/classroom/student', day?.studentId ]">
+            <img class="avatar-image p-0 mr-1" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
+          </a>
+
+          <div class="header-info" fxLayout="column" fxLayoutAlign="center">
+
+            <!-- Archived -->
+            <div *ngIf="day?.archived" class="mat-small error mb-q" (dblclick)="tapToEdit(day)">
+              <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+              <span class="error-color"> {{'ARCHIVED' | translate}} </span>
+            </div>
+
+            <!-- Name -->
+            <a class="mat-h3 mb-0 pointer student-name" [routerLink]="[ '/classroom/student', day?.studentId ]">{{day?.student?.personal?.name}}</a>
+
+            <!-- Subject -->
+            <div *ngIf="day?.subjectId" class="subject mt-q">
+              <fa-icon class="header-icon mat-icon-14 mat-hint mr-q" icon="book"></fa-icon>
+              <button mat-button class="badge badge-big badge-fill mt-0 ml-0" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: day?.subjectId, openFilters: true}">
+                <span class="mat-hint">{{day?.subjectId | subjectName}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action button -->
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button class="action-button" mat-icon-button (click)="quickAction(day, 'favorite')" [matTooltip]="'MSG.MARK_DAY_FAV' | translate" [matTooltipShowDelay]="300">
+            <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-18 mat-hint" icon="star"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="container-padd day-content-containaer">
+      <div class="container-max sm">
+
+        <!-- Skeleton -->
+        <ng-template #dayContentSkeleton>
+          <ng-container *ngFor="let loader of skeleton.text">
+            <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+          </ng-container>
+        </ng-template>
+
+        <div *ngIf="data$ | async as day; else dayContentSkeleton" (dblclick)="tapToEdit(day)">
+          <!-- Date -->
+          <div class="mat-small mat-hint mb-h pb-q txt-right">
+            <fa-icon class="mat-icon-14 mat-hint mr-q" icon="calendar-day"></fa-icon>
+            {{day?.date | date: 'fullDate'}}
+          </div>
+
+          <!-- Content -->
+          <div class="pb-1" [innerHTML]="day?.content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

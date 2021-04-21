@@ -1,0 +1,41 @@
+.profile-header {
+  padding: var(--main-padding-size);
+  padding-bottom: 48px !important;
+
+  .avatar-container {
+
+    flex: 0 0 6rem;
+
+    .avatar {
+      max-width: 64px;
+      max-height: 64px;
+      cursor: pointer;
+    }
+  }
+
+  .action-buttons button {
+    margin-top: -10px;
+  }
+
+  fa-icon.header-icon {
+    width: 1.2rem !important;
+  }
+}
+
+.profile-tabs {
+  margin-top: -48px;
+  box-sizing: border-box;
+  height: calc(var(--vh, 1vh) * 100 - var(--main-header-size) * 2 - 190px);
+}
+
+.first-of-month {
+  margin-top: 1rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &.mat-button span {
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,22 @@
+mat-sidenav-container {
+  .sidenav-container {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+mat-sidenav-content {
+  overflow-x: hidden;
+}
+
+mat-sidenav.sidenav {
+  min-width: var(--main-sidemenu-size);
+  max-width: var(--main-sidemenu-size);
+}
+
+#main-content-container {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.main-content {
+  // padding-top: var(--main-header-size);
+}

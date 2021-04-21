@@ -1,0 +1,69 @@
+<mat-toolbar class="header stiky-top" [ngClass]="{'height-auto': !isTruncated}" [color]="themeName">
+
+  <div class="container-max sm relative" fxLayout="row" fxLayoutAlign="start center">
+
+    <!-- Back button  -->
+    <button *ngIf="headerConfig?.back" class="mr-h menu-button action-button" (click)="goBack()" mat-icon-button attr.aria-label="{{'BACK' | translate}}">
+      <fa-icon class="mat-icon-18" icon="arrow-left"></fa-icon>
+    </button>
+
+    <!-- Title -->
+    <h2 *ngIf="headerConfig?.title" class="title pt-h pb-h" (click)="truncate()" [ngClass]="{'truncate': isTruncated}">
+      {{headerConfig?.title | translate}}
+    </h2>
+
+    <!-- List length -->
+    <span *ngIf="headerConfig?.length | typeOf:'number'" class="title translucide list-count ml-h"> | {{headerConfig?.length}}</span>
+
+    <!-- Logo -->
+    <a13-title-logo class="title-logo" [config]="logoConfig"></a13-title-logo>
+
+    <!-- Spacer -->
+    <span fxFlex></span>
+
+    <!-- Menu phone -->
+    <button *ngIf="headerConfig?.student?.contactInformation?.phones?.length" class="menu-button action-button" mat-icon-button [matMenuTriggerFor]="menuPhones" attr.aria-label="{{'PHONE_MENU' | translate}}">
+      <fa-icon class="mat-icon-18" icon="phone-alt"></fa-icon>
+    </button>
+    <mat-menu #menuPhones="matMenu">
+      <div class="phone-numbers" mat-menu-item *ngFor="let phone of headerConfig?.student?.contactInformation?.phones" fxLayout="row" fxLayoutAlign="start center">
+        <!-- <a class="phone-icon" mat-icon-button href="{{'tel:' + phone.number}}">
+          <fa-icon class="mat-icon-15 mat-hint" icon="phone-alt"></fa-icon>
+        </a> -->
+        <a class="phone-icon" color="accent" mat-icon-button target="_blank" href="{{'https://wa.me/' + phone.number}}">
+          <fa-icon class="mat-icon-18" [icon]="['fab', 'whatsapp']"></fa-icon>
+        </a>
+        <a class="clickable-phone-number" target="_blank" href="{{'tel:' + phone.number}}">
+          <span *ngIf="phone.name" class="mat-hint">{{phone.name}}:</span>
+          <span class="phone">{{phone.number | phone:false:false:true}}</span>
+        </a>
+      </div>
+    </mat-menu>
+
+    <!-- Menu options-->
+    <a13-menu-options *ngIf="headerConfig?.menuOptions?.length" [options]="headerConfig?.menuOptions" [lightColor]="true"></a13-menu-options>
+
+    <!-- Sign Out -->
+    <button *ngIf="headerConfig?.signOut" class="menu-button action-button mr-q" mat-icon-button (click)="logOut()" attr.aria-label="{{'SIGN.OUT' | translate}}">
+      <fa-icon class="mat-icon-18" icon="sign-out-alt"></fa-icon>
+    </button>
+
+    <!-- Profile options -->
+    <ng-container *ngIf="headerConfig?.showProfile">
+      <a mat-icon-button class="header-avatar-button" [matMenuTriggerFor]="menuProfileId" #openStatus="matMenuTrigger">
+        <img class="header-avatar" [src]="user?.avatar || ('' | srcImage:true)" alt="Avatar">
+      </a>
+      <mat-menu #menuProfileId="matMenu">
+        <ng-container *ngFor="let option of menuProfile">
+          <button *ngIf="!option.divider else separator" mat-menu-item (click)="option.action()" [disabled]="option.disabled">
+            <fa-icon class="mat-icon-20 mr-h mat-hint" [icon]="option.icon"></fa-icon>
+            <span>{{option.name | translate}}</span>
+          </button>
+          <ng-template #separator>
+            <mat-divider></mat-divider>
+          </ng-template>
+        </ng-container>
+      </mat-menu>
+    </ng-container>
+  </div>
+</mat-toolbar>

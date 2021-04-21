@@ -1,0 +1,48 @@
+<form [formGroup]="formGroup" class="pt-h">
+
+  <!-- Email -->
+  <mat-form-field class="mb-q" [appearance]="'inputAppearance' | settingValue">
+    <mat-label>{{'EMAIL' | translate}}</mat-label>
+    <input matInput tabindex="1" type="text" required formControlName="email">
+    <button mat-button *ngIf="formGroup.controls.email.value" matSuffix mat-icon-button attr.aria-label="{{'RESET_EMAIL' | translate}}" (click)="formGroup.controls.email.reset()">
+      <fa-icon class="mat-icon-20 mat-hint" icon="times"></fa-icon>
+    </button>
+    <mat-error *ngIf="hasError('email','required')">{{'ERR.EMAIL_REQUIRED' | translate}}</mat-error>
+    <mat-error *ngIf="hasError('email','pattern')">{{'ERR.EMAIL_INVALID' | translate}}</mat-error>
+  </mat-form-field>
+
+  <div class="f-row-r relative pointer link-forgot-container mat-small" fxLayout="row" fxLayoutAlign="space-between center">
+    <a tabindex="8" class="link link-forgot" [routerLink]="['/authentication/forgotPassword']">{{'MSG.FORGOT_PASSWORD' | translate}}</a>
+  </div>
+
+  <!-- Password -->
+  <mat-form-field class="mb-h" [appearance]="'inputAppearance' | settingValue">
+    <mat-label>{{'PASSWORD' | translate}}</mat-label>
+    <input matInput tabindex="2" type="{{passwordType}}" required formControlName="password">
+    <button mat-button *ngIf="formGroup.controls.password.value" matSuffix mat-icon-button attr.aria-label="{{(passwordType === 'password' ? 'SHOW_PASSWORD' : 'HIDE_PASSWORD') | translate}}" (click)="togglePasswordVisibility()">
+      <fa-icon class="mat-icon-20 mat-hint" [icon]="passwordType === 'password' ? 'eye' : 'eye-slash'">
+      </fa-icon>
+    </button>
+    <mat-error *ngIf="hasError('password','required')">{{'ERR.PASSWORD_REQUIRED' | translate}}</mat-error>
+  </mat-form-field>
+
+  <!-- SignIn button -->
+  <div class="mb-1" fxLayout="row" fxLayoutAlign="space-between center">
+    <button tabindex="3" class="sign-button" fxFlex="100" mat-flat-button color="accent" (click)="signInWithEmail()" attr.arial-label="{{'SIGN.IN'| translate}}">
+      <div class="pt-H">{{'SIGN.IN' | translate}}</div>
+    </button>
+  </div>
+</form>
+
+<!-- SignIn RS buttons -->
+<div fxLayout="row" fxLayoutGap="1rem">
+  <button type="button" tabindex="{{4+i}}" fxFlex="33" *ngFor="let social of signInSocialNetworks; let i = index" mat-stroked-button (click)="signInWithSocial(social.id)" attr.arial-label="{{social.txt | translate}}">
+    <img [src]="'/assets/svgs/social/' + social.icon + '.svg'" class="mat-icon-24" [alt]="'Logo ' + social.id">
+  </button>
+</div>
+
+<!-- Go to SignUp button -->
+<div class="mt-1" fxLayout="row" fxLayoutAlign="end center">
+  <span class="mat-body mat-hint mr-h">{{'MSG.NO_ACCOUNT' | translate}}</span>
+  <button tabindex="7" mat-button color="primary" [routerLink]="['/authentication/signUp']" attr.arial-label="{{'SIGN.UP' | translate}}">{{'SIGN.UP' | translate}}</button>
+</div>

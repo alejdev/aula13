@@ -1,0 +1,25 @@
+<div class="mat-typography padding-content-h">
+  <header class="dialog-header pt-1 pb-1" fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- Title -->
+    <h2 class="m-0" mat-dialog-title>
+      {{textConfig.title | translate}}
+    </h2>
+
+    <!-- Close dialog -->
+    <button class="button-close action-button" mat-icon-button attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">
+      <fa-icon class="mat-icon-22 mat-hint" icon="times"></fa-icon>
+    </button>
+  </header>
+
+  <section>
+    <p class="mat-hint">
+      <b *ngIf="textConfig.msg">{{textConfig.msg | translate}}</b><span *ngIf="textConfig.msg2"> {{textConfig.msg2 | translate}}.</span>
+    </p>
+  </section>
+
+  <!-- Action buttons -->
+  <footer class="dialog-footer pt-1 pb-1" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button color="warn" attr.aria-label="{{'CANCEL' | translate}}" (click)="cancel()">{{'CANCEL' | translate}}</button>
+    <button class="ml-h" mat-flat-button [color]="textConfig.okButtonColor ? textConfig.okButtonColor : 'primary'" mat-dialog-close (click)="ok()" attr.aria-label="{{textConfig.okButton | translate}}">{{textConfig.okButton | translate}}</button>
+  </footer>
+</div>

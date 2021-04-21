@@ -1,7 +1,11 @@
-@import "scss/variables";
+@import "scss/functions";
 @import "scss/mixins";
+@import "scss/variables";
 @import "scss/theming";
+@import "scss/animations";
 @import "scss/typography";
+@import "scss/components";
+@import "scss/modified-components";
 @import "scss/main";
-@import "scss/utilities.scss";
-@import "~css-utilities/dist/style.min.css";
+@import "scss/util";
+@import "~@alejdev/css-utilities/dist/style.min.css";

@@ -1,0 +1,24 @@
+<mat-sidenav-container class="sidenav-container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
+
+  <!-- Side-menu -->
+  <mat-sidenav #sideMenu class="sidenav border-0" [mode]="mobileQueryL.matches ? 'over' : 'side'" [opened]="!mobileQueryL.matches" [fixedInViewport]="true" [autoFocus]="false">
+    <a13-side-menu></a13-side-menu>
+  </mat-sidenav>
+
+  <!-- Content -->
+  <mat-sidenav-content id="main-content-container">
+    <div class="main-content overflow-scroll-container" fxLayout="column">
+      <!-- Header -->
+      <a13-header></a13-header>
+
+      <!-- Router -->
+      <main class="main-content-bg overflow-scroll mat-typography relative" [@routerAnimations]="prepareRouteTransition(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </main>
+
+      <!-- Footer toolbar -->
+      <a13-footer-toolbar [sidenav]="sideMenu"></a13-footer-toolbar>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

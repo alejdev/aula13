@@ -1,6 +1,10 @@
 // Google fonts
 
-/* varela-round-regular - latin */
+// Typography
+$primary-typography: mat-typography-config($font-family: map-get($fonts, primary));
+@include angular-material-typography($primary-typography);
+
+// varela-round-regular - latin
 @font-face {
   font-family: 'Varela Round';
   font-style: normal;
@@ -13,94 +17,6 @@
   /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-/* material-icon */
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Material Icons'),
-    local('MaterialIcons-Regular'),
-    url('/assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
-    url('/assets/fonts/MaterialIcons-Regular.woff') format('woff')
-}
-
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-}
-
-// Typography
-$primary-typography: mat-typography-config($font-family: '"Varela Round", "Helvetica Neue", sans-serif');
-
-@include angular-material-typography($primary-typography);
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.mat-display-4,
-.mat-display-3,
-.mat-display-2,
-.mat-display-1,
-.mat-h1,
-.mat-headline,
-.mat-h2,
-.mat-title,
-.mat-h3,
-.mat-subheading-2,
-.mat-h4,
-.mat-subheading-1,
-.mat-body,
-.mat-body-1,
-.mat-body-strong,
-.mat-body-2,
-.mat-small,
-.mat-caption {
-  @include secondary-font;
-  color: var(--font-header-color);
-}
-
-.light-text {
-  color: var(--font-light-color);
-}
-.mat-icon-10 {
-  @include mat-icon-size(10px);
-}
-
-.mat-icon-14 {
-  @include mat-icon-size(14px);
-}
-
-.mat-icon-16 {
-  @include mat-icon-size(16px);
-}
-
-.mat-icon-18 {
-  @include mat-icon-size(18px);
-}
-
-.mat-icon-24 {
-  @include mat-icon-size(24px);
-}
-
-.mat-icon-28 {
-  @include mat-icon-size(28px);
-}
-
-.mat-icon-32 {
-  @include mat-icon-size(32px);
-}
+// Icons sizes
+$iconSizes: (12 : 12px, 14 : 14px, 16 : 16px, 18 : 18px, 22 : 22px, 20 : 20px, 24 : 24px, 28 : 28px, 32 : 32px);
+@include set-icon-classes($iconSizes);

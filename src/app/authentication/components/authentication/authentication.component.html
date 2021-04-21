@@ -1,0 +1,20 @@
+<section class="authentication mat-typography" fxLayout="row" fxLayoutAlign="center center">
+
+  <!-- Background -->
+  <div class="authentication-background"></div>
+
+  <div class="authentication-container mat-elevation-z5" fxFlex.xs="100">
+
+    <!-- Logo -->
+    <div class="image-logo" fxLayout="row" fxLayoutAlign="center center">
+      <img class="image-logo-icon" src="/assets/svgs/logo-blue.svg" alt="Logo Aula 13">
+    </div>
+
+    <!-- Title -->
+    <h1 class="m-0 mb-h txt-thin">{{'APP_TITLE' | translate}}</h1>
+    <span class="mat-body mat-hint mb-1 block">{{'APP_SUBTITLE' | translate}}</span>
+
+    <router-outlet></router-outlet>
+
+  </div>
+</section>

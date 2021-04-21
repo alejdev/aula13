@@ -1,0 +1,183 @@
+<section class="container container-nopadd">
+  <header class="profile-header mat-card shadow-bottom padding-content pb-h mat-elevation-z0">
+
+    <!-- Skeleton -->
+    <ng-template #studentSkeleton>
+      <div fxLayout="row" fxLayoutAlign="start center" class="skeleton container-max sm mt-h">
+        <div>
+          <ngx-skeleton-loader count="1" appearance="circle" [animation]="skeleton.animation" [theme]="skeleton.circle.theme"></ngx-skeleton-loader>
+        </div>
+        <div fxFlex="100">
+          <ng-container *ngFor="let loader of skeleton.lines">
+            <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+
+    <div *ngIf="(data$ | async)?.student as student else studentSkeleton" class="container-max sm mt-h" fxLayout="row">
+      <div class="avatar-container mr-q" fxLayout="column" fxLayoutAlign="start center">
+
+        <!-- Avatar -->
+        <a flex="grow" matRipple class="avatar avatar-button border-theme border-theme-button">
+          <img class="avatar-image" [src]="student?.personal?.avatar | srcImage" alt="{{student?.personal?.avatar}}" (click)="tapToEdit(student)">
+        </a>
+
+        <!-- Fav button -->
+        <button class="mr-h ml-h action-button" mat-icon-button (click)="quickAction(student,'favorite')" [matTooltip]="'MSG.MARK_STUDENT_FAV' | translate" [matTooltipShowDelay]="300">
+          <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-20 mat-hint" icon="star">
+          </fa-icon>
+        </button>
+      </div>
+
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between start" (dblclick)="tapToEdit(student)">
+
+          <!-- Student information -->
+          <div>
+            <!-- Archived -->
+            <div *ngIf="student?.archived" class="mat-small error mb-h">
+              <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+              <span class="error-color"> {{'STUDENT_ARCHIVED' | translate}} </span>
+            </div>
+
+            <!-- Number info -->
+            <div class="mb-q" fxLayout="row wrap" fxLayoutGap="1rem">
+              <div fxLayout="row" *ngIf="student?.personal?.birthdate" class="personal-numbers">
+                <span class=" mb-0 mr-q">{{student?.personal?.birthdate | age}}</span>
+                <span class="mat-hint mat-small"> {{'YEARS' | translate}}</span>
+              </div>
+              <div fxLayout="row" *ngIf="student?.personal?.academicCourse" class="personal-numbers">
+                <span class="mb-0 mr-q">{{student?.personal?.academicCourse?.viewValue}}</span>
+                <span class="mat-hint mat-small">
+                  {{student?.personal?.academicCourse?.id | group: academicCourseList | translate | lowercase}}
+                </span>
+              </div>
+              <div fxLayout="row" *ngIf="student?.musical?.course" class="personal-numbers">
+                <span class="mb-0 mr-q">{{student?.musical?.course.viewValue}}</span>
+                <span class="mat-hint mat-small">
+                  {{student?.musical?.course?.id | group: conservatoryCourseList | translate | lowercase}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Classrooms -->
+        <div *ngIf="student?.classroom?.classrooms?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+          <fa-icon class="header-icon mat-icon-14 mr-q mb-q mat-hint" icon="chalkboard"></fa-icon>
+          <button mat-button class="badge badge-big mt-0 ml-0" *ngFor="let classroom of student?.classroom.classrooms; let i=index; let first = first" [routerLink]="['/classroom/students']" [queryParams]="{classroomsFilter: classroom, openFilters: true}">
+            <span class="mat-hint">{{classroom | classroomName}}</span>
+          </button>
+        </div>
+
+        <!-- Subjects -->
+        <div *ngIf="student?.classroom?.subjects?.length" class="mt-q mb-q" fxLayout="row wrap" fxLayoutAlign="start center">
+          <fa-icon class="header-icon mat-icon-14 mr-q mb-q mat-hint" icon="book"></fa-icon>
+          <button mat-button class="badge badge-big badge-fill mt-0 ml-0" *ngFor="let subject of student?.classroom?.subjects; let i=index; let first = first" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: subject, openFilters: true}">
+            <span class="mat-hint">{{subject | subjectName}}</span>
+          </button>
+        </div>
+
+        <!-- Instrument -->
+        <div *ngIf="student?.musical?.instrument" class="mat-small">
+          <fa-icon class="header-icon mat-icon-14 mr-h pr-q mb-q mat-hint" icon="music"></fa-icon>
+          <span class="mb-0">{{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}</span>
+        </div>
+
+        <!-- More Info -->
+        <div *ngIf="moreInfoConfig.show" (dblclick)="tapToEdit(student)">
+
+          <!-- Teacher -->
+          <div *ngIf="student?.musical?.teacher" class="mat-small mt-q mb-q">
+            <fa-icon class="header-icon mat-icon-14 mr-h mat-hint" icon="chalkboard-teacher"></fa-icon>
+            <span class="mb-0">{{student?.musical?.teacher}}</span>
+          </div>
+
+          <!-- Birthday -->
+          <div *ngIf="student?.personal?.birthdate" class="mat-small mt-q mb-q">
+            <fa-icon class="header-icon mat-icon-14 mr-h pr-q mat-hint" icon="birthday-cake"></fa-icon>
+            <span class="mb-0">{{student?.personal?.birthdate}}</span>
+          </div>
+
+          <!-- Observations -->
+          <div *ngIf="student?.personal?.observations" class="mat-small mt-q mb-q">
+            <fa-icon class="header-icon mat-icon-14 mr-h mat-hint" icon="eye"></fa-icon>
+            <span class="mb-0">{{student?.personal?.observations}}</span>
+          </div>
+        </div>
+
+        <!-- More Info button-->
+        <a *ngIf="student?.musical?.teacher || student?.personal?.birthdate || student?.personal?.observations || student?.personal?.observations" class="link mat-small pointer" (click)="showMore()">
+          {{moreInfoConfig.text | translate}}
+          <fa-icon class="ml-q mat-icon-14" [icon]="moreInfoConfig.icon"></fa-icon>
+        </a>
+
+      </div>
+    </div>
+
+  </header>
+
+  <!-- Tabs -->
+  <div class="container-max sm profile-tabs" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
+    <mat-tab-group mat-stretch-tabs color="primary" [(selectedIndex)]="selectedTab">
+
+      <!-- Days -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <fa-icon class="mat-icon-20" icon="calendar-day"></fa-icon>
+        </ng-template>
+
+        <div class="padding-content">
+
+          <!-- Skeleton -->
+          <ng-template #dayListSkeleton>
+            <ng-container *ngFor="let loader of skeleton.list">
+              <ngx-skeleton-loader class="skeleton" fxLayout="column" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+            </ng-container>
+          </ng-template>
+
+          <div *ngIf="data$ | async as data else dayListSkeleton">
+
+            <a13-day-filters [ngClass]="{'d-none': !data?.dayList.length}" [dayList]="data?.dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+
+            <div *ngIf="data?.dayList?.length" [ngClass]="{'grid-layout': grid}" class="relative mt-1">
+
+              <!-- Layout -->
+              <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="300" (click)="switchLayout()">
+                <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': grid}" [icon]="grid ? 'th' : 'list-ul'"></fa-icon>
+              </button>
+
+              <div class="card-container" [ngClass]="{'pt-2': grid}">
+                <ng-container *ngFor="let day of dayListFiltered">
+                  <button *ngIf="day.firstOfMonth && !grid" mat-button class="mat-hint first-of-month">
+                    <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
+                    <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
+                  </button>
+                  <a13-day-card [grid]="grid" [(day)]="day" [fromUrl]="router.url"></a13-day-card>
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- Empty list messages -->
+            <a13-empty-list *ngIf="data?.dayList" [list]="data?.dayList" [listFiltered]="dayListFiltered" listMessage="MSG.STUDENT_DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- Marks -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <fa-icon class="mat-icon-20" icon="poll"></fa-icon>
+        </ng-template>
+        <div class="padding-content">
+          <p class="txt-3 mt-3 txt-center mat-hint">{{'COMING_SOON' | translate}}...</p>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <!-- Floating button -->
+    <a13-floating-button [pulse]="!dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" (click)="createDay(student)">
+    </a13-floating-button>
+  </div>
+</section>

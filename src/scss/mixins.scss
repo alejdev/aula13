@@ -1,28 +1,78 @@
 // Mixins
 
-// Primary font
-@mixin primary-font {
-  font-family: "Varela Round" !important;
+// Set map
+@mixin set-map($map) {
+
+  @each $nameSchema, $schema in $map {
+
+    @each $key, $value in $schema {
+      --#{$nameSchema}-#{$key}: #{$value};
+    }
+  }
 }
 
-// Secondary font
-@mixin secondary-font {
-  font-family: "Varela Round" !important;
+// Set utility palette classes
+@mixin set-palette-classes($palettes-map) {
+
+  @each $namePalette, $palette in $palettes-map {
+
+    @each $colorName, $color in $palette {
+      @if $colorName !=contrast {
+        .#{$namePalette}-#{$colorName} {
+          background-color: $color;
+          color: mat-color(map-get($palette, contrast), $colorName);
+        }
+      }
+    }
+  }
+}
+
+// Set utility icon classes
+@mixin set-icon-classes($iconSizes) {
+
+  @each $key, $size in $iconSizes {
+    .mat-icon-#{$key} {
+      @include mat-icon-size($size);
+    }
+  }
 }
 
 // Material icon size
 @mixin mat-icon-size($size: 24px) {
-  font-size: $size;
-  height: $size;
-  width: $size;
+  font-size: $size !important;
+  height: $size !important;
+  width: $size !important;
 }
 
-// Background-color
-@mixin bg-color($color) {
-	background-color: $color !important;
-}
+// Set custom theme
+@mixin set-custom-theme($name, $theme-colors, $isDark, $primary-hue: 500, $accent-hue: 200, $warn-hue: 700, ) {
 
-// Color
-@mixin color($color) {
-	color: $color !important;
+  $palettes-map: set-custom-palettes($theme-colors);
+
+  $my-theme: ();
+
+  @if $isDark {
+    $my-theme: mat-dark-theme(
+      mat-palette(map-get($palettes-map, primary), $primary-hue, $primary-hue -200, $primary-hue +200),
+      mat-palette(map-get($palettes-map, accent), $accent-hue, $accent-hue -200, $accent-hue +200),
+      mat-palette(map-get($palettes-map, warn), $warn-hue, $warn-hue -200, $warn-hue +200)
+    );
+  }
+
+  @else {
+    $my-theme: mat-light-theme(
+      mat-palette(map-get($palettes-map, primary), $primary-hue, $primary-hue -200, $primary-hue +200),
+      mat-palette(map-get($palettes-map, accent), $accent-hue, $accent-hue -200, $accent-hue +200),
+      mat-palette(map-get($palettes-map, warn), $warn-hue, $warn-hue -200, $warn-hue +200)
+    );
+  }
+
+  $my-theme: set-background-theme($my-theme, map-get($theme-colors, background));
+  $my-theme: set-foreground-theme($my-theme, map-get($theme-colors, foreground));
+
+  // Theme
+  .#{$name} {
+    @include angular-material-theme($my-theme);
+    @include set-palette-classes($palettes-map);
+  }
 }

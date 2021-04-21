@@ -1,0 +1,14 @@
+<button class="action-button" mat-icon-button [matMenuTriggerFor]="menuOptions" (click)="$event.stopPropagation()">
+  <fa-icon class="{{'mat-icon-' + buttonSize}}" [ngClass]="{'mat-hint': !lightColor}" icon="ellipsis-v"></fa-icon>
+</button>
+<mat-menu #menuOptions="matMenu">
+  <ng-container *ngFor="let item of options">
+    <button *ngIf="!item.divider else divider" mat-menu-item (click)="openDialog(item.dialog?.component, item.dialog?.config)">
+      <fa-icon class="mat-icon-16 mat-hint" [icon]="item.icon"></fa-icon>
+      <span>{{item.name | translate}}</span>
+    </button>
+  </ng-container>
+  <ng-template #divider>
+    <mat-divider></mat-divider>
+  </ng-template>
+</mat-menu>

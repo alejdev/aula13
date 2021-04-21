@@ -1,0 +1,220 @@
+mat-form-field {
+
+  button[mat-icon-button].action-button {
+    position: relative;
+    top: -8px;
+
+    fa-icon {
+      top: -1px;
+      left: 1px;
+      margin-left: 0;
+    }
+  }
+
+  fa-icon {
+    position: relative;
+    top: -4px;
+    margin-left: 0.5rem;
+  }
+}
+
+// Skeleton
+ngx-skeleton-loader.skeleton .loader {
+  // border-radius: 3px !important;
+  outline: 0;
+
+  &.circle {
+    margin: 0;
+  }
+
+  &.progress:before {
+    animation-duration: 1s !important;
+  }
+}
+
+// Snack bar
+.mat-snack-bar-container {
+  max-width: 560px !important;
+  width: 100%;
+}
+
+// Mat menu
+
+.mat-menu-panel {
+  max-width: 100% !important;
+
+  // .mat-menu-item fa-icon {
+  //   position: relative;
+  //   top: 1px;
+  //   margin-right: 10px;
+
+  //   svg {
+  //     width: 16px !important;
+  //   }
+  // }
+}
+
+// Dialogs
+.mat-dialog-content {
+  overflow-x: hidden !important;
+}
+
+.full-dialog {
+  height: calc(var(--vh, 1vh) * 100);
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .dialog-title {
+    word-break: break-word;
+  }
+
+  mat-dialog-container {
+    height: fit-content;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .dialog-content {
+    max-height: calc(var(--vh, 1vh) * 100 - (36px + 2rem) * 2);
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+.form-error .mat-form-field .mat-form-field-ripple,
+.form-error .mat-form-field .mat-form-field-ripple.mat-accent {
+  background-color: #f53838 !important;
+  opacity: 1;
+  transform: scaleX(1);
+  transition: opacity .6s cubic-bezier(.25, .8, .25, 1);
+}
+
+// Matlist
+.sidenav-container {
+  .mat-list-base .mat-list-item .mat-list-item-content,
+  .mat-list-base .mat-list-option .mat-list-item-content {
+    padding: 0 .5rem;
+  }
+}
+
+// CKEditor
+.angular-editor {
+  width: 100%;
+  box-sizing: border-box;
+
+  &.ng-invalid.ng-touched {
+
+    .ck-editor__editable {
+      border-color: #f53838 !important;
+      transition: opacity .6s cubic-bezier(.25, .8, .25, 1);
+    }
+  }
+
+  .ck {
+
+    .ck-editor__editable_inline {
+      word-break: break-all;
+      min-height: 220px;
+      // max-height: 400px;
+      max-width: 100%;
+    }
+
+    .ck-editor__top .ck-sticky-panel .ck-toolbar,
+    .ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
+      border-radius: 5px 5px 0 0 !important;
+    }
+
+    .ck-sticky-panel .ck-sticky-panel__content.ck-styky-panel__content-sticky {
+      position: sticky !important;
+    }
+
+    // .ck.ck-editor__top.ck-reset_all {
+    //   z-index: var(--ck-z-modal);
+    //   position: sticky;
+    //   top: 0;
+    // }
+
+    // .ck.ck-sticky-panel__placeholder {
+    //   display : none !important;
+    // }
+
+    // .ck.ck-sticky-panel .ck-sticky-panel__content_sticky {
+    //   position: unset;
+    // }
+
+    .ck-reset_all {
+      position: sticky;
+      top: -1px;
+      z-index: 30;
+    }
+
+    .ck-editor__main {
+      & > .ck-editor__editable {
+        // background: map-get(map-get($colors, other), input-color);
+        background: transparent;
+        border-radius: 0 0 5px 5px !important;
+        border-width: 2px;
+
+        &.ck-focused {
+          border-width: 2px;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+// Tables
+.table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0 2rem;
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    min-width: 800px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    table-layout: auto;
+    border: 1px solid transparent;
+    box-shadow: -2px 0 2px rgba($color: #000000, $alpha: .12);
+
+
+    thead {
+      th {
+        border-bottom: 2px solid transparent;
+        border-bottom-width: 2px;
+      }
+    }
+
+    th {
+      border-width: 0;
+    }
+
+    td {
+      border-bottom: 1px solid transparent;
+    }
+
+    th,
+    td {
+      text-align: inherit;
+      padding: .75rem;
+      max-width: 140px;
+    }
+
+    tbody tr:last-child {
+
+      th,
+      td {
+        border-bottom-width: 0;
+      }
+    }
+  }
+}

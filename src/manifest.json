@@ -1,24 +1,24 @@
 {
-  "name": "Aula 13 project",
+  "name": "Aula 13",
   "short_name": " Aula 13",
-  "theme_color": "#2c365b",
-  "background_color": "#ffffff",
+  "description": "La app que te ayuda con la organización de tus alumnos y clases particulares.",
+  "theme_color": "#0259af",
+  "background_color": "#0259af",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
   "dir": "ltr",
   "lang": "es",
-  "description": "La app que te ayuda con la organización de tus alumnos y clases particulares.",
   "related_applications": [],
   "prefer_related_applications": false,
   "gcm_sender_id": "103953800507",
   "icons": [{
-    "src": "/assets/icons/icon-192x192.png",
+    "src": "/assets/icons/android-chrome-192x192.png",
     "sizes": "192x192",
     "type": "image/png"
   }, {
-    "src": "/assets/icons/icon-512x512.png",
+    "src": "/assets/icons/android-chrome-512x512.png",
     "sizes": "512x512",
     "type": "image/png"
   }]

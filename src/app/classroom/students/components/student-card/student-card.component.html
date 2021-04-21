@@ -1,0 +1,57 @@
+<mat-card class="mt-h mb-h mat-elevation-z0 aumente relative" [ngClass]="{'archived-student': student?.archived, grid: grid}" matRipple (click)="goTo()">
+
+  <div class="card-header mr-h ml-h">
+
+    <!-- Avatar -->
+    <img class="user-avatar-image mr-1" [src]="student?.personal?.avatar | srcImage" alt="Avatar">
+
+    <!-- Name & Surname -->
+    <div class="card-title">
+
+      <div class="title-name" [ngClass]="{'mb-h': grid}">
+        <!-- Archived -->
+        <div *ngIf="student?.archived" class="mat-small error mb-q">
+          <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+          <span class="error-color"> {{'STUDENT_ARCHIVED' | translate}} </span>
+        </div>
+
+        <!-- Name -->
+        <span class="">{{student?.personal?.name}}</span>
+      </div>
+      <div class="classroomList mb-h" *ngIf="grid && student?.classrooms.length">
+        <button *ngFor="let classroom of student?.classrooms" mat-button class="mat-hint badge badge-big" [routerLink]="['/classroom/students']" [queryParams]="{classroomsFilter: classroom.id, openFilters: true}" (click)="$event.stopPropagation()">{{classroom.name}}</button>
+      </div>
+      <div class="subjectList">
+        <span class="mat-small mat-hint mr-q" *ngFor="let subject of student?.subjects; let i=index; let first = first">
+          <!-- <a class="mat-hint link" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: subject.id, openFilters: true}" [ngClass]="{'txt-lowercase': !first}" (click)="$event.stopPropagation()">{{subject.name}}</a> -->
+          <span class="mat-hint" [ngClass]="{'txt-lowercase': !first}">{{subject.name}}</span>
+          <span>{{mark(student?.subjects, i) | translate}}</span>
+        </span>
+      </div>
+
+      <!-- Instrument -->
+      <div *ngIf="grid && student?.musical?.instrument" class="instrument mt-h">
+        <fa-icon class="mr-q mat-icon-14 mat-hint" icon="music"></fa-icon>
+        {{'INSTRUMENT.' + student?.musical?.instrument?.viewValue | translate}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Action button -->
+  <div class="footer-card">
+
+    <!-- Edit button -->
+    <!-- <button class="action-button" mat-icon-button (click)="editStudent($event)">
+        <fa-icon class="mat-icon-18 mat-hint" icon="pen"></fa-icon>
+      </button> -->
+
+    <!-- Fav button -->
+    <button class="action-button" mat-icon-button (click)="fav($event)">
+      <fa-icon [ngClass]="{'star-active': student?.favorite}" class="mat-icon-16 mat-hint" icon="star"></fa-icon>
+    </button>
+
+    <!-- Menu options-->
+    <a13-menu-options [options]="menuOptions" [buttonSize]="16"></a13-menu-options>
+  </div>
+
+</mat-card>

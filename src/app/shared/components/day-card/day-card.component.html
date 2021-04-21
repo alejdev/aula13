@@ -1,0 +1,63 @@
+<mat-card class="p-1 mt-h mb-h mat-elevation-z0 aumente relative" [ngClass]="{'archived-student': !day?.hideStudent && (day?.archived || day?.student?.archived) || (day?.hideStudent && day?.archived), grid: grid}" matRipple (click)="goTo()">
+
+  <div class="card-header mb-h mt--q">
+    <div class="date-container ml--q">
+      <!-- Favorite -->
+      <button class="action-button small-button mr-h" mat-icon-button (click)="quickAction($event, 'favorite')">
+        <fa-icon [ngClass]="{'star-active': day?.favorite}" class="mat-icon-16 mat-hint" icon="star"></fa-icon>
+      </button>
+
+      <!-- Date -->
+      <span class="mat-small mat-hint mr-q text-date">
+        <span *ngIf="!grid">{{day?.date | date: 'd MMM, yy'}}</span>
+        <span *ngIf="grid">{{day?.date | date: 'd MMMM, yyyy'}}</span>
+      </span>
+    </div>
+
+    <div class="student-container mr--q">
+
+      <!-- Name -->
+      <a *ngIf="!day?.hideStudent && day?.student" [routerLink]="[ '/classroom/student', day?.student?.id ]" [state]="{ fromUrl: router.url }" class="mat-small mat-hint student-name">{{day?.student?.personal?.name}}</a>
+
+      <!-- Avatar -->
+      <div *ngIf="!day?.hideStudent && day?.student" fxLayout="row" fxLayoutAlign="end center" class="avatar-container ml-h" [ngClass]="{archived: day?.student?.archived}">
+        <fa-icon *ngIf="day?.student?.archived" [ngClass]="{'error-color': day?.student?.archived, 'mat-icon-16': !grid, 'mat-icon-18': grid}" class="mat-hint mr-h" icon="box"></fa-icon>
+        <a [routerLink]="[ '/classroom/student', day?.student?.id ]">
+          <img class="avatar avatar-button border-theme border-theme-button avatar-xs p-0" [src]="day?.student?.personal?.avatar | srcImage" alt="Avatar">
+        </a>
+      </div>
+
+      <!-- Menu options-->
+      <a13-menu-options class="menu-options" [options]="menuOptions" [buttonSize]="16"></a13-menu-options>
+    </div>
+  </div>
+
+  <!-- Day content -->
+  <div class="day-content-container" fxLayout="row" fxLayoutAlign="space-between end">
+    <div class="day-content" fxLayout="column" fxLayoutAlign="start start">
+
+      <!-- Archived -->
+      <div *ngIf="day?.archived" class="mat-small error mb-h">
+        <fa-icon class="mr-q mat-icon-14 error-color" icon="box"></fa-icon>
+        <span class="error-color"> {{'ARCHIVED' | translate}} </span>
+      </div>
+
+      <!-- Title -->
+      <span class="mat-h3 mb-h day-title">{{day?.title}}</span>
+
+      <!-- Content -->
+      <div class="day-content-text txt-1 mat-hint" [ngClass]="{'truncate-2': !grid, 'truncate-6': grid}">
+        {{day?.content | stripHTML}}
+      </div>
+
+      <!-- Subject -->
+      <div *ngIf="day?.subjectId && grid" class="subject mt-h txt-right mb--1">
+        <button mat-button class="badge badge-big badge-fill mt-0 ml-0" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: day?.subjectId, openFilters: true}">
+          <span class="mat-hint">{{day?.subjectId | subjectName}}</span>
+        </button>
+        <!-- <fa-icon class="header-icon mat-icon-14 mat-hint mr-q" icon="book"></fa-icon> -->
+      </div>
+    </div>
+  </div>
+
+</mat-card>

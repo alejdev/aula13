@@ -1,0 +1,71 @@
+<div class="sidenav-container">
+  <div class="side-menu-container" fxLayout="column">
+
+    <!-- Logo -->
+    <div class="mt-1 mb-3" fxLayout="column" fxLayoutAlign="center center">
+      <a13-title-logo class="title-logo" [config]="logoConfig"></a13-title-logo>
+    </div>
+
+    <!-- Menu -->
+    <div class="overflow-scroll-container">
+      <ng-container *ngIf="data$ | async else sidemenuSkeleton">
+        <mat-nav-list class="m-0 p-0 overflow-scroll" *ngFor="let menu of menuItems; index as i">
+          <div class="overflow-scroll-content nav-list">
+            <ng-container *ngFor="let item of menu">
+              <div class="mb-1">
+                <a mat-list-item (click)="onItemSelected($event, item)" class="{{item.color}}" [ngClass]="{'active': item.expanded}">
+                  <fa-icon class="mat-hint ml-h" [icon]="item.icon"></fa-icon>
+                  <span class="mat-hint pl-h ml-q mr-q">{{ item?.name | translate}}</span>
+                  <span class="translucide mat-hint"> | {{item?.children?.length}}</span>
+                  <span fxFlex></span>
+                  <button class="action-button" mat-icon-button [@indicatorRotate]="item.expanded ? 'expanded': 'collapsed'" (click)="createElement($event, item)" [matTooltip]="item.tooltip | translate" [matTooltipShowDelay]="300">
+                    <fa-icon class="mat-hint" icon="plus"></fa-icon>
+                  </button>
+                </a>
+                <div *ngIf="item.expanded">
+                  <ng-container *ngFor="let child of item.children">
+                    <a mat-list-item (click)="onItemSelected($event, child)" [ngClass]="{'expanded': child.expanded}">
+                      <span class="child-container relative truncate">
+                        <span class="list-count-container">
+                          <span class="translucide mat-small list-count">{{child.studentList.length}}</span>
+                          <span class="pl-q pr-q translucide mat-small">|</span>
+                        </span>
+                        <span class="mat-hint ml-1 pl-h">{{child?.name}}</span>
+                      </span>
+                      <span fxFlex></span>
+                      <button class="action-button" mat-icon-button [matMenuTriggerFor]="menuOptionsId" attr.aria-label="{{'OPTION_MENU' | translate}}" (click)=$event.stopPropagation()>
+                        <fa-icon class="mat-hint" icon="ellipsis-v"></fa-icon>
+                      </button>
+                    </a>
+                    <mat-menu #menuOptionsId="matMenu">
+                      <ng-container *ngFor="let option of menuOptions">
+                        <button *ngIf="!option.divider else divider" mat-menu-item (click)="openMenuOption($event, item, child, option)">
+                          <fa-icon class="mat-icon-16 mat-hint" [icon]="option.icon"></fa-icon>
+                          <span class="truncate">{{option.name | translate}}</span>
+                        </button>
+                      </ng-container>
+                      <ng-template #divider>
+                        <mat-divider></mat-divider>
+                      </ng-template>
+                    </mat-menu>
+                  </ng-container>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </mat-nav-list>
+      </ng-container>
+    </div>
+
+    <ng-template #sidemenuSkeleton>
+      <div class="p-1">
+        <ng-container *ngFor="let loader of skeleton.sidenav">
+          <ngx-skeleton-loader class="skeleton" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+        </ng-container>
+      </div>
+    </ng-template>
+
+    <!-- Credits -->
+    <a13-credits class="shadow-top-light"></a13-credits>
+  </div>
+</div>

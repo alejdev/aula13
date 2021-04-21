@@ -1,0 +1,61 @@
+mat-form-field {
+  width: 100%;
+}
+
+.user-avatar-image {
+  max-width: 40px;
+  width: 100%;
+}
+
+.grid-layout {
+  .card-container {
+    margin-bottom: 2rem;
+  }
+
+  a13-student-card {
+    max-width: calc(100% / 4);
+
+    &:nth-child(4n+4) {
+      padding-right: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 960px) {
+
+  .grid-layout .card-container a13-student-card {
+    max-width: calc(100% / 3);
+    padding-right: 1rem;
+
+    &:nth-child(3n+3) {
+      padding-right: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .grid-layout .card-container a13-student-card {
+    max-width: 50%;
+    padding-top: .3rem;
+    padding-bottom: 1rem;
+
+    &:nth-child(odd) {
+      padding-right: .3rem;
+    }
+
+    &:nth-child(even) {
+      padding-left: .3rem;
+      padding-right: 0;
+    }
+  }
+}
+
+// @media only screen and (max-width: 460px) {
+
+//   .grid-layout .card-container a13-student-card {
+//     max-width: 100%;
+//     padding-left: 0 !important;
+//     padding-right: 0 !important;
+//   }
+// }

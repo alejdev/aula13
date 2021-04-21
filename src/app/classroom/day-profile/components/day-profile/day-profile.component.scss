@@ -1,0 +1,30 @@
+.profile-container {
+
+  .avatar {
+    max-width: 36px;
+    max-height: 36px;
+  }
+
+  .student-name {
+    outline: 0;
+    line-height: 1.4;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .subject {
+    fa-icon {
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .day-content-containaer {
+    box-sizing: border-box;
+    height: calc(var(--vh, 1vh) * 100 - var(--main-header-size) * 2 - 86px);
+  }
+}

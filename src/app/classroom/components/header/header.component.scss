@@ -1,0 +1,73 @@
+.header {
+  // position: fixed;
+  // top: 0;
+  // width: 100%;
+  height: var(--main-header-size);
+  min-height: var(--main-header-size);
+  // z-index: 20;
+  white-space: normal;
+
+  .title {
+    line-height: 1.25;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .title,
+  .menu-button {
+    color: var(--light-theme-background);
+  }
+
+  .list-count {
+    width: 2rem;
+    white-space: nowrap;
+  }
+}
+
+.phone-numbers {
+
+  a.phone-icon {
+    margin-left: -10px;
+    margin-right: -5px;
+    position: relative;
+    top: -1px;
+  }
+
+  a.clickable-phone-number {
+    display: block;
+    text-decoration: none !important;
+
+    .phone {
+      color: var(--light-theme-primary);
+      margin-left: .5rem;
+    }
+  }
+}
+
+.title-logo {
+  position: absolute;
+  top: -3px;
+  left: calc(100%/2 - 22px);
+  width: calc(var(--main-header-size) - 10px);
+}
+
+.header-avatar-button {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, .35);
+  padding: 3px;
+
+  img {
+    position: relative;
+    top: -2px;
+    width: 100%;
+    border-radius: 50%;
+    vertical-align: inherit;
+  }
+}
+
+.mat-menu-item > fa-icon {
+  position: relative;
+  top: 1px;
+  margin-right: 10px;
+}

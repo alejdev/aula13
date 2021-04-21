@@ -1,0 +1,134 @@
+mat-card {
+
+  &:focus {
+    outline: -webkit-focus-ring-color auto 0;
+  }
+
+  .mat-icon-button.small-button {
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date-container {
+    flex: 0 0 125px;
+
+    .text-date {
+      flex-wrap: nowrap;
+    }
+  }
+
+  .subject {
+    fa-icon {
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .student-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-basis: 100%;
+
+    .avatar-container {
+      flex: 0 0 1.6rem;
+
+      &.archived {
+        flex: 0 0 3.1rem;
+      }
+    }
+
+    .student-name {
+      text-align: right;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .day-content-container {
+
+    .day-title {
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .day-content-text {
+      width: 100%;
+      word-break: break-word;
+    }
+
+    .action-buttons button {
+      margin-right: -5px;
+      margin-bottom: -5px;
+    }
+  }
+}
+
+mat-card.grid {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem !important;
+  box-sizing: border-box;
+
+  .card-header {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 0 !important;
+
+    .date-container {
+      flex: inherit;
+      margin-left: 0 !important;
+    }
+
+    .student-container {
+      align-self: flex-end;
+      margin-top: 1rem !important;
+      width: 100%;
+
+      a {
+        font-size: .85rem;
+      }
+
+      .avatar-container {
+        flex: 0 0 1.7rem;
+
+        &.archived {
+          flex: 0 0 3.3rem;
+        }
+
+        img.avatar {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+      .menu-options {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
+    }
+  }
+
+  .day-content-container {
+    margin-top: .5rem;
+  }
+
+  .day-title {
+    font-size: 1.1rem;
+  }
+}

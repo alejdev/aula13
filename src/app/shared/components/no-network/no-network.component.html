@@ -1,0 +1,13 @@
+<section class="container container-padd light-theme">
+  <div class="content">
+    <h1>
+      {{'NO_NETWORK.TITLE' | translate}}
+      <fa-icon class="mat-icon-22" icon="exclamation"></fa-icon>
+    </h1>
+    <p>{{'NO_NETWORK.MSG' | translate}}.</p>
+    <button mat-flat-button color="primary" class="mt-1" (click)="reload()">
+      <fa-icon class="mat-icon-18 mr-h" icon="sync-alt"></fa-icon>
+      {{'RETRY_AGAIN' | translate}}
+    </button>
+  </div>
+</section>

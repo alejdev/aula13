@@ -1,0 +1,25 @@
+mat-form-field {
+  width: 100%;
+}
+
+.flag {
+  width: 20px;
+  height: 20px;
+}
+
+.flag-selected {
+  position: relative;
+  top: -5px;
+  width: 24px;
+  height: 24px;
+}
+
+.input-icon {
+  position: relative;
+  top: 2px;
+}
+
+mat-hint {
+  line-height: 1.6;
+  display: block !important;
+}

@@ -1,0 +1,49 @@
+<!-- Skeleton -->
+<ng-template #selectStudentSkeleton>
+  <ngx-skeleton-loader class="skeleton" [animation]="skeleton.animation" [theme]="skeleton.search.theme"></ngx-skeleton-loader>
+</ng-template>
+
+<ng-container *ngIf="data$ | async as studentList" else selectStudentSkeleton>
+  <div [formGroup]="studentFormGroup">
+
+    <!-- Select simple -->
+    <mat-form-field *ngIf="!multiple" [appearance]="'inputAppearance' | settingValue" fxFlex=100>
+      <mat-label>{{'FORM.STUDENT' | translate}}</mat-label>
+      <div matPrefix class="avatar-container">
+        <img class="avatar avatar-xs p-0" [src]="studentFormGroup?.controls?.studentCtrl?.value?.personal?.avatar | srcImage" alt="Avatar">
+      </div>
+      <mat-select formControlName="studentCtrl" attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}" [compareWith]="equals">
+        <mat-option *ngFor="let student of studentList" [value]="student">
+          <span [ngClass]="{'archived-student': student?.archived}" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <img class="avatar avatar-xs p-0 mr-h" [src]="student.personal?.avatar | srcImage" alt="Avatar">
+            <span>
+              <fa-icon *ngIf="student?.archived" class="mat-icon-14 error-color mr-q" icon="box"></fa-icon>
+              <fa-icon *ngIf="student?.favorite" class="mat-icon-14 star-active mr-q" icon="star"></fa-icon>
+              {{student?.personal?.name}}
+            </span>
+          </span>
+        </mat-option>
+      </mat-select>
+      <mat-hint *ngIf="hint" align="start">{{hint | translate}}</mat-hint>
+    </mat-form-field>
+
+    <!-- Select multiple-->
+    <mat-form-field *ngIf="multiple" [appearance]="'inputAppearance' | settingValue" fxFlex=100>
+      <mat-label>{{'FORM.STUDENT_LIST' | translate}}</mat-label>
+      <mat-select formControlName="studentCtrl" multiple attr.aria-label="{{'FORM.STUDENT_LIST' | translate}}">
+        <mat-option *ngFor="let student of studentList" [value]="student.id">
+          <span [ngClass]="{'archived-student': student?.archived}" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <img class="avatar avatar-xs p-0 mr-h" [src]="student.personal?.avatar | srcImage" alt="Avatar">
+            <span>
+              <fa-icon *ngIf="student?.archived" class="mat-icon-14 error-color mr-q" icon="box"></fa-icon>
+              <fa-icon *ngIf="student?.favorite" class="mat-icon-14 star-active mr-q" icon="star"></fa-icon>
+              {{student?.personal?.name}}
+            </span>
+          </span>
+        </mat-option>
+      </mat-select>
+      <fa-icon matPrefix class="mat-icon-20 mat-hint pr-1" icon="user-graduate"></fa-icon>
+      <mat-hint *ngIf="hint" align="start">{{hint | translate}}</mat-hint>
+    </mat-form-field>
+  </div>
+</ng-container>

@@ -1,0 +1,42 @@
+<section class="container container-padd">
+  <div class="container-max sm">
+
+    <!-- Skeleton -->
+    <ng-template #dayListSkeleton>
+      <ng-container *ngFor="let loader of skeleton.list">
+        <ngx-skeleton-loader class="skeleton" [animation]="skeleton.animation" [theme]="loader.theme"></ngx-skeleton-loader>
+      </ng-container>
+    </ng-template>
+
+    <div *ngIf="data$ | async as dayList else dayListSkeleton">
+
+      <!-- Filters -->
+      <a13-day-filters *ngIf="dayList?.length" [dayList]="dayList" (dayListFilter)="dayListFiltered=$event"></a13-day-filters>
+
+      <!-- Days -->
+      <div *ngIf="dayList?.length" [ngClass]="{'grid-layout': grid}" class="relative mt-1">
+
+        <!-- Layout -->
+        <button class="action-button switch-layout-button" mat-button mat-icon-button attr.aria-label="{{'SWITCH_LAYOUT' | translate}}" [matTooltip]="'SWITCH_LAYOUT' | translate" [matTooltipShowDelay]="300" (click)="switchLayout()">
+          <fa-icon class="mat-icon-20 mat-hint" [ngClass]="{'color-primary': grid}" [icon]="grid ? 'th' : 'list-ul'"></fa-icon>
+        </button>
+
+        <div class="card-container" [ngClass]="{'pt-2': grid}">
+          <ng-container *ngFor="let day of dayListFiltered">
+            <button *ngIf="day.firstOfMonth && !grid" mat-button class="mat-hint first-of-month">
+              <span *ngIf="day.thisYear">{{ day.date | date: 'MMMM' }}</span>
+              <span *ngIf="!day.thisYear">{{ day.date | date: "MMMM '\'\yy" }}</span>
+            </button>
+            <a13-day-card [grid]="grid" [(day)]="day" [fromUrl]="router.url"></a13-day-card>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Empty list messages -->
+      <a13-empty-list *ngIf="dayList" [list]="dayList" [listFiltered]="dayListFiltered" listMessage="MSG.DAY_LIST_EMPTY" listFilteredMessage="MSG.NO_MORE_DAYS"></a13-empty-list>
+
+      <!-- Floating button -->
+      <a13-floating-button [pulse]="!dayList?.length" text="DAY.ADD" tooltip="DAY.ADD" icon="edit" [disabled]="!studentList?.length" (click)="createDay()"></a13-floating-button>
+    </div>
+  </div>
+</section>
