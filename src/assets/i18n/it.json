@@ -77,7 +77,7 @@
 	"DELETE_ACCOUNT": {
 		"MSG": "Attenzione! Questa azione non può essere invertita.",
 		"MSG_2": "Se cancelli il tuo account perderai tutti i tuoi dati in modo permanente. Sei sicuro di volerlo fare?",
-		"MSG_OK": "Sei stato cancellato con successo. Speriamo che torni presto.",
+		"MSG_OK": "Il tuo account è stato cancellato con successo. Speriamo che torni presto.",
 		"TITLE": "Cancellare l'account"
 	},
 	"DELETE_CLASSROOM": "Elimina classe",

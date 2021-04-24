@@ -52,7 +52,7 @@
 
       <!-- Subject -->
       <div *ngIf="day?.subjectId && grid" class="subject mt-h txt-right mb--1">
-        <button mat-button class="badge badge-big badge-fill mt-0 ml-0" [routerLink]="['/classroom/students']" [queryParams]="{subjectsFilter: day?.subjectId, openFilters: true}">
+        <button mat-button class="badge badge-big badge-fill mt-0 ml-0" [routerLink]="['/classroom/daily']" [queryParams]="{subjectsFilter: day?.subjectId, openFilters: true}" (click)="$event.stopPropagation()">
           <span class="mat-hint">{{day?.subjectId | subjectName}}</span>
         </button>
         <!-- <fa-icon class="header-icon mat-icon-14 mat-hint mr-q" icon="book"></fa-icon> -->
